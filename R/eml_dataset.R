@@ -9,7 +9,7 @@
 
 ## Add 
 
-function(...){
+dataset = function(...){
 
 # We want to provide several mechanisms to specify each
 # Child Node of the dataset.
