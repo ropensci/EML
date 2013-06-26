@@ -60,10 +60,10 @@ eml_datatable = function(dataframe, col_metadata, unit_metadata,
   # Physical node describes the CSV file.  
   physical = newXMLNode("physical", parent = datatable)
   newXMLNode("objectName", file, parent = physical)
-  addChildren(physical, csv_format)
+  addChildren(physical, csv_format())
   newXMLNode("url", csv_url, parent = 
     newXMLNode("online", parent = 
-      newXMLNode("distribution", parent = physical)
+      newXMLNode("distribution", parent = physical)))
 
 
   # attrlist describes the col_metadata and unit_metadata 
@@ -79,6 +79,14 @@ eml_datatable = function(dataframe, col_metadata, unit_metadata,
 
 
 #' Use templating to cast some standard node structures
-template = xmlParse(system.file("examples", "template.xml", "reml"))
-csv_format = getNodeSet(template, "//physical/dataFormat")
 
+csv_format = function(){ 
+newXMLNode("dataFormat", .children = 
+  newXMLNode("textFormat", .children = list(
+    newXMLNode("numHeaderLines", '1'),
+    newXMLNode("recorDelimiter", "\\r\\n"),
+    newXMLNode("attributeOrientation", "column"),
+    newXMLNode("simpleDelimited", .children =
+      newXMLNode("fieldDelimiter", ","))
+    )))
+}

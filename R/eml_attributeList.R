@@ -104,7 +104,7 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
 #' Helper function to match the unit against standard unit definition
 #' Documentation: http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html
 #' XML discription:
-#' @keyword internal
+#' @keywords internal
 match_unit = function(char){ 
   char 
 }

@@ -1,15 +1,25 @@
 Package: reml
-Description: Read, write, and manipulate EML (ecological markup language) files 
+Description: Read, write, and manipulate EML (ecological markup language) files
 Title: The R Ecological Metadata Language
 Version: 0.0-1
 License: CC0
 URL: https://github.com/ropensci/reml
 BugReports: https://github.com/ropensci/reml/issues
 Date: 2013
-Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"))
+Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
+    "cboettig@gmail.com"))
 VignetteBuilder: knitr
 Suggests:
     knitr
 Depends:
     R (>= 2.15)
-
+Collate:
+    'eml_access.R'
+    'eml_attributeList.R'
+    'eml_contact.R'
+    'eml_dataTable.R'
+    'eml_dataset.R'
+    'eml_settings.R'
+    'eml_write.R'
+    'eml_coverage.R'
+    'eml_otherEntity.R'
