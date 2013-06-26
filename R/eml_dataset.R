@@ -6,42 +6,39 @@
 #' 
 #' @import XML
 #' @import XMLSchema 
+eml_dataset = function(...){
+  dataset = newXMLNode("dataset")
+  dataTable = eml_dataTable(...)
+  contact = eml_contact()
+  addChildren(dataset, contact)
+  addChildren(dataset, dataTable)
+  dataset
+} 
 
-## Add 
-
-dataset = function(...){
 
 # We want to provide several mechanisms to specify each
 # Child Node of the dataset.
 #   (a) Copy from template, possibly update
 #   (b) pass a completed node 
 #   (c) Generate the node from an R object 
-
-newXMLNode("alternateIdentifier", parent = dataset)
-
-root = xmlRoot(template)
-dataset = root[["dataset"]]
-
-title_node = xmlClone(dataset[["title"]])
-xmlValue(title_node) = title
-addChildren(parent, title_node)
-
-
 # Equivalently: addParent(title_node, parent)
-# We don't want to just clone dataset, since we want to be able to assemble dataset from existing nodesets.  
+# We don't want to just clone dataset, since we want to be able to assemble dataset from existing nodesets. 
 
-"title"
-"creator" (multiple)  
-"associatedParty"    (kind of like creator or co-author)
-"pubDate"
-"abstract" 
-"keywordSet" (multiple, specify thesaurus) 
-"intellectualRights" 
-"distribution"
-"coverage" 
-"contact"    
-"publisher"
-"methods"
-"dataTable"
-"otherEntity"
-".attrs"    
+
+# # Required 
+# "contact"    
+# "dataTable"
+# 
+# # Optional  (not all given in the schema Type documentation...)
+# "title"
+# "creator" (multiple)  
+# "associatedParty"    (kind of like creator or co-author)
+# "pubDate"
+# "abstract" 
+# "keywordSet" (multiple, specify thesaurus) 
+# "intellectualRights" 
+# "distribution"
+# "coverage" 
+# "publisher"
+# "methods"
+# "otherEntity"

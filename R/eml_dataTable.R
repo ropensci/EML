@@ -36,18 +36,20 @@
 #' We have semantic meaning available in EML for many numeric units. Any unit not provided must still be defined semantically.  But we have much more obtuse support for providing semantic meaning to character strings.  
 
 
-eml_datatable = function(dataframe, col_metadata, unit_metadata, 
+eml_datatable = function(dataframe, col_metadata, unit_metadata,
+                      # Optional datatable metadata
                       accuracy = NULL, coverage = NULL, 
                       methods = NULL, missingValueCode = NA, 
-                      file=NULL, file_description){
+                      # physical file metadata 
+                      csvfile=NULL, file_description=NULL){
 
   # Write the data to a csv file
-  if(is.null(file))
-    file = gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_"))
-  write.csv(dataframe, file=file) 
+  if(is.null(csvfile))
+    csvfile = gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_"))
+  write.csv(dataframe, file=csvfile) 
 
   if(is.null(file_description))
-    file_discription = paste("Description of file", file)  
+    file_discription = paste("Description of the CSV file", file)  
 
   # Write the datatable header metadata
   datatable = newXMLNode("datatable")
