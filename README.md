@@ -65,7 +65,7 @@ The hard work is over, time to generate some EML.
 eml_write(dat, col_metadata, unit_metadata, file="my_eml_data.xml")
 ```
 
-See the [EML generated](https://github.com/ropensci/eml/tree/master/inst/examples/my_eml_data.xml) by this example.
+See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/examples/my_eml_data.xml) by this example.
 
 ### Advanced Use
 
