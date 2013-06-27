@@ -35,31 +35,30 @@
 #' 
 #' We have semantic meaning available in EML for many numeric units. Any unit not provided must still be defined semantically.  But we have much more obtuse support for providing semantic meaning to character strings.  
 
-
-eml_datatable = function(dataframe, col_metadata, unit_metadata,
+eml_dataTable = function(dataframe, col_metadata, unit_metadata,
                       # Optional datatable metadata
                       accuracy = NULL, coverage = NULL, 
                       methods = NULL, missingValueCode = NA, 
                       # physical file metadata 
-                      csvfile=NULL, file_description=NULL){
+                      csvfile=NULL, file_description=NULL, csv_url="http://github.com"){
 
   # Write the data to a csv file
   if(is.null(csvfile))
-    csvfile = gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_"))
+    csvfile = gsub("(.{16}).+", "\\1", paste(paste(names(dataframe), collapse="_"), ".csv", sep = ""))
   write.csv(dataframe, file=csvfile) 
 
   if(is.null(file_description))
-    file_discription = paste("Description of the CSV file", file)  
+    file_discription = paste("Description of the CSV file", csvfile)  
 
   # Write the datatable header metadata
   datatable = newXMLNode("datatable")
-  newXMLNode("entityName", file, parent = datatable)
+  newXMLNode("entityName", csvfile, parent = datatable)
   newXMLNode("entityDescription", file_description, parent = datatable)
 
 
   # Physical node describes the CSV file.  
   physical = newXMLNode("physical", parent = datatable)
-  newXMLNode("objectName", file, parent = physical)
+  newXMLNode("objectName", csvfile, parent = physical)
   addChildren(physical, csv_format())
   newXMLNode("url", csv_url, parent = 
     newXMLNode("online", parent = 

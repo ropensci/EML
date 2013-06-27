@@ -1,8 +1,8 @@
 #' 
 #'
-eml_contact <- function(givenName = eml_settings$get("givenName"), 
-                        surName = eml_settings$get("surName"), 
-                        email = eml_settings$get("email")){
+eml_contact <- function(givenName = eml$get("givenName"), 
+                        surName = eml$get("surName"), 
+                        email = eml$get("email")){
   newXMLNode("contact", .children = list( 
     newXMLNode("individualName", .children = list(
       newXMLNode("givenName", givenName),

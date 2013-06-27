@@ -8,7 +8,8 @@
   Write a data table into an EML file
 }
 \examples{
-dat = data.frame(river=c("SAC", "SAC", "AM"),
+eml$set(givenName = "Carl", surName = "Boettiger", email = "cboettig@gmail.com")
+ dat = data.frame(river=c("SAC", "SAC", "AM"),
                    spp = c("king", "king", "ccho"),
                    stg = c("smolt", "parr", "smolt"),
                    ct =  c(293L, 410L, 210L))

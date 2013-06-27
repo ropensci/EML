@@ -16,6 +16,7 @@
 
 #' @import XML
 #' @import XMLSchema 
+#' @import digest
 #' @examples
 #'  dat = data.frame(river=c("SAC", "SAC", "AM"), 
 #'                    spp = c("king", "king", "ccho"), 

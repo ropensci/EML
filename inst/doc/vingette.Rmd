@@ -9,10 +9,11 @@ Quick Start
 
 Install the R package:
 
-<!-- r highlighting on github is broken, so we'll use ruby codeblocks -->
+<!-- r highlighting on github is broken, so we'll use {r} codeblocks -->
 
-```ruby
-install_github("reml", "ropensci")
+```{r}
+#install_github("reml", "ropensci")
+library("reml")
 ```
 
 
@@ -22,13 +23,13 @@ Writing R data into EML
 
 Configure general metadata you may want to reuse again and again through settings:
 
-```ruby
+```{r}
  eml$set(givenName = "Carl", surName = "Boettiger", email = "cboettig@ropensci.org")
 ```
 
 Consider some dataset as an R `data.frame`.  
 
-```ruby
+```{r}
   dat = data.frame(river=c("SAC", "SAC", "AM"),
                         spp = c("king", "king", "ccho"),
                         stg = c("smolt", "parr", "smolt"),
@@ -39,7 +40,7 @@ Consider some dataset as an R `data.frame`.
 
 Provide definitions for the columns.  These are usually just plain text definitions, though a URI to a semantic definition can be particularly powerful. See "Advanced Use" for details on adding richer information, such as the method used to collect the data or set the geographic, taxanomic, or temporal coverage of an individual column.   
 
-```ruby
+```{r}
       col_metadata = c(river = "http://dbpedia.org/ontology/River",
                        spp = "http://dbpedia.org/ontology/Species",
                        stg = "Life history stage",
@@ -48,7 +49,7 @@ Provide definitions for the columns.  These are usually just plain text definiti
 
 Define the units used in each column.  For factors, this is a definition of the levels involved.  For numeric data, specify the units from [this list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).  For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character strings, a definition of the kind of string can be given, (e.g. species scientific name), otherwise the column description will be used.  
 
-```ruby
+```{r}
       unit_metadata =
        list(river = c(SAC = "The Sacramento River", AM = "The American River"),
             spp = c(king = "King Salmon", ccho = "Coho Salmon"),
@@ -59,7 +60,7 @@ Define the units used in each column.  For factors, this is a definition of the 
 
 The hard work is over, time to generate some EML.
 
-```ruby
+```{r}
 eml_write(dat, col_metadata, unit_metadata, file="my_eml_data.xml")
 ```
 
