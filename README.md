@@ -3,6 +3,8 @@ reml
 
 R package for reading, writing, integrating and publishing data using the Ecological Metadata Language (EML) format. 
 
+* Author: Carl Boettiger
+* License: [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
 
 Quick Start
 ===========
@@ -65,16 +67,22 @@ eml_write(dat, col_metadata, unit_metadata, file="my_eml_data.xml")
 
 See the [EML generated](https://github.com/ropensci/eml/tree/master/inst/examples/my_eml_data.xml) by this example.
 
+### Advanced Use
+
+Yet to come.  See [Open issues in writing EML](https://github.com/ropensci/reml/issues?labels=write+eml&page=1&state=open)
+
+
 Publish EML
 -----------
 
+In development.  See [Open issues in publishing EML](https://github.com/ropensci/reml/issues?labels=publish+eml&page=1&state=open)
 
 Reading EML
 -----------
 
+In development.  See [Open issues in reading EML](https://github.com/ropensci/reml/issues?labels=read+eml&page=1&state=open)
 
+Integrating Multiple EML files 
+------------------------------
 
-Integrating Multiple EML files into a single data frame
--------------------------------------------------------
-
-
+In development.  See [Open issues in integrating EML](https://github.com/ropensci/reml/issues?labels=integrate+eml&page=1&state=open)
