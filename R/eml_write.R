@@ -1,4 +1,5 @@
 #' Write a data table into an EML file
+#' @aliases write.eml
 #' 
 #' @import XMLSchema
 #' @import XML
@@ -22,17 +23,17 @@
 #'  node = eml_write(dat, col_metadata, unit_metadata) 
 #
 eml_write = function(..., file = "eml_data.xml"){
-  eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.0", 
-                     ds = "eml://ecoinformatics.org/dataset-2.1.0",
-                     xs = "http://www.w3.org/2001/XMLSchema",
-                     xsi = "http://www.w3.org/2001/XMLSchema-instance",
-                     stmml = "http://www.xml-cml.org/schema/stmml-1.1")
 
   emlroot = newXMLNode("eml:eml", namespaceDefinitions = eml_namespaces)
   emldoc = newXMLDoc(node = emlroot)
   dataset = eml_dataset(...)
   addChildren(emlroot, dataset)
-  saveXML(emldoc, file)
+  saveXML(emldoc, file=file)
 }
 
+eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.0", 
+                   ds = "eml://ecoinformatics.org/dataset-2.1.0",
+                   xs = "http://www.w3.org/2001/XMLSchema",
+                   xsi = "http://www.w3.org/2001/XMLSchema-instance",
+                   stmml = "http://www.xml-cml.org/schema/stmml-1.1")
 
