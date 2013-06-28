@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.0" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1">
+  <dataset>
+    <contact>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+      <electronicMailAddress>cboettig@ropensci.org</electronicMailAddress>
+    </contact>
+    <dataTable>
+      <entityName>river_spp_stg_ct</entityName>
+      <entityDescription/>
+      <physical>
+        <objectName>river_spp_stg_ct</objectName>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <recorDelimiter>\r\n</recorDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+        <distribution>
+          <online>
+            <url function="download">http://github.com</url>
+          </online>
+        </distribution>
+      </physical>
+      <attributeList>
+        <attribute id="15172c56ff718273807845e070654c5b">
+          <attributeName>river</attributeName>
+          <attributeDefinition>http://dbpedia.org/ontology/River</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>AM</code>
+                    <definition>The American River</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>SAC</code>
+                    <definition>The Sacramento River</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute id="cc8443ea41a139ed07409e4d389aa694">
+          <attributeName>spp</attributeName>
+          <attributeDefinition>http://dbpedia.org/ontology/Species</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>ccho</code>
+                    <definition>Coho Salmon</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>king</code>
+                    <definition>King Salmon</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute id="2f6371b3b6866e8351ee6d02d63b9bb0">
+          <attributeName>stg</attributeName>
+          <attributeDefinition>Life history stage</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>parr</code>
+                    <definition>third life stage</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>smolt</code>
+                    <definition>fourth life stage</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute id="3c05b17b4ac13d932a3c24f7d4a7707f">
+          <attributeName>ct</attributeName>
+          <attributeDefinition>count</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <numericDomain>
+                <numberType>integer</numberType>
+              </numericDomain>
+              <unit>
+                <standardUnit>number</standardUnit>
+              </unit>
+            </ratio>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+    </dataTable>
+  </dataset>
+</eml:eml>
