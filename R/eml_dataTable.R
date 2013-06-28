@@ -31,12 +31,12 @@
 #'        stg = c(parr = "third life stage", smolt = "fourth life stage"),
 #'        ct = "number")
 #' 
-#'  node = eml_datatable(dat, col_metadata, unit_metadata) 
+#'  node = eml_dataTable(dat, col_metadata, unit_metadata) 
 #' 
 #' We have semantic meaning available in EML for many numeric units. Any unit not provided must still be defined semantically.  But we have much more obtuse support for providing semantic meaning to character strings.  
 
 eml_dataTable = function(dataframe, col_metadata, unit_metadata,
-                      # Optional datatable metadata
+                      # Optional dataTable metadata
                       accuracy = NULL, coverage = NULL, 
                       methods = NULL, missingValueCode = NA, 
                       # physical file metadata 
@@ -50,17 +50,17 @@ eml_dataTable = function(dataframe, col_metadata, unit_metadata,
   if(is.null(file_description))
     file_discription = paste("Description of the CSV file", csvfile)  
 
-  # Write the datatable header metadata
-  datatable = newXMLNode("datatable")
-  newXMLNode("entityName", csvfile, parent = datatable)
-  newXMLNode("entityDescription", file_description, parent = datatable)
+  # Write the dataTable header metadata
+  dataTable = newXMLNode("dataTable")
+  newXMLNode("entityName", csvfile, parent = dataTable)
+  newXMLNode("entityDescription", file_description, parent = dataTable)
 
 
   # Physical node describes the CSV file.  
-  physical = newXMLNode("physical", parent = datatable)
+  physical = newXMLNode("physical", parent = dataTable)
   newXMLNode("objectName", csvfile, parent = physical)
   addChildren(physical, csv_format())
-  newXMLNode("url", csv_url, parent = 
+  newXMLNode("url", csv_url, attrs = list("function"="download"), parent = 
     newXMLNode("online", parent = 
       newXMLNode("distribution", parent = physical)))
 
@@ -71,7 +71,7 @@ eml_dataTable = function(dataframe, col_metadata, unit_metadata,
                       accuracy = accuracy, coverage = coverage, 
                       methods = methods, missingValueCode = missingValueCode)
 
-  addChildren(datatable, attrlist)
+  addChildren(dataTable, attrlist)
 
 }
 

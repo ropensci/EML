@@ -48,11 +48,9 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
     id = digest(colname)
 
     attribute = newXMLNode("attribute", attrs = c("id" = id), parent = attributeList)
-    attrName = newXMLNode("attributeName", colname, parent = attribute)
-    attrName = newXMLNode("attributeDefinition", 
-                          col_metadata[colname], 
-                          parent = attribute)
-
+    addChildren(attribute, newXMLNode("attributeName", colname))
+    addChildren(attribute, newXMLNode("attributeDefinition", col_metadata[colname])) 
+    # (measurementScale is also a child of attribute, but we need a pointer to it)
     measurementScale = newXMLNode("measurementScale", parent = attribute)
 
     ## Factor Data

@@ -8,7 +8,7 @@
       </individualName>
       <electronicMailAddress>cboettig@ropensci.org</electronicMailAddress>
     </contact>
-    <datatable>
+    <dataTable>
       <entityName>river_spp_stg_ct</entityName>
       <entityDescription/>
       <physical>
@@ -105,6 +105,6 @@
           </measurementScale>
         </attribute>
       </attributeList>
-    </datatable>
+    </dataTable>
   </dataset>
 </eml:eml>
