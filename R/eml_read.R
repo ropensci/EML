@@ -54,12 +54,19 @@ eml_read <- function(file){
                                            "/nominal//textDomain/definition"), 
                                xmlValue)
       code <- NULL
+    } else if(!is.empty(xpathSApply(doc, paste0(measure_xpath, "//dateTime")))){
+       definitions <- xpathSApply(doc, paste0(measure_xpath, 
+                                           "//dateTime/formatString"), 
+                               xmlValue)
+      code <- "dateTime"
+
     }
+
     names(definitions) = code
     definitions
   })          
 
-# Set csv column classes  
+  ## Set csv column classes  ####
   colClasses <- sapply(1:n_cols, function(i){
     measure_xpath <- paste0(csv_xpath, "//attribute[position()=", i, "]/measurementScale")
     if(!is.empty(xpathSApply(doc, paste0(measure_xpath, "/nominal//enumeratedDomain"))))
@@ -74,10 +81,16 @@ eml_read <- function(file){
     else if(!is.empty(xpathSApply(doc, paste0(measure_xpath, 
             "//numericDomain[numberType = 'natural' or numberType = 'whole' or numberType = 'integer']"))))
       "integer"
+    else if(!is.empty(xpathSApply(doc, paste0(measure_xpath, "//dateTime"))))
+      "character" #"POSIXt"
     })
 
-## FIXME
-# Optionally, atomatically scale measurements to preferred units through unit conversions.  
+  ## Check for unidentified (NULL) classes, and treat as character strings. 
+  ## otherwise these columns will not be imported
+
+  missing <- which(colClasses == NULL)
+  colClasses[missing] <- "character"
+
 
   ## Read any CSV files ##
   # We can assume that if the data is online, the download URL is:
@@ -87,12 +100,17 @@ eml_read <- function(file){
   # NOTE: EML schema does not guarentee we have online data URL!
 
   ## Specify column types as determined from metadata.  
-  csv <- read.csv(download_url, colClasses=colClasses)
+  dataframe <- read.csv(download_url, colClasses=colClasses)
+
+  
+  ### Optional checks and post-processing ################
+  ## FIXME
+  # Optionally, atomatically scale measurements to preferred units through unit conversions.  
 
   ## If available, check number of records. Warn but don't error if not correct.  
   ## (e.g. Harvard Forest is in the habit of writing 9999 instead of just omitting
   ##  this optional metadata...)
-
+  list(dataframe=dataframe, col_metadata = col_metadata, unit_metadata = unit_metadata) 
 }
 
 ## Helper function
