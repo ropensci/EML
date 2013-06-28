@@ -3,8 +3,8 @@
 #' 
 #' @references Normative technical specification given at
 #' http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-dataset.html
-#' @params ... arguments to \code{\link{eml_dataTable}}
-#' @params .contact a list of argumens to \code{\link{eml_contact}}
+#' @param ... arguments to \code{\link{eml_dataTable}}
+#' @param .contact a list of argumens to \code{\link{eml_contact}}
 #' @import XML
 #' @import XMLSchema 
 eml_dataset = function(..., .contact){

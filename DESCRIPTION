@@ -25,3 +25,4 @@ Collate:
     'eml_otherEntity.R'
     'defaults.R'
     'eml_read.R'
+    'eml_import_settings.R'
