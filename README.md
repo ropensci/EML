@@ -9,11 +9,13 @@ R package for reading, writing, integrating and publishing data using the Ecolog
 Quick Start
 ===========
 
-Install the R package:
+Install dependencies and the R package:
 
 <!-- r highlighting on github is broken, so we'll use ruby codeblocks -->
 
 ```ruby
+library(devtools)
+install_github("XMLSchema", "omegahat")
 install_github("reml", "ropensci")
 ```
 

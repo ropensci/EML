@@ -9,7 +9,6 @@ Quick Start
 
 Install the R package:
 
-<!-- r highlighting on github is broken, so we'll use {r} codeblocks -->
 
 ```{r}
 #install_github("reml", "ropensci")
