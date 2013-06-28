@@ -2,7 +2,7 @@
 \alias{eml_dataset}
 \title{Function to create an EML Dataset node}
 \usage{
-  eml_dataset(..., .contact)
+  eml_dataset(..., .contact = list())
 }
 \arguments{
   \item{...}{arguments to \code{\link{eml_dataTable}}}

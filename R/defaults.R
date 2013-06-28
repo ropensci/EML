@@ -25,7 +25,7 @@ new_defaults = function(value = list()) {
 
 #' Default and current chunk options
 #' @export
-eml = new_defaults(list(contact_givenName="John", contact_surName="Smith", contact_email="john.smith@gmail.com"))
+eml = new_defaults(list())
 
 #' Set aliases for chunk options
 #'

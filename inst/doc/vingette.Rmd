@@ -23,7 +23,7 @@ Writing R data into EML
 Configure general metadata you may want to reuse again and again through settings:
 
 ```{r}
- eml$set(givenName = "Carl", surName = "Boettiger", email = "cboettig@ropensci.org")
+ eml$set(contact_givenName = "Carl", contact_surName = "Boettiger", contact_email = "cboettig@ropensci.org")
 ```
 
 Consider some dataset as an R `data.frame`.  

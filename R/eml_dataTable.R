@@ -44,7 +44,7 @@ eml_dataTable = function(dataframe, col_metadata, unit_metadata,
 
   # Write the data to a csv file
   if(is.null(csvfile))
-    csvfile = gsub("(.{16}).+", "\\1", paste(paste(names(dataframe), collapse="_"), ".csv", sep = ""))
+    csvfile = paste(gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_")), ".csv", sep = "")
   write.csv(dataframe, file=csvfile) 
 
   if(is.null(file_description))

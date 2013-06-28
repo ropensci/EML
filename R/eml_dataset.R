@@ -7,9 +7,10 @@
 #' @param .contact a list of argumens to \code{\link{eml_contact}}
 #' @import XML
 #' @import XMLSchema 
-eml_dataset = function(..., .contact){
+eml_dataset = function(..., .contact=list()){
   dataset = newXMLNode("dataset")
   dataTable = eml_dataTable(...)
+
   contact = do.call(eml_contact, .contact)
   addChildren(dataset, contact)
   addChildren(dataset, dataTable)
