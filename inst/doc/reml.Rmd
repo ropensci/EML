@@ -1,0 +1,31 @@
+
+
+* The Ecological Metadata Language (EML) has been around for a while now, but has so far seen limited use.  
+
+* R is a widely adopted among the community, many researchers already familiar with reading and writing data from R.
+
+* R provides a rich set of data types and constructs that can be mapped into EML (e.g. integers, floats, ordered/nominal factors, character strings)
+
+
+
+### Current state of EML
+
+* Generation of EML is limited.  e.g. to LTER centers with informatics support. 
+* Applications of existing EML more limited still (?)  
+
+* Software to work with EML is limited to tools with low adoption rates across the community (e.g. Kepler). 
+
+ Researchers are isolated from the metadata encoding, instead providing plain-text descriptions in MS Word documents.  Allows for low barrier of entry but also makes a barrier to richer encoding.  
+
+
+
+### Promise of REML
+
+
+### Authoring tools
+
+### Parsing tools
+
+### Publishing tools
+
+
