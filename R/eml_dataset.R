@@ -3,13 +3,14 @@
 #' 
 #' @references Normative technical specification given at
 #' http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-dataset.html
-#' 
+#' @params ... arguments to \code{\link{eml_dataTable}}
+#' @params .contact a list of argumens to \code{\link{eml_contact}}
 #' @import XML
 #' @import XMLSchema 
-eml_dataset = function(...){
+eml_dataset = function(..., .contact){
   dataset = newXMLNode("dataset")
   dataTable = eml_dataTable(...)
-  contact = eml_contact()
+  contact = do.call(eml_contact, .contact)
   addChildren(dataset, contact)
   addChildren(dataset, dataTable)
   dataset
