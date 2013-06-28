@@ -43,7 +43,7 @@ dat = data.frame(river=c("SAC", "SAC", "AM"),
        stg = c(parr = "third life stage", smolt = "fourth life stage"),
        ct = "number")
 
- node = eml_datatable(dat, col_metadata, unit_metadata)
+ node = eml_dataTable(dat, col_metadata, unit_metadata)
 
 We have semantic meaning available in EML for many numeric units. Any unit not provided must still be defined semantically.  But we have much more obtuse support for providing semantic meaning to character strings.
 }

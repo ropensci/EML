@@ -1,5 +1,6 @@
 \name{eml_write}
 \alias{eml_write}
+\alias{write.eml}
 \title{Write a data table into an EML file}
 \usage{
   eml_write(..., file = "eml_data.xml")
