@@ -9,10 +9,10 @@
       <electronicMailAddress>cboettig@ropensci.org</electronicMailAddress>
     </contact>
     <dataTable>
-      <entityName>river_spp_stg_ct</entityName>
+      <entityName>river_spp_stg_ct.csv</entityName>
       <entityDescription/>
       <physical>
-        <objectName>river_spp_stg_ct</objectName>
+        <objectName>river_spp_stg_ct.csv</objectName>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
@@ -106,5 +106,29 @@
         </attribute>
       </attributeList>
     </dataTable>
+    <additionalMetadata id="figshare">
+      <metadata>
+        <keywordSet>
+          <keywordThesaurus>figshare Tags</keywordThesaurus>
+          <keyword>EML</keyword>
+        </keywordSet>
+        <keywordSet>
+          <keywordThesaurus>figshare Categories</keywordThesaurus>
+          <keyword>Ecology</keyword>
+        </keywordSet>
+      </metadata>
+    </additionalMetadata>
+    <additionalMetadata id="figshare">
+      <metadata>
+        <keywordSet>
+          <keywordThesaurus>figshare Tags</keywordThesaurus>
+          <keyword>EML</keyword>
+        </keywordSet>
+        <keywordSet>
+          <keywordThesaurus>figshare Categories</keywordThesaurus>
+          <keyword>Ecology</keyword>
+        </keywordSet>
+      </metadata>
+    </additionalMetadata>
   </dataset>
 </eml:eml>
