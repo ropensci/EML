@@ -9,6 +9,10 @@
 #'  
 #' @import XML
 #' @export
+#' @examples 
+#' \dontrun{
+#'    id = eml_publish("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML")
+#' }
 eml_publish <- function(file, ...,  
                         destination = c("figshare", "github")){
   available <- require(rfigshare)
