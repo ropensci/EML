@@ -17,6 +17,6 @@
   a file with eml_read.
 }
 \seealso{
-  citation
+  \code{\link{citation}}
 }
 

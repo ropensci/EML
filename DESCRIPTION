@@ -39,3 +39,4 @@ Collate:
     'eml_import_settings.R'
     'eml_publish.R'
     'eml_figshare.R'
+    'eml_citation.R'
