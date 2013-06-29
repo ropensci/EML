@@ -27,3 +27,4 @@ Collate:
     'eml_read.R'
     'eml_import_settings.R'
     'eml_publish.R'
+    'eml_figshare.R'

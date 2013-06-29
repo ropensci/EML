@@ -15,6 +15,10 @@
   \item{destination}{the publishing destination, e.g.
   "figshare"}
 }
+\value{
+  Uploads the dataset and file to destination specified
+  returns an id
+}
 \description{
   Push EML and data files to an online server and update
   EML Metadata accordingly
