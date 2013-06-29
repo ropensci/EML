@@ -47,7 +47,7 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
   for(colname in names(dataframe)){
 
     column = dataframe[[colname]]
-    id = digest(colname)
+    id = digest(col_metadata[colname])
 
     attribute = newXMLNode("attribute", attrs = c("id" = id), parent = attributeList)
     addChildren(attribute, newXMLNode("attributeName", colname))
