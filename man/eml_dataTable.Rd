@@ -12,21 +12,33 @@
   definitions, e.g. c("X1" = "species name", "X2" =
   "species density", ...)}
 
-  \item{unit_metadata}{a named list of length ncol.  For
-  each column, factor: a named character vector of
-  definitions of each factor numeric: unit used, from EML
-  list dateTime: For an R time object (POSIXt class), give
-  the format character: definition (same as col def?)
-  definitions of all factors, a named character vector of
-  definitions, e.g.  c("X1" = "species name", "X2" =
-  "species density", ...)
-
-  The primary role of an EML Datatable is to define the
-  data specified by the column headings; facilitating data
-  synthesis.}
+  \item{unit_metadata}{a named list of length ncol defining
+  the cell values. arguments will vary by object class; see
+  details.}
 }
 \description{
   Function to create an EML DataTable
+}
+\details{
+  unit_metadata list items will depend on the class, as
+  shown in the examples. For instance: \item factor: a
+  named character vector of definitions of each factor
+  \item numeric: unit used, from EML list \item dateTime:
+  For an R time object (POSIXt class), give the format
+  \item character: definition (same as col def?)
+  definitions: of all factors, a named character vector of
+  definitions, e.g.  c("X1" = "species name", "X2" =
+  "species density", ...)
+
+  Semantics:
+
+  The primary role of an EML Datatable is to define the
+  data specified by the column headings; facilitating data
+  synthesis. We have semantic meaning available in EML for
+  many numeric units. Any unit not provided must still be
+  defined semantically.  But we have much more obtuse
+  support for providing semantic meaning to character
+  strings.
 }
 \examples{
 dat = data.frame(river=c("SAC", "SAC", "AM"),
@@ -44,10 +56,8 @@ dat = data.frame(river=c("SAC", "SAC", "AM"),
        ct = "number")
 
  node = eml_dataTable(dat, col_metadata, unit_metadata)
-
-We have semantic meaning available in EML for many numeric units. Any unit not provided must still be defined semantically.  But we have much more obtuse support for providing semantic meaning to character strings.
 }
 \references{
-  Normative technical specification given at
+  Normative technical specification given at:
 }
 

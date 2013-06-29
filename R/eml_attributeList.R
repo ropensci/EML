@@ -17,6 +17,8 @@
 #' @import XML
 #' @import XMLSchema 
 #' @import digest
+#' @export
+#' 
 #' @examples
 #'  dat = data.frame(river=c("SAC", "SAC", "AM"), 
 #'                    spp = c("king", "king", "ccho"), 
@@ -33,7 +35,7 @@
 #'        ct = "number")
 #' 
 #'  node = eml_attributeList(dat, col_metadata, unit_metadata) 
-
+#' 
 eml_attributeList = function(dataframe, col_metadata, unit_metadata, 
                       id = c(1:length(dataframe)),  
                       accuracy = NULL, coverage = NULL, methods = NULL,

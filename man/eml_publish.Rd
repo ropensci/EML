@@ -23,4 +23,9 @@
   Push EML and data files to an online server and update
   EML Metadata accordingly
 }
+\examples{
+\dontrun{
+   id = eml_publish("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML")
+}
+}
 
