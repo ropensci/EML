@@ -2,10 +2,18 @@
 \alias{eml_publish}
 \title{Publish EML}
 \usage{
-  eml_publish(file, destination = c("figshare", "github"))
+  eml_publish(file, ...,
+    destination = c("figshare", "github"))
 }
 \arguments{
   \item{file}{The local path of an EML file}
+
+  \item{...}{Additional metadata options.  If publishing to
+  Figshare, these correspond to the options in
+  \code{fs_new_article}. See .}
+
+  \item{destination}{the publishing destination, e.g.
+  "figshare"}
 }
 \description{
   Push EML and data files to an online server and update

@@ -4,8 +4,8 @@
 \usage{
   eml_dataTable(dataframe, col_metadata, unit_metadata,
     accuracy = NULL, coverage = NULL, methods = NULL,
-    missingValueCode = NA, csvfile = NULL,
-    file_description = NULL, csv_url = "http://github.com")
+    missingValueCode = NA, csvfilename = NULL,
+    file_description = NULL)
 }
 \arguments{
   \item{col_metadata}{a named character vector of
