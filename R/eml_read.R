@@ -110,7 +110,10 @@ eml_read <- function(file){
   ## If available, check number of records. Warn but don't error if not correct.  
   ## (e.g. Harvard Forest is in the habit of writing 9999 instead of just omitting
   ##  this optional metadata...)
-  list(dataframe=dataframe, col_metadata = col_metadata, unit_metadata = unit_metadata) 
+  out <-  list(doc = doc, dataframe = dataframe, col_metadata = col_metadata, 
+               unit_metadata = unit_metadata) 
+  class(out) = "eml"
+  out
 }
 
 ## Helper function
