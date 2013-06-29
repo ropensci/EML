@@ -1,4 +1,4 @@
-#' Function to create an EML Datatable
+#' Function to create an EML DataTable
 
 # @param data an R dataframe
 #' @param col_metadata a named character vector of definitions, e.g. c("X1" = "species name", "X2" = "species density", ...)

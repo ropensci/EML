@@ -1,11 +1,11 @@
-\name{eml_datatable}
-\alias{eml_datatable}
-\title{Function to create an EML Datatable}
+\name{eml_dataTable}
+\alias{eml_dataTable}
+\title{Function to create an EML DataTable}
 \usage{
-  eml_datatable(dataframe, col_metadata, unit_metadata,
+  eml_dataTable(dataframe, col_metadata, unit_metadata,
     accuracy = NULL, coverage = NULL, methods = NULL,
     missingValueCode = NA, csvfile = NULL,
-    file_description = NULL)
+    file_description = NULL, csv_url = "http://github.com")
 }
 \arguments{
   \item{col_metadata}{a named character vector of
@@ -26,7 +26,7 @@
   synthesis.}
 }
 \description{
-  Function to create an EML Datatable
+  Function to create an EML DataTable
 }
 \examples{
 dat = data.frame(river=c("SAC", "SAC", "AM"),
@@ -43,7 +43,7 @@ dat = data.frame(river=c("SAC", "SAC", "AM"),
        stg = c(parr = "third life stage", smolt = "fourth life stage"),
        ct = "number")
 
- node = eml_datatable(dat, col_metadata, unit_metadata)
+ node = eml_dataTable(dat, col_metadata, unit_metadata)
 
 We have semantic meaning available in EML for many numeric units. Any unit not provided must still be defined semantically.  But we have much more obtuse support for providing semantic meaning to character strings.
 }
