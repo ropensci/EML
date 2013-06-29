@@ -101,6 +101,10 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   ## Upload updated EML file
   fs_upload(id, file)
 
+
+  details <- fs_details(id, mine=TRUE)
+  eml_id <- details$files[[2]]$id
+
   if(visibility == "private")
     fs_make_private(id)
 
@@ -108,5 +112,5 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     fs_make_public(id)
   ## If public, add the DOI and other citation information to the EML
   }
-  id
+  eml_id
 }
