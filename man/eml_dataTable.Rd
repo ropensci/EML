@@ -1,6 +1,6 @@
 \name{eml_dataTable}
 \alias{eml_dataTable}
-\title{Function to create an EML Datatable}
+\title{Function to create an EML DataTable}
 \usage{
   eml_dataTable(dataframe, col_metadata, unit_metadata,
     accuracy = NULL, coverage = NULL, methods = NULL,
@@ -26,7 +26,7 @@
   synthesis.}
 }
 \description{
-  Function to create an EML Datatable
+  Function to create an EML DataTable
 }
 \examples{
 dat = data.frame(river=c("SAC", "SAC", "AM"),

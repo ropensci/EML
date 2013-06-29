@@ -7,7 +7,7 @@
 #' @param destination the publishing destination, e.g. "figshare"
 #' @return Uploads the dataset and file to destination specified returns an id
 #'  
-#' @import xml
+#' @import XML
 #' @export
 eml_publish <- function(file, ...,  
                         destination = c("figshare", "github")){
