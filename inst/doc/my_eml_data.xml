@@ -23,14 +23,9 @@
             </simpleDelimited>
           </textFormat>
         </dataFormat>
-        <distribution>
-          <online>
-            <url function="download">http://github.com</url>
-          </online>
-        </distribution>
       </physical>
       <attributeList>
-        <attribute id="15172c56ff718273807845e070654c5b">
+        <attribute id="1838f0b53178056585f5bda86818ca30">
           <attributeName>river</attributeName>
           <attributeDefinition>http://dbpedia.org/ontology/River</attributeDefinition>
           <measurementScale>
@@ -50,7 +45,7 @@
             </nominal>
           </measurementScale>
         </attribute>
-        <attribute id="cc8443ea41a139ed07409e4d389aa694">
+        <attribute id="ea5727bd3efa2e6ab373d7da3c6c7885">
           <attributeName>spp</attributeName>
           <attributeDefinition>http://dbpedia.org/ontology/Species</attributeDefinition>
           <measurementScale>
@@ -70,7 +65,7 @@
             </nominal>
           </measurementScale>
         </attribute>
-        <attribute id="2f6371b3b6866e8351ee6d02d63b9bb0">
+        <attribute id="6756a65a81d817505b542e2fa95e3451">
           <attributeName>stg</attributeName>
           <attributeDefinition>Life history stage</attributeDefinition>
           <measurementScale>
@@ -90,7 +85,7 @@
             </nominal>
           </measurementScale>
         </attribute>
-        <attribute id="3c05b17b4ac13d932a3c24f7d4a7707f">
+        <attribute id="49817aab560233c2650de4eb38b5b0cb">
           <attributeName>ct</attributeName>
           <attributeDefinition>count</attributeDefinition>
           <measurementScale>
@@ -106,29 +101,5 @@
         </attribute>
       </attributeList>
     </dataTable>
-    <additionalMetadata id="figshare">
-      <metadata>
-        <keywordSet>
-          <keywordThesaurus>figshare Tags</keywordThesaurus>
-          <keyword>EML</keyword>
-        </keywordSet>
-        <keywordSet>
-          <keywordThesaurus>figshare Categories</keywordThesaurus>
-          <keyword>Ecology</keyword>
-        </keywordSet>
-      </metadata>
-    </additionalMetadata>
-    <additionalMetadata id="figshare">
-      <metadata>
-        <keywordSet>
-          <keywordThesaurus>figshare Tags</keywordThesaurus>
-          <keyword>EML</keyword>
-        </keywordSet>
-        <keywordSet>
-          <keywordThesaurus>figshare Categories</keywordThesaurus>
-          <keyword>Ecology</keyword>
-        </keywordSet>
-      </metadata>
-    </additionalMetadata>
   </dataset>
 </eml:eml>
