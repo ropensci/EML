@@ -6,14 +6,21 @@
 #' @param categories a category or list of categories, selected from the figshare list: 
 #' @param tags at least one tag, any terms are permitted. Tags not required
 #' @param links provided in the list on links of the figshare page. optional.
-#' @param visibility one of "draft", "public", or "private". 
+#' @param visibility one of "draft", "public", or "private".
+#' @param figshare_id If the object already has a figshare id and we want to modify it.  
 #' @return the figshare id
 #' @details figshare requires authentication. See rfigshare 
 #' [tutorial]() for help on configuring this.  
 #' Arguments for figshare are optional, if not provided reml will attempt to
 #' extract appropriate values from the EML.  If no values are found for 
 #' essential metadata (title, description, category), then figshare object
-#' will be still be created as a draft but cannot be published.  
+#' will be still be created as a draft but cannot be published. 
+#'
+#' If publishing as a draft or private file, one can always make public later
+#' through fs_make_public or the figshare online interface.  However, eml_figshare
+#' can take the figshare_id to change any fields of an existing figshare object, 
+#' and in doing so will also update the EML file.  
+#' 
 #' @import rfigshare
 #' @export
 #' @examples 
@@ -22,7 +29,7 @@
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 
-                         visibility = NULL){
+                         visibility = NULL, figshare_id = NULL){
   doc <- xmlParse(file) 
   root <- xmlRoot(doc)
   if(is.null(title))
@@ -37,8 +44,12 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     links <-  xpathSApply(doc, "//dataset/additionalMetadata[@id = 'figshare']/metadata/additionalLinks/url", xmlValue) 
   ## If that still doesn't get anything, we're in for an error... 
 
-
-  id <- fs_create(title=title, description=description, "fileset")
+  if(!is.null(figshare_id)){
+    id <- figshare_id
+    fs_update(article_id = id, title = title, description = description, type = "fileset")
+  } else {
+    id <- fs_create(title = title, description = description, type = "fileset")
+  }
   fs_add_tags(id, tags)
   fs_add_categories(id, categories)
 
