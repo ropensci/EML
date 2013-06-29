@@ -40,30 +40,26 @@ eml_dataTable = function(dataframe, col_metadata, unit_metadata,
                       accuracy = NULL, coverage = NULL, 
                       methods = NULL, missingValueCode = NA, 
                       # physical file metadata 
-                      csvfile=NULL, file_description=NULL, csv_url="http://github.com"){
+                      csvfilename=NULL, file_description=NULL){
 
   # Write the data to a csv file
-  if(is.null(csvfile))
-    csvfile = paste(gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_")), ".csv", sep = "")
-  write.csv(dataframe, file=csvfile) 
+  if(is.null(csvfilename))
+    csvfilename = paste(gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_")), ".csv", sep = "")
+  write.csv(dataframe, file=csvfilename) 
 
   if(is.null(file_description))
-    file_discription = paste("Description of the CSV file", csvfile)  
+    file_discription = paste("Description of the CSV file", csvfilename)  
 
   # Write the dataTable header metadata
   dataTable = newXMLNode("dataTable")
-  newXMLNode("entityName", csvfile, parent = dataTable)
+  newXMLNode("entityName", csvfilename, parent = dataTable)
   newXMLNode("entityDescription", file_description, parent = dataTable)
 
 
   # Physical node describes the CSV file.  
   physical = newXMLNode("physical", parent = dataTable)
-  newXMLNode("objectName", csvfile, parent = physical)
+  newXMLNode("objectName", csvfilename, parent = physical)
   addChildren(physical, csv_format())
-  newXMLNode("url", csv_url, attrs = list("function"="download"), parent = 
-    newXMLNode("online", parent = 
-      newXMLNode("distribution", parent = physical)))
-
 
   # attrlist describes the col_metadata and unit_metadata 
   attrlist = eml_attributeList(dataframe, col_metadata, unit_metadata, 
