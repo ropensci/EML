@@ -24,11 +24,18 @@
 #
 eml_write = function(..., file = "eml_data.xml"){
 
-  emlroot = newXMLNode("eml:eml", namespaceDefinitions = eml_namespaces)
-  emldoc = newXMLDoc(node = emlroot)
-  dataset = eml_dataset(...)
-  addChildren(emlroot, dataset)
-  saveXML(emldoc, file=file)
+	available <- require(uuid)
+	if(!available) {
+		top("Creating EML requires the uuid package")
+	} else {
+		pid = UUIDgenerate()
+		print(pid)
+		emlroot = newXMLNode("eml:eml", attrs = c(packageId = pid, system = 'uuid'), namespaceDefinitions = eml_namespaces)
+		emldoc = newXMLDoc(node = emlroot)
+		dataset = eml_dataset(...)
+		addChildren(emlroot, dataset)
+		saveXML(emldoc, file=file)
+	}
 }
 
 eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.0", 

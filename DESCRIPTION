@@ -22,13 +22,15 @@ Imports:
     XMLSchema,
     digest,
     rfigshare,
-    RCurl
+    RCurl,
+	uuid
 Depends:
     R (>= 2.15)
 Collate:
     'eml_access.R'
     'eml_attributeList.R'
     'eml_contact.R'
+    'eml_creator.R'
     'eml_dataTable.R'
     'eml_dataset.R'
     'eml_write.R'
@@ -37,6 +39,7 @@ Collate:
     'defaults.R'
     'eml_read.R'
     'eml_import_settings.R'
+    'eml_person.R'
     'eml_publish.R'
     'eml_figshare.R'
     'eml_citation.R'
