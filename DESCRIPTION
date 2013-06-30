@@ -16,14 +16,13 @@ Suggests:
     knitr,
     rfigshare,
     devtools,
-    testthat
+    testthat,
+    uuid
 Imports:
     XML,
     XMLSchema,
     digest,
-    rfigshare,
-    RCurl,
-	uuid
+    RCurl
 Depends:
     R (>= 2.15)
 Collate:

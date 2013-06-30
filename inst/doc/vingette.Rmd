@@ -22,6 +22,7 @@ Install the R package:
 
 
 ```{r}
+install.packages("uuid",,'http://rforge.net/',type='source')
 library("devtools")
 install_github("XMLSchema", "omegahat")
 install_github("reml", "ropensci")

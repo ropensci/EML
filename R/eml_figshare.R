@@ -21,7 +21,7 @@
 #' can take the figshare_id to change any fields of an existing figshare object, 
 #' and in doing so will also update the EML file.  
 #' 
-#' @import rfigshare
+#' @import XML
 #' @export
 #' @examples 
 #' \dontrun{
