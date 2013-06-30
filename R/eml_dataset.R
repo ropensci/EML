@@ -8,16 +8,15 @@
 #' @import XML
 #' @import XMLSchema 
 eml_dataset = function(..., .title = "Unnamed", .creator=list(), .contact=list()){
-  browser()
   dataset = newXMLNode("dataset")
   title = newXMLNode("title", .title)
   addChildren(dataset, title)
-  dataTable = eml_dataTable(...)
 
-  creator = do.call(eml_creator, .contact)
+  creator = do.call(eml_person, list(person_type="creator", givenName="Matt", surName="Jones", email="x@y.z"))
   addChildren(dataset, creator)
-  contact = do.call(eml_contact, .contact)
+  contact = do.call(eml_person, list(person_type="contact", givenName="Matt", surName="Jones", email="x@y.z"))
   addChildren(dataset, contact)
+  dataTable = eml_dataTable(...)
   addChildren(dataset, dataTable)
   dataset
 } 
