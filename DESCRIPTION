@@ -29,8 +29,6 @@ Depends:
 Collate:
     'eml_access.R'
     'eml_attributeList.R'
-    'eml_contact.R'
-    'eml_creator.R'
     'eml_dataTable.R'
     'eml_dataset.R'
     'eml_write.R'
