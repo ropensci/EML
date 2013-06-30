@@ -28,7 +28,7 @@ eml_write = function(..., file = "eml_data.xml"){
 	if(!available) {
 		top("Creating EML requires the uuid package")
 	} else {
-		pid = UUIDgenerate()
+		pid = paste(sep='', "urn:uuid:", UUIDgenerate())
 		print(pid)
 		emlroot = newXMLNode("eml:eml", attrs = c(packageId = pid, system = 'uuid'), namespaceDefinitions = eml_namespaces)
 		emldoc = newXMLDoc(node = emlroot)
