@@ -58,7 +58,7 @@ eml_dataTable = function(dataframe, col_metadata, unit_metadata,
   write.csv(dataframe, file=csvfilename) 
 
   if(is.null(file_description))
-    file_discription = paste("Description of the CSV file", csvfilename)  
+    file_description = paste("Description of the CSV file", csvfilename)  
 
   # Write the dataTable header metadata
   dataTable = newXMLNode("dataTable")

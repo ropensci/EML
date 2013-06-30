@@ -73,7 +73,7 @@ Define the units used in each column.  For factors, this is a definition of the 
 The hard work is over, time to generate some EML.
 
 ```{r}
-eml_write(dat, col_metadata, unit_metadata, .title="A test EML file", file="my_eml_data.xml")
+eml_write(dat, col_metadata, unit_metadata, .title="A test EML file", file="my_eml_data.xml", file_description="Test data, only intended for testing")
 ```
 
 See the [EML generated](https://github.com/ropensci/eml/tree/master/inst/doc/my_eml_data.xml) by this example.
