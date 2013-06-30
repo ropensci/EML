@@ -89,7 +89,7 @@ csv_format = function(){
 newXMLNode("dataFormat", .children = 
   newXMLNode("textFormat", .children = list(
     newXMLNode("numHeaderLines", '1'),
-    newXMLNode("recorDelimiter", "\\r\\n"),
+    newXMLNode("recordDelimiter", "\\r\\n"),
     newXMLNode("attributeOrientation", "column"),
     newXMLNode("simpleDelimited", .children =
       newXMLNode("fieldDelimiter", ","))

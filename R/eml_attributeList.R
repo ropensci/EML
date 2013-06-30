@@ -75,15 +75,16 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
     ## Numeric Data 
     } else if(is.numeric(column)){
         ratio = newXMLNode("ratio", parent = measurementScale)
+        # Look up best unit match from the EML Unit library 
+        unit_code = match_unit(unit_metadata[[colname]]) 
+        newXMLNode("standardUnit", unit_code, 
+                   parent = newXMLNode("unit", parent = ratio))
+		# Set the domain to numeric
         numericDomain = newXMLNode("numericDomain", parent = ratio)
         if(is.integer(column))
           newXMLNode("numberType", "integer", parent=numericDomain)
         else
           newXMLNode("numberType", "real", parent=numericDomain)
-        # Look up best unit match from the EML Unit library 
-        unit_code = match_unit(unit_metadata[[colname]]) 
-        newXMLNode("standardUnit", unit_code, 
-                   parent = newXMLNode("unit", parent = ratio))
 
     ## Date-time data
     } else if(is(column, "POSIXt")){

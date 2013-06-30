@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.0" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:ab37cc0e-5f13-4feb-941a-7d78239e326c" system="uuid">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.0" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:7a87dee8-2a77-428b-8774-573ff3abbb7d" system="uuid">
   <dataset>
     <title>A test EML file</title>
     <creator>
@@ -24,7 +24,7 @@
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>
-            <recorDelimiter>\r\n</recorDelimiter>
+            <recordDelimiter>\r\n</recordDelimiter>
             <attributeOrientation>column</attributeOrientation>
             <simpleDelimited>
               <fieldDelimiter>,</fieldDelimiter>
@@ -98,12 +98,12 @@
           <attributeDefinition>count</attributeDefinition>
           <measurementScale>
             <ratio>
-              <numericDomain>
-                <numberType>integer</numberType>
-              </numericDomain>
               <unit>
                 <standardUnit>number</standardUnit>
               </unit>
+              <numericDomain>
+                <numberType>integer</numberType>
+              </numericDomain>
             </ratio>
           </measurementScale>
         </attribute>
