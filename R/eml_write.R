@@ -3,10 +3,10 @@
 #' Generates an EML file corresponding to the data provided.   
 #' @aliases write.eml
 #' 
-#' @return Writes the EML file generated to the filename given.  If no name is given,
-#' returns th XML doc as an R object, see \code{\link{saveXML}}.  May also write out 
+#' @return Writes the EML file generated to the filename given.   May also write out 
 #' the R object to the appropriate file type -- e.g. data.frames will be written out 
-#' to CSV files linked to the EML.  
+#' to CSV files linked to the EML. Invsibily returns a pointer to the EML document,
+#' as would be returned from \code{\link{xmlParse}}.  
 #' @import XMLSchema
 #' @import XML
 #' @export
@@ -43,6 +43,7 @@ eml_write = function(..., file = NULL){
 		dataset = eml_dataset(...)
 		addChildren(emlroot, dataset)
 		saveXML(emldoc, file=file)
+    invisible(emldoc)
 	}
 }
 

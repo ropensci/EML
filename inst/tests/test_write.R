@@ -16,12 +16,14 @@ test_that("We can parse XML written by reml",{
           stg = c(parr = "third life stage", smolt = "fourth life stage"),
           ct = "number")
 
-  eml_write(dat, col_metadata, unit_metadata, file="my_eml_data.xml")
+  doc <- eml_write(dat, col_metadata, unit_metadata)
 
   require(XML)
-  doc <- xmlParse("my_eml_data.xml")
-
   expect_that(class(doc), equals(c("XMLInternalDocument", "XMLAbstractDocument")))
+
+  ## clean up
+  # unlink("my_eml_data.xml") # Not needed if file isn't specified
+  unlink("river_spp_stg_ct.csv")
 })
 
 
@@ -45,8 +47,13 @@ test_that("Column names written into EML match those given", {
 
   require(XML)
   doc <- xmlParse("my_eml_data.xml")
+
   csv_xpath <- "//physical[.//simpleDelimited[fieldDelimiter = ',']]/parent::dataTable"
   colNames <- xpathSApply(doc, paste0(csv_xpath, "/attributeList/attribute/attributeName"), xmlValue)
 
   expect_that(colNames, equals(names(dat)))
+
+  ## clean up
+  unlink("my_eml_data.xml")
+  unlink("river_spp_stg_ct.csv")
 })

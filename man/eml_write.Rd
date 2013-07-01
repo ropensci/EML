@@ -6,11 +6,12 @@
   eml_write(..., file = NULL)
 }
 \value{
-  Writes the EML file generated to the filename given.  If
-  no name is given, returns th XML doc as an R object, see
-  \code{\link{saveXML}}.  May also write out the R object
-  to the appropriate file type -- e.g. data.frames will be
-  written out to CSV files linked to the EML.
+  Writes the EML file generated to the filename given.  May
+  also write out the R object to the appropriate file type
+  -- e.g. data.frames will be written out to CSV files
+  linked to the EML. Invsibily returns a pointer to the EML
+  document, as would be returned from
+  \code{\link{xmlParse}}.
 }
 \description{
   Generates an EML file corresponding to the data provided.
