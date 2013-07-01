@@ -1,12 +1,12 @@
 \name{eml_write}
 \alias{eml_write}
 \alias{write.eml}
-\title{Write a data table into an EML file}
+\title{Write R objects into an EML file}
 \usage{
   eml_write(..., file = "eml_data.xml")
 }
 \description{
-  Write a data table into an EML file
+  Generates an EML file corresponding to the data provided.
 }
 \examples{
 eml$set(givenName = "Carl", surName = "Boettiger", email = "cboettig@gmail.com")
