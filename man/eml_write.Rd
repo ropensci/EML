@@ -3,7 +3,14 @@
 \alias{write.eml}
 \title{Write R objects into an EML file}
 \usage{
-  eml_write(..., file = "eml_data.xml")
+  eml_write(..., file = NULL)
+}
+\value{
+  Writes the EML file generated to the filename given.  If
+  no name is given, returns th XML doc as an R object, see
+  \code{\link{saveXML}}.  May also write out the R object
+  to the appropriate file type -- e.g. data.frames will be
+  written out to CSV files linked to the EML.
 }
 \description{
   Generates an EML file corresponding to the data provided.
