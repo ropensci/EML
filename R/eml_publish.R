@@ -19,7 +19,7 @@ eml_publish <- function(file, ...,
   if(!available)
     stop("Publishing to figshare requires the rfigshare package")
   else
-    do.call(eml_figshare, list(file, ...))
+    do.call(eml_figshare, c(file, list(...)))
 }
 
 

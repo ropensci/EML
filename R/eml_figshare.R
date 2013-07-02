@@ -29,7 +29,8 @@
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 
-                         visibility = NULL, figshare_id = NULL){
+                         visibility = c("draft", "private", "public"), figshare_id = NULL){
+  visibility = match.arg(visibility)
   doc <- xmlParse(file) 
   root <- xmlRoot(doc)
   if(is.null(title))
@@ -70,7 +71,7 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   ## Add figshare download URL to EML
   newXMLNode("url", csv_url, attrs = list("function"="download"), parent = 
     newXMLNode("online", parent = 
-      newXMLNode("distribution", parent = physical)))
+      newXMLNode("distribution", parent = root[["dataset"]][["dataTable"]][["physical"]])))
   
 
   ## Add figshare metadata to EML
@@ -112,5 +113,5 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     fs_make_public(id)
   ## If public, add the DOI and other citation information to the EML
   }
-  eml_id
+  id
 }

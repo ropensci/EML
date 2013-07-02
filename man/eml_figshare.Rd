@@ -4,7 +4,8 @@
 \usage{
   eml_figshare(file, title = NULL, description = NULL,
     categories = NULL, tags = NULL, links = NULL,
-    visibility = NULL, figshare_id = NULL)
+    visibility = c("draft", "private", "public"),
+    figshare_id = NULL)
 }
 \arguments{
   \item{title}{of the figshare dataset,}
