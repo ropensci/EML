@@ -48,14 +48,14 @@
 eml_dataTable = function(dataframe, col_metadata, unit_metadata,
                       # Optional dataTable metadata
                       accuracy = NULL, coverage = NULL, 
-                      methods = NULL, missingValueCode = NA, 
+                      methods = NULL, missingValueCode = "NA", 
                       # physical file metadata 
                       csvfilename=NULL, file_description=NULL){
 
   # Write the data to a csv file
   if(is.null(csvfilename))
     csvfilename = paste(gsub("(.{16}).+", "\\1", paste(names(dataframe), collapse="_")), ".csv", sep = "")
-  write.csv(dataframe, file=csvfilename) 
+  write.csv(dataframe, file=csvfilename, na=missingValueCode) 
 
   if(is.null(file_description))
     file_description = paste("Description of the CSV file", csvfilename)  
@@ -66,19 +66,22 @@ eml_dataTable = function(dataframe, col_metadata, unit_metadata,
   newXMLNode("entityDescription", file_description, parent = dataTable)
 
 
-  # Physical node describes the CSV file.  
+  ## Physical node describes the CSV file.  
   physical = newXMLNode("physical", parent = dataTable)
   newXMLNode("objectName", csvfilename, parent = physical)
   addChildren(physical, csv_format())
 
-  # attrlist describes the col_metadata and unit_metadata 
+  ## attrlist describes the col_metadata and unit_metadata 
   attrlist = eml_attributeList(dataframe, col_metadata, unit_metadata, 
                       id = c(1:length(dataframe)),  
                       accuracy = accuracy, coverage = coverage, 
-                      methods = methods, missingValueCode = missingValueCode)
-
+                      methods = methods, 
+                      missingValueCode = missingValueCode)
   addChildren(dataTable, attrlist)
 
+  ## number of rows, can be used to verify data
+  numberOfRecords <- newXMLNode("numberOfRecords", dim(dataframe)[1]) 
+  addChildren(dataTable, numberOfRecords)
 }
 
 
