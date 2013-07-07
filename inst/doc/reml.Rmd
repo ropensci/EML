@@ -1,16 +1,21 @@
 
+Abstract
+
+1. Recording good metadata is at the heart of effective data synthesis and reuse
+2. 
+
+Vertically integrated repositories vs metadata driven repositories.  
+
+
+Data synthesis
+
+
 ## Why EML?
 
-Archival, open data is great ... blah blah.  Good reuse is all about good Metadata blah blah...
 
-But specifying metadata is typically onerous, time-consuming and error prone.  Your metadata doesn't define your date format/missing value character/etc etc?  What, that's metadata too?  Wouldn't it be nice if someone thought of all the things we should record and just made a template we could use? 
+But specifying metadata is typically onerous, time-consuming and error prone. 
 
-Oh, wait, they did.  It's called EML, and it's been around a long time.  Like carved in petroglyphs long time, in the days before a public internet existed.  
-
-
-Oh, you haven't heard of it?  That's probably because what should be a time-saving template appears more like a huge technological barrier best left to tech geeks.   But it isn't.  
-
-> Terence Parr once said "being an expert in XML is like being an expert in CSV". 
+Such definitions are also not machine readable.  
 
 Or at least, it doesn't have to be that way.  We just need better tools.  
 
@@ -38,6 +43,15 @@ Or at least, it doesn't have to be that way.  We just need better tools.
 
 ### Promise of REML
 
+
+### Getting Started: A minimal example.  
+
+Imagine we are working with a `data.frame` in R analgous to Table 1.
+
+<!--Writing a data.frame into EML -->
+
+
+Writing this table into EML 
 
 ### Authoring tools
 

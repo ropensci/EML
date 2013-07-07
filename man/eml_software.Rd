@@ -2,7 +2,7 @@
 \alias{eml_software}
 \title{Create  an EML Software node}
 \usage{
-  eml_software(license, version, .implementation,
+  eml_software(license, version, implementation,
     .dependency = list(), ..., node = NULL)
 }
 \arguments{
@@ -16,5 +16,8 @@
 }
 \description{
   Create an EML Software node
+}
+\details{
+  We need to pass implementation
 }
 

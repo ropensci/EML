@@ -1,0 +1,28 @@
+
+You know the spiel.  Archivally preserved open data is great [1]. For you [2], for your citations [3], for your grants, [4] and of course, for scientific progress more generally [5].  
+
+And you know that making data reusable is all really all about having good metadata [6-398].  
+
+But specifying metadata is typically onerous, time-consuming and error prone.  Your metadata doesn't define your date format/missing value character/etc etc?  What, that's metadata too?  Wouldn't it be nice if someone thought of all the things we should record and just made a template we could use? 
+
+Oh, wait, they did.  It's called EML, and it's been around a long time.  Like carved in petroglyphs long time, in the days before a public internet existed.  
+
+Oh, you haven't heard of it?  That's probably because what should be a time-saving template appears more like a huge technological barrier best left to tech geeks.   But it isn't.  
+
+
+Or at least, it doesn't have to be that way.  We just need better tools.  
+
+You already use XML every day.  Microsoft office?  Those `.docx`, `xlsx`, etc., are just a bunch of XML files zipped together (just try `unzip file.docx`)  The tools are just good enough to hide the XML from you.  XML is so general that it's essentially meaningless to say a file is XML.  Could be anything. Terence Parr once said "being an expert in XML is like being an expert in CSV". 
+
+That's where schema come in.  
+
+
+## Why REML?
+
+* The Ecological Metadata Language (EML) has been around for a while now, but has so far seen limited use.  
+
+* R is a widely adopted among the community, many researchers already familiar with reading and writing data from R.
+
+* R provides a rich set of data types and constructs that can be mapped into EML (e.g. integers, floats, ordered/nominal factors, character strings)
+
+
