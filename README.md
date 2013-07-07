@@ -22,9 +22,17 @@ Install the R package:
 
 
 ```r
+install.packages("uuid",,'http://rforge.net/',type='source')
 library("devtools")
 install_github("XMLSchema", "omegahat")
 install_github("reml", "ropensci")
+```
+
+
+Load the package:
+
+
+```r
 library("reml")
 ```
 
@@ -82,11 +90,11 @@ The hard work is over, time to generate some EML.
 
 
 ```r
-eml_write(dat, col_metadata, unit_metadata, file="my_eml_data.xml")
+eml_write(dat, col_metadata, unit_metadata, .title="A test EML file", file="my_eml_data.xml", file_description="Test data, only intended for testing")
 ```
 
 ```
-[1] "my_eml_data.xml"
+[1] "urn:uuid:c1043ddf-ba79-45ef-955a-8299277aeb59"
 ```
 
 
@@ -113,9 +121,10 @@ Additional metadata unique to figshare (e.g. matching it's allowed "categories"
 can also be provided.  
 
 ```{r publish_figshare, eval=FALSE} <!-- We don't want to generate a DOI every time we run the vignette -->
-id = eml_publish("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML")
+id = eml_publish("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
 ```
 
+`eml_publish` 
 In return, figshare provides the object with a DOI, which is added to the EML.  
 
 
