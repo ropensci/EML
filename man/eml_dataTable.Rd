@@ -4,7 +4,7 @@
 \usage{
   eml_dataTable(dataframe, col_metadata, unit_metadata,
     accuracy = NULL, coverage = NULL, methods = NULL,
-    missingValueCode = NA, csvfilename = NULL,
+    missingValueCode = "NA", csvfilename = NULL,
     file_description = NULL)
 }
 \arguments{
@@ -21,14 +21,14 @@
 }
 \details{
   unit_metadata list items will depend on the class, as
-  shown in the examples. For instance: \item factor: a
-  named character vector of definitions of each factor
-  \item numeric: unit used, from EML list \item dateTime:
-  For an R time object (POSIXt class), give the format
-  \item character: definition (same as col def?)
-  definitions: of all factors, a named character vector of
-  definitions, e.g.  c("X1" = "species name", "X2" =
-  "species density", ...)
+  shown in the examples. For instance: \itemize{
+  \item{"factor"}{a named character vector of definitions
+  of each factor} \item{"numeric"}{ unit used, from EML
+  list} \item{"dateTime"}{For an R time object (POSIXt
+  class), give the format} \item{"character"}{definition
+  (same as col def?)} } definitions: of all factors, a
+  named character vector of definitions, e.g.  c("X1" =
+  "species name", "X2" = "species density", ...)
 
   Semantics:
 

@@ -50,7 +50,8 @@
 }
 \examples{
 \dontrun{
-   id = eml_figshare("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML")
+   file <- system.file("doc", "my_eml_data.xml", package="reml")
+   id <- eml_figshare(file, description="Example EML file from reml", categories = "Ecology", tags = "EML")
 }
 }
 

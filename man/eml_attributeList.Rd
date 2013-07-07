@@ -4,7 +4,8 @@
 \usage{
   eml_attributeList(dataframe, col_metadata, unit_metadata,
     id = c(1:length(dataframe)), accuracy = NULL,
-    coverage = NULL, methods = NULL, missingValueCode = NA)
+    coverage = NULL, methods = NULL,
+    missingValueCode = "NA")
 }
 \arguments{
   \item{data}{an R dataframe}
