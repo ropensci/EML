@@ -18,3 +18,9 @@ eml_citation <- function(doc){
 
   ## Convert citation metadata into a bibentry object
 }
+
+
+eml_R_citation <- function(packagename, ...){
+  eml_citation(...)
+}
+
