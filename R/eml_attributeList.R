@@ -39,14 +39,22 @@
 eml_attributeList = function(dataframe, col_metadata, unit_metadata, 
                       id = c(1:length(dataframe)),  
                       accuracy = NULL, coverage = NULL, methods = NULL,
-                      missingValueCode = NA){
+                      missingValueCode = "NA"){
 
-  
+##  FIXME prompting should be wrapped around existing functions instead of being internal to them 
+## Prompt User for manual input if necessary metadata is not provided
+#  if(is.null(col_metadata))
+#    col_metadata <- prompt_user_for_columns(dataframe)
+#  if(is.null(unit_metadata))
+#    unit_metadata <- prompt_user_for_units(dataframe)
+
+  ## Build the attributeList XML  
   attributeList = newXMLNode("attributeList")
-
   for(colname in names(dataframe)){
 
     column = dataframe[[colname]]
+
+    ## FIXME Should try to use provided id first
     id = digest(col_metadata[colname])
 
     attribute = newXMLNode("attribute", attrs = c("id" = id), parent = attributeList)
@@ -98,6 +106,11 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
         newXMLNode("definition", unit_metadata[[colname]], parent=textDomain)
     }
 
+
+    ## Optional, default matches that used by write.csv
+    addChildren(attribute, 
+                newXMLNode("MissingValueCode", missingValueCode))
+
   } 
   attributeList 
 }
@@ -117,5 +130,4 @@ match_unit = function(char){
 # optionally: storageType, accuracy, coverage, methods, missingValueCode, attributeLabel
 
 # measurementScale: nominal (factor), ordinal (ordered factor), interval (not yet implemented), ratio (most numeric), dateTime
-
 
