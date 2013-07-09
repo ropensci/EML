@@ -1,4 +1,118 @@
 
+The future belongs to those who can leverage existing data and provide reusable data.  
+
+1. Reuse is essential
+2. Reuse requires good metadata standards
+3. reml provides an easy way to utilize the Ecological Metadata Language to generate, access, and publish data.  
+
+Data in ecology and evolutionary biology research collected for a
+particular purpose can often prove valuable to an entirely different
+line of research. One study may collect morphometric measurements of
+coral reef fish taken to understand their evolution, while another
+reuses only the species names and geographic locations of the samples,
+along with other data, to aid the design of marine reserves.  Such reuse
+is fundamental to much of our research, and yet it is often difficult
+or laborious to discover and obtain. The publications are the only
+documentation of what data is available.  The distribution and discovery
+of publications is geared towards reaching audience interested in common
+set of questions, not a common set of data. Even within a subdispline,
+re-use of data is often laborious or impossible due to lack of data or
+sufficient documentation of the data.
+
+
+Vertically intergrated data repositories such as Genbank, GBIF [Canhos 2004],
+or TreeBase [Morell 1996] provide one route to addressing the challenges 
+of data integration.  These data warehouses provide all there data in a common 
+structure that can usually be queried through a web interface. This makes it
+relatively easy to discover available data and access it in a consistent and
+predictable format.  However, such utility comes at a cost.  This approach
+discards the original data model, preserving only the data that can be shoehorned
+into a common data standard. 
+
+<!-- is "data model" more confusing than "data format"? -->
+
+These challenges have long been recognized and broadly accepted that
+they can be best addressed through establishing and using appropriate
+metadata [Michener 1997]. In this approach it is the metadata, rather than
+the data itself, that conforms to a standard.  The Knowledge Network for
+Biocomplexity (KNB) is one example of a metadata-based ecological data 
+repository [Berkley 2001], [KNB].  The metadata approach preserves the original data
+model from the collecting study. Rather than requiring that the raw data
+be preserved in a standard format -- standard file types, standard column headings, 
+standard date formats, missing value formats, etc etc, -- the metadata standard
+approach provides a consisent way to document whatever data model the researchers
+use.  In principle, this approach is both more powerful than vertical integration, 
+(as the full context of the data is preserved), and easier to implement for both
+researcher and repository (as the researcher does not to to convert data to 
+the format required by the repository, and very heterogenous data models can be 
+stored and searched for in a single system).   [Jones 2006] provides
+an excellent explanation and comparison of these approaches.  
+
+The Ecological Metadata Language
+
+
+Consequently ecological
+data reuse remains difficult and haphazard. __@mbjones: is that unfair?__
+
+
+Widely adopted computing environments such as the R statistical sofware
+provide a key opportunity to increase adoption of metadata standards. 
+
+
+
+Methods in Ecology and Evolution has published XXX application notes or articles presenting new software packages.  XXX of them are R packages.  
+
+
+
+[Jones 2006]: http://dx.doi.org/10.1146/annurev.ecolsys.37.091305.110031
+[KNB]: http://knb.ecoinformatics.org
+[Berkley 2001]: http://dx.doi.org/10.1109/4236.957896
+[Michener 1997]: http://dx.doi.org/10.1890/1051-0761(1997)007[0330:NMFTES]2.0.CO;2
+[Morell 1996]: http://dx.doi.org/10.1126/science.273.5275.569
+[Canhos 2004]: https://journals.ku.edu/index.php/jbi/article/viewArticle/3 
+
+
+1. Commonly used data structures in R provide basic metadata automatically
+2. We can more easily avoid redundant metadata entry 
+3. Automate quality control checks
+
+4. Publish
+5. Search 
+6. Build a synthesis platform
+
+### Challenges
+
+Completely automated data integration will require rich semantic information. Consider the simple example of combining the two data tables shown in Figure 2.  
+
+
+
+The EML schema already provides some 
+
+
+Semantics.
+
+
+
+It's all metadata.  
+
+Share 
+Metadata
+raw data
+formats: file formats, table formats, cell formats 
+good null values
+easy to combine (context data)
+quality control
+repository
+license
+
+
+
+
+
+
+
+
+
 Abstract
 
 1. Recording good metadata is at the heart of effective data synthesis and reuse
