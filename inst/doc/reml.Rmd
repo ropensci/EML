@@ -48,8 +48,17 @@ the format required by the repository, and very heterogenous data models can be
 stored and searched for in a single system).   [Jones 2006] provides
 an excellent explanation and comparison of these approaches.  
 
-The Ecological Metadata Language
+Unfortunately, adoption of these metadata standards for annotating research
+data has been limited, owing to both technological and social challenges 
+involved [Reichman 2011].
 
+
+Things to discuss:
+
+*  It's not just a problem of sharing culture 
+* Sharing is not effective: close competitors can scoop you, but broader reach can't be realized without good metadata 
+* [Strasser survey showing lagging data management practices]
+* [Stodden survey showing effort in curating data is a barrier]
 
 Consequently ecological
 data reuse remains difficult and haphazard. __@mbjones: is that unfair?__
@@ -62,8 +71,7 @@ provide a key opportunity to increase adoption of metadata standards.
 
 Methods in Ecology and Evolution has published XXX application notes or articles presenting new software packages.  XXX of them are R packages.  
 
-
-
+[Reichman 2011]: http://dx.doi.org/10.1126/science.1197962
 [Jones 2006]: http://dx.doi.org/10.1146/annurev.ecolsys.37.091305.110031
 [KNB]: http://knb.ecoinformatics.org
 [Berkley 2001]: http://dx.doi.org/10.1109/4236.957896
@@ -71,6 +79,8 @@ Methods in Ecology and Evolution has published XXX application notes or articles
 [Morell 1996]: http://dx.doi.org/10.1126/science.273.5275.569
 [Canhos 2004]: https://journals.ku.edu/index.php/jbi/article/viewArticle/3 
 
+[Michener 2006]: http://dx.doi.org/10.1016/j.ecoinf.2005.08.004
+[Michener 2012]: http://dx.doi.org/10.1016/j.tree.2011.11.016
 
 1. Commonly used data structures in R provide basic metadata automatically
 2. We can more easily avoid redundant metadata entry 
