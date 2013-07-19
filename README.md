@@ -98,7 +98,7 @@ eml_write(dat, col_metadata, unit_metadata, .title="A test EML file", file="my_e
 ```
 
 
-See the [EML generated](https://github.com/ropensci/eml/tree/master/inst/doc/my_eml_data.xml) by this example.
+See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/my_eml_data.xml) by this example.
 
 
 #### In development.  
