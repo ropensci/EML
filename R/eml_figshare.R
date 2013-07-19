@@ -25,7 +25,8 @@
 #' @export
 #' @examples 
 #' \dontrun{
-#'    id = eml_figshare("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML")
+#'    file <- system.file("doc", "my_eml_data.xml", package="reml")
+#'    id <- eml_figshare(file, description="Example EML file from reml", categories = "Ecology", tags = "EML")
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 
@@ -34,7 +35,7 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   doc <- xmlParse(file) 
   root <- xmlRoot(doc)
   if(is.null(title))
-    title <- xpathSApply(doc, "//dataTable/entityName", xmlValue)
+    title <- xpathSApply(doc, "//dataset/title", xmlValue)
   if(is.null(description))
     description <- xpathSApply(doc, "//dataTable/entityDescription", xmlValue)
   if(is.null(categories))
@@ -111,7 +112,7 @@ eml_figshare <- function(file, title = NULL, description = NULL,
 
   else if(visibility == "public"){
     fs_make_public(id)
-  ## If public, add the DOI and other citation information to the EML
+    ## If public, add the DOI and other citation information to the EML
   }
   id
 }

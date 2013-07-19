@@ -18,12 +18,12 @@ Suggests:
     devtools,
     testthat,
     uuid,
-    yaml
+    yaml,
+    RCurl
 Imports:
     XML,
     XMLSchema,
-    digest,
-    RCurl
+    digest
 Depends:
     R (>= 2.15)
 Collate:
@@ -42,3 +42,9 @@ Collate:
     'eml_publish.R'
     'eml_figshare.R'
     'eml_citation.R'
+    'eml_R_software.R'
+    'eml_distribution.R'
+    'eml_methods.R'
+    'eml_software.R'
+    'eml_wizards.R'
+    'eml_yaml.R'

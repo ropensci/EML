@@ -2,11 +2,11 @@
 #' 
 #' Provides a reasonably readable plain-text summary of metadata by converting XML to YAML
 #' @param file the path to the EML file to be converted
-#' @param con optional file name to write out to (see \link{\code{writeLines}}. 
+#' @param con optional file name to write out to (see \code{\link{writeLines}}. 
 #'  otherwise returned to terminal.  
-#' @param .parseopts optional additional arguments to \link{\code{xmlParse}}
-#' @param .yamlopts optional additional arguments to \link{\code{as.yaml}}
-#' @returns A YAML representation of the metadata in the EML file, either
+#' @param .parseopts optional additional arguments to \code{\link{xmlParse}}
+#' @param .yamlopts optional additional arguments to \code{\link{as.yaml}}
+#' @return A YAML representation of the metadata in the EML file, either
 #' to the terminal or externally.  
 #' @examples
 #' file <- system.file("doc", "my_eml_data.xml", package="reml")
