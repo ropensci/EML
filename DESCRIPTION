@@ -10,7 +10,7 @@ Date: 2013
 Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
     "cboettig@gmail.com"), person("Matt", "Jones", role="aut"),
     person("Karthik", "Ram", role="aut"), person("Duncan", "Temple Lang",
-    role="aut"))
+    role = "aut"))
 VignetteBuilder: knitr
 Suggests:
     knitr,
@@ -47,3 +47,4 @@ Collate:
     'eml_software.R'
     'eml_wizards.R'
     'eml_yaml.R'
+     ext_validate.R
