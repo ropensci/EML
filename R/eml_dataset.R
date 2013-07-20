@@ -34,12 +34,12 @@ eml_dataset <- function(..., .title = "Unnamed", .creator=list(), .contact=list(
                .methods))
   }
   ## In Methods node we note that the EML was generated in reml software
-  methodsStep <- newXMLNode("methodsStep", parent = methods_node)
-  addChildren(methodsStep, eml_R_software("reml"))
-  addChildren(methodsStep, 
+  methodStep <- newXMLNode("methodStep", parent = methods_node)
+  addChildren(methodStep, eml_R_software("reml"))
+  addChildren(methodStep, 
               newXMLNode("description", 
                          packageDescription("reml", fields="Description")))
-#  addChildren(methodsStep, 
+#  addChildren(methodStep, 
 #              newXMLNode("citation", eml_R_citation("reml")))
 
 
