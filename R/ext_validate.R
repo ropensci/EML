@@ -23,6 +23,9 @@ o = eml_validate(saveXML(sampleDoc))
 #xpathSApply(hdoc, "//h2")
 }
 
+
+#' @import RHTMLForms
+#' @export 
 eml_validate <-
 function (doctext = "", .url = "http://knb.ecoinformatics.org/emlparser/parse", 
     ..., .reader = processValidationResponse, .formDescription = structure(list(formAttributes = structure(c("post", "http://knb.ecoinformatics.org/emlparser/parse"

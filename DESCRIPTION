@@ -23,7 +23,8 @@ Suggests:
 Imports:
     XML,
     XMLSchema,
-    digest
+    digest,
+    RHTMLForms
 Depends:
     R (>= 2.15)
 Collate:
@@ -47,4 +48,4 @@ Collate:
     'eml_software.R'
     'eml_wizards.R'
     'eml_yaml.R'
-     ext_validate.R
+    'ext_validate.R'
