@@ -25,10 +25,13 @@ test_that("We can parse XML written by reml",{
   require(XML)
   expect_that(class(doc), equals(c("XMLInternalDocument", "XMLAbstractDocument")))
 
-  ## Test validity 
+  ## Test validity  FIXME Should print validator error message!
   x <- saveXML(doc)
   o <- eml_validate(x)
-  expect_that(!any(!o), is_true) # all cases validate
+  
+  expect_that(o, is.logical)
+  expect_true(o[[1]]) # all cases validate
+  expect_true(o[[2]]) # all cases validate
 
   ## clean up
   # unlink("my_eml_data.xml") # Not needed if file isn't specified
