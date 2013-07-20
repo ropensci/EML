@@ -2,6 +2,9 @@ context("write")
 
 test_that("We can parse XML written by reml",{
 
+
+  eml$set(contact_givenName = "Carl", contact_surName = "Boettiger", contact_email = "cboettig@ropensci.org")
+
   dat = data.frame(river=c("SAC", "SAC", "AM"),
                         spp = c("king", "king", "ccho"),
                         stg = c("smolt", "parr", "smolt"),
@@ -18,8 +21,14 @@ test_that("We can parse XML written by reml",{
 
   doc <- eml_write(dat, col_metadata, unit_metadata)
 
+  ## Test that we write out an XML document
   require(XML)
   expect_that(class(doc), equals(c("XMLInternalDocument", "XMLAbstractDocument")))
+
+  ## Test validity 
+  x <- saveXML(doc)
+  o <- eml_validate(x)
+  expect_that(!any(!o), is_true) # all cases validate
 
   ## clean up
   # unlink("my_eml_data.xml") # Not needed if file isn't specified
