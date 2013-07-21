@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.0" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:c1043ddf-ba79-45ef-955a-8299277aeb59" system="uuid">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:e23b6fd2-f59d-4047-afb2-0d47e562ad03" system="uuid">
   <dataset>
     <title>A test EML file</title>
     <creator>
@@ -16,6 +16,52 @@
       </individualName>
       <electronicMailAddress>cboettig@ropensci.org</electronicMailAddress>
     </contact>
+    <methods>
+      <methodStep>
+        <description>An R package for reading, writing, integrating and publishing data
+    using the Ecological Metadata Language (EML) format.</description>
+        <software>
+          <title>R interface for the Ecological Metadata Language</title>
+          <creator>
+            <individualName>
+              <givenName>Carl</givenName>
+              <surName>Boettiger</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <creator>
+            <individualName>
+              <givenName>Matt</givenName>
+              <surName>Jones</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <creator>
+            <individualName>
+              <givenName>Karthik</givenName>
+              <surName>Ram</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <creator>
+            <individualName>
+              <givenName>DuncanTemple</givenName>
+              <surName>Lang</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <implementation>
+            <distribution>
+              <online>
+                <url>https://github.com/ropensci/reml</url>
+              </online>
+            </distribution>
+          </implementation>
+          <license>CC0</license>
+          <version>0.0-1</version>
+        </software>
+      </methodStep>
+    </methods>
     <dataTable>
       <entityName>river_spp_stg_ct.csv</entityName>
       <entityDescription>Test data, only intended for testing</entityDescription>
@@ -52,6 +98,10 @@
               </nonNumericDomain>
             </nominal>
           </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
         </attribute>
         <attribute id="ea5727bd3efa2e6ab373d7da3c6c7885">
           <attributeName>spp</attributeName>
@@ -72,6 +122,10 @@
               </nonNumericDomain>
             </nominal>
           </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
         </attribute>
         <attribute id="6756a65a81d817505b542e2fa95e3451">
           <attributeName>stg</attributeName>
@@ -92,6 +146,10 @@
               </nonNumericDomain>
             </nominal>
           </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
         </attribute>
         <attribute id="49817aab560233c2650de4eb38b5b0cb">
           <attributeName>ct</attributeName>
@@ -106,8 +164,13 @@
               </numericDomain>
             </ratio>
           </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
         </attribute>
       </attributeList>
+      <numberOfRecords>3</numberOfRecords>
     </dataTable>
   </dataset>
 </eml:eml>

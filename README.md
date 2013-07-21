@@ -93,10 +93,6 @@ The hard work is over, time to generate some EML.
 eml_write(dat, col_metadata, unit_metadata, .title="A test EML file", file="my_eml_data.xml", file_description="Test data, only intended for testing")
 ```
 
-```
-[1] "urn:uuid:c1043ddf-ba79-45ef-955a-8299277aeb59"
-```
-
 
 See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/my_eml_data.xml) by this example.
 
