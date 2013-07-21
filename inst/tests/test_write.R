@@ -29,7 +29,6 @@ test_that("We can parse XML written by reml",{
   x <- saveXML(doc)
   o <- eml_validate(x)
   
-  expect_that(o, is.logical)
   expect_true(o[[1]]) # all cases validate
   expect_true(o[[2]]) # all cases validate
 
