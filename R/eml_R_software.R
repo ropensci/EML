@@ -4,10 +4,11 @@
 eml_R_software <- function(packagename, ...){
   license <- packageDescription(packagename, fields="License")
   version <- packageDescription(packagename, fields="Version")
-  ## This is a bit cumbersome...
-  implementation <- list(distribution = 
-                            list(url = citation(packagename)$url))
-  eml_software(license = license, version = version, implementation = implementation, ...)
+  title <- packageDescription(packagename, fields="Title")
+  authors <- as.person(packageDescription(packagename, fields="Author")) ## Yay for intelligent coercion!
+  implementation <- list(distribution = list(url = citation(packagename)$url))
+  eml_software(title = title, authors = authors, license = license, 
+               version = version, implementation = implementation, ...)
 }
 
 

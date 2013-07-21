@@ -109,7 +109,10 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
 
     ## Optional, default matches that used by write.csv
     addChildren(attribute, 
-                newXMLNode("MissingValueCode", missingValueCode))
+                newXMLNode("missingValueCode", 
+                           newXMLNode("code", missingValueCode),
+                           newXMLNode("codeExplanation", "Missing Values")))
+
 
   } 
   attributeList 

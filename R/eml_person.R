@@ -13,3 +13,9 @@ eml_person <- function(person_type = "contact",
 }
 
 
+#' Coercion method from R person class to eml person 
+#' @param x an R person object
+#' @returns a eml_person node
+as.eml_person <- function(x, person_type="contact"){
+ eml_person(person_type = person_type, givenName = x$given, surName = x$family, email = x$email)
+}

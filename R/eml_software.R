@@ -4,15 +4,20 @@
 #' @param version of the software 
 #' @param node an existing software node we wish to append to
 #' @details We need to pass implementation
-eml_software <- function(license, version, implementation, 
+eml_software <- function(title, authors, license, version, implementation, 
                          .dependency = list(), ..., node = NULL){
   if(is.null(node))
     node <- newXMLNode("software")
-  addChildren(node, newXMLNode("license", license))
-  addChildren(node, newXMLNode("version", version))
+  addChildren(node, newXMLNode("title", title))
+  for(author in authors){
+    addChildren(node, as.eml_person(author, "creator"))
+  }
   addChildren(node, do.call(eml_implementation, implementation))
+
   if(!is.empty(.dependency))
     addChildren(node, do.call(eml_dependency, .dependency))
+  addChildren(node, newXMLNode("license", license))
+  addChildren(node, newXMLNode("version", version))
 
   node
 }
