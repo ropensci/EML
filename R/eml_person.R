@@ -1,5 +1,6 @@
 #' 
-#'
+#' FIXME: we should be able to pass a string, like 'Carl Boettiger' and have it coerced 
+#' into as.person and then as.eml_person
 eml_person <- function(person_type = "contact",
                          givenName = eml$get("contact_givenName"), 
                            surName = eml$get("contact_surName"), 
