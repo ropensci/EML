@@ -116,11 +116,13 @@ Much of this we can automatically extract from our existing EML file.
 Additional metadata unique to figshare (e.g. matching it's allowed "categories"
 can also be provided.  
 
-```{r publish_figshare, eval=FALSE} <!-- We don't want to generate a DOI every time we run the vignette -->
+<!-- We don't want to generate a DOI every time we run the vignette -->
+
+```r
 id = eml_publish("my_eml_data.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
 ```
 
-`eml_publish` 
+
 In return, figshare provides the object with a DOI, which is added to the EML.  
 
 
