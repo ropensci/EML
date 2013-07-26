@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:e23b6fd2-f59d-4047-afb2-0d47e562ad03" system="uuid">
+  <dataset>
+    <title>A test EML file</title>
+    <creator>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+      <electronicMailAddress>cboettig@ropensci.org</electronicMailAddress>
+    </creator>
+    <contact>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+      <electronicMailAddress>cboettig@ropensci.org</electronicMailAddress>
+    </contact>
+    <methods>
+      <methodStep>
+        <description>An R package for reading, writing, integrating and publishing data
+    using the Ecological Metadata Language (EML) format.</description>
+        <software>
+          <title>R interface for the Ecological Metadata Language</title>
+          <creator>
+            <individualName>
+              <givenName>Carl</givenName>
+              <surName>Boettiger</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <creator>
+            <individualName>
+              <givenName>Matt</givenName>
+              <surName>Jones</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <creator>
+            <individualName>
+              <givenName>Karthik</givenName>
+              <surName>Ram</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <creator>
+            <individualName>
+              <givenName>DuncanTemple</givenName>
+              <surName>Lang</surName>
+            </individualName>
+            <electronicMailAddress/>
+          </creator>
+          <implementation>
+            <distribution>
+              <online>
+                <url>https://github.com/ropensci/reml</url>
+              </online>
+            </distribution>
+          </implementation>
+          <license>CC0</license>
+          <version>0.0-1</version>
+        </software>
+      </methodStep>
+    </methods>
+    <dataTable>
+      <entityName>river_spp_stg_ct.csv</entityName>
+      <entityDescription>Test data, only intended for testing</entityDescription>
+      <physical>
+        <objectName>river_spp_stg_ct.csv</objectName>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <recordDelimiter>\r\n</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+      </physical>
+      <attributeList>
+        <attribute id="1838">
+          <attributeName>river</attributeName>
+          <attributeDefinition>http://dbpedia.org/ontology/River</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>AM</code>
+                    <definition>The American River</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>SAC</code>
+                    <definition>The Sacramento River</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id="ea5727bd3efa2e6ab373d7da3c6c7885">
+          <attributeName>spp</attributeName>
+          <attributeDefinition>http://dbpedia.org/ontology/Species</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>ccho</code>
+                    <definition>Coho Salmon</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>king</code>
+                    <definition>King Salmon</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id="6756a65a81d817505b542e2fa95e3451">
+          <attributeName>stg</attributeName>
+          <attributeDefinition>Life history stage</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>parr</code>
+                    <definition>third life stage</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>smolt</code>
+                    <definition>fourth life stage</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id="49817aab560233c2650de4eb38b5b0cb">
+          <attributeName>ct</attributeName>
+          <attributeDefinition>count</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>number</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>integer</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>Missing Values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+      </attributeList>
+      <numberOfRecords>3</numberOfRecords>
+    </dataTable>
+  </dataset>
+  <additionalMetadata>
+     <describes>1838</describes>
+     <metadata>
+      <subject about="http://some.namespace#1838" xmlns:o="http:/oboe-core#"
+               xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" 
+               xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/" 
+               xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+               xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+               xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema#" 
+               xmlns:nex="http://www.nexml.org/2009">
+          <meta property="o:entity" content="Air" datatype="xsd:string"/>
+          <meta property="o:characteristic" content="Temperature" datatype="xsd:string"/>
+          <meta property="o:unit" content="Celsius" datatype="xsd:string"/>
+      </subject>
+    </metadata>
+  </additionalMetadata>
+ </eml:eml>
