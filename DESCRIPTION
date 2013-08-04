@@ -19,10 +19,10 @@ Suggests:
     testthat,
     uuid,
     yaml,
+    XMLSchema,
     RCurl
 Imports:
     XML,
-    XMLSchema,
     digest,
     RHTMLForms
 Depends:

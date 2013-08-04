@@ -80,6 +80,15 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
                     newXMLNode("definition", unit_metadata[[colname]][level])) 
       })
 
+    ## Date-time data
+    } else if(is(column, "POSIXt")){
+      newXMLNode("formatString", unit_metadata[[colname]], 
+                 parent = newXMLNode("dateTime", parent = measurementScale))
+
+    } else if(isDateString(unit_metadata[[colname]])){ #Hack
+      newXMLNode("formatString", unit_metadata[[colname]], 
+                 parent = newXMLNode("dateTime", parent = measurementScale))
+
     ## Numeric Data 
     } else if(is.numeric(column)){
         ratio = newXMLNode("ratio", parent = measurementScale)
@@ -93,11 +102,6 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
           newXMLNode("numberType", "integer", parent=numericDomain)
         else
           newXMLNode("numberType", "real", parent=numericDomain)
-
-    ## Date-time data
-    } else if(is(column, "POSIXt")){
-      newXMLNode("formatString", unit_metadata[[colname]], 
-                 parent = newXMLNode("dateTime", parent = measurementScale))
 
     ## Character Data ###
     } else if(is.character(column)){
@@ -116,6 +120,10 @@ eml_attributeList = function(dataframe, col_metadata, unit_metadata,
 
   } 
   attributeList 
+}
+
+isDateString <- function(x){
+  x %in% c("YYYY", "YYYY-MM-DD", "MM-DD-YYYY") # Temporary hack till I work out a proper solution.  
 }
 
 
