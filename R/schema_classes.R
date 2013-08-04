@@ -61,8 +61,11 @@ setClass("eml:codeDefinition",
          representation(code = "character",
                         definition = "character"))
 setClass("ListOfCodeDefinition", contains="list")
+setClass("eml:textDomain", 
+         representation(definition = "character"))
 setClass("eml:nonNumericDomain", 
-         representation(enumeratedDomain = "ListOfCodeDefinition"))
+         representation(enumeratedDomain = "ListOfCodeDefinition",
+                        textDomain = "eml:textDomain"))
 setClass("eml:nominal", 
          representation(nonNumericDomain = "eml:nonNumericDomain"))
 
