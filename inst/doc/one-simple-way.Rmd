@@ -64,7 +64,11 @@ We can provide much richer annotation than this example includes.  We can also s
 
 ## 1. Share your data
 
+Sharing is as easy as `publish_reml("my_eml_data.xml")`
+
 The data is publically available at the DOI returned. At this DOI we find two files: the raw data in `.csv` format, and the EML data file providing machine readable metadata.  We'll unpack all the information provided in this metadata as we go along.  Many other options for sharing are possible, including private sharing and sharing through a variety of data publication platforms.  
+
+
 
 ## 2. Provide metadata
 
@@ -84,15 +88,15 @@ Rich access options are possible depending on the publication outlet, including 
 
 We can see at a glance what taxa are covered by the data.  More detailed description can be provided in an abstract.
 
-4) warnings about known problems or inconsistencies in the data, and 
-5) information to check that the data are properly imported, such as the number of rows and columns in the dataset and the total sum of numerical columns
+> 4) warnings about known problems or inconsistencies in the data, and 
+> 5) information to check that the data are properly imported, such as the number of rows and columns in the dataset and the total sum of numerical columns
 
 Checks have automatically been performed in generating the data, and are performed in reading in the data into R.  
 
 
 ## 3. Provide unprocsessed data
 
-The second file provides the unprocessed data as a .csv file
+The second file provides the unprocessed data as a `.csv` file.  Because `csv` file formats vary
 
 
 ## 4. Use standard formats

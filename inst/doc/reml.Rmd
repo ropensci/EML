@@ -1,8 +1,8 @@
 
 The future belongs to those who can leverage existing data and provide reusable data.  
 
-1. Reuse is essential
-2. Reuse requires good metadata standards
+1. Following metadata standards facilitates reuse
+2. data 
 3. reml provides an easy way to utilize the Ecological Metadata Language to generate, access, and publish data.  
 
 Data in ecology and evolutionary biology research collected for a
