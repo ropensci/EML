@@ -49,3 +49,4 @@ Collate:
     'eml_wizards.R'
     'eml_yaml.R'
     'ext_validate.R'
+    'schema_classes.R'

@@ -4,7 +4,8 @@
 \usage{
   eml_dataset(..., .title = "Unnamed", .creator = list(),
     .contact = list(), .methods = list(),
-    .coverage = list())
+    .coverage = list(),
+    .rights = eml$get("default_rights"))
 }
 \arguments{
   \item{...}{arguments to \code{\link{eml_dataTable}}}
