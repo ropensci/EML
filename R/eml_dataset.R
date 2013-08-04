@@ -1,3 +1,6 @@
+                                    
+
+
 #' Function to create an EML Dataset node
 #' 
 #' 
@@ -10,9 +13,10 @@
 #' @param .coverage a list of arguments to \code{\link{eml_coverage}}
 #' @import XML
 #' @import XMLSchema 
-eml_dataset <- function(..., .title = "Unnamed", .creator=list(), .contact=list(), .methods=list(), .coverage=list()){
+eml_dataset <- function(..., .title = "Unnamed", .creator=list(), .contact=list(), .methods=list(), .coverage=list(), .rights = eml$get("default_rights")){
   dataset <- newXMLNode("dataset")
   title <- newXMLNode("title", .title)
+  rights <- newXMLNode("intellectualRights", .rights)
   addChildren(dataset, title)
 
   creator <- do.call(eml_person, c(person_type="creator", .contact))
@@ -52,6 +56,9 @@ eml_dataset <- function(..., .title = "Unnamed", .creator=list(), .contact=list(
 
   dataset
 } 
+
+
+
 
 
 
