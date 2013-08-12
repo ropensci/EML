@@ -7,6 +7,9 @@
 \arguments{
   \item{x}{an R person object}
 }
+\value{
+  a eml_person node
+}
 \description{
   Coercion method from R person class to eml person
 }

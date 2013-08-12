@@ -50,3 +50,4 @@ Collate:
     'eml_yaml.R'
     'ext_validate.R'
     'schema_classes.R'
+    'eml_attribute_methods.R'

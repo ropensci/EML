@@ -1,4 +1,8 @@
 
+```{r}
+require(reml)
+```
+
 ## What example functions would look like
 ```{r}
 eml_dataset <- function(x)
@@ -14,6 +18,7 @@ eml_write <- function(x, file = NULL){
 some testing data
 
 ```{r}
+
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),
                  spp   = c("king",  "king", "ccho"),
                  stg   = c("smolt", "parr", "smolt"),
@@ -41,119 +46,30 @@ metadata <-
 
 ### Coercion methods 
 
-Take this metadata and coerce it into a valid `attributeList`
-A list of attributes based on this structure would look like:  
-
-```{r}
-
-  setAs("list", "eml:attribute", 
-        function(from){
-         new("eml:attribute", 
-             attributeName = from[[1]],
-             attributeDefinition = from[[2]], 
-             measurementScale = as(from[[3]], from[[4]])) 
-        })
-```
-
-The trick is to decide what class measurementScale should be coerced into.  This should come from the data.frame class. Not clear if that's allowed in a standard coercion.  We could:
-
-- [ ] Define the `setAs` method inside a function taking both the metadata list and the data table.
-
-```{r}
-detect_class <- function(dat, meta){
-  for(i in length(dat)){
-    meta[[i]][[4]] = map(class(dat[[i]])) 
-  }
-  meta 
-}
-
-map <- function(x){
-  if(is(x, "numeric"))
-    "eml:ratio"
-  else if(is(x, "ordered"))
-    "eml:ordinal"
-  else if(is(x, "nominal"))
-    "eml:nominal",
-  else if(is(x, "POSIXlt") | is(x, "POSIXct"))
-    "eml:dateTime"
-  else if(is(x, "character"))
-    "eml:nominal"
-}
-```
-
-Then in any function that gets both dat and metadata, we can correct things: 
+Detect types 
 
 ```{r}
 metadata <- detect_class(dat, metadata)
 ```
-- [ ] Something else?  
 
-
-
-
-If/once we know it's a nominal, conversion is easy: 
+Coerce a factor definitions into a nominal,
 
 ```{r}
-setAs("character", "eml:nominal", 
-      function(from)
-        new("eml:nominal",
-            nonNumericDomain = as(from, "eml:nonNumericDomain")))
-
-setAs("character", "eml:textDomain", function(from){
-  new("eml:textDomain", definition = from)
-})
-
-setAs("character", "eml:nonNumericDomain", 
-      function(from){
-        if (length(from) == 1)
-          new("eml:nonNumericDomain",
-              textDomain = as(from, "eml:textDomain"))
-        else if(length(from) > 1)
-          new("eml:nonNumericDomain", 
-            enumeratedDomain = as(from, "ListOfCodeDefinition"))
-      })
-
-setAs("character", "ListOfCodeDefinition", 
-      function(from){
-        new("ListOfCodeDefinition", 
-            lapply(names(from), function(name)
-               new("eml:codeDefinition", code = name, definition = from[name])))
-      })
+as(metadata$river[[3]], "eml:nominal")
 ```
 
-
-Then convert the "unit metadata" for the river values just by: 
-
+or coerce the entire list into an attribute node (includes the above coercion)
 
 ```{r}
-as(metadata$river[[3]], "nominal")
+as(metadata$river, "eml:attribute")
 ```
 
-`nominal` is potential slot for `measurementScale`, which is a slot of an `attribute`.  
-
-
-
-
-Moving up the DOM tree from here is easy: 
+Or all metadata lists at once:
 
 ```{r}
-attrList = new("eml:attributeList", as(metadata_list, "eml:attribute")
-new("eml:dataSet", dataTable = new("eml:dataTable", attributeList = attrList) )
+as(metadata, "eml:attributeList")
 ```
 
-and so forth.  lots of permutations are possible.  We can define coercion methods and merge methods to make this all smooth and flexible.   
-
-
-## We either want to look at the data.frame column classes,
-## Or guess from the length of the metadata
-
-setAs("character", "eml:measurementScale",
-      function(from){
-        if(length(from) > 1) ## assume factor.  Not very robust!
-          new("eml:measurementScale", 
-              nominal = as(from, "eml:nominal"))
-        else if(length(from) == 1) ## Assume a unit of 
-      })
-
-
-
+```{r}
+new("eml:dataSet", dataTable = new("eml:dataTable", attributeList = as(metadata, "eml:attributeList")) )
+```

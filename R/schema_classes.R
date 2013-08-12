@@ -55,7 +55,7 @@ setClass("eml:physical",
 
 
 ## Attribute List ##
-setClass("eml:customUnit")
+
 
 setClass("eml:codeDefinition", 
          representation(code = "character",
@@ -69,24 +69,27 @@ setClass("eml:nonNumericDomain",
 setClass("eml:nominal", 
          representation(nonNumericDomain = "eml:nonNumericDomain"))
 
-setClass("eml:ordinal")
-
-setClass("eml:interval")
+setClass("eml:ordinal", contains="eml:nominal")
 
 setClass("eml:numericDomain", 
          representation(numberType = "character")) 
          # Alternatively restrict this to one of: "natural", "whole", "integer", "real", though schema should enforce that
 
 setClass("eml:unit",
-         representation(standardUnit = "character",
-                        customUnit = "eml:customUnit")) # make from a restricted subset
+         representation(standardUnit = "character", # make from a restricted subset
+                        customUnit = "character"))  # should be a class to enforce format?
 setClass("eml:ratio", 
          representation(unit = "eml:unit",
                         precision = "numeric",
                         numericDomain = "eml:numericDomain"))
 
-setClass("eml:dateTime")
+setClass("eml:interval", contains="eml:ratio")
 
+
+setClass("eml:dateTime", 
+         representation(formatString = "character",
+                        dateTimePrecision = "character",
+                        dateTimeDomain = "character"))
 
 setClass("eml:measurementScale", 
          representation(nominal = "eml:nominal",
@@ -104,13 +107,16 @@ setClass("eml:attributeList", contains="list")
 
 
 
-setClass("eml:dataTable", 
+setClass("eml:entity", 
          representation(entityName = "character",
-                        entityDescription = "character",
-                        physical = "eml:physical",
+                        entityDescription = "character"))
+
+setClass("eml:dataTable", 
+         representation(physical = "eml:physical",
                         attributeList = "eml:attributeList",
                         caseSensitive = "logical",
-                        numberOfRecords = "integer"))
+                        numberOfRecords = "integer"),
+         contains="eml:entity")
 
 setClass("eml:dataset", 
          representation('title' = "character",
