@@ -5,8 +5,6 @@ require(reml)
 
 ## What example functions would look like
 ```{r}
-eml_dataset <- function(x)
-  as(x, "eml:dataset")
 
 eml_write <- function(x, file = NULL){
   eml <- as(x, "eml:eml")
@@ -23,12 +21,6 @@ dat = data.frame(river = c("SAC",  "SAC",   "AM"),
                  spp   = c("king",  "king", "ccho"),
                  stg   = c("smolt", "parr", "smolt"),
                  ct    = c(293L,    410L,    210L))
-```
-
-
-New metadata format
-
-```{r}
 metadata <- 
   list("river" = list("river",
                       "River site used for collection",
@@ -71,5 +63,5 @@ as(metadata, "eml:attributeList")
 ```
 
 ```{r}
-new("eml:dataSet", dataTable = new("eml:dataTable", attributeList = as(metadata, "eml:attributeList")) )
+new("eml:dataset", dataTable = new("eml:dataTable", attributeList = as(metadata, "eml:attributeList")) )
 ```

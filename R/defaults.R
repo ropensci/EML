@@ -25,7 +25,12 @@ new_defaults = function(value = list()) {
 
 #' Default and current chunk options
 #' @export
-eml = new_defaults(list("default_rights" = "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"))
+eml = new_defaults(list("default_rights" = "<a rel='license' 
+                                               property='http://creativecommons.org/ns#license' 
+                                               href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>", 
+                        "contact_givenName" = character(0),
+                        "contact_surName" = character(0),
+                        "contact_email" = character(0)))
 
 #' Set aliases for chunk options
 #'

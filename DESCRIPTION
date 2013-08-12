@@ -51,3 +51,5 @@ Collate:
     'ext_validate.R'
     'schema_classes.R'
     'eml_attribute_methods.R'
+    'eml_dataTable_methods.R'
+    'eml_person_methods.R'

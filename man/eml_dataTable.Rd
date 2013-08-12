@@ -2,10 +2,9 @@
 \alias{eml_dataTable}
 \title{Function to create an EML DataTable}
 \usage{
-  eml_dataTable(dataframe, col_metadata, unit_metadata,
-    accuracy = NULL, coverage = NULL, methods = NULL,
-    missingValueCode = "NA", csvfilename = NULL,
-    file_description = NULL)
+  eml_dataTable(dat, metadata, title = character(0),
+    description = character(0), filename = character(0),
+    ...)
 }
 \arguments{
   \item{col_metadata}{a named character vector of

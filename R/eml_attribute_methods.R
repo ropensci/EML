@@ -1,3 +1,5 @@
+#' Helper function to attach classes to metadata
+#' @export 
 detect_class <- function(dat, meta){
   for(i in 1:length(dat)){
     meta[[i]][[4]] = map(class(dat[[i]])) 
@@ -108,17 +110,5 @@ setAs("list", "eml:attributeList", function(from){
 
 
   
-#new("eml:dataSet", dataTable = new("eml:dataTable", attributeList = attrList) )
-
-#eml_dataset <- function(dat, metadata){
-#  new("eml:dataSet", 
-#      dataTable = new("eml:dataTable", 
-#                      attributeList = as(metadata, "eml:attributeList"),
-#                      physical = as(dat, "eml:physical"),
-#                      caseSensitive = TRUE,
-#                      numberOfRecords = dim(dat)[1])
-#  )
-#}
-
-
+#new("eml:dataset", dataTable = new("eml:dataTable", attributeList = attrList) )
 

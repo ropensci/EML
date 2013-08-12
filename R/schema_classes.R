@@ -32,6 +32,9 @@ setClass("eml:textFormat",
                         recordDelimiter = "character",
                         attributeOrientation = "character", 
                         simpleDelimited = "eml:simpleDelimited"))
+
+
+
 setClass("eml:dataFormat",
          representation(textFormat = "eml:textFormat"))
 
@@ -47,7 +50,7 @@ setClass("eml:distribution",
 
 setClass("eml:physical",
          representation(objectName = "character",
-                        size = "character", 
+                        size = "numeric", # "object_size", # R class  
                         characterEncoding = "character",
                         dataFormat = "eml:dataFormat",
                         distribution = "eml:distribution"))
@@ -118,17 +121,46 @@ setClass("eml:dataTable",
                         numberOfRecords = "integer"),
          contains="eml:entity")
 
+
+
+
+## Read from eml$get
+default_creator <- 
+  new("eml:person", 
+      individualName = new("eml:individualName", 
+                           givenName = eml$get("contact_givenName"),
+                           surName = eml$get("contact_surName")),
+      electronicMail = eml$get("contact_email"))
+
+
+
 setClass("eml:dataset", 
          representation('title' = "character",
                         creator = "eml:person",
+                        contact = "eml:person",
                         rights  = "character",
                         'methods' = "eml:methods",
-                        dataTable = "eml:dataTable"))
+                        dataTable = "eml:dataTable"),
+        prototype(rights = eml$get("default_rights"),
+                  creator = default_creator,
+                  contact = default_creator))
+
+
+eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
+                   ds = "eml://ecoinformatics.org/dataset-2.1.1",
+                   xs = "http://www.w3.org/2001/XMLSchema",
+                   xsi = "http://www.w3.org/2001/XMLSchema-instance",
+                   stmml = "http://www.xml-cml.org/schema/stmml-1.1")
 
 setClass("eml:eml",
          representation(packageId   = "character", 
                         system      = "character", 
                         namespaces  = "character",
                         dataset     = "eml:dataset",
-                        additionalMetadata = "eml:additionalMetadata"))
+                        additionalMetadata = "eml:additionalMetadata"),
+          prototype = prototype(packageId = paste(sep='', "urn:uuid:", uuid::UUIDgenerate()),
+                                system = 'uuid',
+                                namespaces = eml_namespaces))
+
+
 

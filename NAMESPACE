@@ -1,5 +1,7 @@
+export(detect_class)
 export(eml)
 export(eml_attributeList)
+export(eml_eml)
 export(eml_figshare)
 export(eml_publish)
 export(eml_validate)
