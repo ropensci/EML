@@ -1,163 +1,176 @@
 
 
 ### Person #####
-setClass("eml:individualName",  
+setClass("individualName",  
          representation(givenName = "character", 
                         surName = "character"))
 
-setClass("eml:additionalMetadata", 
+setClass("additionalMetadata", 
          representation(metadata = "character",
                         describes = "character"))
-setClass("eml:person",
-         representation(individualName = "eml:individualName",  
-                        electronicMail = "character"))
+setClass("eml_person",
+         representation(individualName = "individualName",  
+                        electronicMailAddress = "character"))
 
+setClass("creator", contains="eml_person")
+setClass("contact", contains="eml_person")
 
 ### Methods ### 
-setClass("eml:methodStep", 
+setClass("methodStep", 
          representation(description = "character")) # software, 
-setClass("eml:methods", 
-         representation(methodsStep = "eml:methodStep"))
+setClass("methods", 
+         representation(methodsStep = "methodStep"))
 
 
 
 ## Physical ##
   ### Data Format ###
-setClass("eml:simpleDelimited", 
+setClass("simpleDelimited", 
          representation(fieldDelimiter = "character"))
 
-setClass("eml:textFormat", 
+setClass("textFormat", 
          representation(numHeaderLines = "integer",
                         numFooterLines = "integer",
                         recordDelimiter = "character",
                         attributeOrientation = "character", 
-                        simpleDelimited = "eml:simpleDelimited"))
+                        simpleDelimited = "simpleDelimited"))
 
 
 
-setClass("eml:dataFormat",
-         representation(textFormat = "eml:textFormat"))
+setClass("dataFormat",
+         representation(textFormat = "textFormat"))
 
   ### Distribution ##
-setClass("eml:offline")
-setClass("eml:online",
+setClass("offline")
+setClass("online",
          representation(url = "character",
                         onlineDescription = "character"))
-setClass("eml:distribution",
-         representation(online = "eml:online",
-                        offline = "eml:offline",
+setClass("distribution",
+         representation(online = "online",
+                        offline = "offline",
                         inline = "character"))
 
-setClass("eml:physical",
+setClass("physical",
          representation(objectName = "character",
                         size = "numeric", # "object_size", # R class  
                         characterEncoding = "character",
-                        dataFormat = "eml:dataFormat",
-                        distribution = "eml:distribution"))
+                        dataFormat = "dataFormat",
+                        distribution = "distribution"))
 
 
 
 ## Attribute List ##
 
 
-setClass("eml:codeDefinition", 
+setClass("codeDefinition", 
          representation(code = "character",
                         definition = "character"))
 setClass("ListOfCodeDefinition", contains="list")
-setClass("eml:textDomain", 
+#setClass("enumeratedDomain", 
+#         representation(codeDefinition = "ListOfCodeDefinition"))
+setClass("textDomain", 
          representation(definition = "character"))
-setClass("eml:nonNumericDomain", 
-         representation(enumeratedDomain = "ListOfCodeDefinition",
-                        textDomain = "eml:textDomain"))
-setClass("eml:nominal", 
-         representation(nonNumericDomain = "eml:nonNumericDomain"))
+setClass("nonNumericDomain", 
+         representation(enumeratedDomain = "ListOfCodeDefinition", ### Unclear if this should be "enumeratedDomain"
+                        textDomain = "textDomain"))
+setClass("nominal", 
+         representation(nonNumericDomain = "nonNumericDomain"))
 
-setClass("eml:ordinal", contains="eml:nominal")
+setClass("ordinal", contains="nominal")
 
-setClass("eml:numericDomain", 
+setClass("numericDomain", 
          representation(numberType = "character")) 
          # Alternatively restrict this to one of: "natural", "whole", "integer", "real", though schema should enforce that
 
-setClass("eml:unit",
+setClass("unit",
          representation(standardUnit = "character", # make from a restricted subset
                         customUnit = "character"))  # should be a class to enforce format?
-setClass("eml:ratio", 
-         representation(unit = "eml:unit",
+setClass("ratio", 
+         representation(unit = "unit",
                         precision = "numeric",
-                        numericDomain = "eml:numericDomain"))
+                        numericDomain = "numericDomain"))
 
-setClass("eml:interval", contains="eml:ratio")
+setClass("interval", contains="ratio")
 
 
-setClass("eml:dateTime", 
+setClass("dateTime", 
          representation(formatString = "character",
                         dateTimePrecision = "character",
                         dateTimeDomain = "character"))
 
-setClass("eml:measurementScale", 
-         representation(nominal = "eml:nominal",
-                        ordinal = "eml:ordinal",
-                        interval = "eml:interval",
-                        ratio = "eml:ratio",
-                        dateTime = "eml:dateTime"))
+setClass("measurementScale", 
+         representation(nominal = "nominal",
+                        ordinal = "ordinal",
+                        interval = "interval",
+                        ratio = "ratio",
+                        dateTime = "dateTime"))
 
-setClass("eml:attribute", 
-         representation(attributeName = "character",
+setClass("attribute", 
+         representation(id = "character",
+                        attributeName = "character",
                         attributeDefinition = "character",
-                        measurementScale = "eml:measurementScale"))
-setClass("eml:attributeList", contains="list")
+                        measurementScale = "measurementScale"))
+setClass("attributeList", contains="list")
 
 
 
 
-setClass("eml:entity", 
+setClass("entity", 
          representation(entityName = "character",
                         entityDescription = "character"))
 
-setClass("eml:dataTable", 
-         representation(physical = "eml:physical",
-                        attributeList = "eml:attributeList",
+setClass("dataTable", 
+         representation(physical = "physical",
+                        attributeList = "attributeList",
                         caseSensitive = "logical",
                         numberOfRecords = "integer"),
-         contains="eml:entity")
+         contains="entity")
 
 
 
 
-## Read from eml$get
-default_creator <- 
-  new("eml:person", 
-      individualName = new("eml:individualName", 
-                           givenName = eml$get("contact_givenName"),
-                           surName = eml$get("contact_surName")),
-      electronicMail = eml$get("contact_email"))
+default_person <- function(){ # lazy evaluate 
+         new("eml_person", 
+             individualName = new("individualName", 
+                                givenName = getOption("contact_givenName"),
+                                surName = getOption("contact_surName")),
+             electronicMailAddress = getOption("contact_email"))
+}
 
 
+setClass("ListOfeml_person", contains = "list",
+         validity = function(object)
+               if(!all(sapply(object, is, "eml_person")))
+                  "not all elements are eml_person objects"
+               else
+                 TRUE)
 
-setClass("eml:dataset", 
+setClass("ListOfcreator", contains="ListOfeml_person")
+
+setClass("dataset", 
          representation('title' = "character",
-                        creator = "eml:person",
-                        contact = "eml:person",
+                        creator = "ListOfcreator",
+                        contact = "eml_person",         ###  No idea why this is not working 
                         rights  = "character",
-                        'methods' = "eml:methods",
-                        dataTable = "eml:dataTable"),
-        prototype(rights = eml$get("default_rights"),
-                  creator = default_creator,
-                  contact = default_creator))
+                        'methods' = "methods",
+                        dataTable = "dataTable"),
+        prototype(rights = getOption("default_rights"),
+                  creator = new("ListOfcreator", list(default_person())),
+                  contact = default_person() )) 
 
 
-eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
-                   ds = "eml://ecoinformatics.org/dataset-2.1.1",
+eml_namespaces = c(eml = "//ecoinformatics.org/eml-2.1.1", 
+                   ds = "//ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
                    stmml = "http://www.xml-cml.org/schema/stmml-1.1")
 
-setClass("eml:eml",
+setClass("eml",
          representation(packageId   = "character", 
                         system      = "character", 
                         namespaces  = "character",
-                        dataset     = "eml:dataset",
-                        additionalMetadata = "eml:additionalMetadata"),
+                        dataset     = "dataset",
+                        additionalMetadata = "additionalMetadata"),
           prototype = prototype(packageId = paste(sep='', "urn:uuid:", uuid::UUIDgenerate()),
                                 system = 'uuid',
                                 namespaces = eml_namespaces))

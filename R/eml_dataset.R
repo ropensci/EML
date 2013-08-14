@@ -12,7 +12,6 @@
 #' @param .methods a list of arguments to \code{\link{eml_methods}}
 #' @param .coverage a list of arguments to \code{\link{eml_coverage}}
 #' @import XML
-#' @import XMLSchema 
 eml_dataset <- function(..., .title = "Unnamed", .creator=list(), .contact=list(), .methods=list(), .coverage=list(), .rights = eml$get("default_rights")){
   dataset <- newXMLNode("dataset")
   title <- newXMLNode("title", .title)

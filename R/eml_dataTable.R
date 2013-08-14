@@ -28,7 +28,6 @@
 #' @references Normative technical specification given at: 
 #' 
 #' @import XML
-#' @import XMLSchema 
 #' @examples
 #'  dat = data.frame(river=c("SAC", "SAC", "AM"), 
 #'                    spp = c("king", "king", "ccho"), 

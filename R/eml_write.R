@@ -7,7 +7,6 @@
 #' the R object to the appropriate file type -- e.g. data.frames will be written out 
 #' to CSV files linked to the EML. Invsibily returns a pointer to the EML document,
 #' as would be returned from \code{\link{xmlParse}}.  
-#' @import XMLSchema
 #' @import XML
 #' @export
 #' @examples
@@ -38,7 +37,7 @@ eml_write = function(..., file = NULL){
 	} else {
 		pid = paste(sep='', "urn:uuid:", UUIDgenerate())
 #		message(pid)
-		emlroot = newXMLNode("eml:eml", attrs = c(packageId = pid, system = 'uuid'), namespaceDefinitions = eml_namespaces)
+		emlroot = newXMLNode("eml", attrs = c(packageId = pid, system = 'uuid'), namespaceDefinitions = eml_namespaces)
 		emldoc = newXMLDoc(node = emlroot)
 		dataset = eml_dataset(...)
 		addChildren(emlroot, dataset)

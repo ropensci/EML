@@ -15,7 +15,6 @@
 #' @references Normative technical specification given at
 
 #' @import XML
-#' @import XMLSchema 
 #' @import digest
 #' @export
 #' 

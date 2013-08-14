@@ -46,7 +46,7 @@ Configure general metadata you may want to reuse again and again through setting
 
 
 ```r
- eml$set(contact_givenName = "Carl", contact_surName = "Boettiger", contact_email = "cboettig@ropensci.org")
+eml$set(contact_givenName = "Carl", contact_surName = "Boettiger", contact_email = "cboettig@ropensci.org")
 ```
 
 

@@ -9,106 +9,111 @@ detect_class <- function(dat, meta){
 
 map <- function(x){
   if(is(x, "numeric"))
-    "eml:ratio"
+    "ratio"
   else if(is(x, "ordered"))
-    "eml:ordinal"
+    "ordinal"
   else if(is(x, "factor"))
-    "eml:nominal"
+    "nominal"
   else if(is(x, "POSIXlt") | is(x, "POSIXct"))
-    "eml:dateTime"
+    "dateTime"
   else if(is(x, "character"))
-    "eml:nominal"
+    "nominal"
 }
 
 
-### Character to eml:nominal (factors and character strings) ###
-setAs("character", "eml:nominal", 
+### Character to nominal (factors and character strings) ###
+setAs("character", "nominal", 
       function(from)
-        new("eml:nominal",
-            nonNumericDomain = as(from, "eml:nonNumericDomain")))
+        new("nominal",
+            nonNumericDomain = as(from, "nonNumericDomain")))
 
 
-setAs("character", "eml:textDomain", function(from){
-  new("eml:textDomain", definition = from)
+setAs("character", "textDomain", function(from){
+  new("textDomain", definition = from)
 })
-setAs("character", "eml:nonNumericDomain", 
+setAs("character", "nonNumericDomain", 
       function(from){
         if (length(from) == 1)
-          new("eml:nonNumericDomain",
-              textDomain = as(from, "eml:textDomain"))
+          new("nonNumericDomain",
+              textDomain = as(from, "textDomain"))
         else if(length(from) > 1)
-          new("eml:nonNumericDomain", 
+          new("nonNumericDomain", 
+#             enumeratedDomain = as(from, "enumeratedDomain"))
               enumeratedDomain = as(from, "ListOfCodeDefinition"))
       })
+
+#setAs("character", "enumeratedDomain", function(from)
+#      new("enumeratedDomain", codeDefinition = as(from, "ListOfCodeDefinition")))
+
 setAs("character", "ListOfCodeDefinition", 
       function(from){
         new("ListOfCodeDefinition", 
             lapply(names(from), function(name)
-              new("eml:codeDefinition", code = name, definition = from[name])))
+              new("codeDefinition", code = name, definition = from[name])))
       })
 
 
 ## Promote nominal to a measurement scale
-setAs("eml:nominal", "eml:measurementScale",
+setAs("nominal", "measurementScale",
       function(from)
-        new("eml:measurementScale", 
+        new("measurementScale", 
             nominal = from))
 
 
 ## Ordinal ##
-setAs("character", "eml:ordinal", 
+setAs("character", "ordinal", 
       function(from)
-        new("eml:ordinal",
-            nonNumericDomain = as(from, "eml:nonNumericDomain")))
-setAs("eml:ordinal", "eml:measurementScale",
+        new("ordinal",
+            nonNumericDomain = as(from, "nonNumericDomain")))
+setAs("ordinal", "measurementScale",
       function(from)
-        new("eml:measurementScale", 
+        new("measurementScale", 
             ordinal = from))
 
 
 ## Ratio ## 
-setAs("character", "eml:ratio", 
+setAs("character", "ratio", 
       function(from)
-        new("eml:ratio", unit = as(from, "eml:unit")))
-setAs("character", "eml:unit", 
+        new("ratio", unit = as(from, "unit")))
+setAs("character", "unit", 
       function(from)
-        new("eml:ratio", standardUnit = from)) # Could match from to the standardUnit list
+        new("ratio", standardUnit = from)) # Could match from to the standardUnit list
 
 #### interval ### 
-setAs("character", "eml:interval", 
+setAs("character", "interval", 
       function(from)
-        new("eml:interval", unit = as(from, "eml:unit")))
+        new("interval", unit = as(from, "unit")))
 
 
 ## dateTime ## 
-setAs("character", "eml:dateTime", 
+setAs("character", "dateTime", 
       function(from)
-        new("eml:dateTime", formatString = from)) ## could perform check / validation on string
+        new("dateTime", formatString = from)) ## could perform check / validation on string
 
 
             
 ## Coerce from[[3]] into appropriate scale
-setAs("list", "eml:attribute", 
+setAs("list", "attribute", 
       function(from)
-        new("eml:attribute", 
+        new("attribute", 
             attributeName = from[[1]],
             attributeDefinition = from[[2]],
-            measurementScale = as(as(from[[3]], from[[4]]), "eml:measurementScale")))
+            measurementScale = as(as(from[[3]], from[[4]]), "measurementScale")))
 
 
-setAs("list", "eml:attributeList", function(from){
+setAs("list", "attributeList", function(from){
   if(! all(sapply(from, class) == "list") )
     error("expected list of lists")
-  new("eml:attributeList", lapply(from, as, "eml:attribute"))
+  new("attributeList", lapply(from, as, "attribute"))
 })
 
 
 
 
 
-#attrList =  as(metadata, "eml:attributeList")
+#attrList =  as(metadata, "attributeList")
 
 
   
-#new("eml:dataset", dataTable = new("eml:dataTable", attributeList = attrList) )
+#new("dataset", dataTable = new("dataTable", attributeList = attrList) )
 

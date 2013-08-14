@@ -19,7 +19,6 @@ Suggests:
     testthat,
     uuid,
     yaml,
-    XMLSchema,
     RCurl
 Imports:
     XML,
@@ -33,7 +32,6 @@ Collate:
     'eml_dataTable.R'
     'eml_dataset.R'
     'eml_write.R'
-    'eml_coverage.R'
     'eml_otherEntity.R'
     'defaults.R'
     'eml_read.R'
@@ -52,4 +50,6 @@ Collate:
     'schema_classes.R'
     'eml_attribute_methods.R'
     'eml_dataTable_methods.R'
+    'read_methods.R'
+    'write_methods.R'
     'eml_person_methods.R'
