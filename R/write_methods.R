@@ -1,7 +1,9 @@
+
+########### Write Methods ###############
+
 #setAs("eml", "XMLInternalDocument", function(from))
 #setAs("dataTable", "XMLInternalNode", function(from))
 #setAs("", "XMLInternalNode", function(from))
-
 
 
 
@@ -19,7 +21,7 @@ setAs("attribute", "XMLInternalNode", function(from) emlS4ToXML(from))
 
 
 setAs("codeDefinition", "XMLInternalNode",  function(from) emlS4ToXML(from))
-setAs("ListOfCodeDefinition", "XMLInternalNode",  function(from) emlS4ToXML(from))
+setAs("ListOfcodeDefinition", "XMLInternalNode",  function(from) emlS4ToXML(from))
 setAs("textDomain", "XMLInternalNode",  function(from) emlS4ToXML(from))
 setAs("nonNumericDomain", "XMLInternalNode",  function(from) emlS4ToXML(from))
 setAs("nominal", "XMLInternalNode",  function(from) emlS4ToXML(from))
@@ -32,22 +34,72 @@ setAs("dateTime", "XMLInternalNode",  function(from) emlS4ToXML(from))
 setAs("measurementScale", "XMLInternalNode",  function(from) emlS4ToXML(from))
 
 
+
 emlS4ToXML <- function(obj){
-  node <- newXMLNode(class(obj)[1])
-  for(s in slotNames(obj)){
-    if(s == "id"){
-      addAttributes(node, .attrs = c("id" = uuid::UUIDgenerate()))
-    } else {
-      if(isS4(slot(obj, s))){ 
-        if(!identical(slot(obj, s), new(s))){  ## S4 object not equal to its prototype (e.g. not empty)
-          addChildren(node, slot(obj, s))
+  if(!isEmpty(obj)){
+    node <- newXMLNode(class(obj)[1])
+    for(s in slotNames(obj)){
+      ## Attributes
+      if(s == "id"){
+        if(length(obj@id) > 0){
+          addAttributes(node, .attrs = c("id" = obj@id))
         }
       } else {
-        if(length(slot(obj, s)) > 0){
+        ## Complex child nodes
+        if(isS4(slot(obj, s))){
+          addChildren(node, slot(obj, s))
+        ## Simple Child nodes  
+        } else if(length(slot(obj, s)) > 0){
           addChildren(node, newXMLNode(s,slot(obj, s)))
-        } 
+        ## No child node
+        } else {
+          node
+        }
       }
     }
+    node
+  } else {
+    NULL
   }
-  node
 }
+
+
+isEmpty <- function(obj){
+  if( identical(obj, new(class(obj)[1])) )
+    out <- TRUE
+  else {
+    empty <- sapply(slotNames(obj), 
+    function(s){
+      if(isS4(slot(obj, s)))
+        isEmpty(slot(obj,s))
+      else { 
+        if(length(slot(obj, s)) == 0)
+          TRUE
+        else if(length(slot(obj, s)) > 0)
+          FALSE
+      }
+    })
+    out <- !any(!empty)
+  }
+  out
+}
+
+#emlS4ToXML <- function(obj){
+#  node <- newXMLNode(class(obj)[1])
+#  for(s in slotNames(obj)){
+#    if(s == "id"){
+#      addAttributes(node, .attrs = c("id" = uuid::UUIDgenerate()))
+#    } else {
+#      if(isS4(slot(obj, s))){ 
+#        if(!identical(slot(obj, s), new(s))){  ## S4 object not equal to its prototype (e.g. not empty)
+#          addChildren(node, slot(obj, s))
+#        }
+#      } else {
+#        if(length(slot(obj, s)) > 0){
+#          addChildren(node, newXMLNode(s,slot(obj, s)))
+#        } 
+#      }
+#    }
+#  }
+#  node
+#}

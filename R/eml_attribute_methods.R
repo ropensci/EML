@@ -38,16 +38,16 @@ setAs("character", "nonNumericDomain",
               textDomain = as(from, "textDomain"))
         else if(length(from) > 1)
           new("nonNumericDomain", 
-#             enumeratedDomain = as(from, "enumeratedDomain"))
-              enumeratedDomain = as(from, "ListOfCodeDefinition"))
+             enumeratedDomain = as(from, "enumeratedDomain"))
+#              enumeratedDomain = as(from, "ListOfcodeDefinition"))
       })
 
-#setAs("character", "enumeratedDomain", function(from)
-#      new("enumeratedDomain", codeDefinition = as(from, "ListOfCodeDefinition")))
+setAs("character", "enumeratedDomain", function(from)
+      new("enumeratedDomain", codeDefinition = as(from, "ListOfcodeDefinition")))
 
-setAs("character", "ListOfCodeDefinition", 
+setAs("character", "ListOfcodeDefinition", 
       function(from){
-        new("ListOfCodeDefinition", 
+        new("ListOfcodeDefinition", 
             lapply(names(from), function(name)
               new("codeDefinition", code = name, definition = from[name])))
       })
@@ -104,7 +104,7 @@ setAs("list", "attribute",
 setAs("list", "attributeList", function(from){
   if(! all(sapply(from, class) == "list") )
     error("expected list of lists")
-  new("attributeList", lapply(from, as, "attribute"))
+  new("attributeList", attribute = new("ListOfattribute", lapply(from, as, "attribute")))
 })
 
 

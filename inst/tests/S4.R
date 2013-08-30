@@ -1,3 +1,5 @@
+context("generating S4 from R dataframe")
+
 require(reml)
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),
                  spp   = c("king",  "king", "ccho"),
@@ -6,13 +8,16 @@ dat = data.frame(river = c("SAC",  "SAC",   "AM"),
 metadata <- 
   list("river" = list("river",
                       "River site used for collection",
-                      c(SAC = "The Sacramento River", AM = "The American River")),
+                      c(SAC = "The Sacramento River", 
+                        AM = "The American River")),
        "spp" = list("spp",
                     "Species common name", 
-                    c(king = "King Salmon", ccho = "Coho Salmon")),
+                    c(king = "King Salmon", 
+                      ccho = "Coho Salmon")),
        "stg" = list("stg",
                     "Life Stage", 
-                    c(parr = "third life stage", smolt = "fourth life stage")),
+                    c(parr = "third life stage", 
+                      smolt = "fourth life stage")),
        "ct"  = list("ct",
                     "count", 
                     "number"))
@@ -51,6 +56,11 @@ test_that("Constructor function for dataTable works given data.frame and metadat
 test_that("Constructor function for eml works given dat, metadata", {
   eml(dat, metadata, title = "title", description = "description")
 })
+
+
+
+
+
 
 
 

@@ -65,13 +65,13 @@ setClass("physical",
 setClass("codeDefinition", 
          representation(code = "character",
                         definition = "character"))
-setClass("ListOfCodeDefinition", contains="list")
-#setClass("enumeratedDomain", 
-#         representation(codeDefinition = "ListOfCodeDefinition"))
+setClass("ListOfcodeDefinition", contains="list")
+setClass("enumeratedDomain", 
+         representation(codeDefinition = "ListOfcodeDefinition"))
 setClass("textDomain", 
          representation(definition = "character"))
 setClass("nonNumericDomain", 
-         representation(enumeratedDomain = "ListOfCodeDefinition", ### Unclear if this should be "enumeratedDomain"
+         representation(enumeratedDomain = "enumeratedDomain", 
                         textDomain = "textDomain"))
 setClass("nominal", 
          representation(nonNumericDomain = "nonNumericDomain"))
@@ -110,8 +110,12 @@ setClass("attribute",
                         attributeName = "character",
                         attributeDefinition = "character",
                         measurementScale = "measurementScale"))
-setClass("attributeList", contains="list")
 
+setClass("ListOfattribute", contains="list") # set validity all elements are attribute class
+
+setClass("attributeList", 
+         representation(id = "character", 
+                        attribute = "ListOfattribute"))
 
 
 
@@ -145,17 +149,17 @@ setClass("ListOfeml_person", contains = "list",
                else
                  TRUE)
 
-setClass("ListOfcreator", contains="ListOfeml_person")
+setClass("ListOf_creator", contains="ListOfeml_person")
 
 setClass("dataset", 
          representation('title' = "character",
-                        creator = "ListOfcreator",
+                        creator = "ListOf_creator",
                         contact = "eml_person",         ###  No idea why this is not working 
                         rights  = "character",
                         'methods' = "methods",
                         dataTable = "dataTable"),
-        prototype(rights = getOption("default_rights"),
-                  creator = new("ListOfcreator", list(default_person())),
+        prototype(rights = as.character(getOption("default_rights")),
+                  creator = new("ListOf_creator", list(default_person())),
                   contact = default_person() )) 
 
 
@@ -174,6 +178,5 @@ setClass("eml",
           prototype = prototype(packageId = paste(sep='', "urn:uuid:", uuid::UUIDgenerate()),
                                 system = 'uuid',
                                 namespaces = eml_namespaces))
-
 
 
