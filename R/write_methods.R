@@ -50,55 +50,61 @@
 ## will fail!
 
 emlS4ToXML <- function(obj){
-  if(!isEmpty(obj)){
     node <- newXMLNode(class(obj)[1])
     for(s in slotNames(obj)){
       ## Attributes
       if(s == "id"){
         if(length(obj@id) > 0){
-          node <- addAttributes(node, .attrs = c("id" = obj@id))
+          addAttributes(node, .attrs = c("id" = obj@id))
         }
       } else {
         ## Complex child nodes
-        if(is(slot(obj, s), "list"))
-          addChildren(node, lapply(slot(obj, s), emlS4ToXML))
-        else if(isS4(slot(obj, s))){
-          node <- addChildren(node, emlS4ToXML(slot(obj, s)))
-        ## Simple Child nodes  
-        } else if(length(slot(obj, s)) > 0){
-          node <- addChildren(node, newXMLNode(s,slot(obj, s)))
-        ## No child node
+        if(!isEmpty(slot(obj,s))){
+          if(is(slot(obj, s), "list")){
+            addChildren(node, lapply(slot(obj, s), emlS4ToXML))
+          } else if(isS4(slot(obj, s))){
+            addChildren(node, emlS4ToXML(slot(obj, s)))
+          ## Simple Child nodes  
+          } else if(length(slot(obj, s)) > 0){
+             if(s == class(obj)[1])              # special case
+              addChildren(node, slot(obj, s))   #
+             else  
+              addChildren(node, newXMLNode(s,slot(obj, s)))
+          ## No child node
+          } 
         } else {
           node
         }
       }
     }
     node
-  } else {
-    node <- NULL
-  }
-  node
 }
 
 
 isEmpty <- function(obj){
-  if( identical(obj, new(class(obj)[1])) )
-    out <- TRUE
-  else {
-    empty <- sapply(slotNames(obj), 
-    function(s){
-      if(isS4(slot(obj, s)))
-        isEmpty(slot(obj,s))
-      else { 
-        if(length(slot(obj, s)) == 0)
-          TRUE
-        else if(length(slot(obj, s)) > 0)
-          FALSE
-      }
-    })
-    out <- !any(!empty)
+  if(!isS4(obj)){
+    if(length(obj) > 0)
+      FALSE
+    else 
+      TRUE
+  } else {
+    if( identical(obj, new(class(obj)[1])) )
+      out <- TRUE
+    else {
+      empty <- sapply(slotNames(obj), 
+      function(s){
+        if(isS4(slot(obj, s)))
+          isEmpty(slot(obj,s))
+        else { 
+          if(length(slot(obj, s)) == 0)
+            TRUE
+          else if(length(slot(obj, s)) > 0)
+            FALSE
+        }
+      })
+      out <- !any(!empty)
+    }
+    out 
   }
-  out
 }
-
 

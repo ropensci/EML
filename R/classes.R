@@ -117,19 +117,68 @@ setClass("attributeList",
          representation(id = "character", 
                         attribute = "ListOfattribute"))
 
+##############
+
+setClass("coverage", 
+         representation(id = "character",
+#                        system = "character",
+#                        scope = "character",
+                        geographicCoverage = "geographicCoverage",
+                        temporalCoverage = "temporalCoverage",
+                        taxonomicCoverage = "taxanomicCoverage"),
+         contains = "ReferencesGroup")
+         
+
+setClass("references", representation(references = "character")) # A special case handles this
+setClass("ListOfreferences", contains = "list")
+setClass("referencesGroup", 
+         representation("references" = "ListOfreferences"))
+
+setAs("XMLInternalElementNode", "referencesGroup", function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "references", function(from) emlToS4(from))
+
+setClass("ResourceGroup",
+          representation("alternateIdentifier" = "character",  
+                         "shortName" = "character", 
+                         "title" = "character",  
+                         "creator" = "creator", 
+                         "metadataProvider" = "character", 
+                         "associatedParty"  = "character", 
+                         "pubDate"  = "character", 
+                         "language" = "character", 
+                         "series" = "character", 
+                         "abstract"  = "character", 
+                         "keywordSet" = "character", 
+                         "additionalInfo" = "character", 
+                         "intellectualRights" = "character", 
+                         "distribution" = "character", 
+                         "coverage" = "coverage")) 
 
 
-setClass("entity", 
+
+
+setClass("entityGroup", 
          representation(entityName = "character",
-                        entityDescription = "character"))
+                        entityDescription = "character",
+                        alternateIdentifier = "character",
+                        physical = "physical",
+                        coverage = "coverage",
+                        methods = "methods",
+                        additionalInfo = "character"))
 
 setClass("dataTable", 
-         representation(physical = "physical",
-                        attributeList = "attributeList",
+         representation(attributeList = "attributeList",
                         caseSensitive = "logical",
                         numberOfRecords = "integer"),
-         contains="entity")
+         contains="entityGroup")
 
+
+##############################################
+
+
+setClass("eml_software", 
+         representation
+         contains = "resourceGroup")
 
 
 

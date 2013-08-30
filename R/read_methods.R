@@ -18,6 +18,7 @@ setAs("XMLInternalElementNode", "online", function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "distribution", function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "physical", function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "textDomain",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "nonNumericDomain",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "nominal",  function(from) emlToS4(from))
@@ -34,6 +35,7 @@ setAs("XMLInternalElementNode", "entity",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "dataTable",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "dataset",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
+
 
 ## Hack XML::xmlToS4 to deal with lists 
 
@@ -70,40 +72,3 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     obj
 }
 
-
-
-
-
-
-
-
-### ICK! have to write custom methods every time we get multiply defined fields... really need XMLSchema... 
-#setAs("XMLInternalElementNode", "dataset", function(from){
-#         obj = new("dataset")
-#         kids = xmlChildren(from)
-#         obj@creator = listof(kids, "creator") 
-#         obj
-#})
-# 
-#setAs("XMLInternalElementNode", "enumeratedDomain", function(from){
-#         obj = new("enumeratedDomain")
-#         kids = xmlChildren(from)
-#         obj@codeDefinition <- listof(kids, "codeDefinition") 
-#         obj
-#})
-#
-#
-#
-#setAs("XMLInternalElementNode", "attributeList", function(from){
-#        obj <- new("attributeList") # Create object
-#        atrs <- xmlAttrs(from)      # add attributes
-#        if(!is.na(attrs["id"]))
-#           obj@id <- attrs["id"]
-#        kids = xmlChildren(from)    # add child nodes
-#        obj@attribute = new("ListOfattribute", lapply(kids[names(kids) == "attribute"], as, "attribute"))
-#})
-#setAs("attributeList", "XMLInternalElementNode", function(from){
-#      newXMLInternalNode("attributeList", kids = from@attribute)  
-#})
-#
-#
