@@ -5,7 +5,7 @@ setAs("data.frame", "physical", function(from)
 #' generator for eml
 #' @export
 eml <- function(dat, metadata, title, description = character(0), 
-                creator = new("ListOf_creator", 
+                creator = new("ListOfcreator", 
                               list(as(default_person(), "creator"))), 
                 contact = as(default_person(), "contact"),
                 methods = new("methods"), 

@@ -149,17 +149,17 @@ setClass("ListOfeml_person", contains = "list",
                else
                  TRUE)
 
-setClass("ListOf_creator", contains="ListOfeml_person")
+setClass("ListOfcreator", contains="ListOfeml_person")
 
 setClass("dataset", 
          representation('title' = "character",
-                        creator = "ListOf_creator",
+                        creator = "ListOfcreator",
                         contact = "eml_person",         ###  No idea why this is not working 
                         rights  = "character",
                         'methods' = "methods",
                         dataTable = "dataTable"),
         prototype(rights = as.character(getOption("default_rights")),
-                  creator = new("ListOf_creator", list(default_person())),
+                  creator = new("ListOfcreator", list(default_person())),
                   contact = default_person() )) 
 
 
