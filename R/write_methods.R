@@ -49,7 +49,7 @@
 ## `setAs("someS4class", "XMLInternalNode", function(from) emlS4ToXML(from))`
 ## will fail!
 
-emlS4ToXML <- function(obj){
+S4Toeml <- function(obj){
     node <- newXMLNode(class(obj)[1])
     for(s in slotNames(obj)){
       ## Attributes
