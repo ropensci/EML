@@ -1,20 +1,35 @@
 
-#' @include person.R
+setClass("keyword", 
+         representation(keyword = "character"))
+setAs("XMLInternalElementNode", "keyword",   function(from) emlToS4(from))
+setAs("keyword", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+setClass("ListOfkeyword", contains="list")
+
+setClass("keywordSet",
+         representation(keyword = "ListOfkeyword",
+                        keywordThesaurus = "character"))
+setAs("XMLInternalElementNode", "keywordSet",   function(from) emlToS4(from))
+setAs("keywordSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+#' @include responsibleParty.R
 setClass("resourceGroup",
           representation("alternateIdentifier" = "character",  
                          "shortName" = "character", 
                          "title" = "character",  
                          "creator" = "creator", 
-                         "metadataProvider" = "character", 
-                         "associatedParty"  = "character", 
-                         "pubDate"  = "character", 
+                         "metadataProvider" = "ListOfresponsibleParty", 
+                         "associatedParty"  = "ListOfresponsibleParty", 
+                         "pubDate"  = "character", ## FIXME make a proper date class (schema accepts: year or ISO8601 format)
                          "language" = "character", 
                          "series" = "character", 
                          "abstract"  = "character", 
-                         "keywordSet" = "character", 
+                         "keywordSet" = "keywordSet", 
                          "additionalInfo" = "character", 
                          "intellectualRights" = "character", 
-                         "distribution" = "character", 
+                         "distribution" = "distribution", 
                          "coverage" = "coverage")) 
 
+setAs("XMLInternalElementNode", "resourceGroup",   function(from) emlToS4(from))
+setAs("resourceGroup", "XMLInternalElementNode",   function(from) S4Toeml(from))
 

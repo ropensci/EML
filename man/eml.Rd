@@ -3,8 +3,8 @@
 \title{generator for eml}
 \usage{
   eml(dat, metadata, title, description = character(0),
-    creator = new("ListOfcreator", list(as(default_person(), "creator"))),
-    contact = as(default_person(), "contact"),
+    creator = new("ListOfcreator", list(get("defaultCreator", envir = remlConfig))),
+    contact = get("defaultContact", envir = remlConfig),
     methods = new("methods"),
     additionalMetadata = new("additionalMetadata"))
 }

@@ -23,11 +23,39 @@ metadata <-
                     "number"))
 
 
-S4obj <-  eml(dat, metadata, title = "title", description = "description")
+test_that("We can write sample data/metadata into EML", {
+  ## must either call eml_config or pass creator
+  S4obj <- eml(dat, metadata, title = "title", description = "description", 
+               creator = "Carl Boettiger <cboettig@gmail.com>")
+
+  expect_equal(S4obj@dataset@creator[[1]]@individualName@givenName, "Carl")
+  ## FIXME add more expect_equals to check other fields in this way
+
+       })
+
+## Okay, we know this works, so stick it in the global space for the next functions...
+S4obj <- eml(dat, metadata, title = "title", description = "description", 
+               creator = "Carl Boettiger <cboettig@gmail.com>")
+
+test_that("We can write some part of this to XML", {
+  att <- S4obj@dataset@dataTable@attributeList@attribute[[1]]@measurementScale
+  reml:::S4Toeml(att)
+})
+
+test_that("We can write S4 EML to XML", {
+
+  require(XML)
+  doc <- as(S4obj, "XMLInternalDocument")
+  expect_that(class(doc), equals(c("XMLInternalDocument", "XMLAbstractDocument")))
 
 
-# Currently produces all the empty nodes!
-# Worse, doesn't define "enumeratedDomain" because it is a slot name but not a class definition (class is listOf
-att <- S4obj@dataset@dataTable@attributeList@attribute[[1]]@measurementScale
+  ## Test validity  FIXME Should print validator error message!
+  x <- saveXML(doc)
+  xmlSchemaValidate("inst/xsd/eml.xsd", x)
+#  o <- eml_validate(x)
+#  expect_true(o[[1]]) # all cases validate
+#  expect_true(o[[2]]) # all cases validate
 
-reml:::emlS4ToXML(att)
+       })
+
+

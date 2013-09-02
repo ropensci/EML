@@ -14,4 +14,34 @@ setClass("eml",
                                 system = 'uuid',
                                 namespaces = eml_namespaces))
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
+setAs("eml", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+
+
+#' generator for eml
+#' @export
+eml <- function(dat, metadata, title, description = character(0), 
+                creator = new("ListOfcreator", 
+                              list(get("defaultCreator", envir=remlConfig))), 
+                contact = get("defaultContact", envir=remlConfig),
+                methods = new("methods"), 
+                additionalMetadata = new("additionalMetadata")){
+  if(is(creator, "character"))
+    creator <- as(creator, "creator")
+
+  if(is(creator, "creator"))
+    creator <- new("ListOfcreator", list(creator))
+
+  if(is.null(contact) | length(contact) == 0 )
+    contact <- creator[[1]]
+
+  new("eml", 
+      dataset = new("dataset", 
+                    title = title,
+                    creator = creator,
+                    contact = contact,
+                    dataTable = eml_dataTable(dat, metadata, title, description),
+                    methods = methods))
+}
+
 

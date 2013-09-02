@@ -1,20 +1,5 @@
-
-
-################## Read methods ##################
-
-
-setAs("XMLInternalElementNode", "individualName",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "additionalMetadata",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "eml_person", function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "contact", function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "creator", function(from) emlToS4(from))
-
-
-## Hack XML::xmlToS4 to deal with lists 
-
-listof <- function(kids, element, listclass = paste0("ListOf", element))
-  new(listclass, lapply(kids[names(kids) == element], as, element))
-
+## Used as the basis for all coercion methods from XML::XMLInternalElementNode 
+## to reml's S4 objects.  
 
 ## Assumes slot is named by the name of the repeated element
 ## but has type "ListOf<element>" which contains a list containing
@@ -44,4 +29,8 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     }
     obj
 }
+
+## Hacks XML::xmlToS4 to deal with lists 
+listof <- function(kids, element, listclass = paste0("ListOf", element))
+  new(listclass, lapply(kids[names(kids) == element], as, element))
 

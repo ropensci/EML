@@ -12,7 +12,7 @@ eml_R_software <- function(packagename){
                         distribution = new("distribution", 
                                            new("online", 
                                                url = citation(packagename)$url)))
-  new("software", title = title, authors = as(authors, "eml_person"), license = license, 
+  new("software", title = title, authors = as(authors, "responsibleParty"), license = license, 
                version = version, implementation = implementation)
 }
 

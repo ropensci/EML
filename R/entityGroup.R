@@ -10,5 +10,6 @@ setClass("entityGroup",
                         methods = "methods",
                         additionalInfo = "character"))
 
-etAs("XMLInternalElementNode", "entityGroup",  function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "entityGroup",  function(from) emlToS4(from))
+setAs("entityGroup", "XMLInternalElementNode",   function(from) S4Toeml(from))
 

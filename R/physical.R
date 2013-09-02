@@ -4,6 +4,7 @@
 setClass("simpleDelimited", 
          representation(fieldDelimiter = "character"))
 setAs("XMLInternalElementNode", "simpleDelimited",  function(from) emlToS4(from))
+setAs("simpleDelimited", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("textFormat", 
          representation(numHeaderLines = "integer",
@@ -12,28 +13,45 @@ setClass("textFormat",
                         attributeOrientation = "character", 
                         simpleDelimited = "simpleDelimited"))
 setAs("XMLInternalElementNode", "textFormat",  function(from) emlToS4(from))
+setAs("textFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 setClass("dataFormat",
          representation(textFormat = "textFormat"))
 setAs("XMLInternalElementNode", "dataFormat", function(from) emlToS4(from))
+setAs("dataFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-### Distribution ##
+### Distribution ##  
+## FIXME Flush out, this isn't the full distribution defs 
 setClass("offline")
 setAs("XMLInternalElementNode", "offline", function(from) emlToS4(from))
+setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+
+########################
 
 setClass("online",
          representation(url = "character",
                         onlineDescription = "character"))
 setAs("XMLInternalElementNode", "online", function(from) emlToS4(from))
+setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
+
+###########################
 
 setClass("distribution",
          representation(online = "online",
                         offline = "offline",
                         inline = "character"))
 setAs("XMLInternalElementNode", "distribution", function(from) emlToS4(from))
+setAs("distribution", "XMLInternalElementNode",   function(from) S4Toeml(from))
+## FIXME Should check that 'from' is a internet protocol (e.g http)
+setAs("character", "distribution", function(from)
+  new("distribution", online = new("online", url = from)))
+
+
+########################
 
 setClass("physical",
          representation(objectName = "character",
@@ -43,5 +61,44 @@ setClass("physical",
                         distribution = "distribution"))
 
 setAs("XMLInternalElementNode", "physical", function(from) emlToS4(from))
+setAs("physical", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("data.frame", "physical", function(from)
+      eml_physical(dat)) 
+
+####### Internal function to coerce data.frame to physical #######
+## Custom generator. Consider making int an S4 method?  
+eml_physical <- function(dat, filename=character(0), ...){
+  if(length(filename) == 0) 
+    filename = paste(uuid::UUIDgenerate(), ".csv", sep="")
+  write.csv(dat, file = filename, ...)
+  new("physical", 
+      objectName = filename, 
+      size = as(object.size(dat), "numeric"), 
+      characterEncoding = guess_encoding(),
+      dataFormat = new("csv")) 
+}
+# Attempt to determine encoding. Helper function
+guess_encoding <- function(){
+  encoding = getOption("encoding")
+  if(encoding == "native.enc")
+    encoding = tryCatch(Sys.getlocale("LC_CTYPE"), 
+                        error = function(e) character(0))
+  encoding
+}
+# Generate a dataFormat object for standard csv.  Use as prototype?  
+setClass("csv",
+         contains = "dataFormat",
+         prototype = prototype( 
+           new("textFormat", 
+             numHeaderLines = 1L,
+             numFooterLines = 0L,
+             recordDelimiter = "\\r\\n",
+             attributeOrientation = "column",
+             simpleDelimited = 
+               new("simpleDelimited", fieldDelimiter = ","))))
+
+
+
+
 
 

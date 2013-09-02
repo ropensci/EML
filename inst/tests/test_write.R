@@ -3,24 +3,6 @@ context("write")
 test_that("We can parse XML written by reml",{
 
 
-  eml$set(contact_givenName = "Carl", contact_surName = "Boettiger", contact_email = "cboettig@ropensci.org")
-
-  dat = data.frame(river=c("SAC", "SAC", "AM"),
-                        spp = c("king", "king", "ccho"),
-                        stg = c("smolt", "parr", "smolt"),
-                        ct =  c(293L, 410L, 210L))
-  col_metadata = c(river = "http://dbpedia.org/ontology/River",
-                   spp = "http://dbpedia.org/ontology/Species",
-                   stg = "Life history stage",
-                   ct = "count")
-  unit_metadata =
-     list(river = c(SAC = "The Sacramento River", AM = "The American River"),
-          spp = c(king = "King Salmon", ccho = "Coho Salmon"),
-          stg = c(parr = "third life stage", smolt = "fourth life stage"),
-          ct = "number")
-
-  doc <- eml_write(dat, col_metadata, unit_metadata)
-
   ## Test that we write out an XML document
   require(XML)
   expect_that(class(doc), equals(c("XMLInternalDocument", "XMLAbstractDocument")))

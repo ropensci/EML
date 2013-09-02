@@ -53,8 +53,14 @@ test_that("Constructor function for dataTable works given data.frame and metadat
 }) 
 
 
+## FIXME how about a dataset level test?
+
 test_that("Constructor function for eml works given dat, metadata", {
-  eml(dat, metadata, title = "title", description = "description")
+
+  #eml_config(creator = "Carl Boettiger <cboettig@gmail.com>") 
+  eml(dat, metadata, title = "the title", 
+      description = "some description", 
+      creator = "Carl Boettiger <cboettig@gmail.com>")
 })
 
 

@@ -11,4 +11,6 @@ setClass("coverage",
                         temporalCoverage = "temporalCoverage",
                         taxonomicCoverage = "taxanomicCoverage"),
          contains = "referencesGroup")
- 
+setAs("XMLInternalElementNode", "coverage",   function(from) emlToS4(from))
+setAs("coverage", "XMLInternalElementNode",   function(from) S4Toeml(from))
+

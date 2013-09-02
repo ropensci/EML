@@ -24,7 +24,6 @@ o = eml_validate(saveXML(sampleDoc))
 }
 
 
-#' @import RHTMLForms
 #' @export 
 eml_validate <-
 function (doctext = "", .url = "http://knb.ecoinformatics.org/emlparser/parse", 
@@ -43,8 +42,13 @@ function (doctext = "", .url = "http://knb.ecoinformatics.org/emlparser/parse",
         .Names = "referer"), style = "POST", .curl = getCurlHandle(), 
     .cleanArgs = NULL) 
 {
-    library(RHTMLForms)
-    library(RCurl)
+    success <- require(RHTMLForms)
+    if(!success)
+      error("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
+    success <- require(RCurl)
+    if(!success)
+      error("RCurl package must be installed to use this function.")
+
     args = list(doctext = doctext)
     if (!length(.url)) 
         stop("no url supplied")

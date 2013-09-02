@@ -19,36 +19,40 @@ Suggests:
     testthat,
     uuid,
     yaml,
-    RCurl
+    RCurl,
+    RHTMLForms
 Imports:
     XML,
     digest,
-    RHTMLForms
+    utils
 Depends:
     R (>= 2.15)
 Collate:
-    'classes.R'
-    'defaults.R'
-    'eml_R_software.R'
-    'eml_access.R'
-    'eml_attributeList.R'
-    'eml_attribute_methods.R'
-    'eml_citation.R'
-    'eml_dataTable.R'
-    'eml_dataTable_methods.R'
-    'eml_dataset.R'
-    'eml_distribution.R'
-    'eml_figshare.R'
-    'eml_import_settings.R'
-    'eml_otherEntity.R'
-    'eml_person.R'
-    'eml_person_methods.R'
-    'eml_publish.R'
-    'eml_read.R'
-    'eml_software.R'
+    'additionalMetadata.R'
+    'methods.R'
+    'physical.R'
+    'attribute.R'
+    'referencesGroup.R'
+    'responsibleParty.R'
+    'citation.R'
+    'geographicCoverage.R'
+    'taxanomicCoverage.R'
+    'temporalCoverage.R'
+    'coverage.R'
+    'resourceGroup.R'
+    'entityGroup.R'
+    'software.R'
+    'dataTable.R'
+    'dataset.R'
+    'eml.R'
     'eml_wizards.R'
-    'eml_write.R'
-    'eml_yaml.R'
-    'ext_validate.R'
     'read_methods.R'
     'write_methods.R'
+    'eml_R_software.R'
+    'eml_figshare.R'
+    'eml_publish.R'
+    'eml_yaml.R'
+    'ext_validate.R'
+    'baseAttributes.R'
+    'eml_config.R'
+    'reml_environment.R'
