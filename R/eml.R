@@ -15,11 +15,12 @@ setClass("eml",
                                 namespaces = eml_namespaces))
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
 setAs("eml", "XMLInternalElementNode",   function(from) S4Toeml(from))
-
+setAs("eml", "XMLInternalDocument",   function(from){
+      newXMLDoc(node = as(from, "XMLInternalElementNode"))
+          })
 
 
 #' generator for eml
-#' @export
 eml <- function(dat, metadata, title, description = character(0), 
                 creator = new("ListOfcreator", 
                               list(get("defaultCreator", envir=remlConfig))), 
