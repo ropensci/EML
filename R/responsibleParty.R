@@ -70,7 +70,8 @@ setAs("creator", "person", function(from){
   })
 setAs("character", "creator", function(from)
   as(as.person(from), "creator"))
-
+setAs("creator", "contact", function(from)
+      as(as(from, "responsibleParty"), "contact"))
 
 
 setClass("ListOfcreator", contains = "list",

@@ -1,33 +1,29 @@
 context("publish")
 
 test_that("We can publish a draft to figshare", {
-#  file <- system.file("doc", "my_eml_data.xml", package="reml")
 
+  f <- system.file("examples", "hf205.xml",  package="reml")
+  csv <- system.file("examples", "hf205-01-TPexp1.csv",  package="reml")
 
-  ## Generate some example data
-  dat <- data.frame(a = 1:2, b = 1:2)
-  col_metadata <- c(a = "A", b = "B")
-  unit_metadata <- list(a = "number", b="number")
-  eml_write(dat, col_metadata, unit_metadata, 
-            .title = "A test EML file", file = "tmp.xml",
-            file_description = "Test data, only intended for testing")
+  # move files to working directory
+  saveXML(xmlParse(f), "hf205.xml")
+  write.csv(read.csv(csv), "hf205-01-TPexp1.csv")
 
   ## Publish the data to figshare (as a draft)
-  id <- eml_publish("tmp.xml", categories="Ecology")
+  id <- eml_publish("hf205.xml", categories="Ecology")
 
   ## Confirm that the appropriate metadata has been written to figshare
   library(rfigshare)
   details <- fs_details(id, mine=TRUE)
   expect_that(details$categories[[1]]$name, equals("Ecology"))
 
-
   ## Confirm that the EML contains the figshare metadata 
-  doc <- xmlParse("tmp.xml")
+  doc <- xmlParse("tmp.xml") # check uploaded copy, since cannot download draft/private file
   eml_cat <- xpathSApply(doc, "//additionalMetadata[@id = 'figshare']/metadata/keywordSet/keyword", xmlValue)
   expect_that(eml_cat, equals("Ecology"))
 
   ## Clean up 
   fs_delete(id)
-  unlink("tmp.xml") 
-  unlink("a_b.csv") 
+  unlink("hf205-01-TPexp1.csv")
+  unlink("figshare_hf205.xml")
 })

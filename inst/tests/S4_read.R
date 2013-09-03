@@ -1,6 +1,6 @@
 context("Parsing XML into S4")
 
-## test basic reading
+## test basic reading of XML into S4
 
 library(XML)
 require(reml)

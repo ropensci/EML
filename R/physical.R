@@ -62,6 +62,18 @@ setClass("physical",
 
 setAs("XMLInternalElementNode", "physical", function(from) emlToS4(from))
 setAs("physical", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+## Methods to convert into native R types 
+setAs("physical", "data.frame", function(from)
+      extract(from)) 
+## FIXME  exported for test only, maybe not necessary?
+#' @export
+setMethod("extract", signature("physical"),
+          function(from){
+            ## FIXME use the EML to determine read.csv options
+            dat <- read.csv(from@objectName)
+          })
+
 setAs("data.frame", "physical", function(from)
       eml_physical(dat)) 
 
@@ -70,12 +82,19 @@ setAs("data.frame", "physical", function(from)
 eml_physical <- function(dat, filename=character(0), ...){
   if(length(filename) == 0) 
     filename = paste(uuid::UUIDgenerate(), ".csv", sep="")
-  write.csv(dat, file = filename, ...)
+  write.csv(dat, file = filename, row.names=FALSE, ...)
   new("physical", 
       objectName = filename, 
       size = as(object.size(dat), "numeric"), 
       characterEncoding = guess_encoding(),
-      dataFormat = new("csv")) 
+      dataFormat = new("dataFormat", 
+                       textFormat = new("textFormat", 
+                                 numHeaderLines = 1L,
+                                 numFooterLines = 0L,
+                                 recordDelimiter = "\\r\\n",
+                                 attributeOrientation = "column",
+                                 simpleDelimited = 
+                                   new("simpleDelimited", fieldDelimiter = ",")))) 
 }
 # Attempt to determine encoding. Helper function
 guess_encoding <- function(){
@@ -85,19 +104,6 @@ guess_encoding <- function(){
                         error = function(e) character(0))
   encoding
 }
-# Generate a dataFormat object for standard csv.  Use as prototype?  
-setClass("csv",
-         contains = "dataFormat",
-         prototype = prototype( 
-           new("textFormat", 
-             numHeaderLines = 1L,
-             numFooterLines = 0L,
-             recordDelimiter = "\\r\\n",
-             attributeOrientation = "column",
-             simpleDelimited = 
-               new("simpleDelimited", fieldDelimiter = ","))))
-
-
 
 
 

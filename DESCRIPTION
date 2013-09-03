@@ -28,6 +28,7 @@ Imports:
 Depends:
     R (>= 2.15)
 Collate:
+    'generics.R'
     'additionalMetadata.R'
     'methods.R'
     'physical.R'
@@ -57,3 +58,4 @@ Collate:
     'S4Toeml.R'
     'emlToS4.R'
     'eml_write.R'
+    'eml_read.R'

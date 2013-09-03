@@ -8,13 +8,18 @@
 ## `setAs("someS4class", "XMLInternalElementNode", function(from) S4Toeml(from))`
 ## will fail!
 
-S4Toeml <- function(obj){
-    node <- newXMLNode(class(obj)[1])
+attribute_elements <- c("id", "system", "scope", "packageId")
+
+S4Toeml <- function(obj, 
+                    node = newXMLNode(class(obj)[1])){
+
     for(s in slotNames(obj)){
       ## Attributes
-      if(s == "id"){
-        if(length(obj@id) > 0){
-          addAttributes(node, .attrs = c("id" = obj@id))
+      if(s %in% attribute_elements){
+        if(length(slot(obj,s)) > 0){
+          attrs <- slot(obj,s)
+          names(attrs) <- s
+          addAttributes(node, .attrs = attrs)
         }
       } else {
         ## Complex child nodes

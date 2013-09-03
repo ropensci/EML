@@ -30,8 +30,14 @@
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 
-                         visibility = c("draft", "private", "public"), figshare_id = NULL){
+                         visibility = c("draft", "private", "public"), figshare_id = NULL, 
+                         modified_eml_filename = paste("figshare", file, sep="_")){
+
   visibility = match.arg(visibility)
+
+
+  ## FIXME this workflow is rather crude.  Should eml_read into S4, modify, and then eml_write XML
+  ## as modified EML file, and upload that instead.  
   doc <- xmlParse(file) 
   root <- xmlRoot(doc)
   if(is.null(title))
@@ -44,8 +50,11 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     tags <-  xpathSApply(doc, "//dataset/additionalMetadata[@id = 'figshare']/metadata[keywordThesaurus = 'Figshare Tags']", xmlValue) 
   if(is.null(links))
     links <-  xpathSApply(doc, "//dataset/additionalMetadata[@id = 'figshare']/metadata/additionalLinks/url", xmlValue) 
-  ## If that still doesn't get anything, we're in for an error... 
+ csv <- xpathSApply(doc, "//dataTable/physical/objectName", xmlValue)
 
+
+  ## Actual figshare part of code...
+  ## Call fs_update if we have id, otherwise fs_create new fileset...
   if(!is.null(figshare_id)){
     id <- figshare_id
     fs_update(article_id = id, title = title, description = description, type = "fileset")
@@ -55,8 +64,6 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   fs_add_tags(id, tags)
   fs_add_categories(id, categories)
 
-
-  csv <- xpathSApply(doc, "//dataTable/physical/objectName", xmlValue)
 
   ## Upload data file
   fs_upload(id, csv)
@@ -98,10 +105,10 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     sapply(links, function(link) newXMLNode("url", link, parent = additionalLinks))
   }
   ## Write updated EML file (overwrites existing file unless flagged not to)
-  saveXML(doc, file)
+  saveXML(doc, file = modified_eml_filename)
 
   ## Upload updated EML file
-  fs_upload(id, file)
+  fs_upload(id, file = modified_eml_filename)
 
 
   details <- fs_details(id, mine=TRUE)

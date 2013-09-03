@@ -5,7 +5,8 @@
   eml_figshare(file, title = NULL, description = NULL,
     categories = NULL, tags = NULL, links = NULL,
     visibility = c("draft", "private", "public"),
-    figshare_id = NULL)
+    figshare_id = NULL,
+    modified_eml_filename = paste("figshare", file, sep = "_"))
 }
 \arguments{
   \item{title}{of the figshare dataset,}

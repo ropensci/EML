@@ -195,8 +195,15 @@ setAs("list", "attribute",
 setAs("list", "attributeList", function(from){
   if(! all(sapply(from, class) == "list") )
     error("expected list of lists")
-  new("attributeList", attribute = new("ListOfattribute", lapply(from, as, "attribute")))
+  new("attributeList", 
+      attribute = new("ListOfattribute", 
+                      lapply(from, as, "attribute")))
 })
 
 
+setMethod("extract", signature("attributeList"), function(from){
+# FIXME write this method
+  character()
+})
 
+ 

@@ -1,4 +1,9 @@
 context("generating S4 from R dataframe")
+## This file tests constructors for the S4 objects 
+## using the expected R input formats 
+
+
+## FIXME add unlink commands to remove/cleanup any files created by tests (e.g. the .csv and .xml files)
 
 require(reml)
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),

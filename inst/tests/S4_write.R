@@ -1,5 +1,9 @@
 context("Serializing S4 to XML")
 
+## Test basic writing of S4 classes back into XML
+
+## FIXME add unlink commands to remove/cleanup any files created by tests (e.g. the .csv and .xml files)
+
 require(reml)
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),
                  spp   = c("king",  "king", "ccho"),
@@ -25,37 +29,46 @@ metadata <-
 
 test_that("We can write sample data/metadata into EML", {
   ## must either call eml_config or pass creator
-  S4obj <- eml(dat, metadata, title = "title", description = "description", 
+  S4obj <- reml:::eml(dat, metadata, title = "title", description = "description", 
                creator = "Carl Boettiger <cboettig@gmail.com>")
 
   expect_equal(S4obj@dataset@creator[[1]]@individualName@givenName, "Carl")
   ## FIXME add more expect_equals to check other fields in this way
-
-       })
+})
 
 ## Okay, we know this works, so stick it in the global space for the next functions...
-S4obj <- eml(dat, metadata, title = "title", description = "description", 
+S4obj <- reml:::eml(dat, metadata, title = "title", description = "description", 
                creator = "Carl Boettiger <cboettig@gmail.com>")
+
+
 
 test_that("We can write some part of this to XML", {
   att <- S4obj@dataset@dataTable@attributeList@attribute[[1]]@measurementScale
   reml:::S4Toeml(att)
 })
 
-test_that("We can write S4 EML to XML", {
+
+
+test_that("We can write S4 EML to XML and validate", {
+
+  eml_write(dat, metadata, title = "title", description = "description", creator = "Carl Boettiger <cboettig@gmail.com>")
 
   require(XML)
-  doc <- as(S4obj, "XMLInternalDocument")
-  expect_that(class(doc), equals(c("XMLInternalDocument", "XMLAbstractDocument")))
-
-
   ## Test validity  FIXME Should print validator error message!
-  x <- saveXML(doc)
-  xmlSchemaValidate("inst/xsd/eml.xsd", x)
-#  o <- eml_validate(x)
+  xsd <- system.file("xsd", "eml.xsd", package="reml") 
+  results <- xmlSchemaValidate(xsd, "title.xml")
+    
+  expect_equal(results$status, 0)          ## Currently not validating, doesn't recognize root node
+  expect_equal(length(results$errors), 0)
+
+
+   ## Test external validity
+#  o <- eml_validate(x)                     ## eml_validate function not working 
 #  expect_true(o[[1]]) # all cases validate
 #  expect_true(o[[2]]) # all cases validate
 
-       })
+   unlink("title.xml")
+   unlink("title.csv")
+})
 
 

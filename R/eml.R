@@ -1,5 +1,5 @@
-eml_namespaces = c(eml = "//ecoinformatics.org/eml-2.1.1", 
-                   ds = "//ecoinformatics.org/dataset-2.1.1",
+eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
+                   ds = "eml://ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
                    stmml = "http://www.xml-cml.org/schema/stmml-1.1")
@@ -7,17 +7,21 @@ eml_namespaces = c(eml = "//ecoinformatics.org/eml-2.1.1",
 setClass("eml",
          representation(packageId   = "character", 
                         system      = "character", 
-                        namespaces  = "character",
+#                        namespaces  = "character",
                         dataset     = "dataset",
                         additionalMetadata = "additionalMetadata"),
-          prototype = prototype(packageId = paste(sep='', "urn:uuid:", uuid::UUIDgenerate()),
-                                system = 'uuid',
-                                namespaces = eml_namespaces))
+          prototype = prototype(packageId = paste0("urn:uuid:", uuid::UUIDgenerate()),
+                                system = 'uuid'
+#                                , namespaces = eml_namespaces
+                                ))
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
-setAs("eml", "XMLInternalElementNode",   function(from) S4Toeml(from))
-setAs("eml", "XMLInternalDocument",   function(from){
-      newXMLDoc(node = as(from, "XMLInternalElementNode"))
-          })
+setAs("eml", "XMLInternalElementNode", 
+      function(from){
+        node <- newXMLNode("eml:eml", namespaceDefinitions = eml_namespaces)
+        S4Toeml(from, node)
+      })
+setAs("eml", "XMLInternalDocument", function(from)
+      newXMLDoc(node = as(from, "XMLInternalElementNode")))
 
 
 #' generator for eml
@@ -34,7 +38,7 @@ eml <- function(dat, metadata, title, description = character(0),
     creator <- new("ListOfcreator", list(creator))
 
   if(is.null(contact) | length(contact) == 0 )
-    contact <- creator[[1]]
+    contact <- as(creator[[1]], "contact")
 
   new("eml", 
       dataset = new("dataset", 

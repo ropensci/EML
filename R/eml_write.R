@@ -8,7 +8,7 @@ eml_write <- function(dat, metadata, title, description = character(0),
                 contact = get("defaultContact", envir=remlConfig),
                 methods = new("methods"), 
                 additionalMetadata = new("additionalMetadata"),
-                file = "metadata.xml"){
+                file = paste0(gsub(" ", "_", title), ".xml")){
   s4 <- eml(dat, metadata, title, description, creator,
                 contact, methods, additionalMetadata)
   saveXML(as(s4, "XMLInternalDocument"), file=file)
