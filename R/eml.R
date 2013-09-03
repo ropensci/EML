@@ -9,11 +9,12 @@ setClass("eml",
                         system      = "character", 
 #                        namespaces  = "character",
                         dataset     = "dataset",
-                        additionalMetadata = "additionalMetadata"),
-          prototype = prototype(packageId = paste0("urn:uuid:", uuid::UUIDgenerate()),
-                                system = 'uuid'
+                        additionalMetadata = "additionalMetadata")
+#          , prototype = prototype(packageId = paste0("urn:uuid:", uuid::UUIDgenerate()),
+#                                system = 'uuid'
 #                                , namespaces = eml_namespaces
-                                ))
+#                                )
+         )
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
 setAs("eml", "XMLInternalElementNode", 
       function(from){
@@ -40,7 +41,19 @@ eml <- function(dat, metadata, title, description = character(0),
   if(is.null(contact) | length(contact) == 0 )
     contact <- as(creator[[1]], "contact")
 
-  new("eml", 
+  success <- require(uuid)
+  if(success){
+    id <- paste0("urn:uuid:", uuid::UUIDgenerate())
+    system <- "uuid"
+  } else {
+    id <- paste0("reml_", runif(1, 1e6, 9e6))
+    system <- "reml"
+  }
+
+
+  new("eml",
+      packageId = id,
+      system = system,
       dataset = new("dataset", 
                     title = title,
                     creator = creator,

@@ -94,3 +94,5 @@ setAs("character", "contact", function(from)
 ## FIXME Should be something more intelligent that will let these
 ## inherit the method from responsibleParty?  callNextMethod() maybe??
 
+
+

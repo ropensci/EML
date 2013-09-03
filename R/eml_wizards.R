@@ -1,20 +1,14 @@
-
-prompt_user_for_columns <- function(dataframe){
-  message("You didn't provide descriptions of each column")
-  col_metadata <- character(length(dataframe))
-  names(col_metadata) <- names(dataframe)
+#' @export
+metadata_wizard <- function(dataframe){
+  metadata <- vector("list", length(dataframe))
+  names(metadata) <- names(dataframe)
   for(n in names(dataframe)){
-    col_metadata[n] <- readline(paste("Enter description for column '", n, "':\n ", sep=""))
+    description <- readline(paste("Enter description for column '", n, "':\n ", sep=""))
+    unit_metadata <- prompt_for_units(dataframe, n)
+    metadata[[n]] <- list(n, description, unit_metadata)
+    message("\n")
   }
-}
-
-prompt_user_for_units <- function(dataframe){
-  message("You didn't define what units cell values are in")
-  unit_metadata <- vector("list", length(dataframe))
-  names(unit_metadata) <- names(dataframe)
-  for(n in names(dataframe)){
-      unit_metadata[[n]] <- prompt_for_units(dataframe, n)
-  }
+  metadata
 }
 
 
