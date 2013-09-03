@@ -2,6 +2,8 @@ context("publish")
 
 test_that("We can publish a draft to figshare", {
 
+  library(reml)
+
   f <- system.file("examples", "hf205.xml",  package="reml")
   csv <- system.file("examples", "hf205-01-TPexp1.csv",  package="reml")
 
@@ -18,12 +20,13 @@ test_that("We can publish a draft to figshare", {
   expect_that(details$categories[[1]]$name, equals("Ecology"))
 
   ## Confirm that the EML contains the figshare metadata 
-  doc <- xmlParse("tmp.xml") # check uploaded copy, since cannot download draft/private file
+  doc <- xmlParse("figshare_hf205.xml") # check uploaded copy, since cannot download draft/private file
   eml_cat <- xpathSApply(doc, "//additionalMetadata[@id = 'figshare']/metadata/keywordSet/keyword", xmlValue)
   expect_that(eml_cat, equals("Ecology"))
 
   ## Clean up 
   fs_delete(id)
   unlink("hf205-01-TPexp1.csv")
+  unlink("hf205.xml")
   unlink("figshare_hf205.xml")
 })
