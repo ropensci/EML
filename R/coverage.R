@@ -9,7 +9,7 @@ setClass("coverage",
 #                        scope = "character",
                         geographicCoverage = "geographicCoverage",
                         temporalCoverage = "temporalCoverage",
-                        taxonomicCoverage = "taxanomicCoverage"),
+                        taxonomicCoverage = "taxonomicCoverage"),
          contains = "referencesGroup")
 setAs("XMLInternalElementNode", "coverage",   function(from) emlToS4(from))
 setAs("coverage", "XMLInternalElementNode",   function(from) S4Toeml(from))

@@ -3,6 +3,7 @@ context("publish")
 test_that("We can publish a draft to figshare", {
 
   library(reml)
+  library(XML)
 
   f <- system.file("examples", "hf205.xml",  package="reml")
   csv <- system.file("examples", "hf205-01-TPexp1.csv",  package="reml")

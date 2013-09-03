@@ -16,9 +16,17 @@ setClass("singleDateTime",
 setAs("XMLInternalElementNode", "singleDateTime",   function(from) emlToS4(from))
 setAs("singleDateTime", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
+setClass("beginDate", contains="singleDateTime")
+setAs("XMLInternalElementNode", "beginDate",   function(from) emlToS4(from))
+setAs("beginDate", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+setClass("endDate", contains="singleDateTime")
+setAs("XMLInternalElementNode", "endDate",   function(from) emlToS4(from))
+setAs("endDate", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
 setClass("rangeOfDates", 
-         representation(beginDate = "singleDateTime",
-                        endDate = "singleDateTime"))
+         representation(beginDate = "beginDate",  
+                        endDate = "endDate"))
 setAs("XMLInternalElementNode", "rangeOfDates",   function(from) emlToS4(from))
 setAs("rangeOfDates", "XMLInternalElementNode",   function(from) S4Toeml(from))
 

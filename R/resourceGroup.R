@@ -1,3 +1,11 @@
+setClass("metadataProvider", contains="ListOfresponsibleParty")
+setAs("XMLInternalElementNode", "metadataProvider",   function(from) emlToS4(from))
+setAs("metadataProvider", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setClass("associatedParty", contains="ListOfresponsibleParty")
+setAs("XMLInternalElementNode", "associatedParty",   function(from) emlToS4(from))
+setAs("associatedParty", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+
 setClass("ListOfmetadataProvider", contains="list")
 setClass("ListOfassociatedParty", contains="list")
 

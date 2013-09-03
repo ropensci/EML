@@ -21,35 +21,35 @@ setAs("XMLInternalElementNode", "vouchers",   function(from) emlToS4(from))
 setAs("vouchers", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-setClass("taxanomicSystem",
+setClass("taxonomicSystem",
          representation(classificationSystem = "classificationSystem",
                         identificationReference = "citation",
                         identifierName = "responsibleParty",
-                        taxanomicProcedures = "character",
-                        taxanomicCompleteness = "character", 
+                        taxonomicProcedures = "character",
+                        taxonomicCompleteness = "character", 
                         vouchers = "vouchers")
          )
-setAs("XMLInternalElementNode", "taxanomicSystem",   function(from) emlToS4(from))
-setAs("taxanomicSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("XMLInternalElementNode", "taxonomicSystem",   function(from) emlToS4(from))
+setAs("taxonomicSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-setClass("taxanomicClassification", 
+setClass("taxonomicClassification", 
          representation(taxonRankName = "character",
                         taxonRankValue = "character",
                         commonName = "character" 
-#                       , taxonomicClassification = "taxanomicClassification" ## FIXME should include  this recursive def according to schema?
+#                       , taxonomicClassification = "taxonomicClassification" ## FIXME should include  this recursive def according to schema?
          ))
-setAs("XMLInternalElementNode", "taxanomicClassification",   function(from) emlToS4(from))
-setAs("taxanomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("XMLInternalElementNode", "taxonomicClassification",   function(from) emlToS4(from))
+setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-setClass("ListOftaxanomicClassification", contains = "list")
+setClass("ListOftaxonomicClassification", contains = "list")
 
 #' @include referencesGroup.R
-setClass("taxanomicCoverage",
-         representation(taxanomicSystem = "taxanomicSystem",
+setClass("taxonomicCoverage",
+         representation(taxonomicSystem = "taxonomicSystem",
                         generalTaxanomicCoverage = "character",
-                        taxanomicClassification = "ListOftaxanomicClassification"),
+                        taxonomicClassification = "ListOftaxonomicClassification"),
          contains = "referencesGroup")
-setAs("XMLInternalElementNode", "taxanomicCoverage",   function(from) emlToS4(from))
-setAs("taxanomicCoverage", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("XMLInternalElementNode", "taxonomicCoverage",   function(from) emlToS4(from))
+setAs("taxonomicCoverage", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
