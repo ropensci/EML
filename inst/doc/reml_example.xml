@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:bd45ed8c-992f-4b53-a8f9-aaa28560f970" system="uuid">
+  <dataset>
+    <title>reml example</title>
+    <creator>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+      <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
+    </creator>
+    <contact>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+      <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
+    </contact>
+    <dataTable>
+      <entityName>reml example</entityName>
+      <entityDescription>An example, intended for
+                              illustrative purposes only.</entityDescription>
+      <physical>
+        <objectName>reml_example.csv</objectName>
+        <size>2464</size>
+        <characterEncoding>en_US.UTF-8</characterEncoding>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <numFooterLines>0</numFooterLines>
+            <recordDelimiter>\r\n</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+      </physical>
+      <attributeList>
+        <attribute>
+          <attributeName>river</attributeName>
+          <attributeDefinition>River site used for collection</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>SAC</code>
+                    <definition>The Sacramento River</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>AM</code>
+                    <definition>The American River</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>spp</attributeName>
+          <attributeDefinition>Species common name</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>king</code>
+                    <definition>King Salmon</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>ccho</code>
+                    <definition>Coho Salmon</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>stg</attributeName>
+          <attributeDefinition>Life Stage</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <enumeratedDomain>
+                  <codeDefinition>
+                    <code>parr</code>
+                    <definition>third life stage</definition>
+                  </codeDefinition>
+                  <codeDefinition>
+                    <code>smolt</code>
+                    <definition>fourth life stage</definition>
+                  </codeDefinition>
+                </enumeratedDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute>
+          <attributeName>ct</attributeName>
+          <attributeDefinition>count</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>number</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+      <caseSensitive>yes</caseSensitive>
+      <numberOfRecords>3</numberOfRecords>
+    </dataTable>
+  </dataset>
+</eml:eml>
