@@ -7,22 +7,14 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
 setClass("eml",
          representation(packageId   = "character", 
                         system      = "character", 
-#                        namespaces  = "character",
                         dataset     = "dataset",
-                        additionalMetadata = "additionalMetadata")
-#          , prototype = prototype(packageId = paste0("urn:uuid:", uuid::UUIDgenerate()),
-#                                system = 'uuid'
-#                                , namespaces = eml_namespaces
-#                                )
-         )
+                        additionalMetadata = "additionalMetadata"))
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
 setAs("eml", "XMLInternalElementNode", 
       function(from){
         node <- newXMLNode("eml:eml", namespaceDefinitions = eml_namespaces)
         S4Toeml(from, node)
       })
-setAs("eml", "XMLInternalDocument", function(from)
-      newXMLDoc(node = as(from, "XMLInternalElementNode")))
 
 
 #' generator for eml

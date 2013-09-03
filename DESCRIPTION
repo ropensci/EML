@@ -20,7 +20,8 @@ Suggests:
     uuid,
     yaml,
     RCurl,
-    RHTMLForms
+    RHTMLForms,
+    dataone
 Imports:
     XML,
     digest,
@@ -28,6 +29,7 @@ Imports:
 Depends:
     R (>= 2.15)
 Collate:
+    'reml_environment.R'
     'generics.R'
     'additionalMetadata.R'
     'methods.R'
@@ -54,7 +56,6 @@ Collate:
     'ext_validate.R'
     'baseAttributes.R'
     'eml_config.R'
-    'reml_environment.R'
     'S4Toeml.R'
     'emlToS4.R'
     'eml_write.R'

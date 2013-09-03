@@ -14,5 +14,5 @@ eml_write <- function(dat, metadata=NULL, title, description = character(0),
 
   s4 <- eml(dat, metadata, title, description, creator,
                 contact, methods, additionalMetadata)
-  saveXML(as(s4, "XMLInternalDocument"), file=file)
+  saveXML(as(s4, "XMLInternalElementNode"), file=file)
 }

@@ -1,3 +1,5 @@
+setClass("ListOfmetadataProvider", contains="list")
+setClass("ListOfassociatedParty", contains="list")
 
 setClass("keyword", 
          representation(keyword = "character"))
@@ -17,9 +19,9 @@ setClass("resourceGroup",
           representation("alternateIdentifier" = "character",  
                          "shortName" = "character", 
                          "title" = "character",  
-                         "creator" = "creator", 
-                         "metadataProvider" = "ListOfresponsibleParty", 
-                         "associatedParty"  = "ListOfresponsibleParty", 
+                         "creator" = "ListOfcreator", 
+                         "metadataProvider" = "ListOfmetadataProvider", 
+                         "associatedParty"  = "ListOfassociatedParty", 
                          "pubDate"  = "character", ## FIXME make a proper date class (schema accepts: year or ISO8601 format)
                          "language" = "character", 
                          "series" = "character", 
