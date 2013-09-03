@@ -24,7 +24,7 @@ Install the R package:
 
 
 
-```r
+```coffee
 library("devtools")
 install_github("reml", "ropensci")
 ```
@@ -33,7 +33,7 @@ install_github("reml", "ropensci")
 Load the package:
 
 
-```r
+```coffee
 library("reml")
 ```
 
@@ -47,7 +47,7 @@ Writing R data into EML
 Consider some dataset as an R `data.frame`.  
 
 
-```r
+```coffee
 dat = data.frame(river = c("SAC", "SAC", "AM"),
                  spp   = c("king", "king", "ccho"),
                  stg   = c("smolt", "parr", "smolt"),
@@ -66,7 +66,7 @@ __column units__:   For factors, this is a definition of the levels involved.  F
 
 
 
-```r
+```coffee
 metadata <- 
   list("river" = list("river",
                       "River site used for collection",
@@ -91,7 +91,7 @@ metadata <-
 
 
 
-```r
+```coffee
 eml_write(dat, metadata, title = "reml example",  
           description = "An example, intended for
                               illustrative purposes only.",
@@ -111,7 +111,7 @@ See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/re
 Configure general metadata you may want to frequently reuse, avoiding having to specify things like the name of the creator or contact.
 
 
-```r
+```coffee
 eml_config(creator = list("Carl Boettiger <cboettig@ropensci.org>", "Karthik Ram"), contact = "Carl Boettiger <cboettig@ropensci.org>")
 ```
 
@@ -139,7 +139,7 @@ required to use reml and run the examples in the other sections_
 
 <!-- We don't want to generate a DOI every time we run the vignette -->
 
-```r
+```coffee
 id = eml_publish("reml_example.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
 ```
 
@@ -149,7 +149,7 @@ This creates a draft file visible only to the user configured in `rfigshare`.  T
 <!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 
 
-```r
+```coffee
 doc <- eml_read("my_eml_data.xml")
 citation(doc) # not implemented yet
 ```
@@ -193,13 +193,13 @@ Testing and development
 
 While the dependencies for basic functionality are kept to a minimum, to access all the functions and tests implemented in `reml` you'll need several additional packages.  
 
-```r
+```coffee
 install.packages(c("yaml", "knitr", "rfigshare", "testthat", "RCurl"))
 ```
 
 Some of these additional packages are not yet on CRAN and may not be stable.
 
-```r
+```coffee
 install.packages("uuid",,'http://rforge.net/',type='source')
 install_github("RHTMLForms", "omegahat")
 install_github("XMLSchema", "omegahat")
