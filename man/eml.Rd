@@ -5,6 +5,7 @@
   eml(dat, metadata, title, description = character(0),
     creator = new("ListOfcreator", list(get("defaultCreator", envir = remlConfig))),
     contact = get("defaultContact", envir = remlConfig),
+    coverage = eml_coverage(scientific_names = NULL, dates = NULL, geographic_description = NULL, NSEWbox = NULL),
     methods = new("methods"),
     additionalMetadata = new("additionalMetadata"))
 }

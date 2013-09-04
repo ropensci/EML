@@ -58,7 +58,7 @@ test_that("We can write S4 EML to XML and validate", {
   xsd <- system.file("xsd", "eml.xsd", package="reml") 
   results <- xmlSchemaValidate(xsd, "title.xml")
     
-  expect_equal(results$status, 0)          ## Currently not validating, doesn't recognize root node
+  expect_equal(results$status, 0)      
   expect_equal(length(results$errors), 0)
 
 
@@ -72,3 +72,22 @@ test_that("We can write S4 EML to XML and validate", {
 })
 
 
+
+
+test_that("We can add coverage information and validate", {
+  eml_write(dat, metadata, title = "title", description = "description", 
+            creator = "Carl Boettiger <cboettig@gmail.com>",
+            coverage = eml_coverage(list("Homo sapiens"), c("2013-09-01", "2013-09-03"),  "Santa Cruz, CA", c(37.0,36.5,-122.0, -122.5)))
+
+  require(XML)
+  ## Test validity  FIXME Should print validator error message!
+  xsd <- system.file("xsd", "eml.xsd", package="reml") 
+  results <- xmlSchemaValidate(xsd, "title.xml")
+    
+  expect_equal(results$status, 0)       
+  expect_equal(length(results$errors), 0)
+
+  unlink("title.xml")
+  unlink("title.csv")
+
+})

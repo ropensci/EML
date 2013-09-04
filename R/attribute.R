@@ -210,7 +210,7 @@ setMethod("extract", signature("attributeList"), function(from){
 })
 
  
-setMethod("extract", signature("measurementScale") function(from){
+setMethod("extract", signature("measurementScale"), function(from){
 # Find out which scale is not empty...
   for(s in slotNames(from)){
     if(!isEmpty(slot(from, s))){
@@ -220,19 +220,19 @@ setMethod("extract", signature("measurementScale") function(from){
 })
 
 ## FIXME write these methods! 
-setMethod("extract", signature("nominal") function(from){
+setMethod("extract", signature("nominal"), function(from){
   character()
 })
-setMethod("extract", signature("ordinal") function(from){
+setMethod("extract", signature("ordinal"), function(from){
   character()
 })
-setMethod("extract", signature("ratio") function(from){
+setMethod("extract", signature("ratio"), function(from){
   character()
 })
-setMethod("extract", signature("interval") function(from){
+setMethod("extract", signature("interval"), function(from){
   character()
 })
-setMethod("extract", signature("dateTime") function(from){
+setMethod("extract", signature("dateTime"), function(from){
   character()
 })
 

@@ -7,7 +7,7 @@
 #' reading in data alone without additional metadata. Only works if extract = TRUE
 #' @export
 #' @aliases read.eml
-eml_read <- function(file, extract = FALSE, just_data = FALSE ...){
+eml_read <- function(file, extract = FALSE, just_data = FALSE, ...){
   doc <- xmlParse(file=file, ...)
   root <- xmlRoot(doc)
   s4 <- as(root, "eml")

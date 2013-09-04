@@ -39,7 +39,7 @@ Collate:
     'responsibleParty.R'
     'citation.R'
     'geographicCoverage.R'
-    'taxanomicCoverage.R'
+    'taxonomicCoverage.R'
     'temporalCoverage.R'
     'coverage.R'
     'resourceGroup.R'

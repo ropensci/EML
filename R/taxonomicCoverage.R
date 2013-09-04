@@ -32,12 +32,12 @@ setClass("taxonomicSystem",
 setAs("XMLInternalElementNode", "taxonomicSystem",   function(from) emlToS4(from))
 setAs("taxonomicSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-setClass("taxonomicClassification") 
+setClass("taxonomicClassification")
 setClass("taxonomicClassification", 
          representation(taxonRankName = "character",
                         taxonRankValue = "character",
-                        commonName = "character" 
-                       , taxonomicClassification = "taxonomicClassification" ## FIXME should include  this recursive def according to schema?
+                        commonName = "character", 
+                        taxonomicClassification = "taxonomicClassification" ## FIXME this recursive def is asking for trouble!! 
          ))
 setAs("XMLInternalElementNode", "taxonomicClassification",   function(from) emlToS4(from))
 setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -61,21 +61,25 @@ setAs("character", "taxonomicClassification", function(from){
       if(length(tmp) == 2){  ## Need better error handling of species names here...
         genus <- tmp[[1]]
         species <- tmp[[2]]
-        sp <- new("taxonomicClassification", 
-            taxonRankName = "species", 
-            taxonRankValue = species)
+        sp <- new("taxonomicClassification") 
+        sp@taxonRankName = "species"   # FIXME can't add during call to "new" due to recursive definition...
+        sp@taxonRankValue = species
 
-        out <- new("taxonomicClassification", 
-            taxonRankName = "genus", 
-            taxonRankValue = genus,
-            taxonomicClassification = sp)
+        out <- new("taxonomicClassification") 
+        out@taxonRankName = "genus"
+        out@taxonRankValue = genus
+        out@taxonomicClassification = sp
+        out
       }
 
       out
-         })
+})
 
 eml_taxonomicCoverage <- function(scientific_names){
-  new("taxonomicCoverage", 
+  if(is(scientific_names, "taxonomicCoverage"))
+    scientific_names
+  else 
+    new("taxonomicCoverage", 
       taxonomicClassification = new("ListOftaxonomicClassification", 
                                     lapply(scientific_names, as, "taxonomicClassification")))
 }
