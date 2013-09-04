@@ -161,7 +161,7 @@ setAs("factor", "ListOfcodeDefinition",
       function(from){
         new("ListOfcodeDefinition", 
             lapply(names(from), function(name)
-              new("codeDefinition", code = name, definition = from[name])))
+              new("codeDefinition", code = name, definition = as.character(from[name]))))
       })
 
 
