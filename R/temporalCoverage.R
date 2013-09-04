@@ -39,3 +39,30 @@ setAs("XMLInternalElementNode", "temporalCoverage",   function(from) emlToS4(fro
 setAs("temporalCoverage", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
+## FIXME work with a variety of dateTime formats
+eml_temporalCoverage <- function(dates){
+  if(length(dates) == 2){
+  node <- new("temporalCoverage", 
+              rangeOfDates = 
+              new("rangeOfDates", 
+                   beginDate = 
+                   new("beginDate", 
+                       calendarDate = new("calendarDate", 
+                                          to_ISO8601(dates[1]))),
+                   endDate = 
+                   new("endDate", 
+                       calendarDate = new("calendarDate", 
+                                          to_ISO8601(dates[2])))))
+  }
+  node
+}
+
+
+
+# FIXME should be an S4 coersion method(?)
+to_ISO8601 <- function(x){
+  if(is.character(x))
+    x <- as.Date(x, '%Y-%m-%d')
+  if(is(x, "Date"))
+    format(x, "%Y-%m-%d")
+}

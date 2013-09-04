@@ -3,7 +3,7 @@ context("generating S4 from R dataframe")
 ## using the expected R input formats 
 
 
-## FIXME add unlink commands to remove/cleanup any files created by tests (e.g. the .csv and .xml files)
+## FIXME add expect_that to the tests!
 
 require(reml)
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),
@@ -48,13 +48,17 @@ test_that("Generator for dataset containing generator for dataTable", {
 
 
 test_that("Constructor function for physical works given data.frame", {
-  reml:::eml_physical(dat) 
+  reml:::eml_physical(dat, filename="tmp") 
+
+  unlink("tmp.csv")
 })
 
 ## Constructor functions handle the detect_class internally:
 
 test_that("Constructor function for dataTable works given data.frame and metadata list", {
-  reml:::eml_dataTable(dat, metadata) 
+  reml:::eml_dataTable(dat, metadata, filename="tmp") 
+
+  unlink("tmp.csv")
 }) 
 
 
@@ -66,6 +70,8 @@ test_that("Constructor function for eml works given dat, metadata", {
       reml:::eml(dat, metadata, title = "the title", 
       description = "some description", 
       creator = "Carl Boettiger <cboettig@gmail.com>")
+
+      unlink("the_title.csv")
 })
 
 

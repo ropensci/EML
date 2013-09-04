@@ -18,10 +18,16 @@ setAs("eml", "XMLInternalElementNode",
 
 
 #' generator for eml
-eml <- function(dat, metadata, title, description = character(0), 
+eml <- function(dat, 
+                metadata, 
+                title, 
+                description = character(0), 
                 creator = new("ListOfcreator", 
                               list(get("defaultCreator", envir=remlConfig))), 
                 contact = get("defaultContact", envir=remlConfig),
+                coverage = eml_coverage(scientific_names = NULL, 
+                                        dates = NULL, 
+                                        NSEWbox = NULL), 
                 methods = new("methods"), 
                 additionalMetadata = new("additionalMetadata")){
   if(is(creator, "character"))
@@ -50,7 +56,11 @@ eml <- function(dat, metadata, title, description = character(0),
                     title = title,
                     creator = creator,
                     contact = contact,
-                    dataTable = eml_dataTable(dat, metadata, title, description),
+                    coverage = coverage,
+                    dataTable = eml_dataTable(dat=dat, 
+                                              metadata=metadata, 
+                                              title=title, 
+                                              description=description),
                     methods = methods))
 }
 

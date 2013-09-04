@@ -202,8 +202,41 @@ setAs("list", "attributeList", function(from){
 
 
 setMethod("extract", signature("attributeList"), function(from){
-# FIXME write this method
-  character()
+  lapply(from@attribute, 
+         function(x) 
+           list(x@attributeName,
+                x@attributeDefintion,
+                extract(x@measurementScale)))
 })
 
  
+setMethod("extract", signature("measurementScale") function(from){
+# Find out which scale is not empty...
+  for(s in slotNames(from)){
+    if(!isEmpty(slot(from, s))){
+      extract(slot(from, s))
+    }
+  }
+})
+
+## FIXME write these methods! 
+setMethod("extract", signature("nominal") function(from){
+  character()
+})
+setMethod("extract", signature("ordinal") function(from){
+  character()
+})
+setMethod("extract", signature("ratio") function(from){
+  character()
+})
+setMethod("extract", signature("interval") function(from){
+  character()
+})
+setMethod("extract", signature("dateTime") function(from){
+  character()
+})
+
+
+
+
+

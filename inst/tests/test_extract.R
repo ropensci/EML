@@ -31,10 +31,14 @@ metadata <-
 
 
 
-test_that("we can extract the data unaltered", {
+test_that("we can extract the data unaltered (using method for object 'physical')", {
   out_dat <- extract(S4obj@dataset@dataTable@physical)
   expect_identical(dat, out_dat)
 })
 
 
- 
+## Add unit tests for all extractors!
+
+test_that("we can extract from eml directly", {
+
+})
