@@ -117,6 +117,13 @@ setAs("character", "nominal",
       function(from)
         new("nominal",
             nonNumericDomain = as(from, "nonNumericDomain")))
+setAs("factor", "nominal", 
+      function(from)
+        new("nominal",
+            nonNumericDomain = 
+            as(as(from, "character"),
+               "nonNumericDomain")))
+
 
 
 setAs("character", "textDomain", function(from){
