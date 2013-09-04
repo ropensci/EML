@@ -93,7 +93,7 @@ setAs("attributeList", "XMLInternalElementNode",   function(from) emlToS4(from))
 #' @export 
 detect_class <- function(dat, meta){
   for(i in 1:length(dat)){
-    meta[[i]][[4]] = map(class(dat[[i]])) 
+    meta[[i]][[4]] = map(dat[[i]]) 
   }
   meta 
 }
