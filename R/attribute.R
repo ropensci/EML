@@ -105,10 +105,12 @@ map <- function(x){
     "ordinal"
   else if(is(x, "factor"))
     "nominal"
-  else if(is(x, "POSIXlt") | is(x, "POSIXct"))
+  else if(is(x, "POSIXlt") | is(x, "POSIXct") | is(x, "Date"))
     "dateTime"
   else if(is(x, "character"))
     "nominal"
+  else 
+    "nominal" # FIXME should we error or default to character string?
 }
 
 
