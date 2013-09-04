@@ -15,8 +15,21 @@ setClass("nominal",
 
 setClass("ordinal", contains="nominal")
 
+
+setClass("bounds", 
+         representation(minimum = "numeric",
+                        maximum = "numeric"))
+setAs("XMLInternalElementNode", "bounds", function(from) emlToS4(from))
+setAs("bounds", "XMLInternalElementNode", function(from) S4Toeml(from))
+
+setClass("boundsGroup", 
+         representation(bounds = "bounds"))  ## FIXME Schema allows this to be ListOf.  What would that mean??? 
+setAs("XMLInternalElementNode", "boundsGroup", function(from) emlToS4(from))
+setAs("boundsGroup", "XMLInternalElementNode", function(from) S4Toeml(from))
+
 setClass("numericDomain", 
-         representation(numberType = "character")) 
+         representation(numberType = "character",
+                        boundsGroup = "boundsGroup")) 
          # Alternatively restrict this to one of: "natural", "whole", "integer", "real", though schema should enforce that
 
 setClass("unit",
@@ -56,36 +69,53 @@ setClass("attributeList",
 
 
 
-setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "textDomain",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "nonNumericDomain",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "nominal",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "ordinal",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "numericDomain",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "unit", function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "ratio",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "interval",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "dateTime",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "measurementScale",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "attributeList",  function(from) emlToS4(from))
 
-
+## FIXME Bored? Move these under the class definitions for easier reference...
 setAs("codeDefinition", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
+
 setAs("enumeratedDomain", "XMLInternalElementNode",  function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
+
 setAs("textDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "textDomain",  function(from) emlToS4(from))
+
+
 setAs("nonNumericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "nonNumericDomain",  function(from) emlToS4(from))
+
+
 setAs("nominal", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "nominal",  function(from) emlToS4(from))
+
 setAs("ordinal", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "ordinal",  function(from) emlToS4(from))
+
 setAs("numericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "numericDomain",  function(from) emlToS4(from))
+
 setAs("unit", "XMLInternalElementNode",  function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "unit", function(from) emlToS4(from))
+
 setAs("ratio", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "ratio",  function(from) emlToS4(from))
+
+
 setAs("interval", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "interval",  function(from) emlToS4(from))
+
 setAs("dateTime", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "dateTime",  function(from) emlToS4(from))
+
+
 setAs("measurementScale", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "measurementScale",  function(from) emlToS4(from))
+
 setAs("attribute", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
+
 setAs("attributeList", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "attributeList",  function(from) emlToS4(from))
 
 
 
@@ -99,8 +129,8 @@ detect_class <- function(dat, meta){
 }
 
 map <- function(x){
-  if(is(x, "numeric"))
-    "ratio"
+  if(is(x, "numeric") | is(x, "integer"))
+    "ratio" ## FIXME ideally we'd want to keep track of integer vs numeric..
   else if(is(x, "ordered"))
     "ordinal"
   else if(is(x, "factor"))
@@ -183,10 +213,18 @@ setAs("ordinal", "measurementScale",
             ordinal = from))
 
 
-## Ratio ## 
+## Ratio ## (Note that the unit definition is a character, not a numeric..) 
 setAs("character", "ratio", 
       function(from)
-        new("ratio", unit = as(from, "unit")))
+        new("ratio", 
+            unit = as(from, "unit"),
+            numericDomain = new("numericDomain", 
+                                numberType = "real"))) 
+## FIXME write integers as integers!!
+## Unfortunately this is difficult, because both numerics and integers
+## come in flagged as a ratio (we also ignore 'interval' type...)
+## Might have to correct this post-hoc
+
 setAs("character", "unit", 
       function(from)
         new("unit", standardUnit = from)) # Could match from to the standardUnit list
