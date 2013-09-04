@@ -175,18 +175,31 @@ setAs("character", "ratio",
         new("ratio", unit = as(from, "unit")))
 setAs("character", "unit", 
       function(from)
-        new("ratio", standardUnit = from)) # Could match from to the standardUnit list
+        new("unit", standardUnit = from)) # Could match from to the standardUnit list
+setAs("ratio", "measurementScale",
+      function(from)
+        new("measurementScale", 
+            ratio = from))
+
 
 #### interval ### 
 setAs("character", "interval", 
       function(from)
         new("interval", unit = as(from, "unit")))
+setAs("interval", "measurementScale",
+      function(from)
+        new("measurementScale", 
+            interval = from))
 
 
 ## dateTime ## 
 setAs("character", "dateTime", 
       function(from)
         new("dateTime", formatString = from)) ## could perform check / validation on string
+setAs("dateTime", "measurementScale",
+      function(from)
+        new("measurementScale", 
+            dateTime = from))
 
 
             
