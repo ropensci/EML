@@ -112,19 +112,11 @@ map <- function(x){
 }
 
 
-### Character to nominal (factors and character strings) ###
+### Character to nominal 
 setAs("character", "nominal", 
       function(from)
         new("nominal",
             nonNumericDomain = as(from, "nonNumericDomain")))
-setAs("factor", "nominal", 
-      function(from)
-        new("nominal",
-            nonNumericDomain = 
-            as(as(from, "character"),
-               "nonNumericDomain")))
-
-
 
 setAs("character", "textDomain", function(from){
   new("textDomain", definition = from)
@@ -134,16 +126,36 @@ setAs("character", "nonNumericDomain",
         if (length(from) == 1)
           new("nonNumericDomain",
               textDomain = as(from, "textDomain"))
-        else if(length(from) > 1)
-          new("nonNumericDomain", 
-             enumeratedDomain = as(from, "enumeratedDomain"))
-#              enumeratedDomain = as(from, "ListOfcodeDefinition"))
+        else if(length(from) > 1)                                     ## Arguably only for factors?  
+          new("nonNumericDomain",                                     ## Arguably only for factors?  
+             enumeratedDomain = as(from, "enumeratedDomain"))         ## Arguably only for factors?  
       })
-
-setAs("character", "enumeratedDomain", function(from)
-      new("enumeratedDomain", codeDefinition = as(from, "ListOfcodeDefinition")))
+setAs("character", "enumeratedDomain", function(from)                 ## Arguably only for factors?  
+      new("enumeratedDomain", 
+          codeDefinition = as(from, "ListOfcodeDefinition")))
 
 setAs("character", "ListOfcodeDefinition", 
+      function(from){
+        new("ListOfcodeDefinition", 
+            lapply(names(from), function(name)
+              new("codeDefinition", code = name, definition = from[name])))
+      })
+
+### Factor to nominal 
+
+setAs("factor", "nominal", 
+      function(from)
+        new("nominal",
+            nonNumericDomain = 
+            as(from, "nonNumericDomain")))
+setAs("factor", "nonNumericDomain", 
+      function(from){
+        new("nonNumericDomain", 
+             enumeratedDomain = as(from, "enumeratedDomain"))
+      })
+setAs("factor", "enumeratedDomain", function(from)
+      new("enumeratedDomain", codeDefinition = as(from, "ListOfcodeDefinition")))
+setAs("factor", "ListOfcodeDefinition", 
       function(from){
         new("ListOfcodeDefinition", 
             lapply(names(from), function(name)
