@@ -80,7 +80,7 @@ function(txt, doc = htmlParse(txt, asText = TRUE))
   status = ans == "Passed"
 
   if(!all(status)) {
-     nodes = getNodeSet(doc, "//h2")[!status]
+     nodes = getNodeSet(doc, "//h2 | //h4")[!status]
      msgs = lapply(nodes, function(node) {
                      tmp = getNodeSet(node, "./following-sibling::*")
                      i = sapply(tmp, xmlName) == "hr"
