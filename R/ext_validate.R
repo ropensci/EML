@@ -72,7 +72,7 @@ function (doctext = "", .url = "http://knb.ecoinformatics.org/emlparser/parse",
 processValidationResponse =
 function(txt, doc = htmlParse(txt, asText = TRUE))
 {
-  ans = xpathSApply(doc, "//h2", xmlValue)
+  ans = xpathSApply(doc, "//h2 | //h4", xmlValue)
   tmp = strsplit(ans, ": ")
   ans = structure(gsub("\\.$", "", sapply(tmp, `[`, 2)),
                   names = sapply(tmp, `[`, 1))
