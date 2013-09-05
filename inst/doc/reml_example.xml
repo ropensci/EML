@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:bd45ed8c-992f-4b53-a8f9-aaa28560f970" system="uuid">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:9a1198a3-fb39-4c38-ba2d-cfadac4cc670" system="uuid">
   <dataset>
     <title>reml example</title>
     <creator>
@@ -9,6 +8,8 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </creator>
+    <pubDate>2013-09-04</pubDate>
+    <intellectualRights>&lt;a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'&gt;CC0&lt;/a&gt;</intellectualRights>
     <contact>
       <individualName>
         <givenName>Carl</givenName>
@@ -101,13 +102,14 @@
           <attributeName>ct</attributeName>
           <attributeDefinition>count</attributeDefinition>
           <measurementScale>
-            <nominal>
-              <nonNumericDomain>
-                <textDomain>
-                  <definition>number</definition>
-                </textDomain>
-              </nonNumericDomain>
-            </nominal>
+            <ratio>
+              <unit>
+                <standardUnit>number</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
           </measurementScale>
         </attribute>
       </attributeList>
