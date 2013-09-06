@@ -64,7 +64,7 @@ setAs("creator", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setAs("person", "creator", function(from)
   as(as(from, "responsibleParty"), "creator"))
 setAs("creator", "person", function(from){
-   p <- as(from, "person")
+   p <- as(as(from, "responsibleParty"), "person")
    p$role = "cre" 
    p
   })
@@ -87,12 +87,25 @@ setAs("contact", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setAs("person", "contact", function(from)
   as(as(from, "responsibleParty"), "contact"))
 setAs("contact", "person", function(from){
-   as(from, "person")
+   as(as(from, "responsibleParty"), "person")
   })
 setAs("character", "contact", function(from)
   as(as.person(from), "contact"))
 ## FIXME Should be something more intelligent that will let these
 ## inherit the method from responsibleParty?  callNextMethod() maybe??
 
+setAs("ListOfresponsibleParty", "person", function(from){
+      l <- lapply(from, as, "person")
+      out <- l[[1]]
+      for(p in l)
+        c(out, p)
+      out
+  })
 
-
+setAs("ListOfcreator", "person", function(from){
+    l <- lapply(from, as, "person")
+      out <- l[[1]]
+      for(p in l)
+        c(out, p)
+      out
+  })

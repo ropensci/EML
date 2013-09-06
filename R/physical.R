@@ -68,10 +68,10 @@ setAs("physical", "data.frame", function(from)
       extract(from)) 
 ## FIXME  exported for test only, maybe not necessary?
 #' @export
-setMethod("extract", signature("physical"),
-          function(from){
+setMethod("extract", signature("physical", "character"),
+          function(from, using=NA){
             ## FIXME use the EML to determine read.csv options
-            dat <- read.csv(from@objectName)
+            dat <- read.csv(from@objectName, colClasses=using)
           })
 
 setAs("data.frame", "physical", function(from)

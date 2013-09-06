@@ -16,6 +16,22 @@ setAs("eml", "XMLInternalElementNode",
         S4Toeml(from, node)
       })
 
+## FIXME this could be much richer
+## FIXME use and write accessor and show methods for this info
+setMethod("show", 
+          signature("eml"),
+          function(object){
+            x <- extract(object@dataset@dataTable@physical, using=col_classes(object))
+            cat(object@dataset@title, 
+                object@dataset@dataTable@entityDescription, 
+                format(as(object@dataset@creator, "person")), 
+                sep="\n")
+            cat("", sep="\n\n")
+            cat(show(head(x$dat)))
+          })
+
+
+
 
 #' generator for eml
 eml <- function(dat, 

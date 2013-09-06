@@ -156,6 +156,37 @@ Reading EML
 -----------
 
 
+
+```{r}
+obj <- eml_read("reml_example.xml")
+obj 
+```
+
+We can use various accessor functions to return the data and metadata elements in native R formats.
+
+```{r}
+dataTable(obj)
+```
+
+```{r}
+metadata <- attributeList(obj)
+```
+
+```{r}
+contact(obj)
+```
+
+Note that the contact has been coerced into R's built-in 'person' object:
+
+```{r}
+class(contact(obj))
+```
+
+```{r}
+citationInfo(obj)
+```
+
+
 #### In development
 
 See [Open issues in reading EML](https://github.com/ropensci/reml/issues?labels=read+eml&page=1&state=open)

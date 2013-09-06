@@ -173,6 +173,68 @@ Reading EML
 -----------
 
 
+
+
+```coffee
+obj <- eml_read("reml_example.xml")
+```
+
+
+
+We can use various accessor functions to return the data and metadata elements in native R formats.
+
+
+```coffee
+dataTable(obj)
+```
+
+```
+  river  spp   stg  ct
+1   SAC king smolt 293
+2   SAC king  parr 410
+3    AM ccho smolt 210
+```
+
+
+
+```coffee
+metadata <- attributeList(obj)
+```
+
+
+
+```coffee
+contact(obj)
+```
+
+```
+[1] "Carl Boettiger <cboettig@gmail.com>"
+```
+
+
+Note that the contact has been coerced into R's built-in 'person' object:
+
+
+```coffee
+class(contact(obj))
+```
+
+```
+[1] "person"
+```
+
+
+
+```coffee
+citationInfo(obj)
+```
+
+```
+Boettiger, Carl, 2013. reml example.
+```
+
+
+
 #### In development
 
 See [Open issues in reading EML](https://github.com/ropensci/reml/issues?labels=read+eml&page=1&state=open)

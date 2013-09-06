@@ -3,18 +3,15 @@
 \alias{read.eml}
 \title{read eml files (.xml)}
 \usage{
-  eml_read(file, extract = FALSE, just_data = FALSE, ...)
+  eml_read(file,
+    get = c("eml", "data.frame", "attributeList"), ...)
 }
 \arguments{
   \item{file}{the name or path to the file (see ?xmlParse
   for details)}
 
-  \item{extract}{logical. default to FALSE.  extract the
-  data table when reading the data?}
-
-  \item{just_data}{logical. default FALSE. Set to true to
-  reduce memory footprint by reading in data alone without
-  additional metadata. Only works if extract = TRUE}
+  \item{get}{the name of the object that should be
+  returned}
 }
 \description{
   read eml files (.xml)
