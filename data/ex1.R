@@ -16,8 +16,7 @@ metadata <-
                     c(parr = "third life stage", 
                       smolt = "fourth life stage")),
        "ct"  = list("ct",
-                    "count", 
+                    "count of live fish in traps", 
                     "number"))
-
 
 

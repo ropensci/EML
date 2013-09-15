@@ -60,3 +60,4 @@ Collate:
     'emlToS4.R'
     'eml_write.R'
     'eml_read.R'
+    'data.set.R'
