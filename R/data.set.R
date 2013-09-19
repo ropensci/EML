@@ -17,20 +17,14 @@ data.set <- function(..., col.defs, unit.defs){
   # if named, re-order unit.defs to match order given in `names` 
 
   ds <- data.frame(...)
-  attr(ds, "col.defs") <- col.defs
-  attr(ds, "unit.defs") <- unit.defs
-  class(ds) <- c("data.set", "data.frame")
-  ds
+  new("data.set", data.frame(...), col.defs = col.defs, unit.defs = unit.defs)
 }
 
 ### Actually can use the s4 method.  attributes are slots Dies require the formal calss be defined, even though we construct with `attr` and not `news` above... 
 setClass("data.set",
-         representation(names = "character",
-                        row.names = "integer",
-                        .S3Class = "character",
-                        col.defs = "character",
+         representation(col.defs = "character",
                         unit.defs = "list"),
-         contains = "list")
+         contains = "data.frame")
 
 
 # Construct the metadata list from unit.defs and col.defs  
