@@ -3,7 +3,7 @@
 \alias{write.eml}
 \title{Top-level API function for writing eml}
 \usage{
-  eml_write(dat, metadata = NULL, title,
+  eml_write(dat, metadata = metadata(dat), title,
     description = character(0),
     creator = new("ListOfcreator", list(get("defaultCreator", envir = remlConfig))),
     contact = get("defaultContact", envir = remlConfig),

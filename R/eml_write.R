@@ -2,7 +2,7 @@
 #' @aliases write.eml 
 #' @export
 eml_write <- function(dat, 
-                      metadata=NULL, 
+                      metadata=metadata(dat), 
                       title, 
                       description = character(0), 
                 creator = new("ListOfcreator", 

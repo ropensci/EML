@@ -14,6 +14,17 @@ eml_read <- function(file, get=c("eml", "data.frame", "attributeList"), ...){
 
 ## accessor methods.  Note that having the same name as an existing function is no problem.  
 
+setMethod("unit.defs", signature("eml"), function(object){
+          metadata <- extract(object@dataset@dataTable@attributeList)
+          lapply(metadata, function(x) x[[3]])
+})
+
+setMethod("col.defs", signature("eml"), function(object){
+          metadata <- extract(object@dataset@dataTable@attributeList)
+          lapply(metadata, function(x) x[[2]])
+})
+
+
 
 setMethod("contact", signature("eml"), function(object) as(object@dataset@contact, "person"))
 
@@ -32,10 +43,14 @@ setMethod("attributeList", signature("eml"), function(object){
           extract(object@dataset@dataTable@attributeList)
 })
 
+
+
+
 setMethod("dataTable", signature("eml"), function(object){
-          out = extract(object@dataset@dataTable@physical, using=col_classes(object))
-          out
+          df = extract(object@dataset@dataTable@physical, using=col_classes(object))
+          data.set(df, col.defs=col.defs(object), unit.defs=unit.defs(object))
 })
+
 setMethod("col_classes", signature("eml"),
           function(object)
             get_col_classes(object@dataset@dataTable@attributeList@attribute))
@@ -82,3 +97,6 @@ setMethod("extract", signature("eml"),
                 creator = from@dataset@creator)
           }
           )
+
+
+

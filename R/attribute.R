@@ -2,18 +2,39 @@
 setClass("codeDefinition", 
          representation(code = "character",
                         definition = "character"))
+setAs("codeDefinition", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
+
+
 setClass("ListOfcodeDefinition", contains="list")
+
 setClass("enumeratedDomain", 
          representation(codeDefinition = "ListOfcodeDefinition"))
+setAs("enumeratedDomain", "XMLInternalElementNode",  function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
+
 setClass("textDomain", 
          representation(definition = "character"))
+setAs("textDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "textDomain",  function(from) emlToS4(from))
+
 setClass("nonNumericDomain", 
          representation(enumeratedDomain = "enumeratedDomain", 
                         textDomain = "textDomain"))
+setAs("nonNumericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "nonNumericDomain",  function(from) emlToS4(from))
+
+
 setClass("nominal", 
          representation(nonNumericDomain = "nonNumericDomain"))
+setAs("nominal", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "nominal",  function(from) emlToS4(from))
+
 
 setClass("ordinal", contains="nominal")
+setAs("ordinal", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "ordinal",  function(from) emlToS4(from))
+
 
 
 setClass("bounds", 
@@ -30,23 +51,35 @@ setAs("boundsGroup", "XMLInternalElementNode", function(from) S4Toeml(from))
 setClass("numericDomain", 
          representation(numberType = "character",
                         boundsGroup = "boundsGroup")) 
-         # Alternatively restrict this to one of: "natural", "whole", "integer", "real", though schema should enforce that
+setAs("numericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "numericDomain",  function(from) emlToS4(from))
 
 setClass("unit",
          representation(standardUnit = "character", # make from a restricted subset
                         customUnit = "character"))  # should be a class to enforce format?
+setAs("unit", "XMLInternalElementNode",  function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "unit", function(from) emlToS4(from))
+
+
 setClass("ratio", 
          representation(unit = "unit",
                         precision = "numeric",
                         numericDomain = "numericDomain"))
+setAs("ratio", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "ratio",  function(from) emlToS4(from))
 
 setClass("interval", contains="ratio")
+setAs("interval", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "interval",  function(from) emlToS4(from))
 
 
 setClass("dateTime", 
          representation(formatString = "character",
                         dateTimePrecision = "character",
                         dateTimeDomain = "character"))
+setAs("dateTime", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "dateTime",  function(from) emlToS4(from))
+
 
 setClass("measurementScale", 
          representation(nominal = "nominal",
@@ -54,72 +87,36 @@ setClass("measurementScale",
                         interval = "interval",
                         ratio = "ratio",
                         dateTime = "dateTime"))
+setAs("measurementScale", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "measurementScale",  function(from) emlToS4(from))
+
 
 setClass("attribute", 
          representation(id = "character",
                         attributeName = "character",
                         attributeDefinition = "character",
                         measurementScale = "measurementScale"))
+setAs("attribute", "XMLInternalElementNode",   function(from) emlToS4(from))
+setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
+
 
 setClass("ListOfattribute", contains="list") # set validity all elements are attribute class
 
 setClass("attributeList", 
          representation(id = "character", 
                         attribute = "ListOfattribute"))
-
-
-
-
-## FIXME Bored? Move these under the class definitions for easier reference...
-setAs("codeDefinition", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
-
-setAs("enumeratedDomain", "XMLInternalElementNode",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
-
-setAs("textDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "textDomain",  function(from) emlToS4(from))
-
-
-setAs("nonNumericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "nonNumericDomain",  function(from) emlToS4(from))
-
-
-setAs("nominal", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "nominal",  function(from) emlToS4(from))
-
-setAs("ordinal", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "ordinal",  function(from) emlToS4(from))
-
-setAs("numericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "numericDomain",  function(from) emlToS4(from))
-
-setAs("unit", "XMLInternalElementNode",  function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "unit", function(from) emlToS4(from))
-
-setAs("ratio", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "ratio",  function(from) emlToS4(from))
-
-
-setAs("interval", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "interval",  function(from) emlToS4(from))
-
-setAs("dateTime", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "dateTime",  function(from) emlToS4(from))
-
-
-setAs("measurementScale", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "measurementScale",  function(from) emlToS4(from))
-
-setAs("attribute", "XMLInternalElementNode",   function(from) emlToS4(from))
-setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
-
 setAs("attributeList", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "attributeList",  function(from) emlToS4(from))
 
 
 
+### Helper Method updates metadata list with class #######################
 #' Helper function to attach classes to metadata
+#' @param dat a data frame
+#' @param meta a list containing attribute-level metadata for each column.  
+#' each element of list corresponds to a consecutive column, and gives a list containing
+#' the column name (as appearing in the data-frame), the column description (e.g. from col.defs)
+#' and the 
 #' @export 
 detect_class <- function(dat, meta){
   for(i in 1:length(dat)){
@@ -143,6 +140,15 @@ map <- function(x){
     "nominal" # FIXME should we error or default to character string?
 }
 
+
+######## Methods that write user-provided metadata into S4 #######################
+
+### FIXME weird to have these as coercion methods defined in this manner, 
+### since they do not take a general character 
+### but rather a very particular data structure.  
+### Should at very least define this metadata list as an S3 class (preferably S4 class)
+### of it's own, so that we can be sure the object in `from` has correct form.  
+### Consider adding or replacing all these methods with coercions from `data.set` 
 
 ### Character to nominal 
 setAs("character", "nominal", 
@@ -227,7 +233,7 @@ setAs("character", "ratio",
 
 setAs("character", "unit", 
       function(from)
-        new("unit", standardUnit = from)) # Could match from to the standardUnit list
+        new("unit", standardUnit = from[[1]])) # FIXME Could match from to the standardUnit list
 setAs("ratio", "measurementScale",
       function(from)
         new("measurementScale", 
@@ -247,7 +253,9 @@ setAs("interval", "measurementScale",
 ## dateTime ## 
 setAs("character", "dateTime", 
       function(from)
-        new("dateTime", formatString = from)) ## could perform check / validation on string
+        new("dateTime", formatString = from[[1]])) 
+## FIXME could perform check / validation on string. Could accept R notation (e.g. %Y in place of YYYY)
+
 setAs("dateTime", "measurementScale",
       function(from)
         new("measurementScale", 
@@ -271,6 +279,11 @@ setAs("list", "attributeList", function(from){
       attribute = new("ListOfattribute", 
                       lapply(from, as, "attribute")))
 })
+
+
+
+########################### Extraction methods ###################################
+## methods extract standard R formats (e.g. the metadata list format) 
 
 
 setMethod("extract", signature("attributeList"), function(from){

@@ -10,6 +10,7 @@
 #' * character strings should provide a general description of what the code or string is meant to describe (e.g. may be identical to column heading in this case).
 #' 
 #' WARNING: promoting to a `data.table` will work, but apply only to the data.frame part of the data structure.  The additional metadata attributes will be lost. 
+#' @export
 data.set <- function(..., col.defs, unit.defs){
 
   # if named, re-order col.defs to match order given in `names` 
@@ -30,7 +31,9 @@ setClass("data.set",
                         col.defs = "character",
                         unit.defs = "list"),
          contains = "list")
-setGeneric("metadata", function(object) standardGeneric("metadata"))
+
+
+# Construct the metadata list from unit.defs and col.defs  
 setMethod("metadata", "data.set", function(object){
           out <- lapply(1:length( slot(object, "names")), 
                         function(i){
@@ -41,6 +44,15 @@ setMethod("metadata", "data.set", function(object){
             names(out) <- slot(object, "names")
             out
             })
+
+# data.frames have NULL metadata.  Avoids an error when calling this on a data.frame, 
+# which allows reml to envoke the metadata wizard.  
+setMethod("metadata", "data.frame", function(object) NULL)
+
+
+
+
+### Depricated 
 
 #metadata.data.set <- function(obj){
 #          lapply(1:length( slot(obj, "names")), function(i){

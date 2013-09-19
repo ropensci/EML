@@ -16,3 +16,13 @@ setGeneric("contact", function(object) standardGeneric("contact"))
 #' @export
 setGeneric("col_classes", function(object) standardGeneric("col_classes"))
 
+
+#' @export
+setGeneric("metadata", function(object) standardGeneric("metadata"))
+
+#' @export
+setGeneric("col.defs", function(object) standardGeneric("col.defs"))
+
+#' @export
+setGeneric("unit.defs", function(object) standardGeneric("unit.defs"))
+
