@@ -70,9 +70,31 @@ setAs("physical", "data.frame", function(from)
 #' @export
 setMethod("extract", signature("physical", "character"),
           function(from, using=NA){
+            # The "ordered" class does not have a coercion defined from character
+            # Better to just treat it as a factor 
+            using <- gsub("ordered", "factor", using) 
             ## FIXME use the EML to determine read.csv options
             dat <- read.csv(from@objectName, colClasses=using)
           })
+
+# If col_classes(object) returns a list, means that colClasses are not simple types (e.g. c("ordered", "factor") or "NULL")
+# See read.csv for details.  Meanwhile, if we get a list, just read in ignoring the declared colClasses
+setMethod("extract", signature("physical", "list"),
+          function(from, using=NA){
+            ## FIXME use the EML to determine read.csv options
+            dat <- read.csv(from@objectName)
+          })
+## if no `using` option is defined: 
+setMethod("extract", signature("physical"),
+          function(from, using=NA){
+            ## FIXME use the EML to determine read.csv options
+            dat <- read.csv(from@objectName)
+          })
+
+
+
+
+
 
 setAs("data.frame", "physical", function(from)
       eml_physical(dat)) 

@@ -27,7 +27,7 @@ setMethod("show",
                 format(as(object@dataset@creator, "person")), 
                 sep="\n")
             cat("", sep="\n\n")
-            cat(show(head(x$dat)))
+            cat(show(head(x)))
           })
 
 
@@ -38,8 +38,7 @@ eml <- function(dat,
                 metadata, 
                 title, 
                 description = character(0), 
-                creator = new("ListOfcreator", 
-                              list(get("defaultCreator", envir=remlConfig))), 
+                creator = get("defaultCreator", envir=remlConfig), 
                 contact = get("defaultContact", envir=remlConfig),
                 coverage = eml_coverage(scientific_names = NULL, 
                                         dates = NULL,
@@ -47,14 +46,20 @@ eml <- function(dat,
                                         NSEWbox = NULL), 
                 methods = new("methods"), 
                 additionalMetadata = new("additionalMetadata")){
+
+
   if(is(creator, "character"))
     creator <- as(creator, "creator")
 
-  if(is(creator, "creator"))
+  if(is(creator, "creator")) # Creator should be ListOfCreator
     creator <- new("ListOfcreator", list(creator))
 
-  if(is.null(contact) | length(contact) == 0 )
+  if(is.null(contact) | length(contact) == 0 ){
     contact <- as(creator[[1]], "contact")
+  }
+
+  if(is(contact, "character"))
+    contact <- as(contact, "contact")
 
   success <- require(uuid)
   if(success){

@@ -2,12 +2,10 @@
 #' @aliases write.eml 
 #' @export
 eml_write <- function(dat, 
-                      metadata=metadata(dat), 
-                      title, 
+                      metadata = NULL, 
+                      title = "metadata", 
                       description = character(0), 
-                creator = new("ListOfcreator", 
-                              list(get("defaultCreator",
-                                       envir=remlConfig))), 
+                creator = get("defaultCreator", envir=remlConfig), 
                 contact = get("defaultContact", envir=remlConfig),
                 coverage = eml_coverage(scientific_names = NULL, 
                                         dates = NULL,
@@ -16,6 +14,10 @@ eml_write <- function(dat,
                 methods = new("methods"), 
                 additionalMetadata = new("additionalMetadata"),
                 file = paste0(gsub(" ", "_", title), ".xml")){
+
+  if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
+    metadata <- metadata(dat)
+
   if(is.null(metadata))
     metadata <- metadata_wizard(dat)
 
@@ -28,5 +30,13 @@ eml_write <- function(dat,
             coverage = coverage, 
             methods = methods, 
             additionalMetadata = additionalMetadata)
-  saveXML(as(s4, "XMLInternalElementNode"), file=file)
+  xml <- as(s4, "XMLInternalElementNode")
+  saveXML(xml, file = file)
 }
+
+
+
+
+
+
+

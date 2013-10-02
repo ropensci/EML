@@ -24,7 +24,7 @@ Install the R package:
 
 
 
-```coffee
+```r
 library("devtools")
 install_github("reml", "ropensci")
 ```
@@ -33,7 +33,7 @@ install_github("reml", "ropensci")
 Load the package:
 
 
-```coffee
+```r
 library("reml")
 ```
 
@@ -43,56 +43,44 @@ Writing R data into EML
 -----------------------
 
 
+`reml` now extends R's `data.frame` class by introducing the `data.set` class which includes additional metadata required by EML.  A `data.set` can be created much like a `data.frame` by specifying additional arguments 
 
-Consider some dataset as an R `data.frame`.  
 
 
-```coffee
-dat = data.frame(river = c("SAC", "SAC", "AM"),
-                 spp   = c("king", "king", "ccho"),
-                 stg   = c("smolt", "parr", "smolt"),
-                 ct    =  c(293L, 410L, 210L))
+```r
+dat = data.set(river = c("SAC",  "SAC",   "AM"),
+               spp   = c("king",  "king", "ccho"),
+               stg   = c("smolt", "parr", "smolt"),
+               ct    = c(293L,    410L,    210L),
+               col.defs = c("River site used for collection",
+                            "Species common name",
+                            "Life Stage", 
+                            "count of live fish in traps"),
+               unit.defs = list(c(SAC = "The Sacramento River", 
+                                  AM = "The American River"),
+                                c(king = "King Salmon", 
+                                  ccho = "Coho Salmon"),
+                                c(parr = "third life stage", 
+                                  smolt = "fourth life stage"),
+                                "number"))
+
 ```
 
 
 
 
-Provide a list giving the  __column header__ used in the data.frame, followed by a plain text definitions for the column, followed by a character vector giving the definition for the units:  
+- `col.defs`: These are usually just plain text definitions, though a URI to a semantic definition can be particularly powerful. See "Advanced Use" for details on adding richer information, such as the method used to collect the data or set the geographic, taxanomic, or temporal coverage of an individual column.   
 
-__column descriptions__: These are usually just plain text definitions, though a URI to a semantic definition can be particularly powerful. See "Advanced Use" for details on adding richer information, such as the method used to collect the data or set the geographic, taxanomic, or temporal coverage of an individual column.   
+- `unit.defs`:   For factors, this is a definition of the levels involved.  For numeric data, specify the units from [this list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).  For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character strings, a definition of the kind of string can be given, (e.g. species scientific name), otherwise the column description will be used.  
 
-__column units__:   For factors, this is a definition of the levels involved.  For numeric data, specify the units from [this list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).  For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character strings, a definition of the kind of string can be given, (e.g. species scientific name), otherwise the column description will be used.  
-
-
-
-
-```coffee
-metadata <- 
-  list("river" = list("river",
-                      "River site used for collection",
-                      c(SAC = "The Sacramento River", 
-                        AM = "The American River")),
-       "spp" = list("spp",
-                    "Species common name", 
-                    c(king = "King Salmon", 
-                      ccho = "Coho Salmon")),
-       "stg" = list("stg",
-                    "Life Stage", 
-                    c(parr = "third life stage", 
-                      smolt = "fourth life stage")),
-       "ct"  = list("ct",
-                    "count", 
-                    "number"))
-```
-
-
-*for convenience, this metadata list can instead be constructed with the help of the reml wizard*.  Just use `metadata <- metadata_wizard(dat)` to begin. While this may be helpful starting out, regular users will find it faster to define the columns and units directly in the format above.   
+Alternatively, annotations can be added to an existing data frame, `data.set(my.data.frame, col.defs = ..., unit.defs = ...)`.  
 
 
 
 
-```coffee
-eml_write(dat, metadata, title = "reml example",  
+```r
+eml_write(dat, 
+          title = "reml example",  
           description = "An example, intended for
                               illustrative purposes only.",
           creator = "Carl Boettiger <cboettig@gmail.com>",
@@ -103,6 +91,9 @@ eml_write(dat, metadata, title = "reml example",
 [1] "reml_example.xml"
 ```
 
+                    
+*for convenience, `dat` could simply be a `data.frame` and `reml` will launch it's metadata wizard to assist in constructing the metadata based on the data.frame provided*.  While this may be helpful starting out, regular users will find it faster to define the columns and units directly in the format above.   
+
 
 See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/reml_example.xml) by this example.  Note that if the `metadata` argument providing the definitions for the `data.frame` is not specified, `reml` will launch the wizard to prompt the user.  
 
@@ -111,7 +102,7 @@ See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/re
 Configure general metadata you may want to frequently reuse, avoiding having to specify things like the name of the creator or contact.
 
 
-```coffee
+```r
 eml_config(creator = list("Carl Boettiger <cboettig@ropensci.org>", "Karthik Ram"), contact = "Carl Boettiger <cboettig@ropensci.org>")
 ```
 
@@ -139,7 +130,7 @@ required to use reml and run the examples in the other sections_
 
 <!-- We don't want to generate a DOI every time we run the vignette -->
 
-```coffee
+```r
 id = eml_publish("reml_example.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
 ```
 
@@ -149,7 +140,7 @@ This creates a draft file visible only to the user configured in `rfigshare`.  T
 <!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 
 
-```coffee
+```r
 doc <- eml_read("my_eml_data.xml")
 citation(doc) # not implemented yet
 ```
@@ -175,20 +166,17 @@ Reading EML
 
 
 
-```coffee
+```r
 obj <- eml_read("reml_example.xml")
-```
-
-
-
-We can use various accessor functions to return the data and metadata elements in native R formats.
-
-
-```coffee
-dataTable(obj)
+obj 
 ```
 
 ```
+reml example
+An example, intended for
+                              illustrative purposes only.
+Carl Boettiger <cboettig@gmail.com> [cre]
+
   river  spp   stg  ct
 1   SAC king smolt 293
 2   SAC king  parr 410
@@ -196,14 +184,55 @@ dataTable(obj)
 ```
 
 
+We can use various accessor functions to return the data and metadata elements in native R formats.
 
-```coffee
+
+```r
+dataTable(obj)
+```
+
+```
+Object of class "data.set"
+  river  spp   stg  ct
+1   SAC king smolt 293
+2   SAC king  parr 410
+3    AM ccho smolt 210
+Slot "col.defs":
+                       attribute                        attribute 
+"River site used for collection"            "Species common name" 
+                       attribute                        attribute 
+                    "Life Stage"    "count of live fish in traps" 
+
+Slot "unit.defs":
+$attribute
+                   SAC                     AM 
+"The Sacramento River"   "The American River" 
+
+$attribute
+         king          ccho 
+"King Salmon" "Coho Salmon" 
+
+$attribute
+               parr               smolt 
+ "third life stage" "fourth life stage" 
+
+$attribute
+[1] "number"
+```
+
+```
+NULL
+```
+
+
+
+```r
 metadata <- attributeList(obj)
 ```
 
 
 
-```coffee
+```r
 contact(obj)
 ```
 
@@ -215,7 +244,7 @@ contact(obj)
 Note that the contact has been coerced into R's built-in 'person' object:
 
 
-```coffee
+```r
 class(contact(obj))
 ```
 
@@ -225,7 +254,7 @@ class(contact(obj))
 
 
 
-```coffee
+```r
 citationInfo(obj)
 ```
 
@@ -255,13 +284,13 @@ Testing and development
 
 While the dependencies for basic functionality are kept to a minimum, to access all the functions and tests implemented in `reml` you'll need several additional packages.  
 
-```coffee
+```r
 install.packages(c("yaml", "knitr", "rfigshare", "testthat", "RCurl"))
 ```
 
 Some of these additional packages are not yet on CRAN and may not be stable.
 
-```coffee
+```r
 install.packages("uuid",,'http://rforge.net/',type='source')
 install_github("RHTMLForms", "omegahat")
 install_github("XMLSchema", "omegahat")

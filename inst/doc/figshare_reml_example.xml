@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:cab12d36-288e-46cd-8ce8-baa68ace3178" system="uuid">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:07773d37-aa29-4cb3-9b7a-d52a9a8b9eeb" system="uuid">
   <dataset>
     <title>reml example</title>
     <creator>
@@ -9,7 +9,7 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </creator>
-    <pubDate>2013-09-05</pubDate>
+    <pubDate>2013-10-02</pubDate>
     <intellectualRights>&lt;a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'&gt;CC0&lt;/a&gt;</intellectualRights>
     <contact>
       <individualName>
@@ -24,7 +24,7 @@
                               illustrative purposes only.</entityDescription>
       <physical>
         <objectName>reml_example.csv</objectName>
-        <size>2464</size>
+        <size>4984</size>
         <characterEncoding>en_US.UTF-8</characterEncoding>
         <dataFormat>
           <textFormat>
@@ -39,7 +39,7 @@
         </dataFormat>
         <distribution>
           <online>
-            <url function="download">http://files.figshare.com/1193628/reml_example.csv</url>
+            <url function="download">http://files.figshare.com/1221866/reml_example.csv</url>
           </online>
         </distribution>
       </physical>
@@ -106,7 +106,7 @@
         </attribute>
         <attribute>
           <attributeName>ct</attributeName>
-          <attributeDefinition>count</attributeDefinition>
+          <attributeDefinition>count of live fish in traps</attributeDefinition>
           <measurementScale>
             <ratio>
               <unit>

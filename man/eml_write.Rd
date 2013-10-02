@@ -3,9 +3,9 @@
 \alias{write.eml}
 \title{Top-level API function for writing eml}
 \usage{
-  eml_write(dat, metadata = metadata(dat), title,
+  eml_write(dat, metadata = NULL, title = "metadata",
     description = character(0),
-    creator = new("ListOfcreator", list(get("defaultCreator", envir = remlConfig))),
+    creator = get("defaultCreator", envir = remlConfig),
     contact = get("defaultContact", envir = remlConfig),
     coverage = eml_coverage(scientific_names = NULL, dates = NULL, geographic_description = NULL, NSEWbox = NULL),
     methods = new("methods"),

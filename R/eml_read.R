@@ -19,9 +19,11 @@ setMethod("unit.defs", signature("eml"), function(object){
           lapply(metadata, function(x) x[[3]])
 })
 
+
+## Make sure this returns a character type! warn if not.  
 setMethod("col.defs", signature("eml"), function(object){
           metadata <- extract(object@dataset@dataTable@attributeList)
-          lapply(metadata, function(x) x[[2]])
+          sapply(metadata, function(x) x[[2]])
 })
 
 
@@ -71,11 +73,11 @@ get_col_classes <- function(attrs){
                     else if(!isEmpty(z@enumeratedDomain))
                       "factor"
                   } else if(!isEmpty(y@ordinal)){
-                    z <- y@nominal@nonNumericDomain
+                    z <- y@ordinal@nonNumericDomain
                     if(!isEmpty(z@textDomain))
                       "character"
                     else if(!isEmpty(z@enumeratedDomain))
-                      "ordered"
+                      "ordered" # c("ordered", "factor")
                   }
                 })
 }
