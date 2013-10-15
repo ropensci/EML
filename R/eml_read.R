@@ -90,7 +90,8 @@ setMethod("extract", signature("eml"),
           function(from){
           # Get classes for data table first from attribute list!
 
-
+## FIXME should dat use "using"?  
+# FIXME is this really the right return format?
           dat = extract(from@dataset@dataTable@physical)
             list(dat = dat,
                 metadata = extract(from@dataset@dataTable@attributeList),
