@@ -63,9 +63,9 @@ test_that("We can write S4 EML to XML and validate", {
 
 
    ## Test external validity
-#  o <- eml_validate(x)                     ## eml_validate function not working 
-#  expect_true(o[[1]]) # all cases validate
-#  expect_true(o[[2]]) # all cases validate
+  o <- eml_validate(saveXML(xmlParse("title.xml")))                     ## eml_validate function not working 
+  expect_true(o[[1]]) # all cases validate
+  expect_true(o[[2]]) # all cases validate
 
    unlink("title.xml")
    unlink("title.csv")
@@ -100,6 +100,6 @@ test_that("We can write older versions of EML", {
                  eml_version = "2.1.0")
   eml_validate(ex)
 
-}
+})
 
 

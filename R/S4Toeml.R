@@ -11,9 +11,13 @@
 attribute_elements <- c("id", "system", "scope", "packageId")
 
 S4Toeml <- function(obj, 
-                    node = newXMLNode(class(obj)[1])){
-
-    for(s in slotNames(obj)){
+                    node = newXMLNode(class(obj)[1]),
+                    excluded_slots = c("namespaces")){
+    who <- slotNames(obj)
+    drop <- match(excluded_slots, who)
+    if(!is.na(drop))
+      who <- who[-drop] # drop excluded slots
+    for(s in who){
       ## Attributes
       if(s %in% attribute_elements){
         if(length(slot(obj,s)) > 0){
