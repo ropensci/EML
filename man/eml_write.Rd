@@ -10,7 +10,8 @@
     coverage = eml_coverage(scientific_names = NULL, dates = NULL, geographic_description = NULL, NSEWbox = NULL),
     methods = new("methods"),
     additionalMetadata = new("additionalMetadata"),
-    file = paste0(gsub(" ", "_", title), ".xml"))
+    file = paste0(gsub(" ", "_", title), ".xml"),
+    eml_version = c("2.1.1", "2.1.0"))
 }
 \description{
   Top-level API function for writing eml

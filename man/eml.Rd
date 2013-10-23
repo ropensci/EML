@@ -7,7 +7,8 @@
     contact = get("defaultContact", envir = remlConfig),
     coverage = eml_coverage(scientific_names = NULL, dates = NULL, geographic_description = NULL, NSEWbox = NULL),
     methods = new("methods"),
-    additionalMetadata = new("additionalMetadata"))
+    additionalMetadata = new("additionalMetadata"),
+    eml_version = c("2.1.1", "2.1.0"))
 }
 \description{
   generator for eml

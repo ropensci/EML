@@ -91,3 +91,15 @@ test_that("We can add coverage information and validate", {
   unlink("title.csv")
 
 })
+
+
+test_that("We can write older versions of EML", {
+  ex = eml_write(dat, metadata, title = "title", 
+                 description = "description", 
+                 creator = "Carl Boettiger <cboettig@gmail.com>",
+                 eml_version = "2.1.0")
+  eml_validate(ex)
+
+}
+
+

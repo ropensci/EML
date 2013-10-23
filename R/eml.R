@@ -8,11 +8,13 @@ setClass("eml",
          representation(packageId   = "character", 
                         system      = "character", 
                         dataset     = "dataset",
-                        additionalMetadata = "additionalMetadata"))
+                        additionalMetadata = "additionalMetadata",
+                        namespaces = "character"),
+         prototype = prototype(namespaces = eml_namespaces))
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
 setAs("eml", "XMLInternalElementNode", 
       function(from){
-        node <- newXMLNode("eml:eml", namespaceDefinitions = eml_namespaces)
+        node <- newXMLNode("eml:eml", namespaceDefinitions = from@namespaces)
         S4Toeml(from, node)
       })
 
@@ -45,8 +47,15 @@ eml <- function(dat,
                                         geographic_description = NULL,
                                         NSEWbox = NULL), 
                 methods = new("methods"), 
-                additionalMetadata = new("additionalMetadata")){
+                additionalMetadata = new("additionalMetadata"),
+                eml_version =  c("2.1.1", "2.1.0")){
 
+  eml_version <- match.arg(eml_version)
+  namespaces <- eml_namespaces
+  if(eml_version != "2.1.1"){
+    namespaces["eml"] <- gsub("2.1.1", eml_version, eml_namespaces["eml"])
+    namespaces["ds"] <- gsub("2.1.1", eml_version, eml_namespaces["ds"])
+  }
 
   if(is(creator, "character"))
     creator <- as(creator, "creator")
@@ -83,7 +92,8 @@ eml <- function(dat,
                                               metadata=metadata, 
                                               title=title, 
                                               description=description),
-                    methods = methods))
+                    methods = methods),
+      namespaces = namespaces)
 }
 
 

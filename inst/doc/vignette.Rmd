@@ -207,7 +207,7 @@ install.packages(c("yaml", "knitr", "rfigshare", "testthat", "RCurl"))
 Some of these additional packages are not yet on CRAN and may not be stable.
 
 ```r
-install.packages("uuid",,'http://rforge.net/',type='source')
+install.packages("uuid")
 install_github("RHTMLForms", "omegahat")
 install_github("XMLSchema", "omegahat")
 ```
