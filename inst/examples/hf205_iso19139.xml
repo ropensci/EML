@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+uid=HFR,o=lter,dc=ecoinformatics,dc=orgallpublicreadHF205Thresholds and Tipping Points in a Sarracenia Microecosystem at Harvard Forest since 2012
+<gmd:CI_ResponsibleParty xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:individualName>
+    <givenName>
+      <gco:CharacterString>Aaron</gco:CharacterString>
+    </givenName>
+    <surName>
+      <gco:CharacterString>Ellison</gco:CharacterString>
+    </surName>
+  </gmd:individualName>
+  <gmd:contactInfo>
+    <gmd:CI_Contact/>
+  </gmd:contactInfo>
+  <gmd:role>
+    <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" codeSpace="ISOTC211/19115">custodian</gmd:CI_RoleCode>
+  </gmd:role>
+</gmd:CI_ResponsibleParty>
+<gmd:CI_ResponsibleParty xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:individualName>
+    <givenName>
+      <gco:CharacterString>Nicholas</gco:CharacterString>
+    </givenName>
+    <surName>
+      <gco:CharacterString>Gotelli</gco:CharacterString>
+    </surName>
+  </gmd:individualName>
+  <gmd:contactInfo>
+    <gmd:CI_Contact/>
+  </gmd:contactInfo>
+  <gmd:role>
+    <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" codeSpace="ISOTC211/19115">custodian</gmd:CI_RoleCode>
+  </gmd:role>
+</gmd:CI_ResponsibleParty>
+<gmd:CI_ResponsibleParty xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:individualName>
+    <givenName>
+      <gco:CharacterString>Benjamin</gco:CharacterString>
+    </givenName>
+    <surName>
+      <gco:CharacterString>Baiser</gco:CharacterString>
+    </surName>
+  </gmd:individualName>
+  <gmd:contactInfo>
+    <gmd:CI_Contact/>
+  </gmd:contactInfo>
+  <gmd:role>
+    <gmd:CI_RoleCode codeList="" codeListValue="" codeSpace="">Researcher</gmd:CI_RoleCode>
+  </gmd:role>
+</gmd:CI_ResponsibleParty>
+<gmd:CI_ResponsibleParty xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:individualName>
+    <givenName>
+      <gco:CharacterString>Jennifer</gco:CharacterString>
+    </givenName>
+    <surName>
+      <gco:CharacterString>Sirota</gco:CharacterString>
+    </surName>
+  </gmd:individualName>
+  <gmd:contactInfo>
+    <gmd:CI_Contact/>
+  </gmd:contactInfo>
+  <gmd:role>
+    <gmd:CI_RoleCode codeList="" codeListValue="" codeSpace="">Researcher</gmd:CI_RoleCode>
+  </gmd:role>
+</gmd:CI_ResponsibleParty>
+2012The primary goal of this project is to determine experimentally the amount of lead time required to prevent a state change. To achieve this goal, we will (1) experimentally induce state changes in a natural aquatic ecosystem - the Sarracenia microecosystem; (2) use proteomic analysis to identify potential indicators of states and state changes; and (3) test whether we can forestall state changes by experimentally intervening in the system. This work uses state-of-the art molecular tools to identify early warning indicators in the field of aerobic to anaerobic state changes driven by nutrient enrichment in an aquatic ecosystem. The study tests two general hypotheses: (1) proteomic biomarkers can function as reliable indicators of impending state changes and may give early warning before increasing variances and statistical flickering of monitored variables; and (2) well-timed intervention based on proteomic biomarkers can avert future state changes in ecological systems.bacteriacarnivorous plantsgeneticsthresholdsLTER controlled vocabularypopulationsinorganic nutrientsdisturbanceLTER core areaHarvard ForestHFRLTERUSAHFR defaultThis dataset is released to the public and may be freely downloaded. Please keep the designated Contact person informed of any plans to use the dataset. Consultation or collaboration with the original investigators is strongly encouraged. Publications and data products that make use of the dataset must include proper acknowledgement. For more information on LTER Network data access and use policies, please see: http://www.lternet.edu/data/netpolicy.html.http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf205
+<gmd:geographicElement xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:EX_GeographicBoundingBox>
+    <gmd:westBoundLongitude>
+      <gco:Decimal>-72.29</gco:Decimal>
+    </gmd:westBoundLongitude>
+    <gmd:eastBoundLongitude>
+      <gco:Decimal>-72.10</gco:Decimal>
+    </gmd:eastBoundLongitude>
+    <gmd:southBoundLatitude>
+      <gco:Decimal>+42.42</gco:Decimal>
+    </gmd:southBoundLatitude>
+    <gmd:northBoundLatitude>
+      <gco:Decimal>+42.55</gco:Decimal>
+    </gmd:northBoundLatitude>
+  </gmd:EX_GeographicBoundingBox>
+</gmd:geographicElement>
+<gmd:temporalElement xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:EX_TemporalExtent>
+    <gmd:extent>
+      <gml:TimePeriod>
+        <gml:begin>
+          <gml:TimeInstant>
+            <gml:timePosition>2012-06-01</gml:timePosition>
+          </gml:TimeInstant>
+        </gml:begin>
+        <gml:end>
+          <gml:TimeInstant>
+            <gml:timePosition>2013-12-31</gml:timePosition>
+          </gml:TimeInstant>
+        </gml:end>
+      </gml:TimePeriod>
+    </gmd:extent>
+  </gmd:EX_TemporalExtent>
+</gmd:temporalElement>
+genusSarraceniaspeciespurpureaAaronEllisonHarvard Forest
+<gmd:address xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:CI_Address>
+    <gmd:deliveryPoint>
+      <gco:CharacterString>324 North Main Street</gco:CharacterString>
+    </gmd:deliveryPoint>
+    <gmd:city>
+      <gco:CharacterString>Petersham</gco:CharacterString>
+    </gmd:city>
+    <gmd:administrativeArea>
+      <gco:CharacterString>MA</gco:CharacterString>
+    </gmd:administrativeArea>
+    <gmd:postalCode>
+      <gco:CharacterString>01366</gco:CharacterString>
+    </gmd:postalCode>
+    <gmd:country>
+      <gco:CharacterString>USA</gco:CharacterString>
+    </gmd:country>
+    <gmd:electronicMailAddress>
+      <gco:CharacterString>aellison@fas.harvard.edu</gco:CharacterString>
+    </gmd:electronicMailAddress>
+  </gmd:CI_Address>
+</gmd:address>
+<gmd:phone xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:CI_Telephone>
+    <gmd:voice>
+      <gco:CharacterString>(978) 724-3302</gco:CharacterString>
+    </gmd:voice>
+  </gmd:CI_Telephone>
+</gmd:phone>
+aellison@fas.harvard.eduHarvard Forest
+<gmd:address xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:CI_Address>
+    <gmd:deliveryPoint>
+      <gco:CharacterString>324 North Main Street</gco:CharacterString>
+    </gmd:deliveryPoint>
+    <gmd:city>
+      <gco:CharacterString>Petersham</gco:CharacterString>
+    </gmd:city>
+    <gmd:administrativeArea>
+      <gco:CharacterString>MA</gco:CharacterString>
+    </gmd:administrativeArea>
+    <gmd:postalCode>
+      <gco:CharacterString>01366</gco:CharacterString>
+    </gmd:postalCode>
+    <gmd:country>
+      <gco:CharacterString>USA</gco:CharacterString>
+    </gmd:country>
+    <gmd:electronicMailAddress>
+      <gco:CharacterString/>
+    </gmd:electronicMailAddress>
+  </gmd:CI_Address>
+</gmd:address>
+<gmd:phone xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:CI_Telephone>
+    <gmd:voice>
+      <gco:CharacterString>(978) 724-3302</gco:CharacterString>
+    </gmd:voice>
+  </gmd:CI_Telephone>
+</gmd:phone>
+<gmd:phone xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:CI_Telephone>
+    <gmd:voice>
+      <gco:CharacterString>(978) 724-3595</gco:CharacterString>
+    </gmd:voice>
+  </gmd:CI_Telephone>
+</gmd:phone>
+<gmd:onlineResource xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <gmd:CI_OnlineResource>
+    <gmd:linkage>
+      <gmd:URL>http://harvardforest.fas.harvard.edu</gmd:URL>
+    </gmd:linkage>
+  </gmd:CI_OnlineResource>
+</gmd:onlineResource>
+hf205-01-TPexp1.csvtipping point experiment 1hf205-01-TPexp1.csv1\r\ncolumn,http://harvardforest.fas.harvard.edu/data/p20/hf205/hf205-01-TPexp1.csvrun.numwhich run number (=block). Range: 1 &#x2013; 6. (integer)which run numberyearyear, 2012YYYYdayJulian day. Range: 170 &#x2013; 209.DDDhour.minhour and minute of observation. Range 1 &#x2013; 2400 (integer)hhmmi.flagis variable Real, Interpolated or Bad (character/factor)RrealIinterpolatedBbadvariablewhat variable being measured in what treatment (character/factor).controlno prey addedlow0.125 mg prey added ml-1 d-1med.low0,25 mg prey added ml-1 d-1med.high0.5 mg prey added ml-1 d-1high1.0 mg prey added ml-1 d-1air.tempair temperature measured just above all plants (1 thermocouple)water.tempwater temperature measured within each pitcherparphotosynthetic active radiation (PAR) measured just above all plants (1 sensor)value.ivalue of measured variable for run.num on year/day/hour.min.control% dissolved oxygenlow% dissolved oxygenmed.low% dissolved oxygenmed.high% dissolved oxygenhigh% dissolved oxygenair.tempdegrees Cwater.tempdegrees Cparmicromoles m-1 s-19999hf205-02-mathematica-oxygen.nbMathematica code for oxygen model (nb)hf205-02-mathematica-oxygen.nbMathematica notebookhttp://harvardforest.fas.harvard.edu/data/p20/hf205/hf205-02-mathematica-oxygen.nbMathematica codehf205-03-mathematica-oxygen.pdfMathematica code for oxygen model (pdf)hf205-03-mathematica-oxygen.pdfpdfhttp://harvardforest.fas.harvard.edu/data/p20/hf205/hf205-03-mathematica-oxygen.pdfMathematica codeongoingcommunityshort-term measurementmodelinghttp://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf168http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf109http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf193http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf170http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf096http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf146http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf111http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf114http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf098
