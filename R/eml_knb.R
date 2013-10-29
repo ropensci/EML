@@ -9,24 +9,39 @@
 eml_knb <- function(file, 
                     mn_nodeid = "urn:node:KNB",
                     cli = D1Client("PROD", mn_nodeid),
-                    id = permid(),
                     public = TRUE){
-  success <- require(rfigshare)
+  success <- require(dataone)
   if(!success)
     stop("The dataone package must be installed to publish data to the KNB")
 
-  csvdata <- attachments(file, "csv")
+  # Declare the metadata format ## FIXME get namespace from the file 
 
+  x <- eml_read(file)
+  eml_format <- version(x)  # method works on `file` too
+  eml_id <- id(x)           # method works on `file` too
+
+  # Get the path and identifier of the csv file from the EML 
+  csv <- c(path = unname(x@dataset@dataTable@physical@objectName),
+           id = unname(x@dataset@dataTable@id)) # Define more elegant method..
+  
   ## Build a D1Object for the table, and upload it to the MN
-  d1Object <- new(Class="D1Object", id, csvdata, format, mn_nodeid)
+  csv_object <- new(Class="D1Object", csv[["id"]], csv[["path"]], "text/csv", mn_nodeid)
+  ## Make the object public
+
+#  eml_object <- new(Class="D1Object", id2, file, "eml://ecoinformatics.org/eml-2.1.1", mn_nodeid)
+  meta <- paste(readLines(file), collapse = '')     # Do we need to parse the object first? 
+  eml_object <- new("D1Object", eml_id, meta, eml_format, mn_nodeid)  
+
+
 
   # Query the object to show its identifier
-  pidValue <- getIdentifier(d1Object)
-  message(paste("ID of d1Object:",pidValue))
+  csv_pid <- getIdentifier(csv_object)
+  eml_pid <- getIdentifier(eml_object)
 
   if(public){
   # Set access control on the data object to be public
-    setPublicAccess(d1Object)
+    setPublicAccess(csv_object)
+    setPublicAccess(eml_object)
     if (canRead(d1Object,"public")) {
       message("successfully set public access");
     } else {
@@ -34,19 +49,34 @@ eml_knb <- function(file,
     }
   }
 
-  # Now actually load the object into the KNB repository
-  createD1Object(cli, d1Object)
+  # Assemble our data package containing both metadata and data
+  data.package <- new("DataPackage", packageId=eml_id)
+  addData(data.package,csv_object)
+  addData(data.package,eml_object)
+  insertRelationship(data.package, eml_id, csv["id"])
 
-  pidValue
+  # Now upload the whole package to the member node
+  create(d1.client, data.package)
+
+  #  test <- getD1Object(cli, eml_pid)
+  eml_pid
 }
 
 
 
-permid <- function() paste("r_test1", format(Sys.time(), "%Y%m%d%H%M%s"), "1", sep=".")
-attachments <- function(doc, type="csv"){
-  type <- match.arg(type)
-  switch(type, 
-    csv = xpathSApply(doc, "//dataTable/physical/objectName", xmlValue)
-  )
-}
+setGeneric("id", function(x) standardGeneric("id"))
+setMethod("id", signature("eml"), 
+          function(x) unname(x@packageId))
+          
+
+setGeneric("version", function(x) standardGeneric("version"))
+setMethod("version", signature("eml"), 
+          function(x) x@namespaces[["eml"]])
+setMethod("version", signature("character"), 
+          function(x) { 
+            x <- eml_read(x) 
+            version(x) 
+          })
+
+
 
