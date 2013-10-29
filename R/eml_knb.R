@@ -25,7 +25,9 @@ eml_knb <- function(file,
            id = unname(x@dataset@dataTable@id)) # Define more elegant method..
   
   ## Build a D1Object for the table, and upload it to the MN
-  csv_object <- new(Class="D1Object", csv[["id"]], csv[["path"]], "text/csv", mn_nodeid)
+  csv_object <- new(Class="D1Object", csv[["id"]], 
+                    paste(readLines(csv[["path"]]), collapse = '\n'),
+                    "text/csv", mn_nodeid)
   ## Make the object public
 
 #  eml_object <- new(Class="D1Object", id2, file, "eml://ecoinformatics.org/eml-2.1.1", mn_nodeid)
@@ -36,13 +38,15 @@ eml_knb <- function(file,
 
   # Query the object to show its identifier
   csv_pid <- getIdentifier(csv_object)
+  message(paste("CSV file identifier is :", csv_pid))
   eml_pid <- getIdentifier(eml_object)
+  message(paste("EML file identifier is :", eml_pid))
 
   if(public){
   # Set access control on the data object to be public
     setPublicAccess(csv_object)
     setPublicAccess(eml_object)
-    if (canRead(d1Object,"public")) {
+    if (canRead(eml_object,"public")) {
       message("successfully set public access");
     } else {
       message("FAIL: did not set public access");
@@ -50,7 +54,8 @@ eml_knb <- function(file,
   }
 
   # Assemble our data package containing both metadata and data
-  data.package <- new("DataPackage", packageId=paste0(eml_id, "_package"))
+  pkg.id <- paste0(eml_id, "_package")
+  data.package <- new("DataPackage", packageId=pkg.id)
   addData(data.package, csv_object)
   addData(data.package, eml_object)
   insertRelationship(data.package, eml_id, csv["id"])
@@ -59,7 +64,7 @@ eml_knb <- function(file,
   createDataPackage(cli, data.package)
 
   #  test <- getD1Object(cli, eml_pid)
-  eml_pid
+  c(eml = eml_pid, csv = csv_pid, package = pkg.id)
 }
 
 

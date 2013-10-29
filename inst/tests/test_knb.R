@@ -1,3 +1,7 @@
+context("Publish to KNB")
+
+
+
 library(reml)
 dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
                spp   = c("Oncorhynchus tshawytscha",  "Oncorhynchus tshawytscha", "Oncorhynchus kisutch"),
@@ -24,6 +28,20 @@ eml_write(dat,
           description = "upload to the KNB from reml",
           creator = "Carl Boettiger <cboettig@ropensci.org>",
           file = "test.xml")
-pid = eml_knb("test.xml")
 
+
+
+test_that("We can publish data to the KNB", {
+
+  pid <- eml_knb("test.xml")
+  csv <- getD1Object(cli, pid[["csv"]])
+  require(dataone)
+  expect_is(asDataFrame(csv), "data.frame")
+
+          })
+
+
+
+unlink("test.xml")
+unlink("test.csv")
 
