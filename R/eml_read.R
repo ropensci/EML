@@ -12,6 +12,12 @@ eml_read <- function(file, get=c("eml", "data.frame", "attributeList"), ...){
   
 }
 
+## FIXME Don't use `@`s to access elements. In particular,
+## this isn't even correct since the current format assumes only 
+## 1 dataset per eml and one dataTable per dataset.  
+## Simple accessor methods should be written instead.  
+
+
 ## accessor methods.  Note that having the same name as an existing function is no problem.  
 
 setMethod("unit.defs", signature("eml"), function(object){
