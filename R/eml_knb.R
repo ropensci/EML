@@ -50,26 +50,21 @@ eml_knb <- function(file,
   }
 
   # Assemble our data package containing both metadata and data
-  data.package <- new("DataPackage", packageId=eml_id)
-  addData(data.package,csv_object)
-  addData(data.package,eml_object)
+  data.package <- new("DataPackage", packageId=paste0(eml_id, "_package"))
+  addData(data.package, csv_object)
+  addData(data.package, eml_object)
   insertRelationship(data.package, eml_id, csv["id"])
 
   # Now upload the whole package to the member node
-  create(d1.client, data.package)
+  createDataPackage(cli, data.package)
 
   #  test <- getD1Object(cli, eml_pid)
   eml_pid
 }
 
 
-
-setGeneric("id", function(x) standardGeneric("id"))
 setMethod("id", signature("eml"), 
           function(x) unname(x@packageId))
-          
-
-setGeneric("version", function(x) standardGeneric("version"))
 setMethod("version", signature("eml"), 
           function(x) x@namespaces[["eml"]])
 setMethod("version", signature("character"), 

@@ -26,3 +26,8 @@ setGeneric("col.defs", function(object) standardGeneric("col.defs"))
 #' @export
 setGeneric("unit.defs", function(object) standardGeneric("unit.defs"))
 
+#' @export
+setGeneric("id", function(x) standardGeneric("id"))
+          
+#' @export 
+setGeneric("version", function(x) standardGeneric("version"))
