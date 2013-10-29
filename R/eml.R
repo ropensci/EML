@@ -6,7 +6,8 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
 
 setClass("eml",
          representation(packageId   = "character", 
-                        system      = "character", 
+                        system      = "character",
+                        scope       = "character",
                         dataset     = "dataset",
                         additionalMetadata = "additionalMetadata",
                         namespaces = "character"),
@@ -70,19 +71,12 @@ eml <- function(dat,
   if(is(contact, "character"))
     contact <- as(contact, "contact")
 
-  success <- require(uuid)
-  if(success){
-    id <- paste0("urn:uuid:", uuid::UUIDgenerate())
-    system <- "uuid"
-  } else {
-    id <- paste0("reml_", runif(1, 1e6, 9e6))
-    system <- "reml"
-  }
-
-
+  
+  id <- reml_id()
   new("eml",
-      packageId = id,
-      system = system,
+      packageId = id[["id"]],
+      system = id[["system"]],
+      scope = id[["scope"]],
       dataset = new("dataset", 
                     title = title,
                     creator = creator,
