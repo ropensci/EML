@@ -1,10 +1,10 @@
 
 setClass("id", representation(id = "character"))
 
-setClass("has_scope", 
+setClass("id_scope", 
          representation(id = "character",
                         system = "character",
                         scope = "character"),
-         prototype = prototype( scope = "Document"))
+         prototype = prototype(scope = "document"))
 
 # need to teach to/from methods to deal with system & scope 

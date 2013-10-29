@@ -1,7 +1,10 @@
+
+#' @include baseAttributes.R
 setClass("dataTable_slots", 
          representation(attributeList = "attributeList",  ## Hack to make entityGroup slots listed first!  
                         caseSensitive = "character",
-                        numberOfRecords = "integer"))
+                        numberOfRecords = "integer"),
+         contains = "id_scope")
 
 setAs("XMLInternalElementNode", "dataTable_slots",  function(from) emlToS4(from))
 setAs("dataTable_slots", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -24,7 +27,11 @@ eml_dataTable <- function(dat, metadata,
   if(length(title) > 0 & length(filename) == 0)
     filename <- paste0(gsub(" ", "_", title), ".csv")
   metadata <- detect_class(dat, metadata)
-  dataTable <- new("dataTable", 
+  id <- reml_id()
+  dataTable <- new("dataTable",
+                  id = id[["id"]],
+                  system = id[["system"]],
+                  scope = id[["scope"]],
                   entityName = title,
                   entityDescription = description,
                   attributeList = as(metadata, "attributeList"),
