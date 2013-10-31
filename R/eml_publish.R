@@ -20,7 +20,7 @@ eml_publish <- function(file,
 {
   destination <- match.arg(destination)
   switch(destination, 
-         figshare = do.call(eml_figshare(file, ...)),
+         figshare = eml_figshare(file, ...),
          knb = eml_knb(file, ...)
          )
 }

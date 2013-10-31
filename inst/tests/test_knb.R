@@ -36,7 +36,8 @@ test_that("We can publish data to the KNB", {
                  mn_nodeid = "urn:node:mnDemo5",  # A Development server for testing
                  cli = D1Client("DEV", mn_nodeid)) # Use dev mode client)
 
-  # check that we can access the data with the dataone client 
+  # check that we can access the data with the dataone client
+  Sys.sleep(60*4)
   require(dataone)
   csv <- getD1Object(cli, pid[["csv"]])
   expect_is(asDataFrame(csv), "data.frame")
