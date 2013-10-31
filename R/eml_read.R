@@ -39,19 +39,21 @@ setMethod("col.defs", signature("eml"), function(object){
 setMethod("contact", signature("eml"), function(object) as(object@dataset@contact, "person"))
 
 setMethod("creator", signature("eml"), function(object)
-  paste(format(as(object@dataset@creator, "person"), 
-               include=c("given", "family"), 
-               braces = list(family=c("", ""))), collapse=", "))
+  as(object@dataset@creator, "person"))
 
+#  paste(format(as(object@dataset@creator, "person"), 
+#               include=c("given", "family"), 
+#               braces = list(family=c("", ""))), collapse=", "))
+
+
+## FIXME Consider extracting additional fields:  url, key, possibly month, note, etc
+#  publisher should possibly be 'journal' (e.g. so it prints by default?) 
 setMethod("citationInfo", signature("eml"), function(object){
-          cat(
-              creator(object),
-              ", ", 
-              object@dataset@pubDate, 
-              ". \"",              
-              object@dataset@title, 
-              ".\" ",
-              object@dataset@publisher@organizationName, ".\n", sep="")
+              bibentry(bibtype="Manual",
+                       title = object@dataset@title,
+                       author = creator(object),
+                       year = object@dataset@pubDate,
+                       publisher = object@dataset@publisher@organizationName)
 })
 
 setMethod("attributeList", signature("eml"), function(object){
