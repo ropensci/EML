@@ -11,6 +11,8 @@ setGeneric("attributeList", function(object) standardGeneric("attributeList"))
 setGeneric("citationInfo", function(object) standardGeneric("citationInfo")) # can overload 'citation' if we didn't set a generic
 
 #' @export
+setGeneric("creator", function(object) standardGeneric("creator"))
+#' @export
 setGeneric("contact", function(object) standardGeneric("contact"))
 
 #' @export

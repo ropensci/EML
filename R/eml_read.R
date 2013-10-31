@@ -41,7 +41,7 @@ setMethod("contact", signature("eml"), function(object) as(object@dataset@contac
 setMethod("creator", signature("eml"), function(object)
   paste(format(as(object@dataset@creator, "person"), 
                include=c("given", "family"), 
-               braces = list(family=c("", ""))), collapse=", ")
+               braces = list(family=c("", ""))), collapse=", "))
 
 setMethod("citationInfo", signature("eml"), function(object){
           cat(

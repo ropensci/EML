@@ -3,7 +3,7 @@
 \title{Publish EML}
 \usage{
   eml_publish(file, ...,
-    destination = c("figshare", "github"))
+    destination = c("figshare", "knb"))
 }
 \arguments{
   \item{file}{The local path of an EML file}
