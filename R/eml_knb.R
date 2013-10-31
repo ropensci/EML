@@ -15,9 +15,13 @@ eml_knb <- function(file,
                     cli = D1Client("PROD", mn_nodeid),
                     public = TRUE){
   success <- require(dataone)
-  if(!success)
-    stop("The dataone package must be installed to publish data to the KNB")
-
+  if(!success){
+    message("dataone package not found. Attempting to install")
+    install.packages("dataone")
+    success <- require(dataone)
+     if(!success)  
+      stop("The dataone package must be installed to publish data to the KNB")
+  }
   # Declare the metadata format ## FIXME get namespace from the file 
 
   x <- eml_read(file)

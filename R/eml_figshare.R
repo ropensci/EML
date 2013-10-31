@@ -36,8 +36,13 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   visibility = match.arg(visibility)
 
   success <- require(rfigshare)
-  if(!success)
-    stop("The rfigshare package must be installed to publish data to figshare")
+  if(!success){
+    message("rfigshare package not found. Attempting to install")
+    install.packages("rfigshare")
+    success <- require(rfigshare)
+     if(!success)  
+      stop("The rfigshare package must be installed to publish data to figshare")
+  }
 
   ## FIXME this workflow is rather crude.  Should eml_read into S4, modify, and then eml_write XML
   ## as modified EML file, and upload that instead.  
