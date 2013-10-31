@@ -33,3 +33,10 @@ setGeneric("id", function(x) standardGeneric("id"))
           
 #' @export 
 setGeneric("version", function(x) standardGeneric("version"))
+
+
+
+setGeneric("coverage", function(coverage) defaultGeneric("coverage"))
+
+setGeneric("species", function(taxonomicCoverage) defaultGeneric("species"))
+

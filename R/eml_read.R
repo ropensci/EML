@@ -98,7 +98,6 @@ get_col_classes <- function(attrs){
 }
 
 
-
 ## FIXME should use accessor methods in place of @
 ## FIXME many of these can be lists, class definitions must be fixed
 setMethod("extract", signature("eml"),
@@ -112,9 +111,62 @@ setMethod("extract", signature("eml"),
                 metadata = extract(from@dataset@dataTable@attributeList),
                 title = from@dataset@title,
                 description = from@dataset@dataTable@entityDescription,
-                creator = from@dataset@creator)
+                creator = creator(from))
           }
           )
 
 
+
+
+
+
+
+
+
+
+setMethod("coverage", signature("eml"),
+          function(coverage){
+## consider checking if multiple datasets?  
+          coverage(coverage@dataset)
+          })
+setMethod("coverage", signature("dataset"), 
+          function(coverage){ 
+            coverage(coverage@coverage)
+          })
+
+
+
+setMethod("species", signature("taxonomicCoverage"), 
+          function(taxonomicCoverage){
+            unname(sapply(taxonomicCoverage@taxonomicClassification, 
+                 function(object){
+                    x <- NULL
+                    while(!isEmpty(object)){
+                      if(object@taxonRankName %in% c("genus", "species"))
+                        x <- c(x, object@taxonRankValue)
+                      object <- object@taxonomicClassification
+                    }
+                    paste(x, collapse = " ")
+                 }))
+          })
+
+
+
+setMethod("coverage", signature("coverage"), 
+          function(coverage){
+            list(
+            scientific_names = species(coverage@taxonomicCoverage),
+            dates = c(coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate,
+                      coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate),
+            geographic_description = coverage@geographicCoverage@geographicDescription,
+            NSEWbox = c(north = coverage@geographicCoverage@boundingCoordinates@northBoundingCoordinate, 
+                        south = coverage@geographicCoverage@boundingCoordinates@southBoundingCoordinate, 
+                        east = coverage@geographicCoverage@boundingCoordinates@eastBoundingCoordinate, 
+                        west = coverage@geographicCoverage@boundingCoordinates@westBoundingCoordinate,
+                        ## check that units are in meters!
+                        min_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMinimum, 
+                        max_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMaximum) 
+            )
+
+          })
 

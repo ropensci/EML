@@ -19,8 +19,11 @@ versions of coverage metadata.}
   object.  Can alternatively provide an existing
   `eml::temporalCoverage` object.}
 
-  \item{numeric}{vector giving the decimal degrees of
-  latitude or longitude for a bounding box in the order
+  \item{geographic_descirption}{a plain-text description of
+  the geographic location covered by this data.}
+
+  \item{NSEWbox}{numeric vector giving the decimal degrees
+  of latitude or longitude for a bounding box in the order
   North, South, East, West.  Optionally followed by a 5th
   and 6th value giving the altitude minimum and maximum in
   meters.  Can alternatively provide an existing
