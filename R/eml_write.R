@@ -1,4 +1,5 @@
 #' Top-level API function for writing eml 
+#' @param dat either a data.frame, data.set, or eml object
 #' @aliases eml_write write.eml 
 #' @export eml_write write.eml
 eml_write <- function(dat, 
@@ -15,16 +16,10 @@ eml_write <- function(dat,
                 additionalMetadata = new("additionalMetadata"),
                 file = paste0(gsub(" ", "_", title), ".xml"),
                 eml_version = c("2.1.1", "2.1.0")){
-
-  eml_version <- match.arg(eml_version)
-
-  if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
-    metadata <- metadata(dat)
-
-  if(is.null(metadata))
-    metadata <- metadata_wizard(dat)
-
-  s4 <- eml(dat = dat, 
+  if(is(dat, "eml"))
+    s4 <- dat
+  else 
+    s4 <- eml(dat = dat, 
             metadata = metadata, 
             title = title, 
             description = description, 
@@ -34,13 +29,12 @@ eml_write <- function(dat,
             methods = methods, 
             additionalMetadata = additionalMetadata,
             eml_version = eml_version)
+
   xml <- as(s4, "XMLInternalElementNode")
   saveXML(xml, file = file)
 }
 
 write.eml <- eml_write
-
-
 
 
 

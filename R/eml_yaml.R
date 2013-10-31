@@ -24,3 +24,9 @@ eml_yaml <- function(file, con = stdout(), .parseopts=list(), .yamlopts=list()){
     writeLines(out, con = con)
   }
 }
+
+
+show_yaml <- function(object)     
+          cat(as.yaml(xmlToList(as(object, "XMLInternalElementNode"))))
+
+

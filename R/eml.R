@@ -1,9 +1,13 @@
+## Default XML namespaces -- consider moving to separate file 
 eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
                    ds = "eml://ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
                    stmml = "http://www.xml-cml.org/schema/stmml-1.1")
 
+
+
+## Define S4 class
 setClass("eml",
          representation(packageId   = "character", 
                         system      = "character",
@@ -12,6 +16,8 @@ setClass("eml",
                         additionalMetadata = "additionalMetadata",
                         namespaces = "character"),
          prototype = prototype(namespaces = eml_namespaces))
+
+## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
 setAs("eml", "XMLInternalElementNode", 
       function(from){
@@ -19,27 +25,11 @@ setAs("eml", "XMLInternalElementNode",
         S4Toeml(from, node)
       })
 
-## FIXME this could be much richer
-## FIXME use and write accessor and show methods for this info
-setMethod("show", 
-          signature("eml"),
-          function(object){
-            x <- extract(object@dataset@dataTable@physical, using=col_classes(object))
-            cat(object@dataset@title, 
-                object@dataset@dataTable@entityDescription, 
-                format(as(object@dataset@creator, "person")), 
-                sep="\n")
-            cat("", sep="\n\n")
-            cat(show(head(x)))
-          })
 
-
-
-
-#' generator for eml
+#' Define constructor function 
 eml <- function(dat, 
-                metadata, 
-                title, 
+                metadata = NULL, 
+                title = "metadata", 
                 description = character(0), 
                 creator = get("defaultCreator", envir=remlConfig), 
                 contact = get("defaultContact", envir=remlConfig),
@@ -51,6 +41,13 @@ eml <- function(dat,
                 additionalMetadata = new("additionalMetadata"),
                 eml_version =  c("2.1.1", "2.1.0")){
 
+  if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
+    metadata <- metadata(dat)
+
+  if(is.null(metadata))
+    metadata <- metadata_wizard(dat)
+
+  ## Handle older versions of EML
   eml_version <- match.arg(eml_version)
   namespaces <- eml_namespaces
   if(eml_version != "2.1.1"){
@@ -58,21 +55,21 @@ eml <- function(dat,
     namespaces["ds"] <- gsub("2.1.1", eml_version, eml_namespaces["ds"])
   }
 
+  ## Coerce character string persons into EML representations
   if(is(creator, "character"))
     creator <- as(creator, "creator")
-
   if(is(creator, "creator")) # Creator should be ListOfCreator
     creator <- new("ListOfcreator", list(creator))
-
   if(is.null(contact) | length(contact) == 0 ){
     contact <- as(creator[[1]], "contact")
   }
-
   if(is(contact, "character"))
     contact <- as(contact, "contact")
 
-  
+  ## Generage a unique id
   id <- reml_id()
+
+  ## Call the generic constructor function and write values into slots
   new("eml",
       packageId = id[["id"]],
       system = id[["system"]],
@@ -82,12 +79,38 @@ eml <- function(dat,
                     creator = creator,
                     contact = contact,
                     coverage = coverage,
-                    dataTable = eml_dataTable(dat=dat, 
-                                              metadata=metadata, 
-                                              title=title, 
-                                              description=description),
+                    dataTable = 
+                      eml_dataTable(dat=dat, 
+                                    metadata=metadata, 
+                                    title=title, 
+                                    description=description),
                     methods = methods),
       namespaces = namespaces)
 }
+
+
+# When printing to screen, use YAML
+#' @import yaml 
+setMethod("show", signature("eml"), show_yaml)
+
+
+
+
+
+## FIXME this could be much richer
+## FIXME use and write accessor and show methods for this info
+# setMethod("show", 
+#           signature("eml"),
+#           function(object){
+#             x <- extract(object@dataset@dataTable@physical, using=col_classes(object))
+#             cat(object@dataset@title, 
+#                 object@dataset@dataTable@entityDescription, 
+#                 format(as(object@dataset@creator, "person")), 
+#                 sep="\n")
+#             cat("", sep="\n\n")
+#             cat(show(head(x)))
+#           })
+# 
+# 
 
 

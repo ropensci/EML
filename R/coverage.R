@@ -37,3 +37,9 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
   node
 }
 
+
+
+
+setMethod("show", signature("coverage"), show_yaml)
+
+
