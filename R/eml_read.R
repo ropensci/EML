@@ -3,14 +3,16 @@
 #'
 #' @param file the name or path to the file (see ?xmlParse for details)
 #' @param get the name of the object that should be returned 
-#' @export
-#' @aliases read.eml
+#' @export eml_read read.eml
+#' @aliases eml_read read.eml
 eml_read <- function(file, get=c("eml", "data.frame", "attributeList"), ...){
   doc <- xmlParse(file=file, ...)
   root <- xmlRoot(doc)
   s4 <- as(root, "eml")
   
 }
+read.eml <- eml_read
+
 
 ## FIXME Don't use `@`s to access elements. In particular,
 ## this isn't even correct since the current format assumes only 
@@ -36,14 +38,19 @@ setMethod("col.defs", signature("eml"), function(object){
 
 setMethod("contact", signature("eml"), function(object) as(object@dataset@contact, "person"))
 
+setMethod("creator", signature("eml"), function(object)
+  paste(format(as(object@dataset@creator, "person"), 
+               include=c("given", "family"), 
+               braces = list(family=c("", ""))), collapse=", ")
+
 setMethod("citationInfo", signature("eml"), function(object){
-          cat(format(as(object@dataset@creator, "person"),
-                     include=c("family", "given"),
-                     braces = list(family=c("", ","))),
+          cat(
+              creator(object),
               ", ", 
-              format(as.Date(object@dataset@pubDate), "%Y"), 
-              ". ",              
+              object@dataset@pubDate, 
+              ". \"",              
               object@dataset@title, 
+              ".\" ",
               object@dataset@publisher@organizationName, ".\n", sep="")
 })
 

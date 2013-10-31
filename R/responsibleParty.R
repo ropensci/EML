@@ -104,8 +104,9 @@ setAs("ListOfresponsibleParty", "person", function(from){
 
 setAs("ListOfcreator", "person", function(from){
     l <- lapply(from, as, "person")
-      out <- l[[1]]
+      out <- NULL 
       for(p in l)
-        c(out, p)
+        out <- c(out, p)
+      class(out) = "person"
       out
   })

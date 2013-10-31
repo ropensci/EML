@@ -1,6 +1,6 @@
 #' Top-level API function for writing eml 
-#' @aliases write.eml 
-#' @export
+#' @aliases eml_write write.eml 
+#' @export eml_write write.eml
 eml_write <- function(dat, 
                       metadata = NULL, 
                       title = "metadata", 
@@ -38,7 +38,7 @@ eml_write <- function(dat,
   saveXML(xml, file = file)
 }
 
-
+write.eml <- eml_write
 
 
 
