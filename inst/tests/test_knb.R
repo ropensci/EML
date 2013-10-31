@@ -32,10 +32,13 @@ eml_write(dat,
 
 
 test_that("We can publish data to the KNB", {
+  pid <- eml_knb("test.xml", 
+                 mn_nodeid = "urn:node:mnDemo5",  # A Development server for testing
+                 cli = D1Client("DEV", mn_nodeid)) # Use dev mode client)
 
-  pid <- eml_knb("test.xml")
-  csv <- getD1Object(cli, pid[["csv"]])
+  # check that we can access the data with the dataone client 
   require(dataone)
+  csv <- getD1Object(cli, pid[["csv"]])
   expect_is(asDataFrame(csv), "data.frame")
 
           })

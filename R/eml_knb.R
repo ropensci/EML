@@ -5,6 +5,10 @@
 #' @export
 #' @examples 
 #' \dontrun{
+
+# Initialize a client to interact with DataONE
+
+
 #' }
 eml_knb <- function(file, 
                     mn_nodeid = "urn:node:KNB",
