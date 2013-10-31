@@ -14,16 +14,15 @@
 #'    file <- system.file("doc", "my_eml_data.xml", package="reml")
 #'    id <- eml_publish(file, description="Example EML file from reml", categories = "Ecology", tags = "EML")
 #' }
-eml_publish <- function(file, ...,  
-                        destination = c("figshare", "github")){
+eml_publish <- function(file, 
+                        ...,  
+                        destination = c("figshare", "knb"))
+{
   destination <- match.arg(destination)
-  if(destination == "figshare"){
-    available <- require(rfigshare)
-    if(!available)
-      stop("Publishing to figshare requires the rfigshare package")
-    else
-      do.call(eml_figshare, c(file, list(...)))
-  }
+  switch(destination, 
+         figshare = do.call(eml_figshare(file, ...)),
+         knb = eml_knb(file, ...)
+         )
 }
 
 
