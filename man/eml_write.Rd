@@ -13,6 +13,9 @@
     file = paste0(gsub(" ", "_", title), ".xml"),
     eml_version = c("2.1.1", "2.1.0"))
 }
+\arguments{
+  \item{dat}{either a data.frame, data.set, or eml object}
+}
 \description{
   Top-level API function for writing eml
 }
