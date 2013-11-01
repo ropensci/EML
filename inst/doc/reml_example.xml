@@ -1,4 +1,4 @@
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:10618e66-b808-466d-8f8f-c15f8b5d1391" system="uuid" scope="system">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:289d3f4b-553b-4284-8bed-0cef6f828d7d" system="uuid" scope="system">
   <dataset>
     <title>reml example</title>
     <creator>
@@ -17,7 +17,7 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </contact>
-    <dataTable id="urn:uuid:36d6d88d-b6b4-48d6-a475-e7038a18f46b" system="uuid" scope="system">
+    <dataTable id="urn:uuid:e6825abe-e1c1-439c-ab81-da9a589a3e96" system="uuid" scope="system">
       <entityName>reml example</entityName>
       <entityDescription>An example, intended for
                               illustrative purposes only.</entityDescription>

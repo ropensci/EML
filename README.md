@@ -24,7 +24,7 @@ Install the R package:
 
 
 
-```r
+```coffee
 library("devtools")
 install_github("reml", "ropensci")
 ```
@@ -33,7 +33,7 @@ install_github("reml", "ropensci")
 Load the package:
 
 
-```r
+```coffee
 library("reml")
 ```
 
@@ -47,7 +47,7 @@ Writing R data into EML
 
 
 
-```r
+```coffee
 dat = data.set(river = c("SAC",  "SAC",   "AM"),
                spp   = c("king",  "king", "ccho"),
                stg   = c("smolt", "parr", "smolt"),
@@ -78,7 +78,7 @@ Alternatively, annotations can be added to an existing data frame, `data.set(my.
 
 
 
-```r
+```coffee
 eml_write(dat, 
           title = "reml example",  
           description = "An example, intended for
@@ -102,7 +102,7 @@ See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/re
 Configure general metadata you may want to frequently reuse, avoiding having to specify things like the name of the creator or contact.
 
 
-```r
+```coffee
 eml_config(creator = list("Carl Boettiger <cboettig@ropensci.org>", "Karthik Ram"), contact = "Carl Boettiger <cboettig@ropensci.org>")
 ```
 
@@ -130,8 +130,12 @@ required to use reml and run the examples in the other sections_
 
 <!-- We don't want to generate a DOI every time we run the vignette -->
 
-```r
+```coffee
 id = eml_publish("reml_example.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
+```
+
+```
+Error: Could not resolve host: api.figshare.com
 ```
 
 
@@ -140,7 +144,7 @@ This creates a draft file visible only to the user configured in `rfigshare`.  T
 <!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 
 
-```r
+```coffee
 doc <- eml_read("my_eml_data.xml")
 citation(doc) # not implemented yet
 ```
@@ -166,73 +170,27 @@ Reading EML
 
 
 
-```r
+```coffee
 obj <- eml_read("reml_example.xml")
-obj 
-```
-
-```
-reml example
-An example, intended for
-                              illustrative purposes only.
-Carl Boettiger <cboettig@gmail.com> [cre]
-
-  river  spp   stg  ct
-1   SAC king smolt 293
-2   SAC king  parr 410
-3    AM ccho smolt 210
 ```
 
 
 We can use various accessor functions to return the data and metadata elements in native R formats.
 
 
-```r
-dataTable(obj)
-```
-
-```
-Object of class "data.set"
-  river  spp   stg  ct
-1   SAC king smolt 293
-2   SAC king  parr 410
-3    AM ccho smolt 210
-Slot "col.defs":
-                       attribute                        attribute 
-"River site used for collection"            "Species common name" 
-                       attribute                        attribute 
-                    "Life Stage"    "count of live fish in traps" 
-
-Slot "unit.defs":
-$attribute
-                   SAC                     AM 
-"The Sacramento River"   "The American River" 
-
-$attribute
-         king          ccho 
-"King Salmon" "Coho Salmon" 
-
-$attribute
-               parr               smolt 
- "third life stage" "fourth life stage" 
-
-$attribute
-[1] "number"
-```
-
-```
-NULL
+```coffee
+dat <- dataTable(obj)
 ```
 
 
 
-```r
+```coffee
 metadata <- attributeList(obj)
 ```
 
 
 
-```r
+```coffee
 contact(obj)
 ```
 
@@ -244,7 +202,7 @@ contact(obj)
 Note that the contact has been coerced into R's built-in 'person' object:
 
 
-```r
+```coffee
 class(contact(obj))
 ```
 
@@ -254,12 +212,12 @@ class(contact(obj))
 
 
 
-```r
+```coffee
 citationInfo(obj)
 ```
 
 ```
-Boettiger, Carl, 2013. reml example.
+Boettiger C (2013-10-31). _reml example_.
 ```
 
 
@@ -284,13 +242,13 @@ Testing and development
 
 While the dependencies for basic functionality are kept to a minimum, to access all the functions and tests implemented in `reml` you'll need several additional packages.  
 
-```r
+```coffee
 install.packages(c("yaml", "knitr", "rfigshare", "testthat", "RCurl"))
 ```
 
 Some of these additional packages are not yet on CRAN and may not be stable.
 
-```r
+```coffee
 install.packages("uuid")
 install_github("RHTMLForms", "omegahat")
 install_github("XMLSchema", "omegahat")
