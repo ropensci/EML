@@ -152,13 +152,12 @@ Reading EML
 
 ```{r}
 obj <- eml_read("reml_example.xml")
-obj 
 ```
 
 We can use various accessor functions to return the data and metadata elements in native R formats.
 
 ```{r}
-dataTable(obj)
+dat <- dataTable(obj)
 ```
 
 ```{r}
