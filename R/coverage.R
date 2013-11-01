@@ -39,7 +39,7 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
 
 
 
-
-setMethod("show", signature("coverage"), show_yaml)
+#' @include eml_yaml.R
+setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
 

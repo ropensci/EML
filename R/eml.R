@@ -91,7 +91,8 @@ eml <- function(dat,
 
 # When printing to screen, use YAML
 #' @import yaml 
-setMethod("show", signature("eml"), show_yaml)
+#' @include eml_yaml.R
+setMethod("show", signature("eml"), function(object) show_yaml(object))
 
 
 
