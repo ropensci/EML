@@ -1,6 +1,6 @@
 \name{eml_coverage}
 \alias{eml_coverage}
-\title{Helper constructor for creating coverage node.
+\title{Constructor function for `coverage` class.
 Provides convenience tools to write the more common
 versions of coverage metadata.}
 \usage{
@@ -33,7 +33,7 @@ versions of coverage metadata.}
   an S4 representation of an eml coverage node.
 }
 \description{
-  Helper constructor for creating coverage node. Provides
+  Constructor function for `coverage` class. Provides
   convenience tools to write the more common versions of
   coverage metadata.
 }
