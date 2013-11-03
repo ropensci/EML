@@ -2,14 +2,19 @@
 #' read eml files (.xml)
 #'
 #' @param file the name or path to the file (see ?xmlParse for details)
-#' @param get the name of the object that should be returned 
 #' @export eml_read read.eml
 #' @aliases eml_read read.eml
-eml_read <- function(file, get=c("eml", "data.frame", "attributeList"), ...){
-  doc <- xmlParse(file=file, ...)
+eml_read <- function(file,  ...){
+
+  if(is(file, "XMLInternalDocument"))  # if already parsed XML, e.g. from d1_get
+    doc <- file
+  if(file.exists(file)) # if is a path
+    doc <- xmlParse(file=file, ...)
   root <- xmlRoot(doc)
   s4 <- as(root, "eml")
-  s4@dirname <- dirname(file) 
+  s4@dirname <- paste0(dirname(file), "/")
+  s4@dataset@dataTable@physical@dirname <- paste0(dirname(file), "/") ## Fix for multiple dataTables per dataset
+  s4
 }
 read.eml <- eml_read
 
@@ -64,7 +69,7 @@ setMethod("attributeList", signature("eml"), function(object){
 
 
 setMethod("dataTable", signature("eml"), function(object){
-          df = extract(object@dataset@dataTable@physical, using=col_classes(object))
+          df = extract(object@dataset@dataTable@physical)    ## FIXME as.Date likely to fail on ambiguous formats, need to extract format first , using=col_classes(object)
           data.set(df, col.defs=col.defs(object), unit.defs=unit.defs(object))
 })
 

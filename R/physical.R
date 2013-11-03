@@ -1,5 +1,7 @@
 ## Physical ##
 
+## Definitions of subclasses, and their coercions to/from XML: 
+
 ### Data Format ###
 setClass("simpleDelimited", 
          representation(fieldDelimiter = "character"))
@@ -31,6 +33,7 @@ setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 ########################
 
+## FIXME should include function *attribute* as well (e.g. function=download)  
 setClass("online",
          representation(url = "character",
                         onlineDescription = "character"))
@@ -58,7 +61,8 @@ setClass("physical",
                         size = "numeric", # "object_size", # R class  
                         characterEncoding = "character",
                         dataFormat = "dataFormat",
-                        distribution = "distribution"))
+                        distribution = "distribution",
+                        dirname = "character"))  ## An internal notation only to assist in reading in from correct filepath  
 
 setAs("XMLInternalElementNode", "physical", function(from) emlToS4(from))
 setAs("physical", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -66,7 +70,28 @@ setAs("physical", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## Methods to convert into native R types 
 setAs("physical", "data.frame", function(from)
       extract(from)) 
+
+
 ## FIXME  exported for test only, maybe not necessary?
+## extraction might not be the best way to define these.  
+
+
+setMethod("filepath", signature("physical"),
+          function(from){
+            path <- paste0(from@dirname, from@objectName)
+            if(file.exists(path))
+              path
+            else {
+              fail = download.file(from@distribution@online@url, 
+                                      destfile = path, method="auto")
+              if(!fail)
+                path
+              else
+                stop(paste("could not find file", from@objectName, "in", from@dirname, "or at", from@distribution@online@url))
+            }
+          })
+
+
 #' @export
 setMethod("extract", signature("physical", "character"),
           function(from, using=NA){
@@ -74,21 +99,23 @@ setMethod("extract", signature("physical", "character"),
             # Better to just treat it as a factor 
             using <- gsub("ordered", "factor", using) 
             ## FIXME use the EML to determine read.csv options
-            dat <- read.csv(from@objectName, colClasses=using)
+            dat <- read.csv(filepath(from))  #colClasses=using)
           })
-
 # If col_classes(object) returns a list, means that colClasses are not simple types (e.g. c("ordered", "factor") or "NULL")
 # See read.csv for details.  Meanwhile, if we get a list, just read in ignoring the declared colClasses
 setMethod("extract", signature("physical", "list"),
           function(from, using=NA){
             ## FIXME use the EML to determine read.csv options
-            dat <- read.csv(from@objectName)
+            dat <- read.csv(filepath(from)) 
           })
+
+
+
 ## if no `using` option is defined: 
 setMethod("extract", signature("physical"),
           function(from, using=NA){
             ## FIXME use the EML to determine read.csv options
-            dat <- read.csv(from@objectName)
+            dat <- read.csv(filepath(from)) 
           })
 
 

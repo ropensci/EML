@@ -35,6 +35,7 @@ setGeneric("id", function(x) standardGeneric("id"))
 setGeneric("version", function(x) standardGeneric("version"))
 
 
+setGeneric("filepath", function(from) defaultGeneric("filepath"))
 
 setGeneric("coverage", function(coverage) defaultGeneric("coverage"))
 

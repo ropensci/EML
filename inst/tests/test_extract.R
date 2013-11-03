@@ -19,6 +19,32 @@ test_that("we can extract the data unaltered (using method for object 'physical'
 })
 
 
+test_that("we can extract from alternative paths", {
+  ## Create a subdirectory to make sure we can read when data is not in the working directory
+  dir.create("tmp")
+
+  ## Let's get the example dataset from the DataONE REST API just for fun
+  require(httr)
+  id <- "knb-lter-hfr.205.4"
+  base <- "https://cn.dataone.org/cn/v1"
+  url <- paste(base, "object", id, sep="/")
+  file <- content(GET(url))
+
+  ## Write the file out again just so we can test our reading local paths
+  require(XML)
+  saveXML(file, "tmp/hf205.xml")
+
+  ## Here's the actual test
+  met <- eml_read("tmp/hf205.xml")
+  dat <- dataTable(met) # Includes call to extract that must download the CSV file from the address given in the EML
+  expect_is(dat, "data.frame")
+
+  ## Cleanup
+  unlink("tmp/hf205.xml")
+  unlink("tmp/hf205-01-TPexp1.csv")
+  unlink("tmp")
+})
+
 ## Add unit tests for all extractors!
 
 test_that("we can extract from eml directly", {
