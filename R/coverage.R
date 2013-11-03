@@ -1,4 +1,6 @@
 
+## Class defintiion
+##    Dependent classes 
 #' @include temporalCoverage.R
 #' @include geographicCoverage.R
 #' @include taxonomicCoverage.R
@@ -16,7 +18,7 @@ setAs("coverage", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 
-#' Helper constructor for creating coverage node.  
+#' Constructor function for `coverage` class.  
 #' Provides convenience tools to write the more common
 #' versions of coverage metadata. 
 #' @param scientific_names a list or character string of scientific names of species covered by this dataset.  Assumes names are two words long, given as "genus species" or "genus_species". Can alternatively provide an `eml::taxonomicCoverage` object.  
@@ -38,8 +40,29 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
 }
 
 
+## Methods for `coverage` class 
 
 #' @include eml_yaml.R
 setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
+
+
+#' accessor method
+setMethod("coverage", signature("coverage"), 
+          function(coverage){
+            list(
+            scientific_names = species(coverage@taxonomicCoverage),
+            dates = c(coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate,
+                      coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate),
+            geographic_description = coverage@geographicCoverage@geographicDescription,
+            NSEWbox = c(north = coverage@geographicCoverage@boundingCoordinates@northBoundingCoordinate, 
+                        south = coverage@geographicCoverage@boundingCoordinates@southBoundingCoordinate, 
+                        east = coverage@geographicCoverage@boundingCoordinates@eastBoundingCoordinate, 
+                        west = coverage@geographicCoverage@boundingCoordinates@westBoundingCoordinate,
+                        ## check that units are in meters!
+                        min_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMinimum, 
+                        max_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMaximum) 
+            )
+
+          })
 

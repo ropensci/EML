@@ -9,7 +9,7 @@ eml_read <- function(file, get=c("eml", "data.frame", "attributeList"), ...){
   doc <- xmlParse(file=file, ...)
   root <- xmlRoot(doc)
   s4 <- as(root, "eml")
-  
+  s4@dirname <- dirname(file) 
 }
 read.eml <- eml_read
 
@@ -120,53 +120,4 @@ setMethod("extract", signature("eml"),
 
 
 
-
-
-
-
-setMethod("coverage", signature("eml"),
-          function(coverage){
-## consider checking if multiple datasets?  
-          coverage(coverage@dataset)
-          })
-setMethod("coverage", signature("dataset"), 
-          function(coverage){ 
-            coverage(coverage@coverage)
-          })
-
-
-
-setMethod("species", signature("taxonomicCoverage"), 
-          function(taxonomicCoverage){
-            unname(sapply(taxonomicCoverage@taxonomicClassification, 
-                 function(object){
-                    x <- NULL
-                    while(!isEmpty(object)){
-                      if(object@taxonRankName %in% c("genus", "species"))
-                        x <- c(x, object@taxonRankValue)
-                      object <- object@taxonomicClassification
-                    }
-                    paste(x, collapse = " ")
-                 }))
-          })
-
-
-
-setMethod("coverage", signature("coverage"), 
-          function(coverage){
-            list(
-            scientific_names = species(coverage@taxonomicCoverage),
-            dates = c(coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate,
-                      coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate),
-            geographic_description = coverage@geographicCoverage@geographicDescription,
-            NSEWbox = c(north = coverage@geographicCoverage@boundingCoordinates@northBoundingCoordinate, 
-                        south = coverage@geographicCoverage@boundingCoordinates@southBoundingCoordinate, 
-                        east = coverage@geographicCoverage@boundingCoordinates@eastBoundingCoordinate, 
-                        west = coverage@geographicCoverage@boundingCoordinates@westBoundingCoordinate,
-                        ## check that units are in meters!
-                        min_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMinimum, 
-                        max_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMaximum) 
-            )
-
-          })
 

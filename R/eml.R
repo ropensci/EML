@@ -14,8 +14,13 @@ setClass("eml",
                         scope       = "character",
                         dataset     = "dataset",
                         additionalMetadata = "additionalMetadata",
-                        namespaces = "character"),
+                        namespaces = "character", 
+                        dirname = "character"), 
+         # slots 'namespaces' and 'dirnames' are for internal use
+         # only and not written as XML child elements.  
          prototype = prototype(namespaces = eml_namespaces))
+
+
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
@@ -89,10 +94,21 @@ eml <- function(dat,
 }
 
 
+## Additional METHODS for this class ## 
+
+
 # When printing to screen, use YAML
 #' @import yaml 
 #' @include eml_yaml.R
 setMethod("show", signature("eml"), function(object) show_yaml(object))
+
+
+
+setMethod("coverage", signature("eml"),
+          function(coverage){
+## consider checking if multiple datasets?  
+          coverage(coverage@dataset@coverage)
+          })
 
 
 

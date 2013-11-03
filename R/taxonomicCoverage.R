@@ -1,4 +1,7 @@
 
+## Subclasses of taxonomicCoverage, 
+## with coercion methods to/from XML 
+
 setClass("classificationSystem",
          representation(classificationSystemCitation = "citation",
                         classificationSystemModifications = "character"))
@@ -44,6 +47,8 @@ setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4To
 
 setClass("ListOftaxonomicClassification", contains = "list")
 
+
+## Class definition for taxonomicCoverage 
 #' @include referencesGroup.R
 setClass("taxonomicCoverage",
          representation(taxonomicSystem = "taxonomicSystem",
@@ -55,6 +60,11 @@ setAs("taxonomicCoverage", "XMLInternalElementNode",   function(from) S4Toeml(fr
 
 
 
+### Helper coercion methods to convert strings of species names into EML objects  ##
+## FIXME is it wise to define such coercions since the strings may not correspond to appropriate objects?  
+
+
+## string taxonomicClassification object
 setAs("character", "taxonomicClassification", function(from){
       from <- gsub("_", " ", from) # names should have spaces
       tmp <- strsplit(from, " ")[[1]]
@@ -75,11 +85,58 @@ setAs("character", "taxonomicClassification", function(from){
       out
 })
 
+setAs("character", "taxonomicCoverage", function(from){
+    new("taxonomicCoverage", 
+      taxonomicClassification = 
+      new("ListOftaxonomicClassification", 
+          lapply(from, as, "taxonomicClassification")))})
+
+
+## Coerce taxonomicCoverage into a string of species names
+setAs("taxonomicClassification", "character", function(from){
+                    x <- NULL
+                    while(!isEmpty(from)){
+                      if(from@taxonRankName %in% c("genus", "species"))
+                        x <- c(x, from@taxonRankValue)
+                      from <- from@taxonomicClassification
+                    }
+                    paste(x, collapse = " ")
+                 })
+setAs("taxonomicCoverage", "character", function(from)
+            unname(sapply(from@taxonomicClassification, as, "character"))
+
+
+## Coerce taxonomicCoverage into a species string  
+## FIXME define at the taxonomimcClassifcation level first
+## FIXME Define as a coercion to character instead?
+setMethod("species", signature("taxonomicCoverage"), 
+          function(taxonomicCoverage){
+            unname(sapply(taxonomicCoverage@taxonomicClassification, 
+                 function(object){
+                    x <- NULL
+                    while(!isEmpty(object)){
+                      if(object@taxonRankName %in% c("genus", "species"))
+                        x <- c(x, object@taxonRankValue)
+                      object <- object@taxonomicClassification
+                    }
+                    paste(x, collapse = " ")
+                 }))
+          })
+
+
+
+## Constructor for `taxonomicCoverage` class
 eml_taxonomicCoverage <- function(scientific_names){
   if(is(scientific_names, "taxonomicCoverage"))
     scientific_names
   else 
     new("taxonomicCoverage", 
-      taxonomicClassification = new("ListOftaxonomicClassification", 
-                                    lapply(scientific_names, as, "taxonomicClassification")))
+      taxonomicClassification = 
+      new("ListOftaxonomicClassification", 
+          lapply(scientific_names, as, "taxonomicClassification")))
 }
+
+
+
+
+

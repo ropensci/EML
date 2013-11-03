@@ -12,7 +12,7 @@ attribute_elements <- c("id", "system", "scope", "packageId")
 
 S4Toeml <- function(obj, 
                     node = newXMLNode(class(obj)[1]),
-                    excluded_slots = c("namespaces")){
+                    excluded_slots = c("namespaces", "dirname")){
     who <- slotNames(obj)
     drop <- match(excluded_slots, who)
     if(!is.na(drop))
