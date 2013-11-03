@@ -103,7 +103,7 @@ setAs("taxonomicClassification", "character", function(from){
                     paste(x, collapse = " ")
                  })
 setAs("taxonomicCoverage", "character", function(from)
-            unname(sapply(from@taxonomicClassification, as, "character"))
+            unname(sapply(from@taxonomicClassification, as, "character")))
 
 
 ## Coerce taxonomicCoverage into a species string  
