@@ -60,8 +60,8 @@ test_that("we can access the citation", {
 })
 
 
-
-
+# Created by S4Obj for the 'physical' node
+unlink("title.csv")
 
 
 
