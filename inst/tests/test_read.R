@@ -29,6 +29,23 @@ S4obj <- reml:::eml(dat, metadata, title = "title",
 
 
 
+
+test_that("We can access a file by DataONE ID", {
+          a <- eml_read("knb-lter-hfr.205.4")
+          expect_is(a, "eml")
+          unlink("hf205.xml")
+})
+
+test_that("We can access a file by its URL", {
+          a <- eml_read("http://harvardforest.fas.harvard.edu/data/eml/hf205.xml")
+          expect_is(a, "eml")
+          unlink("hf205.xml")
+})
+
+
+### These should be moved into seperate tests
+
+
 test_that("we can access the dataTable", {
   dataTable(S4obj)
 })
@@ -41,5 +58,10 @@ test_that("we can access the contact", {
 test_that("we can access the citation", {
   citationInfo(S4obj)
 })
+
+
+
+
+
 
 
