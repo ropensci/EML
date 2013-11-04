@@ -25,7 +25,7 @@ test_that("we can extract from alternative paths", {
 
   ## Let's get the example dataset from the DataONE REST API just for fun
   require(httr)
-  id <- "knb-lter-hfr.205.4"
+  id <- "knb-lter-hfr.205.4" # Interestingly, met@packageID ends with `.7`, not `.4` ...
   base <- "https://cn.dataone.org/cn/v1"
   url <- paste(base, "object", id, sep="/")
   file <- content(GET(url))
