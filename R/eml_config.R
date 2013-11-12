@@ -1,5 +1,8 @@
 
 
+
+## FIXME consider using S4 objects and their constructors as the standard way to set defaults. 
+
 ## FIXME are defaults resonable? i.e. define creator and set contact = creator, rather than vice versa?  
 #' @export
 eml_config <- function(creator, contact = NULL, defaultLicense = "CC0"){
