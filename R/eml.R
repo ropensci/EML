@@ -13,7 +13,7 @@ setClass("eml",
                         system      = "character",
                         scope       = "character",
                         dataset     = "dataset",
-                        additionalMetadata = "additionalMetadata",
+                        additionalMetadata = "ListOfadditionalMetadata",
                         namespaces = "character", 
                         dirname = "character"), 
          # slots 'namespaces' and 'dirnames' are for internal use
@@ -111,7 +111,14 @@ setMethod("coverage", signature("eml"),
           })
 
 
-
+#' @export
+setMethod("keywords", signature("eml"),
+          function(object){
+            out <- unname(lapply(object@dataset@keywordSet, keywords))
+            thes <- sapply(object@dataset@keywordSet, function(x) x@keywordThesaurus)
+            names(out) <- thes
+            out
+          })
 
 
 ## FIXME this could be much richer

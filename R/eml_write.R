@@ -14,7 +14,7 @@ eml_write <- function(dat,
                                         NSEWbox = NULL),
                 methods = new("methods"), 
                 additionalMetadata = new("additionalMetadata"),
-                file = paste0(gsub(" ", "_", title), ".xml"),
+                file = NULL, # paste0(gsub(" ", "_", title), ".xml"),
                 eml_version = c("2.1.1", "2.1.0")){
   if(is(dat, "eml"))
     s4 <- dat

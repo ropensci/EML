@@ -9,28 +9,35 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
         obj = new(obj)
     ids = names(node)
     nodes = xmlChildren(node)
-    obj = XML:::addXMLAttributes(obj, xmlAttrs(node))
+    ## isn't  that automatic from the class definition?   
+    obj = XML:::addXMLAttributes(obj, xmlAttrs(node)) ## treat attributes as slots. 
     slotIds = slotNames(obj)
     slots = getClass(class(obj))@slots
-    for (i in seq(along = nodes)) {
-        if (ids[i] %in% slotIds) {
 
-          ## Added this condition to hadle multiple elements of same name
-          if(is(new(slots[[ids[[i]]]]), "list"))
-            slot(obj, ids[i]) <- listof(nodes, ids[[i]])
-          else {
-
-            val = if (slots[[ids[i]]] == "character") 
-                xmlValue(nodes[[i]])
-            else as(nodes[[i]], slots[[ids[i]]])
-            slot(obj, ids[i]) <- val
-          }
+    for (i in slotIds ) {  
+      if(i %in% names(node)){  ## only process slotIds that have corresponding values in the XML) 
+        ## Added this condition to hadle multiple elements of same name
+        if(is(new(slots[[i]]), "list")){
+          ## don't want to loop over all nodes, just those whose name matches i. 
+          matching_nodes <- nodes[(names(nodes) %in% i)]
+          slot(obj, i) <- listof(matching_nodes, i)  
+        } else {
+          val <- 
+          if (slots[[i]] == "character") 
+              xmlValue(nodes[[i]])
+          else 
+            as(nodes[[i]], slots[[i]])
+          slot(obj, i) <- val
         }
+      } else if(i == xmlName(node)) {
+        if(slots[[i]] == "character")
+          slot(obj, i) <- xmlValue(node)
+      }
     }
     obj
 }
 
 ## Hacks XML::xmlToS4 to deal with lists 
 listof <- function(kids, element, listclass = paste0("ListOf", element))
-  new(listclass, lapply(kids[names(kids) == element], as, element))
+  new(listclass, lapply(kids[names(kids) == element], as, element))  ## subsets already 
 

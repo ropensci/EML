@@ -64,3 +64,11 @@ eml_geographicCoverage <- function(description, NSEWbox=NULL){
     node
   }
 }
+
+
+#' @include eml_yaml.R
+setMethod("show", signature("geographicCoverage"), function(object) show_yaml(object))
+
+
+
+

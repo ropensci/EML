@@ -48,8 +48,21 @@ setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
 
 #' accessor method
-setMethod("coverage", signature("coverage"), 
-          function(coverage){
+setMethod("coverage", signature("coverage"), function(coverage) coverage)
+
+# Coercing to a generic list is error-prone, e.g. as(coverage, "list")[[1]][[1]] 
+# would not consistently return the same field.  Instead, we coerce to a specific
+# list structured in the way eml_coverage expects its arugments.  
+# Thus, `cov <- coverage(eml); S4 <- do.call(eml_coverage, cov)` works,
+# returning an S4 version (S4) and the list argument (cov).  
+setAs("coverage", "list", function(from)
+      get_coverage_list(from)
+#      xmlToList(as(from, "XMLInternalElementNode"))
+)
+
+
+get_coverage_list <- 
+  function(coverage){
             list(
             scientific_names = species(coverage@taxonomicCoverage),
             dates = c(coverage@temporalCoverage@rangeOfDates@beginDate@calendarDate,
@@ -64,5 +77,5 @@ setMethod("coverage", signature("coverage"),
                         max_alt = coverage@geographicCoverage@boundingCoordinates@boundingAltitudes@altitudeMaximum) 
             )
 
-          })
+          }
 

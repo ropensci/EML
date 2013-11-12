@@ -48,16 +48,14 @@ test_that("Generator for dataset containing generator for dataTable", {
 
 
 test_that("Constructor function for physical works given data.frame", {
-  reml:::eml_physical(dat, filename="tmp") 
-
+  reml:::eml_physical(dat, filename="tmp.csv") 
   unlink("tmp.csv")
 })
 
 ## Constructor functions handle the detect_class internally:
 
 test_that("Constructor function for dataTable works given data.frame and metadata list", {
-  reml:::eml_dataTable(dat, metadata, filename="tmp") 
-
+  reml:::eml_dataTable(dat, metadata, filename="tmp.csv") 
   unlink("tmp.csv")
 }) 
 

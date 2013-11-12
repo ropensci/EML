@@ -14,9 +14,7 @@ S4Toeml <- function(obj,
                     node = newXMLNode(class(obj)[1]),
                     excluded_slots = c("namespaces", "dirname")){
     who <- slotNames(obj)
-    drop <- match(excluded_slots, who)
-    if(!is.na(drop))
-      who <- who[-drop] # drop excluded slots
+    who <- who[!(who %in% excluded_slots)] # drop excluded slots
     for(s in who){
       ## Attributes
       if(s %in% attribute_elements){

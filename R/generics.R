@@ -35,9 +35,15 @@ setGeneric("id", function(x) standardGeneric("id"))
 setGeneric("version", function(x) standardGeneric("version"))
 
 
-setGeneric("filepath", function(from) defaultGeneric("filepath"))
+#' @export
+setGeneric("filepath", function(from) standardGeneric("filepath"))
 
-setGeneric("coverage", function(coverage) defaultGeneric("coverage"))
+#' @export
+setGeneric("coverage", function(coverage) standardGeneric("coverage"))
 
-setGeneric("species", function(taxonomicCoverage) defaultGeneric("species"))
+#' @export
+setGeneric("keywords", function(object) standardGeneric("keywords"))
+
+#' @export
+setGeneric("species", function(taxonomicCoverage) standardGeneric("species"))
 
