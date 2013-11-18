@@ -51,7 +51,7 @@ test_that("We can write some part of this to XML", {
 
 test_that("We can write S4 EML to XML and validate", {
 
-  eml_write(dat, metadata, title = "title", description = "description", creator = "Carl Boettiger <cboettig@gmail.com>")
+  eml_write(dat, metadata, title = "title", description = "description", creator = "Carl Boettiger <cboettig@gmail.com>", file="title.xml")
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
@@ -75,9 +75,15 @@ test_that("We can write S4 EML to XML and validate", {
 
 
 test_that("We can add coverage information and validate", {
-  eml_write(dat, metadata, title = "title", description = "description", 
+  eml_write(dat, 
+            metadata, 
+            file = "title.xml",
+            title = "title", 
+            description = "description", 
             creator = "Carl Boettiger <cboettig@gmail.com>",
-            coverage = eml_coverage(list("Homo sapiens"), c("2013-09-01", "2013-09-03"),  "Santa Cruz, CA", c(37.0,36.5,-122.0, -122.5)))
+            coverage = eml_coverage(list("Homo sapiens"), 
+                                    c("2013-09-01", "2013-09-03"),  
+                                    "Santa Cruz, CA", c(37.0,36.5,-122.0, -122.5)))
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
