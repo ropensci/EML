@@ -162,10 +162,6 @@ sections}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-Error: Could not resolve host: api.figshare.com
-\end{verbatim}
-
 This creates a draft file visible only to the user configured in
 \texttt{rfigshare}. The document can be made (permanently) public using
 either the figshare web interface, the \texttt{rfigshare} package (using
@@ -242,7 +238,7 @@ object:
 \end{Shaded}
 
 \begin{verbatim}
-Boettiger C (2013-10-31). _reml example_.
+Boettiger C (2013-11-12). _reml example_.
 \end{verbatim}
 
 \paragraph{In development}\label{in-development-1}

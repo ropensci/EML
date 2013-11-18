@@ -1,4 +1,4 @@
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:289d3f4b-553b-4284-8bed-0cef6f828d7d" system="uuid" scope="system">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:ca8b398c-ce3c-4def-9381-cb0a6727b093" system="uuid" scope="system">
   <dataset>
     <title>reml example</title>
     <creator>
@@ -8,7 +8,7 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </creator>
-    <pubDate>2013-10-31</pubDate>
+    <pubDate>2013-11-12</pubDate>
     <intellectualRights>&lt;a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'&gt;CC0&lt;/a&gt;</intellectualRights>
     <contact>
       <individualName>
@@ -17,7 +17,7 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </contact>
-    <dataTable id="urn:uuid:e6825abe-e1c1-439c-ab81-da9a589a3e96" system="uuid" scope="system">
+    <dataTable id="urn:uuid:122f4466-cb8b-4f04-865d-38d1d87c6d57" system="uuid" scope="system">
       <entityName>reml example</entityName>
       <entityDescription>An example, intended for
                               illustrative purposes only.</entityDescription>
