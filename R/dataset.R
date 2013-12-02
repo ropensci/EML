@@ -1,3 +1,5 @@
+#' @include reml_environment.R
+#' @include resourceGroup.R
 
 ## Helper class definitions for dataset 
 setClass("publisher", contains="responsibleParty")
@@ -10,7 +12,7 @@ setAs("publisher", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## order provided by slotNames), since resourceGroup elements
 ## must come before these elements
 setClass("dataset_elements",     
-         representation(purpose = "character", 
+         slots = c(purpose = "character", 
                         contact = "contact",
                         publisher = "publisher",
                         methods = "methods",

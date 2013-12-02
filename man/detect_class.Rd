@@ -2,7 +2,7 @@
 \alias{detect_class}
 \title{Helper function to attach classes to metadata}
 \usage{
-  detect_class(dat, meta)
+detect_class(dat, meta)
 }
 \arguments{
   \item{dat}{a data frame}

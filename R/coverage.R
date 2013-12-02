@@ -6,7 +6,7 @@
 #' @include taxonomicCoverage.R
 #' @include referencesGroup.R
 setClass("coverage", 
-         representation(id = "character",
+         slots = c(id = "character",
 #                        system = "character",
 #                        scope = "character",
                         geographicCoverage = "geographicCoverage",

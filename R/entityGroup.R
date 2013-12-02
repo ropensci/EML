@@ -2,7 +2,7 @@
 #' @include coverage.R
 #' @include physical.R
 setClass("entityGroup", 
-         representation(entityName = "character",
+         slots = c(entityName = "character",
                         entityDescription = "character",
                         alternateIdentifier = "character",
                         physical = "physical",

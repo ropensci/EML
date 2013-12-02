@@ -1,15 +1,18 @@
 \name{eml_read}
 \alias{eml_read}
 \alias{read.eml}
-\title{read eml files (.xml)}
+\title{Read EML files}
 \usage{
-  eml_read(file, ...)
+eml_read(file, ...)
 }
 \arguments{
-  \item{file}{the name or path to the file (see ?xmlParse
-  for details)}
+  \item{file}{an external eml (xml) file, or
+  XMLInternalDocument}
+}
+\value{
+  an EML object
 }
 \description{
-  read eml files (.xml)
+  Read EML files
 }
 

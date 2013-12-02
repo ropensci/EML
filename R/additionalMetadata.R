@@ -1,5 +1,5 @@
 setClass("additionalMetadata", 
-         representation(metadata = "XMLInternalElementNode",
+         slots = c(metadata = "XMLInternalElementNode",
                         describes = "character",
                         id = "character"))
 setAs("XMLInternalElementNode", "additionalMetadata", 

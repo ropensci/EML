@@ -7,14 +7,14 @@
 
 
 setClass("boundingAltitudes", 
-         representation(altitudeMinimum = "numeric",
+         slots = c(altitudeMinimum = "numeric",
                         altitudeMaximum = "numeric",
                         altitudeUnits = "character"))
 setAs("XMLInternalElementNode", "boundingAltitudes",   function(from) emlToS4(from))
 setAs("boundingAltitudes", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("boundingCoordinates",
-         representation(westBoundingCoordinate = "numeric", 
+         slots = c(westBoundingCoordinate = "numeric", 
                         eastBoundingCoordinate = "numeric",
                         northBoundingCoordinate = "numeric",
                         southBoundingCoordinate = "numeric", 
@@ -24,7 +24,7 @@ setAs("boundingCoordinates", "XMLInternalElementNode",   function(from) S4Toeml(
 
 #' @include referencesGroup.R
 setClass("geographicCoverage",
-         representation(id = "character",
+         slots = c(id = "character",
                         geographicDescription = "character",
                         boundingCoordinates = "boundingCoordinates",
                         datasetGPolygon = "character"), # Should support the polygon properly...

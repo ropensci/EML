@@ -2,7 +2,7 @@ require(utils)
 
 
 setClass("individualName",  
-         representation(salutation = "character",
+         slots = c(salutation = "character",
                         givenName = "character", 
                         surName = "character"))
 setAs("XMLInternalElementNode", "individualName",   function(from) emlToS4(from))
@@ -10,7 +10,7 @@ setAs("individualName", "XMLInternalElementNode",   function(from) S4Toeml(from)
 
 
 setClass("address", 
-         representation(deliveryPoint = "character", # street address
+         slots = c(deliveryPoint = "character", # street address
                          city = "character",
                          adminstrativeArea = "character", #state
                          postalCode = "character",
@@ -22,7 +22,7 @@ setAs("address", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 ### definition of the focal class, responsibleParty 
 setClass("responsibleParty",
-         representation(individualName = "individualName", # or
+         slots = c(individualName = "individualName", # or
                         organizationName = "character",
                         positionName = "character", 
                         address = "address",

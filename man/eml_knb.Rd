@@ -2,8 +2,8 @@
 \alias{eml_knb}
 \title{Upload EML to knb}
 \usage{
-  eml_knb(file, mn_nodeid = "urn:node:KNB",
-    cli = D1Client("PROD", mn_nodeid), public = TRUE)
+eml_knb(file, mn_nodeid = "urn:node:KNB", cli = D1Client("PROD", mn_nodeid),
+  public = TRUE)
 }
 \description{
   Upload EML to knb

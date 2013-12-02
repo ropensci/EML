@@ -2,7 +2,7 @@
 \alias{eml_geographicCoverage}
 \title{Helper constructor for creating geographicCoverage node}
 \usage{
-  eml_geographicCoverage(description, NSEWbox = NULL)
+eml_geographicCoverage(description, NSEWbox = NULL)
 }
 \arguments{
   \item{description}{the text-based description of the

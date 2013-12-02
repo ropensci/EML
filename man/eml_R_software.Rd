@@ -2,7 +2,7 @@
 \alias{eml_R_software}
 \title{Create a software node given the name of an R package}
 \usage{
-  eml_R_software(packagename)
+eml_R_software(packagename)
 }
 \arguments{
   \item{packagename}{the name of the R package for which we

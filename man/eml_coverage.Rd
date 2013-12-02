@@ -4,8 +4,8 @@
 Provides convenience tools to write the more common
 versions of coverage metadata.}
 \usage{
-  eml_coverage(scientific_names = NULL, dates = NULL,
-    geographic_description = NULL, NSEWbox = NULL)
+eml_coverage(scientific_names = NULL, dates = NULL,
+  geographic_description = NULL, NSEWbox = NULL)
 }
 \arguments{
   \item{scientific_names}{a list or character string of

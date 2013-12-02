@@ -1,6 +1,8 @@
 ## Attribute List ##
+#' @include generics.R
+
 setClass("codeDefinition", 
-         representation(code = "character",
+         slots = c(code = "character",
                         definition = "character"))
 setAs("codeDefinition", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
@@ -9,24 +11,24 @@ setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
 setClass("ListOfcodeDefinition", contains="list")
 
 setClass("enumeratedDomain", 
-         representation(codeDefinition = "ListOfcodeDefinition"))
+         slots = c(codeDefinition = "ListOfcodeDefinition"))
 setAs("enumeratedDomain", "XMLInternalElementNode",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
 
 setClass("textDomain", 
-         representation(definition = "character"))
+         slots = c(definition = "character"))
 setAs("textDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "textDomain",  function(from) emlToS4(from))
 
 setClass("nonNumericDomain", 
-         representation(enumeratedDomain = "enumeratedDomain", 
+         slots = c(enumeratedDomain = "enumeratedDomain", 
                         textDomain = "textDomain"))
 setAs("nonNumericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "nonNumericDomain",  function(from) emlToS4(from))
 
 
 setClass("nominal", 
-         representation(nonNumericDomain = "nonNumericDomain"))
+         slots = c(nonNumericDomain = "nonNumericDomain"))
 setAs("nominal", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "nominal",  function(from) emlToS4(from))
 
@@ -38,31 +40,31 @@ setAs("XMLInternalElementNode", "ordinal",  function(from) emlToS4(from))
 
 
 setClass("bounds", 
-         representation(minimum = "numeric",
+         slots = c(minimum = "numeric",
                         maximum = "numeric"))
 setAs("XMLInternalElementNode", "bounds", function(from) emlToS4(from))
 setAs("bounds", "XMLInternalElementNode", function(from) S4Toeml(from))
 
 setClass("boundsGroup", 
-         representation(bounds = "bounds"))  ## FIXME Schema allows this to be ListOf.  What would that mean??? 
+         slots = c(bounds = "bounds"))  ## FIXME Schema allows this to be ListOf.  What would that mean??? 
 setAs("XMLInternalElementNode", "boundsGroup", function(from) emlToS4(from))
 setAs("boundsGroup", "XMLInternalElementNode", function(from) S4Toeml(from))
 
 setClass("numericDomain", 
-         representation(numberType = "character",
+         slots = c(numberType = "character",
                         boundsGroup = "boundsGroup")) 
 setAs("numericDomain", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "numericDomain",  function(from) emlToS4(from))
 
 setClass("unit",
-         representation(standardUnit = "character", # make from a restricted subset
+         slots = c(standardUnit = "character", # make from a restricted subset
                         customUnit = "character"))  # should be a class to enforce format?
 setAs("unit", "XMLInternalElementNode",  function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "unit", function(from) emlToS4(from))
 
 
 setClass("ratio", 
-         representation(unit = "unit",
+         slots = c(unit = "unit",
                         precision = "numeric",
                         numericDomain = "numericDomain"))
 setAs("ratio", "XMLInternalElementNode",   function(from) emlToS4(from))
@@ -74,7 +76,7 @@ setAs("XMLInternalElementNode", "interval",  function(from) emlToS4(from))
 
 
 setClass("dateTime", 
-         representation(formatString = "character",
+         slots = c(formatString = "character",
                         dateTimePrecision = "character",
                         dateTimeDomain = "character"))
 setAs("dateTime", "XMLInternalElementNode",   function(from) emlToS4(from))
@@ -82,7 +84,7 @@ setAs("XMLInternalElementNode", "dateTime",  function(from) emlToS4(from))
 
 
 setClass("measurementScale", 
-         representation(nominal = "nominal",
+         slots = c(nominal = "nominal",
                         ordinal = "ordinal",
                         interval = "interval",
                         ratio = "ratio",
@@ -92,7 +94,7 @@ setAs("XMLInternalElementNode", "measurementScale",  function(from) emlToS4(from
 
 
 setClass("attribute", 
-         representation(id = "character",
+         slots = c(id = "character",
                         attributeName = "character",
                         attributeDefinition = "character",
                         measurementScale = "measurementScale"))
@@ -103,7 +105,7 @@ setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
 setClass("ListOfattribute", contains="list") # set validity all elements are attribute class
 
 setClass("attributeList", 
-         representation(id = "character", 
+         slots = c(id = "character", 
                         attribute = "ListOfattribute"))
 setAs("attributeList", "XMLInternalElementNode",   function(from) emlToS4(from))
 setAs("XMLInternalElementNode", "attributeList",  function(from) emlToS4(from))

@@ -1,3 +1,6 @@
+#' @include reml_environment.R
+
+
 ## Default XML namespaces -- consider moving to separate file 
 eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
                    ds = "eml://ecoinformatics.org/dataset-2.1.1",
@@ -9,7 +12,7 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
 
 ## Define S4 class
 setClass("eml",
-         representation(packageId   = "character", 
+         slots = c(packageId   = "character", 
                         system      = "character",
                         scope       = "character",
                         dataset     = "dataset",

@@ -1,7 +1,10 @@
+
+
 #' Top-level API function for writing eml 
 #' @param dat either a data.frame, data.set, or eml object
 #' @aliases eml_write write.eml 
 #' @export eml_write write.eml
+#' @include reml_environment.R
 eml_write <- function(dat, 
                       metadata = NULL, 
                       title = "metadata", 

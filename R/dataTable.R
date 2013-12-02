@@ -1,7 +1,7 @@
 
 #' @include baseAttributes.R
 setClass("dataTable_slots", 
-         representation(attributeList = "attributeList",  ## Hack to make entityGroup slots listed first!  
+         slots = c(attributeList = "attributeList",  ## Hack to make entityGroup slots listed first!  
                         caseSensitive = "character",
                         numberOfRecords = "integer"),
          contains = "id_scope")

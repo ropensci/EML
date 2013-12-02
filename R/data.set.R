@@ -22,7 +22,7 @@ data.set <- function(..., col.defs, unit.defs){
 
 ### Actually can use the s4 method.  attributes are slots Dies require the formal calss be defined, even though we construct with `attr` and not `news` above... 
 setClass("data.set",
-         representation(col.defs = "character",
+         slots = c(col.defs = "character",
                         unit.defs = "list"),
          contains = "data.frame")
 

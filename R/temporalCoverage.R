@@ -1,5 +1,7 @@
+#' @include referencesGroup.R
+
 setClass("alternativeTimeScale",
-         representation(timeScaleName = "character",
+         slots = c(timeScaleName = "character",
                         timeScaleAgeEstimate = "character",
                         timeScaleAgeUncertainty = "character",
                         timeScaleAgeExplanation = "character",
@@ -10,7 +12,7 @@ setAs("alternativeTimeScale", "XMLInternalElementNode",   function(from) S4Toeml
 
 
 setClass("singleDateTime",
-         representation(calendarDate = "character",
+         slots = c(calendarDate = "character",
                         time = "character",
                         alternativeTimeScale = "alternativeTimeScale"))
 setAs("XMLInternalElementNode", "singleDateTime",   function(from) emlToS4(from))
@@ -25,13 +27,13 @@ setAs("XMLInternalElementNode", "endDate",   function(from) emlToS4(from))
 setAs("endDate", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("rangeOfDates", 
-         representation(beginDate = "beginDate",  
+         slots = c(beginDate = "beginDate",  
                         endDate = "endDate"))
 setAs("XMLInternalElementNode", "rangeOfDates",   function(from) emlToS4(from))
 setAs("rangeOfDates", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("temporalCoverage",
-         representation(id = "character",
+         slots = c(id = "character",
                         singleDateTime = "singleDateTime",
                         rangeOfDates = "rangeOfDates"),
          contains = "referencesGroup")

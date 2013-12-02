@@ -1,7 +1,16 @@
+#' @include generics.R
+NULL
 
-#' read eml files (.xml)
-#'
-#' @param file the name or path to the file (see ?xmlParse for details)
+
+
+
+
+
+#' Read EML files
+#' 
+#' Read EML files
+#' @param file an external eml (xml) file, or XMLInternalDocument
+#' @return an EML object 
 #' @export eml_read read.eml
 #' @aliases eml_read read.eml
 eml_read <- function(file,  ...){

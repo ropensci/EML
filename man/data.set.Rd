@@ -2,7 +2,7 @@
 \alias{data.set}
 \title{Create a data.set object (data.frame with metadata)}
 \usage{
-  data.set(..., col.defs, unit.defs)
+data.set(..., col.defs, unit.defs)
 }
 \arguments{
   \item{...}{arguments as for data.frame}

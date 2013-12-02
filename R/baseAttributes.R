@@ -1,8 +1,8 @@
 
-setClass("id", representation(id = "character"))
+setClass("id", slots = c(id = "character"))
 
 setClass("id_scope", 
-         representation(id = "character",
+         slots = c(id = "character",
                         system = "character",
                         scope = "character"),
          prototype = prototype(scope = "document"))

@@ -1,15 +1,17 @@
+#' @include generics.R
+
 ## Physical ##
 
 ## Definitions of subclasses, and their coercions to/from XML: 
 
 ### Data Format ###
 setClass("simpleDelimited", 
-         representation(fieldDelimiter = "character"))
+         slots = c(fieldDelimiter = "character"))
 setAs("XMLInternalElementNode", "simpleDelimited",  function(from) emlToS4(from))
 setAs("simpleDelimited", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("textFormat", 
-         representation(numHeaderLines = "integer",
+         slots = c(numHeaderLines = "integer",
                         numFooterLines = "integer",
                         recordDelimiter = "character",
                         attributeOrientation = "character", 
@@ -19,7 +21,7 @@ setAs("textFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 setClass("dataFormat",
-         representation(textFormat = "textFormat"))
+         slots = c(textFormat = "textFormat"))
 setAs("XMLInternalElementNode", "dataFormat", function(from) emlToS4(from))
 setAs("dataFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -35,7 +37,7 @@ setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 ## FIXME should include function *attribute* as well (e.g. function=download)  
 setClass("online",
-         representation(url = "character",
+         slots = c(url = "character",
                         onlineDescription = "character"))
 setAs("XMLInternalElementNode", "online", function(from) emlToS4(from))
 setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -44,7 +46,7 @@ setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ###########################
 
 setClass("distribution",
-         representation(online = "online",
+         slots = c(online = "online",
                         offline = "offline",
                         inline = "character"))
 setAs("XMLInternalElementNode", "distribution", function(from) emlToS4(from))
@@ -57,7 +59,7 @@ setAs("character", "distribution", function(from)
 ########################
 
 setClass("physical",
-         representation(objectName = "character",
+         slots = c(objectName = "character",
                         size = "numeric", # "object_size", # R class  
                         characterEncoding = "character",
                         dataFormat = "dataFormat",

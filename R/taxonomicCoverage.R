@@ -1,9 +1,11 @@
+#' @include responsibleParty.R
+
 
 ## Subclasses of taxonomicCoverage, 
 ## with coercion methods to/from XML 
 
 setClass("classificationSystem",
-         representation(classificationSystemCitation = "citation",
+         slots = c(classificationSystemCitation = "citation",
                         classificationSystemModifications = "character"))
 setAs("XMLInternalElementNode", "classificationSystem",   function(from) emlToS4(from))
 setAs("classificationSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -18,14 +20,14 @@ setAs("originator", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setClass("ListOforiginator", contains="list")
 
 setClass("vouchers",
-         representation(specimen = "character",
+         slots = c(specimen = "character",
                         repository = "ListOforiginator")) 
 setAs("XMLInternalElementNode", "vouchers",   function(from) emlToS4(from))
 setAs("vouchers", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 setClass("taxonomicSystem",
-         representation(classificationSystem = "classificationSystem",
+         slots = c(classificationSystem = "classificationSystem",
                         identificationReference = "citation",
                         identifierName = "responsibleParty",
                         taxonomicProcedures = "character",
@@ -37,7 +39,7 @@ setAs("taxonomicSystem", "XMLInternalElementNode",   function(from) S4Toeml(from
 
 setClass("taxonomicClassification")
 setClass("taxonomicClassification", 
-         representation(taxonRankName = "character",
+         slots = c(taxonRankName = "character",
                         taxonRankValue = "character",
                         commonName = "character", 
                         taxonomicClassification = "taxonomicClassification" ## FIXME this recursive def is asking for trouble!! 
@@ -51,7 +53,7 @@ setClass("ListOftaxonomicClassification", contains = "list")
 ## Class definition for taxonomicCoverage 
 #' @include referencesGroup.R
 setClass("taxonomicCoverage",
-         representation(taxonomicSystem = "taxonomicSystem",
+         slots = c(taxonomicSystem = "taxonomicSystem",
                         generalTaxanomicCoverage = "character",
                         taxonomicClassification = "ListOftaxonomicClassification"),
          contains = "referencesGroup")

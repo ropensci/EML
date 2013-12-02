@@ -2,8 +2,7 @@
 \alias{eml_yaml}
 \title{Convert EML into a YAML file}
 \usage{
-  eml_yaml(file, con = stdout(), .parseopts = list(),
-    .yamlopts = list())
+eml_yaml(file, con = stdout(), .parseopts = list(), .yamlopts = list())
 }
 \arguments{
   \item{file}{the path to the EML file to be converted}
