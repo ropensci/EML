@@ -16,13 +16,24 @@
 #' }
 eml_publish <- function(file, 
                         ...,  
-                        destination = c("figshare", "knb"))
-{
-  destination <- match.arg(destination)
-  switch(destination, 
-         figshare = eml_figshare(file, ...),
-         knb = eml_knb(file, ...)
-         )
+                        destination = c("figshare", "knb")){
+
+  txt <- "continue"
+  if(!all(eml_validate(saveXML(xmlParse(file))))){
+    print(o)
+    txt <- readline("File validation check failed. Type 'continue' 
+            to continue anyway, otherwise, Type 'exit'
+            or press Ctrl+C")
+  } 
+  if(txt == "continue") {
+    destination <- match.arg(destination)
+    out <- switch(destination, 
+           figshare = eml_figshare(file, ...),
+           knb = eml_knb(file, ...))
+  } else {
+    out <- NULL
+  }
+  out 
 }
 
 
