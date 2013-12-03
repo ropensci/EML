@@ -31,7 +31,7 @@ eml <- read.eml("test.xml")
 class(eml@additionalMetadata[[1]]@metadata) # it's XML!
 ## treat as an xmlDoc, e.g. for XPath
 meta <- xmlDoc(eml@additionalMetadata[[1]]@metadata)
-xpathSApply(meta, "//meta[@property=='o:unit']", xmlAttrs)
+xpathSApply(meta, "//meta[@property='o:unit']", xmlAttrs)
 free(meta) # free external pointers...
 
 ## Extract the RDF
