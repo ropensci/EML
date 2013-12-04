@@ -20,7 +20,7 @@ rdfa <- newXMLNode("subject",
             ))
 
 ## clean up this interaface for adding additionalMetadata! 
-eml <- eml(dat,          
+eml <- reml:::eml(dat,          
            creator="Carl Boettiger <cboettig@ropensci.org>", 
            additionalMetadata = new("ListOfadditionalMetadata", 
                                    list(new("additionalMetadata", 
