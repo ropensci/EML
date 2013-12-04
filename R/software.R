@@ -1,3 +1,4 @@
+#' @include resourceGroup.R referencesGroup.R
 
 ## FIXME flush out this class
 setClass("software", 
