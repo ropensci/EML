@@ -1,16 +1,13 @@
 # TODO:
-
-# check that citation file has not been included somewhere if so change to
-# litrature file here.
-
-# check that all fields are correct down to the atomic ones
-
-# check that superclasses are included properly
+# o check that citation file has not been included somewhere if so change to literature file here.
+# o check that all fields are correct down to the atomic ones
+# o check that superclass are included properly
+# o create validity functions (really necessary?)
+# o create conversion (for which functions)
 
 
-
-
-
+#' The literature module
+#'
 #' The eml-literature module contains information that describes literature
 #' resources. It is intended to provide overview information about the
 #' literature citation, including title, abstract, keywords, and contacts.
@@ -20,105 +17,131 @@
 #' manuscript, report, thesis, conference proceedings, personal communication,
 #' map, generic, audio visual, and presentation. The "generic" citation type
 #' would be used when one of the other types will not work (cite eml
-#' documentatoin)).
+#' documentation)).
 
-## Dependent classes (atm all in one file but when separated then include)
-#' @include article.R
-#' @include book.R
-#' @include chapter.R
-#' @include editedBook.R
-#' @include manuscript.R
-#' @include thesis.R
-#' @include conferenceProceedings.R
-#' @include personalCommunication.R
-#' @include map.R
-#' @include audioVisual.R
-#' @include generic.R
-
-# Inclusion of superclasses
+#' Inclusion of superclass
 #' @include responsibleparty.R
 #' @include geographicCoverage.R
+#' @include dataset.R
 
-# citation types:
-# article
-# book
-# chapter
-# editedBook
-# manuscript
-# thesis
-# conferenceProceedings
-# personalCommunication
-# map
-# audioVisual
-# generic
 
-# atomic classes used in citation types
+# Atomic classes for citation types
+# =================================
+
 setClass("journal",
-         slots = c(journal = "character"))
+         slots = c(journal = "character")
+         )
 
 setClass("volume",
-         slots = c(volume = "character"))
+         slots = c(volume = "character")
+         )
 
 setClass("numberOfVolumes",
-         slots = c(numberOfVolumes = "character"))
+         slots = c(numberOfVolumes = "character")
+         )
 
 setClass("issue",
-         slots = c(issue = "character"))
+         slots = c(issue = "character")
+         )
 
 setClass("pageRange",
-         slots = c(pageRange = "character"))
+         slots = c(pageRange = "character")
+         )
 
 setClass("totalPages",
-         slots = c(totalPages = "character"))
+         slots = c(totalPages = "character")
+         )
 
 setClass("totalTables",
-         slots = c(totalTables = "character"))
+         slots = c(totalTables = "character")
+         )
 
 setClass("totalFigures",
-         slots = c(totalFigures = "character"))
+         slots = c(totalFigures = "character")
+         )
 
+# already defined in  dataset.R
 # setClass("publisher",
-         # slots = c(publisher = "character"))
+         # slots = c(publisher = "responsibleParty"))
+
+setClass("institution",
+         slots = c(institution = "responsibleParty")
+         )
 
 setClass("publicationPlace",
-         slots = c(publicationPlace = "character"))
+         slots = c(publicationPlace = "character")
+         )
 
 setClass("ISSN",
-         slots = c(ISSN = "character"))
+         slots = c(ISSN = "character")
+         )
 
 setClass("ISBN",
-         slots = c(ISBN = "character"))
+         slots = c(ISBN = "character")
+         )
 
 setClass("edition",
-         slots = c(edition = "character"))
+         slots = c(edition = "character")
+         )
 
 setClass("chapterNumber",
-         slots = c(chapterNumber = "character"))
+         slots = c(chapterNumber = "character")
+         )
 
 setClass("editor",
-         slots = c(editor = "character"))
+         slots = c(editor = "character")
+        )
 
 setClass("bookTitle",
-         slots = c(bookTitle = "character"))
+         slots = c(bookTitle = "character")
+         )
 
 setClass("degree",
-         slots = c(degree = "character"))
+         slots = c(degree = "character")
+         )
 
 setClass("conferenceName",
-         slots = c(conferenceName = "character"))
+         slots = c(conferenceName = "character")
+         )
 
 setClass("conferenceDate",
-         slots = c(conferenceDate = "character"))
+         slots = c(conferenceDate = "character")
+         )
 
 setClass("communicationType",
-         slots = c(communicationType = "character"))
+         slots = c(communicationType = "character")
+         )
 
 setClass("referenceType",
-         slots = c(referenceType = "character"))
+         slots = c(referenceType = "character")
+         )
+
+setClass("scale",
+         slots = c(referenceType = "geographicCoverage")
+         )
+
+setClass("performer",
+         slots = c(referenceType = "responsibleParty")
+         )
+
+setClass("originalPublication",
+         slots = c(referenceType = "character")
+         )
+
+setClass("reprintEdition",
+         slots = c(reprintEdition = "character")
+         )
+
+setClass("reviewdItem",
+         slots = c(reviewdItem = "character")
+         )
+
 
 # citation types
+# ==============
 
 # Article
+
 # A sequence of (
                # journal	required
                # volume	optional
@@ -136,15 +159,21 @@ setClass("article_slots",
                    pageRange = "pageRange",
                    publisher = "publisher",
                    publicationPlace = "publicationPlace",
-                   ISSN = "ISSN")
+                   ISSN = "ISSN"
+                   )
          )
 
 setClass("article",
-         contains = c("resourceGroup",
-                      "article_slots")
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "article_slots",
+                      "referencesGroup"
+                      )
          )
 
+
 # Book
+
 # A sequence of (
                # publisher	required (responsibleParty)
                # publicationPlace	optional
@@ -158,7 +187,7 @@ setClass("article",
                # )
 
 setClass("book_slots",
-        slots = c(publisher = "publisher", # FIXME: comes from responsibleParty
+        slots = c(publisher = "publisher",
                   publicationPlace = "publicationPlace",
                   edition = "edition",
                   volume = "volume",
@@ -170,12 +199,18 @@ setClass("book_slots",
         )
 
 setClass("book",
-         contains = c("resourceGroup",
-                      "book_slots")
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "book_slots",
+                      "referencesGroup"
+                      )
          )
 
+
 # Edited book (like book but see creator)
-# A sequence of ( publisher	required
+
+# A sequence of (
+              # publisher	required
               # publicationPlace	optional
               # edition	optional
               # volume	optional
@@ -188,13 +223,16 @@ setClass("book",
               # )
 
 setClass("editedBook",
-        contains = c("resourceGroup",
-                     "book_slots")
-        )
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "book_slots",
+                      "referencesGroup")
+         )
 
 
 # Chapter
 # Derived from: Book (by xs:extension)
+
 # A sequence of (
                # chapterNumber	optional
                # editor	required	unbounded
@@ -204,33 +242,45 @@ setClass("editedBook",
 
 setClass("chapter_slots",
          slots = c(chapterNumber = "chapterNumber",
-                   bookTitle = "bookTitle",
                    editor = "editor",
-                   pageRange = "pageRange")
+                   bookTitle = "bookTitle",
+                   pageRange = "pageRange"
+                   )
          )
+
 setClass("chapter",
-         contains = c("resourceGroup",
+         contains = c("id_scope",
+                      "resourceGroup",
                       "book_slots",
-                      "chapter_slots")
+                      "chapter_slots",
+                      "referencesGroup"
+                      )
          )
 
 
 # Manuscript
+
 # A sequence of (
               # institution	required	unbounded (from responsibleParty)
               # totalPages	optional
               # )
 
 setClass("manuscript_slots",
-         total_pages = "totalPages"
-          )
-setClass("manuscript",
-         contains = c("resourceGroup",
-                      "responsibleParty",
-                      "manuscript_slots")
+         slots = c(institution = "institution",
+                   totalPages = "totalPages")
          )
 
+setClass("manuscript",
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "manuscript_slots",
+                      "referencesGroup"
+                      )
+         )
+
+
 # Thesis
+
 # A sequence of (
                # degree	required
                # institution	required (from responsibleParty)
@@ -238,17 +288,24 @@ setClass("manuscript",
                # )
 
 setClass("thesis_slots",
-         slots = c(degree = "degree")
+         slots = c(degree = "degree",
+                   institution = "institution",
+                   totalPages = "totalPages"
+                   )
          )
 
 setClass("thesis",
-         contains = c("resourceGroup",
-                      "responsibleParty",
-                      "thesis_slots")
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "thesis_slots",
+                      "referencesGroup"
+                      )
          )
+
 
 # Conference proceedings
 # Derived from: Chapter (by xs:extension)
+
 # A sequence of (
                # conferenceName	optional
                # conferenceDate	optional
@@ -258,14 +315,20 @@ setClass("thesis",
 setClass("conference_proceedings_slots",
          slots = c(conferenceName = "conferenceName",
                    conferenceDate = "conferenceDate")
+                   # conferenceLocation = "conferenceLocation" FIXME: This needs to come from address
          )
 
 setClass("conferenceProceedings",
-         contains = c("resourceGroup",
-                      "conference_proceedings_slots")
-         ) # FIXME: should also contain conferencLocation from address (from where to include?)
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "conference_proceedings_slots",
+                      "referencesGroup"
+                      )
+         )
+
 
 # Personal communication
+
 # A sequence of (
                # publisher	optional (from responsibleParty)
                # publicationPlace	optional
@@ -274,18 +337,24 @@ setClass("conferenceProceedings",
                # )
 
 setClass("personal_communication_slots",
-         slots = c(publicationPlace = "publicationPlace",
-                   communicationType = "communicationType"
+         slots = c(publisher = "publisher",
+                   publicationPlace = "publicationPlace",
+                   communicationType = "communicationType",
+                   recipient = "recipient"
                    )
+         )
 
 setClass("personalCommunication",
-        contains = c("resourceGroup",
-                     "responsibleParty",
-                     "personal_communication_slots")
-        )
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "personal_communication_slots",
+                      "referencesGroup"
+                      )
+         )
 
 
 # Map
+
 # A sequence of (
                # publisher optional (from responsibleParty)
                # edition	optional
@@ -294,19 +363,23 @@ setClass("personalCommunication",
                # )
 
 setClass("map_slots",
-         slots = c(edition = "edition",
+         slots = c(publisher = "publisher",
+                   edition = "edition",
+                   geographicCoverage = "geographicCoverage",
                    scale = "scale")
          )
 
 setClass("map",
-         contains = c("resourceGroup",
-                      "responsibleParty",
-                      "geographicCoverage",
-                      "map_slots")
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "map_slots",
+                      "referencesGroup"
+                      )
          )
 
 
 # Audio visual
+
 # A sequence of (
                # publisher	required (from responsibleParty)
                # publicationPlace	optional	unbounded
@@ -315,17 +388,23 @@ setClass("map",
                # )
 
 setClass("audio_visual_slots",
-         slots = c(publicationPlace = "publicationPlace",
+         slots = c(publisher = "publisher",
+                   publicationPlace = "publicationPlace",
+                   performer = "performer",
                    ISBN = "ISBN")
          )
 
 setClass("audioVisual",
-         contains = c("resourceGroup",
-                      "responsibleParty",
-                      "audio_visual_slots")
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "audio_visual_slots",
+                      "referencesGroup"
+                      )
          )
 
-# Gneric
+
+# Generic
+
 # A sequence of (
                # publisher	required (from responsibleParty)
                # volume	optional
@@ -345,7 +424,7 @@ setClass("audioVisual",
                # )
 
 setClass("generic_slots",
-         slots = c(publisher = "responsibleParty",
+         slots = c(publisher = "publisher",
                    volume = "volume",
                    numberOfVolumes = "numberOfVolumes",
                    totalPages = "totalPages",
@@ -357,18 +436,20 @@ setClass("generic_slots",
                    reviewdItem = "reviewdItem", # fehlt
                    ISBN = "ISBN",
                    ISSN = "ISSN")
-
          )
 
 setClass("generic",
-         contains = c("resourceGroup",
-                      "generic_slots")
+         contains = c("id_scope",
+                      "resourceGroup",
+                      "generic_slots",
+                      "referencesGroup"
+                      )
          )
 
 # Top most classes rely on the classes above
 
 setClass("literature",
-         slots = c(citation = "citation") # this needs to be base on R internal citation?
+         slots = c(citation = "citation") # FIXME: this needs to be base on R internal citation
          )
 
 setClass("citation",
@@ -385,11 +466,28 @@ setClass("citation",
                    generic = "generic")
         )
 
-setAs("XMLInternalElementNode", "citation",   function(from) emlToS4(from))
-setAs("citation", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("XMLInternalElementNode",
+      "citation",
+      function(from) emlToS4(from)
+      )
+
+setAs("citation",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
 
 setClass("classificationSystem",
          slots = c(classificationSystemCitation = "citation",
-                        classificationSystemModifications = "character"))
-setAs("XMLInternalElementNode", "classificationSystem",   function(from) emlToS4(from))
-setAs("classificationSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
+                   classificationSystemModifications = "character"
+                   )
+         )
+
+setAs("XMLInternalElementNode",
+      "classificationSystem",
+      function(from) emlToS4(from)
+      )
+
+setAs("classificationSystem",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
