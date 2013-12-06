@@ -1,7 +1,14 @@
+setClass("metadata", contains="XMLInternalElementNode")
+setAs("metadata", "XMLInternalElementNode", function(from) newXMLNode("metadata", from))
+setAs("XMLInternalElementNode", "metadata", function(from) new("metadata", from))
+
+
 setClass("additionalMetadata",
-         slots = c(metadata = "XMLInternalElementNode",
-                        describes = "character",
-                        id = "character"))
+         slots = c(metadata = "metadata",
+                   describes = "character",
+                   id = "character"))
+
+setAs("additionalMetadata", "XMLInternalElementNode", function(from) S4Toeml(from))
 setAs("XMLInternalElementNode", "additionalMetadata",
       function(from){
         if("describes" %in% names(from))
@@ -10,9 +17,8 @@ setAs("XMLInternalElementNode", "additionalMetadata",
           describes <- character(0)
         new("additionalMetadata",
             describes = describes,
-            metadata = from[["metadata"]])
+            metadata = as(from[["metadata"]], "metadata"))
       })
-setAs("additionalMetadata", "XMLInternalElementNode", function(from) S4Toeml(from))
 
 
 setClass("ListOfadditionalMetadata", contains="list")

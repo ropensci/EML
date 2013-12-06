@@ -20,13 +20,14 @@ setAs("dataTable", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 ## generator for data table
-eml_dataTable <- function(dat, metadata, 
+eml_dataTable <- function(dat, 
+                          meta, 
                           title = character(0), 
                           description = character(0), 
                           filename = character(0), ...){
   if(length(title) > 0 & length(filename) == 0)
     filename <- paste0(gsub(" ", "_", title), ".csv")
-  metadata <- detect_class(dat, metadata)
+  meta <- detect_class(dat, meta)
   id <- reml_id()
   dataTable <- new("dataTable",
                   id = id[["id"]],
@@ -34,7 +35,7 @@ eml_dataTable <- function(dat, metadata,
                   scope = id[["scope"]],
                   entityName = title,
                   entityDescription = description,
-                  attributeList = as(metadata, "attributeList"),
+                  attributeList = as(meta, "attributeList"),
                   physical = eml_physical(dat, filename=filename),
                   caseSensitive = 'yes',
                   numberOfRecords = dim(dat)[1])

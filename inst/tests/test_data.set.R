@@ -88,15 +88,33 @@ test_that("We can generate an eml S4 object", {
 
 
 test_that("We can generate an eml S4 object", {
-  s4 <- reml:::eml(dat, metadata(dat), title, description, 
-                 creator = "Carl Boettiger <cboettig@ropensci.org>", 
-                 contact = as("Carl Boettiger <cboettig@ropensci.org>", "contact"))
+  s4 <- reml:::eml(dat, 
+                   metadata(dat), 
+                   title=title, 
+                   description=description, 
+                   creator = "Carl Boettiger <cboettig@ropensci.org>")
   expect_is(s4, "eml")
 
-# test that the show method doesn't error
-  show(s4)
 })
 
+
+test_that("Show method is working", {
+  s4 <- reml:::eml(dat, 
+                   metadata(dat), 
+                   title=title, 
+                   description=description, 
+                   creator = "Carl Boettiger <cboettig@ropensci.org>")
+  capture.output(show(s4))
+})
+
+test_that("we can build eml from a data.set using embedded metadata", {
+  s4 <- reml:::eml(dat,
+            title = "reml example",  
+            description = "An example, intended for illustrative purposes only.",
+            creator = "Carl Boettiger <cboettig@gmail.com>")
+  unlink("reml_example.csv")
+
+})
 
 
 

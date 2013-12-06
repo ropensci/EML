@@ -32,9 +32,9 @@ S4Toeml <- function(obj,
         ## Complex child nodes
         if(!isEmpty(slot(obj,s))){
           if(is(slot(obj, s), "list")){
-            addChildren(node, lapply(slot(obj, s), S4Toeml))
+            addChildren(node, lapply(slot(obj, s), as, "XMLInternalElementNode"))
           } else if(isS4(slot(obj, s))){
-            addChildren(node, S4Toeml(slot(obj, s)))
+            addChildren(node, as(slot(obj, s), "XMLInternalElementNode"))
           ## Simple Child nodes  
           } else if(length(slot(obj, s)) > 0){
              if(s == class(obj)[1])              # special case
