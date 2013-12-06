@@ -1,3 +1,16 @@
+# TODO:
+
+# check that citation file has not been included somewhere if so change to
+# litrature file here.
+
+# check that all fields are correct down to the atomic ones
+
+# check that superclasses are included properly
+
+
+
+
+
 #' The eml-literature module contains information that describes literature
 #' resources. It is intended to provide overview information about the
 #' literature citation, including title, abstract, keywords, and contacts.
@@ -9,7 +22,7 @@
 #' would be used when one of the other types will not work (cite eml
 #' documentatoin)).
 
-##    Dependent classes
+## Dependent classes (atm all in one file but when separated then include)
 #' @include article.R
 #' @include book.R
 #' @include chapter.R
@@ -19,48 +32,25 @@
 #' @include conferenceProceedings.R
 #' @include personalCommunication.R
 #' @include map.R
-#' @include generic.R
 #' @include audioVisual.R
 #' @include generic.R
 
-# they contain info about:
-
-# litrature citation
-  # title
-  # abstract
-  # keywords
-  # contacts
+# Inclusion of superclasses
+#' @include responsibleparty.R
+#' @include geographicCoverage.R
 
 # citation types:
-# article.R
-# book.R
-# chapter.R
-# editedBook.R
-# manuscript.R
-# thesis.R
-# conferenceProceedings.R
-# personalCommunication.R
-# map.R
-# audioVisual.R
-# generic.R
-
-setClass("literature",
-         slots = c(citation = "citation") # this needs to be base on R internal citation?
-         )
-
-setClass("citation",
-         slots = c(article = "article",
-                   book = "book",
-                   chapter = "chapter",
-                   editedBook = "editedBook",
-                   manuscript = "manuscript",
-                   thesis = "thesis",
-                   conferenceProceedings = "conferenceProceedings",
-                   personalCommunication = "personalCommunication",
-                   map = "map",
-                   audioVisual = "audioVisual",
-                   generic = "generic")
-        )
+# article
+# book
+# chapter
+# editedBook
+# manuscript
+# thesis
+# conferenceProceedings
+# personalCommunication
+# map
+# audioVisual
+# generic
 
 # atomic classes used in citation types
 setClass("journal",
@@ -82,13 +72,13 @@ setClass("totalPages",
          slots = c(totalPages = "character"))
 
 setClass("totalTables",
-         slots = c(totalPages = "character"))
+         slots = c(totalTables = "character"))
 
 setClass("totalFigures",
          slots = c(totalFigures = "character"))
 
-setClass("publisher",
-         slots = c(publisher = "character"))
+# setClass("publisher",
+         # slots = c(publisher = "character"))
 
 setClass("publicationPlace",
          slots = c(publicationPlace = "character"))
@@ -111,6 +101,21 @@ setClass("editor",
 setClass("bookTitle",
          slots = c(bookTitle = "character"))
 
+setClass("degree",
+         slots = c(degree = "character"))
+
+setClass("conferenceName",
+         slots = c(conferenceName = "character"))
+
+setClass("conferenceDate",
+         slots = c(conferenceDate = "character"))
+
+setClass("communicationType",
+         slots = c(communicationType = "character"))
+
+setClass("referenceType",
+         slots = c(referenceType = "character"))
+
 # citation types
 
 # Article
@@ -119,12 +124,12 @@ setClass("bookTitle",
                # volume	optional
                # issue	optional
                # pageRange	optional
-               # publisher	optional
+               # publisher	optional (from responsibleParty)
                # publicationPlace	optional
                # ISSN	optional
                # )
 
-setClass("article",
+setClass("article_slots",
          slots = c(journal = "journal",
                    volume = "volume",
                    issue = "issue",
@@ -134,9 +139,14 @@ setClass("article",
                    ISSN = "ISSN")
          )
 
+setClass("article",
+         contains = c("resourceGroup",
+                      "article_slots")
+         )
+
 # Book
 # A sequence of (
-               # publisher	required
+               # publisher	required (responsibleParty)
                # publicationPlace	optional
                # edition	optional
                # volume	optional
@@ -147,8 +157,8 @@ setClass("article",
                # ISBN	optional
                # )
 
-setClass("book",
-        slots = c(publisher = "publisher", # comes from responsibleParty actually so reflect this here?
+setClass("book_slots",
+        slots = c(publisher = "publisher", # FIXME: comes from responsibleParty
                   publicationPlace = "publicationPlace",
                   edition = "edition",
                   volume = "volume",
@@ -159,6 +169,30 @@ setClass("book",
                   )
         )
 
+setClass("book",
+         contains = c("resourceGroup",
+                      "book_slots")
+         )
+
+# Edited book (like book but see creator)
+# A sequence of ( publisher	required
+              # publicationPlace	optional
+              # edition	optional
+              # volume	optional
+              # numberOfVolumes	optional
+              # totalPages	optional
+              # totalFigures	optional
+              # totalTables	optional
+              # ISBN	optional
+              # creator (list editors here)
+              # )
+
+setClass("editedBook",
+        contains = c("resourceGroup",
+                     "book_slots")
+        )
+
+
 # Chapter
 # Derived from: Book (by xs:extension)
 # A sequence of (
@@ -168,66 +202,194 @@ setClass("book",
                # pageRange	optional
                # )
 
-setClass("chapter", slots = c(chapterNumber = "chapterNumber",
-                   editor = "editor",
+setClass("chapter_slots",
+         slots = c(chapterNumber = "chapterNumber",
                    bookTitle = "bookTitle",
-                   pageRange = "pageRange"),
-         contains = "book")
+                   editor = "editor",
+                   pageRange = "pageRange")
+         )
+setClass("chapter",
+         contains = c("resourceGroup",
+                      "book_slots",
+                      "chapter_slots")
+         )
 
 
+# Manuscript
+# A sequence of (
+              # institution	required	unbounded (from responsibleParty)
+              # totalPages	optional
+              # )
 
-setClass("editedBook")
+setClass("manuscript_slots",
+         total_pages = "totalPages"
+          )
+setClass("manuscript",
+         contains = c("resourceGroup",
+                      "responsibleParty",
+                      "manuscript_slots")
+         )
 
-setClass("manuscript")
-setClass("thesis")
-setClass("conferenceProceedings")
-setClass("personalCommunication")
-setClass("map")
-setClass("audioVisual")
-setClass("generic")
+# Thesis
+# A sequence of (
+               # degree	required
+               # institution	required (from responsibleParty)
+               # totalPages	optional
+               # )
+
+setClass("thesis_slots",
+         slots = c(degree = "degree")
+         )
+
+setClass("thesis",
+         contains = c("resourceGroup",
+                      "responsibleParty",
+                      "thesis_slots")
+         )
+
+# Conference proceedings
+# Derived from: Chapter (by xs:extension)
+# A sequence of (
+               # conferenceName	optional
+               # conferenceDate	optional
+               # conferenceLocation	optional (from address)
+               # )
+
+setClass("conference_proceedings_slots",
+         slots = c(conferenceName = "conferenceName",
+                   conferenceDate = "conferenceDate")
+         )
+
+setClass("conferenceProceedings",
+         contains = c("resourceGroup",
+                      "conference_proceedings_slots")
+         ) # FIXME: should also contain conferencLocation from address (from where to include?)
+
+# Personal communication
+# A sequence of (
+               # publisher	optional (from responsibleParty)
+               # publicationPlace	optional
+               # communicationType	optional
+               # recipient	optional	unbounded (from responsibleParty)
+               # )
+
+setClass("personal_communication_slots",
+         slots = c(publicationPlace = "publicationPlace",
+                   communicationType = "communicationType"
+                   )
+
+setClass("personalCommunication",
+        contains = c("resourceGroup",
+                     "responsibleParty",
+                     "personal_communication_slots")
+        )
 
 
+# Map
+# A sequence of (
+               # publisher optional (from responsibleParty)
+               # edition	optional
+               # geographicCoverage	optional	unbounded (from geographicCoverage)
+               # scale	optional
+               # )
+
+setClass("map_slots",
+         slots = c(edition = "edition",
+                   scale = "scale")
+         )
+
+setClass("map",
+         contains = c("resourceGroup",
+                      "responsibleParty",
+                      "geographicCoverage",
+                      "map_slots")
+         )
 
 
+# Audio visual
+# A sequence of (
+               # publisher	required (from responsibleParty)
+               # publicationPlace	optional	unbounded
+               # performer	optional	unbounded (from responsibleParty)
+               # ISBN	optional
+               # )
+
+setClass("audio_visual_slots",
+         slots = c(publicationPlace = "publicationPlace",
+                   ISBN = "ISBN")
+         )
+
+setClass("audioVisual",
+         contains = c("resourceGroup",
+                      "responsibleParty",
+                      "audio_visual_slots")
+         )
+
+# Gneric
+# A sequence of (
+               # publisher	required (from responsibleParty)
+               # volume	optional
+               # numberOfVolumes	optional
+               # totalPages	optional
+               # totalFigures	optional
+               # totalTables	optional
+               # edition	optional
+               # originalPublication	optional
+               # reprintEdition	optional
+               # reviewedItem	optional
+               # A choice of (
+                            # ISBN	required
+                            # OR
+                            # ISSN	required
+                            # )
+               # )
+
+setClass("generic_slots",
+         slots = c(publisher = "responsibleParty",
+                   volume = "volume",
+                   numberOfVolumes = "numberOfVolumes",
+                   totalPages = "totalPages",
+                   totalFigures = "totalFigures",
+                   totalTables = "totalTables",
+                   edition = "edition",
+                   originalPublication = "originalPublication", # fehlt
+                   reprintEdition = "reprintEdition",  # fehlt
+                   reviewdItem = "reviewdItem", # fehlt
+                   ISBN = "ISBN",
+                   ISSN = "ISSN")
+
+         )
+
+setClass("generic",
+         contains = c("resourceGroup",
+                      "generic_slots")
+         )
+
+# Top most classes rely on the classes above
+
+setClass("literature",
+         slots = c(citation = "citation") # this needs to be base on R internal citation?
+         )
+
+setClass("citation",
+         slots = c(article = "article",
+                   book = "book",
+                   chapter = "chapter",
+                   editedBook = "editedBook",
+                   manuscript = "manuscript",
+                   thesis = "thesis",
+                   conferenceProceedings = "conferenceProceedings",
+                   personalCommunication = "personalCommunication",
+                   map = "map",
+                   audioVisual = "audioVisual",
+                   generic = "generic")
+        )
 
 setAs("XMLInternalElementNode", "citation",   function(from) emlToS4(from))
 setAs("citation", "XMLInternalElementNode",   function(from) S4Toeml(from))
-
-
-
 
 setClass("classificationSystem",
          slots = c(classificationSystemCitation = "citation",
                         classificationSystemModifications = "character"))
 setAs("XMLInternalElementNode", "classificationSystem",   function(from) emlToS4(from))
 setAs("classificationSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
-
-
-new(literature)
-
-chapter = "chapter",
-editedBook = "editedBoo",
-manuscript = "manuscript")
-
-# just example
-## Class defintiion
-##    Dependent classes
-#' @include temporalCoverage.R
-#' @include geographicCoverage.R
-#' @include taxonomicCoverage.R
-#' @include referencesGroup.R
-# setClass("coverage",
-         # slots = c(id = "character",
-# #                        system = "character",
-# #                        scope = "character",
-                        # geographicCoverage = "geographicCoverage",
-                        # temporalCoverage = "temporalCoverage",
-                        # taxonomicCoverage = "taxonomicCoverage"),
-         # contains = "referencesGroup")
-# setAs("XMLInternalElementNode", "coverage",   function(from) emlToS4(from))
-# setAs("coverage", "XMLInternalElementNode",   function(from) S4Toeml(from))
-
-
-
-
-
