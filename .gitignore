@@ -1,3 +1,6 @@
 inst/doc/cache
 inst/depricated
 inst/xsd
+inst/doc/*.pdf
+inst/doc/*.Rnw
+vignettes/*.pdf

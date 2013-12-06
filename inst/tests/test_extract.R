@@ -1,4 +1,4 @@
-context("extracting data from S4 to native R")
+context("extract")
 
 
 ## FIXME add unlink commands to remove/cleanup any files created by tests (e.g. the .csv and .xml files)
@@ -21,7 +21,7 @@ test_that("we can extract the data unaltered (using method for object 'physical'
 
 test_that("we can extract from alternative paths", {
   ## Create a subdirectory to make sure we can read when data is not in the working directory
-  dir.create("tmp")
+  dir.create("tmp", showWarnings=FALSE)
 
   ## Let's get the example dataset from the DataONE REST API just for fun
   require(httr)
@@ -36,7 +36,7 @@ test_that("we can extract from alternative paths", {
 
   ## Here's the actual test
   met <- eml_read("tmp/hf205.xml")
-  dat <- dataTable(met) # Includes call to extract that must download the CSV file from the address given in the EML
+  capture.output(dat <- dataTable(met)) # Includes call to extract that must download the CSV file from the address given in the EML
   expect_is(dat, "data.frame")
 
   ## Cleanup

@@ -19,11 +19,14 @@ rdfa <- newXMLNode("subject",
              newXMLNode("meta", attrs = c(property="o:unit", content="Celsius", datatype="xsd:string"))
             ))
 
+## clean up this interaface for adding additionalMetadata! 
+eml <- reml:::eml(dat,          
+           creator="Carl Boettiger <cboettig@ropensci.org>", 
+           additionalMetadata = new("ListOfadditionalMetadata", 
+                                   list(new("additionalMetadata", 
+                                            metadata = new("metadata", rdfa)))))
 
-eml_write(dat, file = "test.xml",
-          creator="Carl Boettiger <cboettig@ropensci.org>", 
-          additionalMetadata = new("additionalMetadata", metadata = rdfa))
-
+eml_write(eml, file = "test.xml")
 
 
 ## Explore the eml directly -- some functions could help here.  

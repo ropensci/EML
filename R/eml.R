@@ -1,5 +1,4 @@
-#' @include reml_environment.R
-
+#' @include reml_environment.R dataset.R software.R citation.R protocol.R additionalMetadata.R
 
 ## Default XML namespaces -- consider moving to separate file 
 eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
@@ -16,6 +15,9 @@ setClass("eml",
                         system      = "character",
                         scope       = "character",
                         dataset     = "dataset",
+#                        software    = "software",
+#                        citation    = "citation",
+#                        protocol    = "protocol",
                         additionalMetadata = "ListOfadditionalMetadata",
                         namespaces = "character", 
                         dirname = "character"), 
@@ -36,7 +38,7 @@ setAs("eml", "XMLInternalElementNode",
 
 #' Define constructor function 
 eml <- function(dat, 
-                metadata = NULL, 
+                meta = NULL, 
                 title = "metadata", 
                 description = character(0), 
                 creator = get("defaultCreator", envir=remlConfig), 
@@ -46,14 +48,15 @@ eml <- function(dat,
                                         geographic_description = NULL,
                                         NSEWbox = NULL), 
                 methods = new("methods"), 
-                additionalMetadata = new("additionalMetadata"),
+                additionalMetadata = new("ListOfadditionalMetadata",
+                                         list(new("additionalMetadata"))),
                 eml_version =  c("2.1.1", "2.1.0")){
 
   if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
-    metadata <- metadata(dat)
+    meta <- metadata(dat)
 
-  if(is.null(metadata))
-    metadata <- metadata_wizard(dat)
+  if(is.null(meta))
+    meta <- metadata_wizard(dat)
 
   ## Handle older versions of EML
   eml_version <- match.arg(eml_version)
@@ -89,10 +92,11 @@ eml <- function(dat,
                     coverage = coverage,
                     dataTable = 
                       eml_dataTable(dat=dat, 
-                                    metadata=metadata, 
+                                    meta=meta, 
                                     title=title, 
                                     description=description),
                     methods = methods),
+      additionalMetadata = additionalMetadata,
       namespaces = namespaces)
 }
 

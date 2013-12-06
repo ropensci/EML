@@ -6,7 +6,7 @@
 #' @export eml_write write.eml
 #' @include reml_environment.R
 eml_write <- function(dat, 
-                      metadata = NULL, 
+                      meta = NULL, 
                       title = "metadata", 
                       description = character(0), 
                 creator = get("defaultCreator", envir=remlConfig), 
@@ -16,14 +16,14 @@ eml_write <- function(dat,
                                         geographic_description = NULL,
                                         NSEWbox = NULL),
                 methods = new("methods"), 
-                additionalMetadata = new("additionalMetadata"),
+                additionalMetadata = new("ListOfadditionalMetadata"),
                 file = NULL, # paste0(gsub(" ", "_", title), ".xml"),
                 eml_version = c("2.1.1", "2.1.0")){
   if(is(dat, "eml"))
     s4 <- dat
   else 
     s4 <- eml(dat = dat, 
-            metadata = metadata, 
+            meta = meta, 
             title = title, 
             description = description, 
             creator = creator,
