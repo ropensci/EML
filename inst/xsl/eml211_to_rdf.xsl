@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-
   <xsl:output method="xml" indent="yes" encoding="utf-8" />
-  <xsl:param name="BaseURI">http://www.github.com/eml</xsl:param>
-
-
   <xsl:template match="/">
     <xsl:element name="rdf:RDF">
       <rdf:Description>
           <xsl:attribute name="rdf:about">
-            <xsl:value-of select="$BaseURI"/>
             <xsl:text>#</xsl:text> 
+            <xsl:value-of select="eml/@packageId"/>
           </xsl:attribute> 
           <xsl:apply-templates select="/*|/@*"/>
        </rdf:Description>
