@@ -37,6 +37,7 @@ setAs("eml", "XMLInternalElementNode",
 
 
 #' Define constructor function 
+#' @export
 eml <- function(dat, 
                 meta = NULL, 
                 title = "metadata", 
