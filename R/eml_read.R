@@ -39,7 +39,7 @@ eml_read <- function(file,  ...){
 
   ##  Keep track of dirname in additional resource files (e.g. csv's) are available in same directory
   s4@dirname <- paste0(dirname(file), "/")
-  s4@dataset@dataTable@physical@dirname <- paste0(dirname(file), "/") ## Fix for multiple dataTables per dataset
+  s4@dataset@dataTable[[1]]@physical@dirname <- paste0(dirname(file), "/") ## Fix for multiple dataTables per dataset
   s4
 }
 read.eml <- eml_read
@@ -54,14 +54,14 @@ read.eml <- eml_read
 ## accessor methods.  Note that having the same name as an existing function is no problem.  
 
 setMethod("unit.defs", signature("eml"), function(object){
-          metadata <- extract(object@dataset@dataTable@attributeList)
+          metadata <- extract(object@dataset@dataTable[[1]]@attributeList)
           lapply(metadata, function(x) x[[3]])
 })
 
 
 ## Make sure this returns a character type! warn if not.  
 setMethod("col.defs", signature("eml"), function(object){
-          metadata <- extract(object@dataset@dataTable@attributeList)
+          metadata <- extract(object@dataset@dataTable[[1]]@attributeList)
           sapply(metadata, function(x) x[[2]])
 })
 
@@ -88,20 +88,20 @@ setMethod("citationInfo", signature("eml"), function(object){
 })
 
 setMethod("attributeList", signature("eml"), function(object){
-          extract(object@dataset@dataTable@attributeList)
+          extract(object@dataset@dataTable[[1]]@attributeList)
 })
 
 
 
 
 setMethod("dataTable", signature("eml"), function(object){
-          df = extract(object@dataset@dataTable@physical)    ## FIXME as.Date likely to fail on ambiguous formats, need to extract format first , using=col_classes(object)
+          df = extract(object@dataset@dataTable[[1]]@physical)    ## FIXME as.Date likely to fail on ambiguous formats, need to extract format first , using=col_classes(object)
           data.set(df, col.defs=col.defs(object), unit.defs=unit.defs(object))
 })
 
 setMethod("col_classes", signature("eml"),
           function(object)
-            get_col_classes(object@dataset@dataTable@attributeList@attribute))
+            get_col_classes(object@dataset@dataTable[[1]]@attributeList@attribute))
 get_col_classes <- function(attrs){          
           sapply(attrs,
                 function(x){
@@ -137,11 +137,11 @@ setMethod("extract", signature("eml"),
 
 ## FIXME should dat use "using"?  
 # FIXME is this really the right return format?
-          dat = extract(from@dataset@dataTable@physical)
+          dat = extract(from@dataset@dataTable[[1]]@physical)
             list(dat = dat,
-                metadata = extract(from@dataset@dataTable@attributeList),
+                metadata = extract(from@dataset@dataTable[[1]]@attributeList),
                 title = from@dataset@title,
-                description = from@dataset@dataTable@entityDescription,
+                description = from@dataset@dataTable[[1]]@entityDescription,
                 creator = creator(from))
           }
           )

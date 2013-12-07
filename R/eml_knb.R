@@ -29,8 +29,8 @@ eml_knb <- function(file,
   eml_id <- id(x)           # method works on `file` too
 
   # Get the path and identifier of the csv file from the EML 
-  csv <- c(path = unname(x@dataset@dataTable@physical@objectName),
-           id = unname(x@dataset@dataTable@id)) # Define more elegant method..
+  csv <- c(path = unname(x@dataset@dataTable[[1]]@physical@objectName),
+           id = unname(x@dataset@dataTable[[1]]@id)) # Define more elegant method..
   
   ## Build a D1Object for the table, and upload it to the MN
   csv_object <- new(Class="D1Object", csv[["id"]], 
