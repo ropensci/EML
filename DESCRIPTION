@@ -64,3 +64,4 @@ Collate:
     'eml_wizards.R'
     'eml_write.R'
     'reml_id.R'
+    'xsl_coercions.R'
