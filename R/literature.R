@@ -3,8 +3,8 @@
 # o check that all fields are correct down to the atomic ones
 # o check that superclass are included properly
 # o create validity functions (really necessary?)
-# o create conversion (for which functions)
-
+# o check mapping of fields to bibtex (write all fields? as bibtex ignores unknown)
+#       - or give own style file that allows for all fields
 
 #' The literature module
 #'
@@ -136,6 +136,11 @@ setClass("reviewdItem",
          slots = c(reviewdItem = "character")
          )
 
+setClass("recipient",
+         slots = c(reviewdItem = "responsibleParty")
+         )
+
+
 
 # citation types
 # ==============
@@ -151,6 +156,19 @@ setClass("reviewdItem",
                # publicationPlace	optional
                # ISSN	optional
                # )
+
+# bibtex [required/optional] (EML)
+
+# author  [r] (?)
+# title   [r] (?)
+# journal [r] (journal)
+# year    [r] (?)
+
+# volume  [o] (volume)
+# number  [o] (? issue)
+# pages   [o] (? pageRange)
+# month   [o] (?)
+# note    [o] (?)
 
 setClass("article_slots",
          slots = c(journal = "journal",
@@ -171,6 +189,15 @@ setClass("article",
                       )
          )
 
+setAs("article",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "article",
+      function(from) emlToS4(from)
+      )
 
 # Book
 
@@ -185,6 +212,22 @@ setClass("article",
                # totalTables	optional
                # ISBN	optional
                # )
+
+# bibtex book
+# field [required/optional] (EML)
+
+# author or editor [r] (?)
+# title            [r] (?)
+# publisher        [r] (journal)
+# year             [r] (?)
+
+# volume or number [o] (volume)
+# series           [o] (? pageRange)
+# address          [o] (?)
+# edition          [o] (?)
+# month            [o] (?)
+# note             [o] (?)
+# isbn             [o] (ISBN)
 
 setClass("book_slots",
         slots = c(publisher = "publisher",
@@ -206,6 +249,16 @@ setClass("book",
                       )
          )
 
+setAs("book",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "book",
+      function(from) emlToS4(from)
+      )
+
 
 # Edited book (like book but see creator)
 
@@ -222,13 +275,39 @@ setClass("book",
               # creator (list editors here)
               # )
 
+# bibtex book
+# field [required/optional] (EML)
+
+# author or editor [r] (?)
+# title            [r] (?)
+# publisher        [r] (journal)
+# year             [r] (?)
+
+# volume or number [o] (volume)
+# series           [o] (? pageRange)
+# address          [o] (?)
+# edition          [o] (?)
+# month            [o] (?)
+# note             [o] (?)
+# isbn             [o] (ISBN)
+
 setClass("editedBook",
          contains = c("id_scope",
                       "resourceGroup",
                       "book_slots",
-                      "referencesGroup")
+                      "referencesGroup"
+                      )
          )
 
+setAs("editedBook",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "editedBook",
+      function(from) emlToS4(from)
+      )
 
 # Chapter
 # Derived from: Book (by xs:extension)
@@ -239,6 +318,23 @@ setClass("editedBook",
                # bookTitle	required
                # pageRange	optional
                # )
+
+# bibtex inbook
+# field [required/optional] (EML)
+
+# author or editor     [r] (?)
+# title                [r] (?)
+# chapter and/or pages [r] (?)
+# publisher            [r] (journal)
+# year                 [r] (?)
+
+# volume or number     [o] (volume)
+# series               [o] (? pageRange)
+# type                 [o] (?)
+# address              [o] (?)
+# edition              [o] (?)
+# month                [o] (?)
+# note                 [o] (?)
 
 setClass("chapter_slots",
          slots = c(chapterNumber = "chapterNumber",
@@ -257,6 +353,15 @@ setClass("chapter",
                       )
          )
 
+setAs("chapter",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "chapter",
+      function(from) emlToS4(from)
+      )
 
 # Manuscript
 
@@ -265,9 +370,21 @@ setClass("chapter",
               # totalPages	optional
               # )
 
+# bibtex unpublished
+
+# field [required/optional] (EML)
+
+# author [r] (?)
+# title  [r] (?)
+# note   [r] (?)
+
+# year   [o] (?)
+# month  [o] (?)
+
 setClass("manuscript_slots",
          slots = c(institution = "institution",
-                   totalPages = "totalPages")
+                   totalPages = "totalPages"
+                   )
          )
 
 setClass("manuscript",
@@ -278,6 +395,15 @@ setClass("manuscript",
                       )
          )
 
+setAs("manuscript",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "manuscript",
+      function(from) emlToS4(from)
+      )
 
 # Thesis
 
@@ -286,6 +412,21 @@ setClass("manuscript",
                # institution	required (from responsibleParty)
                # totalPages	optional
                # )
+
+
+# bibtex phdthesis
+
+# field [required/optional] (EML)
+
+# author  [r] (?)
+# title   [r] (?)
+# school  [r] (?)
+# year    [r] (?)
+
+# type    [o] (?)
+# address [o] (?)
+# month   [o] (?)
+# note    [o] (?)
 
 setClass("thesis_slots",
          slots = c(degree = "degree",
@@ -302,15 +443,41 @@ setClass("thesis",
                       )
          )
 
+setAs("thesis",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "thesis",
+      function(from) emlToS4(from)
+      )
+
 
 # Conference proceedings
 # Derived from: Chapter (by xs:extension)
 
 # A sequence of (
-               # conferenceName	optional
-               # conferenceDate	optional
+               # conferenceName	        optional
+               # conferenceDate	        optional
                # conferenceLocation	optional (from address)
                # )
+
+# bibtex proceedings
+
+# field [required/optional] (EML)
+
+# title            [r] (?)
+# year             [r] (?)
+
+# editor           [o] (?)
+# volume or number [o] (?)
+# series           [o] (?)
+# address          [o] (?)
+# month            [o] (?)
+# organization     [o] (?)
+# publisher        [o] (?)
+# note             [o] (?)
 
 setClass("conference_proceedings_slots",
          slots = c(conferenceName = "conferenceName",
@@ -326,15 +493,36 @@ setClass("conferenceProceedings",
                       )
          )
 
+setAs("conferenceProceedings",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "conferenceProceedings",
+      function(from) emlToS4(from)
+      )
+
 
 # Personal communication
 
 # A sequence of (
-               # publisher	optional (from responsibleParty)
+               # publisher	        optional (from responsibleParty)
                # publicationPlace	optional
                # communicationType	optional
-               # recipient	optional	unbounded (from responsibleParty)
+               # recipient	        optional unbounded (from responsibleParty)
                # )
+
+# bibtex misc
+
+# field [required/optional] (EML)
+
+# author       [o] (?)
+# title        [o] (?)
+# howpublished [o] (?)
+# month        [o] (?)
+# year         [o] (?)
+# note         [o] (?)
 
 setClass("personal_communication_slots",
          slots = c(publisher = "publisher",
@@ -352,21 +540,42 @@ setClass("personalCommunication",
                       )
          )
 
+setAs("personalCommunication",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "personalCommunication",
+      function(from) emlToS4(from)
+      )
 
 # Map
 
 # A sequence of (
-               # publisher optional (from responsibleParty)
-               # edition	optional
-               # geographicCoverage	optional	unbounded (from geographicCoverage)
-               # scale	optional
+               # publisher              optional (from responsibleParty)
+               # edition	        optional
+               # geographicCoverage	optional unbounded (from geographicCoverage)
+               # scale	                optional
                # )
+
+# bibtex misc
+
+# field [required/optional] (EML)
+
+# author       [o] (?)
+# title        [o] (?)
+# howpublished [o] (?)
+# month        [o] (?)
+# year         [o] (?)
+# note         [o] (?)
 
 setClass("map_slots",
          slots = c(publisher = "publisher",
                    edition = "edition",
                    geographicCoverage = "geographicCoverage",
-                   scale = "scale")
+                   scale = "scale"
+                   )
          )
 
 setClass("map",
@@ -377,15 +586,35 @@ setClass("map",
                       )
          )
 
+setAs("map",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "map",
+      function(from) emlToS4(from)
+      )
 
 # Audio visual
 
 # A sequence of (
-               # publisher	required (from responsibleParty)
-               # publicationPlace	optional	unbounded
-               # performer	optional	unbounded (from responsibleParty)
-               # ISBN	optional
+               # publisher	        required (from responsibleParty)
+               # publicationPlace	optional unbounded
+               # performer	        optional unbounded (from responsibleParty)
+               # ISBN	                optional
                # )
+
+# bibtex misc
+
+# field [required/optional] (EML)
+
+# author       [o] (?)
+# title        [o] (?)
+# howpublished [o] (?)
+# month        [o] (?)
+# year         [o] (?)
+# note         [o] (?)
 
 setClass("audio_visual_slots",
          slots = c(publisher = "publisher",
@@ -406,22 +635,26 @@ setClass("audioVisual",
 # Generic
 
 # A sequence of (
-               # publisher	required (from responsibleParty)
-               # volume	optional
+               # publisher	        required (from responsibleParty)
+               # volume	                optional
                # numberOfVolumes	optional
-               # totalPages	optional
-               # totalFigures	optional
-               # totalTables	optional
-               # edition	optional
+               # totalPages	        optional
+               # totalFigures	        optional
+               # totalTables	        optional
+               # edition	        optional
                # originalPublication	optional
-               # reprintEdition	optional
-               # reviewedItem	optional
+               # reprintEdition	        optional
+               # reviewedItem	        optional
                # A choice of (
                             # ISBN	required
                             # OR
                             # ISSN	required
                             # )
                # )
+
+# bibtex misc or book or?
+# field [required/optional] (EML)
+# ? ?
 
 setClass("generic_slots",
          slots = c(publisher = "publisher",
@@ -435,7 +668,8 @@ setClass("generic_slots",
                    reprintEdition = "reprintEdition",  # fehlt
                    reviewdItem = "reviewdItem", # fehlt
                    ISBN = "ISBN",
-                   ISSN = "ISSN")
+                   ISSN = "ISSN"
+                   )
          )
 
 setClass("generic",
@@ -446,13 +680,20 @@ setClass("generic",
                       )
          )
 
-# Top most classes rely on the classes above
+setAs("generic",
+      "XMLInternalElementNode",
+      function(from) emlToS4(from)
+      )
 
-setClass("literature",
-         slots = c(citation = "citation") # FIXME: this needs to be base on R internal citation
-         )
+setAs("XMLInternalElementNode",
+      "generic",
+      function(from) emlToS4(from)
+      )
 
-setClass("citation",
+
+# Top level classes rely on the classes above
+
+setClass("citationType",
          slots = c(article = "article",
                    book = "book",
                    chapter = "chapter",
@@ -466,28 +707,22 @@ setClass("citation",
                    generic = "generic")
         )
 
-setAs("XMLInternalElementNode",
-      "citation",
-      function(from) emlToS4(from)
-      )
+# setClass("literature",
+         # slots = c(citation = "citation") # FIXME: this needs to be base on R internal citation
+         # )
 
-setAs("citation",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
+# setClass("classificationSystem",
+         # slots = c(classificationSystemCitation = "citation",
+                   # classificationSystemModifications = "character"
+                   # )
+         # )
 
-setClass("classificationSystem",
-         slots = c(classificationSystemCitation = "citation",
-                   classificationSystemModifications = "character"
-                   )
-         )
+# setAs("XMLInternalElementNode",
+      # "classificationSystem",
+      # function(from) emlToS4(from)
+      # )
 
-setAs("XMLInternalElementNode",
-      "classificationSystem",
-      function(from) emlToS4(from)
-      )
-
-setAs("classificationSystem",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
+# setAs("classificationSystem",
+      # "XMLInternalElementNode",
+      # function(from) S4Toeml(from)
+      # )
