@@ -19,7 +19,7 @@ setAs("dataTable", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 
-## generator for data table
+## constructor / generator for data table
 eml_dataTable <- function(dat, 
                           meta, 
                           title = character(0), 

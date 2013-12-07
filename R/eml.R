@@ -91,11 +91,12 @@ eml <- function(dat,
                     creator = creator,
                     contact = contact,
                     coverage = coverage,
-                    dataTable = 
+                    dataTable = new("ListOfdataTable", 
+                      list(
                       eml_dataTable(dat=dat, 
                                     meta=meta, 
                                     title=title, 
-                                    description=description),
+                                    description=description)),
                     methods = methods),
       additionalMetadata = additionalMetadata,
       namespaces = namespaces)
@@ -134,9 +135,9 @@ setMethod("keywords", signature("eml"),
 # setMethod("show", 
 #           signature("eml"),
 #           function(object){
-#             x <- extract(object@dataset@dataTable@physical, using=col_classes(object))
+#             x <- extract(object@dataset@dataTable[[1]]@physical, using=col_classes(object))
 #             cat(object@dataset@title, 
-#                 object@dataset@dataTable@entityDescription, 
+#                 object@dataset@dataTable[[1]]@entityDescription, 
 #                 format(as(object@dataset@creator, "person")), 
 #                 sep="\n")
 #             cat("", sep="\n\n")

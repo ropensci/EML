@@ -6,6 +6,8 @@ setClass("publisher", contains="responsibleParty")
 setAs("XMLInternalElementNode", "publisher",   function(from) emlToS4(from))
 setAs("publisher", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
+setClass("ListOfdataTable", contains = "dataTable")
+
 
 ## A Hack to get element order correct without writing
 ## a custom S4Toeml function (which writes slots in 
@@ -13,10 +15,13 @@ setAs("publisher", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## must come before these elements
 setClass("dataset_elements",     
          slots = c(purpose = "character", 
-                        contact = "contact",
-                        publisher = "publisher",
-                        methods = "methods",
-                        dataTable = "dataTable")) 
+                   contact = "contact",
+                   publisher = "publisher",
+                   methods = "methods",
+#                   spatialRaster = "ListOfspatialRaster",
+#                   spatialVector = "ListOfspatialVector",
+#                   view = "view",
+                   dataTable = "ListOfdataTable")) 
 
 ## Declaration of the dataset class
 ##
