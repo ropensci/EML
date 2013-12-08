@@ -141,7 +141,6 @@ setClass("recipient",
          )
 
 
-
 # citation types
 # ==============
 
@@ -157,18 +156,7 @@ setClass("recipient",
                # ISSN	optional
                # )
 
-# bibtex [required/optional] (EML)
-
-# author  [r] (?)
-# title   [r] (?)
-# journal [r] (journal)
-# year    [r] (?)
-
-# volume  [o] (volume)
-# number  [o] (? issue)
-# pages   [o] (? pageRange)
-# month   [o] (?)
-# note    [o] (?)
+# article setup
 
 setClass("article_slots",
          slots = c(journal = "journal",
@@ -186,8 +174,14 @@ setClass("article",
                       "resourceGroup",
                       "article_slots",
                       "referencesGroup"
-                      )
-         )
+                      ),
+         validity = function(object){
+               if(all.equal(object@journal, character(0))){ # FIXME: check that non empty does not work yet
+                     return("Journal is reqired")
+               }else{TRUE}
+         })
+
+# article coercion
 
 setAs("article",
       "XMLInternalElementNode",
@@ -198,6 +192,31 @@ setAs("XMLInternalElementNode",
       "article",
       function(from) emlToS4(from)
       )
+
+
+# article methods
+
+# bibtex [required/optional] (EML)
+
+# author  [r] (?)
+# title   [r] (?)
+# journal [r] (journal)
+# year    [r] (?)
+
+# volume  [o] (volume)
+# number  [o] (? issue)
+# pages   [o] (? pageRange)
+# month   [o] (?)
+# note    [o] (?)
+
+setMethod("toBibtex",
+          "article",
+          function(object){
+          }
+          )
+
+
+
 
 # Book
 
@@ -707,9 +726,23 @@ setClass("citationType",
                    generic = "generic")
         )
 
-# setClass("literature",
-         # slots = c(citation = "citation") # FIXME: this needs to be base on R internal citation
-         # )
+setClass("literature",
+         slots = c(citation = "citationType")
+         )
+
+
+# cite prototype
+
+# setMethod("citation", "eml",
+          # function(package, lib.loc, auto){
+                # bib <- c(
+                         # bibentry(package@citationType
+                                  # )
+                         # )
+                # bib
+                # }
+          # )
+
 
 # setClass("classificationSystem",
          # slots = c(classificationSystemCitation = "citation",
