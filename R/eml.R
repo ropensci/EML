@@ -1,4 +1,36 @@
-#' @include reml_environment.R dataset.R software.R citation.R protocol.R additionalMetadata.R
+#' @include reml_environment.R 
+#' @include eml-dataset.R 
+#' @include eml-software.R 
+#' @include eml-literature.R 
+#' @include eml-protocol.R
+
+
+
+setClass("metadata", contains="XMLInternalElementNode")
+setAs("metadata", "XMLInternalElementNode", function(from) newXMLNode("metadata", from))
+setAs("XMLInternalElementNode", "metadata", function(from) new("metadata", from))
+
+setClass("additionalMetadata", 
+         slots = c(metadata = "metadata",
+                   describes = "character",
+                   id = "character"))
+
+setAs("additionalMetadata", "XMLInternalElementNode", function(from) S4Toeml(from))
+setAs("XMLInternalElementNode", "additionalMetadata", 
+      function(from){ 
+        if("describes" %in% names(from))
+          describes <- xmlValue(from[["describes"]])
+        else
+          describes <- character(0)
+        new("additionalMetadata", 
+            describes = describes, 
+            metadata = as(from[["metadata"]], "metadata"))
+      })
+
+setClass("ListOfadditionalMetadata", contains="list")
+
+############# eml top-level  ######################
+
 
 ## Default XML namespaces -- consider moving to separate file 
 eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
@@ -96,7 +128,7 @@ eml <- function(dat,
                       eml_dataTable(dat=dat, 
                                     meta=meta, 
                                     title=title, 
-                                    description=description)),
+                                    description=description))),
                     methods = methods),
       additionalMetadata = additionalMetadata,
       namespaces = namespaces)
@@ -129,21 +161,5 @@ setMethod("keywords", signature("eml"),
             out
           })
 
-
-## FIXME this could be much richer
-## FIXME use and write accessor and show methods for this info
-# setMethod("show", 
-#           signature("eml"),
-#           function(object){
-#             x <- extract(object@dataset@dataTable[[1]]@physical, using=col_classes(object))
-#             cat(object@dataset@title, 
-#                 object@dataset@dataTable[[1]]@entityDescription, 
-#                 format(as(object@dataset@creator, "person")), 
-#                 sep="\n")
-#             cat("", sep="\n\n")
-#             cat(show(head(x)))
-#           })
-# 
-# 
 
 

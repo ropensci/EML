@@ -1,4 +1,4 @@
-#' @include responsibleParty.R
+#' @include eml-party.R
 
 setClass("metadataProvider", contains="responsibleParty")
 setAs("XMLInternalElementNode", "metadataProvider",   function(from) emlToS4(from))
@@ -34,15 +34,8 @@ setAs("keywordSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setClass("ListOfkeywordSet", contains="list")
 
 
-## Accessor / Extractor method for keywords 
-setMethod("keywords", signature("keywordSet"), 
-          function(object){
-           unname(sapply(object@keyword, slot, "keyword"))
-          }
-         )
 
-
-#' @include responsibleParty.R
+#' @include eml-party.R
 setClass("resourceGroup",
           slots = c("alternateIdentifier" = "character",  
                          "shortName" = "character", 

@@ -1,6 +1,27 @@
 require(utils)
 
 
+###### referencesGroup ####
+setClass("references", 
+         slots = c(references = "character")) # A special case handles this
+setAs("XMLInternalElementNode", "references", function(from) emlToS4(from))
+setAs("references", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+
+setClass("ListOfreferences", 
+         contains = "list")
+
+setClass("referencesGroup", 
+         slots = c("references" = "ListOfreferences"))
+
+setAs("XMLInternalElementNode", "referencesGroup", function(from) emlToS4(from))
+setAs("referencesGroup", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
+
+
+
+
+
 setClass("individualName",  
          slots = c(salutation = "character",
                         givenName = "character", 
@@ -120,4 +141,12 @@ setAs("person", "individualName", function(from)
 setAs("individualName", "person", function(from){
   person(from@givenName,from@surName)
 })
+
+
+
+setClass("originator", contains="responsibleParty")
+setAs("XMLInternalElementNode", "originator",   function(from) emlToS4(from))
+setAs("originator", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setClass("ListOforiginator", contains="list")
+
 

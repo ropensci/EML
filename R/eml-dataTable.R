@@ -9,8 +9,8 @@ setClass("dataTable_slots",
 setAs("XMLInternalElementNode", "dataTable_slots",  function(from) emlToS4(from))
 setAs("dataTable_slots", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-#' @include attribute.R
-#' @include entityGroup.R
+#' @include eml-attribute.R
+#' @include eml-entity.R
 setClass("dataTable", 
          contains=c("entityGroup", "dataTable_slots"))
 setAs("XMLInternalElementNode", "dataTable",  function(from) emlToS4(from))

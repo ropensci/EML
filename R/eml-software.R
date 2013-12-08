@@ -1,4 +1,4 @@
-#' @include resourceGroup.R referencesGroup.R
+#' @include eml-resource.R 
 
 ## FIXME flush out this class
 setClass("software", 
