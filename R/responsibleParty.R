@@ -113,10 +113,10 @@ setAs("ListOfcreator", "person", function(from){
 
 
 setAs("person", "individualName", function(from)
-   new("individualName", 
+   new("individualName",
        givenName = from@given,
        surName = from@family))
- 
+
 setAs("individualName", "person", function(from){
   person(from@givenName,from@surName)
 })

@@ -1,7 +1,7 @@
 #' @include reml_environment.R dataset.R software.R citation.R protocol.R additionalMetadata.R
 
-## Default XML namespaces -- consider moving to separate file 
-eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
+## Default XML namespaces -- consider moving to separate file
+eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
                    ds = "eml://ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
@@ -11,7 +11,7 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
 
 ## Define S4 class
 setClass("eml",
-         slots = c(packageId   = "character", 
+         slots = c(packageId   = "character",
                         system      = "character",
                         scope       = "character",
                         dataset     = "dataset",
@@ -19,41 +19,41 @@ setClass("eml",
 #                        citation    = "citation",
 #                        protocol    = "protocol",
                         additionalMetadata = "ListOfadditionalMetadata",
-                        namespaces = "character", 
-                        dirname = "character"), 
+                        namespaces = "character",
+                        dirname = "character"),
          # slots 'namespaces' and 'dirnames' are for internal use
-         # only and not written as XML child elements.  
+         # only and not written as XML child elements.
          prototype = prototype(namespaces = eml_namespaces))
 
 
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
-setAs("eml", "XMLInternalElementNode", 
+setAs("eml", "XMLInternalElementNode",
       function(from){
         node <- newXMLNode("eml:eml", namespaceDefinitions = from@namespaces)
         S4Toeml(from, node)
       })
 
 
-#' Define constructor function 
+#' Define constructor function
 #' @export
-eml <- function(dat, 
-                meta = NULL, 
-                title = "metadata", 
-                description = character(0), 
-                creator = get("defaultCreator", envir=remlConfig), 
+eml <- function(dat,
+                meta = NULL,
+                title = "metadata",
+                description = character(0),
+                creator = get("defaultCreator", envir=remlConfig),
                 contact = get("defaultContact", envir=remlConfig),
-                coverage = eml_coverage(scientific_names = NULL, 
+                coverage = eml_coverage(scientific_names = NULL,
                                         dates = NULL,
                                         geographic_description = NULL,
-                                        NSEWbox = NULL), 
-                methods = new("methods"), 
+                                        NSEWbox = NULL),
+                methods = new("methods"),
                 additionalMetadata = new("ListOfadditionalMetadata",
                                          list(new("additionalMetadata"))),
                 eml_version =  c("2.1.1", "2.1.0")){
 
-  if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
+  if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)
     meta <- metadata(dat)
 
   if(is.null(meta))
@@ -86,28 +86,27 @@ eml <- function(dat,
       packageId = id[["id"]],
       system = id[["system"]],
       scope = id[["scope"]],
-      dataset = new("dataset", 
+      dataset = new("dataset",
                     title = title,
                     creator = creator,
                     contact = contact,
                     coverage = coverage,
-                    dataTable = new("ListOfdataTable", 
-                      list(
-                      eml_dataTable(dat=dat, 
-                                    meta=meta, 
-                                    title=title, 
-                                    description=description)),
-                    methods = methods),
-      additionalMetadata = additionalMetadata,
-      namespaces = namespaces)
+                    dataTable = new("ListOfdataTable",
+                                    list(eml_dataTable(dat = dat,
+                                                       meta = meta,
+                                                       title = title,
+                                                       description = description)),
+                                    methods = methods),
+                    additionalMetadata = additionalMetadata,
+                    namespaces = namespaces)
+        )
 }
 
-
-## Additional METHODS for this class ## 
+## Additional METHODS for this class ##
 
 
 # When printing to screen, use YAML
-#' @import yaml 
+#' @import yaml
 #' @include eml_yaml.R
 setMethod("show", signature("eml"), function(object) show_yaml(object))
 
@@ -115,7 +114,7 @@ setMethod("show", signature("eml"), function(object) show_yaml(object))
 
 setMethod("coverage", signature("eml"),
           function(coverage){
-## consider checking if multiple datasets?  
+## consider checking if multiple datasets?
           coverage(coverage@dataset@coverage)
           })
 
@@ -132,18 +131,18 @@ setMethod("keywords", signature("eml"),
 
 ## FIXME this could be much richer
 ## FIXME use and write accessor and show methods for this info
-# setMethod("show", 
+# setMethod("show",
 #           signature("eml"),
 #           function(object){
 #             x <- extract(object@dataset@dataTable[[1]]@physical, using=col_classes(object))
-#             cat(object@dataset@title, 
-#                 object@dataset@dataTable[[1]]@entityDescription, 
-#                 format(as(object@dataset@creator, "person")), 
+#             cat(object@dataset@title,
+#                 object@dataset@dataTable[[1]]@entityDescription,
+#                 format(as(object@dataset@creator, "person")),
 #                 sep="\n")
 #             cat("", sep="\n\n")
 #             cat(show(head(x)))
 #           })
-# 
-# 
+#
+#
 
 
