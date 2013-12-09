@@ -43,7 +43,8 @@ test_that("We can coerce metadata to attributeList", {
 
 test_that("Generator for dataset containing generator for dataTable", {
   metadata <- reml:::detect_class(dat, metadata)  ## Needs metadata with class info from data
-  new("dataset", dataTable = new("ListOfdataTable", list(new("dataTable", attributeList = as(metadata, "attributeList")))))
+  set <- new("dataset")
+  set@dataTable = new("ListOfdataTable", list(new("dataTable", attributeList = as(metadata, "attributeList"))))
 })
 
 
