@@ -7,10 +7,6 @@
 # #' @include spatialVector.R
 # #' @include view.R
 
-## Helper class definitions for dataset 
-setClass("publisher", contains="responsibleParty")
-setAs("XMLInternalElementNode", "publisher",   function(from) emlToS4(from))
-setAs("publisher", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOfdataTable", contains = "list")
 

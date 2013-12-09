@@ -79,6 +79,10 @@ setAs("originator", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setClass("ListOforiginator", contains="list")
 
 
+## Helper class definitions for dataset 
+setClass("publisher", contains="responsibleParty")
+setAs("XMLInternalElementNode", "publisher",   function(from) emlToS4(from))
+setAs("publisher", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 ########### Coercions between classes ########### 
 
@@ -95,11 +99,7 @@ setClass("person", contains = "list")
 
 setAs("character", "responsibleParty", function(from)
   as(as.person(from), "responsibleParty"))  # need to import utils for the person definition
-<<<<<<< HEAD:R/party.R
 
-=======
-#' @import utils
->>>>>>> 49a9ef18130ca986563f29cc5b7bd627ff64049a:R/responsibleParty.R
 setAs("responsibleParty", "person", function(from)
   person(from@individualName@givenName,
          from@individualName@surName,
