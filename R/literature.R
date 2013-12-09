@@ -174,12 +174,8 @@ setClass("article",
                       "resourceGroup",
                       "article_slots",
                       "referencesGroup"
-                      ),
-         validity = function(object){
-               if(all.equal(object@journal, character(0))){ # FIXME: check that non empty does not work yet
-                     return("Journal is reqired")
-               }else{TRUE}
-         })
+                      )
+         )
 
 # article coercion
 
@@ -198,10 +194,10 @@ setAs("XMLInternalElementNode",
 
 # bibtex [required/optional] (EML)
 
-# author  [r] (?)
-# title   [r] (?)
+# author  [r] (? creator)
+# title   [r] (? title)
 # journal [r] (journal)
-# year    [r] (?)
+# year    [r] (? pubDate)
 
 # volume  [o] (volume)
 # number  [o] (? issue)
@@ -209,13 +205,17 @@ setAs("XMLInternalElementNode",
 # month   [o] (?)
 # note    [o] (?)
 
-setMethod("toBibtex",
-          "article",
-          function(object){
-          }
-          )
+# setMethod("bibentry",
+          # "article",
+    # function(object, bibtype){
+          # bibentry(author = object@creator,
+                # title = object@title,
+                # journal = object@journal,
+                # year = object@pubDate)
 
-
+          # entry
+          # }
+      # )
 
 
 # Book
