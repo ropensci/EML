@@ -20,9 +20,7 @@
 #' documentation)).
 
 #' Inclusion of superclass
-#' @include responsibleparty.R
-#' @include geographicCoverage.R
-#' @include dataset.R
+#' @include resource.R
 
 
 # Atomic classes for citation types
