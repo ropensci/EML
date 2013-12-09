@@ -13,7 +13,7 @@ test_that("We can publish a draft to figshare", {
   write.csv(read.csv(csv), "hf205-01-TPexp1.csv")
 
   ## Publish the data to figshare (as a draft)
-  id <- eml_publish("hf205.xml", categories="Ecology")
+  id <- eml_publish("hf205.xml", categories="Ecology", destination="figshare")
 
   ## Confirm that the appropriate metadata has been written to figshare
   library(rfigshare)

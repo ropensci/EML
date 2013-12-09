@@ -47,7 +47,7 @@ test_that("We can access a file by its URL", {
 
 
 test_that("we can access the dataTable", {
-  dataTable(S4obj)
+  eml_get(S4obj, "data.set")
 })
 test_that("we can access the metadata attributeList", {
           reml:::attributeList(S4obj)

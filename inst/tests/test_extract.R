@@ -36,7 +36,7 @@ test_that("we can extract from alternative paths", {
 
   ## Here's the actual test
   met <- eml_read("tmp/hf205.xml")
-  capture.output(dat <- dataTable(met)) # Includes call to extract that must download the CSV file from the address given in the EML
+  capture.output(dat <- eml_get((met, "data.set")) # Includes call to extract that must download the CSV file from the address given in the EML
   expect_is(dat, "data.frame")
 
   ## Cleanup

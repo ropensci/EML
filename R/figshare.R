@@ -22,7 +22,6 @@
 #' and in doing so will also update the EML file.  
 #' 
 #' @import XML
-#' @export
 #' @examples 
 #' \dontrun{
 #'    file <- system.file("doc", "my_eml_data.xml", package="reml")

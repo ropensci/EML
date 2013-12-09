@@ -28,8 +28,10 @@ setClass("data.set",
          contains = "data.frame")
 
 
+
+setGeneric("get_metadata", function(object) standardGeneric("get_metadata"))
 # Construct the metadata list from unit.defs and col.defs  
-setMethod("metadata", "data.set", function(object){
+setMethod("get_metadata", "data.set", function(object){
           out <- lapply(1:length( slot(object, "names")), 
                         function(i){
                  list(slot(object, "names")[i], 
@@ -42,41 +44,9 @@ setMethod("metadata", "data.set", function(object){
 
 # data.frames have NULL metadata.  Avoids an error when calling this on a data.frame, 
 # which allows reml to envoke the metadata wizard.  
-setMethod("metadata", "data.frame", function(object) NULL)
+setMethod("get_metadata", "data.frame", function(object) NULL)
 
 
 
 
-### Depricated 
 
-#metadata.data.set <- function(obj){
-#          lapply(1:length( slot(obj, "names")), function(i){
-#                 list(slot(obj, "names")[i], 
-#                      attr(obj, "col.defs")[i],
-#                      attr(obj, "unit.defs")[[i]])
-#                        })
-#}
-#
-#
-
-##### 
-#
-#data.set <- function(..., col.defs, unit.defs){
-#  # if named, re-order col.defs to match order given in `names` 
-#  # if named, re-order unit.defs to match order given in `names` 
-#  ds <- data.frame(...)
-#  ds <- new("data.set", 
-#            names = slot(df, "names"),
-#            row.names = slot(df, "row.names"),
-#            col.defs=col.defs,   
-#            unit.defs=unit.defs)
-#  attr(ds, "class") <- c("data.set", "data.frame")
-#  ds@.S3Class <- "data.frame"
-#  ds@.Data <- df@.Data
-#  ds
-#}
-#
-#
-#
-#
-#

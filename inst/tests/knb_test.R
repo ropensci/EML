@@ -33,7 +33,7 @@ eml_write(dat,
 
 test_that("We can publish data to the KNB", {
   nodeid = "urn:node:mnDemo5" # A Development server for testing
-  pid <- eml_knb("test.xml", 
+  pid <- reml:::eml_knb("test.xml", 
                  mn_nodeid = nodeid,                   
                  cli = D1Client("DEV", nodeid)) # Use dev mode client
 

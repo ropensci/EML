@@ -109,37 +109,6 @@ setAs("XMLInternalElementNode", "attributeList",  function(from) emlToS4(from))
 
 
 
-### Helper Method updates metadata list with class #######################
-#' Helper function to attach classes to metadata
-#' @param dat a data frame
-#' @param meta a list containing attribute-level metadata for each column.  
-#' each element of list corresponds to a consecutive column, and gives a list containing
-#' the column name (as appearing in the data-frame), the column description (e.g. from col.defs)
-#' and the 
-#' @export 
-detect_class <- function(dat, meta){
-  for(i in 1:length(dat)){
-    meta[[i]][[4]] = map(dat[[i]]) 
-  }
-  meta 
-}
-
-map <- function(x){
-  if(is(x, "numeric") | is(x, "integer"))
-    "ratio" ## FIXME ideally we'd want to keep track of integer vs numeric..
-  else if(is(x, "ordered"))
-    "ordinal"
-  else if(is(x, "factor"))
-    "nominal"
-  else if(is(x, "POSIXlt") | is(x, "POSIXct") | is(x, "Date"))
-    "dateTime"
-  else if(is(x, "character"))
-    "nominal"
-  else 
-    "nominal" # FIXME should we error or default to character string?
-}
-
-
 ######## Methods that write user-provided metadata into S4 #######################
 
 ### FIXME weird to have these as coercion methods defined in this manner, 

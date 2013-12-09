@@ -1,5 +1,3 @@
-#' @include generics.R
-
 ## Physical ##
 
 ## Definitions of subclasses, and their coercions to/from XML: 

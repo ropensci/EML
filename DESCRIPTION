@@ -2,7 +2,7 @@ Package: reml
 Description: An R package for reading, writing, integrating and publishing data
     using the Ecological Metadata Language (EML) format.
 Title: R interface for the Ecological Metadata Language
-Version: 0.0-2
+Version: 0.0-3
 License: CC0
 URL: https://github.com/ropensci/reml
 BugReports: https://github.com/ropensci/reml/issues
@@ -37,11 +37,10 @@ Collate:
     'party.R'
     'literature.R'
     'coverage.R'
-    'eml_yaml.R'
-    'coverage_methods.R'
-    'generics.R'
     'physical.R'
     'resource.R'
+    'eml_yaml.R'
+    'coverage_methods.R'
     'software.R'
     'protocol.R'
     'methods.R'
@@ -50,17 +49,20 @@ Collate:
     'dataset.R'
     'eml.R'
     'data.set.R'
+    'dataTable_methods.R'
     'emlToS4.R'
-    'eml_R_software.R'
+    'eml_add.R'
     'eml_config.R'
-    'eml_figshare.R'
-    'eml_functions.R'
-    'eml_knb.R'
+    'eml_get.R'
+    'eml_methods.R'
     'eml_publish.R'
     'eml_read.R'
     'eml_validate.R'
     'eml_wizards.R'
     'eml_write.R'
+    'figshare.R'
+    'knb.R'
     'physical_methods.R'
     'reml_id.R'
+    'software_methods.R'
     'xsl_coercions.R'

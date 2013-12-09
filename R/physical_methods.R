@@ -36,7 +36,7 @@ setMethod("extract", signature("physical"),
 ## FIXME  exported for test only, maybe not necessary?
 ## extraction might not be the best way to define these.  
 
-
+setGeneric("filepath", function(from) standardGeneric("filepath"))
 setMethod("filepath", signature("physical"),
           function(from){
             path <- paste0(from@dirname, from@objectName)
