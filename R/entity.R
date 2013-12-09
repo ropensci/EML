@@ -1,6 +1,6 @@
-#' @include eml-methods.R
-#' @include eml-coverage.R
-#' @include eml-physical.R
+#' @include methods.R
+#' @include coverage.R
+#' @include physical.R
 setClass("entityGroup", 
          slots = c(entityName = "character",
                         entityDescription = "character",

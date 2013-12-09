@@ -1,4 +1,4 @@
-#' @include eml-resource.R
+#' @include resource.R
 
 ## FIXME work with a variety of dateTime formats
 eml_temporalCoverage <- function(dates){

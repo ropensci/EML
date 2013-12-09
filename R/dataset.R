@@ -1,5 +1,5 @@
 #' @include reml_environment.R
-#' @include eml-resource.R
+#' @include resource.R
 
 ## Helper class definitions for dataset 
 setClass("publisher", contains="responsibleParty")

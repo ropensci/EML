@@ -3,7 +3,7 @@
 
 ## Subclasses of taxonomicCoverage, 
 ## with coercion methods to/from XML 
-#' @include eml-party.R
+#' @include party.R
 setClass("classificationSystem",
          slots = c(classificationSystemCitation = "citation",
                         classificationSystemModifications = "character"))
@@ -41,7 +41,7 @@ setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4To
 setClass("ListOftaxonomicClassification", contains = "list")
 
 ## Class definition for taxonomicCoverage 
-#' @include eml-resource.R
+#' @include resource.R
 setClass("taxonomicCoverage",
          slots = c(taxonomicSystem = "taxonomicSystem",
                         generalTaxanomicCoverage = "character",
@@ -145,7 +145,7 @@ setAs("temporalCoverage", "XMLInternalElementNode",   function(from) S4Toeml(fro
 
 ############# GEOGRAPHIC COVERAGE ##########################
 
-#' @include eml-attribute.R 
+#' @include attribute.R 
 #setClass("altitudeUnits", contains="unit")
 #setAs("XMLInternalElementNode", "altitudeUnits",   function(from) emlToS4(from))
 #setAs("altitudeUnits", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -166,7 +166,7 @@ setClass("boundingCoordinates",
 setAs("XMLInternalElementNode", "boundingCoordinates",   function(from) emlToS4(from))
 setAs("boundingCoordinates", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-#' @include eml-resource.R
+#' @include resource.R
 setClass("geographicCoverage",
          slots = c(id = "character",
                         geographicDescription = "character",

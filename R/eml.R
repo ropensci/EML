@@ -1,8 +1,8 @@
 #' @include reml_environment.R 
-#' @include eml-dataset.R 
-#' @include eml-software.R 
-#' @include eml-literature.R 
-#' @include eml-protocol.R
+#' @include dataset.R 
+#' @include software.R 
+#' @include literature.R 
+#' @include protocol.R
 
 
 

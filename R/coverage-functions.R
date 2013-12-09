@@ -7,7 +7,7 @@
 #' @param NSEWbox numeric vector giving the decimal degrees of latitude or longitude for a bounding box in the order North, South, East, West.  Optionally followed by a 5th and 6th value giving the altitude minimum and maximum in meters.  Can alternatively provide an existing `eml::geographicCoverage` object. 
 #' @return an S4 representation of an eml coverage node.  
 #' @export
-#' @include eml-coverage.R
+#' @include coverage.R
 eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_description = NULL, NSEWbox = NULL){
   ## FIXME functions should take a S4 node too
   node <- new("coverage") 
@@ -24,6 +24,7 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
 ## Methods for `coverage` class 
 
 #' @include eml_yaml.R
+#' @include coverage.R
 setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
 

@@ -1,4 +1,4 @@
-#' @include eml-resource.R 
+#' @include resource.R 
 
 ## FIXME flush out this class
 setClass("software", 

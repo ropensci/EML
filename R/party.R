@@ -1,5 +1,7 @@
 require(utils)
 
+#' @importClassesFrom utils person
+NULL
 
 ###### referencesGroup ####
 setClass("references", 

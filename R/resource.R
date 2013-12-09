@@ -1,4 +1,4 @@
-#' @include eml-party.R
+#' @include party.R
 
 setClass("metadataProvider", contains="responsibleParty")
 setAs("XMLInternalElementNode", "metadataProvider",   function(from) emlToS4(from))
@@ -35,7 +35,7 @@ setClass("ListOfkeywordSet", contains="list")
 
 
 
-#' @include eml-party.R
+#' @include party.R
 setClass("resourceGroup",
           slots = c("alternateIdentifier" = "character",  
                          "shortName" = "character", 
