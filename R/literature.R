@@ -106,24 +106,24 @@ setClass("conferenceDate",
          slots = c(conferenceDate = "character")
          )
 
-setClass("communicationType",
-         slots = c(communicationType = "character")
+setClass("communication",
+         slots = c(communication = "character")
          )
 
-setClass("referenceType",
-         slots = c(referenceType = "character")
+setClass("reference",
+         slots = c(reference = "character")
          )
 
 setClass("scale",
-         slots = c(referenceType = "geographicCoverage")
+         slots = c(reference = "geographicCoverage")
          )
 
 setClass("performer",
-         slots = c(referenceType = "responsibleParty")
+         slots = c(reference = "responsibleParty")
          )
 
 setClass("originalPublication",
-         slots = c(referenceType = "character")
+         slots = c(reference = "character")
          )
 
 setClass("reprintEdition",
@@ -526,7 +526,7 @@ setAs("XMLInternalElementNode",
 # A sequence of (
                # publisher	        optional (from responsibleParty)
                # publicationPlace	optional
-               # communicationType	optional
+               # communication	optional
                # recipient	        optional unbounded (from responsibleParty)
                # )
 
@@ -544,7 +544,7 @@ setAs("XMLInternalElementNode",
 setClass("personal_communication_slots",
          slots = c(publisher = "publisher",
                    publicationPlace = "publicationPlace",
-                   communicationType = "communicationType",
+                   communication = "communication",
                    recipient = "recipient"
                    )
          )
@@ -710,7 +710,7 @@ setAs("XMLInternalElementNode",
 
 # Top level classes rely on the classes above
 
-setClass("citationType",
+setClass("citation",
          slots = c(article = "article",
                    book = "book",
                    chapter = "chapter",
@@ -725,7 +725,7 @@ setClass("citationType",
         )
 
 setClass("literature",
-         slots = c(citation = "citationType")
+         slots = c(citation = "citation")
          )
 
 
@@ -734,7 +734,7 @@ setClass("literature",
 # setMethod("citation", "eml",
           # function(package, lib.loc, auto){
                 # bib <- c(
-                         # bibentry(package@citationType
+                         # bibentry(package@citation
                                   # )
                          # )
                 # bib
