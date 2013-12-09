@@ -28,6 +28,8 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
 setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
 
+#' @export
+setGeneric("coverage", function(coverage) standardGeneric("coverage"))
 
 #' accessor method
 setMethod("coverage", signature("coverage"), function(coverage) coverage)
@@ -62,6 +64,10 @@ get_coverage_list <-
           }
 
 
+
+
+#' @export
+setGeneric("species", function(taxonomicCoverage) standardGeneric("species"))
 ## Coerce taxonomicCoverage into a species string  
 ## FIXME define at the taxonomimcClassifcation level first
 ## FIXME Define as a coercion to character instead?

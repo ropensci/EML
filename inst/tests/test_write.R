@@ -43,7 +43,7 @@ S4obj <- reml:::eml(dat, metadata, title = "title", description = "description",
 
 
 test_that("We can write some part of this to XML", {
-  att <- S4obj@dataset@dataTable@attributeList@attribute[[1]]@measurementScale
+  att <- S4obj@dataset@dataTable[[1]]@attributeList@attribute[[1]]@measurementScale
   reml:::S4Toeml(att)
 })
 

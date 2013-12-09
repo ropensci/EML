@@ -50,7 +50,7 @@ test_that("We can generate an dataset S4 object", {
       creator = creator,
       contact = as(creator[[1]], "contact"),
       coverage = new("coverage"),
-      dataTable = dt,
+      dataTable = c(dt),
       methods = new("methods"))
   expect_is(s4, "dataset")
 })
@@ -65,7 +65,7 @@ test_that("We can generate an eml S4 object", {
       creator = creator,
       contact = as(creator[[1]], "contact"),
       coverage = new("coverage"),
-      dataTable = dt,
+      dataTable = c(dt),
       methods = new("methods"))
 
   success <- require(uuid)

@@ -13,7 +13,7 @@ S4obj <- reml:::eml(dat, metadata, title = "title",
 
 
 test_that("we can extract the data unaltered (using method for object 'physical')", {
-  out_dat <- extract(S4obj@dataset@dataTable@physical, using=col_classes(S4obj))
+  out_dat <- reml:::extract(S4obj@dataset@dataTable[[1]]@physical, using=col_classes(S4obj))
   expect_equal(dat, out_dat) 
  # expect_identical(dat, out_dat) ## FIXME should be identical, but isn't because integers are cast as eml:ratio which is cast as numeric.  Need to add mechanism for integers reml::detect_class
 })
@@ -28,7 +28,7 @@ test_that("we can extract from alternative paths", {
   id <- "knb-lter-hfr.205.4" # Interestingly, met@packageID ends with `.7`, not `.4` ...
   base <- "https://cn.dataone.org/cn/v1"
   url <- paste(base, "object", id, sep="/")
-  file <- content(GET(url))
+  file <- capture.output(content(GET(url)))
 
   ## Write the file out again just so we can test our reading local paths
   require(XML)
@@ -48,5 +48,5 @@ test_that("we can extract from alternative paths", {
 ## Add unit tests for all extractors!
 
 test_that("we can extract from eml directly", {
-#  extract(S4obj)
+#  reml:::extract(S4obj)
 })

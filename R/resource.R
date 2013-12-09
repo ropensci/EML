@@ -1,4 +1,6 @@
 #' @include party.R
+#' @include coverage.R
+#' @include physical.R
 
 setClass("metadataProvider", contains="responsibleParty")
 setAs("XMLInternalElementNode", "metadataProvider",   function(from) emlToS4(from))

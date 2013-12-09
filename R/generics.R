@@ -33,12 +33,8 @@ setGeneric("version", function(x) standardGeneric("version"))
 #' @export
 setGeneric("filepath", function(from) standardGeneric("filepath"))
 
-#' @export
-setGeneric("coverage", function(coverage) standardGeneric("coverage"))
 
 #' @export
 setGeneric("keywords", function(object) standardGeneric("keywords"))
 
-#' @export
-setGeneric("species", function(taxonomicCoverage) standardGeneric("species"))
 

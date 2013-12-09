@@ -4,6 +4,7 @@
 ## Subclasses of taxonomicCoverage, 
 ## with coercion methods to/from XML 
 #' @include party.R
+#' @include literature.R
 setClass("classificationSystem",
          slots = c(classificationSystemCitation = "citation",
                         classificationSystemModifications = "character"))
@@ -41,7 +42,6 @@ setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4To
 setClass("ListOftaxonomicClassification", contains = "list")
 
 ## Class definition for taxonomicCoverage 
-#' @include resource.R
 setClass("taxonomicCoverage",
          slots = c(taxonomicSystem = "taxonomicSystem",
                         generalTaxanomicCoverage = "character",
@@ -166,7 +166,6 @@ setClass("boundingCoordinates",
 setAs("XMLInternalElementNode", "boundingCoordinates",   function(from) emlToS4(from))
 setAs("boundingCoordinates", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-#' @include resource.R
 setClass("geographicCoverage",
          slots = c(id = "character",
                         geographicDescription = "character",

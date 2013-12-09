@@ -1,4 +1,5 @@
 #' @include generics.R
+#' @include eml.R
 NULL
 
 

@@ -50,7 +50,7 @@ test_that("we can access the dataTable", {
   dataTable(S4obj)
 })
 test_that("we can access the metadata attributeList", {
-  attributeList(S4obj)
+          reml:::attributeList(S4obj)
 })
 test_that("we can access the contact", {
   contact(S4obj)
