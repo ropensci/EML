@@ -50,13 +50,13 @@ test_that("we can access the dataTable", {
   eml_get(S4obj, "data.set")
 })
 test_that("we can access the metadata attributeList", {
-          reml:::attributeList(S4obj)
+          eml_get(S4obj, "attributeList")
 })
 test_that("we can access the contact", {
-  contact(S4obj)
+  eml_get(S4obj, "contact")
 })
 test_that("we can access the citation", {
-  citationInfo(S4obj)
+  eml_get(S4obj, "citation_info")
 })
 
 

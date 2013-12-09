@@ -7,7 +7,12 @@ eml_get <- function(eml,
                           "filepath", 
                           "unit.defs", 
                           "col.defs", 
-                          "citation_info", 
+                          "citation_info",
+                          "keywords",
+                          "coverage",
+                          "contact",
+                          "creator",
+                          "attributeList",
                           "data.set")){
   if(!is(eml, "eml"))
     stop("object 'eml' must be of class 'eml'")
@@ -21,9 +26,10 @@ eml_get <- function(eml,
          "unit.defs" = unit.defs(eml),
          "col.defs" = col.defs(eml),
          "citation_info" = citation_info(eml),
-         "keywords", keywords(eml),
-         "coverage", coverage(eml), 
-         "contact", contact(eml),
-         "creator", creator(eml),
-         "attributeList", attributeList(eml))
+         "keywords" = keywords(eml),
+         "coverage" = coverage(eml), 
+         "contact" = contact(eml),
+         "creator" = creator(eml),
+         "attributeList" = attributeList(eml))
+   
 }
