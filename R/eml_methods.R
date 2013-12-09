@@ -17,7 +17,7 @@ eml <- function(dat,
                 eml_version =  c("2.1.1", "2.1.0")){
 
   if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
-    meta <- eml_get(dat, "metadata")
+    meta <- get_metadata(dat)
 
   if(is.null(meta))
     meta <- metadata_wizard(dat)

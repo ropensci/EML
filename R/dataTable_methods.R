@@ -8,7 +8,7 @@ eml_dataTable <- function(dat,
                           filename = character(0), ...){
 
   if(is(dat, "data.set")) 
-    meta <- eml_get(dat, "metadata")
+    meta <- get_metadata(dat)
   if(is.null(meta))
     meta <- metadata_wizard(dat)
 

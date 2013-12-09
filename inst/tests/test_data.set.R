@@ -37,13 +37,13 @@ description = "testing description"
 
 
 test_that("We can generate an dataTable S4 object", {
-  s4 <- reml:::eml_dataTable(dat, eml_get(dat, "metadata"), title=title, description=description)
+  s4 <- reml:::eml_dataTable(dat, reml:::get_metadata(dat), title=title, description=description)
   expect_is(s4, "dataTable")
                
                })
 
 test_that("We can generate an dataset S4 object", {
-  dt <- reml:::eml_dataTable(dat, eml_get(dat, "metadata"), title=title, description=description)
+  dt <- reml:::eml_dataTable(dat, reml:::get_metadata(dat), title=title, description=description)
   creator <- new("ListOfcreator", list(as("Carl Boettiger <cboettig@ropensci.org>", "creator")))
   s4 <- new("dataset", 
       title = title, 
@@ -58,7 +58,7 @@ test_that("We can generate an dataset S4 object", {
 
 
 test_that("We can generate an eml S4 object", {
-  dt <- reml:::eml_dataTable(dat, eml_get(dat, "metadata"), title=title, description=description)
+  dt <- reml:::eml_dataTable(dat, reml:::get_metadata(dat), title=title, description=description)
   creator <- new("ListOfcreator", list(as("Carl Boettiger <cboettig@ropensci.org>", "creator")))
   ds <- new("dataset", 
       title = title, 
@@ -89,7 +89,7 @@ test_that("We can generate an eml S4 object", {
 
 test_that("We can generate an eml S4 object", {
   s4 <- reml:::eml(dat, 
-                   eml_get(dat, "metadata"), 
+                   reml:::get_metadata(dat), 
                    title=title, 
                    description=description, 
                    creator = "Carl Boettiger <cboettig@ropensci.org>")
@@ -100,7 +100,7 @@ test_that("We can generate an eml S4 object", {
 
 test_that("Show method is working", {
   s4 <- reml:::eml(dat, 
-                   eml_get(dat, "metadata"), 
+                   reml:::get_metadata(dat), 
                    title=title, 
                    description=description, 
                    creator = "Carl Boettiger <cboettig@ropensci.org>")
