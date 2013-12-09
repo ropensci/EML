@@ -20,15 +20,15 @@ setAs("referencesGroup", "XMLInternalElementNode",   function(from) S4Toeml(from
 
 ### Definitions for elements of responsibleParty ### 
 
-setClass("individualName",  
+setClass("individualName",
          slots = c(salutation = "character",
-                        givenName = "character", 
+                        givenName = "character",
                         surName = "character"))
 setAs("XMLInternalElementNode", "individualName",   function(from) emlToS4(from))
 setAs("individualName", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-setClass("address", 
+setClass("address",
          slots = c(deliveryPoint = "character", # street address
                          city = "character",
                          adminstrativeArea = "character", #state
@@ -39,11 +39,11 @@ setAs("XMLInternalElementNode", "address",   function(from) emlToS4(from))
 setAs("address", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-### definition of the focal class, responsibleParty 
+### definition of the focal class, responsibleParty
 setClass("responsibleParty",
          slots = c(individualName = "individualName", # or
                         organizationName = "character",
-                        positionName = "character", 
+                        positionName = "character",
                         address = "address",
                         phone = "character",
                         electronicMailAddress = "character",
@@ -95,15 +95,19 @@ setClass("person", contains = "list")
 
 setAs("character", "responsibleParty", function(from)
   as(as.person(from), "responsibleParty"))  # need to import utils for the person definition
+<<<<<<< HEAD:R/party.R
 
+=======
+#' @import utils
+>>>>>>> 49a9ef18130ca986563f29cc5b7bd627ff64049a:R/responsibleParty.R
 setAs("responsibleParty", "person", function(from)
   person(from@individualName@givenName,
          from@individualName@surName,
          email = from@electronicMailAddress)
 )
 setAs("person", "responsibleParty", function(from)
-  new("responsibleParty", 
-      individualName = new("individualName", 
+  new("responsibleParty",
+      individualName = new("individualName",
                            "givenName" = as.character(from$given),
                            "surName" = as.character(from$family)),
       electronicMailAddress = as.character(from$email))
@@ -118,7 +122,7 @@ setAs("person", "creator", function(from)
   as(as(from, "responsibleParty"), "creator"))
 setAs("creator", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
-   p$role = "cre" 
+   p$role = "cre"
    p
   })
 setAs("character", "creator", function(from)
@@ -147,7 +151,7 @@ setAs("ListOfresponsibleParty", "person", function(from){
 
 setAs("ListOfcreator", "person", function(from){
     l <- lapply(from, as, "person")
-      out <- NULL 
+      out <- NULL
       for(p in l)
         out <- c(out, p)
       class(out) = "person"
@@ -156,10 +160,10 @@ setAs("ListOfcreator", "person", function(from){
 
 
 setAs("person", "individualName", function(from)
-   new("individualName", 
+   new("individualName",
        givenName = from@given,
        surName = from@family))
- 
+
 setAs("individualName", "person", function(from){
   person(from@givenName,from@surName)
 })

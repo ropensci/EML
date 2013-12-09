@@ -30,8 +30,8 @@ setClass("ListOfadditionalMetadata", contains="list")
 ############# eml top-level  ######################
 
 
-## Default XML namespaces -- consider moving to separate file 
-eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1", 
+## Default XML namespaces -- consider moving to separate file
+eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
                    ds = "eml://ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
@@ -41,7 +41,7 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
 
 ## Define S4 class
 setClass("eml",
-         slots = c(packageId   = "character", 
+         slots = c(packageId   = "character",
                         system      = "character",
                         scope       = "character",
                         dataset     = "dataset",
@@ -49,17 +49,17 @@ setClass("eml",
 #                        citation    = "citation",
 #                        protocol    = "protocol",
                         additionalMetadata = "ListOfadditionalMetadata",
-                        namespaces = "character", 
-                        dirname = "character"), 
+                        namespaces = "character",
+                        dirname = "character"),
          # slots 'namespaces' and 'dirnames' are for internal use
-         # only and not written as XML child elements.  
+         # only and not written as XML child elements.
          prototype = prototype(namespaces = eml_namespaces))
 
 
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
-setAs("eml", "XMLInternalElementNode", 
+setAs("eml", "XMLInternalElementNode",
       function(from){
         node <- newXMLNode("eml:eml", namespaceDefinitions = from@namespaces)
         S4Toeml(from, node)
