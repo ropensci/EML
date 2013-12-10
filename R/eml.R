@@ -44,9 +44,9 @@ setClass("eml",
          slots = c(packageId   = "character",
                         system      = "character",
                         scope       = "character",
-                        dataset     = "dataset",
+                        dataset     = "dataset", 
+                        citation    = "citation",
 #                        software    = "software",
-#                        citation    = "citation",
 #                        protocol    = "protocol",
                         additionalMetadata = "ListOfadditionalMetadata",
                         namespaces = "character",
@@ -54,8 +54,6 @@ setClass("eml",
          # slots 'namespaces' and 'dirnames' are for internal use
          # only and not written as XML child elements.
          prototype = prototype(namespaces = eml_namespaces))
-
-
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))

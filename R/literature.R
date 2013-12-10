@@ -1,8 +1,5 @@
 # TODO:
-# o check that citation file has not been included somewhere if so change to literature file here.
 # o check that all fields are correct down to the atomic ones
-# o check that superclass are included properly
-# o create validity functions (really necessary?)
 # o check mapping of fields to bibtex (write all fields? as bibtex ignores unknown)
 #       - or give own style file that allows for all fields
 
@@ -19,8 +16,13 @@
 #' would be used when one of the other types will not work (cite eml
 #' documentation)).
 
+#' The module includes: 
+#' eml-documentation, eml-resource, eml-coverage, eml-party, eml-access, eml-project
+
 #' Inclusion of superclass
 #' @include resource.R
+#' @include coverage.R
+#' @include party.R
 
 
 # Atomic classes for citation types
@@ -30,113 +32,409 @@ setClass("journal",
          slots = c(journal = "character")
          )
 
+setAs("journal",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "journal",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("volume",
          slots = c(volume = "character")
          )
+
+setAs("volume",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "volume",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("numberOfVolumes",
          slots = c(numberOfVolumes = "character")
          )
 
+setAs("numberOfVolumes",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "numberOfVolumes",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("issue",
          slots = c(issue = "character")
          )
+
+setAs("issue",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "issue",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("pageRange",
          slots = c(pageRange = "character")
          )
 
+setAs("pageRange",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "pageRange",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("totalPages",
          slots = c(totalPages = "character")
          )
+
+setAs("totalPages",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "totalPages",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("totalTables",
          slots = c(totalTables = "character")
          )
 
+setAs("totalPages",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "totalPages",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("totalFigures",
          slots = c(totalFigures = "character")
          )
+
+setAs("totalFigures",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "totalFigures",
+      function(from) emlToS4(from)
+      )
+
 
 # already defined in  dataset.R
 # setClass("publisher",
          # slots = c(publisher = "responsibleParty"))
 
+
 setClass("institution",
          slots = c(institution = "responsibleParty")
          )
+
+setAs("institution",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "institution",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("publicationPlace",
          slots = c(publicationPlace = "character")
          )
 
+setAs("publicationPlace",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "publicationPlace",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("ISSN",
          slots = c(ISSN = "character")
          )
+
+setAs("ISSN",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "ISSN",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("ISBN",
          slots = c(ISBN = "character")
          )
 
+setAs("ISBN",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "ISBN",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("edition",
          slots = c(edition = "character")
          )
+
+setAs("edition",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "edition",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("chapterNumber",
          slots = c(chapterNumber = "character")
          )
 
+setAs("chapterNumber",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "chapterNumber",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("editor",
          slots = c(editor = "character")
         )
+
+setAs("editor",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "editor",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("bookTitle",
          slots = c(bookTitle = "character")
          )
 
+setAs("bookTitle",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "bookTitle",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("degree",
          slots = c(degree = "character")
          )
+
+setAs("degree",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "degree",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("conferenceName",
          slots = c(conferenceName = "character")
          )
 
+setAs("conferenceName",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("conferenceName",
+      "edition",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("conferenceDate",
          slots = c(conferenceDate = "character")
          )
+
+setAs("conferenceDate",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("conferenceDate",
+      "edition",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("communication",
          slots = c(communication = "character")
          )
 
+setAs("communication",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "communication",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("reference",
          slots = c(reference = "character")
          )
 
+setAs("reference",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "reference",
+      function(from) emlToS4(from)
+      )
+
 setClass("scale",
-         slots = c(reference = "geographicCoverage")
+         slots = c(scale = "geographicCoverage")
          )
+
+setAs("scale",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "scale",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("performer",
-         slots = c(reference = "responsibleParty")
+         slots = c(performer = "responsibleParty")
          )
 
+setAs("performer",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "performer",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("originalPublication",
-         slots = c(reference = "character")
+         slots = c(originalPublication = "character")
          )
+
+setAs("originalPublication",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "originalPublication",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("reprintEdition",
          slots = c(reprintEdition = "character")
          )
 
+setAs("reprintEdition",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("reprintEdition",
+      "edition",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("reviewdItem",
          slots = c(reviewdItem = "character")
          )
 
+setAs("reviewdItem",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "reviewdItem",
+      function(from) emlToS4(from)
+      )
+
+
 setClass("recipient",
-         slots = c(reviewdItem = "responsibleParty")
+         slots = c(recipient = "responsibleParty")
          )
+
+setAs("recipient",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "recipient",
+      function(from) emlToS4(from)
+      )
 
 
 # citation types
@@ -179,7 +477,7 @@ setClass("article",
 
 setAs("article",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -200,7 +498,7 @@ setAs("XMLInternalElementNode",
 # volume  [o] (volume)
 # number  [o] (? issue)
 # pages   [o] (? pageRange)
-# month   [o] (?)
+# month   [o] (? pubDate)
 # note    [o] (?)
 
 # setMethod("bibentry",
@@ -268,7 +566,7 @@ setClass("book",
 
 setAs("book",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -318,7 +616,7 @@ setClass("editedBook",
 
 setAs("editedBook",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -372,7 +670,7 @@ setClass("chapter",
 
 setAs("chapter",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -414,7 +712,7 @@ setClass("manuscript",
 
 setAs("manuscript",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -462,7 +760,7 @@ setClass("thesis",
 
 setAs("thesis",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -512,7 +810,7 @@ setClass("conferenceProceedings",
 
 setAs("conferenceProceedings",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -559,7 +857,7 @@ setClass("personalCommunication",
 
 setAs("personalCommunication",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -605,7 +903,7 @@ setClass("map",
 
 setAs("map",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -647,6 +945,18 @@ setClass("audioVisual",
                       "referencesGroup"
                       )
          )
+
+# audio visual coercion 
+
+setAs("audioVisual",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "audioVisual",
+      function(from) emlToS4(from)
+      )
 
 
 # Generic
@@ -699,7 +1009,7 @@ setClass("generic",
 
 setAs("generic",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -709,6 +1019,9 @@ setAs("XMLInternalElementNode",
 
 
 # Top level classes rely on the classes above
+# ============================================
+
+# citation
 
 setClass("citation",
          slots = c(article = "article",
@@ -722,16 +1035,52 @@ setClass("citation",
                    map = "map",
                    audioVisual = "audioVisual",
                    generic = "generic")
-        )
-
-setClass("literature",
-         slots = c(citation = "citation")
          )
 
+# citation coercion
 
-# cite prototype
+setAs("citation",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
 
-# setMethod("citation", "eml",
+setAs("XMLInternalElementNode",
+      "citation",
+      function(from) emlToS4(from)
+      )
+
+# literature
+
+setAs("citation",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "citation",
+      function(from) emlToS4(from)
+      )
+
+
+setClass("literature",
+        slots = c(citation = "citation")
+         )
+
+# literature coercion
+
+setAs("literature",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "literature",
+      function(from) emlToS4(from)
+      )
+
+# cite prototypes
+
+# setMethod("bibentry", "citation",
           # function(package, lib.loc, auto){
                 # bib <- c(
                          # bibentry(package@citation
