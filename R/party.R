@@ -95,7 +95,7 @@ setAs("creator", "contact", function(from)
 
 # Make a formal S4 class of the S3 class.  Could add a validation method to check is(object, "person")...
 #' @import utils 
-setClass("person", contains = "list")
+setOldClass("person") # promote to S4
 
 setAs("character", "responsibleParty", function(from)
   as(as.person(from), "responsibleParty"))  # need to import utils for the person definition
@@ -161,8 +161,8 @@ setAs("ListOfcreator", "person", function(from){
 
 setAs("person", "individualName", function(from)
    new("individualName",
-       givenName = from@given,
-       surName = from@family))
+       givenName = from$given,
+       surName = from$family))
 
 setAs("individualName", "person", function(from){
   person(from@givenName,from@surName)
