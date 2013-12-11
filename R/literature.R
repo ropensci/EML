@@ -179,7 +179,7 @@ setClass("article",
 
 setAs("article",
       "XMLInternalElementNode",
-      function(from) emlToS4(from)
+      function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
@@ -723,6 +723,17 @@ setClass("citation",
                    audioVisual = "audioVisual",
                    generic = "generic")
         )
+
+setAs("citation",
+      "XMLInternalElementNode",
+      function(from) S4Toeml(from)
+      )
+
+setAs("XMLInternalElementNode",
+      "citation",
+      function(from) emlToS4(from)
+      )
+
 
 setClass("literature",
          slots = c(citation = "citation")
