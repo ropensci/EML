@@ -473,7 +473,7 @@ setClass("article",
                       )
          )
 
-# article coercion
+# article xml <-> s4 coercion
 
 setAs("article",
       "XMLInternalElementNode",
@@ -485,8 +485,7 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
-
-# article methods
+# article 
 
 # bibtex [required/optional] (EML)
 
@@ -501,17 +500,70 @@ setAs("XMLInternalElementNode",
 # month   [o] (? pubDate)
 # note    [o] (?)
 
-# setMethod("bibentry",
-          # "article",
-    # function(object, bibtype){
-          # bibentry(author = object@creator,
-                # title = object@title,
-                # journal = object@journal,
-                # year = object@pubDate)
+setClass("bibentry")
+setAs("article", "bibentry", function(from){
+	bibentry(bibtype = "article", 
+                 # required fields
+                 author = , # FIXME: from@creator extract all necessary information 
+                 title = from@title,
+                 journal = from@journal@journal,
+                 year = from@pubDate, 
+                 # optional fields
+                 volume = from@volume@volume,
+                 number = from@issue@issue,
+                 pages = from@pageRange@pageRange,
+                 month = from@pubDate,
+                 # note = "something", # not available
+                 textVersion = NULL, 
+                 header = "Citation based on eml article classs", 
+                 footer = "---------------------------------------0")
+	     }
+)
 
-          # entry
-          # }
-      # )
+# setAs("bibentry", "article", function(from){
+	# bibentry(bibtype = "article", 
+                 # # required fields
+                 # author = "Testauthor", # FIXME: from@creator extract all necessary information 
+                 # title = from@title,
+                 # journal = from@journal@journal,
+                 # year = from@pubDate, 
+                 # # optional fields
+                 # volume = from@volume@volume,
+                 # number = from@issue@issue,
+                 # pages = from@pageRange@pageRange,
+                 # month = from@pubDate,
+                 # # note = "something",
+                 # textVersion = NULL, 
+                 # header = "Citation based on eml article classs", 
+                 # footer = "---------------------------------------0")
+	     # }
+# )
+
+
+
+# setAs("bibentry", "article", function(from){
+    # art = new("article")
+    # art@title <- a$title
+    # art@address = "article", 
+    # art@author = "Testauthor", 
+    # art@booktitle = "something",
+    # art@chapter = "something",
+    # art@editor = "something",
+    # art@institution = "something",
+    # art@journal = "something",
+    # art@note = "something",
+    # art@number = "something",
+    # art@pages = "something",
+    # art@publisher = "something",
+    # art@school = "something",
+    # art@series = "something",
+    # art@title ="something",
+    # art@volume ="something",
+    # art@year = "something",
+    # art@textVersion = NULL, 
+    # art@header = NULL, 
+    # art@footer = NULL)
+# }
 
 
 # Book
