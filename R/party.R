@@ -31,7 +31,7 @@ setAs("individualName", "XMLInternalElementNode",   function(from) S4Toeml(from)
 setClass("address",
          slots = c(deliveryPoint = "character", # street address
                          city = "character",
-                         adminstrativeArea = "character", #state
+                         administrativeArea = "character", #state
                          postalCode = "character",
                          country = "character"),
          contains = "referencesGroup")
