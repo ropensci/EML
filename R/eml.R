@@ -3,6 +3,7 @@
 #' @include software.R 
 #' @include literature.R 
 #' @include protocol.R
+#' @include reml_id.R
 
 setClass("metadata", contains="XMLInternalElementNode")
 setAs("metadata", "XMLInternalElementNode", function(from) newXMLNode("metadata", from))
@@ -26,6 +27,7 @@ setAs("XMLInternalElementNode", "additionalMetadata",
       })
 
 setClass("ListOfadditionalMetadata", contains="list")
+setMethod("c", signature("additionalMetadata"), function(x, ...) new("ListOfadditionalMetadata", list(x, ...)))
 
 ############# eml top-level  ######################
 
@@ -53,7 +55,13 @@ setClass("eml",
                         dirname = "character"),
          # slots 'namespaces' and 'dirnames' are for internal use
          # only and not written as XML child elements.
-         prototype = prototype(namespaces = eml_namespaces))
+
+         prototype = prototype(
+                               packageId = reml_id()[["id"]], 
+                               system = reml_id()[["system"]],
+                               scope = reml_id()[["scope"]], 
+## ideally we'd have only one call to reml_id()..
+                               namespaces = eml_namespaces))
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
