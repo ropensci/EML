@@ -18,10 +18,23 @@ eml_write <- function(dat,
                 methods = new("methods"), 
                 additionalMetadata = new("ListOfadditionalMetadata"),
                 file = NULL, # paste0(gsub(" ", "_", title), ".xml"),
-                eml_version = c("2.1.1", "2.1.0")){
+                eml_version = c("2.1.1", "2.1.0"))
+
+{
   if(is(dat, "eml"))
     s4 <- dat
-  else 
+  else{
+
+    if(is.null(creator))
+      creator <- person_wizard("creator")
+    if(is.null(contact))
+      contact <- person_wizard("contact")
+    if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
+            meta <- get_metadata(dat)
+    if(is.null(meta)) # If it is still NULL after get_metadata(), 
+          meta <- metadata_wizard(dat)
+  }
+
     s4 <- eml(dat = dat, 
             meta = meta, 
             title = title, 
