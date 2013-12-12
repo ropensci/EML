@@ -67,8 +67,6 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
 ```
 
 
-
-
 - `col.defs`: These are usually just plain text definitions, though a URI to a semantic definition can be particularly powerful. See "Advanced Use" for details on adding richer information, such as the method used to collect the data or set the geographic, taxanomic, or temporal coverage of an individual column.   
 
 - `unit.defs`:   For factors, this is a definition of the levels involved.  For numeric data, specify the units from [this list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).  For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character strings, a definition of the kind of string can be given, (e.g. species scientific name), otherwise the column description will be used.  
@@ -76,35 +74,47 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
 Alternatively, annotations can be added to an existing data frame, `data.set(my.data.frame, col.defs = ..., unit.defs = ...)`.  
 
 
+We will also specify a default creator who will also be used as the contact person for EML files created in this session.  
 
 
 ```coffee
-eml_write(dat, 
-          title = "reml example",  
-          description = "An example, intended for
-                              illustrative purposes only.",
-          creator = "Carl Boettiger <cboettig@gmail.com>",
-          file = "reml_example.xml")
+eml_config(creator="Carl Boettiger <cboettig@gmail.com>")
+```
+
+
+While we will always be able to provide alternative or additional creators or contact person later, `eml_config` can store the defaults to save us the trouble of entering this data repeatedly.  See `?eml_config` for more information and other configurable defaults.  
+
+
+With this information in place, we have all the required metadata to generate a minimally valid EML file documenting this dataset.   
+
+
+
+```coffee
+eml_write(dat, file = "reml_example.xml")
 ```
 
 ```
 [1] "reml_example.xml"
 ```
 
-                    
-*for convenience, `dat` could simply be a `data.frame` and `reml` will launch it's metadata wizard to assist in constructing the metadata based on the data.frame provided*.  While this may be helpful starting out, regular users will find it faster to define the columns and units directly in the format above.   
+
+*for convenience, had we ommitted any essential metadata, such as providing only an unannotated `data.frame` in place of a `data.set`, `reml` will launch its metadata wizard to assist in constructing the metadata based on the data.frame provided*.  While this may be helpful starting out, regular users will find it faster to define the columns and units directly in the format above.   
+
+See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/reml_example.xml) by this example.  
 
 
-See the [EML generated](https://github.com/ropensci/reml/tree/master/inst/doc/reml_example.xml) by this example.  Note that if the `metadata` argument providing the definitions for the `data.frame` is not specified, `reml` will launch the wizard to prompt the user.  
-
-### Configuration 
-
-Configure general metadata you may want to frequently reuse, avoiding having to specify things like the name of the creator or contact.
+We can validate the resulting document to check that no required fields are missing and that no entry has been incorrectly formatted.  This ensures that other software can correctly parse and interpret the metadata document:
 
 
 ```coffee
-eml_config(creator = list("Carl Boettiger <cboettig@ropensci.org>", "Karthik Ram"), contact = "Carl Boettiger <cboettig@ropensci.org>")
+eml_validate("reml_example.xml")
 ```
+
+```
+EML specific tests XML specific tests 
+              TRUE               TRUE 
+```
+
 
 
 
@@ -117,6 +127,9 @@ Once we have generated a basic EML file, we can publish it to a variety
 of academic repositories where it will be indexed, permenently archived,
 more easily citable, and publicly discoverable.
 
+
+### Publishing to figshare
+
 In this example, we will publish the above
 EML to [figshare](http://figshare.com) using the
 [rfigshare](https://github.com/ropensci/rfigshare) package. Like most
@@ -126,29 +139,42 @@ Additional metadata unique to figshare (e.g. matching it's allowed "categories"
 can also be provided. 
 
 _Note: this example assumes `rfigshare` is installed, even though it is not 
-required to use reml and run the examples in the other sections_
+required to use reml and run the examples in the other sections.  See the 
+`rfigshare` documentation for authenticating `rfigshare` with your user account_
 
 <!-- We don't want to generate a DOI every time we run the vignette -->
 
+
 ```coffee
-id = eml_publish("reml_example.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
+eml_publish("reml_example.xml", description="Example EML file from reml", categories = "Ecology", tags = "EML", destination="figshare")
 ```
 
 ```
-Error: Could not resolve host: api.figshare.com
+[1] 875576
 ```
 
 
 This creates a draft file visible only to the user configured in `rfigshare`.  The document can be made (permanently) public using either the figshare web interface, the `rfigshare` package (using `fs_make_public(id)`) or just by adding the argument `visibility = TRUE` to the above `eml_publish` command.
 
-<!-- In return, figshare provides the object with a DOI, which is added to the EML.  
+### Publishing to the KNB
+
+We can also publish to the KNB (Knowledge Network for Biocomplexity, a data repository provided by NCEAS) using the `dataon` R package.  KNB offers several advantages over alternative repositories such as figshare or [Dryad](http://datadryad.org) when publishing EML metadata. The KNB "speaks" EML, so it is unnecessary to provide repository-specific additional metadata such as description, category or tag -- all necessary information will be extracted from the EML. This is also much more thorough than other repositories: we can search the KNB network by specific taxonomic or geographic coverage, or even down at the level of individual attribute or column headings, rather than being limited to more generic metadata.  Lastly, KNB is a member node of the DataONE repository, making the resulting data files immediately part of a much larger network for ecological, earth and environmental science data.
+
+_Note: this example assumes `dataone` is installed, even though it is not 
+required to use reml and run the examples in the other sections.  See the 
+`dataone` documentation for authenticating `dataone` with a user account_
 
 
 ```coffee
-doc <- eml_read("my_eml_data.xml")
-citation(doc) # not implemented yet
+eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
 ```
 
+
+
+_NB:_ To avoid clutter, we should publish only real research data to the KNB production servers (by setting `permanent=TRUE`).  By default, `eml_publish` assumes `permanent=FALSE` when sending data to the KNB, and will publish to the development server instead.  The development server works as a testing platform, providing all the same features as the production platform but without permanent storage -- all data will be deleted regularly.  The development server is not as stable as the production server, so if the command fails, please try again later.  
+
+
+<!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 -->
 
 <-- Too detailed for this vignette
@@ -164,9 +190,11 @@ e.g. if we use the figshare search tool.
 
 See [Open issues in publishing EML](https://github.com/ropensci/reml/issues?labels=publish+eml&page=1&state=open)
 
-Reading EML
------------
 
+Parsing and exploring an EML file
+----------------------------------
+
+Users will not only want to generate EML files, but also take advantage of the wealth of data already well documented in EML.  The package provides many tools to facilitate the extraction of data from EML files into their native R formats, as well as utilities to access and manipulate the metadata provided. By having these tools avialble in the scripted R environment, it becomes possible to write functions that can be easily applied across large collections of files. In this way, researchers can scale their analyses across ever larger collections of datasets by automating the more tedious aspects of data discovery and integration.  
 
 
 
@@ -175,23 +203,20 @@ obj <- eml_read("reml_example.xml")
 ```
 
 
-We can use various accessor functions to return the data and metadata elements in native R formats.
+We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).  
+
+
+The `eml_get` function provides us with easy access to many of the component elements of the metadata file.  See the documentation for a complete list.  
 
 
 ```coffee
-dat <- dataTable(obj)
+dat <- eml_get(obj, "data.set")
 ```
 
 
 
 ```coffee
-metadata <- attributeList(obj)
-```
-
-
-
-```coffee
-contact(obj)
+eml_get(obj, "contact")
 ```
 
 ```
@@ -199,41 +224,48 @@ contact(obj)
 ```
 
 
-Note that the contact has been coerced into R's built-in 'person' object:
-
 
 ```coffee
-class(contact(obj))
+eml_get(obj, "citation_info")
 ```
 
 ```
-[1] "person"
-```
-
-
-
-```coffee
-citationInfo(obj)
-```
-
-```
-Boettiger C (2013-10-31). _reml example_.
+Boettiger C (2013-12-11). _metadata_.
 ```
 
 
 
-#### In development
 
-See [Open issues in reading EML](https://github.com/ropensci/reml/issues?labels=read+eml&page=1&state=open)
+Advanced writing of EML
+-----------------------
+
+**IN PROGRESS**
+
+Our minimal EML file barely scratches the surface of what is possible to do with EML.  In [Advanced writing of EML](), we construct a much richer EML file, including:
+
+- Constructing more complete lists of authors, publishers and contact.
+- Summarizing the geographic, temporal, and taxonomic coverage of the dataset
+- Reading in pages of methods descriptions from a Word document
+- Adding arbitrary additional metadata
+- Indicating the canonical citation to the paper that should be acknowledged when the data is re-used.  
+- Conversion between EML and other metadata formats, such as NCBII and ISO standards.
+
+In so doing we will take a more modular approach that will allow us to build up our metadata from reusable components, while also providing a more fine-grained control over the resulting output fields and files.  
 
 
+Advanced parsing and manipulation of EML 
+----------------------------------------
 
-Integrating multiple EML files into a single data frame
--------------------------------------------------------
+**IN PROGRESS**
 
-#### In development
+In [Advanced parsing and manipulation of EML](), we
 
-See [Open issues in integrating EML](https://github.com/ropensci/reml/issues?labels=integrate+eml&page=1&state=open)
+- Introduce how to access any EML element in R using the S4 subsetting mechanism
+- Demonstrate how to extract and manipulate semantic RDF triples from EML metadata
+- Illustrate how EML metadata extraction can be applied across a collection of files 
+- Illustrate how EML manipulation can be combined with queries across even larger distributed collections of EML data over the dataone network
+- Demonstrate merging of multiple datasets based on semantics
+
 
 
 
@@ -257,3 +289,5 @@ install_github("XMLSchema", "omegahat")
 Successful installation of these packages will require the `devtools` package (for `install_github`) and the ability to build packages from source.  
 
 
+
+***Suggestions, feature requests, bug reports and other feedback welcome!*** Please see our [issues tracker](https://github.com/ropensci/reml/issues)

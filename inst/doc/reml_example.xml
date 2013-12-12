@@ -1,6 +1,6 @@
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:ca8b398c-ce3c-4def-9381-cb0a6727b093" system="uuid" scope="system">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:996e4252-f30b-4a19-a970-38ae37a477c1" system="uuid" scope="system">
   <dataset>
-    <title>reml example</title>
+    <title>metadata</title>
     <creator>
       <individualName>
         <givenName>Carl</givenName>
@@ -8,7 +8,7 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </creator>
-    <pubDate>2013-11-12</pubDate>
+    <pubDate>2013-12-11</pubDate>
     <intellectualRights>&lt;a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'&gt;CC0&lt;/a&gt;</intellectualRights>
     <contact>
       <individualName>
@@ -17,12 +17,10 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </contact>
-    <dataTable id="urn:uuid:122f4466-cb8b-4f04-865d-38d1d87c6d57" system="uuid" scope="system">
-      <entityName>reml example</entityName>
-      <entityDescription>An example, intended for
-                              illustrative purposes only.</entityDescription>
+    <dataTable id="urn:uuid:98c23174-7bc6-4d68-882a-10d571e75184" system="uuid" scope="system">
+      <entityName>metadata</entityName>
       <physical>
-        <objectName>reml_example.csv</objectName>
+        <objectName>metadata.csv</objectName>
         <size>4984</size>
         <characterEncoding>C</characterEncoding>
         <dataFormat>
