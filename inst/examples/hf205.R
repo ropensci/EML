@@ -24,6 +24,7 @@ keywords <- eml_get(hf205, "keywords")
 coverage <- eml_get(hf205, "coverage")
 metadata <- eml_get(hf205, "attributeList")
 additionalMetadata <- hf205@additionalMetadata
+creator <- eml_get(hf205, "id")
 
 
 ###### Write metadata ####
