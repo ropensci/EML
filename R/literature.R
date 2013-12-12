@@ -1,8 +1,3 @@
-# TODO:
-# o check that all fields are correct down to the atomic ones
-# o check mapping of fields to bibtex (write all fields? as bibtex ignores unknown)
-#       - or give own style file that allows for all fields
-
 #' The literature module
 #'
 #' The eml-literature module contains information that describes literature
@@ -16,13 +11,19 @@
 #' would be used when one of the other types will not work (cite eml
 #' documentation)).
 
-#' The module includes: 
-#' eml-documentation, eml-resource, eml-coverage, eml-party, eml-access, eml-project
+#' The module includes
+#'       eml-documentation, 
+#'       eml-resource, 
+#'       eml-coverage, 
+#'       eml-party, 
+#'       eml-access, 
+#'       eml-project
 
 #' Inclusion of superclass
 #' @include resource.R
 #' @include coverage.R
 #' @include party.R
+
 
 # Set rquired classes 
 # =================================
@@ -34,6 +35,7 @@ setClass("bibentry")
 # Atomic classes for citation types
 # =================================
 
+# journal
 setClass("journal",
          slots = c(journal = "character")
          )
@@ -49,6 +51,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# volume 
 setClass("volume",
          slots = c(volume = "character")
          )
@@ -64,6 +67,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# number of volumes 
 setClass("numberOfVolumes",
          slots = c(numberOfVolumes = "character")
          )
@@ -79,6 +83,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# issue 
 setClass("issue",
          slots = c(issue = "character")
          )
@@ -94,6 +99,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# page range 
 setClass("pageRange",
          slots = c(pageRange = "character")
          )
@@ -109,6 +115,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# total pages 
 setClass("totalPages",
          slots = c(totalPages = "character")
          )
@@ -124,21 +131,23 @@ setAs("XMLInternalElementNode",
       )
 
 
+# total tables
 setClass("totalTables",
          slots = c(totalTables = "character")
          )
 
-setAs("totalPages",
+setAs("totalTables",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
-      "totalPages",
+      "totalTables",
       function(from) emlToS4(from)
       )
 
 
+# total figures 
 setClass("totalFigures",
          slots = c(totalFigures = "character")
          )
@@ -159,6 +168,7 @@ setAs("XMLInternalElementNode",
          # slots = c(publisher = "responsibleParty"))
 
 
+# institution 
 setClass("institution",
          slots = c(institution = "responsibleParty")
          )
@@ -174,6 +184,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# publication place 
 setClass("publicationPlace",
          slots = c(publicationPlace = "character")
          )
@@ -189,6 +200,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# issn 
 setClass("ISSN",
          slots = c(ISSN = "character")
          )
@@ -204,6 +216,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# isbn 
 setClass("ISBN",
          slots = c(ISBN = "character")
          )
@@ -219,6 +232,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# edition 
 setClass("edition",
          slots = c(edition = "character")
          )
@@ -234,6 +248,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# chapter number
 setClass("chapterNumber",
          slots = c(chapterNumber = "character")
          )
@@ -249,6 +264,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# editor
 setClass("editor",
          slots = c(editor = "character")
         )
@@ -264,6 +280,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# book title 
 setClass("bookTitle",
          slots = c(bookTitle = "character")
          )
@@ -279,6 +296,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# degree 
 setClass("degree",
          slots = c(degree = "character")
          )
@@ -294,6 +312,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# conference name 
 setClass("conferenceName",
          slots = c(conferenceName = "character")
          )
@@ -309,6 +328,7 @@ setAs("conferenceName",
       )
 
 
+# conference date 
 setClass("conferenceDate",
          slots = c(conferenceDate = "character")
          )
@@ -324,6 +344,7 @@ setAs("conferenceDate",
       )
 
 
+# communication 
 setClass("communication",
          slots = c(communication = "character")
          )
@@ -339,6 +360,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# reference 
 setClass("reference",
          slots = c(reference = "character")
          )
@@ -353,6 +375,7 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
+# scale 
 setClass("scale",
          slots = c(scale = "geographicCoverage")
          )
@@ -368,6 +391,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# performer 
 setClass("performer",
          slots = c(performer = "responsibleParty")
          )
@@ -383,6 +407,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# original publication 
 setClass("originalPublication",
          slots = c(originalPublication = "character")
          )
@@ -398,6 +423,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# reprint ecition 
 setClass("reprintEdition",
          slots = c(reprintEdition = "character")
          )
@@ -413,6 +439,7 @@ setAs("reprintEdition",
       )
 
 
+# reviewed item 
 setClass("reviewdItem",
          slots = c(reviewdItem = "character")
          )
@@ -428,6 +455,7 @@ setAs("XMLInternalElementNode",
       )
 
 
+# recipient 
 setClass("recipient",
          slots = c(recipient = "responsibleParty")
          )
@@ -507,7 +535,7 @@ setAs("XMLInternalElementNode",
 # note    [o] (?)
 
 setAs("article", "bibentry", function(from){
-	entry = bibentry(bibtype = "article", 
+	entry = bibentry(bibtype = class(from), 
                  author = as(from@creator, "person"),
                  title = from@title,
                  journal = from@journal@journal,
@@ -519,7 +547,7 @@ setAs("article", "bibentry", function(from){
                  month = from@pubDate, # FIXME: Needs to be handled properly to extract month from pubdate
                  # note not available in eml
                  textVersion = NULL, 
-                 header = "Citation based on eml article", 
+                 header = paste("Citation based on eml", class(from)), 
                  footer = "---------------------------------------0")
         class(entry) = "bibentry"
         entry
@@ -605,7 +633,7 @@ setAs("XMLInternalElementNode",
 # isbn             [o] (ISBN)
 
 setAs("book", "bibentry", function(from){
-      entry = bibentry(bibtype = "book", 
+      entry = bibentry(bibtype = class(from), 
                        # required fields
                        author = as(from@creator, "person"),
                        title = from@title,
@@ -618,7 +646,7 @@ setAs("book", "bibentry", function(from){
                        month = from@pubDate,
                        isbn = from@ISBN@ISBN,
                        textVersion = NULL, 
-                       header = "Citation based on eml article", 
+                       header = paste("Citation based on eml", class(from)), 
                        footer = "---------------------------------------0"
                        )
       class(entry) = "bibentry"
