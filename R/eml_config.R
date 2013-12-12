@@ -2,8 +2,18 @@
 
 
 ## FIXME consider using S4 objects and their constructors as the standard way to set defaults. 
-
 ## FIXME are defaults resonable? i.e. define creator and set contact = creator, rather than vice versa?  
+
+#' Default options for generating EML objects
+#' @param creator a character string, person object, or creator object
+#' @param contact  a character string, person object, or contact object
+#' @param defaultLicense a text string specifying the default intellectual rights text that should be indicated.  
+#' 
+#' @details Configuration settings will be used as the default values when creating a new eml file or dataset object
+#'   unless alternative values are provided at the time of creation.  Configuration settings last only for the duration
+#'   of the current R session.  Add a call to `reml::eml_config` in your .Rprofile to have these settings used by
+#'   default in each R session.  Repeating a call to eml_config will reset the settings. The default settings of `eml_config`
+#'   are not applied if the function is not called explicitly.  
 #' @export
 eml_config <- function(creator, contact = NULL, defaultLicense = "CC0"){
   if(defaultLicense == "CC0")
