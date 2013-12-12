@@ -9,6 +9,7 @@
 
 
 setClass("ListOfdataTable", contains = "list")
+setMethod("c", signature("dataTable"), function(x, ...) new("ListOfdataTable", list(x, ...)))
 
 
 ## A Hack to get element order correct without writing
