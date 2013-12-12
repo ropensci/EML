@@ -64,6 +64,7 @@ Collate:
     'figshare.R'
     'knb.R'
     'party_methods.R'
+    'person_wizard.R'
     'physical_methods.R'
     'resource_methods.R'
     'software_methods.R'
