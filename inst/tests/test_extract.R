@@ -48,6 +48,3 @@ test_that("we can extract from alternative paths", {
 
 ## Add unit tests for all extractors!
 
-test_that("we can extract from eml directly", {
-#  reml:::extract(S4obj)
-})
