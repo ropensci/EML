@@ -1,5 +1,8 @@
 \name{eml_config}
 \alias{eml_config}
+\title{Configure EML default values
+
+Default options for generating EML objects}
 \usage{
 eml_config(creator, contact = NULL, defaultLicense = "CC0")
 }
@@ -13,6 +16,15 @@ eml_config(creator, contact = NULL, defaultLicense = "CC0")
   \item{defaultLicense}{a text string specifying the
   default intellectual rights text that should be
   indicated.}
+}
+\value{
+  Nothing, but updates the remlConfig environment where
+  this information is stored.
+}
+\description{
+  Configure EML default values
+
+  Default options for generating EML objects
 }
 \details{
   Configuration settings will be used as the default values
