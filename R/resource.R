@@ -2,22 +2,6 @@
 #' @include coverage.R
 #' @include physical.R
 
-setClass("metadataProvider", contains="responsibleParty")
-setAs("XMLInternalElementNode", "metadataProvider",   function(from) emlToS4(from))
-setAs("metadataProvider", "XMLInternalElementNode",   function(from) S4Toeml(from))
-
-setClass("associatedPartySlots", slots = c(role = "character")) # hack to change odering
-# Unclear if role should be one of the controlled types: http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-party.html#RoleType, hf205 doesn't follow that.
-setClass("associatedParty", contains=c("responsibleParty", "associatedPartySlots")) # FIXME should be ListOfresponsibleParty? but then does not find the type...
-setAs("XMLInternalElementNode", "associatedParty",   function(from) emlToS4(from))
-setAs("associatedParty", "XMLInternalElementNode",   function(from) S4Toeml(from))
-
-
-setClass("ListOfmetadataProvider", contains="list")
-setClass("ListOfassociatedParty", contains="list")
-
-
-
 
 
 setClass("keyword",

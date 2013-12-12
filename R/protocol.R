@@ -4,6 +4,7 @@ setClass("proceduralStep", slots = c(procedure = "character")) # FIXME DUMMY  cl
 
 
 setClass("ListOfproceduralStep", contains="list")
+setMethod("c", signature("proceduralStep"), function(x, ...) new("ListOfproceduralStep", list(x, ...)))
 
 
 setClass("protocol_elements", 
