@@ -18,8 +18,7 @@
 #' 
 #' cre <- eml_person("Aaron Ellison", "Nicholas Gotelli")               # Creates 'ListOfcreator' (names, no role) 
 #' res <- eml_person("Benjamin Baiser [ctb]", "Jennifer Sirota [ctb]")  # creates a 'ListOfassociatedParty' (roles != cre)
-#' con <- eml_person("Aaron Ellison <fake@email.com>")                  #  Creates 'contact' (Single name, email present)
-#' 
+#' con <- eml_person("Aaron Ellison <fake@@email.com>")                  #  Creates 'contact' (Single name, email present)
 #' # Doesn't matter if we give the multiple names in a character vector instead of separate arguments: 
 #' res <- eml_person(c("Benjamin Baiser [ctb]", "Jennifer Sirota [ctb]")) #ListOfassociatedParty 
 #'
