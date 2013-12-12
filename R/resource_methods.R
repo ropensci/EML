@@ -1,6 +1,6 @@
 
-
-construct_keywordSet <- function(x){
+#' @export 
+eml_keyword <- function(x){
 # expects x is a list of character vectors, named by keywordThesaurus
   out <- new("ListOfkeywordSet", lapply(x, 
     function(y){
