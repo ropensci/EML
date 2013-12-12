@@ -65,3 +65,17 @@ unlink("title.csv")
 
 
 
+
+test_that("we don't overwrite the identifiers (packageId) when reading in EML", {
+  s4 <- eml_read(f)
+  id <- eml_get(s4, "id")
+  expect_identical(id, "knb-lter-hfr.205.4")
+})
+
+test_that("we don't overwirte the namespace when reading in the EML", {
+  s4 <- eml_read(f)
+  expect_match(s4@namespaces["eml"], "2.1.0") 
+})
+
+
+
