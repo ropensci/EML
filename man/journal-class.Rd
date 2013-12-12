@@ -15,6 +15,8 @@
   personal communication, map, generic, audio visual, and
   presentation. The "generic" citation type would be used
   when one of the other types will not work (cite eml
-  documentation)). Inclusion of superclass
+  documentation)). The module includes: eml-documentation,
+  eml-resource, eml-coverage, eml-party, eml-access,
+  eml-project Inclusion of superclass
 }
 
