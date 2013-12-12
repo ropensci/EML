@@ -65,5 +65,6 @@ Collate:
     'knb.R'
     'party_methods.R'
     'physical_methods.R'
+    'resource_methods.R'
     'software_methods.R'
     'xsl_coercions.R'
