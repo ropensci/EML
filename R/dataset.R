@@ -35,9 +35,10 @@ setClass("dataset",
          contains = c("resourceGroup", 
                       "dataset_elements", 
                       "referencesGroup"),
-        prototype = prototype(pubDate = as.character(Sys.Date()),
-                              intellectualRights = 
-                              as.character(get("defaultRights", envir=remlConfig))))
+        prototype = prototype(coverage = new("coverage"), # if defining a prototype, undefined elements default to NULL?? WTF?  
+                              pubDate = as.character(Sys.Date()),
+                              title = "metadata", # FIXME something more intelligent.  Use id?  
+                              intellectualRights = as.character(get("defaultRights", envir=remlConfig))))
 
 ## Coercion methods to/from XML 
 setAs("XMLInternalElementNode", "dataset",  function(from) emlToS4(from))

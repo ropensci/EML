@@ -10,6 +10,38 @@ In [Advanced writing of EML](), we construct richer EML files, including:
 
 In so doing we will take a more modular approach that will allow us to build up our metadata from reusable components, while also providing a more fine-grained control over the resulting output fields and files.  
 
+```{r include=FALSE, cache=FALSE}
+source("~/.knitr_defaults.R")
+```
+
+### Overview of the EML heirarchy
+
+A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the official schema documentation, here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
+
+This schematic shows each of the metadata elements we will generate.  Most these elements have sub-components (e.g. a 'publisher' may have a name, address, and so forth) which are not shown for simplicity.  Other optional fields we will not be generating in this example are also not shown.   
+
+```yaml
+- eml
+  - dataset
+    - creator
+    - contact
+    - publisher
+    - title
+    - pubDate
+    - keywords
+    - abstract 
+    - intellectualRights
+    - methods
+    - coverage
+    - dataTable
+      - physical
+      - attributeList
+  - additionalMetadata
+```
+
+The EML R package allows us to assemble these pieces bit by bit, allowing us to work either from the top down or bottom up.  
+
+Our `data.set` object captures all of the information required to generate the `dataTable` element: the `data.frame`, which will be written to an external CSV file descibed by the `physical` node, and the `attributeList`, containing the column and unit metadata descriptions.  
 
 
 
@@ -17,21 +49,15 @@ In so doing we will take a more modular approach that will allow us to build up 
 
 In this example, we will use R to re-generate the EML metadata originally published by [Ellison _et al_ (2012)]() through the Harvard Forest Long Term Ecological Research Center.  <!-- The original metadata file was created in association with the publication in PNAS based on a Microsoft Word document template that Harvard Forest provides to the academic researchers.  Metadata from this template is then read off by hand and an EML file is generated using a combination of a commercial XML editing platform (Oxygen) for commonly used higher-level elements, and the Java platform `Morpho` provided by the EML development team for lower level attribute metadata. -->
 
-
-
-
-
-#### Overview of the EML heirarchy
-
-The EML metadata language 
-
-
+```{r}
+library(reml)
+```
 
 
 We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
 
 ```{r}
- dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"))
+dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"))
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  
@@ -250,10 +276,11 @@ methods@methodsStep@description <- method_description
 One of the simplest ways and most powerful ways to generate EML metadata is to resuse a section from an existing EML file directly.  
 
 ```{r}
+hf205 <- eml_read(system.file("examples", "hf205.xml", package="reml"))
 additionalMetadata <- hf205@additionalMetadata # extracted from previous eml file
 ```
 
-
+We now have all of the elements we wished to define for the `dataset` metadata. We can assemble them into a `datset` node as follows:
 
 
 ```{r}
@@ -263,12 +290,18 @@ dataset <- new("dataset",
                 contact = contact,
                 pubDate = pubDate,
                 associatedParty = other_researchers,
-                keywordSet = keywords,
+                keywordSet = keys,
                 coverage = coverage,
                 methods = methods,
                 dataTable = c(dataTable))
 
 ```
+
+Note that because a `dataset` can have multiple dataTable elements, we use the same concatenate notation illustrated earlier, `c(dataTable)`, even though only one element is provided.  This lets R known that the resulting object is a `ListOfdataTable`, not an individual `dataTable` file.  This convention should be followed whenever assigning a value to a slot that can take more than one element of that name.  
+
+
+With most of the metadata now in place, we can construct the top-level element:  
+
 
 ```{r}
 eml <- new("eml", 
@@ -276,7 +309,7 @@ eml <- new("eml",
             additionalMetadata = additionalMetadata)
 ```
 
-This `eml` object we have just created now has the complete R representation of the EML data.  This is the same class of object returned by `eml_read`, and consequently we can use all of the read methods provided to explore or manipulate it.  
+This call automatically adds a few additional bits of information, such as a unique identifier `packageId` for the metadata file.  This `eml` object we have just created now has the complete R representation of the EML data.  This is the same class of object returned by `eml_read`, and consequently we can use all of the read methods provided to explore or manipulate it.  
 
 Finally we are ready to write out our EML object to an XML file. 
 
@@ -293,7 +326,11 @@ As before, we can now validate our EML document to ensure all the information ha
 eml_validate("hf205_from_reml.xml")
 ```
 
-While it is difficult to create invalid EML using the constructor functions, it is not impossible so it never hurts to check.  As illustrated in the basic tutorial, we can now publish this file automatically to a central repository such as the KNB.   
+While it is difficult to create invalid EML using the constructor functions, it is not impossible so it never hurts to check.  
+
+
+
+As illustrated in the basic tutorial, we can now publish this file automatically to a central repository such as the KNB.   
 
 
 

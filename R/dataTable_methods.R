@@ -9,6 +9,8 @@ eml_dataTable <- function(dat,
                           description = character(0), 
                           filename = character(0), ...){
 
+## FIXME title should be called entityName, or maybe just "name"
+
   if(is(dat, "data.set")) 
     meta <- get_metadata(dat)
   if(is.null(meta))
@@ -19,7 +21,9 @@ eml_dataTable <- function(dat,
     filename <- paste0(gsub(" ", "_", title), ".csv")
   id <- reml_id()
   if(length(filename) == 0)
-    filename <- paste0(id,".csv")
+    filename <- paste0(id[["id"]], ".csv")
+  if(length(title) == 0)
+    title <- filename 
 
 
   meta <- detect_class(dat, meta)

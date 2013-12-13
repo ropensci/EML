@@ -27,31 +27,21 @@ metadata <-
                     "number"))
 
 
-test_that("We can write sample data/metadata into EML", {
-  ## must either call eml_config or pass creator
-  S4obj <- reml:::eml(dat, metadata, title = "title", description = "description", 
-               creator = "Carl Boettiger <cboettig@gmail.com>")
-
-  expect_equal(S4obj@dataset@creator[[1]]@individualName@givenName, "Carl")
-  ## FIXME add more expect_equals to check other fields in this way
-})
 
 ## Okay, we know this works, so stick it in the global space for the next functions...
-S4obj <- reml:::eml(dat, metadata, title = "title", description = "description", 
-               creator = "Carl Boettiger <cboettig@gmail.com>")
-
+S4obj <- reml:::eml(dat, metadata)
 
 
 test_that("We can write some part of this to XML", {
+  S4obj <- reml:::eml(dat, metadata)
   att <- S4obj@dataset@dataTable[[1]]@attributeList@attribute[[1]]@measurementScale
   reml:::S4Toeml(att)
 })
 
 
-
 test_that("We can write S4 EML to XML and validate", {
 
-  eml_write(dat, metadata, title = "title", description = "description", creator = "Carl Boettiger <cboettig@gmail.com>", file="title.xml")
+  eml_write(dat, metadata, contact = "Carl Boettiger <cboettig@gmail.com>", file="title.xml")
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
@@ -75,15 +65,23 @@ test_that("We can write S4 EML to XML and validate", {
 
 
 test_that("We can add coverage information and validate", {
-  eml_write(dat, 
-            metadata, 
-            file = "title.xml",
-            title = "title", 
-            description = "description", 
-            creator = "Carl Boettiger <cboettig@gmail.com>",
-            coverage = eml_coverage(list("Homo sapiens"), 
-                                    c("2013-09-01", "2013-09-03"),  
-                                    "Santa Cruz, CA", c(37.0,36.5,-122.0, -122.5)))
+  contact <- as("Carl Boettiger <cboettig@ropensci.org>", "contact")
+  creator <- c(as(contact, "creator"))
+  eml_write(new("eml",
+                new("dataset", 
+                    dataTable = eml_dataTable(dat, 
+                                              metadata,
+                                              description = "description",
+                                              filename = "title.csv"), 
+                    contact = contact,
+                    creator = creator, 
+                    title = "title",
+                    coverage = eml_coverage(list("Homo sapiens"), 
+                                            c("2013-09-01", "2013-09-03"),  
+                                            "Santa Cruz, CA", c(37.0,36.5,-122.0, -122.5))
+                   )
+                ),
+                file = "title.xml")
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
@@ -95,16 +93,6 @@ test_that("We can add coverage information and validate", {
 
   unlink("title.xml")
   unlink("title.csv")
-
-})
-
-
-test_that("We can write older versions of EML", {
-  ex = eml_write(dat, metadata, title = "title", 
-                 description = "description", 
-                 creator = "Carl Boettiger <cboettig@gmail.com>",
-                 eml_version = "2.1.0")
-  eml_validate(ex)
 
 })
 
