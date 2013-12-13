@@ -23,11 +23,7 @@ dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
                                 c(format = "YYYY-MM-DD", precision = 1)))               # Date
 
 
-eml_write(dat, 
-          title = "test",  
-          description = "upload to the KNB from reml",
-          creator = "Carl Boettiger <cboettig@ropensci.org>",
-          file = "test.xml")
+eml_write(dat, contact = "Carl Boettiger <cboettig@ropensci.org>", file = "test.xml")
 
 
 

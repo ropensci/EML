@@ -1,5 +1,8 @@
 VIGNETTE = reml_tutorial
 
+all: 
+	make vignette
+	make readme
 
 vignette: README.Rmd
 	Rscript -e 'require(knitr); knit("README.Rmd")'
@@ -13,3 +16,6 @@ readme: README.Rmd
 	Rscript -e 'require(knitr); knit("README.Rmd")'
 	cp README.md ../../README.md
 	sed -i 's/```r/```coffee/' ../../README.md
+
+clean:
+	rm README.md 

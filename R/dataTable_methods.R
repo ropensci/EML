@@ -1,11 +1,15 @@
 
+#' constructor / generator for data table
+#' 
+#' @export
 #' @include dataTable.R
-## constructor / generator for data table
 eml_dataTable <- function(dat, 
                           meta = NULL, 
                           title = character(0), 
                           description = character(0), 
                           filename = character(0), ...){
+
+## FIXME title should be called entityName, or maybe just "name"
 
   if(is(dat, "data.set")) 
     meta <- get_metadata(dat)
@@ -15,8 +19,14 @@ eml_dataTable <- function(dat,
 
   if(length(title) > 0 & length(filename) == 0)
     filename <- paste0(gsub(" ", "_", title), ".csv")
-  meta <- detect_class(dat, meta)
   id <- reml_id()
+  if(length(filename) == 0)
+    filename <- paste0(id[["id"]], ".csv")
+  if(length(title) == 0)
+    title <- filename 
+
+
+  meta <- detect_class(dat, meta)
   dataTable <- new("dataTable",
                   id = id[["id"]],
                   system = id[["system"]],

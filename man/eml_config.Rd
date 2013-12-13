@@ -1,0 +1,40 @@
+\name{eml_config}
+\alias{eml_config}
+\title{Configure EML default values
+
+Default options for generating EML objects}
+\usage{
+eml_config(creator, contact = NULL, defaultLicense = "CC0")
+}
+\arguments{
+  \item{creator}{a character string, person object, or
+  creator object}
+
+  \item{contact}{a character string, person object, or
+  contact object}
+
+  \item{defaultLicense}{a text string specifying the
+  default intellectual rights text that should be
+  indicated.}
+}
+\value{
+  Nothing, but updates the remlConfig environment where
+  this information is stored.
+}
+\description{
+  Configure EML default values
+
+  Default options for generating EML objects
+}
+\details{
+  Configuration settings will be used as the default values
+  when creating a new eml file or dataset object unless
+  alternative values are provided at the time of creation.
+  Configuration settings last only for the duration of the
+  current R session.  Add a call to `reml::eml_config` in
+  your .Rprofile to have these settings used by default in
+  each R session.  Repeating a call to eml_config will
+  reset the settings. The default settings of `eml_config`
+  are not applied if the function is not called explicitly.
+}
+

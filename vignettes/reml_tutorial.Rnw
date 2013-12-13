@@ -91,14 +91,27 @@ by EML. A \texttt{data.set} can be created much like a
 Alternatively, annotations can be added to an existing data frame,
 \texttt{data.set(my.data.frame, col.defs = ..., unit.defs = ...)}.
 
+We will also specify a default creator who will also be used as the
+contact person for EML files created in this session.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{eml_write}\NormalTok{(dat, }
-          \DataTypeTok{title =} \StringTok{"reml example"}\NormalTok{,  }
-          \DataTypeTok{description =} \StringTok{"An example, intended for}
-\StringTok{                              illustrative purposes only."}\NormalTok{,}
-          \DataTypeTok{creator =} \StringTok{"Carl Boettiger <cboettig@gmail.com>"}\NormalTok{,}
-          \DataTypeTok{file =} \StringTok{"reml_example.xml"}\NormalTok{)}
+\KeywordTok{eml_config}\NormalTok{(}\DataTypeTok{creator=}\StringTok{"Carl Boettiger <cboettig@gmail.com>"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+While we will always be able to provide alternative or additional
+creators or contact person later, \texttt{eml\_config} can store the
+defaults to save us the trouble of entering this data repeatedly. See
+\texttt{?eml\_config} for more information and other configurable
+defaults.
+
+With this information in place, we have all the required metadata to
+generate a minimally valid EML file documenting this dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eml_write}\NormalTok{(dat, }\DataTypeTok{file =} \StringTok{"reml_example.xml"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -106,29 +119,32 @@ Alternatively, annotations can be added to an existing data frame,
 [1] "reml_example.xml"
 \end{verbatim}
 
-\emph{for convenience, \texttt{dat} could simply be a
-\texttt{data.frame} and \texttt{reml} will launch it's metadata wizard
-to assist in constructing the metadata based on the data.frame
-provided}. While this may be helpful starting out, regular users will
-find it faster to define the columns and units directly in the format
-above.
+\emph{for convenience, had we ommitted any essential metadata, such as
+providing only an unannotated \texttt{data.frame} in place of a
+\texttt{data.set}, \texttt{reml} will launch its metadata wizard to
+assist in constructing the metadata based on the data.frame provided}.
+While this may be helpful starting out, regular users will find it
+faster to define the columns and units directly in the format above.
 
 See the
 \href{https://github.com/ropensci/reml/tree/master/inst/doc/reml_example.xml}{EML
-generated} by this example. Note that if the \texttt{metadata} argument
-providing the definitions for the \texttt{data.frame} is not specified,
-\texttt{reml} will launch the wizard to prompt the user.
+generated} by this example.
 
-\subsubsection{Configuration}\label{configuration}
-
-Configure general metadata you may want to frequently reuse, avoiding
-having to specify things like the name of the creator or contact.
+We can validate the resulting document to check that no required fields
+are missing and that no entry has been incorrectly formatted. This
+ensures that other software can correctly parse and interpret the
+metadata document:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{eml_config}\NormalTok{(}\DataTypeTok{creator =} \KeywordTok{list}\NormalTok{(}\StringTok{"Carl Boettiger <cboettig@ropensci.org>"}\NormalTok{, }\StringTok{"Karthik Ram"}\NormalTok{), }\DataTypeTok{contact =} \StringTok{"Carl Boettiger <cboettig@ropensci.org>"}\NormalTok{)}
+\KeywordTok{eml_validate}\NormalTok{(}\StringTok{"reml_example.xml"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+EML specific tests XML specific tests 
+              TRUE               TRUE 
+\end{verbatim}
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
@@ -144,6 +160,8 @@ Once we have generated a basic EML file, we can publish it to a variety
 of academic repositories where it will be indexed, permenently archived,
 more easily citable, and publicly discoverable.
 
+\subsubsection{Publishing to figshare}\label{publishing-to-figshare}
+
 In this example, we will publish the above EML to
 \href{http://figshare.com}{figshare} using the
 \href{https://github.com/ropensci/rfigshare}{rfigshare} package. Like
@@ -154,19 +172,62 @@ file. Additional metadata unique to figshare (e.g.~matching it's allowed
 
 \emph{Note: this example assumes \texttt{rfigshare} is installed, even
 though it is not required to use reml and run the examples in the other
-sections}
+sections. See the \texttt{rfigshare} documentation for authenticating
+\texttt{rfigshare} with your user account}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{id =}\StringTok{ }\KeywordTok{eml_publish}\NormalTok{(}\StringTok{"reml_example.xml"}\NormalTok{, }\DataTypeTok{description=}\StringTok{"Example EML file from reml"}\NormalTok{, }\DataTypeTok{categories =} \StringTok{"Ecology"}\NormalTok{, }\DataTypeTok{tags =} \StringTok{"EML"}\NormalTok{, }\DataTypeTok{destination=}\StringTok{"figshare"}\NormalTok{)}
+\KeywordTok{eml_publish}\NormalTok{(}\StringTok{"reml_example.xml"}\NormalTok{, }\DataTypeTok{description=}\StringTok{"Example EML file from reml"}\NormalTok{, }\DataTypeTok{categories =} \StringTok{"Ecology"}\NormalTok{, }\DataTypeTok{tags =} \StringTok{"EML"}\NormalTok{, }\DataTypeTok{destination=}\StringTok{"figshare"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+[1] 875572
+\end{verbatim}
 
 This creates a draft file visible only to the user configured in
 \texttt{rfigshare}. The document can be made (permanently) public using
 either the figshare web interface, the \texttt{rfigshare} package (using
 \texttt{fs\_make\_public(id)}) or just by adding the argument
 \texttt{visibility = TRUE} to the above \texttt{eml\_publish} command.
+
+\subsubsection{Publishing to the KNB}\label{publishing-to-the-knb}
+
+We can also publish to the KNB (Knowledge Network for Biocomplexity, a
+data repository provided by NCEAS) using the \texttt{dataon} R package.
+KNB offers several advantages over alternative repositories such as
+figshare or \href{http://datadryad.org}{Dryad} when publishing EML
+metadata. The KNB ``speaks'' EML, so it is unnecessary to provide
+repository-specific additional metadata such as description, category or
+tag -- all necessary information will be extracted from the EML. This is
+also much more thorough than other repositories: we can search the KNB
+network by specific taxonomic or geographic coverage, or even down at
+the level of individual attribute or column headings, rather than being
+limited to more generic metadata. Lastly, KNB is a member node of the
+DataONE repository, making the resulting data files immediately part of
+a much larger network for ecological, earth and environmental science
+data.
+
+\emph{Note: this example assumes \texttt{dataone} is installed, even
+though it is not required to use reml and run the examples in the other
+sections. See the \texttt{dataone} documentation for authenticating
+\texttt{dataone} with a user account}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{eml_publish}\NormalTok{(}\StringTok{"reml_example.xml"}\NormalTok{, }\DataTypeTok{destination=}\StringTok{"KNB"}\NormalTok{, }\DataTypeTok{permanent=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{NB:} To avoid clutter, we should publish only real research data
+to the KNB production servers (by setting \texttt{permanent=TRUE}). By
+default, \texttt{eml\_publish} assumes \texttt{permanent=FALSE} when
+sending data to the KNB, and will publish to the development server
+instead. The development server works as a testing platform, providing
+all the same features as the production platform but without permanent
+storage -- all data will be deleted regularly. The development server is
+not as stable as the production server, so if the command fails, please
+try again later.
 
 \textless{}-- Too detailed for this vignette
 
@@ -185,7 +246,19 @@ See
 \href{https://github.com/ropensci/reml/issues?labels=publish+eml\&page=1\&state=open}{Open
 issues in publishing EML}
 
-\subsection{Reading EML}\label{reading-eml}
+\subsection{Parsing and exploring an EML
+file}\label{parsing-and-exploring-an-eml-file}
+
+Users will not only want to generate EML files, but also take advantage
+of the wealth of data already well documented in EML. The package
+provides many tools to facilitate the extraction of data from EML files
+into their native R formats, as well as utilities to access and
+manipulate the metadata provided. By having these tools avialble in the
+scripted R environment, it becomes possible to write functions that can
+be easily applied across large collections of files. In this way,
+researchers can scale their analyses across ever larger collections of
+datasets by automating the more tedious aspects of data discovery and
+integration.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -193,24 +266,22 @@ issues in publishing EML}
 \end{Highlighting}
 \end{Shaded}
 
-We can use various accessor functions to return the data and metadata
-elements in native R formats.
+We can also read in a remote file by providing a URL or KNB object
+identifier (such as a DOI).
+
+The \texttt{eml\_get} function provides us with easy access to many of
+the component elements of the metadata file. See the documentation for a
+complete list.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dat <-}\StringTok{ }\KeywordTok{dataTable}\NormalTok{(obj)}
+\NormalTok{dat <-}\StringTok{ }\KeywordTok{eml_get}\NormalTok{(obj, }\StringTok{"data.set"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{metadata <-}\StringTok{ }\KeywordTok{attributeList}\NormalTok{(obj)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{contact}\NormalTok{(obj)}
+\KeywordTok{eml_get}\NormalTok{(obj, }\StringTok{"contact"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -218,43 +289,72 @@ elements in native R formats.
 [1] "Carl Boettiger <cboettig@gmail.com>"
 \end{verbatim}
 
-Note that the contact has been coerced into R's built-in `person'
-object:
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{class}\NormalTok{(}\KeywordTok{contact}\NormalTok{(obj))}
+\KeywordTok{eml_get}\NormalTok{(obj, }\StringTok{"citation_info"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-[1] "person"
+Boettiger C (2013-12-11). _metadata_.
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{citationInfo}\NormalTok{(obj)}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Advanced writing of EML}\label{advanced-writing-of-eml}
 
-\begin{verbatim}
-Boettiger C (2013-11-12). _reml example_.
-\end{verbatim}
+\textbf{IN PROGRESS}
 
-\paragraph{In development}\label{in-development-1}
+Our minimal EML file barely scratches the surface of what is possible to
+do with EML. In \href{}{Advanced writing of EML}, we construct a much
+richer EML file, including:
 
-See
-\href{https://github.com/ropensci/reml/issues?labels=read+eml\&page=1\&state=open}{Open
-issues in reading EML}
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Constructing more complete lists of authors, publishers and contact.
+\item
+  Summarizing the geographic, temporal, and taxonomic coverage of the
+  dataset
+\item
+  Reading in pages of methods descriptions from a Word document
+\item
+  Adding arbitrary additional metadata
+\item
+  Indicating the canonical citation to the paper that should be
+  acknowledged when the data is re-used.\\
+\item
+  Conversion between EML and other metadata formats, such as NCBII and
+  ISO standards.
+\end{itemize}
 
-\subsection{Integrating multiple EML files into a single data
-frame}\label{integrating-multiple-eml-files-into-a-single-data-frame}
+In so doing we will take a more modular approach that will allow us to
+build up our metadata from reusable components, while also providing a
+more fine-grained control over the resulting output fields and files.
 
-\paragraph{In development}\label{in-development-2}
+\subsection{Advanced parsing and manipulation of
+EML}\label{advanced-parsing-and-manipulation-of-eml}
 
-See
-\href{https://github.com/ropensci/reml/issues?labels=integrate+eml\&page=1\&state=open}{Open
-issues in integrating EML}
+\textbf{IN PROGRESS}
+
+In \href{}{Advanced parsing and manipulation of EML}, we
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Introduce how to access any EML element in R using the S4 subsetting
+  mechanism
+\item
+  Demonstrate how to extract and manipulate semantic RDF triples from
+  EML metadata
+\item
+  Illustrate how EML metadata extraction can be applied across a
+  collection of files
+\item
+  Illustrate how EML manipulation can be combined with queries across
+  even larger distributed collections of EML data over the dataone
+  network
+\item
+  Demonstrate merging of multiple datasets based on semantics
+\end{itemize}
 
 \subsection{Testing and development}\label{testing-and-development}
 
@@ -282,3 +382,7 @@ stable.
 Successful installation of these packages will require the
 \texttt{devtools} package (for \texttt{install\_github}) and the ability
 to build packages from source.
+
+\textbf{\emph{Suggestions, feature requests, bug reports and other
+feedback welcome!}} Please see our
+\href{https://github.com/ropensci/reml/issues}{issues tracker}
