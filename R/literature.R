@@ -348,7 +348,7 @@ setAs("XMLInternalElementNode",
 # month  [o] (?)
 
 setClass("manuscript_slots",
-         slots = c(institution = "listOfinstitution",
+         slots = c(institution = "ListOfinstitution",
                    totalPages = "character"
                    )
          )
@@ -396,7 +396,7 @@ setAs("XMLInternalElementNode",
 
 setClass("thesis_slots",
          slots = c(degree = "character",
-                   institution = "listOfinstitution",
+                   institution = "ListOfinstitution",
                    totalPages = "character"
                    )
          )
@@ -494,7 +494,7 @@ setClass("personal_communication_slots",
          slots = c(publisher = "ListOfpublisher",
                    publicationPlace = "character",
                    communication = "character",
-                   recipient = "listOfrecipient"
+                   recipient = "ListOfrecipient"
                    )
          )
 
