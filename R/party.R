@@ -88,11 +88,125 @@ setMethod("c", signature("originator"), function(x, ...) new("ListOforiginator",
 
 
 ## Helper class definitions for dataset 
+setClass("person") 
+
+# publisher + coercions
 setClass("publisher", contains="responsibleParty")
-setAs("XMLInternalElementNode", "publisher",   function(from) emlToS4(from))
-setAs("publisher", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
+setAs("XMLInternalElementNode", 
+      "publisher",   
+      function(from) emlToS4(from))
 
+setAs("publisher", 
+      "XMLInternalElementNode",   
+      function(from) S4Toeml(from))
+
+# institution + coercions
+setClass("institution", contains="responsibleParty")
+
+setAs("XMLInternalElementNode", 
+      "institution",   
+      function(from) emlToS4(from))
+
+setAs("institution", 
+      "XMLInternalElementNode",   
+      function(from) S4Toeml(from))
+
+setClass("ListOfinstitution", contains="list")
+
+setMethod("c", 
+          signature("institution"), 
+          function(x, ...) new("ListOfinstitution", list(x, ...)))
+
+setAs("institution", "person", function(from){
+   p <- as(as(from, "responsibleParty"), "person")
+   p
+  })
+
+setAs("ListOfinstitution", "person", function(from){
+      l <- lapply(from, as, "person")
+      out <- NULL
+      for(p in l)
+        out <- c(out, p)
+      class(out) = "person"
+      out
+   })
+
+setAs("person", "ListOfinstitution", function(from){
+      new("ListOfinstitution", lapply(person, as, "institution"))
+})
+
+# performer + list + coercions
+setClass("performer", contains="responsibleParty")
+
+setAs("XMLInternalElementNode", 
+      "performer", 
+      function(from) emlToS4(from))
+
+setAs("performer", 
+      "XMLInternalElementNode",   
+      function(from) S4Toeml(from))
+
+setClass("ListOfperformer", contains="list")
+
+setMethod("c", 
+          signature("performer"), 
+          function(x, ...) new("ListOfperformer", list(x, ...)))
+
+setAs("performer", "person", function(from){
+   p <- as(as(from, "responsibleParty"), "person")
+   p$role = "cre"
+   p
+  })
+
+setAs("ListOfperformer", "person", function(from){
+      l <- lapply(from, as, "person")
+      out <- NULL
+      for(p in l)
+        out <- c(out, p)
+      class(out) = "person"
+      out
+   })
+
+setAs("person", "ListOfperformer", function(from){
+      new("ListOfperformer", lapply(person, as, "performer"))
+})
+
+# recipient + list + coercions
+setClass("recipient", contains="responsibleParty")
+
+setAs("XMLInternalElementNode", 
+      "recipient", 
+      function(from) emlToS4(from))
+
+setAs("recipient", 
+      "XMLInternalElementNode",   
+      function(from) S4Toeml(from))
+
+setClass("ListOfrecipient", contains="list")
+
+setMethod("c", 
+          signature("recipient"), 
+          function(x, ...) new("ListOfrecipient", list(x, ...)))
+
+setAs("recipient", "person", function(from){
+   p <- as(as(from, "responsibleParty"), "person")
+   p$role = "ctb"
+   p
+  })
+
+setAs("ListOfrecipient", "person", function(from){
+      l <- lapply(from, as, "person")
+      out <- NULL
+      for(p in l)
+        out <- c(out, p)
+      class(out) = "person"
+      out
+   })
+
+setAs("person", "ListOfrecipient", function(from){
+      new("ListOfrecipient", lapply(person, as, "recipient"))
+})
 
 
 ####### Part of resource.R class
