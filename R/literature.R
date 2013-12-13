@@ -24,451 +24,11 @@
 #' @include coverage.R
 #' @include party.R
 
-
 # Set rquired classes 
 # =================================
 
 # bibentry coercion
 setClass("bibentry")
-
-
-# Atomic classes for citation types
-# =================================
-
-# journal
-setClass("journal",
-         slots = c(journal = "character")
-         )
-
-setAs("journal",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "journal",
-      function(from) emlToS4(from)
-      )
-
-
-# volume 
-setClass("volume",
-         slots = c(volume = "character")
-         )
-
-setAs("volume",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "volume",
-      function(from) emlToS4(from)
-      )
-
-
-# number of volumes 
-setClass("numberOfVolumes",
-         slots = c(numberOfVolumes = "character")
-         )
-
-setAs("numberOfVolumes",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "numberOfVolumes",
-      function(from) emlToS4(from)
-      )
-
-
-# issue 
-setClass("issue",
-         slots = c(issue = "character")
-         )
-
-setAs("issue",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "issue",
-      function(from) emlToS4(from)
-      )
-
-
-# page range 
-setClass("pageRange",
-         slots = c(pageRange = "character")
-         )
-
-setAs("pageRange",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "pageRange",
-      function(from) emlToS4(from)
-      )
-
-
-# total pages 
-setClass("totalPages",
-         slots = c(totalPages = "character")
-         )
-
-setAs("totalPages",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "totalPages",
-      function(from) emlToS4(from)
-      )
-
-
-# total tables
-setClass("totalTables",
-         slots = c(totalTables = "character")
-         )
-
-setAs("totalTables",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "totalTables",
-      function(from) emlToS4(from)
-      )
-
-
-# total figures 
-setClass("totalFigures",
-         slots = c(totalFigures = "character")
-         )
-
-setAs("totalFigures",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "totalFigures",
-      function(from) emlToS4(from)
-      )
-
-
-# already defined in  dataset.R
-# setClass("publisher",
-         # slots = c(publisher = "responsibleParty"))
-
-
-# institution 
-setClass("institution",
-         slots = c(institution = "responsibleParty")
-         )
-
-setAs("institution",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "institution",
-      function(from) emlToS4(from)
-      )
-
-
-# publication place 
-setClass("publicationPlace",
-         slots = c(publicationPlace = "character")
-         )
-
-setAs("publicationPlace",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "publicationPlace",
-      function(from) emlToS4(from)
-      )
-
-
-# issn 
-setClass("ISSN",
-         slots = c(ISSN = "character")
-         )
-
-setAs("ISSN",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "ISSN",
-      function(from) emlToS4(from)
-      )
-
-
-# isbn 
-setClass("ISBN",
-         slots = c(ISBN = "character")
-         )
-
-setAs("ISBN",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "ISBN",
-      function(from) emlToS4(from)
-      )
-
-
-# edition 
-setClass("edition",
-         slots = c(edition = "character")
-         )
-
-setAs("edition",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "edition",
-      function(from) emlToS4(from)
-      )
-
-
-# chapter number
-setClass("chapterNumber",
-         slots = c(chapterNumber = "character")
-         )
-
-setAs("chapterNumber",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "chapterNumber",
-      function(from) emlToS4(from)
-      )
-
-
-# editor
-setClass("editor",
-         slots = c(editor = "character")
-        )
-
-setAs("editor",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "editor",
-      function(from) emlToS4(from)
-      )
-
-
-# book title 
-setClass("bookTitle",
-         slots = c(bookTitle = "character")
-         )
-
-setAs("bookTitle",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "bookTitle",
-      function(from) emlToS4(from)
-      )
-
-
-# degree 
-setClass("degree",
-         slots = c(degree = "character")
-         )
-
-setAs("degree",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "degree",
-      function(from) emlToS4(from)
-      )
-
-
-# conference name 
-setClass("conferenceName",
-         slots = c(conferenceName = "character")
-         )
-
-setAs("conferenceName",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("conferenceName",
-      "edition",
-      function(from) emlToS4(from)
-      )
-
-
-# conference date 
-setClass("conferenceDate",
-         slots = c(conferenceDate = "character")
-         )
-
-setAs("conferenceDate",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("conferenceDate",
-      "edition",
-      function(from) emlToS4(from)
-      )
-
-
-# communication 
-setClass("communication",
-         slots = c(communication = "character")
-         )
-
-setAs("communication",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "communication",
-      function(from) emlToS4(from)
-      )
-
-
-# reference 
-setClass("reference",
-         slots = c(reference = "character")
-         )
-
-setAs("reference",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "reference",
-      function(from) emlToS4(from)
-      )
-
-# scale 
-setClass("scale",
-         slots = c(scale = "geographicCoverage")
-         )
-
-setAs("scale",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "scale",
-      function(from) emlToS4(from)
-      )
-
-
-# performer 
-setClass("performer",
-         slots = c(performer = "responsibleParty")
-         )
-
-setAs("performer",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "performer",
-      function(from) emlToS4(from)
-      )
-
-
-# original publication 
-setClass("originalPublication",
-         slots = c(originalPublication = "character")
-         )
-
-setAs("originalPublication",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "originalPublication",
-      function(from) emlToS4(from)
-      )
-
-
-# reprint ecition 
-setClass("reprintEdition",
-         slots = c(reprintEdition = "character")
-         )
-
-setAs("reprintEdition",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("reprintEdition",
-      "edition",
-      function(from) emlToS4(from)
-      )
-
-
-# reviewed item 
-setClass("reviewdItem",
-         slots = c(reviewdItem = "character")
-         )
-
-setAs("reviewdItem",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "reviewdItem",
-      function(from) emlToS4(from)
-      )
-
-
-# recipient 
-setClass("recipient",
-         slots = c(recipient = "responsibleParty")
-         )
-
-setAs("recipient",
-      "XMLInternalElementNode",
-      function(from) S4Toeml(from)
-      )
-
-setAs("XMLInternalElementNode",
-      "recipient",
-      function(from) emlToS4(from)
-      )
 
 
 # citation types
@@ -489,13 +49,13 @@ setAs("XMLInternalElementNode",
 # article setup
 
 setClass("article_slots",
-         slots = c(journal = "journal",
-                   volume = "volume",
-                   issue = "issue",
-                   pageRange = "pageRange",
-                   publisher = "publisher",
-                   publicationPlace = "publicationPlace",
-                   ISSN = "ISSN"
+         slots = c(journal = "character",
+                   volume = "character",
+                   issue = "character",
+                   pageRange = "character",
+                   publisher = "ListOfpublisher",
+                   publicationPlace = "character",
+                   ISSN = "character"
                    )
          )
 
@@ -535,37 +95,34 @@ setAs("XMLInternalElementNode",
 # note    [o] (?)
 
 setAs("article", "bibentry", function(from){
-	entry = bibentry(bibtype = class(from), 
-                 author = as(from@creator, "person"),
-                 title = from@title,
-                 journal = from@journal@journal,
-                 year = from@pubDate, # FIXME: Needs to be handled properly to extract year from pubdate
-                 # optional fields
-                 volume = from@volume@volume,
-                 number = from@issue@issue,
-                 pages = from@pageRange@pageRange,
-                 month = from@pubDate, # FIXME: Needs to be handled properly to extract month from pubdate
-                 # note not available in eml
-                 textVersion = NULL, 
-                 header = paste("Citation based on eml", class(from)), 
-                 footer = "---------------------------------------0")
-        class(entry) = "bibentry"
-        entry
-     }
+      entry = bibentry(bibtype = class(from), 
+                       author = as(from@creator, "person"),
+                       title = from@title,
+                       journal = from@journal,
+                       year = from@pubDate, # FIXME: handle date properly and extract year 
+                       volume = from@volume,
+                       number = from@issue,
+                       pages = from@pageRange,
+                       month = from@pubDate, # FIXME: handle date properly and extract year
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
 )
 
 setAs("bibentry", "article", function(from){
-        eml_citation = new("article")  
-        # required fields
-        # eml_citation@creator = new("creator", creator = as(from$author, "creator")) # FIXME: This needs to coerce from author to "creator" 
-        eml_citation@title = from$title
-        eml_citation@journal = new("journal", journal = from$journal)
-        eml_citation@pubDate = from$year # FIXME: here we write from two in one year and month are available from$month
-        eml_citation@volume = new("volume", volume = from$volume)
-        eml_citation@issue = new("issue", issue = from$number)
-        eml_citation@pageRange = new("pageRange", pageRange = from$pages)
-        eml_citation 
-        }
+      eml_citation = new("article")  
+      eml_citation@creator = new("ListOfcreator", lapply(from$author, as, "creator")) 
+      eml_citation@title = from$title
+      eml_citation@journal = from$journal
+      eml_citation@pubDate = paste(from$year, from$month, sep = "-") # FIXME: Needs to be handled properly to put together year and month 
+      eml_citation@volume = from$volume
+      eml_citation@issue = from$number
+      eml_citation@pageRange = from$pages
+      eml_citation 
+     } 
 )
 
 
@@ -584,15 +141,15 @@ setAs("bibentry", "article", function(from){
                # )
 
 setClass("book_slots",
-        slots = c(publisher = "publisher",
-                  publicationPlace = "publicationPlace",
-                  edition = "edition",
-                  volume = "volume",
-                  numberOfVolumes = "numberOfVolumes",
-                  totalPages = "totalPages",
-                  totalFigures = "totalFigures",
-                  totalTables = "totalTables",
-                  ISBN = "ISBN"
+        slots = c(publisher = "ListOfpublisher",
+                  publicationPlace = "character",
+                  edition = "character",
+                  volume = "character",
+                  numberOfVolumes = "character",
+                  totalPages = "character",
+                  totalFigures = "character",
+                  totalTables = "character",
+                  ISBN = "character"
                   )
         )
 
@@ -634,26 +191,40 @@ setAs("XMLInternalElementNode",
 
 setAs("book", "bibentry", function(from){
       entry = bibentry(bibtype = class(from), 
-                       # required fields
-                       author = as(from@creator, "person"),
-                       title = from@title,
-                       publisher = as(from@publisher, "person"),
-                       year = from@pubDate,
-                       # optional fields
-                       volume = from@volume@volume,
-                       address = from@publicationPlace@publicationPlace,
-                       edition = from@edition@edition,
-                       month = from@pubDate,
-                       isbn = from@ISBN@ISBN,
+                       # required
+                       author = as(from@creator, "person"),   
+                       title  = from@title, 
+                       publisher = as(from@publisher, "person"),  
+                       year = from@pubDate, # FIXME: handle date properly and extract year 
+                       volume = from@volume, 
+                       series = from@series,
+                       address = from@publicationPlace,
+                       edition = from@edition,
+                       month = from@pubDate, # FIXME: handle date properly and extract year
+                       isbn = from@ISBN,
                        textVersion = NULL, 
                        header = paste("Citation based on eml", class(from)), 
-                       footer = "---------------------------------------0"
-                       )
+                       footer = "---------------------------------------0")
       class(entry) = "bibentry"
       entry
       }
 )
 
+setAs("bibentry", "book", function(from){
+     eml_citation                  = new("book")
+     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@title            = from$title
+     eml_citation@publisher        = new("ListOfpublisher", lapply(from$publisher, as, "publisher"))
+     eml_citation@pubDate          = from$year
+     eml_citation@volume           = from$volume
+     eml_citation@series           = from$series
+     eml_citation@publicationPlace = from$address
+     eml_citation@edition          = from$edition
+     eml_citation@pubDate          = from$month
+     eml_citation@ISBN             = from$isbn
+     eml_citation
+     } 
+)
 
 # Edited book (like book but see creator)
 
@@ -732,10 +303,10 @@ setAs("XMLInternalElementNode",
 # note                 [o] (?)
 
 setClass("chapter_slots",
-         slots = c(chapterNumber = "chapterNumber",
-                   editor = "editor",
-                   bookTitle = "bookTitle",
-                   pageRange = "pageRange"
+         slots = c(chapterNumber = "character",
+                   editor = "character",
+                   bookTitle = "character",
+                   pageRange = "character"
                    )
          )
 
@@ -777,8 +348,8 @@ setAs("XMLInternalElementNode",
 # month  [o] (?)
 
 setClass("manuscript_slots",
-         slots = c(institution = "institution",
-                   totalPages = "totalPages"
+         slots = c(institution = "listOfinstitution",
+                   totalPages = "character"
                    )
          )
 
@@ -824,9 +395,9 @@ setAs("XMLInternalElementNode",
 # note    [o] (?)
 
 setClass("thesis_slots",
-         slots = c(degree = "degree",
-                   institution = "institution",
-                   totalPages = "totalPages"
+         slots = c(degree = "character",
+                   institution = "listOfinstitution",
+                   totalPages = "character"
                    )
          )
 
@@ -875,9 +446,9 @@ setAs("XMLInternalElementNode",
 # note             [o] (?)
 
 setClass("conference_proceedings_slots",
-         slots = c(conferenceName = "conferenceName",
-                   conferenceDate = "conferenceDate")
-                   # conferenceLocation = "conferenceLocation" FIXME: This needs to come from address
+         slots = c(conferenceName = "character",
+                   conferenceDate = "character",
+                   conferenceLocation = "address") 
          )
 
 setClass("conferenceProceedings",
@@ -920,10 +491,10 @@ setAs("XMLInternalElementNode",
 # note         [o] (?)
 
 setClass("personal_communication_slots",
-         slots = c(publisher = "publisher",
-                   publicationPlace = "publicationPlace",
-                   communication = "communication",
-                   recipient = "recipient"
+         slots = c(publisher = "ListOfpublisher",
+                   publicationPlace = "character",
+                   communication = "character",
+                   recipient = "listOfrecipient"
                    )
          )
 
@@ -966,10 +537,10 @@ setAs("XMLInternalElementNode",
 # note         [o] (?)
 
 setClass("map_slots",
-         slots = c(publisher = "publisher",
-                   edition = "edition",
+         slots = c(publisher = "ListOfpublisher",
+                   edition = "character",
                    geographicCoverage = "geographicCoverage",
-                   scale = "scale"
+                   scale = "character"
                    )
          )
 
@@ -1012,10 +583,10 @@ setAs("XMLInternalElementNode",
 # note         [o] (?)
 
 setClass("audio_visual_slots",
-         slots = c(publisher = "publisher",
-                   publicationPlace = "publicationPlace",
-                   performer = "performer",
-                   ISBN = "ISBN")
+         slots = c(publisher = "ListOfpublisher",
+                   publicationPlace = "character",
+                   performer = "listOfperformer",
+                   ISBN = "character")
          )
 
 setClass("audioVisual",
@@ -1064,18 +635,18 @@ setAs("XMLInternalElementNode",
 # ? ?
 
 setClass("generic_slots",
-         slots = c(publisher = "publisher",
-                   volume = "volume",
-                   numberOfVolumes = "numberOfVolumes",
-                   totalPages = "totalPages",
-                   totalFigures = "totalFigures",
-                   totalTables = "totalTables",
-                   edition = "edition",
-                   originalPublication = "originalPublication", # fehlt
-                   reprintEdition = "reprintEdition",  # fehlt
-                   reviewdItem = "reviewdItem", # fehlt
-                   ISBN = "ISBN",
-                   ISSN = "ISSN"
+         slots = c(publisher = "ListOfPublisher",
+                   volume = "character",
+                   numberOfVolumes = "character",
+                   totalPages = "character",
+                   totalFigures = "character",
+                   totalTables = "character",
+                   edition = "character",
+                   originalPublication = "character",
+                   reprintEdition = "character",
+                   reviewedItem = "character",
+                   ISBN = "character",
+                   ISSN = "character"
                    )
          )
 
