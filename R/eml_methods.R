@@ -147,7 +147,7 @@ get_col_classes <- function(attrs){
 
 
 
-## depricated. use default constructors  ##
+## To be depricated. use default constructors  ##
 #' Define constructor function 
 eml <- function(dat, 
                 meta = NULL, 
@@ -161,31 +161,18 @@ eml <- function(dat,
                                         NSEWbox = NULL), 
                 methods = new("methods"), 
                 additionalMetadata = new("ListOfadditionalMetadata",
-                                         list(new("additionalMetadata"))),
-                eml_version =  c("2.1.1", "2.1.0")){
+                                         list(new("additionalMetadata")))){
 
-  if(is(dat, "data.set")) # use embedded metadata (even if metadata is not NULL?)  
-    meta <- get_metadata(dat)
-
-  if(is.null(meta))
-    meta <- metadata_wizard(dat)
-
-  ## Handle older versions of EML
-  eml_version <- match.arg(eml_version)
-  namespaces <- eml_namespaces
-  if(eml_version != "2.1.1"){
-    namespaces["eml"] <- gsub("2.1.1", eml_version, eml_namespaces["eml"])
-    namespaces["ds"] <- gsub("2.1.1", eml_version, eml_namespaces["ds"])
-  }
 
   ## Coerce character string persons into EML representations
+  if(is.null(creator))
+    creator <- "" 
   if(is(creator, "character"))
     creator <- as(creator, "creator")
-  if(is(creator, "creator")) # Creator should be ListOfCreator
+  if(is(creator, "creator"))                        # Creator should be ListOfCreator
     creator <- new("ListOfcreator", list(creator))
-  if(is.null(contact) | length(contact) == 0 ){
+  if(is.null(contact) | length(contact) == 0 )
     contact <- as(creator[[1]], "contact")
-  }
   if(is(contact, "character"))
     contact <- as(contact, "contact")
 
@@ -212,24 +199,5 @@ eml <- function(dat,
       additionalMetadata = additionalMetadata,
       namespaces = namespaces)
 }
-
-
-#' Show/change eml version
-eml_version <- function(eml, version=NULL){
-  if(is.null(version))
-    return(eml@namespaces["eml"]) 
-  else {
-
-# HELL NO! Call the XSLT conversion instead...
-    current <- "2\\.\\d\\.\\d" ## FIXME use more flexible pattern to match current version
-    eml@namespaces["eml"] <- gsub(current, version, eml@namespaces["eml"])
-    eml@namespaces["ds"] <- gsub(current, version, eml@namespaces["ds"])
-    return(eml)
-  } 
-  
-}
-
-
-
 
 
