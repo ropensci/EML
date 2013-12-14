@@ -147,57 +147,64 @@ get_col_classes <- function(attrs){
 
 
 
-## To be depricated. use default constructors  ##
-#' Define constructor function 
-eml <- function(dat, 
-                meta = NULL, 
-                title = "metadata", 
-                description = character(0), 
-                creator = get("defaultCreator", envir=remlConfig), 
-                contact = get("defaultContact", envir=remlConfig),
-                coverage = eml_coverage(scientific_names = NULL, 
+#' eml constructor function 
+#' 
+#' @details
+#' 
+#' - Permits character string definitions of creator & contact 
+#' - Avoid separate call to eml_dataTable, just pass it dat, optionally meta too
+#' 
+eml <- function(dat,            ## attribute level
+                meta = NULL,    ## attribute level 
+## physical level
+                title = "metadata",         # required  
+                description = character(0), # optional
+## dataset level 
+                creator = get("defaultCreator", envir=remlConfig), # required
+                contact = get("defaultContact", envir=remlConfig), # required 
+                coverage = eml_coverage(scientific_names = NULL,   # optional
                                         dates = NULL,
                                         geographic_description = NULL,
-                                        NSEWbox = NULL), 
-                methods = new("methods"), 
-                additionalMetadata = new("ListOfadditionalMetadata",
-                                         list(new("additionalMetadata")))){
+                                        NSEWbox = NULL),
+                methods = new("methods"),
+                ...,
+## eml level
+                additionalMetadata = c(new("additionalMetadata")))
+{
 
 
   ## Coerce character string persons into EML representations
   if(is.null(creator))
     creator <- "" 
-  if(is(creator, "character"))
+  if(is(creator, "character") || is(creator, "person"))
     creator <- as(creator, "creator")
-  if(is(creator, "creator"))                        # Creator should be ListOfCreator
-    creator <- new("ListOfcreator", list(creator))
-  if(is.null(contact) | length(contact) == 0 )
+  if(is(creator, "creator"))                     
+    creator <- c(creator)
+  if((is.null(contact) || length(contact) == 0) && is(creator, "ListOfcreator"))
     contact <- as(creator[[1]], "contact")
   if(is(contact, "character"))
     contact <- as(contact, "contact")
 
-  ## Generage a unique id
-  id <- reml_id()
+  
+  eml <- new("eml",
+             dataset = new("dataset", 
+                           title = title, # required 
+                           creator = creator,
+                           contact = contact,
+                           coverage = coverage,
+                           methods = methods, 
+                           ...),
+             additionalMetadata = additionalMetadata)
+  
 
-  ## Call the generic constructor function and write values into slots
-  new("eml",
-      packageId = id[["id"]],
-      system = id[["system"]],
-      scope = id[["scope"]],
-      dataset = new("dataset", 
-                    title = title,
-                    creator = creator,
-                    contact = contact,
-                    coverage = coverage,
-                    dataTable = new("ListOfdataTable", 
-                      list(
-                      eml_dataTable(dat=dat, 
-                                    meta=meta, 
-                                    title=title, 
-                                    description=description))),
-                    methods = methods),
-      additionalMetadata = additionalMetadata,
-      namespaces = namespaces)
+  ## Identify the kind of dataset by the type of dat provided 
+  if(is(dat, "data.frame")){
+    eml@dataset@dataTable <- 
+      c(eml_dataTable(dat = dat, meta = meta, 
+                      title=title, description=description))
+  } 
+
+  eml 
 }
 
 
