@@ -87,9 +87,6 @@ setClass("ListOforiginator", contains="list")
 setMethod("c", signature("originator"), function(x, ...) new("ListOforiginator", list(x, ...)))
 
 
-## Helper class definitions for dataset 
-setClass("person") 
-
 # publisher + coercions
 setClass("publisher", contains="responsibleParty")
 
@@ -246,8 +243,13 @@ setAs("creator", "contact", function(from)
 setOldClass("person") # promote to S4
 
 setAs("character", "responsibleParty", function(from){
-  as(as.person(from), "responsibleParty")
+  if(length(from) > 0)
+    as(as.person(from), "responsibleParty")
+  else
+    new("responsibleParty")
   })
+setAs("list", "responsibleParty", function(from)
+      as(as(from, "character"),"responsibleParty"))
 
 setAs("person", "responsibleParty", function(from){
       if(length(from) == 1){
@@ -258,10 +260,15 @@ setAs("person", "responsibleParty", function(from){
             electronicMailAddress = as.character(from$email))
       } else if(length(from) > 1){
         new("ListOfresponsibleParty", lapply(from, as, "responsibleParty"))
+      } else if(length(from) < 1){
+        new("responsibleParty")
       }
+
   })
 
-
+setAs("NULL", "responsibleParty", function(from) new("responsibleParty"))
+setAs("NULL", "creator", function(from) new("creator"))
+setAs("NULL", "contact", function(from) new("contact"))
 
 
 setAs("responsibleParty", "person", function(from)
@@ -288,7 +295,7 @@ setAs("creator", "person", function(from){
    p
   })
 setAs("character", "creator", function(from)
-  as(as.person(from), "creator"))
+  as(as(from, "responsibleParty"), "creator"))
 
 
 setAs("person", "contact", function(from)
@@ -297,7 +304,7 @@ setAs("contact", "person", function(from){
    as(as(from, "responsibleParty"), "person")
   })
 setAs("character", "contact", function(from)
-  as(as.person(from), "contact"))
+  as(as(from, "responsibleParty"), "contact"))
 
 setMethod("print", "responsibleParty", function(x)
   as(x, "person"))

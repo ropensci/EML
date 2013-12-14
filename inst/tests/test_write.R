@@ -41,7 +41,7 @@ test_that("We can write some part of this to XML", {
 
 test_that("We can write S4 EML to XML and validate", {
 
-  eml_write(dat, metadata, contact = "Carl Boettiger <cboettig@gmail.com>", file="title.xml")
+  eml_write(dat, metadata, contact = as("Carl Boettiger <cboettig@gmail.com>", "contact"), file="title.xml")
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
@@ -67,12 +67,12 @@ test_that("We can write S4 EML to XML and validate", {
 test_that("We can add coverage information and validate", {
   contact <- as("Carl Boettiger <cboettig@ropensci.org>", "contact")
   creator <- c(as(contact, "creator"))
-  eml_write(new("eml",
+  eml_write(new("eml",dataset = 
                 new("dataset", 
-                    dataTable = eml_dataTable(dat, 
+                    dataTable = c(eml_dataTable(dat, 
                                               metadata,
                                               description = "description",
-                                              filename = "title.csv"), 
+                                              filename = "title.csv")), 
                     contact = contact,
                     creator = creator, 
                     title = "title",

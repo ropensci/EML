@@ -19,7 +19,7 @@
 #'   are not applied if the function is not called explicitly.  
 #' @include reml_environment.R
 #' @export
-eml_config <- function(creator, contact = NULL, defaultLicense = "CC0"){
+eml_config <- function(creator = "", contact = "", defaultLicense = "CC0"){
   if(defaultLicense == "CC0")
     defaultLicense <- "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"
   defaultCreator <- new("ListOfcreator", lapply(creator, as, "creator"))
