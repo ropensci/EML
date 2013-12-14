@@ -101,6 +101,16 @@ setAs("publisher",
       "XMLInternalElementNode",   
       function(from) S4Toeml(from))
 
+setAs("publisher", "person", function(from){
+   p <- as(as(from, "responsibleParty"), "person")
+   p
+  })
+
+setAs("person", "publisher", function(from){
+   p <- as(as(from, "responsibleParty"), "publisher")
+   p
+  })
+
 # institution + coercions
 setClass("institution", contains="responsibleParty")
 
@@ -207,6 +217,59 @@ setAs("ListOfrecipient", "person", function(from){
 setAs("person", "ListOfrecipient", function(from){
       new("ListOfrecipient", lapply(person, as, "recipient"))
 })
+
+# editor + list + coercions
+setClass("editor", contains="responsibleParty")
+
+setAs("XMLInternalElementNode", 
+      "editor",   
+      function(from) emlToS4(from))
+
+setAs("editor", 
+      "XMLInternalElementNode",   
+      function(from) S4Toeml(from))
+
+setAs("editor", 
+      "person", 
+      function(from){
+        p <- as(as(from, "responsibleParty"), "person")
+        p$role = "cre"
+        p
+      }
+    )
+
+setAs("person", 
+      "editor", 
+      function(from) as(as(from, "responsibleParty"), "editor"))
+
+setAs("character", 
+      "editor", 
+      function(from) as(as.person(from), "editor"))
+
+setClass("ListOfeditor", contains="list")
+
+setMethod("c", 
+          signature("editor"), 
+          function(x, ...) new("ListOfeditor", list(x, ...)))
+
+setAs("ListOfeditor", 
+      "person", 
+      function(from){
+        l <- lapply(from, as, "person")
+        out <- NULL
+        for(p in l)
+          out <- c(out, p)
+        class(out) = "person"
+        out
+      }
+    )
+
+setAs("person", 
+      "ListOfeditor", 
+      function(from){
+        new("ListOfeditor", lapply(person, as, "editor"))
+      }
+    )
 
 
 ####### Part of resource.R class
