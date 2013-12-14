@@ -53,7 +53,7 @@ In this example, we will use R to re-generate the EML metadata originally publis
 We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
 
 
-```r
+```coffee
  dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"))
 ```
 
@@ -62,7 +62,7 @@ As in our [Basic tutorial](), essential metadata describes the columns and units
 
 
 
-```r
+```coffee
 col.defs <- c("run.num" = "which run number (=block). Range: 1 - 6. (integer)",
               "year" = "year, 2012",
               "day" = "Julian day. Range: 170 - 209.",
@@ -76,7 +76,7 @@ col.defs <- c("run.num" = "which run number (=block). Range: 1 - 6. (integer)",
 
 
 
-```r
+```coffee
 unit.defs = list("which run number", 
                  "YYYY",
                  "DDD",
@@ -106,7 +106,7 @@ We attach this essential metadata directly to the `data.frame` to make a `data.s
 
 
 
-```r
+```coffee
 dat <- data.set(dat, col.defs = col.defs, unit.defs = unit.defs)
 ```
 
@@ -117,7 +117,7 @@ As a _metadata_ format, we do not encode the actual data file itself into the EM
 
 
 
-```r
+```coffee
 dataTable <- reml:::eml_dataTable(dat, 
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
@@ -132,7 +132,7 @@ CSV file conventions can differ across platforms and continents. To remove any a
 One of the primary benefits in constructing EML in a scripted language such as R rather than in a GUI interface such as `morpho` is the ability to easily save and reuse components.  Here is an EML component that Harvard Forest will use a lot: it's address
 
 
-```r
+```coffee
 HF_address <- new("address", 
                   deliveryPoint = "324 North Main Street",
                   city = "Petersham",
@@ -147,7 +147,7 @@ We use the `new` function to construct an object of class `address`.  This R obj
 This element is now available for reuse as we create other metadata.  For instance, we will define the publisher of the data by providing a name and an address:
 
 
-```r
+```coffee
 publisher <- new("publisher", 
     organizationName = "Harvard Forest",
     address = HF_address)
@@ -161,7 +161,7 @@ We can reuse data formats native to R as well.  For instance, R comes with an in
 
 
 
-```r
+```coffee
 aaron <- as.person("Aaron Ellison <fakeaddress@email.com>")
 ```
 
@@ -169,7 +169,7 @@ aaron <- as.person("Aaron Ellison <fakeaddress@email.com>")
 can be interpreted as person's first and last name and email address.  The EML R package also recognizes this syntax, and can coerce this into the various 'person' or 'responsibleParty' roles defined in the EML schema.  Here we construct a contact node using coercion (the `as` function) from the `person` object
 
 
-```r
+```coffee
 contact <- as(aaron, "contact")
 contact@address = HF_address
 contact@organizationName = "Harvard Forest"
@@ -182,7 +182,7 @@ We could have entered each slot manually using `new("contact")` as we did for th
 Multiple individuals can be listed as the creator (author) of data.  Here we use coercion (`as`) to turn strings into creator nodes, and then use R's concatenate operator, `c`, to combine them. 
 
 
-```r
+```coffee
 creator <- c(as("Aaron Ellison", "creator"), as("Nicholas Gotelli", "creator"))
 ```
 
@@ -191,7 +191,7 @@ creator <- c(as("Aaron Ellison", "creator"), as("Nicholas Gotelli", "creator"))
 Yet another way to create person objects is to use the helper function `eml_person`.  This function recongnizes the plain-text string conventions already used by R's person objects (or the person objects themselves, see ?person).   Here we add other researchers as contributors to the data.  The `eml_person` function automatically decides whether to return a `contact`, `creator` list, or `associatedParty`, based on the additional information provided (such as an email address in angle braces, contributor role in square brackets).  
 
 
-```r
+```coffee
 other_researchers <- eml_person("Benjamin Baiser [ctb]", "Jennifer Sirota [ctb]") # creates a 'ListOfassociatedParty' (roles != cre)
 ```
 
@@ -202,7 +202,7 @@ Again, we could just as well have created these nodes using any of the other mec
 Some metadata is just a string: 
 
 
-```r
+```coffee
 pubDate <- "2012" 
 title <- "Thresholds and Tipping Points in a Sarracenia Microecosystem at Harvard Forest since 2012"
 ```
@@ -211,7 +211,7 @@ title <- "Thresholds and Tipping Points in a Sarracenia Microecosystem at Harvar
 When metadata fields have more complicated types, the package provides constructor functions to help build these elements succinctly.  For instance, while we could add our keyword sets manually using only `new`:
 
 
-```r
+```coffee
 keys <-
   c(new("keywordSet", 
       keywordThesaurus = "LTER controlled vocabulary",
@@ -226,7 +226,7 @@ keys <-
 and so forth, it is more compact to use the provided constructor function:
 
 
-```r
+```coffee
 keys <- eml_keyword(list("LTER controlled vocabulary" = c("bacteria", "carnivorous plants", "genetics", "thresholds"),
                                      "LTER core area" = c("populations", "inorganic nutrients", "disturbance"),
                                         "HFR default" = c("Harvard Forest", "HFR", "LTER", "USA")))
@@ -235,7 +235,7 @@ keys <- eml_keyword(list("LTER controlled vocabulary" = c("bacteria", "carnivoro
 
 A similar situation arises with describing the coverage metadata element. 
 
-```r
+```coffee
 coverage <- eml_coverage(scientific_names = "Sarracenia purpurea", 
                          dates            = c('2012-06-01', '2013-12-31'),
                          geographic_description = "Harvard Forest Greenhouse, Tom Swamp Tract (Harvard Forest)", 
@@ -249,7 +249,7 @@ In this case, the helper function supports only the more common types of coverag
 The remaining metadata provided in hf205.xml consists primarily of text blocks.  We might write small text blocks directly into our script:  
 
 
-```r
+```coffee
 abstract <- "The primary goal of this project is to determine
   experimentally the amount of lead time required to prevent a state
   change. To achieve this goal, we will (1) experimentally induce state
@@ -271,7 +271,7 @@ abstract <- "The primary goal of this project is to determine
 or read them in from some externa plain text file such as `abstract <- readLines("abstract.txt")`.  
 
 
-```r
+```coffee
 rights <- "This dataset is released to the public and may be freely
   downloaded. Please keep the designated Contact person informed of any
   plans to use the dataset. Consultation or collaboration with the original
@@ -286,7 +286,7 @@ rights <- "This dataset is released to the public and may be freely
 For larger blocks of text we might rather write these Word.  We can read them in from there, with the help of a few additional R packages.   
 
 
-```r
+```coffee
 library(RWordXML)
 library(XML)
 f2 <- wordDoc(system.file("examples", "methods.docx", package="reml"))
@@ -300,7 +300,7 @@ method_description <- paste(txt, collapse = "\n\n")
 We can then construct a methods node containing this text as the description: 
 
 
-```r
+```coffee
 methods <- new("methods")
 methods@methodsStep@description <- method_description
 ```
@@ -310,7 +310,7 @@ methods@methodsStep@description <- method_description
 One of the simplest ways and most powerful ways to generate EML metadata is to resuse a section from an existing EML file directly.  
 
 
-```r
+```coffee
 additionalMetadata <- hf205@additionalMetadata # extracted from previous eml file
 ```
 
@@ -319,7 +319,7 @@ We now have all of the elements we wished to define for the `dataset` metadata. 
 
 
 
-```r
+```coffee
 dataset <- new("dataset", 
                 title = title,
                 creator = creator,
@@ -346,7 +346,7 @@ With most of the metadata now in place, we can construct the top-level element:
 
 
 
-```r
+```coffee
 eml <- new("eml", 
             dataset = dataset,
             additionalMetadata = additionalMetadata)
@@ -362,7 +362,7 @@ This call automatically adds a few additional bits of information, such as a uni
 Finally we are ready to write out our EML object to an XML file. 
 
 
-```r
+```coffee
 eml_write(eml, "hf205_from_reml.xml")
 ```
 
@@ -377,7 +377,7 @@ When we used the `eml_write()` function for the first time in the [Basic tutoria
 As before, we can now validate our EML document to ensure all the information has been formatted correctly:
 
 
-```r
+```coffee
 eml_validate("hf205_from_reml.xml")
 ```
 
