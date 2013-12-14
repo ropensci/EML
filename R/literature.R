@@ -38,12 +38,12 @@ setClass("bibentry")
 
 # A sequence of (
                # journal	required
-               # volume	optional
-               # issue	optional
+               # volume	        optional
+               # issue	        optional
                # pageRange	optional
                # publisher	optional (from responsibleParty)
-               # publicationPlace	optional
-               # ISSN	optional
+               # publicationPlace       optional
+               # ISSN	        optional
                # )
 
 # article setup
@@ -53,7 +53,7 @@ setClass("article_slots",
                    volume = "character",
                    issue = "character",
                    pageRange = "character",
-                   publisher = "ListOfpublisher",
+                   publisher = "publisher",
                    publicationPlace = "character",
                    ISSN = "character"
                    )
@@ -141,7 +141,7 @@ setAs("bibentry", "article", function(from){
                # )
 
 setClass("book_slots",
-        slots = c(publisher = "ListOfpublisher",
+        slots = c(publisher = "publisher",
                   publicationPlace = "character",
                   edition = "character",
                   volume = "character",
@@ -212,19 +212,19 @@ setAs("book", "bibentry", function(from){
 
 setAs("bibentry", "book", function(from){
      eml_citation                  = new("book")
-     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@creator          = new("ListOfeditor", lapply(from$editor, as, "editor")) 
      eml_citation@title            = from$title
-     eml_citation@publisher        = new("ListOfpublisher", lapply(from$publisher, as, "publisher"))
-     eml_citation@pubDate          = from$year
+     eml_citation@publisher        = as(person(from$publisher), "publisher")
+     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
      eml_citation@volume           = from$volume
      eml_citation@series           = from$series
      eml_citation@publicationPlace = from$address
      eml_citation@edition          = from$edition
-     eml_citation@pubDate          = from$month
      eml_citation@ISBN             = from$isbn
      eml_citation
      } 
 )
+
 
 # Edited book (like book but see creator)
 
@@ -241,22 +241,6 @@ setAs("bibentry", "book", function(from){
               # creator (list editors here)
               # )
 
-# bibtex book
-# field [required/optional] (EML)
-
-# author or editor [r] (?)
-# title            [r] (?)
-# publisher        [r] (journal)
-# year             [r] (?)
-
-# volume or number [o] (volume)
-# series           [o] (? pageRange)
-# address          [o] (?)
-# edition          [o] (?)
-# month            [o] (?)
-# note             [o] (?)
-# isbn             [o] (ISBN)
-
 setClass("editedBook",
          contains = c("id_scope",
                       "resourceGroup",
@@ -264,6 +248,8 @@ setClass("editedBook",
                       "referencesGroup"
                       )
          )
+
+# edited book coercion
 
 setAs("editedBook",
       "XMLInternalElementNode",
@@ -275,6 +261,58 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
+# bibtex book
+# field [required/optional] (EML)
+
+# editor [r] (creator list editors here)
+# title            [r] (title)
+# publisher        [r] (publisher)
+# year             [r] (pubDate)
+
+# volume or number [o] (volume)
+# series           [o] (pageRange)
+# address          [o] (publicationPlace)
+# edition          [o] (edition)
+# month            [o] (pubDate)
+# note             [o] (?)
+# isbn             [o] (ISBN)
+
+setAs("editedBook", "bibentry", function(from){
+      entry = bibentry(bibtype = "Book", 
+                       editor = as(from@creator, "person"),   
+                       title  = from@title, 
+                       publisher = as(from@publisher, "person"),  
+                       year = from@pubDate, # FIXME: handle date properly and extract year 
+                       volume = from@volume, 
+                       series = from@series,
+                       address = from@publicationPlace,
+                       edition = from@edition,
+                       month = from@pubDate, # FIXME: handle date properly and extract month
+                       isbn = from@ISBN,
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
+
+setAs("bibentry", "editedBook", function(from){
+     eml_citation                  = new("editedBook")
+     eml_citation@creator          = new("ListOfeditor", lapply(from$editor, as, "editor"))
+     eml_citation@title            = from$title
+     eml_citation@publisher        = as(person(from$publisher), "publisher")
+     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
+     eml_citation@volume           = from$volume
+     eml_citation@series           = from$series
+     eml_citation@publicationPlace = from$address
+     eml_citation@edition          = from$edition
+     eml_citation@ISBN             = from$isbn
+     eml_citation
+     } 
+)
+
+
 # Chapter
 # Derived from: Book (by xs:extension)
 
@@ -285,26 +323,9 @@ setAs("XMLInternalElementNode",
                # pageRange	optional
                # )
 
-# bibtex inbook
-# field [required/optional] (EML)
-
-# author or editor     [r] (?)
-# title                [r] (?)
-# chapter and/or pages [r] (?)
-# publisher            [r] (journal)
-# year                 [r] (?)
-
-# volume or number     [o] (volume)
-# series               [o] (? pageRange)
-# type                 [o] (?)
-# address              [o] (?)
-# edition              [o] (?)
-# month                [o] (?)
-# note                 [o] (?)
-
 setClass("chapter_slots",
          slots = c(chapterNumber = "character",
-                   editor = "character",
+                   editor = "ListOfeditor",
                    bookTitle = "character",
                    pageRange = "character"
                    )
@@ -319,6 +340,8 @@ setClass("chapter",
                       )
          )
 
+# chapter coercions
+
 setAs("chapter",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -329,23 +352,65 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
+# bibtex inbook
+# field [required/optional] (EML)
+# author or editor     [r] (editor)
+# title                [r] (title)
+# chapter and/or pages [r] (pageRange)
+# publisher            [r] (publisher)
+# year                 [r] (pubDate)
+
+# volume or number     [o] (volume)
+# series               [o] (series)
+# type                 [o] (?)
+# address              [o] (publicationPlace)
+# edition              [o] (edition)
+# month                [o] (pubDate)
+# note                 [o] (?)
+
+setAs("chapter", "bibentry", function(from){
+      entry = bibentry(bibtype = "InBook", 
+                       editor = as(from@editor, "person"),   
+                       title  = from@title, 
+                       publisher = as(from@publisher, "person"),  
+                       chapter = from@pageRange, # Not exaclty right bu field required 
+                       year = from@pubDate, # FIXME: handle date properly and extract year 
+                       volume = from@volume, 
+                       series = from@series,
+                       address = from@publicationPlace,
+                       edition = from@edition,
+                       month = from@pubDate, # FIXME: handle date properly and extract year
+                       isbn = from@ISBN,
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
+
+setAs("bibentry", "chapter", function(from){
+     eml_citation                  = new("chapter")
+     eml_citation@editor           = new("ListOfeditor", lapply(from$editor, as, "editor"))
+     eml_citation@title            = from$title
+     eml_citation@publisher        = as(person(from$publisher), "publisher")
+     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
+     eml_citation@volume           = from$volume
+     eml_citation@series           = from$series
+     eml_citation@publicationPlace = from$address
+     eml_citation@edition          = from$edition
+     eml_citation@ISBN             = from$isbn
+     eml_citation
+     } 
+)
+
+
 # Manuscript
 
 # A sequence of (
               # institution	required	unbounded (from responsibleParty)
               # totalPages	optional
               # )
-
-# bibtex unpublished
-
-# field [required/optional] (EML)
-
-# author [r] (?)
-# title  [r] (?)
-# note   [r] (?)
-
-# year   [o] (?)
-# month  [o] (?)
 
 setClass("manuscript_slots",
          slots = c(institution = "ListOfinstitution",
@@ -361,6 +426,8 @@ setClass("manuscript",
                       )
          )
 
+# coercions manuscript
+
 setAs("manuscript",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -370,6 +437,41 @@ setAs("XMLInternalElementNode",
       "manuscript",
       function(from) emlToS4(from)
       )
+
+# bibtex unpublished
+# field [required/optional] (EML)
+
+# author [r] (creator)
+# title  [r] (title)
+# note   [r] (?)
+
+# year   [o] (pubDate)
+# month  [o] (pubDate)
+
+setAs("manuscript", "bibentry", function(from){
+      entry = bibentry(bibtype = "unpublished", 
+                       author = as(from@creator, "person"),   
+                       title  = from@title, 
+                       year = from@pubDate, # FIXME: handle date properly and extract year 
+                       month = from@pubDate, # FIXME: handle date properly and extract year
+                       note = "-",
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
+
+setAs("bibentry", "manuscript", function(from){
+     eml_citation                  = new("manuscript")
+     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@title            = from$title
+     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
+     eml_citation
+     } 
+)
+
 
 # Thesis
 
@@ -491,7 +593,7 @@ setAs("XMLInternalElementNode",
 # note         [o] (?)
 
 setClass("personal_communication_slots",
-         slots = c(publisher = "ListOfpublisher",
+         slots = c(publisher = "publisher",
                    publicationPlace = "character",
                    communication = "character",
                    recipient = "ListOfrecipient"
@@ -537,7 +639,7 @@ setAs("XMLInternalElementNode",
 # note         [o] (?)
 
 setClass("map_slots",
-         slots = c(publisher = "ListOfpublisher",
+         slots = c(publisher = "publisher",
                    edition = "character",
                    geographicCoverage = "geographicCoverage",
                    scale = "character"
@@ -583,7 +685,7 @@ setAs("XMLInternalElementNode",
 # note         [o] (?)
 
 setClass("audio_visual_slots",
-         slots = c(publisher = "ListOfpublisher",
+         slots = c(publisher = "publisher",
                    publicationPlace = "character",
                    performer = "listOfperformer",
                    ISBN = "character")
@@ -635,7 +737,7 @@ setAs("XMLInternalElementNode",
 # ? ?
 
 setClass("generic_slots",
-         slots = c(publisher = "ListOfPublisher",
+         slots = c(publisher = "publisher",
                    volume = "character",
                    numberOfVolumes = "character",
                    totalPages = "character",
