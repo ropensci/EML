@@ -57,7 +57,8 @@ library(reml)
 We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
 
 ```{r}
-dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"))
+dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"), colClasses = 
+                  c("factor", "Date", "Date", "Date", "factor", "factor", "factor"))
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  
@@ -314,7 +315,7 @@ This call automatically adds a few additional bits of information, such as a uni
 Finally we are ready to write out our EML object to an XML file. 
 
 ```{r}
-eml_write(eml, "hf205_from_reml.xml")
+eml_write(eml, file="hf205_from_reml.xml")
 ```
 
 When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `new("eml")` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
