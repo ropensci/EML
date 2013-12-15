@@ -87,7 +87,10 @@ setClass("ListOforiginator", contains="list")
 setMethod("c", signature("originator"), function(x, ...) new("ListOforiginator", list(x, ...)))
 
 
+
 # publisher + coercions
+setClass("person")
+
 setClass("publisher", contains="responsibleParty")
 
 setAs("XMLInternalElementNode", 

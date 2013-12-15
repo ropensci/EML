@@ -443,18 +443,20 @@ setAs("XMLInternalElementNode",
 
 # author [r] (creator)
 # title  [r] (title)
-# note   [r] (?)
+# note   [r] (? not available but required)
 
 # year   [o] (pubDate)
 # month  [o] (pubDate)
 
 setAs("manuscript", "bibentry", function(from){
       entry = bibentry(bibtype = "unpublished", 
+                       # required
                        author = as(from@creator, "person"),   
                        title  = from@title, 
+                       note = "-",
+                       # optional
                        year = from@pubDate, # FIXME: handle date properly and extract year 
                        month = from@pubDate, # FIXME: handle date properly and extract year
-                       note = "-",
                        textVersion = NULL, 
                        header = paste("Citation based on eml", class(from)), 
                        footer = "---------------------------------------0")
@@ -481,21 +483,6 @@ setAs("bibentry", "manuscript", function(from){
                # totalPages	optional
                # )
 
-
-# bibtex phdthesis
-
-# field [required/optional] (EML)
-
-# author  [r] (?)
-# title   [r] (?)
-# school  [r] (?)
-# year    [r] (?)
-
-# type    [o] (?)
-# address [o] (?)
-# month   [o] (?)
-# note    [o] (?)
-
 setClass("thesis_slots",
          slots = c(degree = "character",
                    institution = "ListOfinstitution",
@@ -511,6 +498,8 @@ setClass("thesis",
                       )
          )
 
+# thesis coercions
+
 setAs("thesis",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -520,6 +509,53 @@ setAs("XMLInternalElementNode",
       "thesis",
       function(from) emlToS4(from)
       )
+
+# bibtex phdthesis
+# field [required/optional] (EML)
+
+# author  [r] (author)
+# title   [r] (title)
+# school  [r] (institution)
+# year    [r] (pubDate (year))
+
+# type    [o] (degree)
+# address [o] (write coercion from institution to address)
+# month   [o] (pubDate)
+# note    [o] (?)
+
+setAs("thesis", "bibentry", function(from){
+      entry = bibentry(bibtype = "phdthesis", 
+                       # required
+                       author = as(from@creator, "person"), 
+                       title  = from@title, 
+                       school = paste(unlist(lapply(eml_citation@institution, function(x)  slot(x,"organizationName"))), collapse = ", "),
+                       year = from@pubDate, # FIXME: handle date properly and extract year 
+                       # optional
+                       type = from@degree,
+                       # address = as(from@institution, "address") # FIXME write coercion
+                       month = from@pubDate, # FIXME: handle date properly and extract month
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
+
+# setAs("bibentry", "thesis", function(from){
+     # eml_citation                  = new("thesis")
+     # # required
+     # eml_citation@degree           = from$type
+     # # eml_citation@institution      = from$school
+     # eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     # # optional + more
+     # # eml_citation@totalPages     = na   
+     # eml_citation@title            = from$title 
+     # eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     # eml_citation@pubDate          = paste(from$year, from$month, sep = "-") # FIXME: Handle dates properly
+     # eml_citation
+     # } 
+# )
 
 
 # Conference proceedings
