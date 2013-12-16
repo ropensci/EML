@@ -532,7 +532,7 @@ setAs("thesis", "bibentry", function(from){
                        year = from@pubDate, # FIXME: handle date properly and extract year 
                        # optional
                        type = from@degree,
-                       # address = as(from@institution, "address") # FIXME write coercion
+                       # address = as(from@institution, "address") # FIXME: write coercion? But no good way back from this entry to an eml address
                        month = from@pubDate, # FIXME: handle date properly and extract month
                        textVersion = NULL, 
                        header = paste("Citation based on eml", class(from)), 
@@ -542,20 +542,19 @@ setAs("thesis", "bibentry", function(from){
       }
 )
 
-# setAs("bibentry", "thesis", function(from){
-     # eml_citation                  = new("thesis")
-     # # required
-     # eml_citation@degree           = from$type
-     # # eml_citation@institution      = from$school
-     # eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
-     # # optional + more
-     # # eml_citation@totalPages     = na   
-     # eml_citation@title            = from$title 
-     # eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
-     # eml_citation@pubDate          = paste(from$year, from$month, sep = "-") # FIXME: Handle dates properly
-     # eml_citation
-     # } 
-# )
+setAs("bibentry", "thesis", function(from){
+     eml_citation                  = new("thesis")
+     # required
+     eml_citation@degree           = from$type
+     eml_citation@institution      = new("ListOfinstitution", lapply(unlist(strsplit(from$school, ",")), function(organization) new("institution", organizationName = organization)))
+     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     # optional + more
+     eml_citation@title            = from$title 
+     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@pubDate          = paste(from$year, from$month, sep = "-") # FIXME: Handle dates properly
+     eml_citation
+     } 
+)
 
 
 # Conference proceedings
@@ -566,22 +565,6 @@ setAs("thesis", "bibentry", function(from){
                # conferenceDate	        optional
                # conferenceLocation	optional (from address)
                # )
-
-# bibtex proceedings
-
-# field [required/optional] (EML)
-
-# title            [r] (?)
-# year             [r] (?)
-
-# editor           [o] (?)
-# volume or number [o] (?)
-# series           [o] (?)
-# address          [o] (?)
-# month            [o] (?)
-# organization     [o] (?)
-# publisher        [o] (?)
-# note             [o] (?)
 
 setClass("conference_proceedings_slots",
          slots = c(conferenceName = "character",
@@ -597,6 +580,8 @@ setClass("conferenceProceedings",
                       )
          )
 
+# conference proceedings coercions
+
 setAs("conferenceProceedings",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -606,6 +591,47 @@ setAs("XMLInternalElementNode",
       "conferenceProceedings",
       function(from) emlToS4(from)
       )
+
+# bibtex proceedings
+# field [required/optional] (EML)
+
+# title            [r] (title)
+# year             [r] (conferenceDate)
+
+# address          [o] (conferenceLocation)
+# month            [o] (conferenceDate)
+# organization     [o] (conferenceName)
+# editor           [o] (?)
+# volume or number [o] (?)
+# series           [o] (?)
+# publisher        [o] (?)
+# note             [o] (?)
+
+setAs("conferenceProceedings", "bibentry", function(from){
+      entry = bibentry(bibtype = "proceedings", 
+                       # required
+                       title  = from@title, 
+                       year = from@conferenceDate, # FIXME: handle date properly and extract year 
+                       address = as(from@conferenceLocation, "character"),
+                       month = from@conferenceDate,
+                       organization = from@conferenceName,
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
+
+setAs("bibentry", "conferenceProceedings", function(from){
+     eml_citation                      = new("conferenceProceedings")
+     eml_citation@title                = from$title
+     eml_citation@conferenceDate       = from$year # FIXME: handle date properly
+     # eml_citation@conferenceLocation = from$adddress # FIXME: extract address from string
+     eml_citation@conferenceName       = from$organization
+     eml_citation
+     } 
+)
 
 
 # Personal communication
