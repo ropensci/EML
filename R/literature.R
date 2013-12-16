@@ -627,7 +627,7 @@ setAs("bibentry", "conferenceProceedings", function(from){
      eml_citation                      = new("conferenceProceedings")
      eml_citation@title                = from$title
      eml_citation@conferenceDate       = from$year # FIXME: handle date properly
-     # eml_citation@conferenceLocation = from$adddress # FIXME: extract address from string
+     # eml_citation@conferenceLocation = from$adddress # FIXME: extract address from string? no good way
      eml_citation@conferenceName       = from$organization
      eml_citation
      } 
@@ -642,17 +642,6 @@ setAs("bibentry", "conferenceProceedings", function(from){
                # communication	optional
                # recipient	        optional unbounded (from responsibleParty)
                # )
-
-# bibtex misc
-
-# field [required/optional] (EML)
-
-# author       [o] (?)
-# title        [o] (?)
-# howpublished [o] (?)
-# month        [o] (?)
-# year         [o] (?)
-# note         [o] (?)
 
 setClass("personal_communication_slots",
          slots = c(publisher = "publisher",
@@ -670,6 +659,8 @@ setClass("personalCommunication",
                       )
          )
 
+# personal communication coercions
+
 setAs("personalCommunication",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -680,6 +671,42 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
+# bibtex misc
+# field [required/optional] (EML)
+# author       [o] (creator)
+# title        [o] (title)
+# howpublished [o] (?)
+# month        [o] (pubDate)
+# year         [o] (pubDate)
+# note         [o] (?)
+
+setAs("personalCommunication", "bibentry", function(from){
+      entry = bibentry(bibtype = "misc", 
+                       author = as(from@publisher, "person"),
+                       title  = from@title, 
+                       howpublished = from@communication,
+                       month = from@pubDate,
+                       year = from@pubDate,
+                       note = from@additionalInfo, # paste from more fields in here?
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
+
+setAs("bibentry", "personalCommunication", function(from){
+     eml_citation                      = new("personalCommunication")
+     eml_citation@publisher            = as(person(from$author), "publisher")
+     # eml_citation@publicationPlace     
+     # eml_citation@recipient
+     eml_citation@communication = from$howpublished
+     eml_citation
+     } 
+)
+
+
 # Map
 
 # A sequence of (
@@ -688,17 +715,6 @@ setAs("XMLInternalElementNode",
                # geographicCoverage	optional unbounded (from geographicCoverage)
                # scale	                optional
                # )
-
-# bibtex misc
-
-# field [required/optional] (EML)
-
-# author       [o] (?)
-# title        [o] (?)
-# howpublished [o] (?)
-# month        [o] (?)
-# year         [o] (?)
-# note         [o] (?)
 
 setClass("map_slots",
          slots = c(publisher = "publisher",
@@ -716,6 +732,8 @@ setClass("map",
                       )
          )
 
+# map coercions
+
 setAs("map",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -726,6 +744,32 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
+# bibtex misc
+# field [required/optional] (EML)
+# author       [o] (?)
+# title        [o] (?)
+# howpublished [o] (?)
+# month        [o] (?)
+# year         [o] (?)
+# note         [o] (?)
+
+
+# setAs("map", "bibentry", function(from){
+      # entry = bibentry(bibtype = "misc", 
+                       # textVersion = NULL, 
+                       # header = paste("Citation based on eml", class(from)), 
+                       # footer = "---------------------------------------0")
+      # class(entry) = "bibentry"
+      # entry
+      # }
+# )
+
+# setAs("bibentry", "map", function(from){
+     # eml_citation                      = new("map")
+     # eml_citation
+     # } 
+# )
+
 # Audio visual
 
 # A sequence of (
@@ -734,17 +778,6 @@ setAs("XMLInternalElementNode",
                # performer	        optional unbounded (from responsibleParty)
                # ISBN	                optional
                # )
-
-# bibtex misc
-
-# field [required/optional] (EML)
-
-# author       [o] (?)
-# title        [o] (?)
-# howpublished [o] (?)
-# month        [o] (?)
-# year         [o] (?)
-# note         [o] (?)
 
 setClass("audio_visual_slots",
          slots = c(publisher = "publisher",
@@ -773,6 +806,32 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
+# bibtex misc
+# field [required/optional] (EML)
+# author       [o] (?)
+# title        [o] (?)
+# howpublished [o] (?)
+# month        [o] (?)
+# year         [o] (?)
+# note         [o] (?)
+
+
+# setAs("audioVisual", "bibentry", function(from){
+      # entry = bibentry(bibtype = "misc", 
+                       # textVersion = NULL, 
+                       # header = paste("Citation based on eml", class(from)), 
+                       # footer = "---------------------------------------0")
+      # class(entry) = "bibentry"
+      # entry
+      # }
+# )
+
+# setAs("bibentry", "audioVisual", function(from){
+     # eml_citation                      = new("audioVisual")
+     # eml_citation
+     # } 
+# )
+
 
 # Generic
 
@@ -794,10 +853,7 @@ setAs("XMLInternalElementNode",
                             # )
                # )
 
-# bibtex misc or book or?
-# field [required/optional] (EML)
-# ? ?
-
+# 
 setClass("generic_slots",
          slots = c(publisher = "publisher",
                    volume = "character",
@@ -822,6 +878,8 @@ setClass("generic",
                       )
          )
 
+# generic coercions
+
 setAs("generic",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -831,6 +889,31 @@ setAs("XMLInternalElementNode",
       "generic",
       function(from) emlToS4(from)
       )
+
+# bibtex misc
+# field [required/optional] (EML)
+# author       [o] (?)
+# title        [o] (?)
+# howpublished [o] (?)
+# month        [o] (?)
+# year         [o] (?)
+# note         [o] (?)
+
+# setAs("generic", "bibentry", function(from){
+      # entry = bibentry(bibtype = "misc", 
+                       # textVersion = NULL, 
+                       # header = paste("Citation based on eml", class(from)), 
+                       # footer = "---------------------------------------0")
+      # class(entry) = "bibentry"
+      # entry
+      # }
+# )
+
+# setAs("bibentry", "generic", function(from){
+     # eml_citation                      = new("generic")
+     # eml_citation
+     # } 
+# )
 
 
 # Top level classes rely on the classes above
