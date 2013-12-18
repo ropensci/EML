@@ -39,6 +39,19 @@ setClass("address",
 setAs("XMLInternalElementNode", "address",   function(from) emlToS4(from))
 setAs("address", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
+# address as character (e.g in bibtex entry)
+setAs("address", 
+      "character", 
+      function(from) {
+        as.character(paste(from@deliveryPoint, 
+                           from@city, 
+                           from@administrativeArea, 
+                           from@postalCode, 
+                           from@country, 
+                           sep = ", ")
+                    )
+                  }
+        )
 
 ### definition of the focal class, responsibleParty
 setClass("responsibleParty",
