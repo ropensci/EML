@@ -1,3 +1,28 @@
+# TODO: 
+# o improve matching on litrature type coercion (mabe change latex types 
+#   from generic to ther that offers more suitable fields 
+# o write tests for all litrature coercions 
+# o integrate the module wherever it can occur: 
+
+# o grep CitationType *.xsd
+#     eml-literature.xsd:    <xs:complexType name = "CitationType"                                                                                   >
+#     eml.xsd:               <xs:element     name = "citation"                     type = "cit:CitationType"                                         >
+#     eml-attribute.xsd:     <xs:element     name = "citation"                     type = "cit:CitationType"                                         >
+#     eml-coverage.xsd:      <xs:element     name = "timeScaleCitation"            type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
+#     eml-coverage.xsd:      <xs:element     name = "classificationSystemCitation" type = "cit:CitationType"                                         >
+#     eml-coverage.xsd:      <xs:element     name = "identificationReference"      type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
+#     eml-literature.xsd:    <xs:element     name = "citation"                     type = "CitationType"                                             >
+#     eml-methods.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
+#     eml-methods.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType"                                         >
+#     eml-physical.xsd:      <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0"                         >
+#     eml-project.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
+#     eml-project.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0"                         >
+#     eml-project.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0"                         >
+
+# o write convenient user functions to extract citations (eml_get)
+# o handle dates properly so month and year can be extracted in here (where to place? use in pubDate)
+
+
 #' The literature module
 #'
 #' The eml-literature module contains information that describes literature
@@ -443,7 +468,7 @@ setAs("XMLInternalElementNode",
 
 # author [r] (creator)
 # title  [r] (title)
-# note   [r] (? not available but required)
+# note   [r] (additionalInfo)
 
 # year   [o] (pubDate)
 # month  [o] (pubDate)
@@ -453,10 +478,10 @@ setAs("manuscript", "bibentry", function(from){
                        # required
                        author = as(from@creator, "person"),   
                        title  = from@title, 
-                       note = "-",
+                       note = from@additionalInfo,
                        # optional
                        year = from@pubDate, # FIXME: handle date properly and extract year 
-                       month = from@pubDate, # FIXME: handle date properly and extract year
+                       month = from@pubDate, # FIXME: handle date properly and extract month
                        textVersion = NULL, 
                        header = paste("Citation based on eml", class(from)), 
                        footer = "---------------------------------------0")
@@ -469,7 +494,9 @@ setAs("bibentry", "manuscript", function(from){
      eml_citation                  = new("manuscript")
      eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
      eml_citation@title            = from$title
+     eml_citation@additionalInfo   = from$note
      eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
+     eml_citation@institution      = new("ListOfinstitution")
      eml_citation
      } 
 )
@@ -528,7 +555,7 @@ setAs("thesis", "bibentry", function(from){
                        # required
                        author = as(from@creator, "person"), 
                        title  = from@title, 
-                       school = paste(unlist(lapply(eml_citation@institution, function(x)  slot(x,"organizationName"))), collapse = ", "),
+                       school = paste(unlist(lapply(from@institution, function(x)  slot(x,"organizationName"))), collapse = ", "),
                        year = from@pubDate, # FIXME: handle date properly and extract year 
                        # optional
                        type = from@degree,
@@ -550,7 +577,6 @@ setAs("bibentry", "thesis", function(from){
      eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
      # optional + more
      eml_citation@title            = from$title 
-     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
      eml_citation@pubDate          = paste(from$year, from$month, sep = "-") # FIXME: Handle dates properly
      eml_citation
      } 
@@ -626,7 +652,7 @@ setAs("conferenceProceedings", "bibentry", function(from){
 setAs("bibentry", "conferenceProceedings", function(from){
      eml_citation                      = new("conferenceProceedings")
      eml_citation@title                = from$title
-     eml_citation@conferenceDate       = from$year # FIXME: handle date properly
+     eml_citation@conferenceDate       = paste(from$year, from$month, sep = "-") # FIXME: handle date properly
      # eml_citation@conferenceLocation = from$adddress # FIXME: extract address from string? no good way
      eml_citation@conferenceName       = from$organization
      eml_citation
@@ -675,19 +701,18 @@ setAs("XMLInternalElementNode",
 # field [required/optional] (EML)
 # author       [o] (creator)
 # title        [o] (title)
-# howpublished [o] (?)
+# howpublished [o] (publisher) questionable
 # month        [o] (pubDate)
 # year         [o] (pubDate)
-# note         [o] (?)
+# note         [o] (additionalinfo)
 
 setAs("personalCommunication", "bibentry", function(from){
       entry = bibentry(bibtype = "misc", 
-                       author = as(from@publisher, "person"),
+                       author = as(from@creator, "person"),
                        title  = from@title, 
-                       howpublished = from@communication,
                        month = from@pubDate,
                        year = from@pubDate,
-                       note = from@additionalInfo, # paste from more fields in here?
+                       note = from@additionalInfo, 
                        textVersion = NULL, 
                        header = paste("Citation based on eml", class(from)), 
                        footer = "---------------------------------------0")
@@ -698,10 +723,14 @@ setAs("personalCommunication", "bibentry", function(from){
 
 setAs("bibentry", "personalCommunication", function(from){
      eml_citation                      = new("personalCommunication")
-     eml_citation@publisher            = as(person(from$author), "publisher")
+     eml_citation@creator              = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@title                = from$title
+     eml_citation@pubDate              = paste(from$year, from$month, sep = "-")
+     eml_citation@additionalInfo       = from$note
+     # eml_citation@publisher           
      # eml_citation@publicationPlace     
      # eml_citation@recipient
-     eml_citation@communication = from$howpublished
+     # eml_citation@communication
      eml_citation
      } 
 )
@@ -746,29 +775,42 @@ setAs("XMLInternalElementNode",
 
 # bibtex misc
 # field [required/optional] (EML)
-# author       [o] (?)
-# title        [o] (?)
+# author       [o] (creator)
+# title        [o] (title)
 # howpublished [o] (?)
-# month        [o] (?)
-# year         [o] (?)
-# note         [o] (?)
+# month        [o] (pubDate)
+# year         [o] (pubDate)
+# note         [o] (additionalInfo)
 
+setAs("map", "bibentry", function(from){
+      entry = bibentry(bibtype = "misc", 
+                       author = as(from@creator, "person"),
+                       title  = from@title, 
+                       month = from@pubDate,
+                       year = from@pubDate,
+                       note = from@additionalInfo, 
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
 
-# setAs("map", "bibentry", function(from){
-      # entry = bibentry(bibtype = "misc", 
-                       # textVersion = NULL, 
-                       # header = paste("Citation based on eml", class(from)), 
-                       # footer = "---------------------------------------0")
-      # class(entry) = "bibentry"
-      # entry
-      # }
-# )
+setAs("bibentry", "map", function(from){
+     eml_citation                      = new("map")
+     eml_citation@creator              = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@title                = from$title
+     eml_citation@pubDate              = paste(from$year, from$month, sep = "-")
+     eml_citation@additionalInfo       = from$note
+     # publisher              optional (from responsibleParty)
+     # edition	        optional
+     # geographicCoverage	optional unbounded (from geographicCoverage)
+     # scale	                optional
+     eml_citation
+     } 
+)
 
-# setAs("bibentry", "map", function(from){
-     # eml_citation                      = new("map")
-     # eml_citation
-     # } 
-# )
 
 # Audio visual
 
@@ -808,29 +850,41 @@ setAs("XMLInternalElementNode",
 
 # bibtex misc
 # field [required/optional] (EML)
-# author       [o] (?)
-# title        [o] (?)
+# author       [o] (creator)
+# title        [o] (title)
 # howpublished [o] (?)
-# month        [o] (?)
-# year         [o] (?)
-# note         [o] (?)
+# month        [o] (pubDate)
+# year         [o] (pubDate)
+# note         [o] (additionalinfo)
 
+setAs("audioVisual", "bibentry", function(from){
+      entry = bibentry(bibtype = "misc", 
+                       author = as(from@creator, "person"),
+                       title  = from@title, 
+                       month = from@pubDate,
+                       year = from@pubDate,
+                       note = from@additionalInfo, 
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
 
-# setAs("audioVisual", "bibentry", function(from){
-      # entry = bibentry(bibtype = "misc", 
-                       # textVersion = NULL, 
-                       # header = paste("Citation based on eml", class(from)), 
-                       # footer = "---------------------------------------0")
-      # class(entry) = "bibentry"
-      # entry
-      # }
-# )
-
-# setAs("bibentry", "audioVisual", function(from){
-     # eml_citation                      = new("audioVisual")
-     # eml_citation
-     # } 
-# )
+setAs("bibentry", "audioVisual", function(from){
+     eml_citation                      = new("audioVisual")
+     eml_citation@publisher	       = new("publisher")
+     eml_citation@creator              = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@title                = from$title
+     eml_citation@pubDate              = paste(from$year, from$month, sep = "-")
+     eml_citation@additionalInfo       = from$note
+     # publicationPlace	optional unbounded
+     # performer	        optional unbounded (from responsibleParty)
+     # ISBN	                optional
+     eml_citation
+     } 
+)
 
 
 # Generic
@@ -853,7 +907,6 @@ setAs("XMLInternalElementNode",
                             # )
                # )
 
-# 
 setClass("generic_slots",
          slots = c(publisher = "publisher",
                    volume = "character",
@@ -892,28 +945,39 @@ setAs("XMLInternalElementNode",
 
 # bibtex misc
 # field [required/optional] (EML)
-# author       [o] (?)
-# title        [o] (?)
+# author       [o] (creator)
+# title        [o] (title)
 # howpublished [o] (?)
-# month        [o] (?)
-# year         [o] (?)
-# note         [o] (?)
+# month        [o] (pubDate)
+# year         [o] (pubDate)
+# note         [o] (additionalInfo)
 
-# setAs("generic", "bibentry", function(from){
-      # entry = bibentry(bibtype = "misc", 
-                       # textVersion = NULL, 
-                       # header = paste("Citation based on eml", class(from)), 
-                       # footer = "---------------------------------------0")
-      # class(entry) = "bibentry"
-      # entry
-      # }
-# )
+setAs("generic", "bibentry", function(from){
+      entry = bibentry(bibtype = "misc", 
+                       author = as(from@creator, "person"),
+                       title  = from@title, 
+                       month = from@pubDate,
+                       year = from@pubDate,
+                       note = from@additionalInfo, 
+                       textVersion = NULL, 
+                       header = paste("Citation based on eml", class(from)), 
+                       footer = "---------------------------------------0")
+      class(entry) = "bibentry"
+      entry
+      }
+)
 
-# setAs("bibentry", "generic", function(from){
-     # eml_citation                      = new("generic")
-     # eml_citation
-     # } 
-# )
+setAs("bibentry", "generic", function(from){
+     eml_citation                      = new("generic")
+     eml_citation@publisher	       = new("publisher")
+     eml_citation@creator              = new("ListOfcreator", lapply(from$author, as, "creator"))
+     eml_citation@title                = from$title
+     eml_citation@pubDate              = paste(from$year, from$month, sep = "-")
+     eml_citation@additionalInfo       = from$note
+     eml_citation@ISBN                 = ""
+     eml_citation
+     } 
+)
 
 
 # Top level classes rely on the classes above
