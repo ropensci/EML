@@ -241,7 +241,7 @@ Advanced writing of EML
 
 **IN PROGRESS**
 
-Our minimal EML file barely scratches the surface of what is possible to do with EML.  In [Advanced writing of EML](), we construct a much richer EML file, including:
+Our minimal EML file barely scratches the surface of what is possible to do with EML.  In [Advanced writing of EML](https://github.com/ropensci/reml/blob/master/inst/doc/Advanced_writing_of_EML.Rmd), we construct a much richer EML file, including:
 
 - Constructing more complete lists of authors, publishers and contact.
 - Summarizing the geographic, temporal, and taxonomic coverage of the dataset
@@ -258,7 +258,7 @@ Advanced parsing and manipulation of EML
 
 **IN PROGRESS**
 
-In [Advanced parsing and manipulation of EML](), we
+In [Advanced parsing and manipulation of EML](https://github.com/ropensci/reml/blob/master/inst/doc/Advanced_parsing_of_EML.md), we
 
 - Introduce how to access any EML element in R using the S4 subsetting mechanism
 - Demonstrate how to extract and manipulate semantic RDF triples from EML metadata
