@@ -47,6 +47,8 @@ function (eml = "",
           .cleanArgs = NULL) 
 {
 
+## FIXME should we attempt to use XMLSchemaValidate here if RHTMLForms isn't available?  
+
     doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
 
     success <- require(RHTMLForms)
