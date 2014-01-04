@@ -1,5 +1,7 @@
+
+#' @import uuid 
 reml_id <- function(prefix="reml_") {
-  success <- require(uuid)
+  success <- 1 # require(uuid)  ## uuid on CRAN, let's just import it and be done with
     if(success){
       id <- paste0("urn:uuid:", uuid::UUIDgenerate())
       scope <- "system"

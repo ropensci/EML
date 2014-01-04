@@ -111,8 +111,8 @@ eml_validate("reml_example.xml")
 ```
 
 ```
-EML specific tests XML specific tests 
-              TRUE               TRUE 
+$`XML specific tests`
+[1] "cvc-complex-type.2.4.a: Invalid content starting with element 'dataTable'. The content must match '((((((((((((((((((((((((\"\":alternateIdentifier){0-UNBOUNDED},(\"\":shortName){0-1}),(\"\":title){1-UNBOUNDED}),(\"\":creator){1-UNBOUNDED}),(\"\":metadataProvider){0-UNBOUNDED}),(\"\":associatedParty){0-UNBOUNDED}),(\"\":pubDate){0-1}),(\"\":language){0-1}),(\"\":series){0-1}),(\"\":abstract){0-1}),(\"\":keywordSet){0-UNBOUNDED}),(\"\":additionalInfo){0-UNBOUNDED}),(\"\":intellectualRights){0-1}),(\"\":distribution){0-UNBOUNDED}),(\"\":coverage){0-1}),(\"\":purpose){0-1}),(\"\":maintenance){0-1}),(\"\":contact){1-UNBOUNDED}),(\"\":publisher){0-1}),(\"\":pubPlace){0-1}),(\"\":methods){0-1}),(\"\":project){0-1}),((((((\"\":dataTable)|(\"\":spatialRaster))|(\"\":spatialVector))|(\"\":storedProcedure))|(\"\":view))|(\"\":otherEntity)){0-UNBOUNDED})|(\"\":references))'."
 ```
 
 
@@ -150,7 +150,7 @@ eml_publish("reml_example.xml", description="Example EML file from reml", catego
 ```
 
 ```
-[1] 875576
+Error: missing value where TRUE/FALSE needed
 ```
 
 
@@ -202,6 +202,11 @@ Users will not only want to generate EML files, but also take advantage of the w
 obj <- eml_read("reml_example.xml")
 ```
 
+```
+Error: trying to generate an object from a virtual class
+("ListOfcreatorOreditor")
+```
+
 
 We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).  
 
@@ -213,6 +218,10 @@ The `eml_get` function provides us with easy access to many of the component ele
 dat <- eml_get(obj, "data.set")
 ```
 
+```
+Error: object 'obj' not found
+```
+
 
 
 ```coffee
@@ -220,7 +229,7 @@ eml_get(obj, "contact")
 ```
 
 ```
-[1] "Carl Boettiger <cboettig@gmail.com>"
+Error: object 'obj' not found
 ```
 
 
@@ -230,7 +239,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2013-12-11). _metadata_.
+Error: object 'obj' not found
 ```
 
 
@@ -241,7 +250,7 @@ Advanced writing of EML
 
 **IN PROGRESS**
 
-Our minimal EML file barely scratches the surface of what is possible to do with EML.  In [Advanced writing of EML](https://github.com/ropensci/reml/blob/master/inst/doc/Advanced_writing_of_EML.Rmd), we construct a much richer EML file, including:
+Our minimal EML file barely scratches the surface of what is possible to do with EML.  In [Advanced writing of EML](), we construct a much richer EML file, including:
 
 - Constructing more complete lists of authors, publishers and contact.
 - Summarizing the geographic, temporal, and taxonomic coverage of the dataset
@@ -258,7 +267,7 @@ Advanced parsing and manipulation of EML
 
 **IN PROGRESS**
 
-In [Advanced parsing and manipulation of EML](https://github.com/ropensci/reml/blob/master/inst/doc/Advanced_parsing_of_EML.md), we
+In [Advanced parsing and manipulation of EML](), we
 
 - Introduce how to access any EML element in R using the S4 subsetting mechanism
 - Demonstrate how to extract and manipulate semantic RDF triples from EML metadata

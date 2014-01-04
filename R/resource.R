@@ -19,14 +19,14 @@ setAs("keywordSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOfkeywordSet", contains="list")
 
-setClassUnion("ListOfcreatorOreditor", c("ListOfcreator", "ListOfeditor"))
+#setClassUnion("ListOfcreatorOreditor", c("ListOfcreator", "ListOfeditor"))
 
 #' @include party.R
 setClass("resourceGroup",
           slots = c("alternateIdentifier" = "character",
                          "shortName" = "character",
                          "title" = "character",
-                         "creator" = "ListOfcreatorOreditor",
+                         "creator" = "ListOfcreator",
                          "metadataProvider" = "ListOfmetadataProvider",
                          "associatedParty"  = "ListOfassociatedParty",
                          "pubDate"  = "character", ## FIXME make a proper date class (schema accepts: year or ISO8601 format)

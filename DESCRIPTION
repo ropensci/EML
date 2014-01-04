@@ -17,15 +17,16 @@ Suggests:
     rfigshare,
     devtools,
     testthat,
-    uuid,
-    yaml,
-    RCurl,
     RHTMLForms,
+    RCurl,
     dataone
 Imports:
     XML,
-    digest,
-    utils
+    utils,
+    methods,
+    uuid,
+    yaml,
+    httr
 Depends:
     R (>= 2.15)
 Collate:
@@ -35,15 +36,15 @@ Collate:
     'attribute_methods.R'
     'baseAttributes.R'
     'party.R'
+    'coverage.R'
     'physical.R'
     'resource.R'
-    'literature.R'
-    'coverage.R'
     'eml_yaml.R'
     'coverage_methods.R'
     'software.R'
     'reml_id.R'
     'protocol.R'
+    'literature.R'
     'methods.R'
     'entity.R'
     'dataTable.R'

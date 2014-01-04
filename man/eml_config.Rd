@@ -4,7 +4,7 @@
 
 Default options for generating EML objects}
 \usage{
-eml_config(creator, contact = NULL, defaultLicense = "CC0")
+eml_config(creator = "", contact = "", defaultLicense = "CC0")
 }
 \arguments{
   \item{creator}{a character string, person object, or

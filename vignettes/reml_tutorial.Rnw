@@ -142,8 +142,8 @@ metadata document:
 \end{Shaded}
 
 \begin{verbatim}
-EML specific tests XML specific tests 
-              TRUE               TRUE 
+$`XML specific tests`
+[1] "cvc-complex-type.2.4.a: Invalid content starting with element 'dataTable'. The content must match '((((((((((((((((((((((((\"\":alternateIdentifier){0-UNBOUNDED},(\"\":shortName){0-1}),(\"\":title){1-UNBOUNDED}),(\"\":creator){1-UNBOUNDED}),(\"\":metadataProvider){0-UNBOUNDED}),(\"\":associatedParty){0-UNBOUNDED}),(\"\":pubDate){0-1}),(\"\":language){0-1}),(\"\":series){0-1}),(\"\":abstract){0-1}),(\"\":keywordSet){0-UNBOUNDED}),(\"\":additionalInfo){0-UNBOUNDED}),(\"\":intellectualRights){0-1}),(\"\":distribution){0-UNBOUNDED}),(\"\":coverage){0-1}),(\"\":purpose){0-1}),(\"\":maintenance){0-1}),(\"\":contact){1-UNBOUNDED}),(\"\":publisher){0-1}),(\"\":pubPlace){0-1}),(\"\":methods){0-1}),(\"\":project){0-1}),((((((\"\":dataTable)|(\"\":spatialRaster))|(\"\":spatialVector))|(\"\":storedProcedure))|(\"\":view))|(\"\":otherEntity)){0-UNBOUNDED})|(\"\":references))'."
 \end{verbatim}
 
 \begin{itemize}
@@ -182,7 +182,7 @@ sections. See the \texttt{rfigshare} documentation for authenticating
 \end{Shaded}
 
 \begin{verbatim}
-[1] 875572
+Error: missing value where TRUE/FALSE needed
 \end{verbatim}
 
 This creates a draft file visible only to the user configured in
@@ -266,6 +266,11 @@ integration.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+Error: trying to generate an object from a virtual class
+("ListOfcreatorOreditor")
+\end{verbatim}
+
 We can also read in a remote file by providing a URL or KNB object
 identifier (such as a DOI).
 
@@ -279,6 +284,10 @@ complete list.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+Error: object 'obj' not found
+\end{verbatim}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{eml_get}\NormalTok{(obj, }\StringTok{"contact"}\NormalTok{)}
@@ -286,7 +295,7 @@ complete list.
 \end{Shaded}
 
 \begin{verbatim}
-[1] "Carl Boettiger <cboettig@gmail.com>"
+Error: object 'obj' not found
 \end{verbatim}
 
 \begin{Shaded}
@@ -296,7 +305,7 @@ complete list.
 \end{Shaded}
 
 \begin{verbatim}
-Boettiger C (2013-12-11). _metadata_.
+Error: object 'obj' not found
 \end{verbatim}
 
 \subsection{Advanced writing of EML}\label{advanced-writing-of-eml}

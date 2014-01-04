@@ -21,7 +21,8 @@
 #' @export
 eml_config <- function(creator = "", contact = "", defaultLicense = "CC0"){
   if(defaultLicense == "CC0")
-    defaultLicense <- "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"
+#    defaultLicense <- "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"
+  defaultLicense <- "CC0, http://creativecommons.org/publicdomain/zero/1.0"
   defaultCreator <- new("ListOfcreator", lapply(creator, as, "creator"))
 
   if(is.null(contact))

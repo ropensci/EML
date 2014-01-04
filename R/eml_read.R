@@ -13,6 +13,8 @@ NULL
 #' @return an EML object
 #' @export eml_read read.eml
 #' @aliases eml_read read.eml
+#' @import XML
+#' @import httr
 eml_read <- function(file,  ...){
 
   ## Handle different input arguments: ## 

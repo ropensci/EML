@@ -5,6 +5,8 @@
 #' @include protocol.R
 #' @include reml_id.R
 
+
+#' @import methods
 setClass("metadata", contains="XMLInternalElementNode")
 setAs("metadata", "XMLInternalElementNode", function(from) newXMLNode("metadata", from))
 setAs("XMLInternalElementNode", "metadata", function(from) new("metadata", from))

@@ -824,7 +824,7 @@ setAs("bibentry", "map", function(from){
 setClass("audio_visual_slots",
          slots = c(publisher = "publisher",
                    publicationPlace = "character",
-                   performer = "listOfperformer",
+                   performer = "ListOfperformer",
                    ISBN = "character")
          )
 

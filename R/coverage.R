@@ -4,7 +4,10 @@
 ## Subclasses of taxonomicCoverage, 
 ## with coercion methods to/from XML 
 #' @include party.R
-#' @include literature.R
+# @include literature.R
+
+setClass("citation") # Dummy declaration to avoid warning, replaced when collating literature.R module
+
 setClass("classificationSystem",
          slots = c(classificationSystemCitation = "citation",
                         classificationSystemModifications = "character"))
