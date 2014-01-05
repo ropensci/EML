@@ -26,6 +26,7 @@ eml_publish <- function(file,
             or press Ctrl+C")
   } 
   if(txt == "continue") {
+    destination <- tolower(destination)
     destination <- match.arg(destination)
     out <- switch(destination, 
            figshare = eml_figshare(file, ...),

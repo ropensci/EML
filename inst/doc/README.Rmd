@@ -140,12 +140,23 @@ required to use reml and run the examples in the other sections.  See the
 `dataone` documentation for authenticating `dataone` with a user account_
 
 ```{r publish_knb, eval=FALSE}
-eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
+ids <- eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
 ```
 
 
 _NB:_ To avoid clutter, we should publish only real research data to the KNB production servers (by setting `permanent=TRUE`).  By default, `eml_publish` assumes `permanent=FALSE` when sending data to the KNB, and will publish to the development server instead.  The development server works as a testing platform, providing all the same features as the production platform but without permanent storage -- all data will be deleted regularly.  The development server is not as stable as the production server, so if the command fails, please try again later.  
 
+
+<!--
+Test data shows up on the test server, followed by the identifer, at `paste0("(https://mn-demo-5.test.dataone.org/knb/d1/mn/v1/object/", ids[["eml"]])`
+
+This returns the object identifiers for the EML metadata, the csv file, and the package itself.  We can read in the EML directly from its unique identifier using `eml_read`. We must wait about four minutes first for the entry to be completely registered in the dataone repository.  (Note that because we are using the development server, `permanent=FALSE`, this file will dissapear after a few days.)
+
+```{r}
+Sys.sleep(60*4)
+eml <- eml_read(paste0("(https://mn-demo-5.test.dataone.org/knb/d1/mn/v1/object/", ids[["eml"]]))
+```
+-->
 
 <!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 -->

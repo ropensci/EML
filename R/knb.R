@@ -9,10 +9,13 @@
 
 
 #' }
-eml_knb <- function(file, 
+eml_knb <- function(file,
+                    permanent = FALSE,
+                    public = TRUE,
                     mn_nodeid = "urn:node:KNB",
-                    cli = D1Client("PROD", mn_nodeid),
-                    public = TRUE){
+                    cli = D1Client("PROD", mn_nodeid)){
+
+
   success <- require(dataone)
   if(!success){
     message("dataone package not found. Attempting to install")
@@ -22,6 +25,11 @@ eml_knb <- function(file,
       stop("The dataone package must be installed to publish data to the KNB")
   }
   # Declare the metadata format ## FIXME get namespace from the file 
+  if(permanent == FALSE){
+    mn_nodeid <- "urn:node:mnDemo5" # A Development server for testing
+    cli <- D1Client("DEV", mn_nodeid)
+
+  }
 
   x <- eml_read(file)
   eml_format <- version(x)  # method works on `file` too

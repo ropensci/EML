@@ -1,4 +1,4 @@
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:2584d329-6975-4433-806b-b798571a75e9" system="uuid" scope="system">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:28266c92-7c5d-462d-a604-7d47b59ea203" system="uuid" scope="system">
   <dataset>
     <title>metadata</title>
     <creator>
@@ -8,12 +8,19 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </creator>
-    <pubDate>2014-01-03</pubDate>
-    <intellectualRights>&lt;a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'&gt;CC0&lt;/a&gt;</intellectualRights>
-    <dataTable id="urn:uuid:6e2945e1-43cc-4e9d-a61f-c44eb42b9cf9" system="uuid" scope="system">
-      <entityName>urn:uuid:6e2945e1-43cc-4e9d-a61f-c44eb42b9cf9.csv</entityName>
+    <pubDate>2014-01-04</pubDate>
+    <intellectualRights>CC0, http://creativecommons.org/publicdomain/zero/1.0</intellectualRights>
+    <contact>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+      <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
+    </contact>
+    <dataTable id="urn:uuid:83b9ec06-56cb-4dec-88e6-d43de8d76e52" system="uuid" scope="system">
+      <entityName>urn:uuid:83b9ec06-56cb-4dec-88e6-d43de8d76e52.csv</entityName>
       <physical>
-        <objectName>urn:uuid:6e2945e1-43cc-4e9d-a61f-c44eb42b9cf9.csv</objectName>
+        <objectName>urn:uuid:83b9ec06-56cb-4dec-88e6-d43de8d76e52.csv</objectName>
         <size>4984</size>
         <characterEncoding>C</characterEncoding>
         <dataFormat>

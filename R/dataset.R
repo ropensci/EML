@@ -1,4 +1,5 @@
 #' @include reml_environment.R
+#' @include eml_config.R 
 #' @include resource.R
 #' @include dataTable.R
 #' @include methods.R

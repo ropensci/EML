@@ -23,6 +23,8 @@ eml_read <- function(file,  ...){
   if(is(file, "XMLInternalDocument")){  # if already parsed XML, e.g. from d1_get
     doc <- file
 
+  
+
   ## Local Path
   } else if(file.exists(file)){ # if is a local file path...
     doc <- xmlParse(file=file, ...)
@@ -35,7 +37,9 @@ eml_read <- function(file,  ...){
         doc <- content(GET(file), "parsed", "text/xml") 
       
       ## Identifier 
-      } else {   ## Assume object is a DataONE identifer(?)
+      } else {   ## FIXME cannot assume this endpoint. Better to use dataone function  
+#        getD1Object(cli, file)
+#        use  dataone::EMLParser -- but returns XMLNode instead of an XMLInternalNode (C pointer...) 
         doc <- content(GET(paste0("https://cn.dataone.org/cn/v1/object/", file)), "parsed", "text/xml") # content type actually is detected.
       }
   } else {
