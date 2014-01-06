@@ -1,6 +1,8 @@
 reml
 ====
 
+[![Build Status](https://travis-ci.org/ropensci/reml.png?branch=master)](https://travis-ci.org/ropensci/reml)
+
 An R package for reading, writing, integrating and publishing data using the Ecological Metadata Language (EML) format.   
 
 * **Note:** This package is still in active development and not yet submitted to CRAN.  Functions and documentation may be incomplete and subject to change.  
