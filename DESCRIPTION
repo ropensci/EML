@@ -10,7 +10,8 @@ Date: 2013
 Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
     "cboettig@gmail.com"), person("Matt", "Jones", role="aut"),
     person("Karthik", "Ram", role="aut"), person("Duncan", "Temple Lang",
-    role = "aut"))
+    role = "aut"), person("Claas-Thido", "Pfaff", role = c("aut"), email =
+    "ctpfaff@arcor.de"))
 VignetteBuilder: knitr
 Suggests:
     knitr,
