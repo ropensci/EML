@@ -22,7 +22,6 @@
 # o write convenient user functions to extract citations (eml_get)
 # o handle dates properly so month and year can be extracted in here (where to place? use in pubDate)
 
-
 #' The literature module
 #'
 #' The eml-literature module contains information that describes literature
@@ -1026,6 +1025,7 @@ setAs("bibentry",
                type <- "conferenceProceedings"
           if(type == "Misc")
                type <- "generic"
+               warning("Cannot determine eml citation type. Converse to eml generic citation type!")
 
            switch(type,
                   Article = as(from, "article"),
