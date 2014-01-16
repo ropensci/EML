@@ -58,12 +58,7 @@ setClass("eml",
          # slots 'namespaces' and 'dirnames' are for internal use
          # only and not written as XML child elements.
 
-         prototype = prototype(
-                               packageId = reml_id()[["id"]], 
-                               system = reml_id()[["system"]],
-                               scope = reml_id()[["scope"]], 
-## ideally we'd have only one call to reml_id()..
-                               namespaces = eml_namespaces))
+         prototype = prototype(namespaces = eml_namespaces))
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))
