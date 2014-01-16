@@ -172,7 +172,7 @@ eml <- function(dat,            ## attribute level
   uid <- reml_id()
 
   eml <- new("eml",
-             packageId = uid()[["id"]], 
+             packageId = uid[["id"]], 
              system = uid[["system"]],
              scope = uid[["scope"]], 
              dataset = new("dataset", 
