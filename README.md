@@ -1,8 +1,6 @@
 reml
 ====
 
-[![Build Status](https://travis-ci.org/ropensci/reml.png?branch=master)](https://travis-ci.org/ropensci/reml)
-
 An R package for reading, writing, integrating and publishing data using the Ecological Metadata Language (EML) format.   
 
 * **Note:** This package is still in active development and not yet submitted to CRAN.  Functions and documentation may be incomplete and subject to change.  
@@ -113,8 +111,8 @@ eml_validate("reml_example.xml")
 ```
 
 ```
-$`XML specific tests`
-[1] "cvc-complex-type.2.4.a: Invalid content starting with element 'dataTable'. The content must match '((((((((((((((((((((((((\"\":alternateIdentifier){0-UNBOUNDED},(\"\":shortName){0-1}),(\"\":title){1-UNBOUNDED}),(\"\":creator){1-UNBOUNDED}),(\"\":metadataProvider){0-UNBOUNDED}),(\"\":associatedParty){0-UNBOUNDED}),(\"\":pubDate){0-1}),(\"\":language){0-1}),(\"\":series){0-1}),(\"\":abstract){0-1}),(\"\":keywordSet){0-UNBOUNDED}),(\"\":additionalInfo){0-UNBOUNDED}),(\"\":intellectualRights){0-1}),(\"\":distribution){0-UNBOUNDED}),(\"\":coverage){0-1}),(\"\":purpose){0-1}),(\"\":maintenance){0-1}),(\"\":contact){1-UNBOUNDED}),(\"\":publisher){0-1}),(\"\":pubPlace){0-1}),(\"\":methods){0-1}),(\"\":project){0-1}),((((((\"\":dataTable)|(\"\":spatialRaster))|(\"\":spatialVector))|(\"\":storedProcedure))|(\"\":view))|(\"\":otherEntity)){0-UNBOUNDED})|(\"\":references))'."
+EML specific tests XML specific tests 
+              TRUE               TRUE 
 ```
 
 
@@ -152,7 +150,7 @@ eml_publish("reml_example.xml", description="Example EML file from reml", catego
 ```
 
 ```
-Error: missing value where TRUE/FALSE needed
+[1] 894955
 ```
 
 
@@ -168,7 +166,7 @@ required to use reml and run the examples in the other sections.  See the
 
 
 ```coffee
-eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
+ids <- eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
 ```
 
 
@@ -176,10 +174,27 @@ eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
 _NB:_ To avoid clutter, we should publish only real research data to the KNB production servers (by setting `permanent=TRUE`).  By default, `eml_publish` assumes `permanent=FALSE` when sending data to the KNB, and will publish to the development server instead.  The development server works as a testing platform, providing all the same features as the production platform but without permanent storage -- all data will be deleted regularly.  The development server is not as stable as the production server, so if the command fails, please try again later.  
 
 
+<!--
+Test data shows up on the test server, followed by the identifer, at `paste0("(https://mn-demo-5.test.dataone.org/knb/d1/mn/v1/object/", ids[["eml"]])`
+
+This returns the object identifiers for the EML metadata, the csv file, and the package itself.  We can read in the EML directly from its unique identifier using `eml_read`. We must wait about four minutes first for the entry to be completely registered in the dataone repository.  (Note that because we are using the development server, `permanent=FALSE`, this file will dissapear after a few days.)
+
+
+```coffee
+Sys.sleep(60*4)
+eml <- eml_read(paste0("(https://mn-demo-5.test.dataone.org/knb/d1/mn/v1/object/", ids[["eml"]]))
+```
+
+```
+Error: "error" is not a defined class
+```
+
+-->
+
 <!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 -->
 
-<-- Too detailed for this vignette
+<--! Too detailed for this vignette
 
 For the sake of completeness, the explicitly figshare metadata is also written into a 
 dedicated `<additionalMetadata>` node with the attribute `id = figshare`.  This allows
@@ -204,11 +219,6 @@ Users will not only want to generate EML files, but also take advantage of the w
 obj <- eml_read("reml_example.xml")
 ```
 
-```
-Error: trying to generate an object from a virtual class
-("ListOfcreatorOreditor")
-```
-
 
 We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).  
 
@@ -220,10 +230,6 @@ The `eml_get` function provides us with easy access to many of the component ele
 dat <- eml_get(obj, "data.set")
 ```
 
-```
-Error: object 'obj' not found
-```
-
 
 
 ```coffee
@@ -231,7 +237,7 @@ eml_get(obj, "contact")
 ```
 
 ```
-Error: object 'obj' not found
+[1] "Carl Boettiger <cboettig@gmail.com>"
 ```
 
 
@@ -241,7 +247,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Error: object 'obj' not found
+Boettiger C (2014-01-06). _metadata_.
 ```
 
 

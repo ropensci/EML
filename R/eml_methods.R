@@ -122,53 +122,36 @@ get_col_classes <- function(attrs){
 }
 
 
-## Depricated, stupid function 
-## FIXME should use accessor methods in place of @
-## FIXME DOn't assume dataTable[[1]] 
-#setMethod("extract", signature("eml"),
-#          function(from){
-#          # Get classes for data table first from attribute list!
-#          dat = extract(from@dataset@dataTable[[1]]@physical)
-#            list(dat = dat,
-#                metadata = extract(from@dataset@dataTable[[1]]@attributeList),
-#                title = from@dataset@title,
-#                description = from@dataset@dataTable[[1]]@entityDescription,
-#                creator = creator(from))
-#          }
-#          )
-#
-#
-
-
-
-
-
-
-
 
 
 #' eml constructor function 
-#' 
+#' @param dat a data.set object  
+#' @param title for the metadata.  Also used as the csv filename.   
+#' @param creator a ListOfcreator object, character string, or person object.  
+#'  Otherwise loaded from value set by eml_config.  
+#' @param contact a contact object, character string, or person object.  
+#'  Otherwise loaded from value set by eml_config.  
+#' @param a coverage object, such as created by the eml_coverage constructor function.
+#' @param methods a method object.  
+#' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
+#' @param additionalMetadata an additionalMetadata object
 #' @details
 #' 
-#' - Permits character string definitions of creator & contact 
-#' - Avoid separate call to eml_dataTable, just pass it dat, optionally meta too
+#' - Permits character string definitions of creator & contact
+#' - generates a unique PackageId
+#' - Avoids more verbose separate call to dataset constructor and eml_dataTable
 #' 
+#' @export 
 eml <- function(dat,            ## attribute level
-                meta = NULL,    ## attribute level 
-## physical level
-                title = "metadata",         # required  
-                description = character(0), # optional
-## dataset level 
-                creator = get("defaultCreator", envir=remlConfig), # required
-                contact = get("defaultContact", envir=remlConfig), # required 
+                title = "metadata", ## dataset lvl, also used for physical (csv name) 
+                creator = get("defaultCreator", envir=remlConfig), # dataset lvl 
+                contact = get("defaultContact", envir=remlConfig), # dataset lvl
                 coverage = eml_coverage(scientific_names = NULL,   # optional
                                         dates = NULL,
                                         geographic_description = NULL,
                                         NSEWbox = NULL),
                 methods = new("methods"),
                 ...,
-## eml level
                 additionalMetadata = c(new("additionalMetadata")))
 {
 
@@ -185,8 +168,13 @@ eml <- function(dat,            ## attribute level
   if(is(contact, "character"))
     contact <- as(contact, "contact")
 
-  
+
+  uid <- reml_id()
+
   eml <- new("eml",
+             packageId = uid()[["id"]], 
+             system = uid[["system"]],
+             scope = uid[["scope"]], 
              dataset = new("dataset", 
                            title = title, # required 
                            creator = creator,
@@ -199,9 +187,8 @@ eml <- function(dat,            ## attribute level
 
   ## Identify the kind of dataset by the type of dat provided 
   if(is(dat, "data.frame")){
-    eml@dataset@dataTable <- 
-      c(eml_dataTable(dat = dat, meta = meta, 
-                      title=title, description=description))
+    eml@dataset@dataTable <- c(eml_dataTable(dat = dat, 
+                                             title = title))
   } 
 
   eml 

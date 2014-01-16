@@ -1,4 +1,4 @@
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:28266c92-7c5d-462d-a604-7d47b59ea203" system="uuid" scope="system">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="urn:uuid:a2759469-ea75-4ddb-91a2-de73179489e2" system="uuid" scope="system">
   <dataset>
     <title>metadata</title>
     <creator>
@@ -8,7 +8,7 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </creator>
-    <pubDate>2014-01-04</pubDate>
+    <pubDate>2014-01-06</pubDate>
     <intellectualRights>CC0, http://creativecommons.org/publicdomain/zero/1.0</intellectualRights>
     <contact>
       <individualName>
@@ -17,12 +17,12 @@
       </individualName>
       <electronicMailAddress>cboettig@gmail.com</electronicMailAddress>
     </contact>
-    <dataTable id="urn:uuid:83b9ec06-56cb-4dec-88e6-d43de8d76e52" system="uuid" scope="system">
-      <entityName>urn:uuid:83b9ec06-56cb-4dec-88e6-d43de8d76e52.csv</entityName>
+    <dataTable id="urn:uuid:6848812b-962f-4f03-a328-9c743572f4d1" system="uuid" scope="system">
+      <entityName>urn:uuid:6848812b-962f-4f03-a328-9c743572f4d1.csv</entityName>
       <physical>
-        <objectName>urn:uuid:83b9ec06-56cb-4dec-88e6-d43de8d76e52.csv</objectName>
+        <objectName>urn:uuid:6848812b-962f-4f03-a328-9c743572f4d1.csv</objectName>
         <size>4984</size>
-        <characterEncoding>C</characterEncoding>
+        <characterEncoding>en_US.UTF-8</characterEncoding>
         <dataFormat>
           <textFormat>
             <numHeaderLines>1</numHeaderLines>

@@ -139,7 +139,7 @@ _Note: this example assumes `dataone` is installed, even though it is not
 required to use reml and run the examples in the other sections.  See the 
 `dataone` documentation for authenticating `dataone` with a user account_
 
-```{r publish_knb, eval=FALSE}
+```{r publish_knb}
 ids <- eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
 ```
 
@@ -161,7 +161,7 @@ eml <- eml_read(paste0("(https://mn-demo-5.test.dataone.org/knb/d1/mn/v1/object/
 <!-- In return, figshare provides the object with a DOI, which is added to the EML.  
 -->
 
-<-- Too detailed for this vignette
+<--! Too detailed for this vignette
 
 For the sake of completeness, the explicitly figshare metadata is also written into a 
 dedicated `<additionalMetadata>` node with the attribute `id = figshare`.  This allows
