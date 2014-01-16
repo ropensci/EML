@@ -1,5 +1,7 @@
 ## Physical ##
 
+#' @include literature.R
+
 ## Definitions of subclasses, and their coercions to/from XML: 
 
 ### Data Format ###

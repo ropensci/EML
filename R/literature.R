@@ -1,8 +1,5 @@
 # TODO: 
-# o improve matching on litrature type coercion (mabe change latex types 
-#   from generic to ther that offers more suitable fields 
-# o write tests for all litrature coercions 
-# o integrate the module wherever it can occur: 
+# o integrate the module wherever it can occur: Done but FIXME: missing in project module because not there yet
 
 # o grep CitationType *.xsd
 #     eml-literature.xsd:    <xs:complexType name = "CitationType"                                                                                   >
@@ -200,7 +197,7 @@ setAs("XMLInternalElementNode",
 # bibtex book
 # field [required/optional] (EML)
 
-# author or editor [r] (? creator)
+# (author) or editor [r] (? creator)
 # title            [r] (? title)
 # publisher        [r] (? publisher)
 # year             [r] (? pubDate)
@@ -995,7 +992,6 @@ setClass("citation",
          )
 
 # citation coercion
-
 setAs("citation",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -1010,22 +1006,33 @@ setAs("XMLInternalElementNode",
 setAs("bibentry",
       "citation",
       function(from){ 
-          type <- from$bibtype
+           type <- from$bibtype
 
-          if(type == "Book") # FIXME: handle book and chapter types properly from fields
-            if(!is.null(from$editor))
-              type <- "editedBook"
-          if(type == "InBook")
-               type <- "chapter"
-          if(type == "Unpublished")
-               type <- "manuscript"
-          if(type == "PhdThesis")
-               type <- "thesis"
-          if(type == "Proceedings")
-               type <- "conferenceProceedings"
-          if(type == "Misc")
-               type <- "generic"
-               warning("Cannot determine eml citation type. Converse to eml generic citation type!")
+           if(type == "Book"){
+                if(!is.null(from$editor))
+                     type <- "editedBook" 
+           }
+
+           if(type == "InBook"){
+                type <- "chapter"
+           }
+
+           if(type == "Unpublished"){
+                type <- "manuscript"
+           }
+
+           if(type == "PhdThesis"){
+                type <- "thesis"
+           }
+
+           if(type == "Proceedings"){
+                type <- "conferenceProceedings" 
+           }
+
+           if(type == "Misc"){
+                type <- "generic" 
+                warning("Cannot determine the right citation type automatically. Coerced to eml generic citation type!")
+           }
 
            switch(type,
                   Article = as(from, "article"),
