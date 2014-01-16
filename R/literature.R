@@ -1,8 +1,5 @@
 # TODO: 
-# o improve matching on litrature type coercion (mabe change latex types 
-#   from generic to ther that offers more suitable fields 
-# o write tests for all litrature coercions 
-# o integrate the module wherever it can occur: 
+# o integrate the module wherever it can occur: Done but FIXME: missing in project module because not there yet
 
 # o grep CitationType *.xsd
 #     eml-literature.xsd:    <xs:complexType name = "CitationType"                                                                                   >

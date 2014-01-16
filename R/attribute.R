@@ -1,4 +1,7 @@
 ## Attribute List ##
+
+#' @include literature.R
+
 setClass("codeDefinition", 
          slots = c(code = "character",
                         definition = "character"))
