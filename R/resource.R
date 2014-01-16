@@ -19,8 +19,6 @@ setAs("keywordSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOfkeywordSet", contains="list")
 
-#setClassUnion("ListOfcreatorOreditor", c("ListOfcreator", "ListOfeditor"))
-
 #' @include party.R
 setClass("resourceGroup",
           slots = c("alternateIdentifier" = "character",

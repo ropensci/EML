@@ -1,4 +1,7 @@
-### Methods ### 
+### Methods ###  
+
+#' @include literature.R
+
 setClass("methodStep", 
          slots = c(description = "character")) # software, 
 setAs("XMLInternalElementNode", "methodStep",  function(from) emlToS4(from))

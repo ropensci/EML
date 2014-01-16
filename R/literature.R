@@ -1,8 +1,5 @@
 # TODO: 
-# o improve matching on litrature type coercion (mabe change latex types 
-#   from generic to ther that offers more suitable fields 
-# o write tests for all litrature coercions 
-# o integrate the module wherever it can occur: 
+# o integrate the module wherever it can occur: Done but FIXME: missing in project module because not there yet
 
 # o grep CitationType *.xsd
 #     eml-literature.xsd:    <xs:complexType name = "CitationType"                                                                                   >
@@ -21,7 +18,6 @@
 
 # o write convenient user functions to extract citations (eml_get)
 # o handle dates properly so month and year can be extracted in here (where to place? use in pubDate)
-
 
 #' The literature module
 #'
@@ -201,7 +197,7 @@ setAs("XMLInternalElementNode",
 # bibtex book
 # field [required/optional] (EML)
 
-# author or editor [r] (? creator)
+# (author) or editor [r] (? creator)
 # title            [r] (? title)
 # publisher        [r] (? publisher)
 # year             [r] (? pubDate)
@@ -237,7 +233,7 @@ setAs("book", "bibentry", function(from){
 
 setAs("bibentry", "book", function(from){
      eml_citation                  = new("book")
-     eml_citation@creator          = new("ListOfeditor", lapply(from$editor, as, "editor")) 
+     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator")) # FIXME: The latex fields can be author or editor
      eml_citation@title            = from$title
      eml_citation@publisher        = as(person(from$publisher), "publisher")
      eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
@@ -249,7 +245,6 @@ setAs("bibentry", "book", function(from){
      eml_citation
      } 
 )
-
 
 # Edited book (like book but see creator)
 
@@ -269,7 +264,7 @@ setAs("bibentry", "book", function(from){
 setClass("editedBook",
          contains = c("id_scope",
                       "resourceGroup",
-                      "book_slots",
+                      "book_slots",  
                       "referencesGroup"
                       )
          )
@@ -324,7 +319,7 @@ setAs("editedBook", "bibentry", function(from){
 
 setAs("bibentry", "editedBook", function(from){
      eml_citation                  = new("editedBook")
-     eml_citation@creator          = new("ListOfeditor", lapply(from$editor, as, "editor"))
+     eml_citation@creator           = new("ListOfcreator", lapply(from$editor, as, "creator")) 
      eml_citation@title            = from$title
      eml_citation@publisher        = as(person(from$publisher), "publisher")
      eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
@@ -429,7 +424,6 @@ setAs("bibentry", "chapter", function(from){
      } 
 )
 
-
 # Manuscript
 
 # A sequence of (
@@ -477,8 +471,9 @@ setAs("manuscript", "bibentry", function(from){
       entry = bibentry(bibtype = "unpublished", 
                        # required
                        author = as(from@creator, "person"),   
-                       title  = from@title, 
-                       note = from@additionalInfo,
+                       title  = from@title,  
+                       # The note is quired for unpublished and is not written if character(0)
+                       note = if(identical(from@additionalInfo, character(0))){"-"} else {from@additionalInfo}, 
                        # optional
                        year = from@pubDate, # FIXME: handle date properly and extract year 
                        month = from@pubDate, # FIXME: handle date properly and extract month
@@ -500,7 +495,6 @@ setAs("bibentry", "manuscript", function(from){
      eml_citation
      } 
 )
-
 
 # Thesis
 
@@ -659,7 +653,6 @@ setAs("bibentry", "conferenceProceedings", function(from){
      } 
 )
 
-
 # Personal communication
 
 # A sequence of (
@@ -734,7 +727,6 @@ setAs("bibentry", "personalCommunication", function(from){
      eml_citation
      } 
 )
-
 
 # Map
 
@@ -1000,7 +992,6 @@ setClass("citation",
          )
 
 # citation coercion
-
 setAs("citation",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
@@ -1011,10 +1002,50 @@ setAs("XMLInternalElementNode",
       function(from) emlToS4(from)
       )
 
-# bibtex (cases then call appropriate function)
-# setAs("eml", "bibentry", function(from){
-# }
+# generic bibentry coercion to eml citations
+setAs("bibentry",
+      "citation",
+      function(from){ 
+           type <- from$bibtype
 
+           if(type == "Book"){
+                if(!is.null(from$editor))
+                     type <- "editedBook" 
+           }
+
+           if(type == "InBook"){
+                type <- "chapter"
+           }
+
+           if(type == "Unpublished"){
+                type <- "manuscript"
+           }
+
+           if(type == "PhdThesis"){
+                type <- "thesis"
+           }
+
+           if(type == "Proceedings"){
+                type <- "conferenceProceedings" 
+           }
+
+           if(type == "Misc"){
+                type <- "generic" 
+                warning("Cannot determine the right citation type automatically. Coerced to eml generic citation type!")
+           }
+
+           switch(type,
+                  Article = as(from, "article"),
+                  Book = as(from, "book"),
+                  editedBook = as(from, "editedBook"),
+                  chapter = as(from, "chapter"),
+                  manuscript = as(from, "manuscript"),
+                  thesis = as(from, "thesis"), 
+                  conferenceProceedings = as(from, "conferenceProceedings"),
+                  generic = as(from, "generic")
+                  )
+      }
+)
 
 # literature 
 
