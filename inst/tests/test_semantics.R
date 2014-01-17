@@ -22,9 +22,8 @@ rdfa <- newXMLNode("subject",
 ## clean up this interaface for adding additionalMetadata! 
 eml <- reml:::eml(dat,          
            creator="Carl Boettiger <cboettig@ropensci.org>", 
-           additionalMetadata = new("ListOfadditionalMetadata", 
-                                   list(new("additionalMetadata", 
-                                            metadata = new("metadata", rdfa)))))
+           additionalMetadata = c(new("additionalMetadata", 
+                                      metadata = new("metadata", rdfa))))
 
 eml_write(eml, file = "test.xml")
 

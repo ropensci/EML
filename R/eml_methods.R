@@ -157,19 +157,10 @@ eml <- function(dat,            ## attribute level
 
 
   ## Coerce character string persons into EML representations
-  if(is.null(creator))
-    creator <- "" 
-  if(is(creator, "character") || is(creator, "person"))
-    creator <- as(creator, "creator")
-  if(is(creator, "creator"))                     
-    creator <- c(creator)
-  if((is.null(contact) || length(contact) == 0) && is(creator, "ListOfcreator"))
-    contact <- as(creator[[1]], "contact")
-  if(is(contact, "character"))
-    contact <- as(contact, "contact")
 
 
   uid <- reml_id()
+  who <- contact_creator(contact, creator)
 
   eml <- new("eml",
              packageId = uid[["id"]], 
@@ -177,8 +168,8 @@ eml <- function(dat,            ## attribute level
              scope = uid[["scope"]], 
              dataset = new("dataset", 
                            title = title, # required 
-                           creator = creator,
-                           contact = contact,
+                           creator = who$creator,
+                           contact = who$contact,
                            coverage = coverage,
                            methods = methods, 
                            ...),
@@ -193,5 +184,98 @@ eml <- function(dat,            ## attribute level
 
   eml 
 }
+
+
+contact_creator <- function(creator = get("defaultCreator", envir=remlConfig),
+                            contact = get("defaultContact", envir=remlConfig)){
+
+   ## Get a contact first 
+  if(is.null(contact) || length(contact) == 0 || isEmpty(contact)){ # IF no contact given... 
+
+   ## If no creator given either...
+    if(is.null(creator) || length(creator) == 0 || isEmpty(creator)){
+      if(interactive()){
+        contact <- person_wizard("contact")  ## USE THE WIZARD!
+      } else { 
+        stop("no creator or contact given.")
+      }
+    ## Else, use the first creator...
+    } else {
+      if(is(creator, "ListOfcreator"))
+        contact <- as(creator[[1]], "contact")
+      else 
+        contact <- as(creator, "contact")
+    }
+  } ## We now have a contact... If we don't have a creator, use this: 
+  if(is.null(creator) || length(creator) == 0 || isEmpty(creator)){
+    creator <- as(contact, "creator")
+  }
+
+  ## Handle character and person coercions 
+  contact <- as(contact, "contact")
+  if(!(is(creator, "ListOfcreator"))){
+    creator <- c(as(creator, "creator")) # ListOf
+  }
+
+  list(contact = contact, creator = creator)
+}
+
+## Tests
+a <- contact_creator()
+
+
+b <- contact_creator(contact = "Carl Boettiger <cboettig@gmail.com>")
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+expect_identical(format(as(b$contact, "person")), "Carl Boettiger <cboettig@gmail.com>")
+expect_identical(b$contact@individualName@surName, "Boettiger")
+
+b <- contact_creator(creator = "Carl Boettiger <cboettig@gmail.com>")
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+expect_identical(format(as(b$contact, "person")), "Carl Boettiger <cboettig@gmail.com>")
+expect_identical(b$contact@individualName@surName, "Boettiger")
+
+b <- contact_creator(creator = "Carl Boettiger <cboettig@gmail.com>",
+                     contact = "Carl Boettiger <cboettig@gmail.com>")
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+expect_identical(format(as(b$contact, "person")), "Carl Boettiger <cboettig@gmail.com>")
+expect_identical(b$contact@individualName@surName, "Boettiger")
+
+b <- contact_creator(creator = as("Carl Boettiger <cboettig@gmail.com>", "creator"),
+                     contact = "Carl Boettiger <cboettig@gmail.com>")
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+expect_identical(format(as(b$contact, "person")), "Carl Boettiger <cboettig@gmail.com>")
+expect_identical(b$contact@individualName@surName, "Boettiger")
+
+b <- contact_creator(contact = as("Carl Boettiger <cboettig@gmail.com>", "contact"))
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+expect_identical(format(as(b$contact, "person")), "Carl Boettiger <cboettig@gmail.com>")
+expect_identical(b$contact@individualName@surName, "Boettiger")
+
+## FIXME Coercions from person to contact/creator do not parse name out correctly...
+
+b <- contact_creator(contact = person("Carl Boettiger <cboettig@gmail.com>"))
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+expect_identical(format(as(b$contact, "person")), "Carl Boettiger <cboettig@gmail.com>")
+expect_identical(b$contact@individualName@surName, "Boettiger")
+
+b <- contact_creator(creator = c(as("Carl Boettiger <cboettig@gmail.com>", "creator"),
+                                as("Karthik Ram", "creator")),
+                     contact = "Carl Boettiger <cboettig@gmail.com>")
+expect_is(b$creator, "ListOfcreator")
+expect_is(b$contact, "contact")
+
+## Provide a contact object as creator...
+b <- contact_creator(creator = as("Carl Boettiger <cboettig@gmail.com>", "contact"))
+
+
+
+
+
 
 

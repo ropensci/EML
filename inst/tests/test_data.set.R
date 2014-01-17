@@ -101,11 +101,12 @@ test_that("We can generate an eml S4 object more cleanly, and test show method",
 })
 
 
-
+#eml(dat, contact = "Carl Boettiger <cboettig@ropensi.org>")
 
 test_that("we can write out a data.set using embedded metadata", {
   eml_write(dat,
-            contact = as("Carl Boettiger <cboettig@gmail.com>", "contact"),
+            contact = "Carl Boettiger <cboettig@ropensi.org>",
+#            contact = as("Carl Boettiger <cboettig@gmail.com>", "contact"),
             file = "test.xml")
   expect_true(all(eml_validate("test.xml")))
   unlink("test.xml")

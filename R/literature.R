@@ -41,6 +41,7 @@
 #'       eml-project
 
 #' Inclusion of superclass
+#' @include baseAttributes.R
 #' @include resource.R
 #' @include coverage.R
 #' @include party.R
