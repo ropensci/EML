@@ -55,12 +55,14 @@ S4Toeml <- function(obj,
 isEmpty <- function(obj){
   if(!isS4(obj)){
     if(length(obj) > 0)
-      FALSE
+      out <- FALSE
     else 
-      TRUE
+      out <- TRUE
   } else {
     if( identical(obj, new(class(obj)[1])) )
       out <- TRUE
+    else if(is(obj, "list"))
+      out <- all(sapply(obj, isEmpty))  # a ListOf object of length > 0 is still empty if all elements are empty 
     else {
       empty <- sapply(slotNames(obj), 
       function(s){

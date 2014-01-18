@@ -22,10 +22,10 @@ test_that("we can read in S4 using eml_read", {
 
 
 require(reml)
-data(ex1)
-S4obj <- reml:::eml(dat, metadata, title = "title", 
-             description = "description", 
-             creator = "Carl Boettiger <cboettig@gmail.com>")
+data(ex2)
+S4obj <- reml:::eml(dat, 
+                    title = "title", 
+                    creator = "Carl Boettiger <cboettig@gmail.com>")
 
 
 

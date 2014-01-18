@@ -5,36 +5,6 @@ require(reml)
 
 ## Okay, we know this works, so stick it in the global space for the next functions...
 
-
-test_that("We can write some part of this to XML", {
-  dat = data.frame(river = c("SAC",  "SAC",   "AM"),
-                   spp   = c("king",  "king", "ccho"),
-                   stg   = c("smolt", "parr", "smolt"),
-                   ct    = c(293L,    410L,    210L))
-
-  metadata <- 
-    list("river" = list("river",
-                        "River site used for collection",
-                        c(SAC = "The Sacramento River", 
-                          AM = "The American River")),
-         "spp" = list("spp",
-                      "Species common name", 
-                      c(king = "King Salmon", 
-                        ccho = "Coho Salmon")),
-         "stg" = list("stg",
-                      "Life Stage", 
-                      c(parr = "third life stage", 
-                        smolt = "fourth life stage")),
-         "ct"  = list("ct",
-                      "count", 
-                      "number"))
-
-  S4obj <- reml:::eml(dat, metadata)
-  att <- S4obj@dataset@dataTable[[1]]@attributeList@attribute[[1]]@measurementScale
-  reml:::S4Toeml(att)
-})
-
-
 ## Rest of tests use data.set object
 
 dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
