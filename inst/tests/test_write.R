@@ -55,13 +55,18 @@ test_that("We can write S4 EML to XML and validate", {
 
 
 
-
+# FIXME ADD ID 
 test_that("We can add coverage information and validate", {
   contact <- as("Carl Boettiger <cboettig@ropensci.org>", "contact")
   creator <- c(as(contact, "creator"))
-  eml_write(new("eml",dataset = 
+  uid <- reml:::reml_id()
+  eml_write(new("eml",
+                packageId = uid[["id"]], 
+                system = uid[["system"]],
+                scope = uid[["scope"]], 
+                dataset = 
                 new("dataset", 
-                    dataTable = c(eml_dataTable(dat, 
+                  dataTable = c(eml_dataTable(dat, 
                                               description = "description",
                                               filename = "title.csv")), 
                     contact = contact,
