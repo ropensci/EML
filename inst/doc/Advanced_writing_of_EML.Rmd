@@ -226,7 +226,9 @@ keys <- eml_keyword(list(
                                   "USA")))
 ```
 
-A similar situation arises with describing the coverage metadata element. 
+A similar situation arises with describing the coverage metadata element. While we could call `new("coverage")` and build the element up slot by slot, most users will find the helper function more convenient:
+
+
 ```{r}
 coverage <- eml_coverage(
   scientific_names = "Sarracenia purpurea", 
@@ -281,14 +283,16 @@ f2 <- wordDoc(system.file("examples", "methods.docx", package="reml"))
 doc <- f2[[getDocument(f2)]]
 txt <- xpathSApply(doc, "//w:t", xmlValue)
 ## FIXME add <title> <section> and <para> blocking back: 
-method_description <- paste(txt, collapse = "\n\n") 
+method <- paste(txt, collapse = "\n\n") 
 ```
 
+
+
+ 
 We can then construct a methods node containing this text as the description: 
 
 ```{r}
-methods <- new("methods")
-methods@methodsStep@description <- method_description
+methods <- new("methods", methodStep = c(new("methodStep", description = method)))
 ```
 
 
@@ -299,7 +303,8 @@ hf205 <- eml_read(system.file("examples", "hf205.xml", package="reml"))
 additionalMetadata <- hf205@additionalMetadata # extracted from previous eml file
 ```
 
-We now have all of the elements we wished to define for the `dataset` metadata. We can assemble them into a `datset` node as follows:
+
+We now have all of the elements we wished to define for the `dataset` metadata. A `dataset` can include yet more elements than we show here (see a list with `slotNames(new("dataset"))`, or see `?dataset` or the [EML documentation](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-dataset.html#DatasetType) for details). We can assemble them into a `dataset` node as follows:
 
 
 ```{r}
@@ -308,6 +313,8 @@ dataset <- new("dataset",
                 creator = creator,
                 contact = contact,
                 pubDate = pubDate,
+                intellectualRights = rights,
+                abstract = abstract,
                 associatedParty = other_researchers,
                 keywordSet = keys,
                 coverage = coverage,
@@ -323,12 +330,44 @@ With most of the metadata now in place, we can construct the top-level element:
 
 
 ```{r}
-eml <- new("eml", 
+eml <- new("eml",
+            packageId = uuid::UUIDgenerate(),
+            system = "uuid", # type of identifier
             dataset = dataset,
             additionalMetadata = additionalMetadata)
 ```
 
-This call automatically adds a few additional bits of information, such as a unique identifier `packageId` for the metadata file.  This `eml` object we have just created now has the complete R representation of the EML data.  This is the same class of object returned by `eml_read`, and consequently we can use all of the read methods provided to explore or manipulate it.  
+
+
+This `eml` object we have just created now has the complete R representation of the EML data.  This is the same class of object returned by `eml_read`, and consequently we can use all of the read methods provided to explore or manipulate it.  
+
+
+
+## `eml` helper function
+
+The helper function `eml` provides a shortcut to this step-by-step construction while retaining most of the expressiveness.   
+
+
+```{r}
+eml     <- eml( dataset = dat,
+                title = title,
+                creator = creator,
+                contact = contact,
+                pubDate = pubDate,
+                associatedParty = other_researchers,
+                intellectualRights = rights,
+                abstract = abstract,
+                keywordSet = keys,
+                coverage = coverage,
+                methods = method,
+                additionalMetadata = additionalMetadata
+              )
+```
+
+The helper function handles certain steps automatically, such as the creation of a `uuid` for the package identifier.  The required fields `creator` and `contact` will use values set by `eml_config` or can take text strings or R `person` objects as arguments, as well as eml's `creator` or `contact` classes.  In this case we pass a `dataTable` (permitting additional customization we used above such as the description field).  Alternatively this could be the more basic `data.set` object as the first argument (`dataset = dat`) or an already constructed EML `dataset` class. 
+
+Because package identifer, creator and contact fields are required for valid EML, this constructor function is often more convenient then the stepwise process shown above. Typically a single call to this function can provide all the metadata needed to properly annotate a `data.set`.    This is similar to the behavior of the `eml_write` function, but returns the R eml object rather than writing out to an XML file.  Additional fields can then be added or manipulated using the standard R S4 subsetting methods (see Advanced Parsing tutorial).  
+
 
 Finally we are ready to write out our EML object to an XML file. 
 
@@ -336,7 +375,7 @@ Finally we are ready to write out our EML object to an XML file.
 eml_write(eml, file="hf205_from_reml.xml")
 ```
 
-When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `new("eml")` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
+When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `eml()` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
 
 
 As before, we can now validate our EML document to ensure all the information has been formatted correctly:
@@ -346,8 +385,6 @@ eml_validate("hf205_from_reml.xml")
 ```
 
 While it is difficult to create invalid EML using the constructor functions, it is not impossible so it never hurts to check.  
-
-
 
 As illustrated in the basic tutorial, we can now publish this file automatically to a central repository such as the KNB.   
 

@@ -59,12 +59,11 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 
 
 ```r
-dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"), colClasses = 
-                  c("factor", "Date", "Date", "Date", "factor", "factor", "factor"))
-```
-
-```
-Error: character string is not in a standard unambiguous format
+f <- system.file("examples", "hf205-01-TPexp1.csv", package="reml")
+dat <- read.csv(f, 
+                colClasses = "factor", # c("factor", "Date", "Date", "Date", 
+                             #  "factor", "factor", "factor")
+                )
 ```
 
 
@@ -198,11 +197,12 @@ creator <- c(as("Aaron Ellison", "creator"), as("Nicholas Gotelli", "creator"))
 
 
 
-Yet another way to create person objects is to use the helper function `eml_person`.  This function recongnizes the plain-text string conventions already used by R's person objects (or the person objects themselves, see ?person).   Here we add other researchers as contributors to the data.  The `eml_person` function automatically decides whether to return a `contact`, `creator` list, or `associatedParty`, based on the additional information provided (such as an email address in angle braces, contributor role in square brackets).  
+Yet another way to create person objects is to use the helper function `eml_person`.  This function recongnizes the plain-text string conventions already used by R's person objects (or the person objects themselves, see ?person).   Here we add other researchers as contributors to the data.  The `eml_person` function automatically decides whether to return a `contact`, `creator` list, or `associatedParty`, based on the additional information provided (such as an email address in angle braces, contributor role, `ctb` in square brackets).  
 
 
 ```r
-other_researchers <- eml_person("Benjamin Baiser [ctb]", "Jennifer Sirota [ctb]") # creates a 'ListOfassociatedParty' (roles != cre)
+other_researchers <- eml_person("Benjamin Baiser [ctb]", 
+                                "Jennifer Sirota [ctb]") 
 ```
 
 
@@ -214,7 +214,8 @@ Some metadata is just a string:
 
 ```r
 pubDate <- "2012" 
-title <- "Thresholds and Tipping Points in a Sarracenia Microecosystem at Harvard Forest since 2012"
+title <- "Thresholds and Tipping Points in a Sarracenia 
+          Microecosystem at Harvard Forest since 2012"
 ```
 
 
@@ -225,7 +226,9 @@ When metadata fields have more complicated types, the package provides construct
 keys <-
   c(new("keywordSet", 
       keywordThesaurus = "LTER controlled vocabulary",
-      keyword = c(new("keyword", keyword="bacteria"), new("keyword", keyword="carnivorous plants"), ...)
+      keyword = c(new("keyword", keyword="bacteria"), 
+                  new("keyword", keyword="carnivorous plants"), 
+                  ...)
     ),
    new("keywordSet", 
       keywordThesaurus = "LTER core area",
@@ -237,19 +240,32 @@ and so forth, it is more compact to use the provided constructor function:
 
 
 ```r
-keys <- eml_keyword(list("LTER controlled vocabulary" = c("bacteria", "carnivorous plants", "genetics", "thresholds"),
-                                     "LTER core area" = c("populations", "inorganic nutrients", "disturbance"),
-                                        "HFR default" = c("Harvard Forest", "HFR", "LTER", "USA")))
+keys <- eml_keyword(list(
+ "LTER controlled vocabulary" = c("bacteria", 
+                                  "carnivorous plants", 
+                                  "genetics", 
+                                  "thresholds"),
+             "LTER core area" = c("populations", 
+                                  "inorganic nutrients", 
+                                  "disturbance"),
+                "HFR default" = c("Harvard Forest", 
+                                  "HFR", 
+                                  "LTER", 
+                                  "USA")))
 ```
 
 
-A similar situation arises with describing the coverage metadata element. 
+A similar situation arises with describing the coverage metadata element. While we could call `new("coverage")` and build the element up slot by slot, most users will find the helper function more convenient:
+
+
 
 ```r
-coverage <- eml_coverage(scientific_names = "Sarracenia purpurea", 
-                         dates            = c('2012-06-01', '2013-12-31'),
-                         geographic_description = "Harvard Forest Greenhouse, Tom Swamp Tract (Harvard Forest)", 
-                         NSEWbox          = c( 42.55,  42.42, -72.1, -72.29, 160, 330))
+coverage <- eml_coverage(
+  scientific_names = "Sarracenia purpurea", 
+  dates            = c('2012-06-01', '2013-12-31'),
+  geographic_description = "Harvard Forest Greenhouse, 
+                            Tom Swamp Tract (Harvard Forest)", 
+  NSEWbox          = c( 42.55,  42.42, -72.1, -72.29, 160, 330))
 ```
 
 
@@ -303,16 +319,18 @@ f2 <- wordDoc(system.file("examples", "methods.docx", package="reml"))
 doc <- f2[[getDocument(f2)]]
 txt <- xpathSApply(doc, "//w:t", xmlValue)
 ## FIXME add <title> <section> and <para> blocking back: 
-method_description <- paste(txt, collapse = "\n\n") 
+method <- paste(txt, collapse = "\n\n") 
 ```
 
 
+
+
+ 
 We can then construct a methods node containing this text as the description: 
 
 
 ```r
-methods <- new("methods")
-methods@methodsStep@description <- method_description
+methods <- new("methods", methodStep = c(new("methodStep", description = method)))
 ```
 
 
@@ -326,7 +344,8 @@ additionalMetadata <- hf205@additionalMetadata # extracted from previous eml fil
 ```
 
 
-We now have all of the elements we wished to define for the `dataset` metadata. We can assemble them into a `datset` node as follows:
+
+We now have all of the elements we wished to define for the `dataset` metadata. A `dataset` can include yet more elements than we show here (see a list with `slotNames(new("dataset"))`, or see `?dataset` or the [EML documentation](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-dataset.html#DatasetType) for details). We can assemble them into a `dataset` node as follows:
 
 
 
@@ -336,6 +355,8 @@ dataset <- new("dataset",
                 creator = creator,
                 contact = contact,
                 pubDate = pubDate,
+                intellectualRights = rights,
+                abstract = abstract,
                 associatedParty = other_researchers,
                 keywordSet = keys,
                 coverage = coverage,
@@ -352,13 +373,47 @@ With most of the metadata now in place, we can construct the top-level element:
 
 
 ```r
-eml <- new("eml", 
+eml <- new("eml",
+            packageId = uuid::UUIDgenerate(),
+            system = "uuid", # type of identifier
             dataset = dataset,
             additionalMetadata = additionalMetadata)
 ```
 
 
-This call automatically adds a few additional bits of information, such as a unique identifier `packageId` for the metadata file.  This `eml` object we have just created now has the complete R representation of the EML data.  This is the same class of object returned by `eml_read`, and consequently we can use all of the read methods provided to explore or manipulate it.  
+
+
+This `eml` object we have just created now has the complete R representation of the EML data.  This is the same class of object returned by `eml_read`, and consequently we can use all of the read methods provided to explore or manipulate it.  
+
+
+
+## `eml` helper function
+
+The helper function `eml` provides a shortcut to this step-by-step construction while retaining most of the expressiveness.   
+
+
+
+```r
+eml     <- eml( dataset = dat,
+                title = title,
+                creator = creator,
+                contact = contact,
+                pubDate = pubDate,
+                associatedParty = other_researchers,
+                intellectualRights = rights,
+                abstract = abstract,
+                keywordSet = keys,
+                coverage = coverage,
+                methods = method,
+                additionalMetadata = additionalMetadata
+              )
+```
+
+
+The helper function handles certain steps automatically, such as the creation of a `uuid` for the package identifier.  The required fields `creator` and `contact` will use values set by `eml_config` or can take text strings or R `person` objects as arguments, as well as eml's `creator` or `contact` classes.  In this case we pass a `dataTable` (permitting additional customization we used above such as the description field).  Alternatively this could be the more basic `data.set` object as the first argument (`dataset = dat`) or an already constructed EML `dataset` class. 
+
+Because package identifer, creator and contact fields are required for valid EML, this constructor function is often more convenient then the stepwise process shown above. Typically a single call to this function can provide all the metadata needed to properly annotate a `data.set`.    This is similar to the behavior of the `eml_write` function, but returns the R eml object rather than writing out to an XML file.  Additional fields can then be added or manipulated using the standard R S4 subsetting methods (see Advanced Parsing tutorial).  
+
 
 Finally we are ready to write out our EML object to an XML file. 
 
@@ -368,11 +423,11 @@ eml_write(eml, file="hf205_from_reml.xml")
 ```
 
 ```
-Error: either the parent or child node is NULL
+[1] "hf205_from_reml.xml"
 ```
 
 
-When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `new("eml")` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
+When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `eml()` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
 
 
 As before, we can now validate our EML document to ensure all the information has been formatted correctly:
@@ -383,45 +438,12 @@ eml_validate("hf205_from_reml.xml")
 ```
 
 ```
-
-Enter a frame number, or 0 to exit   
-
- 1: knit("Advanced_writing_of_EML.Rmd")
- 2: process_file(text, output)
- 3: withCallingHandlers(if (tangle) process_tangle(group) else process_gro
- 4: process_group(group)
- 5: process_group.block(group)
- 6: call_block(x)
- 7: block_exec(params)
- 8: in_dir(opts_knit$get("root.dir") %n% input_dir(), evaluate(code, envir
- 9: evaluate(code, envir = env, new_device = FALSE, keep_warning = !isFALS
-10: evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos, d
-11: handle(ev <- withCallingHandlers(withVisible(eval(call, envir, enclos)
-12: try(f, silent = TRUE)
-13: tryCatch(expr, error = function(e) {
-    call <- conditionCall(e)
-    if
-14: tryCatchList(expr, classes, parentenv, handlers)
-15: tryCatchOne(expr, names, parentenv, handlers[[1]])
-16: doTryCatch(return(expr), name, parentenv, handler)
-17: withCallingHandlers(withVisible(eval(call, envir, enclos)), warning = 
-18: withVisible(eval(call, envir, enclos))
-19: eval(call, envir, enclos)
-20: eval(expr, envir, enclos)
-21: <text>#1: eml_validate("hf205_from_reml.xml")
-22: saveXML(xmlParse(eml))
-23: xmlParse(eml)
-24: (if (isHTML) warning else stop)(e)
-```
-
-```
-Error: error in evaluating the argument 'doc' in selecting a method for function 'saveXML': Error: XML content does not seem to be XML: 'hf205_from_reml.xml'
+EML specific tests XML specific tests 
+              TRUE               TRUE 
 ```
 
 
 While it is difficult to create invalid EML using the constructor functions, it is not impossible so it never hurts to check.  
-
-
 
 As illustrated in the basic tutorial, we can now publish this file automatically to a central repository such as the KNB.   
 

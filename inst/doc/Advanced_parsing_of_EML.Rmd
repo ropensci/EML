@@ -1,4 +1,10 @@
 
+
+```{r include=FALSE, cache=FALSE}
+source("~/.knitr_defaults.R")
+```
+
+
 In [Advanced parsing and manipulation of EML](https://github.com/ropensci/reml/blob/master/inst/doc/Advanced_parsing_of_EML.md), we
 
 - Introduce how to access any EML element in R using the S4 subsetting mechanism
@@ -19,6 +25,12 @@ EML (the Ecological Metadata Language) is formatted using XML (eXtensible Markup
 
 Nodes can also specify information as attributes, such as `<individualName id=45>`, indicating the node has an `id` with the value `45`.  In EML attributes are rarely used for information other than identifiers on the nodes.  
 
+
+```{r}
+library(reml)
+```
+
+
 The EML package represents nodes defined in the EML schema as R objects using R's S4 object mechanism. We can create a new object corresponding to any node defined in the EML Schema using the `new()` function; such as:
 
 ```{r}
@@ -29,13 +41,13 @@ node
 Showing our object in the console reveals that it has three slots, `salutation`, `givenName`, and `surName`, each currently with the value of a length zero character string.  We can assign values to the slots using the S4 subsetting operator `@` (most R users may be more familiar with subsetting S3 objects or lists by using the `$` operator)
 
 ```{r}
-node@givenName <- John
+node@givenName <- "John"
 ```
 
 Alternatively, we can use the `slot` function: 
 
 ```{r}
-slot(node, "givenName") <- John
+slot(node, "givenName") <- "John"
 ```
 
 Each of these operations can also be used (without the assignment operator `<-`) to access the value of the slot, e.g. 
