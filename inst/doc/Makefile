@@ -31,4 +31,4 @@ vignette:
 
 
 clean:
-	rm README.md 
+	rm -rf README.md *.csv *.xml ../tests/*.csv ../tests/*.xml ../tests/tmp ../../*.csv ../../*.xml ../../tmp
