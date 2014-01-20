@@ -10,7 +10,8 @@ eml_write <- function(dat,
                       file = NULL,
                       title = "metadata",
                       creator = get("defaultCreator", envir=remlConfig), 
-                      contact = get("defaultContact", envir=remlConfig)){
+                      contact = get("defaultContact", envir=remlConfig),
+                      ...){
 
   ## dat Types we can handle by coercion
   if(is(dat, "eml")) {
@@ -23,7 +24,11 @@ eml_write <- function(dat,
   } else { ## assemble minimal valid information  
 
 
-    s4 <- eml(dat = dat, title = title, creator = creator, contact = contact)
+    s4 <- eml(dat = dat, 
+              title = title, 
+              creator = creator, 
+              contact = contact,
+              ...)
   }
   xml <- as(s4, "XMLInternalElementNode")
   saveXML(xml, file = file)
