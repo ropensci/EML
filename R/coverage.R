@@ -9,7 +9,7 @@
 setClass("citation") # Dummy declaration to avoid warning, replaced when collating literature.R module
 
 setClass("classificationSystem",
-         slots = c(classificationSystemCitation = "citation",
+         slots = c(classificationSystemCitation = "ListOfcitation",
                         classificationSystemModifications = "character"))
 setAs("XMLInternalElementNode", "classificationSystem",   function(from) emlToS4(from))
 setAs("classificationSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -23,7 +23,7 @@ setAs("vouchers", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("taxonomicSystem",
          slots = c(classificationSystem = "classificationSystem",
-                        identificationReference = "citation",
+                        identificationReference = "ListOfcitation",
                         identifierName = "responsibleParty",
                         taxonomicProcedures = "character",
                         taxonomicCompleteness = "character", 
@@ -110,7 +110,7 @@ setClass("alternativeTimeScale",
                         timeScaleAgeEstimate = "character",
                         timeScaleAgeUncertainty = "character",
                         timeScaleAgeExplanation = "character",
-                        timeScaleCitation = "character") # FIXME should be citation type
+                        timeScaleCitation = "ListOfcitation") 
         )
 setAs("XMLInternalElementNode", "alternativeTimeScale",   function(from) emlToS4(from))
 setAs("alternativeTimeScale", "XMLInternalElementNode",   function(from) S4Toeml(from))
