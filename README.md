@@ -5,7 +5,7 @@ An R package for reading, writing, integrating and publishing data using the Eco
 
 * **Note:** This package is still in active development and not yet submitted to CRAN.  Functions and documentation may be incomplete and subject to change.  
 * Maintainer: Carl Boettiger
-* Authors: Carl Boettiger, Duncan Temple Lang, Karthik Ram, Matt Jones
+* Authors: Carl Boettiger, Claas-Thido Pfaff, Duncan Temple Lang, Karthik Ram, Matt Jones
 * License: [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
 * [Issues](https://github.com/ropensci/reml/issues): Bug reports, feature requests, and development discussion.
 
