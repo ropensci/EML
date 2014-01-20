@@ -46,9 +46,7 @@ eml <- function(dataset = NULL,
 
 
   if(is(methods, "character")){
-    method_object <- new("methods")
-    method_object@methodStep[[1]]@description <- methods
-    methods <- method_object
+    methods <- new("methods", methodStep = c(new("methodStep", description = methods)))
   }
 
   eml <- new("eml",
