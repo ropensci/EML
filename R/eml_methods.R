@@ -1,5 +1,105 @@
 ## Additional METHODS for this class ## 
 
+
+#' eml constructor function 
+#' @param dat a data.set object  
+#' @param title for the metadata.  Also used as the csv filename.   
+#' @param creator a ListOfcreator object, character string, or person object.  
+#'  Otherwise loaded from value set by eml_config.  
+#' @param contact a contact object, character string, or person object.  
+#'  Otherwise loaded from value set by eml_config.  
+#' @param a coverage object, such as created by the eml_coverage constructor function.
+#' @param methods a method object or plain text string, documenting additional methods 
+#' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
+#' @param additionalMetadata an additionalMetadata object
+#' @details
+#' 
+#' - Permits character string definitions of creator & contact
+#' - generates a unique PackageId
+#' - Avoids more verbose separate call to dataset constructor and eml_dataTable
+#' 
+#' @export 
+eml <- function(dataset = NULL,
+                title = "metadata",
+                creator = get("defaultCreator", envir=remlConfig),
+                contact = get("defaultContact", envir=remlConfig),
+                coverage = eml_coverage(scientific_names = NULL,
+                                        dates = NULL,
+                                        geographic_description = NULL,
+                                        NSEWbox = NULL),
+                methods = new("methods"),
+                ...,
+                additionalMetadata = c(new("additionalMetadata")),
+                citation = NULL,
+                software = NULL,
+                protocol = NULL
+                )
+{
+
+
+  ## Coerce character string persons into EML representations
+
+
+  uid <- reml_id()
+  who <- contact_creator(contact = contact, 
+                         creator = creator)
+
+
+  if(is(methods, "character")){
+    method_object <- new("methods")
+    method_object@methodStep[[1]]@description <- methods
+    methods <- method_object
+  }
+
+  eml <- new("eml",
+             packageId = uid[["id"]], 
+             system = uid[["system"]],
+             scope = uid[["scope"]], 
+             additionalMetadata = additionalMetadata)
+
+
+  if(!isEmpty(dataset)){
+    if(is(dataset, "dataset")) # pre-built dataset object
+      eml@dataset <- dataset 
+    else if(is(dataset, "data.frame")) # data.set class, (also data.frame with wizard)
+      eml@dataset = new("dataset", 
+                        title = title, # required 
+                        creator = who$creator,
+                        contact = who$contact,
+                        coverage = coverage,
+                        methods = methods, 
+                        dataTable = c(eml_dataTable(dat = dat, 
+                                                    title = title)),
+                        ...)
+    else if(is(dataset, "dataTable"))
+       eml@dataset = new("dataset", 
+                        title = title, # required 
+                        creator = who$creator,
+                        contact = who$contact,
+                        coverage = coverage,
+                        methods = methods, 
+                        dataTable = c(dat),
+                        ...)
+ }
+
+  if(!isEmpty(citation))
+    eml@citation <- citation
+  if(!isEmpty(software))
+    eml@software <- software
+  if(!isEmpty(protocol))
+    eml@protocol <- protocol
+ 
+
+  ## Identify the kind of dataset by the type of dat provided 
+  if(is(dat, "data.frame")){
+    eml@dataset@dataTable <- c(eml_dataTable(dat = dat, 
+                                             title = title))
+  } 
+
+  eml 
+}
+
+
 # When printing to screen, use YAML
 #' @import yaml 
 #' @include eml_yaml.R
@@ -123,68 +223,6 @@ get_col_classes <- function(attrs){
 
 
 
-
-#' eml constructor function 
-#' @param dat a data.set object  
-#' @param title for the metadata.  Also used as the csv filename.   
-#' @param creator a ListOfcreator object, character string, or person object.  
-#'  Otherwise loaded from value set by eml_config.  
-#' @param contact a contact object, character string, or person object.  
-#'  Otherwise loaded from value set by eml_config.  
-#' @param a coverage object, such as created by the eml_coverage constructor function.
-#' @param methods a method object.  
-#' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
-#' @param additionalMetadata an additionalMetadata object
-#' @details
-#' 
-#' - Permits character string definitions of creator & contact
-#' - generates a unique PackageId
-#' - Avoids more verbose separate call to dataset constructor and eml_dataTable
-#' 
-#' @export 
-eml <- function(dat,            ## attribute level
-                title = "metadata", ## dataset lvl, also used for physical (csv name) 
-                creator = get("defaultCreator", envir=remlConfig), # dataset lvl 
-                contact = get("defaultContact", envir=remlConfig), # dataset lvl
-                coverage = eml_coverage(scientific_names = NULL,   # optional
-                                        dates = NULL,
-                                        geographic_description = NULL,
-                                        NSEWbox = NULL),
-                methods = new("methods"),
-                ...,
-                additionalMetadata = c(new("additionalMetadata")))
-{
-
-
-  ## Coerce character string persons into EML representations
-
-
-  uid <- reml_id()
-  who <- contact_creator(contact = contact, 
-                         creator = creator)
-
-  eml <- new("eml",
-             packageId = uid[["id"]], 
-             system = uid[["system"]],
-             scope = uid[["scope"]], 
-             dataset = new("dataset", 
-                           title = title, # required 
-                           creator = who$creator,
-                           contact = who$contact,
-                           coverage = coverage,
-                           methods = methods, 
-                           ...),
-             additionalMetadata = additionalMetadata)
-  
-
-  ## Identify the kind of dataset by the type of dat provided 
-  if(is(dat, "data.frame")){
-    eml@dataset@dataTable <- c(eml_dataTable(dat = dat, 
-                                             title = title))
-  } 
-
-  eml 
-}
 
 
 contact_creator <- function(contact = get("defaultContact", envir=remlConfig), 
