@@ -3,9 +3,9 @@
 \alias{write.eml}
 \title{Top-level API function for writing eml}
 \usage{
-eml_write(dat, meta = NULL, creator = get("defaultCreator", envir =
-  remlConfig), contact = get("defaultContact", envir = remlConfig),
-  file = NULL)
+eml_write(dat, file = NULL, title = "metadata",
+  creator = get("defaultCreator", envir = remlConfig),
+  contact = get("defaultContact", envir = remlConfig))
 }
 \arguments{
   \item{dat}{either a data.frame, data.set, or eml object}

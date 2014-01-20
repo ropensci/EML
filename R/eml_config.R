@@ -35,3 +35,9 @@ eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
 }
 eml_config()
 
+
+eml_get_config <- function(x){
+  get(x, envir = remlConfig)
+}
+
+

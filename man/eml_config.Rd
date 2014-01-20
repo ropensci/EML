@@ -4,7 +4,7 @@
 
 Default options for generating EML objects}
 \usage{
-eml_config(creator = "", contact = "", defaultLicense = "CC0")
+eml_config(creator = "", contact = "", defaultRights = "CC0")
 }
 \arguments{
   \item{creator}{a character string, person object, or
@@ -13,9 +13,8 @@ eml_config(creator = "", contact = "", defaultLicense = "CC0")
   \item{contact}{a character string, person object, or
   contact object}
 
-  \item{defaultLicense}{a text string specifying the
-  default intellectual rights text that should be
-  indicated.}
+  \item{defaultRights}{a text string specifying the default
+  intellectual rights text that should be indicated.}
 }
 \value{
   Nothing, but updates the remlConfig environment where

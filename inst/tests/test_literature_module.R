@@ -337,7 +337,7 @@ eml_citation@creator        = a_creator
 eml_citation@title          = a_title
 eml_citation@pubDate        = a_pubDate
 eml_citation@additionalInfo = a_note
-a_audioVisual = eml_citation 
+an_audioVisual = eml_citation 
 
 test_that("We can coerce an audioVisual to bibentry", {
   expect_that(as(eml_citation, "bibentry"), is_a('bibentry')) 
@@ -443,10 +443,10 @@ test_that("We warn if we coerce a bibentry of map to generic if we cannot check 
   expect_that(as(a_map_bibitem, "citation"), gives_warning())
 }) 
 
-a_audioVisual_bibitem = as(a_audioVisual, "bibentry")
+an_audioVisual_bibitem = as(an_audioVisual, "bibentry")
 
 test_that("We warn if we coerce a bibentry of personal communication to generic if we cannot check the right type of eml citation", {
-  expect_that(as(a_audioVisual_bibitem, "citation"), gives_warning())
+  expect_that(as(an_audioVisual_bibitem, "citation"), gives_warning())
 })  
 
 # test the book and edited book switch

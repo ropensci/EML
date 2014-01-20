@@ -3,10 +3,10 @@ context("testing measurement scale detection")
 
 
 require(reml)
-data(ex1)
+data(ex2)
 
-s4 <- reml:::eml(dat, metadata, title = "title", 
-                 description = "description", 
+s4 <- reml:::eml(dat, 
+                 title = "title", 
                  creator = "Carl Boettiger <cboettig@gmail.com>")
 
 
@@ -26,3 +26,5 @@ s4 <- reml:::eml(dat, metadata, title = "title",
 ## See https://github.com/ropensci/workshops-norwich-2013-09/blob/0f8738b50d5613526fa9dd531698649c9ad18490/04-reproducible-research/reml.Rmd for an example with different fields (including Date)
 
 ## Write more simple data cases showing this diversity of data types..
+
+

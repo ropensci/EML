@@ -1,5 +1,6 @@
 export(coverage)
 export(data.set)
+export(eml)
 export(eml_add)
 export(eml_config)
 export(eml_coverage)
