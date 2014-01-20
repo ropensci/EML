@@ -1048,10 +1048,14 @@ setAs("bibentry",
       }
 )
 
+
+setClass("ListOfcitation", contains="list")
+setMethod("c", signature("citation"), function(x, ...) new("ListOfcitation", list(x, ...)))
+
 # literature 
 
 setClass("literature",
-        slots = c(citation = "citation")
+        slots = c(citation = "ListOfcitation")
          )
 
 # literature coercion
