@@ -63,7 +63,7 @@ setAs("data.frame", "physical", function(from)
 ## Custom generator. Consider making int an S4 method?  
 eml_physical <- function(dat, filename=character(0), ...){
   if(length(filename) == 0) 
-    filename = paste(reml_id()[["id"]], ".csv", sep="")
+    filename = paste(EML_id()[["id"]], ".csv", sep="")
   suppressWarnings(write.csv(dat, file = filename, row.names=FALSE, ...)) # don't care about warning in coercion of data.set to data.frame
   new("physical", 
       objectName = filename, 

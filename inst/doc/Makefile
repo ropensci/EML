@@ -4,8 +4,9 @@ WRITING = Advanced_writing_of_EML
 
 all: 
 	make readme
+	make basic
 	make vignette
-
+	make writing
 
 readme: README.Rmd 
 	Rscript -e 'require(knitr); knit("README.Rmd")'

@@ -50,7 +50,7 @@ In this example, we will use R to re-generate the EML metadata originally publis
 
 
 ```r
-library(reml)
+library(EML)
 ```
 
 
@@ -59,7 +59,7 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 
 
 ```r
-f <- system.file("examples", "hf205-01-TPexp1.csv", package="reml")
+f <- system.file("examples", "hf205-01-TPexp1.csv", package="EML")
 dat <- read.csv(f, 
                 colClasses = "factor", # c("factor", "Date", "Date", "Date", 
                              #  "factor", "factor", "factor")
@@ -127,7 +127,7 @@ As a _metadata_ format, we do not encode the actual data file itself into the EM
 
 
 ```r
-dataTable <- reml:::eml_dataTable(dat, 
+dataTable <- EML:::eml_dataTable(dat, 
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
 ```
@@ -315,7 +315,7 @@ For larger blocks of text we might rather write these Word.  We can read them in
 ```r
 library(RWordXML)
 library(XML)
-f2 <- wordDoc(system.file("examples", "methods.docx", package="reml"))
+f2 <- wordDoc(system.file("examples", "methods.docx", package="EML"))
 doc <- f2[[getDocument(f2)]]
 txt <- xpathSApply(doc, "//w:t", xmlValue)
 ## FIXME add <title> <section> and <para> blocking back: 
@@ -339,7 +339,7 @@ One of the simplest ways and most powerful ways to generate EML metadata is to r
 
 
 ```r
-hf205 <- eml_read(system.file("examples", "hf205.xml", package="reml"))
+hf205 <- eml_read(system.file("examples", "hf205.xml", package="EML"))
 additionalMetadata <- hf205@additionalMetadata # extracted from previous eml file
 ```
 
@@ -419,11 +419,11 @@ Finally we are ready to write out our EML object to an XML file.
 
 
 ```r
-eml_write(eml, file="hf205_from_reml.xml")
+eml_write(eml, file="hf205_from_EML.xml")
 ```
 
 ```
-[1] "hf205_from_reml.xml"
+[1] "hf205_from_EML.xml"
 ```
 
 
@@ -434,7 +434,7 @@ As before, we can now validate our EML document to ensure all the information ha
 
 
 ```r
-eml_validate("hf205_from_reml.xml")
+eml_validate("hf205_from_EML.xml")
 ```
 
 ```

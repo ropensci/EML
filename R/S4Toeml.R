@@ -1,11 +1,11 @@
-#' @include reml_environment.R
+#' @include EML_environment.R
 
 
 ########### Write Methods ###############
 
 
 
-## Used as the basis of most (all) coercion methods from reml S4 
+## Used as the basis of most (all) coercion methods from EML S4 
 ## to XML::XMLInternalElementNode class
 ##
 ## - Will convert only the id to an attribute, everything else is a child node

@@ -1,17 +1,19 @@
-# eml online validation tool
-# 
-# Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
-# @param eml path to an eml file or text of eml file
-# @param additional arguments to formQuery
-# @param style formQuery style as curl POST. Don't change this.   
-# @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
-# @details More detailed testing against the schema can be performed using the xmlSchemaValidate
-#   function from the XML package, which will report information on exactly what lines fail the 
-#   test, if any.  However, this performs only the first of the two checks provided by the online
-#   tool, which also checks that all referenced internal ids (describes nodes) correspond to matching ids.  
-# 
-#   This function requires an internet connection.
-# @author Duncan Temple Lang
+#' eml online validation tool
+#' 
+#' Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
+#' @param eml path to an eml file or text of eml file
+#' @param additional arguments to formQuery
+#' @param style formQuery style as curl POST. Don't change this.   
+#' @param schema_only logical, use schema-only validation tests.  Default is FALSE, but 
+#'  will also be used as the fallback mechanism if RHTMLForms is unavailable.  
+#' @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
+#' @details More detailed testing against the schema can be performed using the xmlSchemaValidate
+#'   function from the XML package, which will report information on exactly what lines fail the 
+#'   test, if any.  However, this performs only the first of the two checks provided by the online
+#'   tool, which also checks that all referenced internal ids (describes nodes) correspond to matching ids.  
+#' 
+#'   This function requires an internet connection.
+#' @author Duncan Temple Lang
 #' @export
 eml_validate <-
 function (eml = "", 
@@ -44,16 +46,22 @@ function (eml = "",
                             .Names = "referer"), 
           style = "POST", 
           .curl = getCurlHandle(), 
-          .cleanArgs = NULL) 
+          .cleanArgs = NULL,
+          schema_only = FALSE) 
 {
 
-## FIXME should we attempt to use XMLSchemaValidate here if RHTMLForms isn't available?  
+## attempt to use XMLSchemaValidate here if RHTMLForms isn't available?  
 
-    doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
+  doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
 
-    success <- require(RHTMLForms)
-    if(!success)
-      error("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
+  success <- require(RHTMLForms)
+  if(!success | schema_only){
+    warning("Performing XML Schema validation only.\n
+            Install RHTMLForms to provide additional EML-specific tests.")
+#    xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
+    xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+#      error("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
+  } else { 
     success <- require(RCurl)
     if(!success)
       error("RCurl package must be installed to use this function.")
@@ -78,6 +86,7 @@ function (eml = "",
         }
     }
     ans
+  }
 }
 
 processValidationResponse =

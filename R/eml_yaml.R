@@ -9,7 +9,7 @@
 #' @return A YAML representation of the metadata in the EML file, either
 #' to the terminal or externally.  
 #' @examples
-#' file <- system.file("doc", "my_eml_data.xml", package="reml")
+#' file <- system.file("doc", "my_eml_data.xml", package="EML")
 #' eml_yaml(file)
 #' # we can pass additional optional arguments too, e.g.
 #' eml_yaml(file, .yamlopts = list(indent=4))

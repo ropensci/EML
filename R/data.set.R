@@ -43,7 +43,7 @@ setMethod("get_metadata", "data.set", function(object){
             })
 
 # data.frames have NULL metadata.  Avoids an error when calling this on a data.frame, 
-# which allows reml to envoke the metadata wizard.  
+# which allows EML to envoke the metadata wizard.  
 setMethod("get_metadata", "data.frame", function(object) NULL)
 
 

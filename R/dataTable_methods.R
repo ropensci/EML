@@ -19,7 +19,7 @@ eml_dataTable <- function(dat,
 
   if(length(title) > 0 & length(filename) == 0)
     filename <- paste0(gsub(" ", "_", title), ".csv")
-  id <- reml_id()
+  id <- EML_id()
   if(length(filename) == 0)
     filename <- paste0(id[["id"]], ".csv")
   if(length(title) == 0)

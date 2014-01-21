@@ -1,4 +1,4 @@
-library(reml)
+library(EML)
 dat = data.set(river = c("SAC",  "SAC",   "AM"),
                spp   = c("king",  "king", "ccho"),
                stg   = c("smolt", "parr", "smolt"),

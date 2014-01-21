@@ -21,8 +21,8 @@
 #' @export 
 eml <- function(dataset = NULL,
                 title = "metadata",
-                creator = get("defaultCreator", envir=remlConfig),
-                contact = get("defaultContact", envir=remlConfig),
+                creator = get("defaultCreator", envir=EMLConfig),
+                contact = get("defaultContact", envir=EMLConfig),
                 coverage = eml_coverage(scientific_names = NULL,
                                         dates = NULL,
                                         geographic_description = NULL,
@@ -40,7 +40,7 @@ eml <- function(dataset = NULL,
   ## Coerce character string persons into EML representations
 
 
-  uid <- reml_id()
+  uid <- EML_id()
   who <- contact_creator(contact = contact, 
                          creator = creator)
 
@@ -223,8 +223,8 @@ get_col_classes <- function(attrs){
 
 
 
-contact_creator <- function(contact = get("defaultContact", envir=remlConfig), 
-                            creator = get("defaultCreator", envir=remlConfig)){
+contact_creator <- function(contact = get("defaultContact", envir=EMLConfig), 
+                            creator = get("defaultCreator", envir=EMLConfig)){
 
    ## Get a contact first 
   if(is.null(contact) || length(contact) == 0 || isEmpty(contact)){ # IF no contact given... 

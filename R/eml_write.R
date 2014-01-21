@@ -5,12 +5,12 @@
 #' @aliases eml_write write.eml 
 #' @import XML
 #' @export eml_write write.eml
-#' @include reml_environment.R
+#' @include EML_environment.R
 eml_write <- function(dat,
                       file = NULL,
                       title = "metadata",
-                      creator = get("defaultCreator", envir=remlConfig), 
-                      contact = get("defaultContact", envir=remlConfig),
+                      creator = get("defaultCreator", envir=EMLConfig), 
+                      contact = get("defaultContact", envir=EMLConfig),
                       ...){
 
   ## dat Types we can handle by coercion

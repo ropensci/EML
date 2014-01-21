@@ -11,7 +11,7 @@
 #' @return the figshare id
 #' @details figshare requires authentication. See rfigshare 
 #' [tutorial]() for help on configuring this.  
-#' Arguments for figshare are optional, if not provided reml will attempt to
+#' Arguments for figshare are optional, if not provided EML will attempt to
 #' extract appropriate values from the EML.  If no values are found for 
 #' essential metadata (title, description, category), then figshare object
 #' will be still be created as a draft but cannot be published. 
@@ -24,8 +24,8 @@
 #' @import XML
 #' @examples 
 #' \dontrun{
-#'    file <- system.file("doc", "my_eml_data.xml", package="reml")
-#'    id <- eml_figshare(file, description="Example EML file from reml", categories = "Ecology", tags = "EML")
+#'    file <- system.file("doc", "my_eml_data.xml", package="EML")
+#'    id <- eml_figshare(file, description="Example EML file from EML", categories = "Ecology", tags = "EML")
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 

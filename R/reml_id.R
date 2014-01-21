@@ -1,6 +1,6 @@
 
 #' @import uuid 
-reml_id <- function(prefix="reml_") {
+EML_id <- function(prefix="EML_") {
   success <- 1 # require(uuid)  ## uuid on CRAN, let's just import it and be done with
     if(success){
       id <- paste0("urn:uuid:", uuid::UUIDgenerate())
@@ -9,7 +9,7 @@ reml_id <- function(prefix="reml_") {
     } else {
       id <- paste(prefix, format(Sys.time(), "%Y%m%d%H%M%s"), "1", sep=".")
       scope <- "system"
-      system <- "reml"
+      system <- "EML"
     }
     c(id = id, system = system, scope = scope)
   }

@@ -4,7 +4,7 @@
 
 
 
-In [Advanced parsing and manipulation of EML](https://github.com/ropensci/reml/blob/master/inst/doc/Advanced_parsing_of_EML.md), we
+In [Advanced parsing and manipulation of EML](https://github.com/ropensci/EML/blob/master/inst/doc/Advanced_parsing_of_EML.md), we
 
 - Introduce how to access any EML element in R using the S4 subsetting mechanism
 - Illustrate how EML metadata extraction can be applied across a collection of files 
@@ -27,7 +27,7 @@ Nodes can also specify information as attributes, such as `<individualName id=45
 
 
 ```r
-library(reml)
+library(EML)
 ```
 
 
