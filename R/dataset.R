@@ -10,7 +10,7 @@
 
 
 setClass("ListOfdataTable", contains = "list")
-setMethod("c", signature("dataTable"), function(x, ...) new("ListOfdataTable", list(x, ...)))
+setMethod("c", signature("dataTable"), function(..., recursive = FALSE) new("ListOfdataTable", list(...)))
 
 
 ## A Hack to get element order correct without writing

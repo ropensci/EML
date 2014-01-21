@@ -57,7 +57,6 @@ Collate:
     'data.set.R'
     'dataTable_methods.R'
     'emlToS4.R'
-    'eml_add.R'
     'eml_get.R'
     'eml_methods.R'
     'eml_publish.R'

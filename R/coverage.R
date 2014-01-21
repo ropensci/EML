@@ -42,7 +42,7 @@ setAs("XMLInternalElementNode", "taxonomicClassification",   function(from) emlT
 setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOftaxonomicClassification", contains = "list")
-setMethod("c", signature("taxonomicClassification"), function(x, ...) new("ListOftaxonomicClassification", list(x, ...)))
+setMethod("c", signature("taxonomicClassification"), function(..., recursive=FALSE) new("ListOftaxonomicClassification", list(...)))
 
 ## Class definition for taxonomicCoverage 
 setClass("taxonomicCoverage",

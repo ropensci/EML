@@ -8,7 +8,7 @@ setAs("references", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOfreferences", 
          contains = "list")
-setMethod("c", signature("references"), function(x, ...) new("ListOfreferences", list(x, ...)))
+setMethod("c", signature("references"), function(..., recursive = FALSE) new("ListOfreferences", list(...)))
 
 setClass("referencesGroup", 
          slots = c("references" = "ListOfreferences"))
@@ -71,7 +71,7 @@ setAs("responsibleParty", "XMLInternalElementNode",   function(from) S4Toeml(fro
 
 
 setClass("ListOfresponsibleParty", contains ="list")
-setMethod("c", signature("responsibleParty"), function(x, ...) new("ListOfresponsibleParty", list(x, ...)))
+setMethod("c", signature("responsibleParty"), function(..., recursive = FALSE) new("ListOfresponsibleParty", list(...)))
 
 
 ############ Elements inheriting/of type responsibleParty ### 
@@ -87,7 +87,7 @@ setClass("ListOfcreator", contains = "list",
                   "not all elements are creator objects"
                else
                  TRUE)
-setMethod("c", signature("creator"), function(x, ...) new("ListOfcreator", list(x, ...)))
+setMethod("c", signature("creator"), function(..., recursive = FALSE) new("ListOfcreator", list(...)))
 # Defines contact ##
 setClass("contact", contains="responsibleParty")
 setAs("XMLInternalElementNode", "contact",   function(from) emlToS4(from))
@@ -97,7 +97,7 @@ setClass("originator", contains="responsibleParty")
 setAs("XMLInternalElementNode", "originator",   function(from) emlToS4(from))
 setAs("originator", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setClass("ListOforiginator", contains="list")
-setMethod("c", signature("originator"), function(x, ...) new("ListOforiginator", list(x, ...)))
+setMethod("c", signature("originator"), function(..., recursive = FALSE) new("ListOforiginator", list(...)))
 
 
 # publisher + coercions
@@ -136,9 +136,7 @@ setAs("institution",
 
 setClass("ListOfinstitution", contains="list")
 
-setMethod("c", 
-          signature("institution"), 
-          function(x, ...) new("ListOfinstitution", list(x, ...)))
+setMethod("c", signature("institution"), function(..., recursive = FALSE) new("ListOfinstitution", list(...)))
 
 setAs("institution", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
@@ -171,9 +169,8 @@ setAs("performer",
 
 setClass("ListOfperformer", contains="list")
 
-setMethod("c", 
-          signature("performer"), 
-          function(x, ...) new("ListOfperformer", list(x, ...)))
+setMethod("c", signature("performer"), 
+          function(..., recursive = FALSE) new("ListOfperformer", list(...)))
 
 setAs("performer", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
@@ -209,7 +206,7 @@ setClass("ListOfrecipient", contains="list")
 
 setMethod("c", 
           signature("recipient"), 
-          function(x, ...) new("ListOfrecipient", list(x, ...)))
+          function(..., recursive = FALSE) new("ListOfrecipient", list(...)))
 
 setAs("recipient", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
@@ -262,7 +259,7 @@ setClass("ListOfeditor", contains="list")
 
 setMethod("c", 
           signature("editor"), 
-          function(x, ...) new("ListOfeditor", list(x, ...)))
+          function(..., recursive = FALSE) new("ListOfeditor", list(...)))
 
 setAs("ListOfeditor", 
       "person", 
@@ -297,9 +294,9 @@ setAs("associatedParty", "XMLInternalElementNode",   function(from) S4Toeml(from
 
 
 setClass("ListOfmetadataProvider", contains="list")
-setMethod("c", signature("metadataProvider"), function(x, ...) new("ListOfmetadataProvider", list(x, ...)))
+setMethod("c", signature("metadataProvider"), function(..., recursive = FALSE) new("ListOfmetadataProvider", list(...)))
 setClass("ListOfassociatedParty", contains="list")
-setMethod("c", signature("associatedParty"), function(x, ...) new("ListOfassociatedParty", list(x, ...)))
+setMethod("c", signature("associatedParty"), function(..., recursive = FALSE) new("ListOfassociatedParty", list(...)))
 
 
 

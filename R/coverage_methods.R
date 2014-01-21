@@ -27,11 +27,12 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
 #' @include coverage.R
 setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
+# FIXME should these accessor methods be functions instead? 
 
 #' @export
 setGeneric("coverage", function(coverage) standardGeneric("coverage"))
 
-#' accessor method
+#' accessor method. also defined for eml 
 setMethod("coverage", signature("coverage"), function(coverage) coverage)
 
 # Coercing to a generic list is error-prone, e.g. as(coverage, "list")[[1]][[1]] 

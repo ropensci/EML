@@ -29,7 +29,7 @@ setAs("XMLInternalElementNode", "additionalMetadata",
       })
 
 setClass("ListOfadditionalMetadata", contains="list")
-setMethod("c", signature("additionalMetadata"), function(x, ...) new("ListOfadditionalMetadata", list(x, ...)))
+setMethod("c", signature("additionalMetadata"), function(..., recursive = FALSE) new("ListOfadditionalMetadata", list(...)))
 
 ############# eml top-level  ######################
 

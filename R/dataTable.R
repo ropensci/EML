@@ -18,7 +18,7 @@ setAs("XMLInternalElementNode", "dataTable",  function(from) emlToS4(from))
 setAs("dataTable", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-setMethod("c", "dataTable", function(x, ...){
+setMethod("c", "dataTable", function(..., recursive = FALSE){
         elements <- list(x, ...)
         new("ListOfdataTable", list(elements))
          })

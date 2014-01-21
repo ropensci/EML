@@ -1050,7 +1050,7 @@ setAs("bibentry",
 
 
 setClass("ListOfcitation", contains="list")
-setMethod("c", signature("citation"), function(x, ...) new("ListOfcitation", list(x, ...)))
+setMethod("c", signature("citation"), function(..., recursive = FALSE) new("ListOfcitation", list(...)))
 
 # literature 
 

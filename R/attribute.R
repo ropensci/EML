@@ -18,8 +18,6 @@ setClass("ListOfcodeDefinition", contains="list")
 #' concatenate codeDef
 #'
 #' concatenate codeDef
-#' @rdname c-methods
-#' @aliases c,codeDefinition,ANY-method
 setMethod("c", signature("codeDefinition"), function(..., recursive = FALSE) new("ListOfcodeDefinition", list(...)))
 
 setClass("enumeratedDomain", 
@@ -118,8 +116,6 @@ setClass("ListOfattribute", contains="list") # set validity all elements are att
 #' concatenate attribute
 #' 
 #' concatenate attribute
-#' @rdname c-methods
-#' @aliases c,attribute,ANY-method
 setMethod("c", signature("attribute"), function(..., recursive = FALSE) new("ListOfattribute", list(...)))
 
 setClass("attributeList", 

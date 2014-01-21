@@ -60,10 +60,10 @@ setAs("qualityControl", "XMLInternalElementNode",   function(from) S4Toeml(from)
 
 
 setClass("ListOfmethodStep", contains="list")
-setMethod("c", signature("methodStep"), function(x, ...) new("ListOfmethodStep", list(x, ...)))
+setMethod("c", signature("methodStep"), function(..., recursive = FALSE) new("ListOfmethodStep", list(...)))
 
 setClass("ListOfqualityControl", contains="list")
-setMethod("c", signature("qualityControl"), function(x, ...) new("ListOfqualityControl", list(x, ...)))
+setMethod("c", signature("qualityControl"), function(..., recursive = FALSE) new("ListOfqualityControl", list(...)))
 
 
 
