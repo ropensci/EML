@@ -10,9 +10,9 @@ eml_read(file, ...)
   XMLInternalDocument}
 }
 \value{
-  an EML object
+an EML object
 }
 \description{
-  Read EML files
+Read EML files
 }
 

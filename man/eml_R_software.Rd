@@ -7,9 +7,9 @@ eml_R_software(packagename)
 \arguments{
   \item{packagename}{the name of the R package for which we
   want an EML documentation node See issue
-  [#32](https://github.com/ropensci/reml/issues/32)}
+  [#32](https://github.com/ropensci/EML/issues/32)}
 }
 \description{
-  Create a software node given the name of an R package
+Create a software node given the name of an R package
 }
 

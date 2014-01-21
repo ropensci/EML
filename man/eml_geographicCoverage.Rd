@@ -18,7 +18,7 @@ eml_geographicCoverage(description, NSEWbox = NULL)
   completed `eml::geographicCoverage` object.}
 }
 \description{
-  Implements only a subset of possible specifications for
-  coverage
+Implements only a subset of possible specifications for
+coverage
 }
 

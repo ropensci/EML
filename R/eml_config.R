@@ -19,6 +19,7 @@
 #'   are not applied if the function is not called explicitly.  
 #' @include reml_environment.R
 #' @include party.R 
+#' @import methods
 #' @export
 eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
   if(defaultRights == "CC0")

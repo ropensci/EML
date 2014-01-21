@@ -148,7 +148,7 @@ setAs("temporalCoverage", "XMLInternalElementNode",   function(from) S4Toeml(fro
 
 ############# GEOGRAPHIC COVERAGE ##########################
 
-#' @include attribute.R 
+# @include attribute.R 
 #setClass("altitudeUnits", contains="unit")
 #setAs("XMLInternalElementNode", "altitudeUnits",   function(from) emlToS4(from))
 #setAs("altitudeUnits", "XMLInternalElementNode",   function(from) S4Toeml(from))

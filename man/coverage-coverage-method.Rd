@@ -6,6 +6,6 @@
 \S4method{coverage}{coverage}(coverage)
 }
 \description{
-  accessor method
+accessor method
 }
 

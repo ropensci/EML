@@ -2,8 +2,7 @@
 #' 
 #' Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
 #' @param eml path to an eml file or text of eml file
-#' @param additional arguments to formQuery
-#' @param style formQuery style as curl POST. Don't change this.   
+#' @param ... additional arguments to formQuery
 #' @param schema_only logical, use schema-only validation tests.  Default is FALSE, but 
 #'  will also be used as the fallback mechanism if RHTMLForms is unavailable.  
 #' @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
@@ -17,9 +16,13 @@
 #' @export
 eml_validate <-
 function (eml = "", 
-          .url = "http://knb.ecoinformatics.org/emlparser/parse", 
           ..., 
-          .reader = processValidationResponse, 
+          schema_only = FALSE) 
+{
+
+          ## Should be part of the function arguments, but plays havoc with silly roxygen at this time...
+          .url = "http://knb.ecoinformatics.org/emlparser/parse"
+          .reader = processValidationResponse 
           .formDescription = structure(list(formAttributes = 
                                             structure(c("post", 
                                                         "http://knb.ecoinformatics.org/emlparser/parse"), 
@@ -41,15 +44,12 @@ function (eml = "",
                                             url = structure("http://knb.ecoinformatics.org/emlparser/parse", 
                                                             .Names = "action")), 
                                        .Names = c("formAttributes", "elements", "url"), 
-                                       class = "HTMLFormDescription"), 
+                                       class = "HTMLFormDescription") 
           .opts = structure(list(referer = "http://knb.ecoinformatics.org/emlparser/parse"), 
-                            .Names = "referer"), 
-          style = "POST", 
-          .curl = getCurlHandle(), 
-          .cleanArgs = NULL,
-          schema_only = FALSE) 
-{
-
+                            .Names = "referer")
+          style = "POST" 
+          .curl = getCurlHandle()
+          .cleanArgs = NULL
 ## attempt to use XMLSchemaValidate here if RHTMLForms isn't available?  
 
   doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  

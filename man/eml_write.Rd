@@ -4,13 +4,13 @@
 \title{Top-level API function for writing eml}
 \usage{
 eml_write(dat, file = NULL, title = "metadata",
-  creator = get("defaultCreator", envir = remlConfig),
-  contact = get("defaultContact", envir = remlConfig))
+  creator = get("defaultCreator", envir = EMLConfig),
+  contact = get("defaultContact", envir = EMLConfig), ...)
 }
 \arguments{
   \item{dat}{either a data.frame, data.set, or eml object}
 }
 \description{
-  Top-level API function for writing eml
+Top-level API function for writing eml
 }
 

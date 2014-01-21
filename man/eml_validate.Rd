@@ -1,0 +1,38 @@
+\name{eml_validate}
+\alias{eml_validate}
+\title{eml online validation tool}
+\usage{
+eml_validate(eml = "", ..., schema_only = FALSE)
+}
+\arguments{
+  \item{eml}{path to an eml file or text of eml file}
+
+  \item{...}{additional arguments to formQuery}
+
+  \item{schema_only}{logical, use schema-only validation
+  tests.  Default is FALSE, but will also be used as the
+  fallback mechanism if RHTMLForms is unavailable.}
+}
+\value{
+Two logicals indicating if we pass schema validation tests
+and id/referencing tests.
+}
+\description{
+Programmatic interface to the online parsing tool
+http://knb.ecoinformatics.org/emlparser/parse
+}
+\details{
+More detailed testing against the schema can be performed
+using the xmlSchemaValidate function from the XML package,
+which will report information on exactly what lines fail
+the test, if any.  However, this performs only the first of
+the two checks provided by the online tool, which also
+checks that all referenced internal ids (describes nodes)
+correspond to matching ids.
+
+This function requires an internet connection.
+}
+\author{
+Duncan Temple Lang
+}
+

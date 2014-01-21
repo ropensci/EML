@@ -5,6 +5,6 @@
 eml_add(eml = new(x, "eml"))
 }
 \description{
-  add element to an existing EML object
+add element to an existing EML object
 }
 

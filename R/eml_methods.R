@@ -18,6 +18,7 @@
 #' - generates a unique PackageId
 #' - Avoids more verbose separate call to dataset constructor and eml_dataTable
 #' 
+#' @import methods
 #' @export 
 eml <- function(dataset = NULL,
                 title = "metadata",
