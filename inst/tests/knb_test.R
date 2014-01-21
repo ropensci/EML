@@ -2,7 +2,7 @@ context("Publish to KNB")
 
 
 
-library(reml)
+library(EML)
 dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
                spp   = c("Oncorhynchus tshawytscha",  "Oncorhynchus tshawytscha", "Oncorhynchus kisutch"),
                stg   = ordered(c("smolt", "parr", "smolt"), levels=c("parr", "smolt")), # levels indicates increasing level, eg. parr < smolt
@@ -29,7 +29,7 @@ eml_write(dat, contact = "Carl Boettiger <cboettig@ropensci.org>", file = "test.
 
 test_that("We can publish data to the KNB", {
   nodeid = "urn:node:mnDemo5" # A Development server for testing
-  pid <- reml:::eml_knb("test.xml", 
+  pid <- EML:::eml_knb("test.xml", 
                  mn_nodeid = nodeid,                   
                  cli = D1Client("DEV", nodeid)) # Use dev mode client
 

@@ -1,6 +1,6 @@
 context("Testing the literature module")
 
-require(reml)
+require(EML)
 
 # Create litrature filds for reuse
 a_creator = new("ListOfcreator", list(new("creator", individualName = new("individualName", givenName = "Claas-Thido", surName = "Pfaff")))) 

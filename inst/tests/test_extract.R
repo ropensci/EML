@@ -3,23 +3,23 @@ context("extract")
 
 ## FIXME add unlink commands to remove/cleanup any files created by tests (e.g. the .csv and .xml files)
 
-require(reml)
+require(EML)
 data(ex4)
 
-S4obj <- reml:::eml(dat, title = "title", 
+S4obj <- EML:::eml(dat, title = "title", 
              creator = "Carl Boettiger <cboettig@gmail.com>")
 
 
 
 test_that("we can extract the data unaltered (using method for object 'physical')", {
-  out_dat <- reml:::extract(S4obj@dataset@dataTable[[1]]@physical, using=reml:::col_classes(S4obj)) ## Using is ignored...
+  out_dat <- EML:::extract(S4obj@dataset@dataTable[[1]]@physical, using=EML:::col_classes(S4obj)) ## Using is ignored...
 
  
   expect_equal(dat[["river"]], out_dat[["river"]])
 
 
 #  expect_equal(dat, out_dat) ## FIXME not quite, classes differ 
- # expect_identical(dat, out_dat) ## FIXME should be identical, but isn't because integers are cast as eml:ratio which is cast as numeric.  Need to add mechanism for integers reml::detect_class
+ # expect_identical(dat, out_dat) ## FIXME should be identical, but isn't because integers are cast as eml:ratio which is cast as numeric.  Need to add mechanism for integers EML::detect_class
 })
 
 

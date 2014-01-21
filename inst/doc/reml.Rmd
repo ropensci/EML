@@ -3,7 +3,7 @@ The future belongs to those who can leverage existing data and provide reusable 
 
 1. Following metadata standards facilitates reuse
 2. data 
-3. reml provides an easy way to utilize the Ecological Metadata Language to generate, access, and publish data.  
+3. EML provides an easy way to utilize the Ecological Metadata Language to generate, access, and publish data.  
 
 Data in ecology and evolutionary biology research collected for a
 particular purpose can often prove valuable to an entirely different
@@ -128,7 +128,7 @@ Completely automated data integration will require rich semantic information. Co
 
 ### Implementation and architecture
 
-The `reml` package is built for the Ecological Markup Language schema, [version 2.1.1], using the R software environment and the XML package for parsing and generating XML [Temple Lang 2013, XML]. 
+The `EML` package is built for the Ecological Markup Language schema, [version 2.1.1], using the R software environment and the XML package for parsing and generating XML [Temple Lang 2013, XML]. 
 
 <!-- Possibly cite all dependencies and suggests from the DESCRIPTION --> 
 <!-- Reference any installation and configuration instructions necessary (e.g. API credentials for figshare) -->
@@ -138,23 +138,23 @@ The `reml` package is built for the Ecological Markup Language schema, [version 
 
 ### Quality control
 
-The `reml` package can perform three levels of validation on EML files written from or read into R: validating the XML, validating against the EML 2.1.1 Schema, and performing
+The `EML` package can perform three levels of validation on EML files written from or read into R: validating the XML, validating against the EML 2.1.1 Schema, and performing
 
-Several mechanisms are in place to evaluate the quality of the `reml` package functions themselves.  In addition to the examples from the documentation and the automated package checks provided for the R system, the `reml` package includes a complete test suite using the testthat package [Wickham 2011].  
+Several mechanisms are in place to evaluate the quality of the `EML` package functions themselves.  In addition to the examples from the documentation and the automated package checks provided for the R system, the `EML` package includes a complete test suite using the testthat package [Wickham 2011].  
 
 [Wickham 2011]: http://vita.had.co.nz/papers/testthat.html
 
 ### Software reuse and support
 
-The `reml` package is available through the CRAN repository under a CC0 license. At the time of writing, the current version is `r packageDescription("reml", fields="Version")`. The current development branch can be found on Github at [https://github.com/ropensci/reml].  See the NEWS file for changes in recent versions. Users are encouraged to submit bug reports or feature requests in the issues log.  Contact ropensci-discuss@googlegroups.com or the package maintainer for help. 
+The `EML` package is available through the CRAN repository under a CC0 license. At the time of writing, the current version is `r packageDescription("EML", fields="Version")`. The current development branch can be found on Github at [https://github.com/ropensci/EML].  See the NEWS file for changes in recent versions. Users are encouraged to submit bug reports or feature requests in the issues log.  Contact ropensci-discuss@googlegroups.com or the package maintainer for help. 
 
-There are many promising directions for further development of the `reml` package.  The project's Milestones page provides a list of steps currently planned or under consideration.  In particular, these milestones include increased support for interactive mode of entering data (wizards), and support for integration of semantics defined through the Web Ontology language (OWL), as discussed in the Challenges section.  
+There are many promising directions for further development of the `EML` package.  The project's Milestones page provides a list of steps currently planned or under consideration.  In particular, these milestones include increased support for interactive mode of entering data (wizards), and support for integration of semantics defined through the Web Ontology language (OWL), as discussed in the Challenges section.  
 
 
 
 ### Acknowledgements
 
-This project was supported in part by a grant from the Alfred P Sloan Foundation (CB and KR), NSF Grant DBI-1306697 (CB), ... `reml` is part of the rOpenSci project, [http://ropensci.org].  
+This project was supported in part by a grant from the Alfred P Sloan Foundation (CB and KR), NSF Grant DBI-1306697 (CB), ... `EML` is part of the rOpenSci project, [http://ropensci.org].  
 
 
 

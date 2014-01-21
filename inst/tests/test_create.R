@@ -5,7 +5,7 @@ context("generating S4 from R dataframe")
 
 ## FIXME add expect_that to the tests!
 
-require(reml)
+require(EML)
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),
                  spp   = c("king",  "king", "ccho"),
                  stg   = c("smolt", "parr", "smolt"),
@@ -36,31 +36,31 @@ test_that("We can coerce factor definitions to nominal", {
 })
 
 test_that("We can coerce list to to attribute", {
-  metadata <- reml:::detect_class(dat, metadata)
+  metadata <- EML:::detect_class(dat, metadata)
   as(metadata$river, "attribute")
 })
 
 test_that("We can coerce metadata to attributeList", {
-  metadata <- reml:::detect_class(dat, metadata) ## Needs metadata with class info from data
+  metadata <- EML:::detect_class(dat, metadata) ## Needs metadata with class info from data
   as(metadata, "attributeList") 
 })
 
 test_that("Generator for dataset containing generator for dataTable", {
-  metadata <- reml:::detect_class(dat, metadata)  ## Needs metadata with class info from data
+  metadata <- EML:::detect_class(dat, metadata)  ## Needs metadata with class info from data
   set <- new("dataset")
   set@dataTable = new("ListOfdataTable", list(new("dataTable", attributeList = as(metadata, "attributeList"))))
 })
 
 
 test_that("Constructor function for physical works given data.frame", {
-  reml:::eml_physical(dat, filename="tmp.csv") 
+  EML:::eml_physical(dat, filename="tmp.csv") 
   unlink("tmp.csv")
 })
 
 ## Constructor functions handle the detect_class internally:
 
 test_that("Constructor function for dataTable works given data.frame and metadata list", {
-  reml:::eml_dataTable(dat, metadata, filename="tmp.csv") 
+  EML:::eml_dataTable(dat, metadata, filename="tmp.csv") 
   unlink("tmp.csv")
 }) 
 
@@ -98,7 +98,7 @@ dataset = data.set(river = factor(c("SAC",  "SAC",   "AM")),
 
   #eml_config(creator = "Carl Boettiger <cboettig@gmail.com>") 
 
-      reml:::eml(dataset, title = "the title", 
+      EML:::eml(dataset, title = "the title", 
       creator = "Carl Boettiger <cboettig@gmail.com>")
 
       unlink("the_title.csv")

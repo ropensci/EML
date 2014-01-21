@@ -15,11 +15,11 @@ DataONE repository, making the resulting data files immediately part of a
 much larger network for ecological, earth and environmental science data.
 
 _Note: this example assumes `dataone` is installed, even though it is not 
-required to use reml and run the examples in the other sections.  See the 
+required to use EML and run the examples in the other sections.  See the 
 `dataone` documentation for authenticating `dataone` with a user account_
 
 ```{r publish_knb}
-ids <- eml_publish("reml_example.xml", destination="KNB", permanent=FALSE)
+ids <- eml_publish("EML_example.xml", destination="KNB", permanent=FALSE)
 ```
 
 

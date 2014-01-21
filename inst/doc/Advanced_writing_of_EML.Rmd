@@ -50,14 +50,14 @@ Our `data.set` object captures all of the information required to generate the `
 In this example, we will use R to re-generate the EML metadata originally published by [Ellison _et al_ (2012)]() through the Harvard Forest Long Term Ecological Research Center.  <!-- The original metadata file was created in association with the publication in PNAS based on a Microsoft Word document template that Harvard Forest provides to the academic researchers.  Metadata from this template is then read off by hand and an EML file is generated using a combination of a commercial XML editing platform (Oxygen) for commonly used higher-level elements, and the Java platform `Morpho` provided by the EML development team for lower level attribute metadata. -->
 
 ```{r}
-library(reml)
+library(EML)
 ```
 
 
 We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
 
 ```{r}
-f <- system.file("examples", "hf205-01-TPexp1.csv", package="reml")
+f <- system.file("examples", "hf205-01-TPexp1.csv", package="EML")
 dat <- read.csv(f, 
                 colClasses = "factor", # c("factor", "Date", "Date", "Date", 
                              #  "factor", "factor", "factor")
@@ -117,7 +117,7 @@ As a _metadata_ format, we do not encode the actual data file itself into the EM
 
 
 ```{r}
-dataTable <- reml:::eml_dataTable(dat, 
+dataTable <- EML:::eml_dataTable(dat, 
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
 ```
@@ -279,7 +279,7 @@ For larger blocks of text we might rather write these Word.  We can read them in
 ```{r}
 library(RWordXML)
 library(XML)
-f2 <- wordDoc(system.file("examples", "methods.docx", package="reml"))
+f2 <- wordDoc(system.file("examples", "methods.docx", package="EML"))
 doc <- f2[[getDocument(f2)]]
 txt <- xpathSApply(doc, "//w:t", xmlValue)
 ## FIXME add <title> <section> and <para> blocking back: 
@@ -299,7 +299,7 @@ methods <- new("methods", methodStep = c(new("methodStep", description = method)
 One of the simplest ways and most powerful ways to generate EML metadata is to resuse a section from an existing EML file directly.  
 
 ```{r}
-hf205 <- eml_read(system.file("examples", "hf205.xml", package="reml"))
+hf205 <- eml_read(system.file("examples", "hf205.xml", package="EML"))
 additionalMetadata <- hf205@additionalMetadata # extracted from previous eml file
 ```
 
@@ -372,7 +372,7 @@ Because package identifer, creator and contact fields are required for valid EML
 Finally we are ready to write out our EML object to an XML file. 
 
 ```{r}
-eml_write(eml, file="hf205_from_reml.xml")
+eml_write(eml, file="hf205_from_EML.xml")
 ```
 
 When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `eml()` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
@@ -381,7 +381,7 @@ When we used the `eml_write()` function for the first time in the [Basic tutoria
 As before, we can now validate our EML document to ensure all the information has been formatted correctly:
 
 ```{r}
-eml_validate("hf205_from_reml.xml")
+eml_validate("hf205_from_EML.xml")
 ```
 
 While it is difficult to create invalid EML using the constructor functions, it is not impossible so it never hurts to check.  

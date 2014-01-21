@@ -1,4 +1,4 @@
-library(reml)
+library(EML)
 ## Define the data and metadata
 dat = data.set(spp   = c("king",  "ccho"),
                temp    = c(24,   20),
@@ -20,7 +20,7 @@ rdfa <- newXMLNode("subject",
             ))
 
 ## clean up this interaface for adding additionalMetadata! 
-eml <- reml:::eml(dat,          
+eml <- EML:::eml(dat,          
            creator="Carl Boettiger <cboettig@ropensci.org>", 
            additionalMetadata = c(new("additionalMetadata", 
                                       metadata = new("metadata", rdfa))))

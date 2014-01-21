@@ -1,7 +1,7 @@
 context("Serializing S4 to XML")
 
 ## Test basic writing of S4 classes back into XML
-require(reml)
+require(EML)
 
 ## Okay, we know this works, so stick it in the global space for the next functions...
 
@@ -37,7 +37,7 @@ test_that("We can write S4 EML to XML and validate", {
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
-  xsd <- system.file("xsd", "eml.xsd", package="reml") 
+  xsd <- system.file("xsd", "eml.xsd", package="EML") 
   results <- xmlSchemaValidate(xsd, "title.xml")
     
   expect_equal(results$status, 0)      
@@ -59,7 +59,7 @@ test_that("We can write S4 EML to XML and validate", {
 test_that("We can add coverage information and validate", {
   contact <- as("Carl Boettiger <cboettig@ropensci.org>", "contact")
   creator <- c(as(contact, "creator"))
-  uid <- reml:::reml_id()
+  uid <- EML:::EML_id()
   eml_write(new("eml",
                 packageId = uid[["id"]], 
                 system = uid[["system"]],
@@ -81,7 +81,7 @@ test_that("We can add coverage information and validate", {
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
-  xsd <- system.file("xsd", "eml.xsd", package="reml") 
+  xsd <- system.file("xsd", "eml.xsd", package="EML") 
   results <- xmlSchemaValidate(xsd, "title.xml")
     
   expect_equal(results$status, 0)       

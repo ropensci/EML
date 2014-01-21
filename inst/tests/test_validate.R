@@ -11,7 +11,7 @@ test_that("External validator works using RHTMLForms", {
 # and that causes checkFormArgs to complain.
 
   library(XML)
-  library(reml)
+  library(EML)
 ## A case that should validate
   txt = saveXML(xmlParse("http://knb.ecoinformatics.org/emlparser/eml-sample.xml"))
   o = eml_validate(txt)

@@ -3,8 +3,8 @@ context("Parsing")
 ## test basic reading of XML into S4
 
 library(XML)
-require(reml)
-f <- system.file("examples", "hf205.xml",  package="reml")
+require(EML)
+f <- system.file("examples", "hf205.xml",  package="EML")
 
 test_that("we can parse XML into S4", {
 
@@ -21,9 +21,9 @@ test_that("we can read in S4 using eml_read", {
 })
 
 
-require(reml)
+require(EML)
 data(ex2)
-S4obj <- reml:::eml(dat, 
+S4obj <- EML:::eml(dat, 
                     title = "title", 
                     creator = "Carl Boettiger <cboettig@gmail.com>")
 

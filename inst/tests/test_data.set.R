@@ -1,6 +1,6 @@
 context("data.set")
 
-library(reml)
+library(EML)
 
 dat = data.set(river = factor(c("SAC",  
                                 "SAC",   
@@ -37,12 +37,12 @@ description = "testing description"
 
 
 test_that("We can generate an dataTable S4 object", {
-  s4 <- reml:::eml_dataTable(dat, reml:::get_metadata(dat), description=description)
+  s4 <- EML:::eml_dataTable(dat, EML:::get_metadata(dat), description=description)
   expect_is(s4, "dataTable")              
 })
 
 test_that("We can generate an dataset S4 object", {
-  dt <- reml:::eml_dataTable(dat, reml:::get_metadata(dat), description=description)
+  dt <- EML:::eml_dataTable(dat, EML:::get_metadata(dat), description=description)
   creator <- new("ListOfcreator", list(as("Carl Boettiger <cboettig@ropensci.org>", "creator")))
   s4 <- new("dataset", 
       title = title, 
@@ -57,7 +57,7 @@ test_that("We can generate an dataset S4 object", {
 
 
 test_that("We can generate an eml S4 object", {
-  dt <- eml_dataTable(dat, reml:::get_metadata(dat), description=description)
+  dt <- eml_dataTable(dat, EML:::get_metadata(dat), description=description)
   creator <- new("ListOfcreator", list(as("Carl Boettiger <cboettig@ropensci.org>", "creator")))
   ds <- new("dataset", 
       title = title, 
@@ -72,8 +72,8 @@ test_that("We can generate an eml S4 object", {
     id <- paste0("urn:uuid:", uuid::UUIDgenerate())
     system <- "uuid"
   } else {
-    id <- paste0("reml_", runif(1, 1e6, 9e6))
-    system <- "reml"
+    id <- paste0("EML_", runif(1, 1e6, 9e6))
+    system <- "EML"
   }
   s4 <- new("eml",
       packageId = id,

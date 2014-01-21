@@ -2,11 +2,11 @@ context("publish")
 
 test_that("We can publish a draft to figshare", {
 
-  library(reml)
+  library(EML)
   library(XML)
 
-  f <- system.file("examples", "hf205.xml",  package="reml")
-  csv <- system.file("examples", "hf205-01-TPexp1.csv",  package="reml")
+  f <- system.file("examples", "hf205.xml",  package="EML")
+  csv <- system.file("examples", "hf205-01-TPexp1.csv",  package="EML")
 
   # move files to working directory
   saveXML(xmlParse(f), "hf205.xml")

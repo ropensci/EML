@@ -6,7 +6,7 @@ source("~/.knitr_defaults.R")
 options(xtable.type = 'html')
 ```
 
-Use `reml`.
+Use `EML`.
 
 You have your data as a `data.frame` in R, convient for your analyses and graphs.  How best to archive share that data in a way that will maximize its utility to your lab group, your future self?  What will most impress your NSF data management review, or improve the chances that others will use and cite your data set?  Good metadata.
 
@@ -64,7 +64,7 @@ We can provide much richer annotation than this example includes.  We can also s
 
 ## 1. Share your data
 
-Sharing is as easy as `publish_reml("my_eml_data.xml")`
+Sharing is as easy as `publish_EML("my_eml_data.xml")`
 
 The data is publically available at the DOI returned. At this DOI we find two files: the raw data in `.csv` format, and the EML data file providing machine readable metadata.  We'll unpack all the information provided in this metadata as we go along.  Many other options for sharing are possible, including private sharing and sharing through a variety of data publication platforms.  
 
@@ -144,11 +144,11 @@ We have quality control on the metadata as well as the data.  While user mistake
 
 ## 8. Use an established repository
 
-`reml` can automatically push our data to a variety of established repositories, as illustrated in this example. 
+`EML` can automatically push our data to a variety of established repositories, as illustrated in this example. 
 
 ## 9. Licenses
 
-We see by default `reml` has provided us with the liberal CC0 license for the data, consistent with major repositories such as Dryad.  Other options can be specified if needed.  
+We see by default `EML` has provided us with the liberal CC0 license for the data, consistent with major repositories such as Dryad.  Other options can be specified if needed.  
 
 
 

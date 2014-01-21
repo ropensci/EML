@@ -1,4 +1,4 @@
-Package: reml
+Package: EML
 Description: An R package for reading, writing, integrating and publishing data
     using the Ecological Metadata Language (EML) format.
 Title: R interface for the Ecological Metadata Language
