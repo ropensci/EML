@@ -77,7 +77,7 @@ test_that("Constructor function for dataTable works given data.frame and metadat
 
 
 test_that("Constructor function for eml works given dat, metadata", {
-dataset = data.set(river = factor(c("SAC",  "SAC",   "AM")),
+dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
                spp   = c("Oncorhynchus tshawytscha",  "Oncorhynchus tshawytscha", "Oncorhynchus kisutch"),
                stg   = ordered(c("smolt", "parr", "smolt"), levels=c("parr", "smolt")), # levels indicates increasing level, eg. parr < smolt
                ct    = c(293L,    410L,    210L),
@@ -98,7 +98,7 @@ dataset = data.set(river = factor(c("SAC",  "SAC",   "AM")),
 
   #eml_config(creator = "Carl Boettiger <cboettig@gmail.com>") 
 
-      EML:::eml(dataset, title = "the title", 
+      EML:::eml(dat, title = "the title", 
       creator = "Carl Boettiger <cboettig@gmail.com>")
 
       unlink("the_title.csv")
