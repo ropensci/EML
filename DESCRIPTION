@@ -30,6 +30,7 @@ Imports:
 Depends:
     R (>= 2.15)
 Collate:
+    'data.set.R'
     'reml_environment.R'
     'S4Toeml.R'
     'physical.R'
@@ -51,7 +52,6 @@ Collate:
     'dataTable.R'
     'dataset.R'
     'eml.R'
-    'data.set.R'
     'dataTable_methods.R'
     'emlToS4.R'
     'eml_add.R'

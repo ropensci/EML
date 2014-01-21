@@ -11,7 +11,6 @@
 #' 
 #' WARNING: promoting to a `data.table` will work, but apply only to the data.frame part of the data structure.  The additional metadata attributes will be lost. 
 #' @export
-#' @include eml.R
 data.set <- function(..., col.defs, unit.defs){
 
   # if named, re-order col.defs to match order given in `names` 
