@@ -17,7 +17,7 @@
 #'   of the current R session.  Add a call to `EML::eml_config` in your .Rprofile to have these settings used by
 #'   default in each R session.  Repeating a call to eml_config will reset the settings. The default settings of `eml_config`
 #'   are not applied if the function is not called explicitly.  
-#' @include EML_environment.R
+#' @include reml_environment.R
 #' @include party.R 
 #' @export
 eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){

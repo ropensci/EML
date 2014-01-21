@@ -1,9 +1,9 @@
-#' @include EML_environment.R 
+#' @include reml_environment.R 
 #' @include dataset.R 
 #' @include software.R 
 #' @include literature.R 
 #' @include protocol.R
-#' @include EML_id.R
+#' @include reml_id.R
 
 
 #' @import methods

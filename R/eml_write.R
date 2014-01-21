@@ -5,7 +5,7 @@
 #' @aliases eml_write write.eml 
 #' @import XML
 #' @export eml_write write.eml
-#' @include EML_environment.R
+#' @include reml_environment.R
 eml_write <- function(dat,
                       file = NULL,
                       title = "metadata",
