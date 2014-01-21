@@ -59,7 +59,11 @@ function (eml = "",
     warning("Performing XML Schema validation only.\n
             Install RHTMLForms to provide additional EML-specific tests.")
 #    xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
-    xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+    out <- xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+    if(out$status == 0) 
+      TRUE
+    else 
+      out$errors
 #      error("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
   } else { 
     success <- require(RCurl)
