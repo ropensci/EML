@@ -214,16 +214,15 @@ In [Advanced parsing and manipulation of EML](), we
 Testing and development
 -----------------------
 
-While the dependencies for basic functionality are kept to a minimum, to access all the functions and tests implemented in `EML` you'll need several additional packages.  
+While the dependencies for basic functionality are kept to a minimum, to access all the functions and tests implemented in `EML` you'll need several additional packages from CRAN.   
 
 ```r
-install.packages(c("yaml", "knitr", "rfigshare", "testthat", "RCurl"))
+install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone"))
 ```
 
 Some of these additional packages are not yet on CRAN and may not be stable.
 
 ```r
-install.packages("uuid")
 install_github("RHTMLForms", "omegahat")
 install_github("XMLSchema", "omegahat")
 ```
