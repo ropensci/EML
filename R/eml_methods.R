@@ -20,7 +20,7 @@
 #' 
 #' @import methods
 #' @export 
-eml <- function(dataset = NULL,
+eml <- function(dat = NULL,
                 title = "metadata",
                 creator = get("defaultCreator", envir=EMLConfig),
                 contact = get("defaultContact", envir=EMLConfig),
@@ -57,10 +57,10 @@ eml <- function(dataset = NULL,
              additionalMetadata = additionalMetadata)
 
 
-  if(!isEmpty(dataset)){
-    if(is(dataset, "dataset")) # pre-built dataset object
-      eml@dataset <- dataset 
-    else if(is(dataset, "data.frame")) # data.set class, (also data.frame with wizard)
+  if(!isEmpty(dat)){
+    if(is(dat, "dataset")) # pre-built dataset object
+      eml@dataset <- dat 
+    else if(is(dat, "data.frame")) # data.set class, (also data.frame with wizard)
       eml@dataset = new("dataset", 
                         title = title, # required 
                         creator = who$creator,
@@ -70,7 +70,7 @@ eml <- function(dataset = NULL,
                         dataTable = c(eml_dataTable(dat = dat, 
                                                     title = title)),
                         ...)
-    else if(is(dataset, "dataTable"))
+    else if(is(dat, "dataTable"))
        eml@dataset = new("dataset", 
                         title = title, # required 
                         creator = who$creator,
