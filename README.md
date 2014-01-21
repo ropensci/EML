@@ -271,5 +271,3 @@ install_github("XMLSchema", "omegahat")
 Successful installation of these packages will require the `devtools` package (for `install_github`) and the ability to build packages from source.  
 
 
-
-***Suggestions, feature requests, bug reports and other feedback welcome!*** Please see our [issues tracker](https://github.com/ropensci/EML/issues)
