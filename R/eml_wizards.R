@@ -35,7 +35,8 @@ prompt_for_units <- function(dataframe, n){
       message("Otherwise, please specify the units from the list below\n or type 'custom' to define a custom unit type")
       out <- readline("units are: ")
       if(out == "custom"){
-        out <- custom_unit_metadata(column)
+#        out<- readline("custom unit creation not yet supported. Define unit:") 
+        out <- create_custom_unit_metadata(column) 
       }
     ## Date-time data
     } else if(is(column, "POSIXt")){
