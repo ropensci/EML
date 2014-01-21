@@ -56,7 +56,7 @@ setMethod("filepath", signature("physical"),
 ### Coerce data.frame to physical (csv) using constructor function:
 
 setAs("data.frame", "physical", function(from)
-      eml_physical(dat)) 
+      eml_physical(from)) 
 
 
 ####### Internal function to coerce data.frame to physical #######
