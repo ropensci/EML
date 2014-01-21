@@ -64,11 +64,8 @@ function (eml = "",
       TRUE
     else 
       out$errors
-#      error("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
+#      stop("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
   } else { 
-    success <- require(RCurl)
-    if(!success)
-      error("RCurl package must be installed to use this function.")
 
 
 
