@@ -223,8 +223,16 @@ install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone"))
 Some of these additional packages are not yet on CRAN and may not be stable.
 
 ```r
-install_github("RHTMLForms", "omegahat")
-install_github("XMLSchema", "omegahat")
+# install_github("Sxslt", "omegahat")
+# install_github("XMLSchema", "omegahat") 
+# install_github("RHTMLForms", "omegahat")
+
+install_github("RWordXML", "duncantl") # fails, clone and install locally
+
+install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")
+install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")
+install.packages("XMLSchema", repos="http://www.omegahat.org/R", type="source")
+
 ```
 
 Successful installation of these packages will require the `devtools` package (for `install_github`) and the ability to build packages from source.  
