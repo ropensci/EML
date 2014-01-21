@@ -1,5 +1,8 @@
 ## Attribute List ##
 
+# FIXME Enumerated Domains (nominal and ordinal) need externalCodeSet and entityCodeList and child classes defined.  (alternatives to codeDefinition)
+# @mbjones I'm not clear how these fields would actually be used.  Docs seem to prefer codDefinition to externalCodeSet.  not sure what CodeList is for.  
+
 #' @include literature.R
 
 setClass("codeDefinition", 
