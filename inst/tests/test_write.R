@@ -35,19 +35,8 @@ test_that("We can write S4 EML to XML and validate", {
 
   eml_write(dat, contact = as("Carl Boettiger <cboettig@gmail.com>", "contact"), file="title.xml")
 
-  require(XML)
-  ## Test validity  FIXME Should print validator error message!
-  xsd <- system.file("xsd", "eml.xsd", package="EML") 
-  results <- xmlSchemaValidate(xsd, "title.xml")
-    
-  expect_equal(results$status, 0)      
-  expect_equal(length(results$errors), 0)
-
-
-   ## Test external validity
-  o <- eml_validate(saveXML(xmlParse("title.xml")))                     ## eml_validate function not working 
-  expect_true(o[[1]]) # all cases validate
-  expect_true(o[[2]]) # all cases validate
+  o <- eml_validate("title.xml")                
+  expect_true(all(o)) # all cases validate
 
    unlink("title.xml")
    unlink("title.csv")
@@ -81,11 +70,9 @@ test_that("We can add coverage information and validate", {
 
   require(XML)
   ## Test validity  FIXME Should print validator error message!
-  xsd <- system.file("xsd", "eml.xsd", package="EML") 
-  results <- xmlSchemaValidate(xsd, "title.xml")
-    
-  expect_equal(results$status, 0)       
-  expect_equal(length(results$errors), 0)
+  o <- eml_validate("title.xml")                
+  expect_true(all(o)) # all cases validate
+   
 
   unlink("title.xml")
   unlink("title.csv")

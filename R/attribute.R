@@ -13,7 +13,14 @@ setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
 
 
 setClass("ListOfcodeDefinition", contains="list")
-setMethod("c", signature("codeDefinition"), function(x, ...) new("ListOfcodeDefinition", list(x, ...)))
+
+
+#' concatenate codeDef
+#'
+#' concatenate codeDef
+#' @rdname c-methods
+#' @aliases c,codeDefinition,ANY-method
+setMethod("c", signature("codeDefinition"), function(..., recursive = FALSE) new("ListOfcodeDefinition", list(...)))
 
 setClass("enumeratedDomain", 
          slots = c(codeDefinition = "ListOfcodeDefinition"))
@@ -107,7 +114,13 @@ setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
 
 
 setClass("ListOfattribute", contains="list") # set validity all elements are attribute class
-setMethod("c", signature("attribute"), function(x, ...) new("ListOfattribute", list(x, ...)))
+
+#' concatenate attribute
+#' 
+#' concatenate attribute
+#' @rdname c-methods
+#' @aliases c,attribute,ANY-method
+setMethod("c", signature("attribute"), function(..., recursive = FALSE) new("ListOfattribute", list(...)))
 
 setClass("attributeList", 
          slots = c(id = "character", 

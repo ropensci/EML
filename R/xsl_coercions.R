@@ -2,6 +2,8 @@
 
 
 # file <- system.file("examples", "hf205.xml", package = "EML")
+
+#' 
 #' @export
 get_rdf <- function(file){
   require(Sxslt)
