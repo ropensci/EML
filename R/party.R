@@ -451,6 +451,9 @@ setAs("character", "contact", function(from)
 setMethod("print", "responsibleParty", function(x)
   as(x, "person"))
 
+setAs("contact", "creator", function(from){
+   as(as(from, "responsibleParty"), "creator")
+  })
 
 ## FIXME Should be something more intelligent that will let these
 ## inherit the method from responsibleParty?  callNextMethod() maybe??
