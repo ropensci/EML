@@ -1,5 +1,14 @@
 
-
+#' Extract content from an EML object
+#' 
+#' Extract content from an EML object
+#' @param eml an EML object
+#' @param x the desired content we should extract from the eml object
+#' @return the requested content.  Format will depend on the request.  
+#' @details All content can always be accessed using the standard S4 subsetting mechanisms.
+#' This function merely provides a convenient interface for returning more commonly requested
+#' content in forms that may be more convenient than the S4 structure.  These formats mirror the 
+#' input formats used by the corresponding helper constructors.  
 #' @export 
 eml_get <- function(eml, 
                     x = c("id", 
