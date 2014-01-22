@@ -64,6 +64,7 @@ setAs("data.frame", "physical", function(from)
 eml_physical <- function(dat, filename=character(0), ...){
   if(length(filename) == 0) 
     filename = paste(gsub('.*:(.*)', '\\1', EML_id()[["id"]]), ".csv", sep="")
+
   suppressWarnings(write.csv(dat, file = filename, row.names=FALSE, ...)) # don't care about warning in coercion of data.set to data.frame
   new("physical", 
       objectName = filename, 
