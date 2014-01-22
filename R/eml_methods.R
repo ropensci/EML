@@ -8,7 +8,11 @@
 #'  Otherwise loaded from value set by eml_config.  
 #' @param contact a contact object, character string, or person object.  
 #'  Otherwise loaded from value set by eml_config.  
-#' @param a coverage object, such as created by the eml_coverage constructor function.
+#' @param coverage a coverage object, such as created by the eml_coverage constructor function. (optional)
+#' @param citation a citation object (optional, an EML file can have either 
+#' a dataset OR citation OR software OR protocol as its top-level object) 
+#' @param software a software object (optional) 
+#' @param protocol a protocol object (optional) 
 #' @param methods a method object or plain text string, documenting additional methods 
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
@@ -19,6 +23,8 @@
 #' - Avoids more verbose separate call to dataset constructor and eml_dataTable
 #' 
 #' @import methods
+#' @include party.R
+#' @include eml.R
 #' @export 
 eml <- function(dat = NULL,
                 title = "metadata",

@@ -60,10 +60,24 @@ setAs("qualityControl", "XMLInternalElementNode",   function(from) S4Toeml(from)
 
 
 setClass("ListOfmethodStep", contains="list")
-setMethod("c", signature("methodStep"), function(..., recursive = FALSE) new("ListOfmethodStep", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... methodSteps to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-methodStep
+setMethod("c", signature("methodStep"), function(x, ..., recursive = FALSE) new("ListOfmethodStep", list(x, ...)))
 
 setClass("ListOfqualityControl", contains="list")
-setMethod("c", signature("qualityControl"), function(..., recursive = FALSE) new("ListOfqualityControl", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... qualityControls to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-qualityControl
+setMethod("c", signature("qualityControl"), function(x, ..., recursive = FALSE) new("ListOfqualityControl", list(x, ...)))
 
 
 

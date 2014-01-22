@@ -42,7 +42,14 @@ setAs("XMLInternalElementNode", "taxonomicClassification",   function(from) emlT
 setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOftaxonomicClassification", contains = "list")
-setMethod("c", signature("taxonomicClassification"), function(..., recursive=FALSE) new("ListOftaxonomicClassification", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... taxonomicClassifications to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-taxonomicClassification
+setMethod("c", signature("taxonomicClassification"), function(x, ..., recursive = FALSE) new("ListOftaxonomicClassification", list(x, ...)))
 
 ## Class definition for taxonomicCoverage 
 setClass("taxonomicCoverage",

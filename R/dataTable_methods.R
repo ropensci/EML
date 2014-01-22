@@ -1,13 +1,26 @@
 
-#' constructor / generator for data table
+#' constructor helper function for data table
 #' 
+#' constructor helper function for data table
+#' @param dat a data.set object, data.frame object
+#' @param meta a list of meta information organized by column.  
+#'  Elements of the list are another list, in which: 
+#'  - the first object is the column name, 
+#'  - then the column description, 
+#'  - then the unit definition
+#' @param title the the title of the dataTable 
+#' @param description a description of the dataTable
+#' @param filename the filename of the csv file created
+#' @param ... additional arguments (not yet implemented)
+#' @return a dataTable element
 #' @export
 #' @include dataTable.R
 eml_dataTable <- function(dat, 
                           meta = NULL, 
                           title = character(0), 
                           description = character(0), 
-                          filename = character(0), ...){
+                          filename = character(0), 
+                          ...){
 
 ## FIXME title should be called entityName, or maybe just "name"
 

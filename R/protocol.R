@@ -4,7 +4,14 @@ setClass("proceduralStep", slots = c(procedure = "character")) # FIXME DUMMY  cl
 
 
 setClass("ListOfproceduralStep", contains="list")
-setMethod("c", signature("proceduralStep"), function(..., recursive = FALSE) new("ListOfproceduralStep", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... proceduralSteps to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-proceduralStep
+setMethod("c", signature("proceduralStep"), function(x, ..., recursive = FALSE) new("ListOfproceduralStep", list(x, ...)))
 
 
 setClass("protocol_elements", 

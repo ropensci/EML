@@ -1050,7 +1050,14 @@ setAs("bibentry",
 
 
 setClass("ListOfcitation", contains="list")
-setMethod("c", signature("citation"), function(..., recursive = FALSE) new("ListOfcitation", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... citations to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-citation
+setMethod("c", signature("citation"), function(x, ..., recursive = FALSE) new("ListOfcitation", list(x, ...)))
 
 # literature 
 

@@ -3,7 +3,7 @@
 #' @include software.R 
 #' @include literature.R 
 #' @include protocol.R
-#' @include reml_id.R
+#' @include EML_id.R
 
 
 #' @import methods
@@ -29,7 +29,14 @@ setAs("XMLInternalElementNode", "additionalMetadata",
       })
 
 setClass("ListOfadditionalMetadata", contains="list")
-setMethod("c", signature("additionalMetadata"), function(..., recursive = FALSE) new("ListOfadditionalMetadata", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... additionalMetadatas to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-additionalMetadata
+setMethod("c", signature("additionalMetadata"), function(x, ..., recursive = FALSE) new("ListOfadditionalMetadata", list(x, ...)))
 
 ############# eml top-level  ######################
 

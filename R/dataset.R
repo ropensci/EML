@@ -10,7 +10,14 @@
 
 
 setClass("ListOfdataTable", contains = "list")
-setMethod("c", signature("dataTable"), function(..., recursive = FALSE) new("ListOfdataTable", list(...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... dataTables to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-dataTable
+setMethod("c", signature("dataTable"), function(x, ..., recursive = FALSE) new("ListOfdataTable", list(x, ...)))
 
 
 ## A Hack to get element order correct without writing

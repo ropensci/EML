@@ -12,6 +12,8 @@
 #'   tool, which also checks that all referenced internal ids (describes nodes) correspond to matching ids.  
 #' 
 #'   This function requires an internet connection.
+#' @import RCurl
+#' @import XML
 #' @author Duncan Temple Lang
 #' @export
 eml_validate <-

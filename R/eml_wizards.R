@@ -1,4 +1,9 @@
-#' @export
+#' Generate unit and column metadata for a data.frame
+#' 
+#' Utility to help generate unit and column metadata for a data.frame
+#' @param dataframe a data.frame object  
+#' @return a metadata list object, such as could be passed to eml_dataTable
+# @export
 metadata_wizard <- function(dataframe){
   metadata <- vector("list", length(dataframe))
   names(metadata) <- names(dataframe)

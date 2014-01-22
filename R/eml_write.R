@@ -2,6 +2,14 @@
 
 #' Top-level API function for writing eml 
 #' @param dat either a data.frame, data.set, or eml object
+#' @param file the filename for the output EML.  If NULL, will return the 
+#' XML text as a character string.  
+#' @param title a title for the EML metadata file, also used in naming the csv file.  
+#' @param creator an EML creator (or ListOfcreator for multiple creators) object, 
+#' R person object, or text string recognizable as a name or vector of names.  
+#' @param contact an EML contact, R person object with email address, or text
+#' string with email in angle brackets.  
+#' @param ... additional arguments to the dataset constructor, see ?dataset
 #' @aliases eml_write write.eml 
 #' @import XML
 #' @export eml_write write.eml

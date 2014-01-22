@@ -17,7 +17,6 @@ Suggests:
     rfigshare,
     devtools,
     testthat,
-    RCurl,
     dataone,
     RHTMLForms,
     Sxslt,
@@ -25,6 +24,7 @@ Suggests:
     XMLSchema
 Imports:
     XML,
+    RCurl,
     utils,
     methods,
     uuid,
@@ -33,6 +33,7 @@ Imports:
 Depends:
     R (>= 2.15)
 Collate:
+    'EML_id.R'
     'reml_environment.R'
     'S4Toeml.R'
     'physical.R'
@@ -46,7 +47,6 @@ Collate:
     'eml_yaml.R'
     'coverage_methods.R'
     'software.R'
-    'reml_id.R'
     'protocol.R'
     'methods.R'
     'eml_config.R'

@@ -5,15 +5,29 @@ test_that("We can publish a draft to figshare", {
   library(EML)
   library(XML)
 
-  f <- system.file("examples", "hf205.xml",  package="EML")
-  csv <- system.file("examples", "hf205-01-TPexp1.csv",  package="EML")
+dat = data.set(river = c("SAC",  "SAC",   "AM"),
+               spp   = c("king",  "king", "ccho"),
+               stg   = c("smolt", "parr", "smolt"),
+               ct    = c(293L,    410L,    210L),
+               col.defs = c("River site used for collection",
+                            "Species common name",
+                            "Life Stage", 
+                            "count of live fish in traps"),
+               unit.defs = list(c(SAC = "The Sacramento River", 
+                                  AM = "The American River"),
+                                c(king = "King Salmon", 
+                                  ccho = "Coho Salmon"),
+                                c(parr = "third life stage", 
+                                  smolt = "fourth life stage"),
+                                "number"))
 
-  # move files to working directory
-  saveXML(xmlParse(f), "hf205.xml")
-  write.csv(read.csv(csv), "hf205-01-TPexp1.csv")
+  eml <- eml(dat, file="publish_example.xml", contact = "test person <test@example.com>")
+
+  f <- "publish_example.xml" 
+  csv <- eml_get(eml, "csv_filepaths")
 
   ## Publish the data to figshare (as a draft)
-  id <- eml_publish("hf205.xml", categories="Ecology", destination="figshare")
+  id <- eml_publish(f, categories="Ecology", destination="figshare")
 
   ## Confirm that the appropriate metadata has been written to figshare
   library(rfigshare)
@@ -27,7 +41,7 @@ test_that("We can publish a draft to figshare", {
 
   ## Clean up 
   fs_delete(id)
-  unlink("hf205-01-TPexp1.csv")
-  unlink("hf205.xml")
-  unlink("figshare_hf205.xml")
+  unlink(csv)
+  unlink(f)
+  unlink(paste0("figshare_", f)
 })

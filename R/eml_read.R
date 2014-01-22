@@ -10,6 +10,7 @@ NULL
 #'
 #' Read EML files
 #' @param file an external eml (xml) file, or XMLInternalDocument
+#' @param ... optional additional arguments to xmlParse
 #' @return an EML object
 #' @export eml_read read.eml
 #' @aliases eml_read read.eml
