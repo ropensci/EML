@@ -1,0 +1,32 @@
+\name{eml_write}
+\alias{eml_write}
+\alias{write.eml}
+\title{Top-level API function for writing eml}
+\usage{
+eml_write(dat, file = NULL, title = "metadata",
+  creator = get("defaultCreator", envir = EMLConfig),
+  contact = get("defaultContact", envir = EMLConfig), ...)
+}
+\arguments{
+  \item{dat}{either a data.frame, data.set, or eml object}
+
+  \item{file}{the filename for the output EML.  If NULL,
+  will return the XML text as a character string.}
+
+  \item{title}{a title for the EML metadata file, also used
+  in naming the csv file.}
+
+  \item{creator}{an EML creator (or ListOfcreator for
+  multiple creators) object, R person object, or text
+  string recognizable as a name or vector of names.}
+
+  \item{contact}{an EML contact, R person object with email
+  address, or text string with email in angle brackets.}
+
+  \item{...}{additional arguments to the dataset
+  constructor, see ?dataset}
+}
+\description{
+Top-level API function for writing eml
+}
+

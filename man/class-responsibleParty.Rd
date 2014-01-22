@@ -1,0 +1,17 @@
+\docType{methods}
+\name{c,responsibleParty-method}
+\alias{c,responsibleParty-method}
+\title{concatenate}
+\usage{
+\S4method{c}{responsibleParty}(x, ..., recursive = FALSE)
+}
+\arguments{
+  \item{x,...}{responsiblePartys to concatenate}
+
+  \item{recursive}{Needed for compatibility with generic,
+  otherwise ignored}
+}
+\description{
+concatenate
+}
+
