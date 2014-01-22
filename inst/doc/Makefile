@@ -24,8 +24,10 @@ parsing: ${PARSING}.Rmd
 	pandoc ${PARSING}.md -o ${PARSING}.pdf
 
 writing: ${WRITING}.Rmd
+	cd ../../vignettes
 	Rscript -e 'require(knitr); knit("${WRITING}.Rmd")'
 	pandoc ${WRITING}.md -o ${WRITING}.pdf
+	cd -
 
 #vignette: 
 #	cp ${VIGNETTE}.Rnw ${VIGNETTE}.pdf ../../vignettes/

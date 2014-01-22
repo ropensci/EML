@@ -1,3 +1,8 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Publishing to the KNB}
+-->
+
 ### Publishing to the KNB
 
 We can also publish to the KNB (Knowledge Network for Biocomplexity,

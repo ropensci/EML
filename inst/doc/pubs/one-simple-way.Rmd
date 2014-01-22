@@ -1,5 +1,10 @@
 # One simple way to share your data
 
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{EML: One simple way to share your data}
+-->
+
 
 ```{r, include=FALSE}
 source("~/.knitr_defaults.R")

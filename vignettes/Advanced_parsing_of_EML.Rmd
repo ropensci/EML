@@ -1,4 +1,7 @@
-
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Advanced parsing of EML}
+-->
 
 ```{r include=FALSE, cache=FALSE}
 source("~/.knitr_defaults.R")

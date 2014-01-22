@@ -1,3 +1,8 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Advanced writing of EML}
+-->
+
 
 In [Advanced writing of EML](), we construct richer EML files, including:
 
