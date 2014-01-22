@@ -4,7 +4,17 @@
 -->
 
 ```{r include=FALSE, cache=FALSE}
-source("~/.knitr_defaults.R")
+library(knitr)
+library(devtools)
+opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE, cache=1, 
+               comment=NA, verbose=TRUE, fig.width=6, fig.height=4)
+opts_chunk$set(fig.path = paste("figure/",
+                                gsub(".Rmd", "", knitr:::knit_concord$get('infile')),
+                                "-", sep=""),
+               cache.path = paste("cache/", 
+                                  gsub(".Rmd", "", knitr:::knit_concord$get('infile') ), 
+                                "/", sep=""))
+ 
 ```
 
 
