@@ -29,12 +29,11 @@ eml_dataTable <- function(dat,
   if(is.null(meta))
     meta <- metadata_wizard(dat)
 
-
-  if(length(title) > 0 & length(filename) == 0)
-    filename <- paste0(gsub(" ", "_", title), ".csv")
   id <- EML_id()
-  if(length(filename) == 0)
-    filename <- paste0(id[["id"]], ".csv")
+#  if(length(title) > 0 & length(filename) == 0)
+#    filename <- paste0(gsub(" ", "_", title), ".csv")
+  if(length(filename) == 0) # use id, without prefixes 
+    filename = paste(gsub('.*:(.*)', '\\1', EML_id()[["id"]]), ".csv", sep="")
   if(length(title) == 0)
     title <- filename 
 
