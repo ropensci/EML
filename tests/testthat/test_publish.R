@@ -37,7 +37,7 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
   ## Confirm that the EML contains the figshare metadata 
   doc <- xmlParse(paste0("figshare_", f)) # check uploaded copy, since cannot download draft/private file
   eml_cat <- xpathSApply(doc, "//additionalMetadata[@id = 'figshare']/metadata/keywordSet/keyword", xmlValue)
-  expect_that(eml_cat, equals("Ecology"))
+  expect_true("Ecology" %in% eml_cat)
 
   ## Clean up 
   fs_delete(id)
