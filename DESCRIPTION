@@ -46,6 +46,7 @@ Collate:
     'attribute_methods.R'
     'eml_yaml.R'
     'coverage_methods.R'
+    'dat_documentation.R'
     'software.R'
     'protocol.R'
     'methods.R'

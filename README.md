@@ -1,3 +1,4 @@
+
 EML
 ====
 
@@ -150,7 +151,7 @@ eml_publish("EML_example.xml", description="Example EML file from EML", categori
 ```
 
 ```
-[1] 903758
+[1] 906732
 ```
 
 
@@ -213,7 +214,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-01-20). _metadata_.
+Boettiger C (2014-01-21). _metadata_.
 ```
 
 
@@ -264,10 +265,20 @@ install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone"))
 Some of these additional packages are not yet on CRAN and may not be stable.
 
 ```coffee
-install_github("RHTMLForms", "omegahat")
-install_github("XMLSchema", "omegahat")
+# install_github("Sxslt", "omegahat")
+# install_github("XMLSchema", "omegahat") 
+# install_github("RHTMLForms", "omegahat")
+
+install_github("RWordXML", "duncantl") # fails, clone and install locally
+
+install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")
+install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")
+install.packages("XMLSchema", repos="http://www.omegahat.org/R", type="source")
+
 ```
 
 Successful installation of these packages will require the `devtools` package (for `install_github`) and the ability to build packages from source.  
 
 
+
+***Suggestions, feature requests, bug reports and other feedback welcome!*** Please see our [issues tracker](https://github.com/ropensci/EML/issues)
