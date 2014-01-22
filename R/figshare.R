@@ -64,6 +64,8 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     links <-  xpathSApply(doc, "//dataset/additionalMetadata[@id = 'figshare']/metadata/additionalLinks/url", xmlValue) 
  csv <- xpathSApply(doc, "//dataTable/physical/objectName", xmlValue)
 
+ if(isEmpty(description))
+   description <- "EML metadata"
 
   ## Actual figshare part of code...
   ## Call fs_update if we have id, otherwise fs_create new fileset...
