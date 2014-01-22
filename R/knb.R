@@ -5,20 +5,14 @@
 #' @param permanent logical, indicate whether we should use the production server.
 #' default is FALSE, implies use of the Demo server, overriding any arguments set
 #' to mn_nodeid and cli.  
-#' @param The server ID to which we upload (if permanent is FALSE).  The default
+#' @param public logical, make object public?  Otherwise only authorized users may access file.
+#' @param mn_nodeid The server ID to which we upload (if permanent is FALSE).  The default
 #' path is to the KNB, which can index all EML metadata through metacat. 
 #' @param cli the dataone client object. See dataone::D1Client 
 #' @details knb requires authentication. 
 #' @return the EML identifier, csv file identifier, and dataone package identifier 
 #'  (a metadata object associating the two files in the dataone repository).  
 #' @import XML
-#' @examples 
-#' \dontrun{
-
-# Initialize a client to interact with DataONE
-
-
-#' }
 eml_knb <- function(file,
                     permanent = FALSE,
                     public = TRUE,

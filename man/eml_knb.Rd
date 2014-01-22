@@ -13,9 +13,12 @@ eml_knb(file, permanent = FALSE, public = TRUE,
   the Demo server, overriding any arguments set to
   mn_nodeid and cli.}
 
-  \item{The}{server ID to which we upload (if permanent is
-  FALSE).  The default path is to the KNB, which can index
-  all EML metadata through metacat.}
+  \item{public}{logical, make object public?  Otherwise
+  only authorized users may access file.}
+
+  \item{mn_nodeid}{The server ID to which we upload (if
+  permanent is FALSE).  The default path is to the KNB,
+  which can index all EML metadata through metacat.}
 
   \item{cli}{the dataone client object. See
   dataone::D1Client}
@@ -30,9 +33,5 @@ Upload EML to knb
 }
 \details{
 knb requires authentication.
-}
-\examples{
-\dontrun{
-}
 }
 

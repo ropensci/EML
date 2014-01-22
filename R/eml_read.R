@@ -32,7 +32,6 @@ eml_read <- function(file,  ...){
   
   ## Remote path
   } else if(is.character(file)){ ## Assume a remote access method?
-      require(httr)
       ## URL 
       if(gsub("^(....).*", "\\1", file) %in% c("http", "ftp:", "file")) { ## Is it a URL?
         doc <- content(GET(file), "parsed", "text/xml") 

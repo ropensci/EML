@@ -26,6 +26,15 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
   csv <- eml_get(eml, "csv_filepaths")
   eml_write(eml, f)
 
+  ## Declare figshare credentials: Uses test account.  Credentials valid for testing purposes only.  
+  ## All content on this account is periodically deleted.  
+  ## Visit the account at http://figshare.com/authors/Ropensci%20TestAccount/431423
+  options(FigshareKey = "Kazwg91wCdBB9ggypFVVJg")
+  options(FigsharePrivateKey = "izgO06p1ymfgZTsdsZQbcA")
+  options(FigshareToken = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q")
+  options(FigsharePrivateToken = "4mdM3pfekNGO16X4hsvZdg")
+
+
   ## Publish the data to figshare (as a draft)
   id <- eml_publish(f, categories="Ecology", tags = "EML", description="Test of publishing EML", destination="figshare")
 

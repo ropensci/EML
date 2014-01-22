@@ -2,8 +2,8 @@ Package: EML
 Description: An R package for reading, writing, integrating and publishing data
     using the Ecological Metadata Language (EML) format.
 Title: R interface for the Ecological Metadata Language
-Version: 0.0-4
-License: CC0 + LICENSE
+Version: 0.0-5
+License: CC0 | file LICENSE
 URL: https://github.com/ropensci/EML
 BugReports: https://github.com/ropensci/EML/issues
 Date: 2013
