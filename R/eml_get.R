@@ -47,6 +47,6 @@ eml_get <- function(eml,
 csv_filepaths <- function(eml){
   paste(eml@dirname, 
         sapply(eml@dataset@dataTable, function(dataTable) dataTable@physical@objectName),
-        sep = "/")
+        sep = "")
 }
 
