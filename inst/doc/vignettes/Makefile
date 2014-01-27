@@ -11,8 +11,8 @@ all:
 
 README.md: README.Rmd 
 	Rscript -e 'require(knitr); knit("README.Rmd")'
-	cp README.md ../../README.md
-	sed -i 's/```r/```coffee/' ../../README.md
+	cp README.md ../../../README.md
+	sed -i 's/```r/```coffee/' ../../../README.md
 
 #README.pdf:  README.Rmd
 #	Rscript -e 'require(knitr); knit("README.Rmd")'
@@ -36,4 +36,4 @@ README.md: README.Rmd
 
 
 clean:
-	rm -rf README.md *.csv *.xml ../../tests/testthat/*.xml ../../tests/testthat/*.csv ../../*.csv ../../*.xml ../../tmp
+	rm -rf README.md *.csv *.xml ../../../tests/testthat/*.xml ../../../tests/testthat/*.csv ../../../*.csv ../../../*.xml ../../../tmp

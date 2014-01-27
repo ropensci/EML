@@ -1,3 +1,11 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{An Introduction to the EML package}
+-->
+
+[![Build Status](https://travis-ci.org/ropensci.org/EML.png)](https://travis-ci.org/ropensci.org/EML)
+
+
 
 EML
 ====
@@ -82,6 +90,10 @@ We will also specify a default creator who will also be used as the contact pers
 eml_config(creator="Carl Boettiger <cboettig@gmail.com>")
 ```
 
+```
+Error: could not find function "loadMethod"
+```
+
 
 While we will always be able to provide alternative or additional creators or contact person later, `eml_config` can store the defaults to save us the trouble of entering this data repeatedly.  See `?eml_config` for more information and other configurable defaults.  
 
@@ -95,7 +107,7 @@ eml_write(dat, file = "EML_example.xml")
 ```
 
 ```
-[1] "EML_example.xml"
+Error: no creator or contact given.
 ```
 
 
@@ -112,8 +124,11 @@ eml_validate("EML_example.xml")
 ```
 
 ```
-EML specific tests XML specific tests 
-              TRUE               TRUE 
+recover called non-interactively; frames dumped, use debugger() to view
+```
+
+```
+Error: error in evaluating the argument 'doc' in selecting a method for function 'saveXML': Error: XML content does not seem to be XML: 'EML_example.xml'
 ```
 
 
@@ -151,7 +166,11 @@ eml_publish("EML_example.xml", description="Example EML file from EML", categori
 ```
 
 ```
-[1] 906732
+recover called non-interactively; frames dumped, use debugger() to view
+```
+
+```
+Error: error in evaluating the argument 'doc' in selecting a method for function 'saveXML': Error: XML content does not seem to be XML: 'EML_example.xml'
 ```
 
 
@@ -186,6 +205,10 @@ automating the more tedious aspects of data discovery and integration.
 obj <- eml_read("EML_example.xml")
 ```
 
+```
+Error: "error" is not a defined class
+```
+
 
 We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).  
 
@@ -197,6 +220,10 @@ The `eml_get` function provides us with easy access to many of the component ele
 dat <- eml_get(obj, "data.set")
 ```
 
+```
+Error: object 'obj' not found
+```
+
 
 
 ```coffee
@@ -204,7 +231,7 @@ eml_get(obj, "contact")
 ```
 
 ```
-[1] "Carl Boettiger <cboettig@gmail.com>"
+Error: object 'obj' not found
 ```
 
 
@@ -214,7 +241,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-01-21). _metadata_.
+Error: object 'obj' not found
 ```
 
 
