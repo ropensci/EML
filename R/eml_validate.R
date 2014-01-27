@@ -56,6 +56,8 @@ function (eml = "",
 
   doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
 
+  # CRAN will WARN since RHTMLForms isn't on CRAN (and hence not on the SUGGESTS list).  Well, let it, because
+  # that is just stupid.  
   success <- require(RHTMLForms)
   if(!success | schema_only){
     warning("Performing XML Schema validation only.\n
@@ -113,35 +115,6 @@ function(txt, doc = htmlParse(txt, asText = TRUE))
   } else
      status
   
-}
-
-
-
-## TEST CASES 
-
-if(FALSE) {
-  library(RHTMLForms)
-  ff = getHTMLFormDescription("http://knb.ecoinformatics.org/emlparser/")
-  eml_validate = createFunction(ff[[2]], reader = processValidationResponse)
-
-# printing eml_validate to include as source code below currently
-# loses the class information on the .formDescription default value
-# and that causes checkFormArgs to complain.
-
-  library(XML)
-  txt = saveXML(xmlParse("http://knb.ecoinformatics.org/emlparser/eml-sample.xml"))
-  o = eml_validate(txt)
-#hdoc = htmlParse(o)
-#xpathSApply(hdoc, "//h2")
-
-  sampleDoc = xmlParse("http://knb.ecoinformatics.org/emlparser/eml-sample.xml")
-  r = xmlRoot(sampleDoc)
-  newXMLNode("garbage", parent = r)
-  newXMLNode("otherNonsense", parent = r)
-
-  o = eml_validate(saveXML(sampleDoc))
-#hdoc = htmlParse(o)
-#xpathSApply(hdoc, "//h2")
 }
 
 

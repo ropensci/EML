@@ -19,7 +19,7 @@ eml_knb <- function(file,
                     mn_nodeid = "urn:node:KNB",
                     cli = D1Client("PROD", mn_nodeid)){
 
-
+  # require call leads to a warning when package is not on the SUGGESTS list.  A problem for TRAVIS, not for CRAN.  
   success <- require(dataone)
   if(!success){
     message("dataone package not found. Attempting to install")

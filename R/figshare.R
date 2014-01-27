@@ -30,7 +30,10 @@
 #' @examples 
 #' \dontrun{
 #'    file <- system.file("doc", "my_eml_data.xml", package="EML")
-#'    id <- eml_figshare(file, description="Example EML file from EML", categories = "Ecology", tags = "EML")
+#'    id <- eml_figshare(file, 
+#'                       description="Example EML file from EML",
+#'                       categories = "Ecology", 
+#'                       tags = "EML")
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 
