@@ -12,12 +12,12 @@
 # get_rdf(file) # not working yet
 
 get_rdf <- function(eml){
-  require(Sxslt)
+#   require(Sxslt) # Wait until package is available on CRAN to formally depend on it.  
   # FIXME stylesheet not working yet
   # FIXME detect EML version first in selecting which stylesheet to use.
   if(is(eml, "eml"))
     eml <- eml_write(eml)
 
   to_rdf <- system.file("xsl", "eml210toDublinCore.xsl", package="EML")
-  rdf <- Sxslt::xsltApplyStyleSheet(eml, to_rdf)
+  rdf <- xsltApplyStyleSheet(eml, to_rdf)
 }
