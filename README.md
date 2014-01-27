@@ -3,7 +3,7 @@
 %\VignetteIndexEntry{An Introduction to the EML package}
 -->
 
-[![Build Status](https://travis-ci.org/ropensci.org/EML.png)](https://travis-ci.org/ropensci.org/EML)
+[![Build Status](https://api.travis-ci.org/ropensci/EML.png)](https://travis-ci.org/ropensci/EML)
 
 
 
