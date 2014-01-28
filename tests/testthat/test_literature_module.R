@@ -445,7 +445,7 @@ test_that("We warn if we coerce a bibentry of map to generic if we cannot check 
 
 an_audioVisual_bibitem = as(an_audioVisual, "bibentry")
 
-test_that("We warn if we coerce a bibentry of personal communication to generic if we cannot check the right type of eml citation", {
+test_that("We warn if we coerce a bibentry of audioVisual to generic if we cannot check the right type of eml citation", {
   expect_that(as(an_audioVisual_bibitem, "citation"), gives_warning())
 })  
 
