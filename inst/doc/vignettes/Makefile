@@ -4,6 +4,7 @@ WRITING = Advanced_writing_of_EML
 
 all: 
 	make README.md
+	make ../../../README.md
 #	make README.pdf
 #	make writing
 #	make basic
@@ -11,6 +12,8 @@ all:
 
 README.md: README.Rmd 
 	Rscript -e 'require(knitr); knit("README.Rmd")'
+
+../../../README.md: README.md
 	cp README.md ../../../README.md
 	sed -i 's/```r/```coffee/' ../../../README.md
 
