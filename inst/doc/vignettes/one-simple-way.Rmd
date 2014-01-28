@@ -1,0 +1,242 @@
+# One simple way to share your data
+
+_Ideas in Ecology and Evolution_ recently published a paper by White _et
+al._ that should be considered required reading in any graduate training
+program Ecology or Evolution training program. Entitled _"Nine simple ways
+to make it easier to (re)use your data"_, the authors present a thorough
+and accessible overview of practices essential for any researcher but
+getting increasing intention in light of spreading requirements from
+primary publishers and funders of ecological and evolutionary research
+for the formal deposition and archiving of data upon publication. The
+spread of such requirements brings new urgency to the elements described
+by White and colleagues, which echo sentiments and recommendations that
+have appeared regularly in this literature over the previous years and
+decades.  The development of standards such as the Ecological Metadata
+Language, the emergence of suitable online data repositories and the
+widespread adoption of scripting languages such as R among students of
+Ecology and Evolution have all reduced barriers to sharing and reusing
+data efficiently and effectively.
+
+Here we introduce the `EML` package for the R statistical environment, 
+as one simple way to accomplish these nine elements and much more besides.
+
+
+
+
+
+<!--
+These developments, together with new semantic technologies currently on
+the horizon, and the billons of dollars invested in enormous monitoring
+and data collection efforts such as the National Ecological Observatory
+Network, the Ocean Observatory Intiative, and similar efforts offer
+unpresidented opportunities to tackle the rich, integrative and data-intensive 
+questions that challenge our globe today.  
+-->
+
+
+
+```{r, include=FALSE}
+source("~/.knitr_defaults.R")
+options(xtable.type = 'html')
+```
+
+You have your data as a `data.frame` in R, convient for your analyses
+and graphs.  How best to archive share that data in a way that will
+maximize its utility to your lab group, your future self?  What will
+most impress your NSF data management review, or improve the chances
+that others will use and cite your data set?  Good metadata.
+
+Before we worry about what the criteria are, let's just jump in and make our archival data shared:
+
+
+For sake of argument, imagine a data.frame looking something like this:
+
+```{r, results="asis"}
+dat = data.frame(river=c("SAC", "SAC", "AM"),
+                 spp = c("king", "king", "ccho"),
+                 stg = c("smolt", "parr", "smolt"),
+                 ct =  c(293, 410, 210L))
+
+xtable::xtable(dat)
+```
+
+
+In case our column header abbreviations are not obvious to others (or our future selves), we take a moment to define them: 
+
+```{r}
+col_metadata = c(river = "http://dbpedia.org/ontology/River",
+                 spp = "http://dbpedia.org/ontology/Species",
+                 stg = "Life history stage",
+                 ct = "count")
+```
+
+
+Define the units used in each column.  In the case of factors, we define
+the abbreviations in a named string.
+
+```{r}
+unit_metadata = 
+  list(river = c(SAC = "The Sacramento River", AM = "The American River"),
+       spp = c(king = "King Salmon", ccho = "Coho Salmon"),
+       stg = c(parr = "third life stage", smolt = "fourth life stage"),
+       ct = "number")
+```
+
+
+
+```{r}
+dat_with_metadata <- data.set(dat, col.defs = col_metadata, unit.defs = unit_metadata)
+```
+
+
+Specify the basic file metadata of creator and contact person, give it
+a title, and even choose where to publish:
+
+
+```{r}
+eml_write(dat_with_metadata,
+          contact = "Carl Boettiger <cboettig@ropensci.org>",  
+          title = "A test EML file", 
+          destination = "figshare")
+```
+
+Just like that, we have accomplished all nine steps, and more besides.
+In the sections below, we'll unpack what this function has done, and how
+to take advantage of this metadata when (re)using this data in the future.
+
+
+
+
+
+<!--
+
+If we had used just the original `data.frame` as the first argument, the
+function would prompt us for the appropriate unit and column metadata. If
+no destination is given, a filename can be provided instead.
+ 
+We can provide much richer annotation than this example includes.
+We can also store information such as the contact name and address
+in a configuration option to avoid having to provide it repeatedly.
+Let's see how this example does on the Nine simple criteria.
+
+-->
+
+## 1. Share your data
+
+Sharing is as easy as `publish_eml("my_eml_data.xml")`
+
+The data is publically available at the DOI returned. At this DOI we find two files: the raw data in `.csv` format, and the EML data file providing machine readable metadata.  We'll unpack all the information provided in this metadata as we go along.  Many other options for sharing are possible, including private sharing and sharing through a variety of data publication platforms.  
+
+
+
+## 2. Provide metadata
+
+We provide `n` lines of metadata in the EML file, one of the "metadata standards" mentioned by White et al.  This includes basic information like the title, author(s), and contact address.  
+
+> 1) the what, when, where, and how of data collection, 
+
+Methods sections in the file provide answers to these questions.  Though our minimal example does not describe the collection itself, note that we nonetheless have generated a `methods` node, which describes the software that created the metadata file (after all, this is a step in the analysis).  
+
+> 2) how to find and access the data, 
+
+Our example returns a DOI and access URLs for the files in the data set: 
+
+Rich access options are possible depending on the publication outlet, including specifying what users or groups have access to the data.  
+
+> 3) suggestions on the suitability of the data for answering specific questions, 
+
+We can see at a glance what taxa are covered by the data.  More detailed description can be provided in an abstract.
+
+> 4) warnings about known problems or inconsistencies in the data, and 
+> 5) information to check that the data are properly imported, such as the number of rows and columns in the dataset and the total sum of numerical columns
+
+Checks have automatically been performed in generating the data, and are performed in reading in the data into R.  
+
+
+## 3. Provide unprocsessed data
+
+The second file provides the unprocessed data as a `.csv` file.  Because `csv` file formats vary
+
+
+## 4. Use standard formats
+
+Of the "nine ways", this one places the greatest burden on the creator and user.  Rather than coercing our data into prescribed formats, EML lets us simply describe whatever format we are using. 
+
+- Standard file formats
+
+Our example generate standard .csv file format, and declares this explicitly so that users can be sure what character is used to seperate values, rows, etc:
+
+```xml
+      <physical>
+        <objectName>river_spp_stg_ct.csv</objectName>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <recordDelimiter>\r\n</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+      </physical>
+```
+
+- Standard table formats
+- Standard cell formats 
+
+Rather than insist everyone use the ISO8601 format for dates, the user can declare whatever date format they prefer.  
+
+## 5. Good null values
+
+R has good null values in its use of `data.frames`, so we already have these.  Better yet, we write out our choice of null value in the metadata.  Reading in the data, we can explicitly pass this to `read.csv` rather than just assume the null value is appropriate.  This is handled automatically by `eml_read`.  
+
+## 6. Make it easy to combine 
+
+Context nodes serve the pupose described in this section.   
+Machine-readable metadata, 
+
+### 7. Perform basic quality control
+
+We have quality control on the metadata as well as the data.  While user mistakes are still possible, automated validation of the metadata provided and 
+
+
+## 8. Use an established repository
+
+The `EML` package can automatically push our data to a variety of established scientific repositories, including some of those discussed by White _et al._.  In the introductory example we submitted the data file to figshare, an internationally recognized interdisciplinary data repository that is integrated with PLOS and several Nature Publishing Group journals.  This command uploaded both the raw data in the recommended plain-text CSV format and the XML file containing the EML metadata description to the same figshare fileset object.  Like most repositories, figshare requires basic metadata of it's own to enable it users to search and discover content.  The `EML` package has automatically extracted the dataset creators and title, as well as any description or keywords already avaialble in the metadata and copied them over to appropriate fields in the figshare metadata. In return, figshare has supplied us with a permanent identifier (DOI) that can be used to persistently locate and cite this data, even if figshare itself goes out of buisness.
+
+Other repositories may be even better suited for publishing of EML-annotated data. The Knowledge Network for Biocomplexity (KNB) is particularly appropriate for EML annotated data, as a member of the DataONE network (see @Reichman2011) and because the repository already "speaks" EML (@Jones2005).  This means that while figshare exposes only a few of the metadata fields for search and discovery, a researcher can search for particular attribute level information on the KNB.  Such as "all data sets that have a column containing dissolved oxygen levels".  
+
+Publishing to the KNB is just as easy, after authentication credentials have been set up.   
+
+The KNB already hosts several decades worth of EML metadata files from around the world, including all data collected by Long Term Ecological Research (LTER) sites.  Researchers can make these powerful search queries directly from the R terminal, and use the `EML` package to parse and explore the resulting hits.  
+
+
+## 9. Licenses
+
+By default, the `EML` package has provided us with the liberal CC0 declaration for the data, consistent with major repositories such as Dryad and Figshare. 
+
+```{r}
+eml_get(eml, "rights")
+```
+
+White _et al._ discuss the motivation for CC0 as the recommended default for scientific data, while also pointing to other license options.  We could have provided many other possible rights when writing the EML by using the `intellectualRights` argument in an `eml` or `eml_write` function call:    
+
+
+```{r}
+eml_write(dat_with_metadata,
+          contact = "Carl Boettiger <cboettig@ropensci.org>",  
+          title = "A test EML file",
+          intellectualRights = "Name of an extablished license or
+          copyright declaration, Text string describing the rights to
+          reuse this data, request for appropriate acknowledgment, etc")
+```
+
+
+
+
+
+
+
+
+[^1]: Disclaimer: CB served as a reviewer and KR as handling editor for White et al. 
