@@ -1,21 +1,25 @@
 #' Upload EML to knb
-#' 
+#'
+#' Upload EML to knb
+#' @param file the filename of the EML file to upload
+#' @param permanent logical, indicate whether we should use the production server.
+#' default is FALSE, implies use of the Demo server, overriding any arguments set
+#' to mn_nodeid and cli.  
+#' @param public logical, make object public?  Otherwise only authorized users may access file.
+#' @param mn_nodeid The server ID to which we upload (if permanent is FALSE).  The default
+#' path is to the KNB, which can index all EML metadata through metacat. 
+#' @param cli the dataone client object. See dataone::D1Client 
 #' @details knb requires authentication. 
+#' @return the EML identifier, csv file identifier, and dataone package identifier 
+#'  (a metadata object associating the two files in the dataone repository).  
 #' @import XML
-#' @examples 
-#' \dontrun{
-
-# Initialize a client to interact with DataONE
-
-
-#' }
 eml_knb <- function(file,
                     permanent = FALSE,
                     public = TRUE,
                     mn_nodeid = "urn:node:KNB",
                     cli = D1Client("PROD", mn_nodeid)){
 
-
+  # require call leads to a warning when package is not on the SUGGESTS list.  A problem for TRAVIS, not for CRAN.  
   success <- require(dataone)
   if(!success){
     message("dataone package not found. Attempting to install")

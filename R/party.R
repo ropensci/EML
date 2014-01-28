@@ -8,7 +8,15 @@ setAs("references", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOfreferences", 
          contains = "list")
-setMethod("c", signature("references"), function(x, ...) new("ListOfreferences", list(x, ...)))
+
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... referencess to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-references
+setMethod("c", signature("references"), function(x, ..., recursive = FALSE) new("ListOfreferences", list(x, ...)))
 
 setClass("referencesGroup", 
          slots = c("references" = "ListOfreferences"))
@@ -71,7 +79,13 @@ setAs("responsibleParty", "XMLInternalElementNode",   function(from) S4Toeml(fro
 
 
 setClass("ListOfresponsibleParty", contains ="list")
-setMethod("c", signature("responsibleParty"), function(x, ...) new("ListOfresponsibleParty", list(x, ...)))
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... responsiblePartys to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-responsibleParty
+setMethod("c", signature("responsibleParty"), function(x, ..., recursive = FALSE) new("ListOfresponsibleParty", list(x, ...)))
 
 
 ############ Elements inheriting/of type responsibleParty ### 
@@ -87,7 +101,13 @@ setClass("ListOfcreator", contains = "list",
                   "not all elements are creator objects"
                else
                  TRUE)
-setMethod("c", signature("creator"), function(x, ...) new("ListOfcreator", list(x, ...)))
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... creators to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-creator
+setMethod("c", signature("creator"), function(x, ..., recursive = FALSE) new("ListOfcreator", list(x, ...)))
 # Defines contact ##
 setClass("contact", contains="responsibleParty")
 setAs("XMLInternalElementNode", "contact",   function(from) emlToS4(from))
@@ -97,7 +117,14 @@ setClass("originator", contains="responsibleParty")
 setAs("XMLInternalElementNode", "originator",   function(from) emlToS4(from))
 setAs("originator", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setClass("ListOforiginator", contains="list")
-setMethod("c", signature("originator"), function(x, ...) new("ListOforiginator", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... originators to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-originator
+setMethod("c", signature("originator"), function(x, ..., recursive = FALSE) new("ListOforiginator", list(x, ...)))
 
 
 # publisher + coercions
@@ -136,9 +163,15 @@ setAs("institution",
 
 setClass("ListOfinstitution", contains="list")
 
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... institutions to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-institution
 setMethod("c", 
           signature("institution"), 
-          function(x, ...) new("ListOfinstitution", list(x, ...)))
+          function(x, ..., recursive = FALSE) new("ListOfinstitution", list(x, ...)))
 
 setAs("institution", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
@@ -171,9 +204,15 @@ setAs("performer",
 
 setClass("ListOfperformer", contains="list")
 
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... performers to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-performer
 setMethod("c", 
           signature("performer"), 
-          function(x, ...) new("ListOfperformer", list(x, ...)))
+          function(x, ..., recursive = FALSE) new("ListOfperformer", list(x, ...)))
 
 setAs("performer", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
@@ -207,9 +246,15 @@ setAs("recipient",
 
 setClass("ListOfrecipient", contains="list")
 
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... recipients to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-recipient
 setMethod("c", 
           signature("recipient"), 
-          function(x, ...) new("ListOfrecipient", list(x, ...)))
+          function(x, ..., recursive = FALSE) new("ListOfrecipient", list(x, ...)))
 
 setAs("recipient", "person", function(from){
    p <- as(as(from, "responsibleParty"), "person")
@@ -259,10 +304,15 @@ setAs("character",
       function(from) as(as.person(from), "editor"))
 
 setClass("ListOfeditor", contains="list")
-
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... editors to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-editor
 setMethod("c", 
           signature("editor"), 
-          function(x, ...) new("ListOfeditor", list(x, ...)))
+          function(x, ..., recursive = FALSE) new("ListOfeditor", list(x, ...)))
 
 setAs("ListOfeditor", 
       "person", 
@@ -297,9 +347,23 @@ setAs("associatedParty", "XMLInternalElementNode",   function(from) S4Toeml(from
 
 
 setClass("ListOfmetadataProvider", contains="list")
-setMethod("c", signature("metadataProvider"), function(x, ...) new("ListOfmetadataProvider", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... metadataProviders to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-metadataProvider
+setMethod("c", signature("metadataProvider"), function(x, ..., recursive = FALSE) new("ListOfmetadataProvider", list(x, ...)))
 setClass("ListOfassociatedParty", contains="list")
-setMethod("c", signature("associatedParty"), function(x, ...) new("ListOfassociatedParty", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... associatedPartys to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-associatedParty
+setMethod("c", signature("associatedParty"), function(x, ..., recursive = FALSE) new("ListOfassociatedParty", list(x, ...)))
 
 
 
@@ -387,6 +451,9 @@ setAs("character", "contact", function(from)
 setMethod("print", "responsibleParty", function(x)
   as(x, "person"))
 
+setAs("contact", "creator", function(from){
+   as(as(from, "responsibleParty"), "creator")
+  })
 
 ## FIXME Should be something more intelligent that will let these
 ## inherit the method from responsibleParty?  callNextMethod() maybe??

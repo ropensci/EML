@@ -1,11 +1,30 @@
 \name{eml_dataTable}
 \alias{eml_dataTable}
-\title{constructor / generator for data table}
+\title{constructor helper function for data table}
 \usage{
 eml_dataTable(dat, meta = NULL, title = character(0),
   description = character(0), filename = character(0), ...)
 }
+\arguments{
+  \item{dat}{a data.set object, data.frame object}
+
+  \item{meta}{a list of meta information organized by
+  column.  Elements of the list are another list, in which:
+  - the first object is the column name, - then the column
+  description, - then the unit definition}
+
+  \item{title}{the the title of the dataTable}
+
+  \item{description}{a description of the dataTable}
+
+  \item{filename}{the filename of the csv file created}
+
+  \item{...}{additional arguments (not yet implemented)}
+}
+\value{
+a dataTable element
+}
 \description{
-  constructor / generator for data table
+constructor helper function for data table
 }
 

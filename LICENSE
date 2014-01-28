@@ -1,3 +1,24 @@
+The CC0 declaration provided applies to all original content of the R package,
+which includes the R functions (R/ directory), documentation (man/).  A 
+full copy of the CC0 License is provided below.  Any other content redistributed
+in this package retains its original license as specified at the top of those
+files.  Where no license is specified the content can be assumed to be under CC0
+public domain declaration.  
+
+
+The provided XSL stylesheets (inst/xsl) are licensed under the GPL version 2
+
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 Creative Commons Legal Code
 
 CC0 1.0 Universal

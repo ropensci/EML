@@ -4,12 +4,12 @@
 
 ## Illustrate reading in based on identifier and based on URL
 
-f <- system.file("examples", "hf205.xml", package="reml")
+f <- system.file("examples", "hf205.xml", package="EML")
 hf205 <- read.eml(f)
 
 dat <- eml_get(hf205, "data.set")
 
-# dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="reml"))
+# dat <- read.csv(system.file("examples", "hf205-01-TPexp1.csv", package="EML"))
 
 
 
@@ -149,7 +149,7 @@ rights <- "This dataset is released to the public and may be freely
 ## Read in methods description from an Word file.  
 library(RWordXML)
 library(XML)
-f2 <- wordDoc(system.file("examples", "methods.docx", package="reml"))
+f2 <- wordDoc(system.file("examples", "methods.docx", package="EML"))
 doc <- f2[[getDocument(f2)]]
 txt <- xpathSApply(doc, "//w:t", xmlValue)
 ## FIXME add <title> <section> and <para> blocking back: 
@@ -165,7 +165,7 @@ additionalMetadata <- hf205@additionalMetadata # extracted from previous eml fil
 ## Construct the dataTable #########
 
 
-dataTable <- reml:::eml_dataTable(dat, 
+dataTable <- EML:::eml_dataTable(dat, 
                            title = "Supplemental Data, table 1", 
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
@@ -186,6 +186,6 @@ eml <- new("eml",
             dataset = dataset,
             additionalMetadata = additionalMetadata)
 
-write.eml(eml, "hf205_from_reml.xml")
+write.eml(eml, "hf205_from_EML.xml")
 
 

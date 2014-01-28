@@ -1,0 +1,17 @@
+\name{coverage}
+\alias{coverage}
+\title{get coverage information}
+\usage{
+coverage(coverage)
+}
+\arguments{
+  \item{coverage}{an object from which we extract coverage
+  information}
+}
+\value{
+content of a coverage node
+}
+\description{
+get coverage information
+}
+

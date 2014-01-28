@@ -1,31 +1,10 @@
 #' Convert EML into a YAML file
 #' 
-#' Provides a reasonably readable plain-text summary of metadata by converting XML to YAML
-#' @param file the path to the EML file to be converted
-#' @param con optional file name to write out to (see \code{\link{writeLines}}. 
-#'  otherwise returned to terminal.  
-#' @param .parseopts optional additional arguments to \code{\link{xmlParse}}
-#' @param .yamlopts optional additional arguments to \code{\link{as.yaml}}
-#' @return A YAML representation of the metadata in the EML file, either
-#' to the terminal or externally.  
-#' @examples
-#' file <- system.file("doc", "my_eml_data.xml", package="reml")
-#' eml_yaml(file)
-#' # we can pass additional optional arguments too, e.g.
-#' eml_yaml(file, .yamlopts = list(indent=4))
-eml_yaml <- function(file, con = stdout(), .parseopts=list(), .yamlopts=list()){
-  available <- require(yaml)
-  if(!available)
-    stop("please install the yaml package first to use this function")
-  else {
-    doc <- do.call(xmlParse, c(file, .parseopts))
-    .yamlopts$x <- xmlToList(doc) 
-    out <- do.call(as.yaml, .yamlopts)
-    writeLines(out, con = con)
-  }
-}
-
-
+#' Convert EML into a YAML file
+#' @param object any object defined by EML that can be coerced into an XML format
+#' @return a yaml representation of the object, also printed to screen.
+#' @import yaml
+#' @import XML
 show_yaml <- function(object)     
           cat(as.yaml(xmlToList(as(object, "XMLInternalElementNode"))))
 

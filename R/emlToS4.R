@@ -1,5 +1,5 @@
 ## Used as the basis for all coercion methods from XML::XMLInternalElementNode 
-## to reml's S4 objects.  
+## to EML's S4 objects.  
 
 ## Assumes slot is named by the name of the repeated element
 ## but has type "ListOf<element>" which contains a list containing

@@ -19,7 +19,7 @@ eml_coverage(scientific_names = NULL, dates = NULL,
   object.  Can alternatively provide an existing
   `eml::temporalCoverage` object.}
 
-  \item{geographic_descirption}{a plain-text description of
+  \item{geographic_description}{a plain-text description of
   the geographic location covered by this data.}
 
   \item{NSEWbox}{numeric vector giving the decimal degrees
@@ -30,11 +30,11 @@ eml_coverage(scientific_names = NULL, dates = NULL,
   `eml::geographicCoverage` object.}
 }
 \value{
-  an S4 representation of an eml coverage node.
+an S4 representation of an eml coverage node.
 }
 \description{
-  Constructor function for `coverage` class. Provides
-  convenience tools to write the more common versions of
-  coverage metadata.
+Constructor function for `coverage` class. Provides
+convenience tools to write the more common versions of
+coverage metadata.
 }
 

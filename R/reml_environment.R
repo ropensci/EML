@@ -1,2 +1,2 @@
-remlConfig <- new.env(hash=TRUE)
+EMLConfig <- new.env(hash=TRUE)
 

@@ -1,23 +1,30 @@
-# eml online validation tool
-# 
-# Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
-# @param eml path to an eml file or text of eml file
-# @param additional arguments to formQuery
-# @param style formQuery style as curl POST. Don't change this.   
-# @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
-# @details More detailed testing against the schema can be performed using the xmlSchemaValidate
-#   function from the XML package, which will report information on exactly what lines fail the 
-#   test, if any.  However, this performs only the first of the two checks provided by the online
-#   tool, which also checks that all referenced internal ids (describes nodes) correspond to matching ids.  
-# 
-#   This function requires an internet connection.
-# @author Duncan Temple Lang
+#' eml online validation tool
+#' 
+#' Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
+#' @param eml path to an eml file or text of eml file
+#' @param ... additional arguments to formQuery
+#' @param schema_only logical, use schema-only validation tests.  Default is FALSE, but 
+#'  will also be used as the fallback mechanism if RHTMLForms is unavailable.  
+#' @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
+#' @details More detailed testing against the schema can be performed using the xmlSchemaValidate
+#'   function from the XML package, which will report information on exactly what lines fail the 
+#'   test, if any.  However, this performs only the first of the two checks provided by the online
+#'   tool, which also checks that all referenced internal ids (describes nodes) correspond to matching ids.  
+#' 
+#'   This function requires an internet connection.
+#' @import RCurl
+#' @import XML
+#' @author Duncan Temple Lang
 #' @export
 eml_validate <-
 function (eml = "", 
-          .url = "http://knb.ecoinformatics.org/emlparser/parse", 
           ..., 
-          .reader = processValidationResponse, 
+          schema_only = FALSE) 
+{
+
+          ## Should be part of the function arguments, but plays havoc with silly roxygen at this time...
+          .url = "http://knb.ecoinformatics.org/emlparser/parse"
+          .reader = processValidationResponse 
           .formDescription = structure(list(formAttributes = 
                                             structure(c("post", 
                                                         "http://knb.ecoinformatics.org/emlparser/parse"), 
@@ -39,24 +46,30 @@ function (eml = "",
                                             url = structure("http://knb.ecoinformatics.org/emlparser/parse", 
                                                             .Names = "action")), 
                                        .Names = c("formAttributes", "elements", "url"), 
-                                       class = "HTMLFormDescription"), 
+                                       class = "HTMLFormDescription") 
           .opts = structure(list(referer = "http://knb.ecoinformatics.org/emlparser/parse"), 
-                            .Names = "referer"), 
-          style = "POST", 
-          .curl = getCurlHandle(), 
-          .cleanArgs = NULL) 
-{
+                            .Names = "referer")
+          style = "POST" 
+          .curl = getCurlHandle()
+          .cleanArgs = NULL
+## attempt to use XMLSchemaValidate here if RHTMLForms isn't available?  
 
-## FIXME should we attempt to use XMLSchemaValidate here if RHTMLForms isn't available?  
+  doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
 
-    doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
-
-    success <- require(RHTMLForms)
-    if(!success)
-      error("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
-    success <- require(RCurl)
-    if(!success)
-      error("RCurl package must be installed to use this function.")
+  # CRAN will WARN since RHTMLForms isn't on CRAN (and hence not on the SUGGESTS list).  Well, let it, because
+  # that is just stupid.  
+  success <- require(RHTMLForms)
+  if(!success | schema_only){
+    warning("Performing XML Schema validation only.\n
+            Install RHTMLForms to provide additional EML-specific tests.")
+#    xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
+    out <- xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+    if(out$status == 0) 
+      TRUE
+    else 
+      out$errors
+#      stop("RHTMLForms package must be installed to use this function.  Visit http://www.omegahat.org for more")
+  } else { 
 
 
 
@@ -78,6 +91,7 @@ function (eml = "",
         }
     }
     ans
+  }
 }
 
 processValidationResponse =
@@ -101,35 +115,6 @@ function(txt, doc = htmlParse(txt, asText = TRUE))
   } else
      status
   
-}
-
-
-
-## TEST CASES 
-
-if(FALSE) {
-  library(RHTMLForms)
-  ff = getHTMLFormDescription("http://knb.ecoinformatics.org/emlparser/")
-  eml_validate = createFunction(ff[[2]], reader = processValidationResponse)
-
-# printing eml_validate to include as source code below currently
-# loses the class information on the .formDescription default value
-# and that causes checkFormArgs to complain.
-
-  library(XML)
-  txt = saveXML(xmlParse("http://knb.ecoinformatics.org/emlparser/eml-sample.xml"))
-  o = eml_validate(txt)
-#hdoc = htmlParse(o)
-#xpathSApply(hdoc, "//h2")
-
-  sampleDoc = xmlParse("http://knb.ecoinformatics.org/emlparser/eml-sample.xml")
-  r = xmlRoot(sampleDoc)
-  newXMLNode("garbage", parent = r)
-  newXMLNode("otherNonsense", parent = r)
-
-  o = eml_validate(saveXML(sampleDoc))
-#hdoc = htmlParse(o)
-#xpathSApply(hdoc, "//h2")
 }
 
 

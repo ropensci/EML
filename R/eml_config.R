@@ -11,14 +11,15 @@
 #' @param creator a character string, person object, or creator object
 #' @param contact  a character string, person object, or contact object
 #' @param defaultRights a text string specifying the default intellectual rights text that should be indicated.  
-#' @return Nothing, but updates the remlConfig environment where this information is stored.  
+#' @return Nothing, but updates the EMLConfig environment where this information is stored.  
 #' @details Configuration settings will be used as the default values when creating a new eml file or dataset object
 #'   unless alternative values are provided at the time of creation.  Configuration settings last only for the duration
-#'   of the current R session.  Add a call to `reml::eml_config` in your .Rprofile to have these settings used by
+#'   of the current R session.  Add a call to `EML::eml_config` in your .Rprofile to have these settings used by
 #'   default in each R session.  Repeating a call to eml_config will reset the settings. The default settings of `eml_config`
 #'   are not applied if the function is not called explicitly.  
 #' @include reml_environment.R
 #' @include party.R 
+#' @import methods
 #' @export
 eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
   if(defaultRights == "CC0")
@@ -29,15 +30,15 @@ eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
     defaultContact <- as(creator[[1]], "contact")
  else 
     defaultContact <- as(contact, "contact")
-  assign('defaultRights', defaultRights, envir=remlConfig)
-  assign('defaultCreator', defaultCreator, envir=remlConfig)
-  assign('defaultContact', defaultContact, envir=remlConfig)
+  assign('defaultRights', defaultRights, envir=EMLConfig)
+  assign('defaultCreator', defaultCreator, envir=EMLConfig)
+  assign('defaultContact', defaultContact, envir=EMLConfig)
 }
 eml_config()
 
 
 eml_get_config <- function(x){
-  get(x, envir = remlConfig)
+  get(x, envir = EMLConfig)
 }
 
 

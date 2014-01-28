@@ -1,17 +1,22 @@
 #' Upload EML to figshare
 #' 
 #' Modifies the EML file to reflect the figshare
+#' @param file the filename of the EML file to upload
 #' @param title of the figshare dataset, 
 #' @param description of the dataset,
 #' @param categories a category or list of categories, selected from the figshare list: 
 #' @param tags at least one tag, any terms are permitted. Tags not required
 #' @param links provided in the list on links of the figshare page. optional.
 #' @param visibility one of "draft", "public", or "private".
-#' @param figshare_id If the object already has a figshare id and we want to modify it.  
+#' @param figshare_id If the object already has a figshare id and we want to modify it. 
+#' @param modified_eml_filename this function will update the EML file to reflect any
+#' additional figshare tags or categories added, as well as the figshare DOI and remote path.
+#' The new EML file is given this modified filename.  By default uses the original filename
+#' and prepends figshare_
 #' @return the figshare id
 #' @details figshare requires authentication. See rfigshare 
 #' [tutorial]() for help on configuring this.  
-#' Arguments for figshare are optional, if not provided reml will attempt to
+#' Arguments for figshare are optional, if not provided EML will attempt to
 #' extract appropriate values from the EML.  If no values are found for 
 #' essential metadata (title, description, category), then figshare object
 #' will be still be created as a draft but cannot be published. 
@@ -24,8 +29,11 @@
 #' @import XML
 #' @examples 
 #' \dontrun{
-#'    file <- system.file("doc", "my_eml_data.xml", package="reml")
-#'    id <- eml_figshare(file, description="Example EML file from reml", categories = "Ecology", tags = "EML")
+#'    file <- system.file("doc", "my_eml_data.xml", package="EML")
+#'    id <- eml_figshare(file, 
+#'                       description="Example EML file from EML",
+#'                       categories = "Ecology", 
+#'                       tags = "EML")
 #' }
 eml_figshare <- function(file, title = NULL, description = NULL, 
                          categories = NULL, tags = NULL, links = NULL, 
@@ -59,6 +67,8 @@ eml_figshare <- function(file, title = NULL, description = NULL,
     links <-  xpathSApply(doc, "//dataset/additionalMetadata[@id = 'figshare']/metadata/additionalLinks/url", xmlValue) 
  csv <- xpathSApply(doc, "//dataTable/physical/objectName", xmlValue)
 
+ if(isEmpty(description))
+   description <- "EML metadata"
 
   ## Actual figshare part of code...
   ## Call fs_update if we have id, otherwise fs_create new fileset...

@@ -17,23 +17,23 @@ eml_config(creator = "", contact = "", defaultRights = "CC0")
   intellectual rights text that should be indicated.}
 }
 \value{
-  Nothing, but updates the remlConfig environment where
-  this information is stored.
+Nothing, but updates the EMLConfig environment where this
+information is stored.
 }
 \description{
-  Configure EML default values
+Configure EML default values
 
-  Default options for generating EML objects
+Default options for generating EML objects
 }
 \details{
-  Configuration settings will be used as the default values
-  when creating a new eml file or dataset object unless
-  alternative values are provided at the time of creation.
-  Configuration settings last only for the duration of the
-  current R session.  Add a call to `reml::eml_config` in
-  your .Rprofile to have these settings used by default in
-  each R session.  Repeating a call to eml_config will
-  reset the settings. The default settings of `eml_config`
-  are not applied if the function is not called explicitly.
+Configuration settings will be used as the default values
+when creating a new eml file or dataset object unless
+alternative values are provided at the time of creation.
+Configuration settings last only for the duration of the
+current R session.  Add a call to `EML::eml_config` in your
+.Rprofile to have these settings used by default in each R
+session.  Repeating a call to eml_config will reset the
+settings. The default settings of `eml_config` are not
+applied if the function is not called explicitly.
 }
 

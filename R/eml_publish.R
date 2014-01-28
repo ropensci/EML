@@ -11,16 +11,16 @@
 #' @export
 #' @examples 
 #' \dontrun{
-#'    file <- system.file("doc", "my_eml_data.xml", package="reml")
-#'    id <- eml_publish(file, description="Example EML file from reml", categories = "Ecology", tags = "EML")
+#'    file <- system.file("doc", "my_eml_data.xml", package="EML")
+#'    id <- eml_publish(file, description="Example EML file from EML",
+#'                      categories = "Ecology", tags = "EML")
 #' }
 eml_publish <- function(file, 
                         ...,  
                         destination = c("figshare", "knb")){
 
   txt <- "continue"
-  if(!all(eml_validate(saveXML(xmlParse(file))))){
-    print(o)
+  if(!all(eml_validate(file))){
     txt <- readline("File validation check failed. Type 'continue' 
             to continue anyway, otherwise, Type 'exit'
             or press Ctrl+C")

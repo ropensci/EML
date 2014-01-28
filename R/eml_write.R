@@ -2,6 +2,14 @@
 
 #' Top-level API function for writing eml 
 #' @param dat either a data.frame, data.set, or eml object
+#' @param file the filename for the output EML.  If NULL, will return the 
+#' XML text as a character string.  
+#' @param title a title for the EML metadata file, also used in naming the csv file.  
+#' @param creator an EML creator (or ListOfcreator for multiple creators) object, 
+#' R person object, or text string recognizable as a name or vector of names.  
+#' @param contact an EML contact, R person object with email address, or text
+#' string with email in angle brackets.  
+#' @param ... additional arguments to the dataset constructor, see ?dataset
 #' @aliases eml_write write.eml 
 #' @import XML
 #' @export eml_write write.eml
@@ -9,8 +17,9 @@
 eml_write <- function(dat,
                       file = NULL,
                       title = "metadata",
-                      creator = get("defaultCreator", envir=remlConfig), 
-                      contact = get("defaultContact", envir=remlConfig)){
+                      creator = get("defaultCreator", envir=EMLConfig), 
+                      contact = get("defaultContact", envir=EMLConfig),
+                      ...){
 
   ## dat Types we can handle by coercion
   if(is(dat, "eml")) {
@@ -23,7 +32,11 @@ eml_write <- function(dat,
   } else { ## assemble minimal valid information  
 
 
-    s4 <- eml(dat = dat, title = title, creator = creator, contact = contact)
+    s4 <- eml(dat = dat, 
+              title = title, 
+              creator = creator, 
+              contact = contact,
+              ...)
   }
   xml <- as(s4, "XMLInternalElementNode")
   saveXML(xml, file = file)

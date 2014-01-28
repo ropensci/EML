@@ -14,6 +14,6 @@ detect_class(dat, meta)
   description (e.g. from col.defs) and the}
 }
 \description{
-  Helper function to attach classes to metadata
+Helper function to attach classes to metadata
 }
 

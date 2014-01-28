@@ -1,1 +1,4 @@
 .travis.yml
+inst/doc/Makefile
+inst/doc/cache
+inst/doc/vignettes/cache

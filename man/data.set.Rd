@@ -18,28 +18,28 @@ data.set(..., col.defs, unit.defs)
   assumed to be in the order of the columns.}
 }
 \description{
-  Create a data.set object (data.frame with metadata)
+Create a data.set object (data.frame with metadata)
 }
 \details{
-  The unit definition provided for the column will depend
-  on the column class - please be sure columns are assigned
-  the appropriate classes (e.g. dates appear as "Date",
-  numerical values appear as "numeric" and not "character"
-  or "factor", etc.  Then define units as follows:
+The unit definition provided for the column will depend on
+the column class - please be sure columns are assigned the
+appropriate classes (e.g. dates appear as "Date", numerical
+values appear as "numeric" and not "character" or "factor",
+etc.  Then define units as follows:
 
-  * Numerical values should simply state the unit used in
-  camelCase, as provided in the list of standard units. *
-  Factors (including ordered factors) should provide a
-  character vector of descriptions for each level, with
-  names matching the factor keys. * Date or time objects
-  should provide a format string, such as "YYYY", or
-  "YYYY-MM-DD", to indicate the format used. * character
-  strings should provide a general description of what the
-  code or string is meant to describe (e.g. may be
-  identical to column heading in this case).
+* Numerical values should simply state the unit used in
+camelCase, as provided in the list of standard units. *
+Factors (including ordered factors) should provide a
+character vector of descriptions for each level, with names
+matching the factor keys. * Date or time objects should
+provide a format string, such as "YYYY", or "YYYY-MM-DD",
+to indicate the format used. * character strings should
+provide a general description of what the code or string is
+meant to describe (e.g. may be identical to column heading
+in this case).
 
-  WARNING: promoting to a `data.table` will work, but apply
-  only to the data.frame part of the data structure.  The
-  additional metadata attributes will be lost.
+WARNING: promoting to a `data.table` will work, but apply
+only to the data.frame part of the data structure.  The
+additional metadata attributes will be lost.
 }
 
