@@ -64,9 +64,9 @@ eml <- function(dat = NULL,
 
 
   if(!isEmpty(dat)){
-    if(is(dat, "dataset")) # pre-built dataset object
+    if(is(dat, "dataset")){ # pre-built dataset object
       eml@dataset <- dat 
-    else if(is(dat, "data.frame")) # data.set class, (also data.frame with wizard)
+    } else if(is(dat, "data.frame")){  # data.set class, (also data.frame with wizard)
       eml@dataset = new("dataset", 
                         title = title, # required 
                         creator = who$creator,
@@ -76,7 +76,7 @@ eml <- function(dat = NULL,
                         dataTable = c(eml_dataTable(dat = dat, 
                                                     title = title)),
                         ...)
-    else if(is(dat, "dataTable"))
+    } else if(is(dat, "dataTable")){
        eml@dataset = new("dataset", 
                         title = title, # required 
                         creator = who$creator,
@@ -85,6 +85,7 @@ eml <- function(dat = NULL,
                         methods = methods, 
                         dataTable = c(dat),
                         ...)
+    }
  }
 
   if(!isEmpty(citation))
@@ -94,13 +95,7 @@ eml <- function(dat = NULL,
   if(!isEmpty(protocol))
     eml@protocol <- protocol
  
-
-  ## Identify the kind of dataset by the type of dat provided 
-  if(is(dat, "data.frame")){
-    eml@dataset@dataTable <- c(eml_dataTable(dat = dat, 
-                                             title = title))
-  } 
-
+ 
   eml 
 }
 
