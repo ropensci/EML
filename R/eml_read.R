@@ -10,6 +10,7 @@ NULL
 #'
 #' Read EML files
 #' @param file an external eml (xml) file, or XMLInternalDocument
+#' @param ... optional additional arguments to xmlParse
 #' @return an EML object
 #' @export eml_read read.eml
 #' @aliases eml_read read.eml
@@ -31,7 +32,6 @@ eml_read <- function(file,  ...){
   
   ## Remote path
   } else if(is.character(file)){ ## Assume a remote access method?
-      require(httr)
       ## URL 
       if(gsub("^(....).*", "\\1", file) %in% c("http", "ftp:", "file")) { ## Is it a URL?
         doc <- content(GET(file), "parsed", "text/xml") 

@@ -4,12 +4,11 @@
 ## Subclasses of taxonomicCoverage, 
 ## with coercion methods to/from XML 
 #' @include party.R
-#' @include literature.R
 
-setClass("citation") # Dummy declaration to avoid warning, replaced when collating literature.R module
+setClass("ListOfcitation") # Dummy declaration to avoid warning, replaced when collating literature.R module
 
 setClass("classificationSystem",
-         slots = c(classificationSystemCitation = "citation",
+         slots = c(classificationSystemCitation = "ListOfcitation",
                         classificationSystemModifications = "character"))
 setAs("XMLInternalElementNode", "classificationSystem",   function(from) emlToS4(from))
 setAs("classificationSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -23,7 +22,7 @@ setAs("vouchers", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("taxonomicSystem",
          slots = c(classificationSystem = "classificationSystem",
-                        identificationReference = "citation",
+                        identificationReference = "ListOfcitation",
                         identifierName = "responsibleParty",
                         taxonomicProcedures = "character",
                         taxonomicCompleteness = "character", 
@@ -43,7 +42,14 @@ setAs("XMLInternalElementNode", "taxonomicClassification",   function(from) emlT
 setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOftaxonomicClassification", contains = "list")
-setMethod("c", signature("taxonomicClassification"), function(x, ...) new("ListOftaxonomicClassification", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... taxonomicClassifications to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-taxonomicClassification
+setMethod("c", signature("taxonomicClassification"), function(x, ..., recursive = FALSE) new("ListOftaxonomicClassification", list(x, ...)))
 
 ## Class definition for taxonomicCoverage 
 setClass("taxonomicCoverage",
@@ -110,7 +116,7 @@ setClass("alternativeTimeScale",
                         timeScaleAgeEstimate = "character",
                         timeScaleAgeUncertainty = "character",
                         timeScaleAgeExplanation = "character",
-                        timeScaleCitation = "character") # FIXME should be citation type
+                        timeScaleCitation = "ListOfcitation") 
         )
 setAs("XMLInternalElementNode", "alternativeTimeScale",   function(from) emlToS4(from))
 setAs("alternativeTimeScale", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -149,7 +155,7 @@ setAs("temporalCoverage", "XMLInternalElementNode",   function(from) S4Toeml(fro
 
 ############# GEOGRAPHIC COVERAGE ##########################
 
-#' @include attribute.R 
+# @include attribute.R 
 #setClass("altitudeUnits", contains="unit")
 #setAs("XMLInternalElementNode", "altitudeUnits",   function(from) emlToS4(from))
 #setAs("altitudeUnits", "XMLInternalElementNode",   function(from) S4Toeml(from))

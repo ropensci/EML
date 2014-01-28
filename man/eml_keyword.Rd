@@ -1,0 +1,34 @@
+\name{eml_keyword}
+\alias{eml_keyword}
+\title{constructor function to generate keywords}
+\usage{
+eml_keyword(x)
+}
+\arguments{
+  \item{x}{a list of character vectors, named by
+  keywordThesaurus. See examples}
+}
+\value{
+a keywordSet EML object
+}
+\description{
+constructor function to generate keywords
+}
+\examples{
+keys <- eml_keyword(list(
+"LTER controlled vocabulary" = c("bacteria",
+                                 "carnivorous plants",
+                                 "genetics",
+                                 "thresholds"),
+            "LTER core area" = c("populations",
+                                 "inorganic nutrients",
+                                 "disturbance"),
+               "HFR default" = c("Harvard Forest",
+                                 "HFR",
+                                 "LTER",
+                                 "USA")))
+
+data("ex")
+# eml(dat, keywordSet = keys, contact = "John Smith <john@example.com>")
+}
+

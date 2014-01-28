@@ -10,7 +10,14 @@
 
 
 setClass("ListOfdataTable", contains = "list")
-setMethod("c", signature("dataTable"), function(x, ...) new("ListOfdataTable", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... dataTables to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-dataTable
+setMethod("c", signature("dataTable"), function(x, ..., recursive = FALSE) new("ListOfdataTable", list(x, ...)))
 
 
 ## A Hack to get element order correct without writing
@@ -39,7 +46,7 @@ setClass("dataset",
         prototype = prototype(coverage = new("coverage"), # if defining a prototype, undefined elements default to NULL?? WTF?  
                               pubDate = as.character(Sys.Date()),
                               title = "metadata", # FIXME something more intelligent.  Use id?  
-                              intellectualRights = as.character(get("defaultRights", envir=remlConfig))))
+                              intellectualRights = as.character(get("defaultRights", envir=EMLConfig))))
 
 ## Coercion methods to/from XML 
 setAs("XMLInternalElementNode", "dataset",  function(from) emlToS4(from))

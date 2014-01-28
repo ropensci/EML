@@ -1,4 +1,9 @@
-#' @export
+#' Generate unit and column metadata for a data.frame
+#' 
+#' Utility to help generate unit and column metadata for a data.frame
+#' @param dataframe a data.frame object  
+#' @return a metadata list object, such as could be passed to eml_dataTable
+# @export
 metadata_wizard <- function(dataframe){
   metadata <- vector("list", length(dataframe))
   names(metadata) <- names(dataframe)
@@ -6,7 +11,6 @@ metadata_wizard <- function(dataframe){
     description <- readline(paste("Enter description for column '", n, "':\n ", sep=""))
     unit_metadata <- prompt_for_units(dataframe, n)
     metadata[[n]] <- list(n, description, unit_metadata)
-    message("\n")
   }
   metadata
 }
@@ -17,32 +21,35 @@ prompt_for_units <- function(dataframe, n){
     ## Factor Data
     if(is.factor(column)){
       lvls <- levels(column)
-      message(paste("column", n, "appears to contain categorical data.\n"))
+        m1 <- paste("column", n, "appears to contain categorical data.\n")
       if(is.ordered(column)){
-      message(paste("column", n, "appears to contain ordered categorical data.\n"))
+        m1 <- paste("column", n, "appears to contain ordered categorical data.\n")
       } else {
       }
-      message(paste("Categories are ", paste(lvls, collapse = ", "), "\n Please define each of the categories at the prompt", sep=""))
+      
+      m2 <- paste("Categories are ", paste(lvls, collapse = ", "), 
+                  "\n Please define each of the categories at the prompt\n", sep="")
       out <- character(length(lvls))
       names(out) <- lvls
       for(item in lvls){
-        out[item] <- readline(paste("define '", item, "':\n", sep=""))
+        out[item] <- readline(paste(m1,m2,"define '", item, "':\n", sep=""))
       }
    ## Numeric Data 
     } else if(is.numeric(column)){
-      message(paste("column", n, "appears to contain numerical data.\n"))
-      message(paste("If this is incorrect, please change the column class and try again.\n"))
-      message("Otherwise, please specify the units from the list below\n or type 'custom' to define a custom unit type")
-      out <- readline("units are: ")
+      m1 <- paste("column", n, "appears to contain numerical data.\n")
+      m2 <- paste("If this is incorrect, please change the column class and try again.\n")
+      m3 <- "Otherwise, please specify the units from the list below\n or type 'custom' to define a custom unit type\n"
+      out <- readline(paste(m1, m2, m3, "units are: "))
       if(out == "custom"){
-        out <- custom_unit_metadata(column)
+#        out<- readline("custom unit creation not yet supported. Define unit:") 
+        out <- create_custom_unit(column) 
       }
     ## Date-time data
     } else if(is(column, "POSIXt")){
     ## Character Data ###
     } else if(is.character(column)){
-      message("Column appears to contain character sting data (not factor or a dateTime object)\n")
-      out <- readline("Please provide a description of this data\n")
+      m1 <- "Column appears to contain character sting data (not factor or a dateTime object)\n"
+      out <- readline(paste(m1, "Please provide a description of this data\n"))
     }
     out
 }

@@ -1,0 +1,17 @@
+\docType{methods}
+\name{c,editor-method}
+\alias{c,editor-method}
+\title{concatenate}
+\usage{
+\S4method{c}{editor}(x, ..., recursive = FALSE)
+}
+\arguments{
+  \item{x,...}{editors to concatenate}
+
+  \item{recursive}{Needed for compatibility with generic,
+  otherwise ignored}
+}
+\description{
+concatenate
+}
+

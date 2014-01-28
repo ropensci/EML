@@ -1,6 +1,6 @@
 #' Create a software node given the name of an R package
 #' @param packagename the name of the R package for which we want an EML documentation node
-#' See issue [#32](https://github.com/ropensci/reml/issues/32)
+#' See issue [#32](https://github.com/ropensci/EML/issues/32)
 
 ## Coerce an installed R package into an EML software node, given the package name
 eml_R_software <- function(packagename){

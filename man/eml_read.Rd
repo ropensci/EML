@@ -8,11 +8,13 @@ eml_read(file, ...)
 \arguments{
   \item{file}{an external eml (xml) file, or
   XMLInternalDocument}
+
+  \item{...}{optional additional arguments to xmlParse}
 }
 \value{
-  an EML object
+an EML object
 }
 \description{
-  Read EML files
+Read EML files
 }
 

@@ -1,6 +1,6 @@
+#' @include physical.R
 #' @include party.R
 #' @include coverage.R
-#' @include physical.R
 
 
 
@@ -19,7 +19,6 @@ setAs("keywordSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("ListOfkeywordSet", contains="list")
 
-#' @include party.R
 setClass("resourceGroup",
           slots = c("alternateIdentifier" = "character",
                          "shortName" = "character",

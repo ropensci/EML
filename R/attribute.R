@@ -2,6 +2,9 @@
 
 #' @include literature.R
 
+# FIXME Enumerated Domains (nominal and ordinal) need externalCodeSet and entityCodeList and child classes defined.  (alternatives to codeDefinition)
+# @mbjones I'm not clear how these fields would actually be used.  Docs seem to prefer codDefinition to externalCodeSet.  not sure what CodeList is for.  
+
 setClass("codeDefinition", 
          slots = c(code = "character",
                         definition = "character"))
@@ -10,7 +13,14 @@ setAs("XMLInternalElementNode", "codeDefinition",  function(from) emlToS4(from))
 
 
 setClass("ListOfcodeDefinition", contains="list")
-setMethod("c", signature("codeDefinition"), function(x, ...) new("ListOfcodeDefinition", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... codeDefinitions to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-codeDefinition
+setMethod("c", signature("codeDefinition"), function(x, ..., recursive = FALSE) new("ListOfcodeDefinition", list(x, ...)))
 
 setClass("enumeratedDomain", 
          slots = c(codeDefinition = "ListOfcodeDefinition"))
@@ -104,7 +114,14 @@ setAs("XMLInternalElementNode", "attribute",  function(from) emlToS4(from))
 
 
 setClass("ListOfattribute", contains="list") # set validity all elements are attribute class
-setMethod("c", signature("attribute"), function(x, ...) new("ListOfattribute", list(x, ...)))
+
+#' concatenate
+#' 
+#' concatenate
+#' @param x,... attributes to concatenate
+#' @param recursive Needed for compatibility with generic, otherwise ignored
+#' @rdname class-attribute
+setMethod("c", signature("attribute"), function(x, ..., recursive = FALSE) new("ListOfattribute", list(x, ...)))
 
 setClass("attributeList", 
          slots = c(id = "character", 

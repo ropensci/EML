@@ -3,7 +3,7 @@
 #' versions of coverage metadata. 
 #' @param scientific_names a list or character string of scientific names of species covered by this dataset.  Assumes names are two words long, given as "genus species" or "genus_species". Can alternatively provide an `eml::taxonomicCoverage` object.  
 #' @param dates a length-2 character vector giving the start and end dates in YYYY-MM-DD (ISO8601) format, or Date object.  Can alternatively provide an existing `eml::temporalCoverage` object.
-#' @param geographic_descirption a plain-text description of the geographic location covered by this data.  
+#' @param geographic_description a plain-text description of the geographic location covered by this data.  
 #' @param NSEWbox numeric vector giving the decimal degrees of latitude or longitude for a bounding box in the order North, South, East, West.  Optionally followed by a 5th and 6th value giving the altitude minimum and maximum in meters.  Can alternatively provide an existing `eml::geographicCoverage` object. 
 #' @return an S4 representation of an eml coverage node.  
 #' @export
@@ -23,15 +23,25 @@ eml_coverage <- function(scientific_names=NULL, dates=NULL, geographic_descripti
 
 ## Methods for `coverage` class 
 
+#' Show coverage pretty-print format using yaml representation
+#' 
+#' Show coverage pretty-print format using yaml representation
+#' @param object an EML coverage object
+#' @return pretty print coverage in yaml format
 #' @include eml_yaml.R
 #' @include coverage.R
 setMethod("show", signature("coverage"), function(object) show_yaml(object))
 
 
-#' @export
+#' get coverage information
+#' 
+#' get coverage information
+#' @param coverage an object from which we extract coverage information
+#' @return content of a coverage node
+# export
 setGeneric("coverage", function(coverage) standardGeneric("coverage"))
 
-#' accessor method
+# accessor method
 setMethod("coverage", signature("coverage"), function(coverage) coverage)
 
 # Coercing to a generic list is error-prone, e.g. as(coverage, "list")[[1]][[1]] 
@@ -65,9 +75,15 @@ get_coverage_list <-
 
 
 
-
-#' @export
+#' get species information
+#' 
+#' get species information
+#' @param taxonomicCoverage an object from which taxonomic coverage information might be extracted
+#' @return species names as a character string
+# export
 setGeneric("species", function(taxonomicCoverage) standardGeneric("species"))
+
+
 ## Coerce taxonomicCoverage into a species string  
 ## FIXME define at the taxonomimcClassifcation level first
 ## FIXME Define as a coercion to character instead?

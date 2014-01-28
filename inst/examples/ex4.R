@@ -1,4 +1,4 @@
-library(reml)
+library(EML)
 dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
                spp   = c("Oncorhynchus tshawytscha",  "Oncorhynchus tshawytscha", "Oncorhynchus kisutch"),
                stg   = ordered(c("smolt", "parr", "smolt"), levels=c("parr", "smolt")), # levels indicates increasing level, eg. parr < smolt
@@ -21,7 +21,7 @@ dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
 
 eml_write(dat, 
           title = "test",  
-          description = "upload to the KNB from reml",
+          description = "upload to the KNB from EML",
           creator = "Carl Boettiger <cboettig@ropensci.org>",
           file = "test.xml")
 pid = eml_knb("test.xml")

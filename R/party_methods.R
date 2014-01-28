@@ -16,11 +16,19 @@
 #' completely constructed using the S4 constructor function for hte class.  
 #' @examples 
 #' 
-#' cre <- eml_person("Aaron Ellison", "Nicholas Gotelli")               # Creates 'ListOfcreator' (names, no role) 
-#' res <- eml_person("Benjamin Baiser [ctb]", "Jennifer Sirota [ctb]")  # creates a 'ListOfassociatedParty' (roles != cre)
-#' con <- eml_person("Aaron Ellison <fake@@email.com>")                  #  Creates 'contact' (Single name, email present)
-#' # Doesn't matter if we give the multiple names in a character vector instead of separate arguments: 
-#' res <- eml_person(c("Benjamin Baiser [ctb]", "Jennifer Sirota [ctb]")) #ListOfassociatedParty 
+#' ## Creates 'ListOfcreator' (names, no role)
+#' cre <- eml_person("Aaron Ellison", "Nicholas Gotelli")
+#' 
+#' ## Creates a 'ListOfassociatedParty' (roles != cre)
+#' res <- eml_person("Benjamin Baiser [ctb]", 
+#'                   "Jennifer Sirota [ctb]") 
+#' ##  Creates 'contact' (Single name, email present)
+#' con <- eml_person("Aaron Ellison <fake@@email.com>")                  
+#' 
+#' ## Doesn't matter if we give the multiple names in 
+#' ## a character vector instead of separate arguments: 
+#' res <- eml_person(c("Benjamin Baiser [ctb]", 
+#'                     "Jennifer Sirota [ctb]")) 
 #'
 #' @export  
 eml_person <- function(x, ...){

@@ -12,28 +12,28 @@ eml_person(x, ...)
   individuals.}
 }
 \value{
-  the return type depends on the argument given, see
-  details.  The default return type is a ListOfcreator, as
-  used in resourceGroup for authorship, etc.
+the return type depends on the argument given, see details.
+The default return type is a ListOfcreator, as used in
+resourceGroup for authorship, etc.
 }
 \description{
-  Convert an R 'person' object (or string formatted in the
-  R 'person' style) to the appropriate EML element
+Convert an R 'person' object (or string formatted in the R
+'person' style) to the appropriate EML element
 }
 \details{
-  The presence of a single name along with an email address
-  triggers creaton of a contact node.  The presence of a
-  role triggers the creation of an associatedParty, unless
-  the role is cre (creator), which triggers the creation of
-  a creator node.  As all party types except contact permit
-  multiple parties, the return object is automatically
-  promoted to a `ListOf` the corresponding class, which can
-  be handed directly into any slot of that name.
+The presence of a single name along with an email address
+triggers creaton of a contact node.  The presence of a role
+triggers the creation of an associatedParty, unless the
+role is cre (creator), which triggers the creation of a
+creator node.  As all party types except contact permit
+multiple parties, the return object is automatically
+promoted to a `ListOf` the corresponding class, which can
+be handed directly into any slot of that name.
 
-  This function is for convenience only.  Any EML
-  responsibleParty-Type element can always be most reliably
-  and more completely constructed using the S4 constructor
-  function for hte class.
+This function is for convenience only.  Any EML
+responsibleParty-Type element can always be most reliably
+and more completely constructed using the S4 constructor
+function for hte class.
 }
 \examples{
 cre <- eml_person("Aaron Ellison", "Nicholas Gotelli")               # Creates 'ListOfcreator' (names, no role)
