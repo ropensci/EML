@@ -125,46 +125,88 @@ Let's see how this example does on the Nine simple criteria.
 
 Sharing is as easy as `publish_eml("my_eml_data.xml")`
 
-The data is publically available at the DOI returned. At this DOI we find two files: the raw data in `.csv` format, and the EML data file providing machine readable metadata.  We'll unpack all the information provided in this metadata as we go along.  Many other options for sharing are possible, including private sharing and sharing through a variety of data publication platforms.  
-
+The data is publically available at the DOI returned. At this DOI we
+find two files: the raw data in `.csv` format, and the EML data file
+providing machine readable metadata.  We'll unpack all the information
+provided in this metadata as we go along.  Many other options for sharing
+are possible, including private sharing and sharing through a variety
+of data publication platforms.
 
 
 ## 2. Provide metadata
 
-We provide `n` lines of metadata in the EML file, one of the "metadata standards" mentioned by White et al.  This includes basic information like the title, author(s), and contact address.  
+We provide `n` lines of metadata in the EML file, one of the "metadata
+standards" mentioned by White et al.  This includes basic information
+like the title, author(s), and contact address.
 
 > 1) the what, when, where, and how of data collection, 
 
-Methods sections in the file provide answers to these questions.  Though our minimal example does not describe the collection itself, note that we nonetheless have generated a `methods` node, which describes the software that created the metadata file (after all, this is a step in the analysis).  
+Methods sections in the file provide answers to these questions.
+Though our minimal example does not describe the collection itself, note
+that we nonetheless have generated a `methods` node, which describes
+the software that created the metadata file (after all, this is a step
+in the analysis).
 
 > 2) how to find and access the data, 
 
-Our example returns a DOI and access URLs for the files in the data set: 
+Our example returns a DOI and access URLs for the files in the data set:
 
-Rich access options are possible depending on the publication outlet, including specifying what users or groups have access to the data.  
+Rich access options are possible depending on the publication outlet,
+including specifying what users or groups have access to the data.
 
 > 3) suggestions on the suitability of the data for answering specific questions, 
 
-We can see at a glance what taxa are covered by the data.  More detailed description can be provided in an abstract.
+We can see at a glance what taxa are covered by the data.  More detailed
+description can be provided in an abstract.
 
-> 4) warnings about known problems or inconsistencies in the data, and 
-> 5) information to check that the data are properly imported, such as the number of rows and columns in the dataset and the total sum of numerical columns
+> 4) warnings about known problems or inconsistencies in the data,
+ and 
+> 5) information to check that the data are properly imported, such
+as the number of rows and columns in the dataset and the total sum of
+numerical columns
 
-Checks have automatically been performed in generating the data, and are performed in reading in the data into R.  
+Checks have automatically been performed in generating the data, and
+are performed in reading in the data into R.
 
 
 ## 3. Provide unprocsessed data
 
-The second file provides the unprocessed data as a `.csv` file.  Because `csv` file formats vary
+The second file provides the unprocessed data as a `.csv` file.
+Because `csv` file formats can vary in the details of data orientation,
+delimeters, and so forth, this information should also be provided as metadata
+to ensure reliable and machine-readable intepretation.  The metadata generated 
+using the EML package automatically adds this information based on R's handling
+of csv files: 
+
+```xml
+<objectName>data.csv</objectName>
+<size>4984</size>
+<characterEncoding>en_US.UTF-8</characterEncoding>
+<dataFormat>
+<textFormat>
+  <numHeaderLines>1</numHeaderLines>
+  <numFooterLines>0</numFooterLines>
+  <recordDelimiter>\r\n</recordDelimiter>
+  <attributeOrientation>column</attributeOrientation>
+  <simpleDelimited>
+    <fieldDelimiter>,</fieldDelimiter>
+  </simpleDelimited>
+</textFormat>
+</dataFormat>
+```
 
 
 ## 4. Use standard formats
 
-Of the "nine ways", this one places the greatest burden on the creator and user.  Rather than coercing our data into prescribed formats, EML lets us simply describe whatever format we are using. 
+Of the "nine ways", this one places the greatest burden on the creator
+and user.  Rather than coercing our data into prescribed formats, EML
+lets us simply describe whatever format we are using.
 
 - Standard file formats
 
-Our example generate standard .csv file format, and declares this explicitly so that users can be sure what character is used to seperate values, rows, etc:
+Our example generate standard .csv file format, and declares this
+explicitly so that users can be sure what character is used to seperate
+values, rows, etc:
 
 ```xml
       <physical>
@@ -183,28 +225,76 @@ Our example generate standard .csv file format, and declares this explicitly so 
 ```
 
 - Standard table formats
+
+
+
 - Standard cell formats 
 
-Rather than insist everyone use the ISO8601 format for dates, the user can declare whatever date format they prefer.  
+White _et al._ recommend that all users learn and adopt certain standard
+formats for representing data, such as the ISO8601 standard for dates
+(YYYY-MM-DD).  While we support this recommendation, this practice can be
+not only burdensome to the data creator but also leaves any future user of
+the data guessing or hoping that the format is one that they recognize.
+Like most computer programs, R does not assume that any such pattern
+is a date in ISO8601 format, but rather uses a Date type that permits
+a variety of printing options.  Similarly, the `EML` package relies on
+the metadata to state which cells contain dates and in what format those
+dates are rendered.  
+
+Likewise, the package detects the appropriate metadata based on the R 
+representation (such as factor, ordered factor, numeric, integer, character, or Date),
+and writes the appropriate metadata for this format.  
+
+
 
 ## 5. Good null values
 
-R has good null values in its use of `data.frames`, so we already have
-these.  Better yet, we write out our choice of null value in the metadata.
+R has good null values in its use of `data.frames`, and permits 
+the user to identify other values for null or missing data.  
+
+Better yet, we write out our choice of null value in the metadata.
+
+
 Reading in the data, we can explicitly pass this to `read.csv` rather than
 just assume the null value is appropriate.  This is handled automatically
 by `eml_read`.
 
 ## 6. Make it easy to combine 
 
-Context nodes serve the pupose described in this section.   
+The detailed column and unit metadata serve the pupose described in this section of White _et al_.   
 Machine-readable metadata, 
 
 ### 7. Perform basic quality control
 
 We have quality control on the metadata as well as the data.  While user
-mistakes are still possible, automated validation of the metadata
-provided and
+mistakes are still possible, automated validation of the metadata are
+provided reduce the chance of errors.   
+
+The `EML` package can perform three levels of validation on EML files
+written from or read into R: validating the XML, validating against the
+EML Schema, and performing other quality control checks.  The `eml_validate`
+function lets a user confirm that the metadata meets the EML standard,
+helping to catch errors that could cause difficulty for another or user
+or computer in intepreting the metadata:
+
+```{r}
+eml_validate("example.xml")
+```
+
+The `eml_validate` function is also run automatically any time a
+user attempts to publish data to an external respository. MD5 checksums
+of the data are also computed at this time to ensure that only complete 
+and uncorrupted data is tranfered over the connection.  
+
+Several mechanisms are in place to evaluate the quality of the `EML`
+package functions themselves.  In addition to the examples from the
+documentation and the automated package checks provided for the R system,
+the `EML` package includes a complete test suite using the testthat
+package [Wickham 2011].  This helps ensures that the software works
+as expected and maintains consistent behavior in any future versions
+of the software package.  
+
+[Wickham 2011]: http://vita.had.co.nz/papers/testthat.html
 
 
 ## 8. Use an established repository
