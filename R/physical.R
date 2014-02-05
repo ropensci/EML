@@ -26,7 +26,14 @@ setAs("dataFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 ### Distribution ##  
 ## FIXME Flush out, this isn't the full distribution defs 
-setClass("offline")
+setClass("offline", slots = c(
+                              mediumName = "character",          # required  
+                              mediumDensity = "character",       # optional  
+                              mediumDensityUnits = "character",  # optional  
+                              mediumVolume = "character",        # optional  
+                              mediumFormat = "character",        # optional  unbounded
+                              mediumNote = "character"           # optional
+                              ))
 setAs("XMLInternalElementNode", "offline", function(from) emlToS4(from))
 setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -45,8 +52,8 @@ setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("distribution",
          slots = c(online = "online",
-                        offline = "offline",
-                        inline = "character"))
+                   offline = "offline",
+                   inline = "character"))
 setAs("XMLInternalElementNode", "distribution", function(from) emlToS4(from))
 setAs("distribution", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## FIXME Should check that 'from' is a internet protocol (e.g http)

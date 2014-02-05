@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml packageId="nceas.982.3" system="knb" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0" xmlns:eml="eml://ecoinformatics.org/eml-2.1.0" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.0 eml.xsd">  <access authSystem="knb" order="denyFirst"><allow><principal>public</principal>
+<permission>read</permission>
+</allow>
+<allow><principal>uid=nceasadmin,o=NCEAS,dc=ecoinformatics,dc=org</principal>
+<permission>all</permission>
+</allow>
+<allow><principal>cn=knb-prod,o=NCEAS,dc=ecoinformatics,dc=org</principal>
+<permission>all</permission>
+</allow>
+<allow><principal>cn=esa-moderators,dc=ecoinformatics,dc=org</principal>
+<permission>all</permission>
+</allow>
+<allow><principal>uid=ewolkovich,o=unaffiliated,dc=ecoinformatics,dc=org</principal>
+<permission>read</permission>
+<permission>write</permission>
+</allow>
+</access>
+<dataset> <title>STONE: Synthesis of Timings Observed in iNcrease Experiments</title>
+ <creator> <organizationName>NCEAS 12574: Cook: Forecasting phenology: Integrating ecology, climatology, and phylogeny to understand plant responses to climate change</organizationName>
+ </creator>
+ <creator> <organizationName>National Center for Ecological Analysis and Synthesis</organizationName>
+ </creator>
+ <creator> <individualName> <givenName>Elizabeth</givenName>
+ <surName>Wolkovich</surName>
+ </individualName>
+ <address> <deliveryPoint>Biodiversity Research Centre</deliveryPoint>
+ <city>Vancouver</city>
+ <administrativeArea>BC</administrativeArea>
+ <postalCode>V6T 1Z4</postalCode>
+ <country>Canada</country>
+ </address>
+ <electronicMailAddress>wolkovich@biodiversity.ubc.ca</electronicMailAddress>
+ </creator>
+ <metadataProvider><individualName> <givenName>Elizabeth</givenName>
+ <surName>Wolkovich</surName>
+ </individualName>
+ </metadataProvider>
+<associatedParty id="1330152549199"><individualName><givenName>Theresa</givenName>
+<surName>Crimmins</surName>
+</individualName>
+<role>Custodian/Steward</role>
+</associatedParty>
+<associatedParty id="1330152549216"><individualName><givenName>Stephanie</givenName>
+<surName>Pau</surName>
+</individualName>
+<role>Custodian/Steward</role>
+</associatedParty>
+<associatedParty id="1330152549233"><individualName><givenName>Steven</givenName>
+<surName>Travers</surName>
+</individualName>
+<role>Custodian/Steward</role>
+</associatedParty>
+<associatedParty id="1330152549144"><individualName><givenName>Elizabeth</givenName>
+<surName>Wolkovich</surName>
+</individualName>
+<role>Principal Investigator</role>
+</associatedParty>
+<associatedParty id="1330152549164"><individualName><givenName>Jenica</givenName>
+<surName>Allen</surName>
+</individualName>
+<role>Custodian/Steward</role>
+</associatedParty>
+<associatedParty id="1330152549182"><individualName><givenName>Elsa</givenName>
+<surName>Cleland</surName>
+</individualName>
+<role>Custodian/Steward</role>
+</associatedParty>
+       <pubDate>2012-02-22</pubDate>
+ <abstract> <para>The Synthesis of Timings Observed in iNcrease Experiments (STONE) database includes data from over 37 warming experiments focused explicitly on assessing phenological change with temperature increases. Only studies that gave data on phenological shifts and the temperature change were included. These data have been used in a study comparing experimental and observational results of temperature change (Wolkovich et al.) and in a study linking performance and a species' ability to track climate (Cleland et al.). See Wolkovich et al. for extensive details on the data.</para>
+ </abstract>
+ <keywordSet> <keyword>plant phenology</keyword>
+ <keyword>warming</keyword>
+ <keyword>Northern hemisphere</keyword>
+ <keyword>climate change</keyword>
+ <keyword>experiments</keyword>
+ <keywordThesaurus>None</keywordThesaurus>
+ </keywordSet>
+<intellectualRights><para>Free use, but please contact Wolkovich before use.</para>
+</intellectualRights>
+  <distribution> <offline> <mediumName>digital</mediumName>
+ </offline>
+ </distribution>
+ <coverage> <temporalCoverage> <rangeOfDates> <beginDate> <calendarDate>1983</calendarDate>
+ </beginDate>
+ <endDate> <calendarDate>2009</calendarDate>
+ </endDate>
+ </rangeOfDates>
+ </temporalCoverage>
+ <geographicCoverage> <geographicDescription>Warming (temperature increase) experiments mainly from North America and Europe with several studies from Asia and Australia.</geographicDescription>
+ <boundingCoordinates> <westBoundingCoordinate>0.0000</westBoundingCoordinate>
+ <eastBoundingCoordinate>0.0000</eastBoundingCoordinate>
+ <northBoundingCoordinate>90.0000</northBoundingCoordinate>
+ <southBoundingCoordinate>90.0000</southBoundingCoordinate>
+ </boundingCoordinates>
+ </geographicCoverage>
+ </coverage>
+<contact id="1330152658559"><individualName><givenName>Elizabeth</givenName>
+<surName>Wolkovich</surName>
+</individualName>
+<address><deliveryPoint>Biodiversity Research Centre</deliveryPoint>
+<city>Vancouver</city>
+<administrativeArea>BC</administrativeArea>
+<postalCode>V6T 1Z4</postalCode>
+<country>Canada</country>
+</address>
+<electronicMailAddress>wolkovich@biodiversity.ubc.ca</electronicMailAddress>
+</contact>
+  <methods><methodStep><description><section> <title>Meta-analysis of warming experiments</title>
+ <para>The Synthesis of Timings Observed in iNcrease Experiments (STONE) database includes data from over 37 warming experiments focused explicitly on assessing phenological change with temperature increases. To find these studies we searched the Web of Science (ISI) for Topic=(warm* OR temperature*) AND Topic=(plant* AND phenolog*) AND Topic=(experiment* OR manip*) in November 2009 and examined all 401 records, updating results through December 2010. To obtain the most accurate data we contacted authors, requesting access to their data (receiving 16.7% of data directly) then
+extracted phenological event dates and magnitude of warming data from the papers if authors could not share data. Studies conducted in distinctly different areas or habitats presented in one paper were each treated as individual sites. We compared all data once extracted and removed data that appeared to be duplicated (e.g., a publication would use data from 1994-1996 and another 1996-1999, if the data were identical we included the 1996 data only once), but we did not combine studies that appeared to be conducted at the same field site unless they specifically stated they were from the identical experiment. We generally extracted data for all treatments reported (e.g., several studies had additional snow or precipitation treatments) but found we had only sufficient data on temperature treatments for comparisons and analyses. We extracted
+all phenological data across all events (leafing, flowering and fruiting)</para>
+ </section>
+ </description>
+ </methodStep>
+ </methods>
+ <dataTable id="1329951083255"><entityName>Study manipulation data</entityName>
+ <physical id="1329950818225"><objectName>manipuse.csv</objectName>
+ <size unit="byte">5501</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/wolkovich.28.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1329951083256"><attributeName>&quot;DatasetID&quot;</attributeName>
+ <attributeDefinition>Unique identifier of study</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Initials of person who entered study and 3 digit numerical code</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083257"><attributeName>&quot;Year&quot;</attributeName>
+ <attributeDefinition>Year</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083258"><attributeName>&quot;medium&quot;</attributeName>
+ <attributeDefinition>Medium in which climate variable was measured</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Medium in which climate variable was measured</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083259"><attributeName>&quot;Temp_treat&quot;</attributeName>
+ <attributeDefinition>Temperature treatment</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>0 is control, 1 is heating, 2 is heating above 1 etc.</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083260"><attributeName>&quot;onetempchange&quot;</attributeName>
+ <attributeDefinition>temperature change, collapsing data from multiple columns in original file</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>celsius</standardUnit>
+ </unit>
+ <numericDomain><numberType>natural</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083261"><attributeName>&quot;Precip_treat&quot;</attributeName>
+ <attributeDefinition>Precipitation treatment</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>0 is control, 1 is water addition, -1 water removal etc.</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083262"><attributeName>&quot;precipchange&quot;</attributeName>
+ <attributeDefinition>Change in precipitation</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Change in precipitation</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951083263"><attributeName>&quot;precipchangetyp&quot;</attributeName>
+ <attributeDefinition>Information on change in precipitation</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Information on precipitation measurement</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>136</numberOfRecords>
+ </dataTable>
+ <dataTable id="1329951690769"><entityName>Response data</entityName>
+ <entityDescription>Response -- phenological and performance -- data by species</entityDescription>
+ <physical id="1329951154266"><objectName>respp.csv</objectName>
+ <size unit="byte">171623</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/wolkovich.29.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1329951690770"><attributeName>&quot;DatasetID&quot;</attributeName>
+ <attributeDefinition>Unique identifier for study</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Unique identifier for study, matches to Study manipulation data</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690771"><attributeName>&quot;Temp_treat&quot;</attributeName>
+ <attributeDefinition>Temperature treatment</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>See info in study manipulation data</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690772"><attributeName>&quot;Precip_treat&quot;</attributeName>
+ <attributeDefinition>Precipitation treatment, if blank is 0</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>See info in study manipulation data</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690773"><attributeName>&quot;Year&quot;</attributeName>
+ <attributeDefinition>Year</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690774"><attributeName>&quot;Genus&quot;</attributeName>
+ <attributeDefinition>Genus</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Genus</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690775"><attributeName>&quot;Species&quot;</attributeName>
+ <attributeDefinition>Species epithet</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Species epithet</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690776"><attributeName>&quot;responsetype&quot;</attributeName>
+ <attributeDefinition>Response type</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>phenological or performance response types (FFD, first flower date etc.)</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690777"><attributeName>&quot;meanresponse&quot;</attributeName>
+ <attributeDefinition>mean response: for phenological and performance data</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690778"><attributeName>&quot;responseunites&quot;</attributeName>
+ <attributeDefinition>units for meanresponse column</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>units</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690779"><attributeName>&quot;stderror&quot;</attributeName>
+ <attributeDefinition>standard error</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690780"><attributeName>&quot;n&quot;</attributeName>
+ <attributeDefinition>n</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>natural</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690781"><attributeName>&quot;otherdatanote&quot;</attributeName>
+ <attributeDefinition>notes</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690782"><attributeName>&quot;Responsenotes&quot;</attributeName>
+ <attributeDefinition>more notes</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>more notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690783"><attributeName>&quot;phenper&quot;</attributeName>
+ <attributeDefinition>notes related to whether response is phenological or performance</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690784"><attributeName>&quot;phentype&quot;</attributeName>
+ <attributeDefinition>type of phenological data</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>type of phenological data, where applicable</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690785"><attributeName>&quot;species&quot;</attributeName>
+ <attributeDefinition>latin binomial</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>latin binomial</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690786"><attributeName>&quot;medium&quot;</attributeName>
+ <attributeDefinition>medium</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>medium</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690787"><attributeName>&quot;onetempchange&quot;</attributeName>
+ <attributeDefinition>temperature change</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>celsius</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690788"><attributeName>&quot;precipchange&quot;</attributeName>
+ <attributeDefinition>precipitation change</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>precipitation change</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951690789"><attributeName>&quot;precipchangetyp&quot;</attributeName>
+ <attributeDefinition>precipitation change information</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>precipitation change</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>1144</numberOfRecords>
+ </dataTable>
+ <dataTable id="1329951818964"><entityName>Temperature manipulation: Duration of measurement</entityName>
+ <physical id="1329951764543"><objectName>maniptemps.csv</objectName>
+ <size unit="byte">2779</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/wolkovich.30.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1329951818965"><attributeName>&quot;site&quot;</attributeName>
+ <attributeDefinition>Unique identifier of study</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Unique identifier of study</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1329951818966"><attributeName>&quot;temprep&quot;</attributeName>
+ <attributeDefinition>temperature change (onetempchange) is study mean or growing season mean</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><enumeratedDomain><codeDefinition><code>&quot;mean&quot;</code>
+ <definition>mean</definition>
+ </codeDefinition>
+ <codeDefinition><code>&quot;growseas&quot;</code>
+ <definition>growing season</definition>
+ </codeDefinition>
+ <codeDefinition><code>NA</code>
+ <definition>NA</definition>
+ </codeDefinition>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>173</numberOfRecords>
+ </dataTable>
+ </dataset>
+ </eml:eml>
