@@ -60,7 +60,10 @@ object, and in doing so will also update the EML file.
 \examples{
 \dontrun{
    file <- system.file("doc", "my_eml_data.xml", package="EML")
-   id <- eml_figshare(file, description="Example EML file from EML", categories = "Ecology", tags = "EML")
+   id <- eml_figshare(file,
+                      description="Example EML file from EML",
+                      categories = "Ecology",
+                      tags = "EML")
 }
 }
 
