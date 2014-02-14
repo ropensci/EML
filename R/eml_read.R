@@ -59,7 +59,13 @@ eml_read <- function(file,  ...){
 
   ##  Keep track of dirname in additional resource files (e.g. csv's) are available in same directory
   s4@dirname <- paste0(dirname(file), "/")
-  s4@dataset@dataTable[[1]]@physical@dirname <- paste0(dirname(file), "/") ## Fix for multiple dataTables per dataset
+
+  ## This is clearly not the best place to write the dirname.... 
+  if(!isEmpty(s4@dataset@dataTable)){
+    for(i in 1:length(s4@dataset@dataTable))
+      s4@dataset@dataTable[[i]]@physical@dirname <- paste0(dirname(file), "/") ## Fix for multiple dataTables per dataset
+  }
+
   s4
 }
 read.eml <- eml_read

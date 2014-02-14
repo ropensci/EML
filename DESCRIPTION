@@ -61,6 +61,7 @@ Collate:
     'eml_methods.R'
     'eml_publish.R'
     'eml_read.R'
+    'eml_software.R'
     'eml_validate.R'
     'eml_wizards.R'
     'eml_write.R'

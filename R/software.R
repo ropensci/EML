@@ -1,22 +1,38 @@
+#' @include baseAttributes.R
+#' @include party.R 
 #' @include resource.R 
+#' @include coverage.R
+#' @include physical.R
 
-
+# FIXME teach the emlToS4 / S4Toeml functions that this class should match 
+# a node named "language", which can't be used as the class name since that class 
+# is already protected.  
+#
 # The actual value for the language or a code for the language, and 
 # The International Language Code being used in the field languageValue. 
 # See http://www.loc.gov/standards/iso639-2/ e.g. ISO639-2
-setClass("language", 
+setClass("eml_language", 
          slots = c(languageValue = "character", 
-                   languageCodeStandard = "character") 
+                   languageCodeStandard = "character")) 
+setAs("XMLInternalElementNode", "language",   function(from) emlToS4(from))
+setAs("language", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-  # Not sure this is correctly defined? Simple types 
+
+# Not sure this is correctly defined? Simple types 
 setClass("action", 
          slots = c(install = "character",
                    assert = "character"))
+setAs("XMLInternalElementNode", "action",   function(from) emlToS4(from))
+setAs("action", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
 
 setClass("dependency",
          slots = c("action" = "action",  # required
                    "software" = "software")) # required 
+setAs("XMLInternalElementNode", "dependency",   function(from) emlToS4(from))
+setAs("dependency", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
 setClass("ListOfdependency", contains = "list")
 
 # # Implementation describes the hardware, operating system resources a
@@ -29,16 +45,19 @@ setClass("ListOfdependency", contains = "list")
 setClass("implementation", 
          slots = c(distribution = "distribution", # required  unbounded
                    size = "character",# optional  
-                   language = "language", # optional  unbounded
+#                   language = "language", # optional  unbounded
                    operatingSystem = "character", # optional  unbounded
                    machineProcessor = "character",  #optional  unbounded
                    virtualMachine = "character", # optional  
                    diskUsage = "character", #  optional  
                    runtimeMemoryUsage = "character", # optional  
                    programmingLanguage = "character", # optional unbounded
-                   checksum = "character",  # optional  
-                   dependency = "ListOfdependency" # optional  unbounded
-                   )
+                   checksum = "character"  # optional  
+#                   dependency = "ListOfdependency" # optional  unbounded
+                   ))
+
+setAs("XMLInternalElementNode", "implementation",   function(from) emlToS4(from))
+setAs("implementation", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 
@@ -48,7 +67,7 @@ setClass("software_slots",
                    licenceURL = "character",
                    license = "character", 
                    version = "character",
-                   project = "chracter") # researchProject 
+                   project = "character")) # researchProject 
 
 ## FIXME flush out this class
 setClass("software",

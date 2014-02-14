@@ -48,8 +48,10 @@ eml <- function(dat = NULL,
 
 
   uid <- EML_id()
-  who <- contact_creator(contact = contact, 
-                         creator = creator)
+
+  if(!is.null(dat)) # this is written only into dataset nodes 
+    who <- contact_creator(contact = contact, 
+                           creator = creator)
 
 
   if(is(methods, "character")){
