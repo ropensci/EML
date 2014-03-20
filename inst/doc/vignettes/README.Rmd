@@ -42,11 +42,6 @@ opts_chunk$set(fig.path = paste("figure/",
                                   gsub(".Rmd", "", knitr:::knit_concord$get('infile') ),
                                 "/", sep=""))
 
-  options(FigshareKey = "Kazwg91wCdBB9ggypFVVJg")
-  options(FigsharePrivateKey = "izgO06p1ymfgZTsdsZQbcA")
-  options(FigshareToken = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q")
-  options(FigsharePrivateToken = "4mdM3pfekNGO16X4hsvZdg")
-
 
 
 ```
@@ -155,7 +150,8 @@ This ensures that other software can correctly parse and interpret the
 metadata document:
 
 ```{r}
-eml_validate("EML_example.xml")
+eml_validate("EML_example.xml", 
+             schema_only=TRUE) # perform simple/fast evaluation
 ```
 
 
@@ -191,7 +187,8 @@ eml_publish("EML_example.xml",
             description="Example EML file from EML",
             categories = "Ecology", 
             tags = "EML", 
-            destination="figshare")
+            destination="figshare", 
+            schema_only=TRUE) # performs simple validation
 ```
 
 This creates a draft file visible only to the user configured in
