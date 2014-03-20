@@ -30,7 +30,8 @@ Imports:
     yaml,
     httr
 Depends:
-    R (>= 2.15)
+    R (>= 2.15),
+    methods
 Collate:
     'EML_id.R'
     'reml_environment.R'
