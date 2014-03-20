@@ -2,7 +2,6 @@ context("external validator")
 
 
 test_that("External validator works using RHTMLForms", {
-  library(RHTMLForms)
   ff = getHTMLFormDescription("http://knb.ecoinformatics.org/emlparser/")
 #eml_validate = createFunction(ff[[2]], reader = processValidationResponse) # failing...
 
