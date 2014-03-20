@@ -9,8 +9,8 @@ before_script:
 - ./travis-tool.sh install_github hadley/httr
 - ./travis-tool.sh install_github hadley/devtools
 - ./travis-tool.sh install_github ropensci/rfigshare@devel
-- Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
+- Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 
 notifications:
   hipchat:

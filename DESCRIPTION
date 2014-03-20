@@ -29,7 +29,6 @@ Imports:
     XML,
     RCurl,
     utils,
-    methods,
     uuid,
     yaml,
     httr
