@@ -4,7 +4,10 @@ before_script:
 - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
 - chmod 755 ./travis-tool.sh
 - ./travis-tool.sh bootstrap
+- ./travis-tool.sh install_r_binary rjava
 - ./travis-tool.sh install_deps
+- Rscript 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
+
 notifications:
   hipchat:
     rooms:
