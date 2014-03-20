@@ -6,7 +6,7 @@ before_script:
 - ./travis-tool.sh bootstrap
 - ./travis-tool.sh install_r_binary rjava
 - ./travis-tool.sh install_deps
-- Rscript 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
+- Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 
 notifications:
   hipchat:
