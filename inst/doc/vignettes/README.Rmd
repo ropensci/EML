@@ -150,8 +150,7 @@ This ensures that other software can correctly parse and interpret the
 metadata document:
 
 ```{r}
-eml_validate("EML_example.xml", 
-             schema_only=TRUE) # perform simple/fast evaluation
+eml_validate("EML_example.xml") 
 ```
 
 
@@ -187,8 +186,7 @@ eml_publish("EML_example.xml",
             description="Example EML file from EML",
             categories = "Ecology", 
             tags = "EML", 
-            destination="figshare", 
-            schema_only=TRUE) # performs simple validation
+            destination="figshare") 
 ```
 
 This creates a draft file visible only to the user configured in

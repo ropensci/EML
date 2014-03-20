@@ -3,7 +3,7 @@
 \title{Publish EML}
 \usage{
 eml_publish(file, ..., destination = c("figshare", "knb"), validate = TRUE,
-  schema_only = FALSE)
+  schema_only = TRUE)
 }
 \arguments{
   \item{file}{The local path of an EML file}
