@@ -27,6 +27,8 @@ setAs("XMLInternalElementNode", "action",   function(from) emlToS4(from))
 setAs("action", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
+setClass("software") # Dummy declarations are now required..
+
 setClass("dependency",
          slots = c("action" = "action",  # required
                    "software" = "software")) # required 

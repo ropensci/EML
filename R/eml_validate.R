@@ -58,7 +58,7 @@ function (eml = "",
 
   # CRAN will WARN since RHTMLForms isn't on CRAN (and hence not on the SUGGESTS list).  Well, let it, because
   # that is just stupid.  
-  success <- require(RHTMLForms)
+  success <- require("RHTMLForms", character.only = TRUE, quietly = TRUE)
   if(!success | schema_only){
     warning("Performing XML Schema validation only.\n
             Install RHTMLForms to provide additional EML-specific tests.")
