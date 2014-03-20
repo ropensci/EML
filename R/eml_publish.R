@@ -21,7 +21,7 @@ eml_publish <- function(file,
                         ...,  
                         destination = c("figshare", "knb"),
                         validate = TRUE,
-                        schema_only = FALSE){
+                        schema_only = TRUE){
 
   txt <- "continue"
   if(validate){

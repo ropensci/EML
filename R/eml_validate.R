@@ -3,7 +3,7 @@
 #' Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
 #' @param eml path to an eml file or text of eml file
 #' @param ... additional arguments to formQuery
-#' @param schema_only logical, use schema-only validation tests.  Default is FALSE, but 
+#' @param schema_only logical, use schema-only validation tests. 
 #'  will also be used as the fallback mechanism if RHTMLForms is unavailable.  
 #' @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
 #' @details More detailed testing against the schema can be performed using the xmlSchemaValidate
@@ -19,7 +19,7 @@
 eml_validate <-
 function (eml = "", 
           ..., 
-          schema_only = FALSE) 
+          schema_only = TRUE) 
 {
 
           ## Should be part of the function arguments, but plays havoc with silly roxygen at this time...
