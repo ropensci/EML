@@ -56,14 +56,23 @@ function (eml = "",
 
   doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
 
+
   # CRAN will WARN since RHTMLForms isn't on CRAN (and hence not on the SUGGESTS list).  Well, let it, because
-  # that is just stupid.  
-  success <- require("RHTMLForms", character.only = TRUE, quietly = TRUE)
+  # that is just stupid. 
+  success <- TRUE
+  if(!schema_only)
+    success <- require("RHTMLForms", character.only = TRUE, quietly = TRUE)
+
+  
+
   if(!success | schema_only){
     warning("Performing XML Schema validation only.\n
             Install RHTMLForms to provide additional EML-specific tests.")
 #    xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
     out <- xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+
+
+
     if(out$status == 0) 
       TRUE
     else 

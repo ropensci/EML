@@ -42,11 +42,11 @@ eml_figshare <- function(file, title = NULL, description = NULL,
 
   visibility = match.arg(visibility)
 
-  success <- require(rfigshare)
+  success <- require("rfigshare", character.only = TRUE, quietly = TRUE)
   if(!success){
     message("rfigshare package not found. Attempting to install")
     install.packages("rfigshare")
-    success <- require(rfigshare)
+    success <- require("rfigshare", character.only = TRUE, quietly = TRUE)
      if(!success)  
       stop("The rfigshare package must be installed to publish data to figshare")
   }
