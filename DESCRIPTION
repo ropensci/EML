@@ -20,7 +20,11 @@ Suggests:
     knitr,
     rfigshare,
     devtools,
-    testthat
+    testthat,
+    dataone,
+    rrdf,
+    RHTMLForms,
+    Sxslt
 Imports:
     XML,
     RCurl,
