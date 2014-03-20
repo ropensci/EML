@@ -7,7 +7,7 @@ before_script:
 - ./travis-tool.sh install_r_binary rjava
 - ./travis-tool.sh install_deps
 - ./travis-tool.sh install_github hadley/httr
-- Rscript -e 'library(methods); library(devtools); install_github("rfigshare","ropensci", branch="devel")'
+- ./travis-tool.sh install_github ropensci/rfigshare ref="devel"
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
 
