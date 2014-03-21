@@ -19,7 +19,7 @@
 eml_validate <-
 function (eml = "", 
           ..., 
-          schema_only = TRUE) 
+          schema_only = FALSE) 
 {
 
           ## Should be part of the function arguments, but plays havoc with silly roxygen at this time...
