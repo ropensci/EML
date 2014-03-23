@@ -2,7 +2,7 @@
 \alias{eml_validate}
 \title{eml online validation tool}
 \usage{
-eml_validate(eml = "", ..., schema_only = TRUE)
+eml_validate(eml = "", ..., schema_only = FALSE)
 }
 \arguments{
   \item{eml}{path to an eml file or text of eml file}
@@ -19,7 +19,7 @@ and id/referencing tests.
 }
 \description{
 Programmatic interface to the online parsing tool
-http://knb.ecoinformatics.org/emlparser/parse
+https://knb.ecoinformatics.org/emlparser/parse
 }
 \details{
 More detailed testing against the schema can be performed
