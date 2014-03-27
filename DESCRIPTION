@@ -20,17 +20,21 @@ Suggests:
     knitr,
     rfigshare,
     devtools,
-    testthat
+    testthat,
+    dataone,
+    rrdf,
+    RHTMLForms,
+    Sxslt
 Imports:
     XML,
     RCurl,
     utils,
-    methods,
     uuid,
     yaml,
     httr
 Depends:
-    R (>= 2.15)
+    R (>= 2.15),
+    methods
 Collate:
     'EML_id.R'
     'reml_environment.R'
@@ -61,6 +65,7 @@ Collate:
     'eml_methods.R'
     'eml_publish.R'
     'eml_read.R'
+    'eml_software.R'
     'eml_validate.R'
     'eml_wizards.R'
     'eml_write.R'

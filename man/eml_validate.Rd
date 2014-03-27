@@ -10,8 +10,8 @@ eml_validate(eml = "", ..., schema_only = FALSE)
   \item{...}{additional arguments to formQuery}
 
   \item{schema_only}{logical, use schema-only validation
-  tests.  Default is FALSE, but will also be used as the
-  fallback mechanism if RHTMLForms is unavailable.}
+  tests.  will also be used as the fallback mechanism if
+  RHTMLForms is unavailable.}
 }
 \value{
 Two logicals indicating if we pass schema validation tests
@@ -19,7 +19,7 @@ and id/referencing tests.
 }
 \description{
 Programmatic interface to the online parsing tool
-http://knb.ecoinformatics.org/emlparser/parse
+https://knb.ecoinformatics.org/emlparser/parse
 }
 \details{
 More detailed testing against the schema can be performed

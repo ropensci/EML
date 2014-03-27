@@ -2,7 +2,8 @@
 \alias{eml_publish}
 \title{Publish EML}
 \usage{
-eml_publish(file, ..., destination = c("figshare", "knb"))
+eml_publish(file, ..., destination = c("figshare", "knb"), validate = TRUE,
+  schema_only = FALSE)
 }
 \arguments{
   \item{file}{The local path of an EML file}
@@ -13,6 +14,13 @@ eml_publish(file, ..., destination = c("figshare", "knb"))
 
   \item{destination}{the publishing destination, e.g.
   "figshare"}
+
+  \item{validate}{logical, should we run validation first?
+  Default true}
+
+  \item{schema_only}{logical, option for the validator
+  function. Check only against the schema directly? see
+  \code{\link{eml_validate}} for details.}
 }
 \value{
 Uploads the dataset and file to destination specified
@@ -25,7 +33,8 @@ Metadata accordingly
 \examples{
 \dontrun{
    file <- system.file("doc", "my_eml_data.xml", package="EML")
-   id <- eml_publish(file, description="Example EML file from EML", categories = "Ecology", tags = "EML")
+   id <- eml_publish(file, description="Example EML file from EML",
+                     categories = "Ecology", tags = "EML")
 }
 }
 

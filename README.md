@@ -151,12 +151,11 @@ metadata document:
 
 
 ```coffee
-eml_validate("EML_example.xml")
+eml_validate("EML_example.xml") 
 ```
 
 ```
-EML specific tests XML specific tests 
-              TRUE               TRUE 
+[1] TRUE
 ```
 
 
@@ -194,11 +193,11 @@ eml_publish("EML_example.xml",
             description="Example EML file from EML",
             categories = "Ecology", 
             tags = "EML", 
-            destination="figshare")
+            destination="figshare") 
 ```
 
 ```
-[1] 915442
+Error: non-character argument
 ```
 
 
@@ -263,7 +262,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-01-28). _metadata_.
+Boettiger C (2014-03-20). _metadata_.
 ```
 
 

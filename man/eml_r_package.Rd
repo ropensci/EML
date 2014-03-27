@@ -1,0 +1,20 @@
+\name{eml_r_package}
+\alias{eml_r_package}
+\title{Generate the EML software node for an R package}
+\usage{
+eml_r_package(packagename)
+}
+\arguments{
+  \item{packagename}{the name of any installed R package}
+}
+\value{
+the eml software element containing the metadata for given
+package
+}
+\description{
+Generate the EML software node for an R package
+}
+\examples{
+software <- eml_r_package("EML")
+}
+

@@ -1,9 +1,9 @@
 #' eml online validation tool
 #' 
-#' Programmatic interface to the online parsing tool http://knb.ecoinformatics.org/emlparser/parse
+#' Programmatic interface to the online parsing tool https://knb.ecoinformatics.org/emlparser/parse
 #' @param eml path to an eml file or text of eml file
 #' @param ... additional arguments to formQuery
-#' @param schema_only logical, use schema-only validation tests.  Default is FALSE, but 
+#' @param schema_only logical, use schema-only validation tests. 
 #'  will also be used as the fallback mechanism if RHTMLForms is unavailable.  
 #' @return Two logicals indicating if we pass schema validation tests and id/referencing tests.  
 #' @details More detailed testing against the schema can be performed using the xmlSchemaValidate
@@ -23,11 +23,11 @@ function (eml = "",
 {
 
           ## Should be part of the function arguments, but plays havoc with silly roxygen at this time...
-          .url = "http://knb.ecoinformatics.org/emlparser/parse"
+          .url = "https://knb.ecoinformatics.org/emlparser/parse"
           .reader = processValidationResponse 
           .formDescription = structure(list(formAttributes = 
                                             structure(c("post", 
-                                                        "http://knb.ecoinformatics.org/emlparser/parse"), 
+                                                        "https://knb.ecoinformatics.org/emlparser/parse"), 
                                                       .Names = c("method", "action"), class = "HTMLFormAttributes"),
                                             elements = 
                                             structure(list(action = structure(list(name = "action", 
@@ -43,11 +43,11 @@ function (eml = "",
                                                                                class = c("HTMLTextAreaElement", "HTMLFormElement"))),
                                                       .Names = c("action", "doctext"), 
                                                       class = "HTMLFormElementsList"), 
-                                            url = structure("http://knb.ecoinformatics.org/emlparser/parse", 
+                                            url = structure("https://knb.ecoinformatics.org/emlparser/parse", 
                                                             .Names = "action")), 
                                        .Names = c("formAttributes", "elements", "url"), 
                                        class = "HTMLFormDescription") 
-          .opts = structure(list(referer = "http://knb.ecoinformatics.org/emlparser/parse"), 
+          .opts = structure(list(referer = "https://knb.ecoinformatics.org/emlparser/parse"), 
                             .Names = "referer")
           style = "POST" 
           .curl = getCurlHandle()
@@ -56,14 +56,23 @@ function (eml = "",
 
   doctext <- saveXML(xmlParse(eml)) # xmlParse will take text or filename equally happily.  We need text.  
 
+
   # CRAN will WARN since RHTMLForms isn't on CRAN (and hence not on the SUGGESTS list).  Well, let it, because
-  # that is just stupid.  
-  success <- require(RHTMLForms)
+  # that is just stupid. 
+  success <- TRUE
+  if(!schema_only)
+    success <- require("RHTMLForms", character.only = TRUE, quietly = TRUE)
+
+  
+
   if(!success | schema_only){
-    warning("Performing XML Schema validation only.\n
-            Install RHTMLForms to provide additional EML-specific tests.")
+#    warning("Performing XML Schema validation only.\n
+#            Install RHTMLForms to provide additional EML-specific tests.")
 #    xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
     out <- xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+
+
+
     if(out$status == 0) 
       TRUE
     else 

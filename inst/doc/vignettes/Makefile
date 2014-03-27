@@ -39,4 +39,4 @@ README.md: README.Rmd
 
 
 clean:
-	rm -rf README.md *.csv *.xml ../../../tests/testthat/*.xml ../../../tests/testthat/*.csv ../../../*.csv ../../../*.xml ../../../tmp
+	rm -rf README.md cache/ *.csv *.xml ../../../tests/testthat/*.xml ../../../tests/testthat/*.csv ../../../*.csv ../../../*.xml ../../../tmp

@@ -12,12 +12,17 @@
 # get_rdf(file) # not working yet
 
 get_rdf <- function(eml){
-#   require(Sxslt) # Wait until package is available on CRAN to formally depend on it.  
+   success <- require("Sxslt", , character.only = TRUE, quietly = TRUE) # Wait until package is available on CRAN to formally depend on it.  
   # FIXME stylesheet not working yet
   # FIXME detect EML version first in selecting which stylesheet to use.
-  if(is(eml, "eml"))
-    eml <- eml_write(eml)
 
-  to_rdf <- system.file("xsl", "eml210toDublinCore.xsl", package="EML")
-  rdf <- xsltApplyStyleSheet(eml, to_rdf)
+  if(success){
+    if(is(eml, "eml"))
+      eml <- eml_write(eml)
+
+    to_rdf <- system.file("xsl", "eml210toDublinCore.xsl", package="EML")
+    rdf <- xsltApplyStyleSheet(eml, to_rdf)
+  } else {
+    warning("Package SXslt not available, please install it from www.omegahat.org") 
+  }
 }

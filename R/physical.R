@@ -43,7 +43,7 @@ setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## FIXME should include function *attribute* as well (e.g. function=download)  
 setClass("online",
          slots = c(url = "character",
-                        onlineDescription = "character"))
+                   onlineDescription = "character"))
 setAs("XMLInternalElementNode", "online", function(from) emlToS4(from))
 setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
