@@ -155,7 +155,8 @@ eml_validate("EML_example.xml")
 ```
 
 ```
-[1] TRUE
+EML specific tests XML specific tests 
+              TRUE               TRUE 
 ```
 
 
@@ -197,7 +198,7 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-Error: non-character argument
+[1] 976221
 ```
 
 
@@ -262,7 +263,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-03-20). _metadata_.
+Boettiger C (2014-03-23). _metadata_.
 ```
 
 

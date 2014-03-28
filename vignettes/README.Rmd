@@ -31,17 +31,20 @@ as the source._
 
 
 ```{r include=FALSE, cache=FALSE}
-library("knitr")
-library("devtools")
-opts_chunk$set(tidy = FALSE, warning = FALSE, message = FALSE, cache = 1,
-               comment = NA, verbose = TRUE, fig.width = 6, fig.height = 4)
+library(knitr)
+library(devtools)
+opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE, cache=1,
+               comment=NA, verbose=TRUE, fig.width=6, fig.height=4)
 opts_chunk$set(fig.path = paste("figure/",
                                 gsub(".Rmd", "", knitr:::knit_concord$get('infile')),
                                 "-", sep=""),
                cache.path = paste("cache/",
                                   gsub(".Rmd", "", knitr:::knit_concord$get('infile') ),
                                 "/", sep=""))
-library("RHTMLForms")
+
+library(rfigshare)
+fs_auth(token = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q", token_secret = "4mdM3pfekNGO16X4hsvZdg")
+
 
 
 ```
@@ -150,7 +153,7 @@ This ensures that other software can correctly parse and interpret the
 metadata document:
 
 ```{r}
-eml_validate("EML_example.xml", schema_only = TRUE)
+eml_validate("EML_example.xml") 
 ```
 
 
@@ -186,8 +189,7 @@ eml_publish("EML_example.xml",
             description="Example EML file from EML",
             categories = "Ecology", 
             tags = "EML", 
-            destination="figshare", 
-            schema_only = TRUE) # simple validation
+            destination="figshare") 
 ```
 
 This creates a draft file visible only to the user configured in

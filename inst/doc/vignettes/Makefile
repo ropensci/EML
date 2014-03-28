@@ -5,10 +5,10 @@ WRITING = Advanced_writing_of_EML
 all: 
 	make README.md
 	make ../../../README.md
-#	make README.pdf
+	make ../../../vignettes/README.Rmd
+
 #	make writing
 #	make basic
-#	make vignette
 
 README.md: README.Rmd 
 	Rscript -e 'require(knitr); knit("README.Rmd")'
@@ -17,11 +17,9 @@ README.md: README.Rmd
 	cp README.md ../../../README.md
 	sed -i 's/```r/```coffee/' ../../../README.md
 
-#README.pdf:  README.Rmd
-#	Rscript -e 'require(knitr); knit("README.Rmd")'
-#	pandoc README.md -o ${VIGNETTE}.tex
-#	mv ${VIGNETTE}.tex ${VIGNETTE}.Rnw
-#	pandoc README.md -o ${VIGNETTE}.pdf
+../../../vignettes/README.Rmd: README.Rmd
+	cp README.Rmd ../../../vignettes/README.Rmd
+
 
 # ${PARSING}.pdf: ${PARSING}.Rmd
 #	Rscript -e 'require(knitr); knit("${PARSING}.Rmd")'
@@ -33,9 +31,6 @@ README.md: README.Rmd
 #	pandoc ${WRITING}.md -o ${WRITING}.pdf
 #	cd - 
 
-
-#vignette: 
-#	cp ${VIGNETTE}.Rnw ${VIGNETTE}.pdf ../../vignettes/
 
 
 clean:
