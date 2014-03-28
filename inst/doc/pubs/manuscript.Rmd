@@ -1,5 +1,42 @@
+---
+layout: preprint
+#layout: review, 11pt
+title: "RNeXML: Parsing and Serializing the Next Generation of Phyloinformatic Data in R"
+author: 
+  - name: Carl Boettiger
+    affiliation: cstar
+    email: cboettig@gmail.com
+    footnote: Corresponding author
+  - name: Karthik Ram 
+    affiliation: Berkeley 
+  - name: Class-Thido Pfaff
+    affiliation: 
+  - name: Matt Jones 
+    affiliation: NCEAS 
+address: 
+  - code: cstar
+    address: | 
+      Center for Stock Assessment Research, 
+      Department of Applied Math and Statistics, 
+      University of California, Mail Stop SOE-2,
+      Santa Cruz, CA 95064, USA
 
+abstract: 
+
+---
+
+
+<!--
 The future belongs to those who can leverage existing data and provide reusable data.  
+-->
+
+
+1. **Write**. Easy to generate and publish data and metadata using state-of-the-art technology and standards. 
+2. **Read**. Easy to consume richly structured data and metadata from rapidly growing archives of repositories such as KNB and DataONE, including over 20,000 datasets deposited by Long Term Ecological Research (LTER) areas over the past 30 years
+3. **Manipulate** Easy to manipulate and add rich machine readable annotations describing heterogenous data sets. This in turn facilitates programmatic integration and synthesis of heterogenous data.  
+
+
+
 
 1. Following metadata standards facilitates reuse
 2. data 
