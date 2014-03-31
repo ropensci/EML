@@ -22,10 +22,10 @@ address:
       Santa Cruz, CA 95064, USA
 
 abstract: | 
-  1. Something about the importance of data, data publication, sharing
-     and annotation
+  1. _Write something about the importance of data, data publication, sharing
+     and annotation_
 
-  2. Something about EML
+  2. _Write something about EML_
 
   3. The EML package provides automated and scriptable tools to make it
      easy to generate and publish data and metadata using state-of-the-art
@@ -53,6 +53,8 @@ The future belongs to those who can leverage existing data and provide reusable 
 -->
 
 
+Heterogeneous Data
+[Jones 2006], [Green 2005] 
 
 
 
@@ -87,7 +89,7 @@ they can be best addressed through establishing and using appropriate
 metadata [Michener 1997]. In this approach it is the metadata, rather than
 the data itself, that conforms to a standard.  The Knowledge Network for
 Biocomplexity (KNB) is one example of a metadata-based ecological data 
-repository [Berkley 2001], [KNB].  The metadata approach preserves the original data
+repository [Jones 2001], [KNB].  The metadata approach preserves the original data
 model from the collecting study. Rather than requiring that the raw data
 be preserved in a standard format -- standard file types, standard column headings, 
 standard date formats, missing value formats, etc etc, -- the metadata standard
@@ -107,9 +109,9 @@ involved [Reichman 2011].
 Things to discuss:
 
 *  It's not just a problem of sharing culture 
-* Sharing is not effective: close competitors can scoop you, but broader reach can't be realized without good metadata 
-* [Strasser survey showing lagging data management practices]
-* [Stodden survey showing effort in curating data is a barrier]
+* Sharing is not effective: close competitors can still scoop you, but broader reach can't be realized without good metadata 
+* [Strasser] survey showing lagging data management practices
+* [Stodden 2010] survey showing effort in curating data is a barrier
 
 Consequently ecological
 data reuse remains difficult and haphazard. 
@@ -125,7 +127,7 @@ Methods in Ecology and Evolution has published XXX application notes or articles
 [Reichman 2011]: http://dx.doi.org/10.1126/science.1197962
 [Jones 2006]: http://dx.doi.org/10.1146/annurev.ecolsys.37.091305.110031
 [KNB]: http://knb.ecoinformatics.org
-[Berkley 2001]: http://dx.doi.org/10.1109/4236.957896
+[Jones 2001]: http://dx.doi.org/10.1109/4236.957896
 [Michener 1997]: http://dx.doi.org/10.1890/1051-0761(1997)007[0330:NMFTES]2.0.CO;2
 [Morell 1996]: http://dx.doi.org/10.1126/science.273.5275.569
 [Canhos 2004]: https://journals.ku.edu/index.php/jbi/article/viewArticle/3 
