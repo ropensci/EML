@@ -34,6 +34,8 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
   options(FigshareToken = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q")
   options(FigsharePrivateToken = "4mdM3pfekNGO16X4hsvZdg")
 
+  library(rfigshare)
+  fs_auth(token = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q", token_secret = "4mdM3pfekNGO16X4hsvZdg")
 
   ## Publish the data to figshare (as a draft)
   id <- eml_publish(f, categories="Ecology", tags = "EML", description="Test of publishing EML", destination="figshare")
