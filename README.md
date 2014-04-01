@@ -198,7 +198,7 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 976221
+[1] 979445
 ```
 
 
@@ -263,7 +263,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-03-23). _metadata_.
+Boettiger C (2014-04-01). _metadata_.
 ```
 
 
