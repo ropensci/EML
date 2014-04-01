@@ -72,11 +72,8 @@ library(EML)
 We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
 
 ```{r}
-f <- system.file("examples", "hf205-01-TPexp1.csv", package="EML")
-dat <- read.csv(f, 
-                colClasses = "factor", # c("factor", "Date", "Date", "Date", 
-                             #  "factor", "factor", "factor")
-                )
+f <- eml_read("knb-lter-hfr.205.4")
+dat <- eml_get(f, "data.set")
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  

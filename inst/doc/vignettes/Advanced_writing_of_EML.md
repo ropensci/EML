@@ -64,15 +64,8 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 
 
 ```r
-f <- system.file("examples", "hf205-01-TPexp1.csv", package="EML")
-dat <- read.csv(f, 
-                colClasses = "factor", # c("factor", "Date", "Date", "Date", 
-                             #  "factor", "factor", "factor")
-                )
-```
-
-```
-Error: no lines available in input
+f <- eml_read("knb-lter-hfr.205.4")
+dat <- eml_get(f, "data.set")
 ```
 
 
@@ -128,10 +121,6 @@ We attach this essential metadata directly to the `data.frame` to make a `data.s
 dat <- data.set(dat, col.defs = col.defs, unit.defs = unit.defs)
 ```
 
-```
-Error: object 'dat' not found
-```
-
 
 Rather than write this out directly to an EML file with `eml_write` like we did in the basic example, we'll first assemble more metadata information.  
 
@@ -143,10 +132,6 @@ As a _metadata_ format, we do not encode the actual data file itself into the EM
 dataTable <- EML:::eml_dataTable(dat, 
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
-```
-
-```
-Error: object 'dat' not found
 ```
 
 
@@ -167,10 +152,6 @@ HF_address <- new("address",
                   country = "USA") 
 ```
 
-```
-Error: could not find function "new"
-```
-
 
 We use the `new` function to construct an object of class `address`.  This R object has "slots" corresponding to each of the elements that makes up an address in EML.  We can define the values for these slots all at once as shown, or we can add and edit them after the object is created by using R's S4 subsetting operator, `@`.  For instance, we could change the street address with: `HF_address@deliveryPoint <- "some new address"`. (Some users might find the equivalent notation, `slot(HF_address, "deliveryPoint") <- "some new address"` to be more intuitive).  We need not specify any additional values when first calling `new("address")`, and we can use `slotNames(HF_address)` to see a list of possible fields.  
 
@@ -181,10 +162,6 @@ This element is now available for reuse as we create other metadata.  For instan
 publisher <- new("publisher", 
     organizationName = "Harvard Forest",
     address = HF_address)
-```
-
-```
-Error: could not find function "new"
 ```
 
 
@@ -205,34 +182,9 @@ can be interpreted as person's first and last name and email address.  The EML R
 
 ```r
 contact <- as(aaron, "contact")
-```
-
-```
-Error: could not find function "as"
-```
-
-```r
 contact@address = HF_address
-```
-
-```
-Error: object 'HF_address' not found
-```
-
-```r
 contact@organizationName = "Harvard Forest"
-```
-
-```
-Error: object 'contact' not found
-```
-
-```r
 contact@phone = "000-000-0000"
-```
-
-```
-Error: object 'contact' not found
 ```
 
 
@@ -243,10 +195,6 @@ Multiple individuals can be listed as the creator (author) of data.  Here we use
 
 ```r
 creator <- c(as("Aaron Ellison", "creator"), as("Nicholas Gotelli", "creator"))
-```
-
-```
-Error: could not find function "as"
 ```
 
 
@@ -418,10 +366,6 @@ dataset <- new("dataset",
                 dataTable = c(dataTable))
 ```
 
-```
-Error: object 'contact' not found
-```
-
 
 Note that because a `dataset` can have multiple dataTable elements, we use the same concatenate notation illustrated earlier, `c(dataTable)`, even though only one element is provided.  This lets R known that the resulting object is a `ListOfdataTable`, not an individual `dataTable` file.  This convention should be followed whenever assigning a value to a slot that can take more than one element of that name.  
 
@@ -436,10 +380,6 @@ eml <- new("eml",
             system = "uuid", # type of identifier
             dataset = dataset,
             additionalMetadata = additionalMetadata)
-```
-
-```
-Error: object 'dataset' not found
 ```
 
 
@@ -471,10 +411,6 @@ eml     <- eml( dataset = dat,
               )
 ```
 
-```
-Error: object 'contact' not found
-```
-
 
 The helper function handles certain steps automatically, such as the creation of a `uuid` for the package identifier.  The required fields `creator` and `contact` will use values set by `eml_config` or can take text strings or R `person` objects as arguments, as well as eml's `creator` or `contact` classes.  In this case we pass a `dataTable` (permitting additional customization we used above such as the description field).  Alternatively this could be the more basic `data.set` object as the first argument (`dataset = dat`) or an already constructed EML `dataset` class. 
 
@@ -489,7 +425,7 @@ eml_write(eml, file="hf205_from_EML.xml")
 ```
 
 ```
-Error: no creator or contact given.
+[1] "hf205_from_EML.xml"
 ```
 
 
@@ -504,11 +440,8 @@ eml_validate("hf205_from_EML.xml")
 ```
 
 ```
-recover called non-interactively; frames dumped, use debugger() to view
-```
-
-```
-Error: error in evaluating the argument 'doc' in selecting a method for function 'saveXML': Error: XML content does not seem to be XML: 'hf205_from_EML.xml'
+$`XML specific tests`
+[1] "cvc-complex-type.2.4.a: Invalid content starting with element 'additionalMetadata'. The content must match '(((\"\":access){0-1},((((\"\":dataset)|(\"\":citation))|(\"\":software))|(\"\":protocol))),(\"\":additionalMetadata){0-UNBOUNDED})'."
 ```
 
 
