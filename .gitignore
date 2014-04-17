@@ -10,3 +10,7 @@ inst/doc/README.Rmd
 inst/doc/README.html
 inst/doc/README.R
 inst/doc/vignettes/README.md
+inst/doc/vignettes/*.xml
+inst/doc/vignettes/*.csv
+inst/doc/pubs/*.xml
+inst/doc/pubs/*.csv
