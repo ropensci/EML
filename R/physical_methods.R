@@ -61,10 +61,13 @@ setAs("data.frame", "physical", function(from)
 
 ####### Internal function to coerce data.frame to physical #######
 ## Custom generator. Consider making int an S4 method?  
+## FIXME filename should follow https://github.com/ropensci/EML/issues/106
 eml_physical <- function(dat, filename=character(0), ...){
-  if(length(filename) == 0) 
-    filename = paste(gsub('.*:(.*)', '\\1', EML_id()[["id"]]), ".csv", sep="")
-
+  if(length(filename) == 0){
+    longID <- gsub('.*:(.*)', '\\1', EML_id()[["id"]])
+    shortID <- gsub("(.{6}).+", "\\1", longID)
+    filename <- paste("table_", shortID, ".csv", sep = 0)
+  }
   suppressWarnings(write.csv(dat, file = filename, row.names=FALSE, ...)) # don't care about warning in coercion of data.set to data.frame
   new("physical", 
       objectName = filename, 

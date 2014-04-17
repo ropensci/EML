@@ -23,32 +23,34 @@ eml_dataTable <- function(dat,
                           ...){
 
 ## FIXME title should be called entityName, or maybe just "name"
-
-  if(is(dat, "data.set")) 
-    meta <- get_metadata(dat)
-  if(is.null(meta))
-    meta <- metadata_wizard(dat)
-
+  
   id <- EML_id()
-#  if(length(title) > 0 & length(filename) == 0)
-#    filename <- paste0(gsub(" ", "_", title), ".csv")
-  if(length(filename) == 0) # use id, without prefixes 
-    filename = paste(gsub('.*:(.*)', '\\1', EML_id()[["id"]]), ".csv", sep="")
-  if(length(title) == 0)
-    title <- filename 
 
-
-  meta <- detect_class(dat, meta)
   dataTable <- new("dataTable",
                   id = id[["id"]],
                   system = id[["system"]],
                   scope = id[["scope"]],
                   entityName = title,
                   entityDescription = description,
-                  attributeList = as(meta, "attributeList"),
-                  physical = eml_physical(dat, filename=filename),
+                  attributeList = eml_attributeList(dat),  
+                  physical = eml_physical(dat, filename = filename),
                   caseSensitive = 'yes',
                   numberOfRecords = dim(dat)[1])
+}
+
+
+
+eml_attributeList <- function(dat, meta = NULL){
+
+  ## Handle other types 
+  if(is(dat, "data.set")) 
+    meta <- get_metadata(dat)
+  if(is.null(meta))
+    meta <- metadata_wizard(dat)
+  meta <- detect_class(dat, meta)
+
+  as(meta, "attributeList")
+
 }
 
 
@@ -58,8 +60,8 @@ eml_dataTable <- function(dat,
 #' @param meta a list containing attribute-level metadata for each column.  
 #' each element of list corresponds to a consecutive column, and gives a list containing
 #' the column name (as appearing in the data-frame), the column description (e.g. from col.defs)
-#' and the 
-detect_class <- function(dat, meta){
+#' and the unit defs (e.g. from unit.defs) as  a (named) character vector.  
+detect_class <- function(dat, meta = get_metadata(dat)){
   for(i in 1:length(dat)){
     meta[[i]][[4]] = map(dat[[i]]) 
   }
@@ -78,7 +80,7 @@ map <- function(x){
   else if(is(x, "character"))
     "nominal"
   else 
-    "nominal" # FIXME should we error or default to character string?
+    "nominal" 
 }
 
 
