@@ -63,10 +63,10 @@ setAs("data.frame", "physical", function(from)
 ## Custom generator. Consider making int an S4 method?  
 ## FIXME filename should follow https://github.com/ropensci/EML/issues/106
 eml_physical <- function(dat, filename=character(0), ...){
-  if(length(filename) == 0){
+  if(length(filename) == 0 | is.null(filename)){
     longID <- gsub('.*:(.*)', '\\1', EML_id()[["id"]])
     shortID <- gsub("(.{6}).+", "\\1", longID)
-    filename <- paste("table_", shortID, ".csv", sep = 0)
+    filename <- paste("table_", shortID, ".csv", sep = "")
   }
   suppressWarnings(write.csv(dat, file = filename, row.names=FALSE, ...)) # don't care about warning in coercion of data.set to data.frame
   new("physical", 

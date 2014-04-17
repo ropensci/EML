@@ -17,7 +17,7 @@
 #' @include dataTable.R
 eml_dataTable <- function(dat, 
                           meta = NULL, 
-                          title = character(0), 
+                          title = "data table", 
                           description = character(0), 
                           filename = character(0), 
                           ...){
