@@ -49,8 +49,61 @@ eml_attributeList <- function(dat, meta = NULL){
     meta <- metadata_wizard(dat)
   meta <- detect_class(dat, meta)
 
-  as(meta, "attributeList")
+#  as(meta, "attributeList")
 
+  new("attributeList", 
+      attribute = new("ListOfattribute", 
+                      lapply(meta, eml_attribute)))
+
+}
+
+eml_attribute <- function(from){
+        new("attribute", 
+            attributeName = from[[1]],
+            attributeDefinition = from[[2]],
+            measurementScale = eml_measurementScale(from[[3]], from[[4]]))
+#            measurementScale = as(as(from[[3]], from[[4]]), "measurementScale"))
+}
+
+
+eml_measurementScale <- function(unit.def, col.class){
+
+  ## FIXME HACK.  Consider more explicit R-based col.class, 
+  if(col.class == "nominal" && length(unit.def) == 1)
+    new("measurementScale", 
+        nominal = new("nominal", 
+                      nonNumericDomain = new("textDomain", 
+                                             definition = unit.def)))
+  else 
+  switch(col.class,
+         nominal = new("measurementScale", nominal = new("nominal", nonNumericDomain = eml_nonNumericDomain(unit.def), 
+         ordinal = new("measurementScale", ordinal = new("ordinal", nonNumericDomain = eml_nonNumericDomain(unit.def), 
+         ratio = new("measurementScale", ratio = new("ratio", unit = eml_unit(unit.def))),
+         dateTime = new("measurementScale", dateTime = eml_dateTime(unit.def[[1]]) ), 
+         interval = new("measurementScale", interval = new("interval", unit = eml_unit(unit.def)))
+         )
+}
+
+eml_dateTime <- function(formatstring){ # FIXME perform validation. Accept R notation (%Y -> YYYY)
+  new("dateTime", formatString = formatstring)
+}
+eml_unit <- function(unit.def){
+# FIXME Fuzzy match against standardUnit list
+# FIXME Provide mechanism to create custom units
+# FIXME support precision, etc
+  new("unit", standardUnit = unit.def[[1]])
+}
+
+eml_nonNumericDomain <- function(from){
+new("nonNumericDomain", 
+    enumeratedDomain = 
+      new("enumeratedDomain", 
+          codeDefinition = 
+            new("ListOfcodeDefinition", 
+                lapply(names(from), 
+                       function(name) new("codeDefinition", 
+                                          code = name, 
+                                          definition = as.character(from[name]))))))
 }
 
 
