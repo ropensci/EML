@@ -6,7 +6,9 @@ eml(dat = NULL, title = "metadata", creator = get("defaultCreator", envir
   = EMLConfig), contact = get("defaultContact", envir = EMLConfig),
   coverage = eml_coverage(scientific_names = NULL, dates = NULL,
   geographic_description = NULL, NSEWbox = NULL), methods = new("methods"),
-  ..., additionalMetadata = c(new("additionalMetadata")), citation = NULL,
+  custom_units = mget("custom_units", envir = EMLConfig, ifnotfound =
+  list(list()))$custom_units, ...,
+  additionalMetadata = c(new("additionalMetadata")), citation = NULL,
   software = NULL, protocol = NULL)
 }
 \arguments{

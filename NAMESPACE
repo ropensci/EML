@@ -1,3 +1,4 @@
+export(create_custom_unit)
 export(data.set)
 export(eml)
 export(eml_config)

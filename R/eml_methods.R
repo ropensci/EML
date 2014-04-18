@@ -35,6 +35,9 @@ eml <- function(dat = NULL,
                                         geographic_description = NULL,
                                         NSEWbox = NULL),
                 methods = new("methods"),
+                custom_units =  mget("custom_units", 
+                                     envir = EMLConfig,  
+                                     ifnotfound=list(list()))$custom_units,
                 ...,
                 additionalMetadata = c(new("additionalMetadata")),
                 citation = NULL,
@@ -45,18 +48,25 @@ eml <- function(dat = NULL,
 
 
   ## Coerce character string persons into EML representations
-
-
-  uid <- EML_id()
-
   if(!is.null(dat)) # this is written only into dataset nodes 
     who <- contact_creator(contact = contact, 
                            creator = creator)
 
 
   if(is(methods, "character")){
-    methods <- new("methods", methodStep = c(new("methodStep", description = methods)))
+    methods <- new("methods", 
+                   methodStep = c(new("methodStep", 
+                                      description = methods)))
   }
+
+  if(length(custom_units) > 0){
+    xml_unitList <- serialize_custom_units(custom_units)
+     c(additionalMetadata, xml_unitList)
+  }
+
+  ## obtain uuids 
+  uid <- EML_id()
+
 
   eml <- new("eml",
              packageId = uid[["id"]], 

@@ -76,4 +76,5 @@ Collate:
     'physical_methods.R'
     'resource_methods.R'
     'software_methods.R'
+    'unit_methods.R'
     'xsl_coercions.R'
