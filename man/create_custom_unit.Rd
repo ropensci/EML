@@ -4,7 +4,7 @@
 \usage{
 create_custom_unit(id, unitType = NULL, parentSI = NULL,
   multiplierToSI = NULL, name = id, constantToSI = NULL,
-  description = NULL)
+  abbreviation = NULL, description = NULL)
 }
 \arguments{
   \item{id}{The id of the unit, given in camelCase with
@@ -22,7 +22,15 @@ create_custom_unit(id, unitType = NULL, parentSI = NULL,
   \item{constantToSI}{An additive constant needed for the
   conversion, such as farenheight to celsius}
 
+  \item{abbreviation}{Optional abbreviation}
+
   \item{description}{a plain text description of the unit}
+}
+\value{
+The unit definition (invisibly), as a list object.  A list
+of these returned objects can be passed to the
+\code{\link{eml}} function directly to define additional
+units, bypassing the config mechanism used by default.
 }
 \description{
 create a custom unit
@@ -36,6 +44,7 @@ https://github.com/ropensci/EML/issues/12
 create_custom_unit(id = "metersSquaredPerHectare",
                     parentSI = "dimensionless",
                     unitType = "dimensionless",
-                    multiplierToSI = "0.0001")
+                    multiplierToSI = "0.0001",
+                    description = "Square meters per hectare")
 }
 

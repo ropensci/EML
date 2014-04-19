@@ -32,7 +32,7 @@ eml_dataTable <- function(dat,
                   scope = id[["scope"]],
                   entityName = title,
                   entityDescription = description,
-                  attributeList = eml_attributeList(dat),  
+                  attributeList = eml_attributeList(dat, meta),  
                   physical = eml_physical(dat, filename = filename),
                   caseSensitive = 'yes',
                   numberOfRecords = dim(dat)[1])
@@ -51,9 +51,11 @@ eml_attributeList <- function(dat, meta = NULL){
 
 #  as(meta, "attributeList")
 
-  new("attributeList", 
+  uid <- EML_id()
+  new("attributeList",
+      id = uid[["id"]], 
       attribute = new("ListOfattribute", 
-                      lapply(meta, eml_attribute)))
+                      lapply(meta, eml_attribute, uid[["id"]])))
 
 }
 

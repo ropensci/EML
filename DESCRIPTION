@@ -23,8 +23,7 @@ Suggests:
     testthat,
     dataone,
     rrdf,
-    RHTMLForms,
-    Sxslt
+    RHTMLForms
 Imports:
     XML,
     RCurl,

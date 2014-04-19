@@ -37,8 +37,23 @@ eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
 eml_config()
 
 
+#' eml get config
+#'
+#' eml get config
+#' @return display the current configuration options
+#' @export
 eml_get_config <- function(x){
   get(x, envir = EMLConfig)
 }
 
 
+
+#' eml_reset_config
+#' 
+#' eml reset config
+#' @return erase current configuration options and restore the defaults.  
+#' @export
+eml_reset_config <- function(){
+  rm(list=ls(envir=EMLConfig), envir=EMLConfig)
+  eml_config()
+}
