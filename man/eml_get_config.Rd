@@ -5,7 +5,7 @@
 eml_get_config(x = ls(envir = EML:::EMLConfig))
 }
 \arguments{
-  \item{name}{of the configuration option desired (gives
+  \item{x}{name of the configuration option desired (gives
   all by default)}
 }
 \value{
