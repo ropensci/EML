@@ -2,6 +2,7 @@ context("Custom units")
 
 
 library(EML)
+eml_reset_config()
 dat = data.set(river = c("SAC",  "SAC",   "AM"),
                spp   = c("king",  "king", "ccho"),
                stg   = c("smolt", "parr", "smolt"),
@@ -30,6 +31,7 @@ test_that("We can define custom units", {
                        ifnotfound = list(list()))$custom_units
   expect_is(custom_units, "list")
   expect_equal(length(custom_units), 1)
+  eml_reset_config()
 
                })
 
@@ -47,6 +49,7 @@ test_that("We can serialize custom units as valid EML", {
   expect_true(all(o)) # all cases validate
   unlink("*.xml")
   unlink("*.csv")
+  eml_reset_config()
 
 })
 

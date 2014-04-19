@@ -16,8 +16,8 @@
 #' @param methods a method object or plain text string, documenting additional methods 
 #' @param custom_units a list of custom units. Leave as NULL and these will be automatically
 #'  detected from the EMLConfig after a user declares any custom units using
-#' \link{\code{create_custom_unit}}.  Advanced users can alternatively just give a list
-#' of custom_unit definitions here.  See \link{\code{create_custom_unit}} for details.  
+#' \code{\link{create_custom_unit}}.  Advanced users can alternatively just give a list
+#' of custom_unit definitions here.  See \code{\link{create_custom_unit}} for details.  
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
 #' @details
@@ -73,7 +73,7 @@ eml <- function(dat = NULL,
   }
 
 
-  ref_id <- EML_id()
+  ref_id <- list(id = "42") 
 
   if(length(custom_units) > 0){
     xml_unitList <- serialize_custom_units(custom_units, id = ref_id[["id"]])
@@ -112,8 +112,6 @@ eml <- function(dat = NULL,
     } else if(is(dat, "dataTable")){
       eml@dataset = new("dataset",
                         id = ref_id[["id"]],
-                        system = ref_id[["system"]],
-                        scope = ref_id[["scope"]],
                         title = title, # required 
                         creator = who$creator,
                         contact = who$contact,

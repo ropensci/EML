@@ -79,6 +79,7 @@ in_custom_library <- function(unit){
 #' 
 #' create a custom unit
 #' @param id The id of the unit, given in camelCase with `Per` signifying division, Squared for second power, etc.  
+#' @param name The name of the unit, by default the same as the id.   
 #' @param unitType The type of the unit. 
 #' @param parentSI the parent SI unit from the Standard Units list
 #' @param multiplierToSI The multiplicative factor to convert the given unit into the parent unit

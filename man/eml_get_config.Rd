@@ -2,7 +2,11 @@
 \alias{eml_get_config}
 \title{eml get config}
 \usage{
-eml_get_config(x)
+eml_get_config(x = ls(envir = EML:::EMLConfig))
+}
+\arguments{
+  \item{name}{of the configuration option desired (gives
+  all by default)}
 }
 \value{
 display the current configuration options

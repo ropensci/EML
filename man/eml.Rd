@@ -40,9 +40,9 @@ eml(dat = NULL, title = "metadata", creator = NULL, contact = NULL,
   \item{custom_units}{a list of custom units. Leave as NULL
   and these will be automatically detected from the
   EMLConfig after a user declares any custom units using
-  \link{\code{create_custom_unit}}.  Advanced users can
+  \code{\link{create_custom_unit}}.  Advanced users can
   alternatively just give a list of custom_unit definitions
-  here.  See \link{\code{create_custom_unit}} for details.}
+  here.  See \code{\link{create_custom_unit}} for details.}
 
   \item{...}{additional slots passed to the dataset
   constructor `new("dataset", ...)`}

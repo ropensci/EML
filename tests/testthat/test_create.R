@@ -6,6 +6,7 @@ context("generating S4 from R dataframe")
 ## FIXME add expect_that to the tests!
 
 require(EML)
+eml_reset_config()
 dat = data.frame(river = c("SAC",  "SAC",   "AM"),
                  spp   = c("king",  "king", "ccho"),
                  stg   = c("smolt", "parr", "smolt"),

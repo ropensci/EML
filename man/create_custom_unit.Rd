@@ -11,6 +11,9 @@ create_custom_unit(id, unitType = NULL, parentSI = NULL,
   `Per` signifying division, Squared for second power,
   etc.}
 
+  \item{name}{The name of the unit, by default the same as
+  the id.}
+
   \item{unitType}{The type of the unit.}
 
   \item{parentSI}{the parent SI unit from the Standard

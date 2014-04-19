@@ -1,8 +1,8 @@
 context("Publish to KNB")
 
 
-
 library(EML)
+eml_reset_config()
 dat = data.set(river = factor(c("SAC",  "SAC",   "AM")),
                spp   = c("Oncorhynchus tshawytscha",  "Oncorhynchus tshawytscha", "Oncorhynchus kisutch"),
                stg   = ordered(c("smolt", "parr", "smolt"), levels=c("parr", "smolt")), # levels indicates increasing level, eg. parr < smolt
