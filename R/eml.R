@@ -12,9 +12,9 @@ setAs("metadata", "XMLInternalElementNode", function(from) newXMLNode("metadata"
 setAs("XMLInternalElementNode", "metadata", function(from) new("metadata", from))
 
 setClass("additionalMetadata", 
-         slots = c(metadata = "metadata",
-                   describes = "character",
-                   id = "character"))
+         slots = c(describes = "character",
+                   id = "character",
+                   metadata = "metadata"))
 
 setAs("additionalMetadata", "XMLInternalElementNode", function(from) S4Toeml(from))
 setAs("XMLInternalElementNode", "additionalMetadata", 

@@ -2,11 +2,11 @@
 \alias{eml}
 \title{eml constructor function}
 \usage{
-eml(dat = NULL, title = "metadata", creator = get("defaultCreator", envir
-  = EMLConfig), contact = get("defaultContact", envir = EMLConfig),
+eml(dat = NULL, title = "metadata", creator = NULL, contact = NULL,
   coverage = eml_coverage(scientific_names = NULL, dates = NULL,
   geographic_description = NULL, NSEWbox = NULL), methods = new("methods"),
-  ..., additionalMetadata = c(new("additionalMetadata")), citation = NULL,
+  custom_units = NULL, ...,
+  additionalMetadata = new("ListOfadditionalMetadata"), citation = NULL,
   software = NULL, protocol = NULL)
 }
 \arguments{
@@ -36,6 +36,13 @@ eml(dat = NULL, title = "metadata", creator = get("defaultCreator", envir
 
   \item{methods}{a method object or plain text string,
   documenting additional methods}
+
+  \item{custom_units}{a list of custom units. Leave as NULL
+  and these will be automatically detected from the
+  EMLConfig after a user declares any custom units using
+  \code{\link{create_custom_unit}}.  Advanced users can
+  alternatively just give a list of custom_unit definitions
+  here.  See \code{\link{create_custom_unit}} for details.}
 
   \item{...}{additional slots passed to the dataset
   constructor `new("dataset", ...)`}

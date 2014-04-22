@@ -55,20 +55,4 @@ prompt_for_units <- function(dataframe, n){
 }
 
 
-## FIXME Doesn't provide SI unit extensions
-create_custom_unit <- function(column){
-      is_SI <- readline("Can the unit be defined in terms of existing SI units? (yes/no)")
-
-      ## Coerce answer into a logical 
-      is_SI <- pmatch(is_SI, c("yes", "no"))
-      pick <- c(TRUE, FALSE)
-      is_SI <- pick[is_SI]
-
-      if(!is_SI){
-        out <- readline("description of custom unit: ")
-      } else {
-        warning("Extended SI definitions not supported yet, treating as a novel unit")
-        out <- readline("description of custom unit: ")
-      }
-}
 

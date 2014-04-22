@@ -1,7 +1,7 @@
 ---
 layout: preprint
 #layout: review, 11pt
-title: "Ecological Metadata Language interface for R: facilitating synthesis and integration of heterogenous data"
+title: "RNeXML: Parsing and Serializing the Next Generation of Phyloinformatic Data in R"
 author: 
   - name: Carl Boettiger
     affiliation: cstar
@@ -22,10 +22,10 @@ address:
       Santa Cruz, CA 95064, USA
 
 abstract: | 
-  1. _Write something about the importance of data, data publication, sharing
-     and annotation_
+  1. Something about the importance of data, data publication, sharing
+     and annotation
 
-  2. _Write something about EML_
+  2. Something about EML
 
   3. The EML package provides automated and scriptable tools to make it
      easy to generate and publish data and metadata using state-of-the-art
@@ -53,8 +53,6 @@ The future belongs to those who can leverage existing data and provide reusable 
 -->
 
 
-Heterogeneous Data
-[Jones 2006], [Green 2005] 
 
 
 
@@ -89,7 +87,7 @@ they can be best addressed through establishing and using appropriate
 metadata [Michener 1997]. In this approach it is the metadata, rather than
 the data itself, that conforms to a standard.  The Knowledge Network for
 Biocomplexity (KNB) is one example of a metadata-based ecological data 
-repository [Jones 2001], [KNB].  The metadata approach preserves the original data
+repository [Berkley 2001], [KNB].  The metadata approach preserves the original data
 model from the collecting study. Rather than requiring that the raw data
 be preserved in a standard format -- standard file types, standard column headings, 
 standard date formats, missing value formats, etc etc, -- the metadata standard
@@ -109,9 +107,9 @@ involved [Reichman 2011].
 Things to discuss:
 
 *  It's not just a problem of sharing culture 
-* Sharing is not effective: close competitors can still scoop you, but broader reach can't be realized without good metadata 
-* [Strasser] survey showing lagging data management practices
-* [Stodden 2010] survey showing effort in curating data is a barrier
+* Sharing is not effective: close competitors can scoop you, but broader reach can't be realized without good metadata 
+* [Strasser survey showing lagging data management practices]
+* [Stodden survey showing effort in curating data is a barrier]
 
 Consequently ecological
 data reuse remains difficult and haphazard. 
@@ -127,7 +125,7 @@ Methods in Ecology and Evolution has published XXX application notes or articles
 [Reichman 2011]: http://dx.doi.org/10.1126/science.1197962
 [Jones 2006]: http://dx.doi.org/10.1146/annurev.ecolsys.37.091305.110031
 [KNB]: http://knb.ecoinformatics.org
-[Jones 2001]: http://dx.doi.org/10.1109/4236.957896
+[Berkley 2001]: http://dx.doi.org/10.1109/4236.957896
 [Michener 1997]: http://dx.doi.org/10.1890/1051-0761(1997)007[0330:NMFTES]2.0.CO;2
 [Morell 1996]: http://dx.doi.org/10.1126/science.273.5275.569
 [Canhos 2004]: https://journals.ku.edu/index.php/jbi/article/viewArticle/3 
@@ -144,102 +142,157 @@ Methods in Ecology and Evolution has published XXX application notes or articles
 
 ### Automatic metadata detection
 
-Not sure this counts as a section - but we can automatically detect
-at least the difference between numeric and character data, factors,
-ordered factors, etc.
+Not sure this counts as a section - but we can automatically detect at least the difference between numeric and character data, factors, ordered factors, etc.  
 
 ### Reusing fields
 
-- Examples of filling in contact information, etc using `eml$set`,
-using an existing EML file as a template, and using an external yaml file.
+- Examples of filling in contact information, etc using `eml$set`, using an existing EML file as a template, and using an external yaml file.  
 
-- Similar example for `column_metadata` and `unit_metadata` based on an
-existing EML file (just using `eml_read`).
+- Similar example for `column_metadata` and `unit_metadata` based on an existing EML file (just using `eml_read`).  
 
 ### Automatic Quality Control checks
 
-<!-- Not sure if we'll actually have/need to have all this in place for
-this paper?  --> Examples of validation against schema.  Examples checking
-md5sums on files or other corruption checks?  Examples checking species
-names (taxize?)
+<!-- Not sure if we'll actually have/need to have all this in place for this paper?  -->
+Examples of validation against schema.  Examples checking md5sums on files or other corruption checks?  Examples checking species names (taxize?)
 
 ### Publish data
 
-Examples of commands for publishing EML files to external repositories.
+Examples of commands for publishing EML files to external repositories.  
 
 ### Complex search queries
 
-Illustrate how to query for data
+Illustrate how to query for data  
 
 ### A synthesis platform
 
-Illustrate a basic example of synthesis.  While arbitrary synthesis will
-require semantics, a lab could store their data in EML format and build
-up there own library of common scripts to extract the data they need. As
-a lab database grows, the same queries can continue to deliver more data.
-By scripting the data access, analyses can be automatically updated as
-the data set grows.
+Illustrate a basic example of synthesis.  While arbitrary synthesis will require semantics, a lab could store their data in EML format and build up there own library of common scripts to extract the data they need. As a lab database grows, the same queries can continue to deliver more data.  By scripting the data access, analyses can be automatically updated as the data set grows.   
 
-Consider simple example in regression between different morphological
-characters of species, or such.
+Consider simple example in regression between different morphological characters of species, or such.  
 
 
 ## Challenges
 
-Completely automated data integration will require rich semantic
-information. Consider the simple example of combining the two data tables
-shown in Figure 2.
+Completely automated data integration will require rich semantic information. Consider the simple example of combining the two data tables shown in Figure 2.  
 
 <!-- Example illustrating the need for semantics to resolve differences -->
+
+
+### Implementation and architecture
+
+The `EML` package is built for the Ecological Markup Language schema, [version 2.1.1], using the R software environment and the XML package for parsing and generating XML [Temple Lang 2013, XML]. 
+
+<!-- Possibly cite all dependencies and suggests from the DESCRIPTION --> 
+<!-- Reference any installation and configuration instructions necessary (e.g. API credentials for figshare) -->
 
 [version 2.1.1]: http://knb.ecoinformatics.org/software/eml/eml-2.1.1
 [Temple Lang 2013, XML]: http://cran.r-project.org/web/packages/XML/
 
 ### Quality control
 
-The `EML` package performs severak levels of validation on EML files
-written from or read into R: validating the XML, and validating against
-the EML schema (based on the declared version), and performing additional
-checks through the EML online validation tool for elements that cannot
-be enforced by schema validation alone.  Validation serves to improve
-consistency in data encoding which facilitates the use of EML across a
-wide variety of platforms and software.
+The `EML` package can perform three levels of validation on EML files written from or read into R: validating the XML, validating against the EML 2.1.1 Schema, and performing
 
-Several mechanisms are in place to evaluate the quality of the `EML`
-package functions themselves.  In addition to the examples from
-the documentation and the automated package checks provided for the
-R system, the `EML` package includes a complete test suite using the
-`testthat` package [Wickham 2011]. Package development on Github includes
-continuous integration through the `travis` platform, in which the full
-test suite is run every time the code is changed.  This not only gives
-users confidence that the development copy can be successfully installed,
-but should assist other developers seeking to contribute to the package
-to test that their proposed changes have not negatively impacted any of
-the existing code base.
+Several mechanisms are in place to evaluate the quality of the `EML` package functions themselves.  In addition to the examples from the documentation and the automated package checks provided for the R system, the `EML` package includes a complete test suite using the testthat package [Wickham 2011].  
 
+[Wickham 2011]: http://vita.had.co.nz/papers/testthat.html
 
 ### Software reuse and support
 
-The `EML` package is available through the CRAN repository under
-a CC0 license. At the time of writing, the current version is `r
-packageDescription("EML", fields="Version")`. The current development
-branch can be found on Github at [https://github.com/ropensci/EML].
-See the NEWS file for changes in recent versions. Users are encouraged
-to submit bug reports or feature requests in the issues log.  Contact
-`ropensci-discuss@googlegroups.com` or the package maintainer for help.
+The `EML` package is available through the CRAN repository under a CC0 license. At the time of writing, the current version is 0.0-6. The current development branch can be found on Github at [https://github.com/ropensci/EML].  See the NEWS file for changes in recent versions. Users are encouraged to submit bug reports or feature requests in the issues log.  Contact ropensci-discuss@googlegroups.com or the package maintainer for help. 
 
-There are many promising directions for further development of the `EML`
-package.  The project's Milestones page provides a list of steps currently
-planned or under consideration.  In particular, these milestones include
-increased support for interactive mode of entering data (wizards), and
-support for integration of semantics defined through the Web Ontology
-language (OWL), as discussed in the Challenges section.
+There are many promising directions for further development of the `EML` package.  The project's Milestones page provides a list of steps currently planned or under consideration.  In particular, these milestones include increased support for interactive mode of entering data (wizards), and support for integration of semantics defined through the Web Ontology language (OWL), as discussed in the Challenges section.  
 
 
 
 ### Acknowledgements
 
-This project was supported in part by a grant from the Alfred P Sloan
-Foundation (CB and KR), NSF Grant DBI-1306697 (CB), ... `EML` is part
-of the rOpenSci project, [http://ropensci.org].
+This project was supported in part by a grant from the Alfred P Sloan Foundation (CB and KR), NSF Grant DBI-1306697 (CB), ... `EML` is part of the rOpenSci project, [http://ropensci.org].  
+
+
+
+
+OLD OUTLINE
+----------------------------------------------------------------------------------------------
+
+
+
+It's all metadata.  
+
+Share 
+Metadata
+raw data
+formats: file formats, table formats, cell formats 
+good null values
+easy to combine (context data)
+quality control
+repository
+license
+
+
+
+
+
+
+
+
+
+Abstract
+
+1. Recording good metadata is at the heart of effective data synthesis and reuse
+2. 
+
+Vertically integrated repositories vs metadata driven repositories.  
+
+
+Data synthesis
+
+
+## Why EML?
+
+
+But specifying metadata is typically onerous, time-consuming and error prone. 
+
+Such definitions are also not machine readable.  
+
+Or at least, it doesn't have to be that way.  We just need better tools.  
+
+
+## Why REML?
+
+* The Ecological Metadata Language (EML) has been around for a while now, but has so far seen limited use.  
+
+* R is a widely adopted among the community, many researchers already familiar with reading and writing data from R.
+
+* R provides a rich set of data types and constructs that can be mapped into EML (e.g. integers, floats, ordered/nominal factors, character strings)
+
+
+
+### Current state of EML
+
+* Generation of EML is limited.  e.g. to LTER centers with informatics support. 
+* Applications of existing EML more limited still (?)  
+
+* Software to work with EML is limited to tools with low adoption rates across the community (e.g. Kepler). 
+
+ Researchers are isolated from the metadata encoding, instead providing plain-text descriptions in MS Word documents.  Allows for low barrier of entry but also makes a barrier to richer encoding.  
+
+
+
+### Promise of REML
+
+
+### Getting Started: A minimal example.  
+
+Imagine we are working with a `data.frame` in R analgous to Table 1.
+
+<!--Writing a data.frame into EML -->
+
+
+Writing this table into EML 
+
+### Authoring tools
+
+### Parsing tools
+
+### Publishing tools
+
 

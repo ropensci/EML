@@ -7,7 +7,7 @@ before_script:
 - ./travis-tool.sh install_r_binary rjava
 - ./travis-tool.sh install_deps
 - ./travis-tool.sh install_github hadley/devtools
-- Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
+#  - Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 
 notifications:

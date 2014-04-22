@@ -2,7 +2,7 @@
 \alias{eml_dataTable}
 \title{constructor helper function for data table}
 \usage{
-eml_dataTable(dat, meta = NULL, title = character(0),
+eml_dataTable(dat, meta = NULL, title = "data table",
   description = character(0), filename = character(0), ...)
 }
 \arguments{

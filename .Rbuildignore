@@ -1,3 +1,3 @@
 .travis.yml
 inst/doc/pubs
-inst/doc/vignettes/cache
+inst/doc/vignettes

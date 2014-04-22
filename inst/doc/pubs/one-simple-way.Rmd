@@ -169,7 +169,7 @@ Checks have automatically been performed in generating the data, and
 are performed in reading in the data into R.
 
 
-## 3. Provide unprocsessed data
+## 3. Provide unprocessed data
 
 The second file provides the unprocessed data as a `.csv` file.
 Because `csv` file formats can vary in the details of data orientation,
@@ -226,6 +226,18 @@ values, rows, etc:
 
 - Standard table formats
 
+Data tables are easiest to manipulate and combine when users consistently
+enter variables as columns and observations as rows (sometimes called "long" format).  Partly because this format
+may require duplicated entries, such as repeating the value of the "site" when
+multiple observations have been made on the same site, many researchers are 
+still tempted to present data in "wide" format, with observations for a single 
+site added as additional rows.  While potentially convenient for field entry,
+the long format is more desirable for most future analysis or reuse.  
+
+The EML package addresses this by both working in the R an environment where
+it is easy and routine to transform between "long" and "wide" formats, while
+also giving the user the flexibility to simply document the data in whatever
+format they feel works best for their analysis.  
 
 
 - Standard cell formats 
@@ -241,9 +253,9 @@ a variety of printing options.  Similarly, the `EML` package relies on
 the metadata to state which cells contain dates and in what format those
 dates are rendered.  
 
-Likewise, the package detects the appropriate metadata based on the R 
-representation (such as factor, ordered factor, numeric, integer, character, or Date),
-and writes the appropriate metadata for this format.  
+Likewise, the package detects the appropriate metadata based on the
+R representation (such as factor, ordered factor, numeric, integer,
+character, or Date), and writes the appropriate metadata for this format.
 
 
 
@@ -261,8 +273,27 @@ by `eml_read`.
 
 ## 6. Make it easy to combine 
 
-The detailed column and unit metadata serve the pupose described in this section of White _et al_.   
-Machine-readable metadata, 
+As White _et al._ discuss, providing the kind of detailed column and unit
+metadata we have already discussed, as well as the standard formats addressed
+above, already make data easy to combine.  
+
+The EML package lets the user go beyond this in being able to automate
+the combining of datasets based on the metadata alone. The key to this process
+is to replace a typical programmatic script for subsetting or combining data sets 
+which is based on implicit knowledge of the data structure (e.g. "select value from column 5 whenever column 2 has value = AAA") into one that is based only 
+on the metadata description: (e.g. "select the species_population_counts from the Sacramento_River site").  The latter has the advantage of not only 
+being easier to interpret, but can also be independent of how the data is structured.  
+
+This is already possible with R, but requires explicit use of the column name.  
+As the column name may already have a specific value given to it by the researcher
+that serves some other purpose, it would be against the objectives of EML to insist that it have a specific name (e.g. all columns containing species names must be called "spp", which among other issues would break some code requiring that
+the column instead be called "species".)  To avoid renaming the columns, we simply
+need to use a consistent description of the column in the metadata instead.
+
+
+
+
+
 
 ### 7. Perform basic quality control
 

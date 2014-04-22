@@ -140,6 +140,9 @@ setAs("XMLInternalElementNode", "attributeList",  function(from) emlToS4(from))
 ### of it's own, so that we can be sure the object in `from` has correct form.  
 ### Consider adding or replacing all these methods with coercions from `data.set` 
 
+
+## Perhaps none of this should be coercion, but instead direct function calls 
+
 ### Character to nominal 
 setAs("character", "nominal", 
       function(from)

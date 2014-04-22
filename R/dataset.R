@@ -32,7 +32,8 @@ setClass("dataset_elements",
 #                   spatialRaster = "ListOfspatialRaster",
 #                   spatialVector = "ListOfspatialVector",
 #                   view = "view",
-                   dataTable = "ListOfdataTable")) 
+                   dataTable = "ListOfdataTable"), 
+         contains="id_scope") 
 
 ## Declaration of the dataset class
 ##
@@ -43,9 +44,11 @@ setClass("dataset",
          contains = c("resourceGroup", 
                       "dataset_elements", 
                       "referencesGroup"),
-        prototype = prototype(coverage = new("coverage"), # if defining a prototype, undefined elements default to NULL?? WTF?  
+# if defining a prototype, undefined elements default to NULL?? WTF?  
+        prototype = prototype(coverage = new("coverage"), 
                               pubDate = as.character(Sys.Date()),
-                              title = "metadata", # FIXME something more intelligent.  Use id?  
+                              title = "metadata", 
+                              # FIXME Make title something more intelligent.  Use id?  
                               intellectualRights = as.character(get("defaultRights", envir=EMLConfig))))
 
 ## Coercion methods to/from XML 

@@ -1,3 +1,4 @@
+
 ########################### Extraction methods ###################################
 ## methods extract standard R formats (e.g. the metadata list format) 
 
@@ -49,7 +50,6 @@ setMethod("extract", signature("interval"), function(from){
 setMethod("extract", signature("dateTime"), function(from){
   from@formatString
 })
-
 
 
 

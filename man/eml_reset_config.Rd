@@ -1,0 +1,14 @@
+\name{eml_reset_config}
+\alias{eml_reset_config}
+\title{eml_reset_config}
+\usage{
+eml_reset_config()
+}
+\value{
+erase current configuration options and restore the
+defaults.
+}
+\description{
+eml reset config
+}
+
