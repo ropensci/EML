@@ -20,6 +20,19 @@ address:
       Department of Applied Math and Statistics, 
       University of California, Mail Stop SOE-2,
       Santa Cruz, CA 95064, USA
+  - code: Berkeley
+    address: |
+      Department of Environmental Science and Policy Management,
+      University of California, Berkeley, 130 Mulford Hall,
+      Berkeley, CA 94720. USA
+  - code: Leipzig
+    address: 
+  - code: NCEAS
+    address |
+      National Center for Ecological Analysis and Synthesis,
+      735 State Street, Suite 300, 
+      Santa Barbara, CA 93101
+
 
 abstract: | 
   1. _Write something about the importance of data, data publication, sharing
