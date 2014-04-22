@@ -11,8 +11,8 @@ layout: software
 
 [![Build Status](https://travis-ci.org/cboettig/labnotebook.svg?branch=master)](https://travis-ci.org/cboettig/labnotebook)
 
-[About]
-=======
+About
+=====
 
 `EML` is an R package for reading, writing, integrating and publishing data using 
 the Ecological Metadata Language (EML) format.
@@ -37,8 +37,8 @@ as the source._
 
 
 
-[Installation]
-==============
+Installation
+============
 
 Install the R package:
 
@@ -68,8 +68,8 @@ library("EML")
 
 
 
-[Usage]
-======
+Usage
+=====
 
 
 Writing R data into EML
@@ -357,15 +357,17 @@ source.
 
 
 
-[License]
-=========
+License
+=======
 
 See [LICENSE](http://github.com/ropensci/EML/blob/master/LICENSE)
 
 
-[Support]
-=========
+Support
+=======
 
-***Suggestions, feature requests, bug reports and 
+***Suggestions, feature requests, bug reports, pull requests and 
 other feedback welcome!*** Please see our [issues
 tracker](https://github.com/ropensci/EML/issues)
+
+Interested in contributing to the package? Want to know more about how the project is organized? Please see our [contributing](http://github.com/ropensci/EML/blob/master/CONTRIBUTING.md) guidelines.  
