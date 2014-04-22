@@ -1,3 +1,8 @@
 .travis.yml
 inst/doc/pubs
 inst/doc/vignettes
+CONTRIBUTING.md
+^.*\.Rproj$
+^\.Rproj\.user$
+.git
+.gitignore
