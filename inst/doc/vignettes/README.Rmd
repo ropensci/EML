@@ -121,7 +121,7 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
 
 - `unit.defs`:   For factors, this is a definition of
   the levels involved.  For numeric data, specify the units from [this
-  list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).
+  list](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary).
   For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character
   strings, a definition of the kind of string can be given, (e.g. species
   scientific name), otherwise the column description will be used.
