@@ -33,24 +33,8 @@ using [README.Rmd](https://github.com/ropensci/EML/blob/master/inst/doc/vingette
 as the source._
 
 
-```{r include=FALSE, cache=FALSE}
-library(knitr)
-library(devtools)
-opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE, cache=1,
-               comment=NA, verbose=TRUE, fig.width=6, fig.height=4)
-opts_chunk$set(fig.path = paste("figure/",
-                                gsub(".Rmd", "", knitr:::knit_concord$get('infile')),
-                                "-", sep=""),
-               cache.path = paste("cache/",
-                                  gsub(".Rmd", "", knitr:::knit_concord$get('infile') ),
-                                "/", sep=""))
-
-library(rfigshare)
-fs_auth(token = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q", token_secret = "4mdM3pfekNGO16X4hsvZdg")
 
 
-
-```
 
 
 Installation
@@ -59,10 +43,12 @@ Installation
 Install the R package:
 
 
-```{r, results="hide", message=FALSE, warning=FALSE, eval=FALSE}
+
+```r
 library("devtools")
 install_github("EML", "ropensci")
 ```
+
 
 While the dependencies for basic functionality are kept to a minimum,
 to access all the functions and tests implemented in `EML` you'll need
@@ -75,9 +61,11 @@ install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone", "rrdf")
 
 Load the package:
 
-```{r, results="hide", message=FALSE, warning=FALSE}
+
+```r
 library("EML")
 ```
+
 
 
 Usage
@@ -93,7 +81,8 @@ class which includes additional metadata required by EML.  A `data.set`
 can be created much like a `data.frame` by specifying additional arguments
 
 
-```{r}
+
+```r
 dat = data.set(river = c("SAC",  "SAC",   "AM"),
                spp   = c("king",  "king", "ccho"),
                stg   = c("smolt", "parr", "smolt"),
@@ -110,8 +99,8 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
                                   smolt = "fourth life stage"),
                                 "number"))
 
-
 ```
+
 
 - `col.defs`: These are usually just plain text definitions, though a
   URI to a semantic definition can be particularly powerful. See "Advanced
@@ -121,7 +110,7 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
 
 - `unit.defs`:   For factors, this is a definition of
   the levels involved.  For numeric data, specify the units from [this
-  list](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary).
+  list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).
   For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character
   strings, a definition of the kind of string can be given, (e.g. species
   scientific name), otherwise the column description will be used.
@@ -133,9 +122,11 @@ Alternatively, annotations can be added to an existing data frame,
 We will also specify a default creator who will also be used as the
 contact person for EML files created in this session.
 
-```{r}
+
+```r
 eml_config(creator="Carl Boettiger <cboettig@gmail.com>")
 ```
+
 
 While we will always be able to provide alternative or additional creators
 or contact person later, `eml_config` can store the defaults to save
@@ -147,9 +138,15 @@ With this information in place, we have all the required metadata to
 generate a minimally valid EML file documenting this dataset.
 
 
-```{r}
+
+```r
 eml_write(dat, file = "EML_example.xml")
 ```
+
+```
+[1] "EML_example.xml"
+```
+
 
 *for convenience, had we ommitted any essential metadata, such as
 providing only an unannotated `data.frame` in place of a `data.set`,
@@ -168,9 +165,16 @@ fields are missing and that no entry has been incorrectly formatted.
 This ensures that other software can correctly parse and interpret the
 metadata document:
 
-```{r}
+
+```r
 eml_validate("EML_example.xml") 
 ```
+
+```
+EML specific tests XML specific tests 
+              TRUE               TRUE 
+```
+
 
 
 
@@ -200,13 +204,19 @@ required to use EML and run the examples in the other sections.  See the
 
 <!-- We don't want to generate a DOI every time we run the vignette -->
 
-```{r publish_figshare}
+
+```r
 eml_publish("EML_example.xml", 
             description="Example EML file from EML",
             categories = "Ecology", 
             tags = "EML", 
             destination="figshare") 
 ```
+
+```
+[1] 1004892
+```
+
 
 This creates a draft file visible only to the user configured in
 `rfigshare`.  The document can be made (permanently) public using
@@ -234,9 +244,11 @@ can scale their analyses across ever larger collections of datasets by
 automating the more tedious aspects of data discovery and integration.
 
 
-```{r}
+
+```r
 obj <- eml_read("EML_example.xml")
 ```
+
 
 We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).
 
@@ -245,17 +257,31 @@ The `eml_get` function provides us with easy access to many of the
 component elements of the metadata file.  See the documentation for a
 complete list.
 
-```{r}
+
+```r
 dat <- eml_get(obj, "data.set")
 ```
 
-```{r}
+
+
+```r
 eml_get(obj, "contact")
 ```
 
-```{r}
+```
+[1] "Carl Boettiger <cboettig@gmail.com>"
+```
+
+
+
+```r
 eml_get(obj, "citation_info")
 ```
+
+```
+Boettiger C (2014-04-18). _metadata_.
+```
+
 
 
 

@@ -15,7 +15,9 @@ opts_chunk$set(fig.path = paste("figure/",
                cache.path = paste("cache/", 
                                   gsub(".Rmd", "", knitr:::knit_concord$get('infile') ), 
                                 "/", sep=""))
- 
+
+## DON'T RUN because we cannot authenticate
+opts_chunk$set(eval=FALSE)
 ```
 
 

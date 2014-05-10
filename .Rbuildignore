@@ -1,8 +1,9 @@
-.travis.yml
-inst/doc/pubs
-inst/doc/vignettes
-CONTRIBUTING.md
-^.*\.Rproj$
-^\.Rproj\.user$
 .git
 .gitignore
+.travis.yml
+manuscripts
+CONTRIBUTING.md
+LICENSE
+
+^.*\.Rproj$
+^\.Rproj\.user$
