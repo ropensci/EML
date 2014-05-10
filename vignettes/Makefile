@@ -4,21 +4,14 @@ WRITING = Advanced_writing_of_EML
 
 all: 
 	make README.md
-	make ../../../README.md
-	make ../../../vignettes/README.Rmd
-
-#	make writing
-#	make basic
+	make ../README.md
 
 README.md: README.Rmd 
 	Rscript -e 'require(knitr); knit("README.Rmd")'
 
-../../../README.md: README.md
+../README.md: README.md
 	cp README.md ../../../README.md
 	sed -i 's/```r/```coffee/' ../../../README.md
-
-../../../vignettes/README.Rmd: README.Rmd
-	cp README.Rmd ../../../vignettes/README.Rmd
 
 
 # ${PARSING}.pdf: ${PARSING}.Rmd
@@ -34,4 +27,4 @@ README.md: README.Rmd
 
 
 clean:
-	rm -rf README.md cache/ *.csv *.xml ../../../tests/testthat/*.xml ../../../tests/testthat/*.csv ../../../*.csv ../../../*.xml ../../../tmp
+	rm -rf cache/ *.csv *.xml ../tests/testthat/*.xml ../tests/testthat/*.csv ../*.csv ../*.xml 
