@@ -11,14 +11,14 @@ License: CC0 | file LICENSE
 URL: https://github.com/ropensci/EML
 BugReports: https://github.com/ropensci/EML/issues
 Date: 2013
-Authors@R: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
-    "cboettig@gmail.com"), person("Matt", "Jones", role="aut"),
-    person("Karthik", "Ram", role="aut"), person("Duncan", "Temple Lang",
-    role = "aut"), person("Claas-Thido", "Pfaff", role = c("aut")))
+Authors@R: c( person("Carl", "Boettiger", role = c("aut", "cre"), email =
+    "cboettig@gmail.com"), person("Karthik", "Ram", role="aut"),
+    person("Duncan", "Temple Lang", role = "aut"), person("Claas-Thido",
+    "Pfaff", role = c("aut")), person("Matt", "Jones", role="aut"))
 VignetteBuilder: knitr
 Suggests:
-    knitr,
-    rfigshare,
+    knitr (>= 1.5),
+    rfigshare (>= 0.3),
     devtools,
     testthat,
     dataone,
@@ -30,7 +30,7 @@ Imports:
     utils,
     uuid,
     yaml,
-    httr
+    httr (>= 0.3)
 Depends:
     R (>= 2.15),
     methods
