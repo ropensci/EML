@@ -3,5 +3,6 @@ download.file("http://cran.r-project.org/src/contrib/Archive/rimage/rimage_0.5-8
 untar("rimage.tar.gz")
 writeLines("", "rimage/NAMESPACE")
 install.packages("rimage/", repos=NULL)
-library("devtools")
-install_github("RWordXML", "duncantl")
+
+#library("devtools")
+#install_github("RWordXML", "duncantl")
