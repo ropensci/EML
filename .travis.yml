@@ -6,8 +6,11 @@ before_script:
 - ./travis-tool.sh bootstrap
 - ./travis-tool.sh install_r_binary rjava
 - ./travis-tool.sh install_deps
-#  - Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
+- sudo apt-get install fftw-dev libxml2-dev 
+- Rscript inst/examples/install_RWordXML.R  
+  #- Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
+- Rscript -e 'install.packages("RWordXML", repos="http://www.omegahat.org/R", type="source")'
 
 notifications:
  slack: ropensci:GQJuD2zwNuvLDQU6PMvX7tgz

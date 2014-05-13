@@ -7,7 +7,7 @@ all:
 	make ../README.md
 
 README.md: README.Rmd 
-	Rscript -e 'require(knitr); knit("README.Rmd")'
+	$(R_HOME)/bin/Rscript -e 'require(knitr); knit("README.Rmd")'
 
 ../README.md: README.md
 	cp README.md ../../../README.md
@@ -15,12 +15,12 @@ README.md: README.Rmd
 
 
 # ${PARSING}.pdf: ${PARSING}.Rmd
-#	Rscript -e 'require(knitr); knit("${PARSING}.Rmd")'
+#	$(R_HOME)/bin/Rscript -e 'require(knitr); knit("${PARSING}.Rmd")'
 #	pandoc ${PARSING}.md -o ${PARSING}.pdf
 
 #${WRITING}.pdf: vignettes/${WRITING}.Rmd
 #	cd vignettes
-#	Rscript -e 'require(knitr); knit("${WRITING}.Rmd")'
+#	"$(R_HOME)/bin/Rscript -e 'require(knitr); knit("${WRITING}.Rmd")'
 #	pandoc ${WRITING}.md -o ${WRITING}.pdf
 #	cd - 
 

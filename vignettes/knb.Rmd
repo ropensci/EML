@@ -15,10 +15,8 @@ opts_chunk$set(fig.path = paste("figure/",
                cache.path = paste("cache/", 
                                   gsub(".Rmd", "", knitr:::knit_concord$get('infile') ), 
                                 "/", sep=""))
-
-## DON'T RUN because we cannot authenticate
-opts_chunk$set(eval=FALSE)
 ```
+
 
 
 ### Publishing to the KNB
@@ -41,7 +39,8 @@ _Note: this example assumes `dataone` is installed, even though it is not
 required to use EML and run the examples in the other sections.  See the 
 `dataone` documentation for authenticating `dataone` with a user account_
 
-```{r publish_knb}
+```r
+library(EML)
 ids <- eml_publish("EML_example.xml", destination="KNB", permanent=FALSE)
 ```
 
@@ -61,7 +60,7 @@ Test data shows up on the test server, followed by the identifer, at `paste0("(h
 
 This returns the object identifiers for the EML metadata, the csv file, and the package itself.  We can read in the EML directly from its unique identifier using `eml_read`. We must wait about four minutes first for the entry to be completely registered in the dataone repository.  (Note that because we are using the development server, `permanent=FALSE`, this file will dissapear after a few days.)
 
-```{r}
+```r
 Sys.sleep(60*4)
 eml <- eml_read(paste0("(https://mn-demo-5.test.dataone.org/knb/d1/mn/v1/object/", ids[["eml"]]))
 ```
