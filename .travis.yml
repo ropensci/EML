@@ -14,5 +14,15 @@ before_script:
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RWordXML", repos="http://www.omegahat.org/R", type="source")'
 
+env:
+ global:
+   - CRAN: http://cran.rstudio.com
+   - R_BUILD_ARGS= "" # Default is: "--no-build-vignettes --no-manual"
+   - R_CHECK_ARGS= "--as-cran" # Default is: "--no-build-vignettes --no-manual --as-cran"
+   - BOOTSTRAP_LATEX=""
+
 notifications:
- slack: ropensci:GQJuD2zwNuvLDQU6PMvX7tgz
+  email:
+    on_success: change
+    on_failure: always
+  slack: ropensci:GQJuD2zwNuvLDQU6PMvX7tgz
