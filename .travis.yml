@@ -16,9 +16,8 @@ before_script:
 
 env:
  global:
-   - CRAN: http://cran.rstudio.com
-   - R_BUILD_ARGS= "" # Default is: "--no-build-vignettes --no-manual"
-   - R_CHECK_ARGS= "--as-cran" # Default is: "--no-build-vignettes --no-manual --as-cran"
+   - R_BUILD_ARGS=""
+   - R_CHECK_ARGS="--as-cran"
    - BOOTSTRAP_LATEX=""
 
 notifications:
