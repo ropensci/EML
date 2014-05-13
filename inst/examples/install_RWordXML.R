@@ -5,4 +5,6 @@ writeLines("", "rimage/NAMESPACE")
 install.packages("rimage/", repos=NULL)
 
 #library("devtools")
+#install_github("Rcompression", "omegahat")
+#install_github("ROOXML", "duncantl")
 #install_github("RWordXML", "duncantl")

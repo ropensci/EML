@@ -8,6 +8,8 @@ before_script:
 - ./travis-tool.sh install_deps
 - sudo apt-get install fftw-dev libxml2-dev 
 - Rscript inst/examples/install_RWordXML.R  
+- ./travis-tool.sh install_github omegahat/Rcompression
+- ./travis-tool.sh install_github duncantl/ROOXML
 - ./travis-tool.sh install_github duncantl/RWordXML
   #- Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
