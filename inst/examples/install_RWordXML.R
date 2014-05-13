@@ -6,7 +6,7 @@ writeLines("", "rimage/NAMESPACE")
 install.packages("rimage/", repos=NULL)
 
 ## Ugh, install_github fails on this one too!
-download.file("https://github.com/omegahat/Rcompression/archive/master.zip", "Rcompression.zip")
+download.file("https://github.com/omegahat/Rcompression/archive/master.zip", "Rcompression.zip", "wget")
 unzip("Rcompression.zip")
 setwd("Rcompression-master")
 system("chmod a+x configure")
