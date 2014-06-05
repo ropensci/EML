@@ -4,7 +4,7 @@
 \alias{write.eml}
 \title{Top-level API function for writing eml}
 \usage{
-eml_write(dat, file = NULL, title = "metadata",
+eml_write(dat = NULL, file = NULL, title = "metadata",
   creator = get("defaultCreator", envir = EMLConfig),
   contact = get("defaultContact", envir = EMLConfig), ...)
 }

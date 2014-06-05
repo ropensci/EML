@@ -134,10 +134,7 @@ setAs("article", "bibentry", function(from){
       }
 )
 
-setAs("bibentry", "article", bibentryToArticle)
-setAs("BibEntry", "article", bibentryToArticle)
-
-bibentryToArticle <- function(from){
+setAs("bibentry", "article", function(from){
       eml_citation = new("article")  
       eml_citation@creator = new("ListOfcreator", lapply(from$author, as, "creator")) 
       eml_citation@title = from$title
@@ -148,7 +145,7 @@ bibentryToArticle <- function(from){
       eml_citation@pageRange = from$pages
       eml_citation 
      } 
-
+)
 
 # Book
 
