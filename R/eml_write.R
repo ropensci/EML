@@ -14,7 +14,7 @@
 #' @import XML
 #' @export eml_write write.eml
 #' @include reml_environment.R
-eml_write <- function(dat,
+eml_write <- function(dat = NULL,
                       file = NULL,
                       title = "metadata",
                       creator = get("defaultCreator", envir=EMLConfig), 

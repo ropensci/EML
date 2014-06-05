@@ -134,7 +134,10 @@ setAs("article", "bibentry", function(from){
       }
 )
 
-setAs("bibentry", "article", function(from){
+setAs("bibentry", "article", bibentryToArticle)
+setAs("BibEntry", "article", bibentryToArticle)
+
+bibentryToArticle <- function(from){
       eml_citation = new("article")  
       eml_citation@creator = new("ListOfcreator", lapply(from$author, as, "creator")) 
       eml_citation@title = from$title
@@ -145,7 +148,6 @@ setAs("bibentry", "article", function(from){
       eml_citation@pageRange = from$pages
       eml_citation 
      } 
-)
 
 
 # Book
@@ -1002,6 +1004,15 @@ setAs("XMLInternalElementNode",
       "citation",
       function(from) emlToS4(from)
       )
+
+setAs("citation", "bibentry", function(from) citationToBibentry(from))
+citationToBibentry <- function(from){
+  eml_types <- slotNames(from)
+  type <- eml_types[sapply(eml_types,
+                           function(x) !isEmpty(slot(from, x)))]
+  as(slot(from, type), "bibentry")
+}
+
 
 # generic bibentry coercion to eml citations
 setAs("bibentry",

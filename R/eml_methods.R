@@ -122,8 +122,14 @@ eml <- function(dat = NULL,
     }
  }
 
-  if(!isEmpty(citation))
-    eml@citation <- citation
+  if(!isEmpty(citation)){
+    if(isS4(citation))
+      eml@citation <- citation
+    else if(is(citation, "bibentry"))
+      eml@citation <- bibentryToCitation(citation)
+    else
+      warning("Citation format not recognized")
+  }
   if(!isEmpty(software))
     eml@software <- software
   if(!isEmpty(protocol))
