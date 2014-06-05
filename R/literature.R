@@ -1006,6 +1006,9 @@ setAs("XMLInternalElementNode",
 # generic bibentry coercion to eml citations
 setAs("bibentry",
       "citation",
+      function(from) bibentryToCitation(from))
+
+bibentryToCitation <- 
       function(from){ 
            type <- from$bibtype
 
@@ -1035,7 +1038,7 @@ setAs("bibentry",
                 warning("Cannot determine the right citation type automatically. Coerced to eml generic citation type!")
            }
 
-           switch(type,
+           out <- switch(type,
                   Article = as(from, "article"),
                   Book = as(from, "book"),
                   editedBook = as(from, "editedBook"),
@@ -1045,8 +1048,15 @@ setAs("bibentry",
                   conferenceProceedings = as(from, "conferenceProceedings"),
                   generic = as(from, "generic")
                   )
+           promote_to_citation(out)
       }
-)
+
+promote_to_citation <- function(object){
+  type <- class(object)
+  out <- new("citation")
+  slot(out, type) <- object
+  out
+}
 
 
 setClass("ListOfcitation", contains="list")
