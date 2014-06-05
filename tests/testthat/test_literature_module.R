@@ -434,30 +434,30 @@ test_that("We auto coerce generic to bibentry", {
 a_personalCommunication_bibitem = as(a_personalCommunication, "bibentry")
 
 test_that("We warn if we coerce a bibentry of personal communication to generic if we cannot check the right type of eml citation", {
-  expect_that(as(a_personalCommunication_bibitem, "citation"), gives_warning())
+  expect_that(as(a_personalCommunication_bibitem, "Citation"), gives_warning())
 }) 
 
 a_map_bibitem = as(a_map, "bibentry")
 
 test_that("We warn if we coerce a bibentry of map to generic if we cannot check the right type of eml citation", {
-  expect_that(as(a_map_bibitem, "citation"), gives_warning())
+  expect_that(as(a_map_bibitem, "Citation"), gives_warning())
 }) 
 
 an_audioVisual_bibitem = as(an_audioVisual, "bibentry")
 
 test_that("We warn if we coerce a bibentry of audioVisual to generic if we cannot check the right type of eml citation", {
-  expect_that(as(an_audioVisual_bibitem, "citation"), gives_warning())
+  expect_that(as(an_audioVisual_bibitem, "Citation"), gives_warning())
 })  
 
 # test the book and edited book switch
 
 test_that("We automatically choose book if editor is not given", {
   a_book_bibitem = as(a_book, "bibentry")
-  expect_that(as(a_book_bibitem, "citation"), is_a("book"))
+  expect_that(as(a_book_bibitem, "book"), is_a("book"))
 })  
 
 test_that("We automatically choose edited book if editor field is given", {
   a_book_bibitem = as(a_book, "bibentry")
   a_book_bibitem$editor = "Claas-Thido Pfaff"
-  expect_that(as(a_book_bibitem, "citation"), is_a("editedBook"))
+  expect_that(as(a_book_bibitem, "editedBook"), is_a("editedBook"))
 })  

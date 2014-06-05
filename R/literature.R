@@ -3,18 +3,18 @@
 
 # o grep CitationType *.xsd
 #     eml-literature.xsd:    <xs:complexType name = "CitationType"                                                                                   >
-#     eml.xsd:               <xs:element     name = "citation"                     type = "cit:CitationType"                                         >
-#     eml-attribute.xsd:     <xs:element     name = "citation"                     type = "cit:CitationType"                                         >
+#     eml.xsd:               <xs:element     name = "Citation"                     type = "cit:CitationType"                                         >
+#     eml-attribute.xsd:     <xs:element     name = "Citation"                     type = "cit:CitationType"                                         >
 #     eml-coverage.xsd:      <xs:element     name = "timeScaleCitation"            type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
 #     eml-coverage.xsd:      <xs:element     name = "classificationSystemCitation" type = "cit:CitationType"                                         >
 #     eml-coverage.xsd:      <xs:element     name = "identificationReference"      type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
-#     eml-literature.xsd:    <xs:element     name = "citation"                     type = "CitationType"                                             >
-#     eml-methods.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
-#     eml-methods.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType"                                         >
-#     eml-physical.xsd:      <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0"                         >
-#     eml-project.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
-#     eml-project.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0"                         >
-#     eml-project.xsd:       <xs:element     name = "citation"                     type = "cit:CitationType" minOccurs = "0"                         >
+#     eml-literature.xsd:    <xs:element     name = "Citation"                     type = "CitationType"                                             >
+#     eml-methods.xsd:       <xs:element     name = "Citation"                     type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
+#     eml-methods.xsd:       <xs:element     name = "Citation"                     type = "cit:CitationType"                                         >
+#     eml-physical.xsd:      <xs:element     name = "Citation"                     type = "cit:CitationType" minOccurs = "0"                         >
+#     eml-project.xsd:       <xs:element     name = "Citation"                     type = "cit:CitationType" minOccurs = "0" maxOccurs = "unbounded" >
+#     eml-project.xsd:       <xs:element     name = "Citation"                     type = "cit:CitationType" minOccurs = "0"                         >
+#     eml-project.xsd:       <xs:element     name = "Citation"                     type = "cit:CitationType" minOccurs = "0"                         >
 
 # o write convenient user functions to extract citations (eml_get)
 # o handle dates properly so month and year can be extracted in here (where to place? use in pubDate)
@@ -977,7 +977,7 @@ setAs("bibentry", "generic", function(from){
 
 # citation
 
-setClass("citation",
+setClass("Citation",
          slots = c(article = "article",
                    book = "book",
                    chapter = "chapter",
@@ -988,21 +988,23 @@ setClass("citation",
                    personalCommunication = "personalCommunication",
                    map = "map",
                    audioVisual = "audioVisual",
-                   generic = "generic")
+                   generic = "generic",
+                   xmlNodeName = "character"),
+         prototype = list(xmlNodeName = "citation")
          )
 
 # citation coercion
-setAs("citation",
+setAs("Citation",
       "XMLInternalElementNode",
       function(from) S4Toeml(from)
       )
 
 setAs("XMLInternalElementNode",
-      "citation",
-      function(from) emlToS4(from)
+      "Citation",
+      function(from) emlToS4(from, obj="citation")
       )
 
-setAs("citation", "bibentry", function(from) citationToBibentry(from))
+setAs("Citation", "bibentry", function(from) citationToBibentry(from))
 citationToBibentry <- function(from){
   eml_types <- slotNames(from)
   type <- eml_types[sapply(eml_types,
@@ -1013,7 +1015,7 @@ citationToBibentry <- function(from){
 
 # generic bibentry coercion to eml citations
 setAs("bibentry",
-      "citation",
+      "Citation",
       function(from) bibentryToCitation(from))
 
 bibentryToCitation <- 
@@ -1061,7 +1063,7 @@ bibentryToCitation <-
 
 promote_to_citation <- function(object){
   type <- class(object)
-  out <- new("citation")
+  out <- new("Citation")
   slot(out, type) <- object
   out
 }
@@ -1075,7 +1077,7 @@ setClass("ListOfcitation", contains="list")
 #' @param x,... citations to concatenate
 #' @param recursive Needed for compatibility with generic, otherwise ignored
 #' @rdname class-citation
-setMethod("c", signature("citation"), function(x, ..., recursive = FALSE) new("ListOfcitation", list(x, ...)))
+setMethod("c", signature("Citation"), function(x, ..., recursive = FALSE) new("ListOfcitation", list(x, ...)))
 
 # literature 
 

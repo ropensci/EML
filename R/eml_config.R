@@ -43,7 +43,7 @@ eml_config()
 #' @param x name of the configuration option desired (gives all by default)
 #' @return display the current configuration options
 #' @export
-eml_get_config <- function(x=ls(envir=EML:::EMLConfig)){
+eml_get_config <- function(x=ls(envir=EMLConfig)){
   get(x, envir = EMLConfig)
 }
 

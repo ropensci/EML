@@ -16,9 +16,20 @@
 attribute_elements <- c("id", "system", "scope", "packageId")
 
 S4Toeml <- function(obj, 
-                    node = newXMLNode(class(obj)[1]),
-                    excluded_slots = c("namespaces", "dirname")){
+                    node = NULL,
+                    excluded_slots = c("namespaces", "dirname", "xmlNodeName")){
+
     who <- slotNames(obj)
+
+    ## Allow XML node name to be defined using a special slot (instead of class name)
+    if(is.null(node)){
+      if("xmlNodeName" %in% who)
+        node <- new(slot(obj, "xmlNodeName"))
+      else
+        node <- newXMLNode(class(obj)[1])
+    }
+
+
     who <- who[!(who %in% excluded_slots)] # drop excluded slots
     for(s in who){
       ## Attributes
