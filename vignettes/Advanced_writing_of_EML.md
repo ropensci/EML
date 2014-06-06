@@ -17,7 +17,6 @@ In so doing we will take a more modular approach that will allow us to build up 
 
 
 
-
 ### Overview of the EML heirarchy
 
 A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the official schema documentation, here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
@@ -59,7 +58,6 @@ library(EML)
 ```
 
 
-
 We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
 
 
@@ -67,7 +65,6 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 f <- eml_read("knb-lter-hfr.205.4")
 dat <- eml_get(f, "data.set")
 ```
-
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  
 
@@ -82,7 +79,6 @@ col.defs <- c("run.num" = "which run number (=block). Range: 1 - 6. (integer)",
               "variable" = "what variable being measured in what treatment (character/factor).",
               "value.i" = "value of measured variable for run.num on year/day/hour.min.")
 ```
-
 
 
 
@@ -112,7 +108,6 @@ unit.defs = list("which run number",
 ```
 
 
-
 We attach this essential metadata directly to the `data.frame` to make a `data.set` object (a data.frame with basic metadata).  
 
 
@@ -120,7 +115,6 @@ We attach this essential metadata directly to the `data.frame` to make a `data.s
 ```r
 dat <- data.set(dat, col.defs = col.defs, unit.defs = unit.defs)
 ```
-
 
 Rather than write this out directly to an EML file with `eml_write` like we did in the basic example, we'll first assemble more metadata information.  
 
@@ -133,7 +127,6 @@ dataTable <- EML:::eml_dataTable(dat,
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
 ```
-
 
 CSV file conventions can differ across platforms and continents. To remove any ambiguity, EML explicitly describes how the csv file is constructed (noting that it is actually comma delimited as the name implies and not tab delimited, and noting other details such as the number of rows, the character used to indicate and end of a row, and so forth).  Because R is writing the csv file itself after all, it already knows all of these details and we are able to automatically fill out this section of the metadata.  This information is summarized in the `dataTable@physical` element.  
 
@@ -152,7 +145,6 @@ HF_address <- new("address",
                   country = "USA") 
 ```
 
-
 We use the `new` function to construct an object of class `address`.  This R object has "slots" corresponding to each of the elements that makes up an address in EML.  We can define the values for these slots all at once as shown, or we can add and edit them after the object is created by using R's S4 subsetting operator, `@`.  For instance, we could change the street address with: `HF_address@deliveryPoint <- "some new address"`. (Some users might find the equivalent notation, `slot(HF_address, "deliveryPoint") <- "some new address"` to be more intuitive).  We need not specify any additional values when first calling `new("address")`, and we can use `slotNames(HF_address)` to see a list of possible fields.  
 
 This element is now available for reuse as we create other metadata.  For instance, we will define the publisher of the data by providing a name and an address:
@@ -163,7 +155,6 @@ publisher <- new("publisher",
     organizationName = "Harvard Forest",
     address = HF_address)
 ```
-
 
 Note that the `address` slot is not simply a text field, but is in fact an `address` S4 object we created above.  This object preserves the structure defined by the EML schema, which ensures that software programs can consistently interpret the values we write into the metadata file.  
 
@@ -176,7 +167,6 @@ We can reuse data formats native to R as well.  For instance, R comes with an in
 aaron <- as.person("Aaron Ellison <fakeaddress@email.com>")
 ```
 
-
 can be interpreted as person's first and last name and email address.  The EML R package also recognizes this syntax, and can coerce this into the various 'person' or 'responsibleParty' roles defined in the EML schema.  Here we construct a contact node using coercion (the `as` function) from the `person` object
 
 
@@ -186,7 +176,6 @@ contact@address = HF_address
 contact@organizationName = "Harvard Forest"
 contact@phone = "000-000-0000"
 ```
-
 
 We could have entered each slot manually using `new("contact")` as we did for the above elemnts. 
 
@@ -198,7 +187,6 @@ creator <- c(as("Aaron Ellison", "creator"), as("Nicholas Gotelli", "creator"))
 ```
 
 
-
 Yet another way to create person objects is to use the helper function `eml_person`.  This function recongnizes the plain-text string conventions already used by R's person objects (or the person objects themselves, see ?person).   Here we add other researchers as contributors to the data.  The `eml_person` function automatically decides whether to return a `contact`, `creator` list, or `associatedParty`, based on the additional information provided (such as an email address in angle braces, contributor role, `ctb` in square brackets).  
 
 
@@ -206,7 +194,6 @@ Yet another way to create person objects is to use the helper function `eml_pers
 other_researchers <- eml_person("Benjamin Baiser [ctb]", 
                                 "Jennifer Sirota [ctb]") 
 ```
-
 
 Again, we could just as well have created these nodes using any of the other mechanisms shown above.  
 
@@ -219,7 +206,6 @@ pubDate <- "2012"
 title <- "Thresholds and Tipping Points in a Sarracenia 
           Microecosystem at Harvard Forest since 2012"
 ```
-
 
 When metadata fields have more complicated types, the package provides constructor functions to help build these elements succinctly.  For instance, while we could add our keyword sets manually using only `new`:
 
@@ -236,7 +222,6 @@ keys <-
       keywordThesaurus = "LTER core area",
       keyword = ...) 
 ```
-
 
 and so forth, it is more compact to use the provided constructor function:
 
@@ -256,7 +241,6 @@ keys <- eml_keyword(list(
                                   "USA")))
 ```
 
-
 A similar situation arises with describing the coverage metadata element. While we could call `new("coverage")` and build the element up slot by slot, most users will find the helper function more convenient:
 
 
@@ -269,7 +253,6 @@ coverage <- eml_coverage(
                             Tom Swamp Tract (Harvard Forest)", 
   NSEWbox          = c( 42.55,  42.42, -72.1, -72.29, 160, 330))
 ```
-
 
 In this case, the helper function supports only the more common types of coverage, such as listing taxonomic coverage at the species name rather than higher taxonomic level, or providing only calendar dates instead of, say, geological epochs.  For these alternative constructions, users will call the `new` constructors directly, see `?temporalCoverage`, `?taxonomicCoverage` and related functions for details.  
 
@@ -295,7 +278,6 @@ abstract <- "The primary goal of this project is to determine
   in ecological systems."  
 ```
 
-
 or read them in from some externa plain text file such as `abstract <- readLines("abstract.txt")`.  
 
 
@@ -308,7 +290,6 @@ rights <- "This dataset is released to the public and may be freely
   more information on LTER Network data access and use policies, please
   see: http://www.lternet.edu/data/netpolicy.html."
 ```
-
 
 
 For larger blocks of text we might rather write these Word.  We can read them in from there, with the help of a few additional R packages.   
@@ -326,7 +307,6 @@ method <- paste(txt, collapse = "\n\n")
 
 
 
-
  
 We can then construct a methods node containing this text as the description: 
 
@@ -336,7 +316,6 @@ methods <- new("methods", methodStep = c(new("methodStep", description = method)
 ```
 
 
-
 One of the simplest ways and most powerful ways to generate EML metadata is to resuse a section from an existing EML file directly.  
 
 
@@ -344,7 +323,6 @@ One of the simplest ways and most powerful ways to generate EML metadata is to r
 hf205 <- eml_read(system.file("examples", "hf205.xml", package="EML"))
 additionalMetadata <- hf205@additionalMetadata # extracted from previous eml file
 ```
-
 
 
 We now have all of the elements we wished to define for the `dataset` metadata. A `dataset` can include yet more elements than we show here (see a list with `slotNames(new("dataset"))`, or see `?dataset` or the [EML documentation](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-dataset.html#DatasetType) for details). We can assemble them into a `dataset` node as follows:
@@ -366,7 +344,6 @@ dataset <- new("dataset",
                 dataTable = c(dataTable))
 ```
 
-
 Note that because a `dataset` can have multiple dataTable elements, we use the same concatenate notation illustrated earlier, `c(dataTable)`, even though only one element is provided.  This lets R known that the resulting object is a `ListOfdataTable`, not an individual `dataTable` file.  This convention should be followed whenever assigning a value to a slot that can take more than one element of that name.  
 
 
@@ -381,7 +358,6 @@ eml <- new("eml",
             dataset = dataset,
             additionalMetadata = additionalMetadata)
 ```
-
 
 
 
@@ -411,7 +387,6 @@ eml     <- eml( dataset = dat,
               )
 ```
 
-
 The helper function handles certain steps automatically, such as the creation of a `uuid` for the package identifier.  The required fields `creator` and `contact` will use values set by `eml_config` or can take text strings or R `person` objects as arguments, as well as eml's `creator` or `contact` classes.  In this case we pass a `dataTable` (permitting additional customization we used above such as the description field).  Alternatively this could be the more basic `data.set` object as the first argument (`dataset = dat`) or an already constructed EML `dataset` class. 
 
 Because package identifer, creator and contact fields are required for valid EML, this constructor function is often more convenient then the stepwise process shown above. Typically a single call to this function can provide all the metadata needed to properly annotate a `data.set`.    This is similar to the behavior of the `eml_write` function, but returns the R eml object rather than writing out to an XML file.  Additional fields can then be added or manipulated using the standard R S4 subsetting methods (see Advanced Parsing tutorial).  
@@ -428,7 +403,6 @@ eml_write(eml, file="hf205_from_EML.xml")
 [1] "hf205_from_EML.xml"
 ```
 
-
 When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `eml()` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
 
 
@@ -440,10 +414,12 @@ eml_validate("hf205_from_EML.xml")
 ```
 
 ```
+$`EML specific tests`
+[1] "Error processing keyrefs: //additionalMetadata/describes : Error in xml document. This EML instance is invalid because referenced id 42 does not exist in the given keys."
+
 $`XML specific tests`
 [1] "cvc-complex-type.2.4.a: Invalid content starting with element 'additionalMetadata'. The content must match '(((\"\":access){0-1},((((\"\":dataset)|(\"\":citation))|(\"\":software))|(\"\":protocol))),(\"\":additionalMetadata){0-UNBOUNDED})'."
 ```
-
 
 While it is difficult to create invalid EML using the constructor functions, it is not impossible so it never hurts to check.  
 

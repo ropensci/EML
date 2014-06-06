@@ -2,11 +2,12 @@ Package: EML
 Description: An R package for reading, writing, integrating and publishing data
     using the Ecological Metadata Language (EML) format.  In addition to the
     Suggests packages, several non-CRAN hosted packages further enhance the use
-    of the EML package as demonstrated in the advanced vignettes: Sxslt, and XMLSchema. See the README at the URL listed below for
-    more information, including how to install additional packages.
+    of the EML package as demonstrated in the advanced vignettes: Sxslt, and
+    XMLSchema. See the README at the URL listed below for more information,
+    including how to install additional packages.
 Title: R interface for the Ecological Metadata Language
 Version: 0.0-6
-License: CC0 | file LICENSE
+License: file LICENCE
 URL: https://github.com/ropensci/EML
 BugReports: https://github.com/ropensci/EML/issues
 Date: 2013
@@ -24,8 +25,8 @@ Suggests:
     rrdf,
     RHTMLForms,
     RWordXML,
-    bibtex,
-    RefManageR
+    RefManageR,
+    bibtex
 Imports:
     XML,
     RCurl,

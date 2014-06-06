@@ -46,12 +46,11 @@
 #' @include coverage.R
 #' @include party.R
 
-# Set rquired classes 
+# Set required classes 
 # =================================
 
 # bibentry coercion
 setClass("bibentry")
-
 
 # citation types
 # ==============
@@ -1001,7 +1000,7 @@ setAs("Citation",
 
 setAs("XMLInternalElementNode",
       "Citation",
-      function(from) emlToS4(from, obj="citation")
+      function(from) emlToS4(from, obj="Citation")
       )
 
 setAs("Citation", "bibentry", function(from) citationToBibentry(from))
@@ -1009,7 +1008,7 @@ citationToBibentry <- function(from){
   eml_types <- slotNames(from)
   type <- eml_types[sapply(eml_types,
                            function(x) !isEmpty(slot(from, x)))]
-  as(slot(from, type), "bibentry")
+  as(slot(from, type[[1]]), "bibentry")
 }
 
 

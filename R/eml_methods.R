@@ -125,7 +125,10 @@ eml <- function(dat = NULL,
   if(!isEmpty(citation)){
     if(isS4(citation))
       eml@citation <- citation
-    else if(is(citation, "bibentry"))
+    else if(is(citation, "BibEntry")){ # handle RefManageR citations
+      class(citation) <- "bibentry"
+      eml@citation <- bibentryToCitation(citation)
+    } else if(is(citation, "bibentry"))
       eml@citation <- bibentryToCitation(citation)
     else
       warning("Citation format not recognized")

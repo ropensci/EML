@@ -36,7 +36,6 @@ as the source._
 
 
 
-
 Installation
 ============
 
@@ -48,7 +47,6 @@ Install the R package:
 library("devtools")
 install_github("EML", "ropensci")
 ```
-
 
 While the dependencies for basic functionality are kept to a minimum,
 to access all the functions and tests implemented in `EML` you'll need
@@ -65,7 +63,6 @@ Load the package:
 ```r
 library("EML")
 ```
-
 
 
 Usage
@@ -98,9 +95,7 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
                                 c(parr = "third life stage",
                                   smolt = "fourth life stage"),
                                 "number"))
-
 ```
-
 
 - `col.defs`: These are usually just plain text definitions, though a
   URI to a semantic definition can be particularly powerful. See "Advanced
@@ -110,7 +105,7 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
 
 - `unit.defs`:   For factors, this is a definition of
   the levels involved.  For numeric data, specify the units from [this
-  list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).
+  list](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary).
   For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character
   strings, a definition of the kind of string can be given, (e.g. species
   scientific name), otherwise the column description will be used.
@@ -126,7 +121,6 @@ contact person for EML files created in this session.
 ```r
 eml_config(creator="Carl Boettiger <cboettig@gmail.com>")
 ```
-
 
 While we will always be able to provide alternative or additional creators
 or contact person later, `eml_config` can store the defaults to save
@@ -146,7 +140,6 @@ eml_write(dat, file = "EML_example.xml")
 ```
 [1] "EML_example.xml"
 ```
-
 
 *for convenience, had we ommitted any essential metadata, such as
 providing only an unannotated `data.frame` in place of a `data.set`,
@@ -174,7 +167,6 @@ eml_validate("EML_example.xml")
 EML specific tests XML specific tests 
               TRUE               TRUE 
 ```
-
 
 
 
@@ -214,9 +206,8 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 1004892
+[1] 1047282
 ```
-
 
 This creates a draft file visible only to the user configured in
 `rfigshare`.  The document can be made (permanently) public using
@@ -249,7 +240,6 @@ automating the more tedious aspects of data discovery and integration.
 obj <- eml_read("EML_example.xml")
 ```
 
-
 We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).
 
 
@@ -263,7 +253,6 @@ dat <- eml_get(obj, "data.set")
 ```
 
 
-
 ```r
 eml_get(obj, "contact")
 ```
@@ -273,15 +262,13 @@ eml_get(obj, "contact")
 ```
 
 
-
 ```r
 eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-04-18). _metadata_.
+Boettiger C (2014-06-05). _metadata_.
 ```
-
 
 
 

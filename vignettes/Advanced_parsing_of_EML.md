@@ -1,5 +1,7 @@
-
-
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Advanced parsing of EML}
+-->
 
 
 
@@ -31,7 +33,6 @@ library(EML)
 ```
 
 
-
 The EML package represents nodes defined in the EML schema as R objects using R's S4 object mechanism. We can create a new object corresponding to any node defined in the EML Schema using the `new()` function; such as:
 
 
@@ -52,30 +53,19 @@ Slot "surName":
 character(0)
 ```
 
-
 Showing our object in the console reveals that it has three slots, `salutation`, `givenName`, and `surName`, each currently with the value of a length zero character string.  We can assign values to the slots using the S4 subsetting operator `@` (most R users may be more familiar with subsetting S3 objects or lists by using the `$` operator)
 
 
 ```r
-node@givenName <- John
+node@givenName <- "John"
 ```
-
-```
-Error: object 'John' not found
-```
-
 
 Alternatively, we can use the `slot` function: 
 
 
 ```r
-slot(node, "givenName") <- John
+slot(node, "givenName") <- "John"
 ```
-
-```
-Error: object 'John' not found
-```
-
 
 Each of these operations can also be used (without the assignment operator `<-`) to access the value of the slot, e.g. 
 
@@ -85,9 +75,8 @@ node@givenName
 ```
 
 ```
-character(0)
+[1] "John"
 ```
-
 
 
 

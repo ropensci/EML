@@ -24,7 +24,7 @@ S4Toeml <- function(obj,
     ## Allow XML node name to be defined using a special slot (instead of class name)
     if(is.null(node)){
       if("xmlNodeName" %in% who)
-        node <- new(slot(obj, "xmlNodeName"))
+        node <- newXMLNode(slot(obj, "xmlNodeName"))
       else
         node <- newXMLNode(class(obj)[1])
     }

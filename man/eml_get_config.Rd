@@ -3,7 +3,7 @@
 \alias{eml_get_config}
 \title{eml get config}
 \usage{
-eml_get_config(x = ls(envir = EML:::EMLConfig))
+eml_get_config(x = ls(envir = EMLConfig))
 }
 \arguments{
 \item{x}{name of the configuration option desired (gives all by default)}
