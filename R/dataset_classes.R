@@ -1,8 +1,8 @@
 #' @include reml_environment.R
 #' @include eml_config.R 
-#' @include resource.R
-#' @include dataTable.R
-#' @include methods.R
+#' @include resource_classes.R
+#' @include dataTable_classes.R
+#' @include methods_classes.R
 
 # #' @include spatialRaster.R
 # #' @include spatialVector.R

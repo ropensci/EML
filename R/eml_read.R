@@ -1,4 +1,4 @@
-#' @include eml.R
+#' @include eml_classes.R
 NULL
 
 

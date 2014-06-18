@@ -6,7 +6,7 @@
 #' @return the eml software element containing the metadata for given package
 #' @examples
 #'   software <- eml_r_package("EML")
-#' @include software.R
+#' @include software_classes.R
 #' @export 
 eml_r_package <- function(packagename){
   info <- packageDescription(packagename)

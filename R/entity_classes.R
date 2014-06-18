@@ -1,6 +1,6 @@
-#' @include methods.R
-#' @include coverage.R
-#' @include physical.R
+#' @include methods_classes.R
+#' @include coverage_classes.R
+#' @include physical_classes.R
 setClass("entityGroup", 
          slots = c(entityName = "character",
                    entityDescription = "character",

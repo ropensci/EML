@@ -3,7 +3,7 @@
 
 ## Subclasses of taxonomicCoverage, 
 ## with coercion methods to/from XML 
-#' @include party.R
+#' @include party_classes.R
 
 setClass("ListOfcitation") # Dummy declaration to avoid warning, replaced when collating literature.R module
 

@@ -1,4 +1,4 @@
-#' @include resource.R 
+#' @include resource_classes.R 
 
 setClass("proceduralStep", slots = c(procedure = "character")) # FIXME DUMMY  class, the real class is recursive.  
 

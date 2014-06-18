@@ -41,10 +41,10 @@
 #'       eml-project
 
 #' Inclusion of superclass
-#' @include baseAttributes.R
-#' @include resource.R
-#' @include coverage.R
-#' @include party.R
+#' @include baseAttributes_classes.R
+#' @include resource_classes.R
+#' @include coverage_classes.R
+#' @include party_classes.R
 
 # Set required classes 
 # =================================

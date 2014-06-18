@@ -1,6 +1,6 @@
-#' @include baseAttributes.R
-#' @include attribute.R
-#' @include entity.R
+#' @include baseAttributes_classes.R
+#' @include attribute_classes.R
+#' @include entity_classes.R
 
 
 setClass("dataTable_slots", 

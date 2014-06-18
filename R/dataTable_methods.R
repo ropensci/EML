@@ -14,7 +14,7 @@
 #' @param ... additional arguments (not yet implemented)
 #' @return a dataTable element
 #' @export
-#' @include dataTable.R
+#' @include dataTable_classes.R
 eml_dataTable <- function(dat, 
                           meta = NULL, 
                           title = "data table", 
@@ -24,7 +24,7 @@ eml_dataTable <- function(dat,
 
 ## FIXME title should be called entityName, or maybe just "name"
   
-  id <- EML_id()
+  id <- eml_id()
 
   dataTable <- new("dataTable",
                   id = id[["id"]],
@@ -51,7 +51,7 @@ eml_attributeList <- function(dat, meta = NULL){
 
 #  as(meta, "attributeList")
 
-  uid <- EML_id()
+  uid <- eml_id()
   new("attributeList",
       id = uid[["id"]], 
       attribute = new("ListOfattribute", 

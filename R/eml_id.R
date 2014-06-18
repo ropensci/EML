@@ -1,6 +1,6 @@
 
 #' @import uuid 
-EML_id <- function(prefix="EML_", uuid = TRUE) {
+eml_id <- function(prefix="EML_", uuid = TRUE) {
     if(uuid){
       id <- uuid::UUIDgenerate()
       scope <- "system"

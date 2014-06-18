@@ -37,7 +37,7 @@ eml_knb <- function(file,
 
   x <- eml_read(file)
   eml_format <- version(x)  # method works on `file` too
-  eml_id <- id(x)           # method works on `file` too
+  package_id <- id(x)           # method works on `file` too
 
   # Get the path and identifier of the csv file from the EML 
   csv <- c(path = unname(x@dataset@dataTable[[1]]@physical@objectName),
@@ -51,7 +51,7 @@ eml_knb <- function(file,
 
 #  eml_object <- new(Class="D1Object", id2, file, "eml://ecoinformatics.org/eml-2.1.1", mn_nodeid)
   meta <- paste(readLines(file), collapse = '')     # Do we need to parse the object first? 
-  eml_object <- new("D1Object", eml_id, meta, eml_format, mn_nodeid)  
+  eml_object <- new("D1Object", package_id, meta, eml_format, mn_nodeid)  
 
 
 
@@ -73,11 +73,11 @@ eml_knb <- function(file,
   }
 
   # Assemble our data package containing both metadata and data
-  pkg.id <- paste0(eml_id, "_package")
+  pkg.id <- paste0(package_id, "_package")
   data.package <- new("DataPackage", packageId=pkg.id)
   addData(data.package, csv_object)
   addData(data.package, eml_object)
-  insertRelationship(data.package, eml_id, csv["id"])
+  insertRelationship(data.package, package_id, csv["id"])
 
   # Now upload the whole package to the member node
   createDataPackage(cli, data.package)

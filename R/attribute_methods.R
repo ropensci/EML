@@ -2,7 +2,7 @@
 ########################### Extraction methods ###################################
 ## methods extract standard R formats (e.g. the metadata list format) 
 
-#' @include attribute.R
+#' @include attribute_classes.R
 
 setGeneric("extract", function(from, using) standardGeneric("extract"))
 

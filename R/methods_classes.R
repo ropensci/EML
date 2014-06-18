@@ -1,7 +1,7 @@
 ### Methods ###  
 
-#' @include literature.R
-#' @include coverage.R
+#' @include literature_classes.R
+#' @include coverage_classes.R
 
 
 # FIXME Classes inheriting coverage really need a ListOfcoverage

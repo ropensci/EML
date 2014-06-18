@@ -1,4 +1,4 @@
-#' @include physical.R
+#' @include physical_classes.R
 
 ########### extract methods for physical
 
@@ -64,7 +64,7 @@ setAs("data.frame", "physical", function(from)
 ## FIXME filename should follow https://github.com/ropensci/EML/issues/106
 eml_physical <- function(dat, filename=character(0), ...){
   if(length(filename) == 0 | is.null(filename)){
-    longID <- gsub('.*:(.*)', '\\1', EML_id()[["id"]])
+    longID <- gsub('.*:(.*)', '\\1', eml_id()[["id"]])
     shortID <- gsub("(.{6}).+", "\\1", longID)
     filename <- paste("table_", shortID, ".csv", sep = "")
   }

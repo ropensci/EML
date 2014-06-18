@@ -129,7 +129,7 @@ eml_figshare <- function(file, title = NULL, description = NULL,
 
 
   details <- fs_details(id, mine=TRUE)
-  eml_id <- details$files[[2]]$id
+  package_id <- details$files[[2]]$id
 
   if(visibility == "private")
     fs_make_private(id)

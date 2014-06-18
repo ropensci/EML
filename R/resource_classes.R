@@ -1,6 +1,6 @@
-#' @include physical.R
-#' @include party.R
-#' @include coverage.R
+#' @include physical_classes.R
+#' @include party_classes.R
+#' @include coverage_classes.R
 
 
 

@@ -1,8 +1,8 @@
-#' @include baseAttributes.R
-#' @include party.R 
-#' @include resource.R 
-#' @include coverage.R
-#' @include physical.R
+#' @include baseAttributes_classes.R
+#' @include party_classes.R 
+#' @include resource_classes.R 
+#' @include coverage_classes.R
+#' @include physical_classes.R
 
 # FIXME teach the emlToS4 / S4Toeml functions that this class should match 
 # a node named "language", which can't be used as the class name since that class 

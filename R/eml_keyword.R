@@ -1,4 +1,3 @@
-
 #' constructor function to generate keywords
 #' 
 #' constructor function to generate keywords
@@ -38,7 +37,3 @@ eml_keyword <- function(x){
 }
 
 
-#
-#setAs("list", "keywordSet", function(from){
-#
-#})
