@@ -42,6 +42,12 @@ of custom_unit definitions here.  See \code{\link{create_custom_unit}} for detai
 
 \item{additionalMetadata}{an additionalMetadata object}
 
+\item{meta}{a list of meta information organized by column. \\
+Elements of the list are another list, in which: \\
+- the first object is the column name, \\
+- then the column description, \\
+- then the unit definition \\}
+
 \item{col.defs}{Natural language definitions of each column. Should be a character
 vector of length equal to each column, defined in the same order as the columns are given.}
 

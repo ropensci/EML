@@ -11,6 +11,10 @@
 #' @param description a description of the dataTable
 #' @param filename the filename of the csv file created
 #' @param ... additional arguments (not yet implemented)
+#' @param col.defs Natural language definitions of each column. Should be a character
+#' vector of length equal to each column, defined in the same order as the columns are given.   
+#' @param unit.defs A list of length equal to the number of columns defining the units for each
+#' column. See examples.  
 #' @return a dataTable element
 #' @export
 #' @include dataTable_classes.R

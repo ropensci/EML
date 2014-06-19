@@ -17,6 +17,11 @@
 #' of custom_unit definitions here.  See \code{\link{create_custom_unit}} for details.  
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
+#' @param meta a list of meta information organized by column. \\ 
+#'  Elements of the list are another list, in which: \\
+#'  - the first object is the column name, \\
+#'  - then the column description, \\
+#'  - then the unit definition \\
 #' @param col.defs Natural language definitions of each column. Should be a character
 #' vector of length equal to each column, defined in the same order as the columns are given.   
 #' @param unit.defs A list of length equal to the number of columns defining the units for each

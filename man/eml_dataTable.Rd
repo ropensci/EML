@@ -23,6 +23,12 @@ Elements of the list are another list, in which:
 \item{filename}{the filename of the csv file created}
 
 \item{...}{additional arguments (not yet implemented)}
+
+\item{col.defs}{Natural language definitions of each column. Should be a character
+vector of length equal to each column, defined in the same order as the columns are given.}
+
+\item{unit.defs}{A list of length equal to the number of columns defining the units for each
+column. See examples.}
 }
 \value{
 a dataTable element
