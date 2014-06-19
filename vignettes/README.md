@@ -73,29 +73,50 @@ Writing R data into EML
 -----------------------
 
 
-`EML` now extends R's `data.frame` class by introducing the `data.set`
-class which includes additional metadata required by EML.  A `data.set`
-can be created much like a `data.frame` by specifying additional arguments
-
+Consider a standard data frame:
 
 
 ```r
-dat = data.set(river = c("SAC",  "SAC",   "AM"),
-               spp   = c("king",  "king", "ccho"),
-               stg   = c("smolt", "parr", "smolt"),
-               ct    = c(293L,    410L,    210L),
-               col.defs = c("River site used for collection",
-                            "Species common name",
-                            "Life Stage",
-                            "count of live fish in traps"),
-               unit.defs = list(c(SAC = "The Sacramento River",
-                                  AM = "The American River"),
-                                c(king = "King Salmon",
-                                  ccho = "Coho Salmon"),
-                                c(parr = "third life stage",
-                                  smolt = "fourth life stage"),
-                                "number"))
+dat = data.frame(river = c("SAC",  "SAC",   "AM"),
+                 spp   = c("king",  "king", "ccho"),
+                 stg   = c("smolt", "parr", "smolt"),
+                 ct    = c(293L,    410L,    210L))
 ```
+
+
+------------------------
+ river   spp   stg   ct 
+------- ----- ----- ----
+  SAC   king  smolt 293 
+
+  SAC   king  parr  410 
+
+  AM    ccho  smolt 210 
+------------------------
+
+Like many real data sets, the column headings are convenient for data entry and manipulation, but not particularly descriptive to a user not already familiar with this data. More important still, they don't
+let us know what units they are measured in (or in the case of categorical / factor data like species names or life stages, what the factor abbreviations refer to).  So let us take a moment to be more explicit:  
+
+
+```r
+col.defs = c("River site used for collection",
+             "Species common name",
+             "Life Stage",
+             "count of live fish in traps")
+
+unit.defs = list(c(SAC = "The Sacramento River",
+                   AM = "The American River"),
+                 c(king = "King Salmon",
+                   ccho = "Coho Salmon"),
+                 c(parr = "third life stage",
+                   smolt = "fourth life stage"),
+                 "number")
+```
+
+We are careful to enter these in the order of the columns given. <!-- Otherwise, we should name the elements using the corresponding column header names.  -->
+
+
+A few notes about how these are constructed:
 
 - `col.defs`: These are usually just plain text definitions, though a
   URI to a semantic definition can be particularly powerful. See "Advanced
@@ -110,8 +131,6 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
   strings, a definition of the kind of string can be given, (e.g. species
   scientific name), otherwise the column description will be used.
 
-Alternatively, annotations can be added to an existing data frame,
-`data.set(my.data.frame, col.defs = ..., unit.defs = ...)`.
 
 
 We will also specify a default creator who will also be used as the
@@ -134,15 +153,14 @@ generate a minimally valid EML file documenting this dataset.
 
 
 ```r
-eml_write(dat, file = "EML_example.xml")
+eml_write(dat, col.defs = col.defs, unit.defs = unit.defs, file = "EML_example.xml")
 ```
 
 ```
 [1] "EML_example.xml"
 ```
 
-*for convenience, had we ommitted any essential metadata, such as
-providing only an unannotated `data.frame` in place of a `data.set`,
+*for convenience, had we omitted `col.defs` and `unit.defs`, 
 `EML` will launch its metadata wizard to assist in constructing the
 metadata based on the data.frame provided*.  While this may be helpful
 starting out, regular users will find it faster to define the columns
@@ -206,7 +224,7 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 1047282
+[1] 1061920
 ```
 
 This creates a draft file visible only to the user configured in
@@ -249,7 +267,7 @@ complete list.
 
 
 ```r
-dat <- eml_get(obj, "data.set")
+dat <- eml_get(obj, "data.frame")
 ```
 
 
@@ -267,7 +285,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-06-05). _metadata_.
+Boettiger C (2014-06-18). _metadata_.
 ```
 
 

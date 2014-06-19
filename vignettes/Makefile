@@ -7,11 +7,10 @@ all:
 	make ../README.md
 
 README.md: README.Rmd 
-	$(R_HOME)/bin/Rscript -e 'require(knitr); knit("README.Rmd")'
+	Rscript -e 'require(knitr); knit("README.Rmd")'
 
 ../README.md: README.md
 	cp README.md ../../../README.md
-	sed -i 's/```r/```coffee/' ../../../README.md
 
 
 # ${PARSING}.pdf: ${PARSING}.Rmd
