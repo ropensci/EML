@@ -98,7 +98,7 @@ dat = data.frame(river = c("SAC",  "SAC",   "AM"),
 ```
 
 ```{r echo=FALSE, results="asis"}
-pander::pandoc.table(dat)
+pander::pandoc.table(dat, style='rmarkdown')
 ```
 
 Like many real data sets, the column headings are convenient for data entry and manipulation, but not particularly descriptive to a user not already familiar with this data. More important still, they don't

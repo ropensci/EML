@@ -84,15 +84,11 @@ dat = data.frame(river = c("SAC",  "SAC",   "AM"),
 ```
 
 
-------------------------
- river   spp   stg   ct 
-------- ----- ----- ----
-  SAC   king  smolt 293 
-
-  SAC   king  parr  410 
-
-  AM    ccho  smolt 210 
-------------------------
+|  river  |  spp  |  stg  |  ct  |
+|:-------:|:-----:|:-----:|:----:|
+|   SAC   | king  | smolt | 293  |
+|   SAC   | king  | parr  | 410  |
+|   AM    | ccho  | smolt | 210  |
 
 Like many real data sets, the column headings are convenient for data entry and manipulation, but not particularly descriptive to a user not already familiar with this data. More important still, they don't
 let us know what units they are measured in (or in the case of categorical / factor data like species names or life stages, what the factor abbreviations refer to).  So let us take a moment to be more explicit:  
