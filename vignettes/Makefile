@@ -10,7 +10,7 @@ README.md: README.Rmd
 	Rscript -e 'require(knitr); knit("README.Rmd")'
 
 ../README.md: README.md
-	cp README.md ../../../README.md
+	cp README.md ../README.md
 
 
 # ${PARSING}.pdf: ${PARSING}.Rmd

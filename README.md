@@ -36,7 +36,6 @@ as the source._
 
 
 
-
 Installation
 ============
 
@@ -44,17 +43,16 @@ Install the R package:
 
 
 
-```coffee
+```r
 library("devtools")
 install_github("EML", "ropensci")
 ```
-
 
 While the dependencies for basic functionality are kept to a minimum,
 to access all the functions and tests implemented in `EML` you'll need
 several additional packages from CRAN.
 
-```coffee
+```r
 install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone", "rrdf"))
 ```
 
@@ -62,10 +60,9 @@ install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone", "rrdf")
 Load the package:
 
 
-```coffee
+```r
 library("EML")
 ```
-
 
 
 Usage
@@ -76,31 +73,50 @@ Writing R data into EML
 -----------------------
 
 
-`EML` now extends R's `data.frame` class by introducing the `data.set`
-class which includes additional metadata required by EML.  A `data.set`
-can be created much like a `data.frame` by specifying additional arguments
+Consider a standard data frame:
 
 
-
-```coffee
-dat = data.set(river = c("SAC",  "SAC",   "AM"),
-               spp   = c("king",  "king", "ccho"),
-               stg   = c("smolt", "parr", "smolt"),
-               ct    = c(293L,    410L,    210L),
-               col.defs = c("River site used for collection",
-                            "Species common name",
-                            "Life Stage",
-                            "count of live fish in traps"),
-               unit.defs = list(c(SAC = "The Sacramento River",
-                                  AM = "The American River"),
-                                c(king = "King Salmon",
-                                  ccho = "Coho Salmon"),
-                                c(parr = "third life stage",
-                                  smolt = "fourth life stage"),
-                                "number"))
-
+```r
+dat = data.frame(river = c("SAC",  "SAC",   "AM"),
+                 spp   = c("king",  "king", "ccho"),
+                 stg   = c("smolt", "parr", "smolt"),
+                 ct    = c(293L,    410L,    210L))
 ```
 
+
+------------------------
+ river   spp   stg   ct 
+------- ----- ----- ----
+  SAC   king  smolt 293 
+
+  SAC   king  parr  410 
+
+  AM    ccho  smolt 210 
+------------------------
+
+Like many real data sets, the column headings are convenient for data entry and manipulation, but not particularly descriptive to a user not already familiar with this data. More important still, they don't
+let us know what units they are measured in (or in the case of categorical / factor data like species names or life stages, what the factor abbreviations refer to).  So let us take a moment to be more explicit:  
+
+
+```r
+col.defs = c("River site used for collection",
+             "Species common name",
+             "Life Stage",
+             "count of live fish in traps")
+
+unit.defs = list(c(SAC = "The Sacramento River",
+                   AM = "The American River"),
+                 c(king = "King Salmon",
+                   ccho = "Coho Salmon"),
+                 c(parr = "third life stage",
+                   smolt = "fourth life stage"),
+                 "number")
+```
+
+We are careful to enter these in the order of the columns given. <!-- Otherwise, we should name the elements using the corresponding column header names.  -->
+
+
+A few notes about how these are constructed:
 
 - `col.defs`: These are usually just plain text definitions, though a
   URI to a semantic definition can be particularly powerful. See "Advanced
@@ -110,23 +126,20 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
 
 - `unit.defs`:   For factors, this is a definition of
   the levels involved.  For numeric data, specify the units from [this
-  list](http://knb.ecoinformatics.org/software/eml/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary).
+  list](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary).
   For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character
   strings, a definition of the kind of string can be given, (e.g. species
   scientific name), otherwise the column description will be used.
 
-Alternatively, annotations can be added to an existing data frame,
-`data.set(my.data.frame, col.defs = ..., unit.defs = ...)`.
 
 
 We will also specify a default creator who will also be used as the
 contact person for EML files created in this session.
 
 
-```coffee
+```r
 eml_config(creator="Carl Boettiger <cboettig@gmail.com>")
 ```
-
 
 While we will always be able to provide alternative or additional creators
 or contact person later, `eml_config` can store the defaults to save
@@ -139,17 +152,15 @@ generate a minimally valid EML file documenting this dataset.
 
 
 
-```coffee
-eml_write(dat, file = "EML_example.xml")
+```r
+eml_write(dat, col.defs = col.defs, unit.defs = unit.defs, file = "EML_example.xml")
 ```
 
 ```
 [1] "EML_example.xml"
 ```
 
-
-*for convenience, had we ommitted any essential metadata, such as
-providing only an unannotated `data.frame` in place of a `data.set`,
+*for convenience, had we omitted `col.defs` and `unit.defs`, 
 `EML` will launch its metadata wizard to assist in constructing the
 metadata based on the data.frame provided*.  While this may be helpful
 starting out, regular users will find it faster to define the columns
@@ -166,7 +177,7 @@ This ensures that other software can correctly parse and interpret the
 metadata document:
 
 
-```coffee
+```r
 eml_validate("EML_example.xml") 
 ```
 
@@ -174,7 +185,6 @@ eml_validate("EML_example.xml")
 EML specific tests XML specific tests 
               TRUE               TRUE 
 ```
-
 
 
 
@@ -205,7 +215,7 @@ required to use EML and run the examples in the other sections.  See the
 <!-- We don't want to generate a DOI every time we run the vignette -->
 
 
-```coffee
+```r
 eml_publish("EML_example.xml", 
             description="Example EML file from EML",
             categories = "Ecology", 
@@ -214,9 +224,8 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 1004892
+[1] 1061920
 ```
-
 
 This creates a draft file visible only to the user configured in
 `rfigshare`.  The document can be made (permanently) public using
@@ -245,10 +254,9 @@ automating the more tedious aspects of data discovery and integration.
 
 
 
-```coffee
+```r
 obj <- eml_read("EML_example.xml")
 ```
-
 
 We can also read in a remote file by providing a URL or KNB object identifier (such as a DOI).
 
@@ -258,13 +266,12 @@ component elements of the metadata file.  See the documentation for a
 complete list.
 
 
-```coffee
-dat <- eml_get(obj, "data.set")
+```r
+dat <- eml_get(obj, "data.frame")
 ```
 
 
-
-```coffee
+```r
 eml_get(obj, "contact")
 ```
 
@@ -273,15 +280,13 @@ eml_get(obj, "contact")
 ```
 
 
-
-```coffee
+```r
 eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-04-18). _metadata_.
+Boettiger C (2014-06-18). _metadata_.
 ```
-
 
 
 
@@ -333,7 +338,7 @@ Testing and development
 The advanced vignettes include some cutting edge functionality that depends on additional packages are not yet on CRAN and may not be stable.  To take advantage of these functions when indicated in the tutorial, consider installing the following packages:
 
 <!-- Not working
-```coffee
+```r
 install_github("Sxslt", "omegahat")
 install_github("XMLSchema", "omegahat")
 install_github("RHTMLForms", "omegahat")
@@ -342,7 +347,7 @@ install_github("RHTMLForms", "omegahat")
 
 
 
-```coffee
+```r
 library("devtools")
 install_github("RWordXML", "duncantl") 
 install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")
