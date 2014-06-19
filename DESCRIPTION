@@ -75,6 +75,7 @@ Collate:
     'eml_knb.R'
     'eml_methods.R'
     'eml_person.R'
+    'eml_physical.R'
     'eml_publish.R'
     'eml_read.R'
     'eml_software.R'

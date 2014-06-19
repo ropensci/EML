@@ -22,13 +22,13 @@ eml_get <- function(eml,
                           "contact",
                           "creator",
                           "attributeList",
-                          "data.set")){
+                          "data.frame")){
   if(!is(eml, "eml"))
     stop("object 'eml' must be of class 'eml'")
 
   x <- match.arg(x)
   switch(x, 
-         "data.set" = get_data.set(eml),
+         "data.frame" = get_data.frame(eml),
          "id" = id(eml),
          "version" = version(eml),
          "csv_filepaths" = csv_filepaths(eml),

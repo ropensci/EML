@@ -162,8 +162,7 @@ generate a minimally valid EML file documenting this dataset.
 eml_write(dat, col.defs = col.defs, unit.defs = unit.defs, file = "EML_example.xml")
 ```
 
-*for convenience, had we ommitted any essential metadata, such as
-providing only an unannotated `data.frame` in place of a `data.set`,
+*for convenience, had we omitted `col.defs` and `unit.defs`, 
 `EML` will launch its metadata wizard to assist in constructing the
 metadata based on the data.frame provided*.  While this may be helpful
 starting out, regular users will find it faster to define the columns
@@ -257,7 +256,7 @@ component elements of the metadata file.  See the documentation for a
 complete list.
 
 ```{r}
-dat <- eml_get(obj, "data.set")
+dat <- eml_get(obj, "data.frame")
 ```
 
 ```{r}

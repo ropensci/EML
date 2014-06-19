@@ -73,7 +73,7 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 
 ```{r}
 f <- eml_read("knb-lter-hfr.205.4")
-dat <- eml_get(f, "data.set")
+dat <- eml_get(f, "data.frame")
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  
@@ -116,12 +116,6 @@ unit.defs = list("which run number",
 ```
 
 
-We attach this essential metadata directly to the `data.frame` to make a `data.set` object (a data.frame with basic metadata).  
-
-
-```{r}
-dat <- data.set(dat, col.defs = col.defs, unit.defs = unit.defs)
-```
 
 Rather than write this out directly to an EML file with `eml_write` like we did in the basic example, we'll first assemble more metadata information.  
 
@@ -129,7 +123,9 @@ As a _metadata_ format, we do not encode the actual data file itself into the EM
 
 
 ```{r}
-dataTable <- EML:::eml_dataTable(dat, 
+dataTable <- EML::eml_dataTable(dat,
+                           col.defs = col.defs,
+                           unit.defs = unit.defs,
                            description = "Metadata documentation for S1.csv", 
                            file = "S1.csv")
 ```

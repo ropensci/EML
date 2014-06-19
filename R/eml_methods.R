@@ -82,6 +82,13 @@ setMethod("attributeList", signature("eml"), function(object){
 })
 
 
+# FIXME consider downloading to csv_filepath instead of loading immediately into R
+setGeneric("get_data.frame", function(object) standardGeneric("get_data.frame"))
+setMethod("get_data.frame", signature("eml"), function(object){
+          df = extract(object@dataset@dataTable[[1]]@physical)    
+})
+
+
 
 setGeneric("get_data.set", function(object) standardGeneric("get_data.set"))
 setMethod("get_data.set", signature("eml"), function(object){

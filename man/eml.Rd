@@ -3,10 +3,10 @@
 \alias{eml}
 \title{eml constructor function}
 \usage{
-eml(dat = NULL, title = "EML_metadata", creator = NULL, contact = NULL,
-  coverage = eml_coverage(scientific_names = NULL, dates = NULL,
-  geographic_description = NULL, NSEWbox = NULL), meta = NULL,
-  col.defs = NULL, unit.defs = NULL, methods = new("methods"),
+eml(dat = NULL, meta = NULL, title = "EML_metadata", creator = NULL,
+  contact = NULL, coverage = eml_coverage(scientific_names = NULL, dates =
+  NULL, geographic_description = NULL, NSEWbox = NULL),
+  methods = new("methods"), col.defs = NULL, unit.defs = NULL,
   custom_units = NULL, ...,
   additionalMetadata = new("ListOfadditionalMetadata"), citation = NULL,
   software = NULL, protocol = NULL)

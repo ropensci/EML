@@ -1,4 +1,3 @@
-library(EML)
 dat <- data.frame(river = factor(c("SAC",  
                                    "SAC",   
                                    "AM")),
