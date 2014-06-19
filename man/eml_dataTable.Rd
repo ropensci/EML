@@ -4,7 +4,8 @@
 \title{constructor helper function for data table}
 \usage{
 eml_dataTable(dat, meta = NULL, title = "data table",
-  description = character(0), filename = character(0), ...)
+  description = character(0), filename = character(0), col.defs = NULL,
+  unit.defs = NULL, ...)
 }
 \arguments{
 \item{dat}{a data.set object, data.frame object}

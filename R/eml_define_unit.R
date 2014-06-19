@@ -1,81 +1,4 @@
-
-
-eml_attribute <- function(from, ...){
-        new("attribute", 
-            attributeName = from[[1]],
-            attributeDefinition = from[[2]],
-            measurementScale = eml_measurementScale(from[[3]], from[[4]], ...))
-}
-
-
-eml_measurementScale <- function(unit.def, col.class, attrListID = NULL){
-
-  ## FIXME HACK.  Consider more explicit R-based col.class, 
-  if(col.class == "nominal" && length(unit.def) == 1)
-    new("measurementScale", 
-        nominal = new("nominal", 
-                      nonNumericDomain = new("nonNumericDomain",
-                                             textDomain = new("textDomain", 
-                                                              definition = unit.def))))
-  else 
-  switch(col.class,
-         nominal = new("measurementScale", 
-                       nominal = new("nominal", 
-                                     nonNumericDomain = eml_nonNumericDomain(unit.def))), 
-         ordinal = new("measurementScale", 
-                       ordinal = new("ordinal", 
-                                     nonNumericDomain = eml_nonNumericDomain(unit.def))), 
-         ratio = new("measurementScale", 
-                     ratio = new("ratio",
-                                 numericDomain = new("numericDomain", 
-                                                     numberType = "real"), #FIXME get numberType properly
-                                 unit = eml_unit(unit.def[[1]]))), 
-         # FIXME has precision and numericDomain@numberType, numericDomain@boundsGroup
-         dateTime = new("measurementScale", 
-                        dateTime = eml_dateTime(unit.def[[1]]) ), 
-         interval = new("measurementScale", 
-                        interval = new("interval",
-                                       numericDomain = new("numericDomain", 
-                                                           numberType = "real"), 
-                                       unit = eml_unit(unit.def[[1]])))
-         )
-}
-
-eml_dateTime <- function(formatstring){ # FIXME perform validation. Accept R notation (%Y -> YYYY)
-  new("dateTime", formatString = formatstring)
-}
-eml_nonNumericDomain <- function(from){
-new("nonNumericDomain", 
-    enumeratedDomain = 
-      new("enumeratedDomain", 
-          codeDefinition = 
-            new("ListOfcodeDefinition", 
-                lapply(names(from), 
-                       function(name) new("codeDefinition", 
-                                          code = name, 
-                                          definition = as.character(from[name]))))))
-}
-
-eml_unit <- function(unit){
-  if(is_standard_unit(unit)){ 
-    out <- new("unit", 
-               standardUnit = unit) 
-  } else {
-    out <- new("unit", customUnit = unit)
-    if(!in_custom_library(unit))
-      create_custom_unit(unit)
-  }
-  out
-}
-
-
-in_custom_library <- function(unit){
-  custom_units <- mget("custom_units", envir = EMLConfig, ifnotfound=list(list()))$custom_units
-  unit %in% sapply(custom_units, `[[`, "id")
-}
-
-
-#' create a custom unit
+#' Define a custom unit
 #' 
 #' create a custom unit
 #' @param id The id of the unit, given in camelCase with `Per` signifying division, Squared for second power, etc.  
@@ -90,7 +13,8 @@ in_custom_library <- function(unit){
 #' @return The unit definition (invisibly), as a list object.  A list of these returned objects
 #' can be passed to the \code{\link{eml}} function directly to define additional units, bypassing
 #' the config mechanism used by default.  
-#' @export
+#' @aliases eml_define_unit create_custom_unit
+#' @export eml_define_unit create_custom_unit
 #' @examples
 #'  create_custom_unit(id = "metersSquaredPerHectare",
 #'                     parentSI = "dimensionless",
@@ -98,7 +22,7 @@ in_custom_library <- function(unit){
 #'                     multiplierToSI = "0.0001",
 #'                     description = "Square meters per hectare")
 #' 
-create_custom_unit <- function(id,
+eml_define_unit <- function(id,
                                unitType = NULL,
                                parentSI = NULL, 
                                multiplierToSI = NULL, 
@@ -141,14 +65,13 @@ create_custom_unit <- function(id,
   }
 }
 
+create_custom_unit <- eml_define_unit
+
+
 camelCase_to_human <- function(x){
   x <- gsub('([a-z]+)([A-Z][a-z]+)', '\\1 \\2', x)
   x <- gsub('([a-z]+)([A-Z][a-z]+)', '\\1 \\2', x)
 }
-
-
-
-
 
 serialize_custom_units <- function(custom_units, id){
   unitList <- newXMLNode("unitList", .children =
@@ -167,10 +90,6 @@ serialize_custom_units <- function(custom_units, id){
 
 }
           
-
-
-
-
 
 # https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/eml-unitTypeDefinitions.html#StandardUnitDictionary
 # FIXME perform fuzzy matching

@@ -1,5 +1,5 @@
 #' eml constructor function 
-#' @param dat a data.set object  
+#' @param dat a data.frame object  
 #' @param title for the metadata.  Also used as the csv filename.   
 #' @param creator a ListOfcreator object, character string, or person object.  
 #'  Otherwise loaded from value set by eml_config.  
@@ -17,18 +17,17 @@
 #' of custom_unit definitions here.  See \code{\link{create_custom_unit}} for details.  
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
-#' @details
-#' 
-#' - Permits character string definitions of creator & contact
-#' - generates a unique PackageId
-#' - Avoids more verbose separate call to dataset constructor and eml_dataTable
-#' 
+#' @param col.defs Natural language definitions of each column. Should be a character
+#' vector of length equal to each column, defined in the same order as the columns are given.   
+#' @param unit.defs A list of length equal to the number of columns defining the units for each
+#' column. See examples.  
 #' @import methods
 #' @include party_classes.R
 #' @include eml_classes.R
 #' @export 
 eml <- function(dat = NULL,
-                title = "metadata",
+                meta = NULL, 
+                title = "EML_metadata",
                 creator = NULL, 
                 contact = NULL, 
                 coverage = eml_coverage(scientific_names = NULL,
@@ -36,8 +35,11 @@ eml <- function(dat = NULL,
                                         geographic_description = NULL,
                                         NSEWbox = NULL),
                 methods = new("methods"),
+                col.defs = NULL,
+                unit.defs = NULL,
+
                 custom_units =  NULL,
-                ...,
+                ..., # reserved for the dataset level? 
                 additionalMetadata = new("ListOfadditionalMetadata"),
                 citation = NULL,
                 software = NULL,
@@ -47,31 +49,14 @@ eml <- function(dat = NULL,
   ## obtain uuids 
   uid <- eml_id()
 
-  if(is.null(creator))
-    creator <- get("defaultCreator", envir=EMLConfig)
-  if(is.null(contact))
-    contact <- get("defaultContact", envir=EMLConfig)
-
+  ## Handle custom units
   if(is.null(custom_units))
     custom_units <- mget("custom_units", 
                          envir = EMLConfig,  
                          ifnotfound=list(list()))$custom_units
 
-  ## Coerce character string persons into EML representations
-  if(!is.null(dat)) # this is written only into dataset nodes 
-    who <- contact_creator(contact = contact, 
-                           creator = creator)
 
-
-  if(is(methods, "character")){
-    methods <- new("methods", 
-                   methodStep = c(new("methodStep", 
-                                      description = methods)))
-  }
-
-
-  ref_id <- list(id = "42") 
-
+  ref_id <- eml_id() # list(id="42") ## Links custom units to attribute defs 
   if(length(custom_units) > 0){
     xml_unitList <- serialize_custom_units(custom_units, id = ref_id[["id"]])
     if(!isEmpty(additionalMetadata@.Data))
@@ -80,11 +65,9 @@ eml <- function(dat = NULL,
     else
       additionalMetadata <- new("ListOfadditionalMetadata", 
                                 c(xml_unitList))
-
   }
 
-
-
+  ## Initialize
   eml <- new("eml",
              packageId = uid[["id"]], 
              system = uid[["system"]],
@@ -92,35 +75,18 @@ eml <- function(dat = NULL,
              additionalMetadata = additionalMetadata)
 
 
-  if(!isEmpty(dat)){
-    if(is(dat, "dataset")){ # pre-built dataset object
-      eml@dataset <- dat 
-    } else if(is(dat, "data.frame")){  # data.set class, (also data.frame with wizard)
-      eml@dataset = new("dataset",
-                        id = ref_id[["id"]],
-                        title = title, # required 
-                        creator = who$creator,
-                        contact = who$contact,
-                        coverage = coverage,
-                        methods = methods, 
-                        dataTable = c(eml_dataTable(dat = dat, 
-                                                    title = title)),
-                        ...)
-    } else if(is(dat, "dataTable")){
-      eml@dataset = new("dataset",
-                        id = ref_id[["id"]],
-                        title = title, # required 
-                        creator = who$creator,
-                        contact = who$contact,
-                        coverage = coverage,
-                        methods = methods, 
-                        dataTable = c(dat),
-                        ...)
-    }
- }
 
-  if(!isEmpty(citation)){
-    if(isS4(citation))
+  if(!isEmpty(dat)){
+    eml@dataset <- 
+      eml_dataset(dat = dat, meta = meta, title = title,
+                  creator = creator, contact = contact,
+                  coverage = coverage, methods = methods,
+                  col.defs = col.defs,
+                  unit.defs = unit.defs, ref_id = ref_id, ...)
+
+  } else if(!isEmpty(citation)){
+  ## EML file that just documents a CITATION only
+      if(isS4(citation))
       eml@citation <- citation
     else if(is(citation, "BibEntry")){ # handle RefManageR citations
       class(citation) <- "bibentry"
@@ -129,13 +95,15 @@ eml <- function(dat = NULL,
       eml@citation <- bibentryToCitation(citation)
     else
       warning("Citation format not recognized")
-  }
-  if(!isEmpty(software))
+
+
+  } else if(!isEmpty(software)){
     eml@software <- software
-  if(!isEmpty(protocol))
+
+  } else if(!isEmpty(protocol)){
     eml@protocol <- protocol
- 
- 
+  }
+
   eml 
 }
 

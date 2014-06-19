@@ -3,15 +3,16 @@
 \alias{eml}
 \title{eml constructor function}
 \usage{
-eml(dat = NULL, title = "metadata", creator = NULL, contact = NULL,
+eml(dat = NULL, title = "EML_metadata", creator = NULL, contact = NULL,
   coverage = eml_coverage(scientific_names = NULL, dates = NULL,
-  geographic_description = NULL, NSEWbox = NULL), methods = new("methods"),
+  geographic_description = NULL, NSEWbox = NULL), meta = NULL,
+  col.defs = NULL, unit.defs = NULL, methods = new("methods"),
   custom_units = NULL, ...,
   additionalMetadata = new("ListOfadditionalMetadata"), citation = NULL,
   software = NULL, protocol = NULL)
 }
 \arguments{
-\item{dat}{a data.set object}
+\item{dat}{a data.frame object}
 
 \item{title}{for the metadata.  Also used as the csv filename.}
 
@@ -40,13 +41,14 @@ of custom_unit definitions here.  See \code{\link{create_custom_unit}} for detai
 \item{...}{additional slots passed to the dataset constructor `new("dataset", ...)`}
 
 \item{additionalMetadata}{an additionalMetadata object}
+
+\item{col.defs}{Natural language definitions of each column. Should be a character
+vector of length equal to each column, defined in the same order as the columns are given.}
+
+\item{unit.defs}{A list of length equal to the number of columns defining the units for each
+column. See examples.}
 }
 \description{
 eml constructor function
-}
-\details{
-- Permits character string definitions of creator & contact
-- generates a unique PackageId
-- Avoids more verbose separate call to dataset constructor and eml_dataTable
 }
 

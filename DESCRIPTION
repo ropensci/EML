@@ -19,6 +19,7 @@ VignetteBuilder: knitr
 Suggests:
     knitr (>= 1.5),
     rfigshare (>= 0.3),
+    pander,
     devtools,
     testthat,
     dataone,
@@ -60,11 +61,14 @@ Collate:
     'dataset_classes.R'
     'eml_classes.R'
     'data.set_classes.R'
-    'dataTable_methods.R'
     'documentation.R'
     'eml.R'
     'emlToS4.R'
+    'eml_attributeList.R'
     'eml_coverage.R'
+    'eml_dataTable.R'
+    'eml_dataset.R'
+    'eml_define_unit.R'
     'eml_figshare.R'
     'eml_get.R'
     'eml_keyword.R'
@@ -80,5 +84,4 @@ Collate:
     'person_wizard.R'
     'physical_methods.R'
     'software_methods.R'
-    'unit_methods.R'
     'xsl_coercions.R'
