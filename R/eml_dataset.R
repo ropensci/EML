@@ -35,7 +35,7 @@ eml_dataset <-
   if(is(dat, "dataset")){ # pre-built dataset object
     dataset <- dat 
 
-  } else if(is(dat, "data.frame")){  # data.set class, 
+  } else if(is(dat, "data.frame") || is(dat, "character")){  # data.set class, 
 
     dataset = new("dataset",
                   id = ref_id[["id"]],

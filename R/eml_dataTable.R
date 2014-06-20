@@ -28,6 +28,9 @@ function(dat,
          ...){
 
   id <- eml_id()
+  numberOfRecords <- integer(0)
+  if(is(dat, "data.frame"))
+    numberOfRecords <- dim(dat)[1]
 
   dataTable <- new("dataTable",
                   id = id[["id"]],
@@ -44,7 +47,7 @@ function(dat,
                                           filename = filename, 
                                           ...),
                   caseSensitive = 'yes',
-                  numberOfRecords = dim(dat)[1],
+                  numberOfRecords = numberOfRecords,
                   additionalInfo = additionalInfo)
 # Unused slots: alternateIdentifier, methods, coverage, 
 }
