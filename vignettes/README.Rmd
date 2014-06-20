@@ -9,7 +9,7 @@ layout: software
 %\VignetteIndexEntry{An Introduction to the EML package}
 -->
 
-[![Build Status](https://travis-ci.org/cboettig/labnotebook.svg?branch=master)](https://travis-ci.org/cboettig/labnotebook)
+[![Build Status](https://travis-ci.org/ropensci/EML.svg)](https://travis-ci.org/ropensci/EML)
 
 About
 =====
@@ -34,8 +34,8 @@ as the source._
 
 
 ```{r include=FALSE, cache=FALSE}
-library(knitr)
-library(devtools)
+library("knitr")
+library("devtools")
 opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE, cache=1,
                comment=NA, verbose=TRUE, fig.width=6, fig.height=4)
 opts_chunk$set(fig.path = paste("figure/",
@@ -45,7 +45,7 @@ opts_chunk$set(fig.path = paste("figure/",
                                   gsub(".Rmd", "", knitr:::knit_concord$get('infile') ),
                                 "/", sep=""))
 
-library(rfigshare)
+library("rfigshare")
 fs_auth(token = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q", token_secret = "4mdM3pfekNGO16X4hsvZdg")
 
 
@@ -61,19 +61,10 @@ Install the R package:
 
 ```{r, results="hide", message=FALSE, warning=FALSE, eval=FALSE}
 library("devtools")
-install_github("EML", "ropensci")
+install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
 ```
 
-While the dependencies for basic functionality are kept to a minimum,
-to access all the functions and tests implemented in `EML` you'll need
-several additional packages from CRAN.
-
-```r
-install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone", "rrdf"))
-```
-
-
-Load the package:
+The additional arguments avoid installing packages that are suggested for use in some advanced examples but not needed for the basic functionality. We can now load the package:
 
 ```{r, results="hide", message=FALSE, warning=FALSE}
 library("EML")

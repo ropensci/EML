@@ -1,5 +1,6 @@
 inst/depricated
 inst/xsd
+vignettes/cache
 vignettes/*.pdf
 manuscripts/components/cache
 manuscripts/components/figure

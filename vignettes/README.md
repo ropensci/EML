@@ -9,7 +9,7 @@ layout: software
 %\VignetteIndexEntry{An Introduction to the EML package}
 -->
 
-[![Build Status](https://travis-ci.org/cboettig/labnotebook.svg?branch=master)](https://travis-ci.org/cboettig/labnotebook)
+[![Build Status](https://travis-ci.org/ropensci/EML.svg)](https://travis-ci.org/ropensci/EML)
 
 About
 =====
@@ -45,19 +45,10 @@ Install the R package:
 
 ```r
 library("devtools")
-install_github("EML", "ropensci")
+install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
 ```
 
-While the dependencies for basic functionality are kept to a minimum,
-to access all the functions and tests implemented in `EML` you'll need
-several additional packages from CRAN.
-
-```r
-install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone", "rrdf"))
-```
-
-
-Load the package:
+The additional arguments avoid installing packages that are suggested for use in some advanced examples but not needed for the basic functionality. We can now load the package:
 
 
 ```r
@@ -98,11 +89,11 @@ dat <- data.frame(river = factor(c("SAC",
 ```
 
 
-|  river  |  spp  |  stg  |  ct  |
-|:-------:|:-----:|:-----:|:----:|
-|   SAC   | king  | smolt | 293  |
-|   SAC   | king  | parr  | 410  |
-|   AM    | ccho  | smolt | 210  |
+|  river  |           spp            |  stg  |  ct  |    day     |
+|:-------:|:------------------------:|:-----:|:----:|:----------:|
+|   SAC   | Oncorhynchus tshawytscha | smolt | 293  | 2013-09-01 |
+|   SAC   | Oncorhynchus tshawytscha | parr  | 410  | 2013-09-01 |
+|   AM    |   Oncorhynchus kisutch   | smolt | 210  | 2013-09-02 |
 
 
 Note that we have taken care to get the column classes right.
@@ -230,7 +221,7 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 1061920
+[1] 1064432
 ```
 
 This creates a draft file visible only to the user configured in
@@ -291,7 +282,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-06-18). _metadata_.
+Boettiger C (2014-06-20). _metadata_.
 ```
 
 

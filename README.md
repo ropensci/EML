@@ -9,7 +9,7 @@ layout: software
 %\VignetteIndexEntry{An Introduction to the EML package}
 -->
 
-[![Build Status](https://travis-ci.org/cboettig/labnotebook.svg?branch=master)](https://travis-ci.org/cboettig/labnotebook)
+[![Build Status](https://travis-ci.org/ropensci/EML.svg)](https://travis-ci.org/ropensci/EML)
 
 About
 =====
@@ -45,19 +45,10 @@ Install the R package:
 
 ```r
 library("devtools")
-install_github("EML", "ropensci")
+install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
 ```
 
-While the dependencies for basic functionality are kept to a minimum,
-to access all the functions and tests implemented in `EML` you'll need
-several additional packages from CRAN.
-
-```r
-install.packages(c("knitr", "rfigshare", "testthat", "RCurl", "dataone", "rrdf"))
-```
-
-
-Load the package:
+The additional arguments avoid installing packages that are suggested for use in some advanced examples but not needed for the basic functionality. We can now load the package:
 
 
 ```r
@@ -164,7 +155,7 @@ eml_write(dat,
 ```
 
 ```
-Error: argument is of length zero
+[1] "EML_example.xml"
 ```
 
 *for convenience, if had we omitted `col.defs` and `unit.defs`, 
@@ -230,7 +221,7 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 1061983
+[1] 1064432
 ```
 
 This creates a draft file visible only to the user configured in
@@ -291,7 +282,7 @@ eml_get(obj, "citation_info")
 ```
 
 ```
-Boettiger C (2014-06-18). _metadata_.
+Boettiger C (2014-06-20). _metadata_.
 ```
 
 
