@@ -61,7 +61,6 @@ Collate:
     'dataset_classes.R'
     'eml_classes.R'
     'data.set_classes.R'
-    'documentation.R'
     'eml.R'
     'emlToS4.R'
     'eml_attributeList.R'

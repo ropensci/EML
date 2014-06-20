@@ -44,7 +44,7 @@ S4obj <- eml(dat, col.defs = col.defs, unit.defs = unit.defs,
 
 
 test_that("we can extract the data unaltered (using method for object 'physical')", {
-  out_dat <- EML:::extract(S4obj@dataset@dataTable[[1]]@physical, using=EML:::col_classes(S4obj)) ## Using is ignored...
+  out_dat <- eml_get(S4obj, "data.frame") 
 
   expect_equal(dat[["river"]], out_dat[["river"]])
 
@@ -71,6 +71,7 @@ test_that("we can extract from alternative paths", {
 
   ## Here's the actual test
   met <- eml_read("tmp/hf205.xml")
+  ## FIXME capture.output does not supress messages about download...
   capture.output(dat <- eml_get(met, "data.frame")) # Includes call to extract that must download the CSV file from the address given in the EML
   expect_is(dat, "data.frame")
 

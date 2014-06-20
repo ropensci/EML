@@ -3,16 +3,16 @@
 \alias{eml}
 \title{eml constructor function}
 \usage{
-eml(dat = NULL, meta = NULL, title = "EML_metadata", creator = NULL,
-  contact = NULL, coverage = eml_coverage(scientific_names = NULL, dates =
-  NULL, geographic_description = NULL, NSEWbox = NULL),
-  methods = new("methods"), col.defs = NULL, unit.defs = NULL,
+eml(dat = NULL, title = "EML_metadata", creator = NULL, contact = NULL,
+  coverage = eml_coverage(scientific_names = NULL, dates = NULL,
+  geographic_description = NULL, NSEWbox = NULL), methods = new("methods"),
+  col.defs = NULL, unit.defs = NULL, col.classes = NULL,
   custom_units = NULL, ...,
   additionalMetadata = new("ListOfadditionalMetadata"), citation = NULL,
   software = NULL, protocol = NULL)
 }
 \arguments{
-\item{dat}{a data.frame object}
+\item{dat}{a data.frame object or path to csv}
 
 \item{title}{for the metadata.  Also used as the csv filename.}
 
@@ -42,17 +42,13 @@ of custom_unit definitions here.  See \code{\link{create_custom_unit}} for detai
 
 \item{additionalMetadata}{an additionalMetadata object}
 
-\item{meta}{a list of meta information organized by column. \\
-Elements of the list are another list, in which: \\
-- the first object is the column name, \\
-- then the column description, \\
-- then the unit definition \\}
-
 \item{col.defs}{Natural language definitions of each column. Should be a character
 vector of length equal to each column, defined in the same order as the columns are given.}
 
-\item{unit.defs}{A list of length equal to the number of columns defining the units for each
-column. See examples.}
+\item{unit.defs}{A list of length equal to the number of columns defining the units for each column. See examples.}
+
+\item{col.classes}{column classes, primarily for use if dat is
+a path to a csv rather than a native R object. Optional otherwise.}
 }
 \description{
 eml constructor function

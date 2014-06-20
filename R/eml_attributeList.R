@@ -3,36 +3,45 @@
 #' eml_attributeList
 #' 
 #' @param dat a data.frame (or a data.set which has col.defs and unit.defs)
-#' @param meta a list of column and unit metadata, OR
 #' @param col.defs the column definitions (if not given in meta)
 #' @param unit.defs the unit definitions (if not given in meta)
-#' @param col.classes the column classes of dat, if dat not given (otherwise inferred from dat)
-#'
+#' @param col.classes column classes, primarily for use if dat is 
+#' a path to a csv rather than a native R object. Optional otherwise.    
+#' @param col.names names of the columns, if dat is a csv file path.  
 #' @export
-eml_attributeList <- function(dat = NULL, 
-                              meta = NULL,
-                              col.classes = sapply(dat, class),
-                              col.defs = NULL,
-                              unit.defs = NULL){
+eml_attributeList <- 
+function(dat = NULL, 
+         col.defs = NULL,
+         unit.defs = NULL,
+         col.classes = NULL,
+         col.names = NULL){
+
+  if(is(dat, "data.frame")){
+    if(is.null(col.classes))
+      col.classes <-  sapply(dat, class)
+    if(is.null(col.names))
+      col.names <-  names(dat)
+  } else if (is(dat, "character") && is.null(col.names)){
+    tmp <- read.csv(dat, nrows=3, header=TRUE)
+    col.names <- names(tmp)
+  }
 
 
-  if(!is.null(col.defs) && !is.null(unit.defs) && 
-     is.null(meta) && is(dat, "data.frame")){
-    column_names <- names(dat)
-    meta <- lapply(1:length(col.defs), 
-                   function(i) list(
-                     column_names[[i]], 
-                     col.defs[[i]], 
-                     unit.defs[[i]]))
-
-  } else if(is(dat, "data.set")) { ## Handle other types 
+  if(is(dat, "data.set")) 
     meta <- get_metadata(dat)
 
-  } else  if(is.null(meta) && is.null(unit.defs)) {
-    meta <- metadata_wizard(dat)
-  }
-  
-  ## Handle column classes
+  if(!is.null(col.defs) && !is.null(unit.defs) && 
+     !is.null(col.names)){
+      meta <- lapply(1:length(col.defs), 
+                     function(i) list(
+                       col.names[[i]], 
+                       col.defs[[i]], 
+                       unit.defs[[i]]))
+  } #else if(is.null(meta)) {
+    #meta <- metadata_wizard(dat)  # Wizard isn't helpful 
+  #}
+
+  ## Detect & add EML class based on R's col.classes
   meta <- detect_class(meta, col.classes)
 
 #  as(meta, "attributeList")

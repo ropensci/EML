@@ -3,19 +3,20 @@
 \alias{eml_attributeList}
 \title{eml_attributeList}
 \usage{
-eml_attributeList(dat = NULL, meta = NULL, col.classes = sapply(dat,
-  class), col.defs = NULL, unit.defs = NULL)
+eml_attributeList(dat = NULL, col.defs = NULL, unit.defs = NULL,
+  col.classes = NULL, col.names = NULL)
 }
 \arguments{
 \item{dat}{a data.frame (or a data.set which has col.defs and unit.defs)}
-
-\item{meta}{a list of column and unit metadata, OR}
 
 \item{col.defs}{the column definitions (if not given in meta)}
 
 \item{unit.defs}{the unit definitions (if not given in meta)}
 
-\item{col.classes}{the column classes of dat, if dat not given (otherwise inferred from dat)}
+\item{col.classes}{column classes, primarily for use if dat is
+a path to a csv rather than a native R object. Optional otherwise.}
+
+\item{col.names}{names of the columns, if dat is a csv file path.}
 }
 \description{
 eml_attributeList

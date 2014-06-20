@@ -99,36 +99,14 @@ setMethod("get_data.set", signature("eml"), function(object){
 })
 
 
-setGeneric("col_classes", function(object) standardGeneric("col_classes"))
-setMethod("col_classes", signature("eml"),
+setGeneric("col.classes", function(object) standardGeneric("col.classes"))
+setMethod("col.classes", signature("eml"),
           function(object)
-            get_col_classes(object@dataset@dataTable[[1]]@attributeList@attribute))
-get_col_classes <- function(attrs){          
-          sapply(attrs,
-                function(x){
-                  y <- x@measurementScale
-                  if(!isEmpty(y@dateTime))
-                    "Date"
-                  else if(!isEmpty(y@ratio))
-                    "numeric"
-                  else if(!isEmpty(y@interval))
-                    "numeric"
-                  else if(!isEmpty(y@nominal)){
-                    z <- y@nominal@nonNumericDomain
-                    if(!isEmpty(z@textDomain))
-                      "character"
-                    else if(!isEmpty(z@enumeratedDomain))
-                      "factor"
-                  } else if(!isEmpty(y@ordinal)){
-                    z <- y@ordinal@nonNumericDomain
-                    if(!isEmpty(z@textDomain))
-                      "character"
-                    else if(!isEmpty(z@enumeratedDomain))
-                      "ordered" # c("ordered", "factor")
-                  }
-                })
-}
+            lapply(object@dataset@dataTable, col.classes)) 
 
+setMethod("col.classes", signature("dataTable"),
+          function(object)
+            get_col.classes(object@attributeList@attribute))
 
 
 

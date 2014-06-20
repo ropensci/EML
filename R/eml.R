@@ -1,5 +1,5 @@
 #' eml constructor function 
-#' @param dat a data.frame object  
+#' @param dat a data.frame object or path to csv 
 #' @param title for the metadata.  Also used as the csv filename.   
 #' @param creator a ListOfcreator object, character string, or person object.  
 #'  Otherwise loaded from value set by eml_config.  
@@ -17,21 +17,16 @@
 #' of custom_unit definitions here.  See \code{\link{create_custom_unit}} for details.  
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
-#' @param meta a list of meta information organized by column. \\ 
-#'  Elements of the list are another list, in which: \\
-#'  - the first object is the column name, \\
-#'  - then the column description, \\
-#'  - then the unit definition \\
 #' @param col.defs Natural language definitions of each column. Should be a character
 #' vector of length equal to each column, defined in the same order as the columns are given.   
-#' @param unit.defs A list of length equal to the number of columns defining the units for each
-#' column. See examples.  
+#' @param unit.defs A list of length equal to the number of columns defining the units for each column. See examples.  
+#' @param col.classes column classes, primarily for use if dat is 
+#' a path to a csv rather than a native R object. Optional otherwise.    
 #' @import methods
 #' @include party_classes.R
 #' @include eml_classes.R
 #' @export 
 eml <- function(dat = NULL,
-                meta = NULL, 
                 title = "EML_metadata",
                 creator = NULL, 
                 contact = NULL, 
@@ -42,7 +37,7 @@ eml <- function(dat = NULL,
                 methods = new("methods"),
                 col.defs = NULL,
                 unit.defs = NULL,
-
+                col.classes = NULL,
                 custom_units =  NULL,
                 ..., # reserved for the dataset level? 
                 additionalMetadata = new("ListOfadditionalMetadata"),
@@ -83,11 +78,16 @@ eml <- function(dat = NULL,
 
   if(!isEmpty(dat)){
     eml@dataset <- 
-      eml_dataset(dat = dat, meta = meta, title = title,
-                  creator = creator, contact = contact,
-                  coverage = coverage, methods = methods,
+      eml_dataset(dat = dat, 
+                  title = title,
+                  creator = creator, 
+                  contact = contact,
+                  coverage = coverage, 
+                  methods = methods,
                   col.defs = col.defs,
-                  unit.defs = unit.defs, ref_id = ref_id, ...)
+                  unit.defs = unit.defs, 
+                  col.classes = col.classes,
+                  ref_id = ref_id, ...)
 
   } else if(!isEmpty(citation)){
   ## EML file that just documents a CITATION only

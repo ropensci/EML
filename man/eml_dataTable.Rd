@@ -3,20 +3,14 @@
 \alias{eml_dataTable}
 \title{constructor helper function for data table}
 \usage{
-eml_dataTable(dat, meta = NULL, title = "data table",
-  description = character(0), filename = character(0), col.defs = NULL,
-  unit.defs = NULL, ...)
+eml_dataTable(dat, name = "data table", description = character(0),
+  filename = generate_filename(name), col.defs = NULL, unit.defs = NULL,
+  col.classes = NULL, additionalInfo = character(0), ...)
 }
 \arguments{
 \item{dat}{a data.set object, data.frame object}
 
-\item{meta}{a list of meta information organized by column.
-Elements of the list are another list, in which:
-- the first object is the column name,
-- then the column description,
-- then the unit definition}
-
-\item{title}{the the title of the dataTable}
+\item{name}{the the name of the dataTable}
 
 \item{description}{a description of the dataTable}
 
@@ -29,6 +23,11 @@ vector of length equal to each column, defined in the same order as the columns 
 
 \item{unit.defs}{A list of length equal to the number of columns defining the units for each
 column. See examples.}
+
+\item{col.classes}{column classes, primarily for use if dat is
+a path to a csv rather than a native R object. Optional otherwise.}
+
+\item{additionalInfo}{character vector of any additional metadata lacking a defined slot.}
 }
 \value{
 a dataTable element

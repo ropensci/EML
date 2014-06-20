@@ -1,6 +1,6 @@
 #' @include physical_classes.R
-
-########### extract methods for physical
+#' 
+NULL
 
 setMethod("extract", signature("physical", "character"),
           function(from, using=NA){
@@ -10,8 +10,10 @@ setMethod("extract", signature("physical", "character"),
             ## FIXME use the EML to determine read.csv options
             dat <- read.csv(filepath(from))  #colClasses=using)
           })
-# If col_classes(object) returns a list, means that colClasses are not simple types (e.g. c("ordered", "factor") or "NULL")
-# See read.csv for details.  Meanwhile, if we get a list, just read in ignoring the declared colClasses
+
+# If col.classes(object) returns a list, means that col.classes are not simple types (e.g. c("ordered", "factor") or "NULL")
+# See read.csv for details.  Meanwhile, if we get a list, just read in ignoring the declared col.classes
+
 setMethod("extract", signature("physical", "list"),
           function(from, using=NA){
             ## FIXME use the EML to determine read.csv options
@@ -39,7 +41,7 @@ setMethod("extract", signature("physical"),
 setGeneric("filepath", function(from) standardGeneric("filepath"))
 setMethod("filepath", signature("physical"),
           function(from){
-            path <- paste0(from@dirname, from@objectName)
+            path <- catpaths(from@dirname, from@objectName)
             if(file.exists(path))
               path
             else {
@@ -55,8 +57,7 @@ setMethod("filepath", signature("physical"),
 
 ### Coerce data.frame to physical (csv) using constructor function:
 
-setAs("data.frame", "physical", function(from)
-      eml_physical(from)) 
+setAs("data.frame", "physical", function(from) eml_physical(from)) 
 
 
 

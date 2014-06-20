@@ -5,7 +5,7 @@
 \usage{
 eml_get(eml, x = c("id", "version", "csv_filepaths", "unit.defs", "col.defs",
   "citation_info", "keywords", "coverage", "contact", "creator",
-  "attributeList", "data.frame"))
+  "attributeList", "data.frame", "data.set"))
 }
 \arguments{
 \item{eml}{an EML object}

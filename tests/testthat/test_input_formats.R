@@ -1,5 +1,8 @@
 context("test input formats")
 
+## Add tests with .csv file
+
+
 test_that("We can use the unit.def/col.def format", {
   dat <- data.frame(river = factor(c("SAC",  
                                      "SAC",   
@@ -44,45 +47,6 @@ test_that("We can use the unit.def/col.def format", {
   eml_write(dat, 
       col.defs = col.defs,
       unit.defs = unit.defs,
-      contact = "Carl Boettiger <cboettig@ropensci.org>", 
-      file = "test.xml")
-
-  # Validate
-  o <- eml_validate("test.xml")
-  expect_true(all(o)) # all cases validate
-  unlink("test.xml")
-
-})
-
-
-test_that("We can use the original metadata format", {
-dat = data.frame(river = c("SAC",  "SAC",   "AM"),
-                 spp   = c("king",  "king", "ccho"),
-                 stg   = c("smolt", "parr", "smolt"),
-                 ct    = c(293L,    410L,    210L))
-
-
-  metadata <-list(
-    list("river",
-        "River site used for collection",
-        c(SAC = "The Sacramento River", 
-          AM = "The American River")),
-    list("spp",
-        "Species common name", 
-        c(king = "King Salmon", 
-          ccho = "Coho Salmon")),
-    list("stg",
-        "Life Stage", 
-        c(parr = "third life stage", 
-          smolt = "fourth life stage")),
-    list("ct",
-        "count of live fish in traps", 
-        "number"))
-
-
-  # Write EML
-  eml_write(dat, 
-      meta = metadata, 
       contact = "Carl Boettiger <cboettig@ropensci.org>", 
       file = "test.xml")
 

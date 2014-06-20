@@ -37,12 +37,12 @@ description = "testing description"
 
 
 test_that("We can generate an dataTable S4 object", {
-  s4 <- EML:::eml_dataTable(dat, EML:::get_metadata(dat), description=description)
+  s4 <- eml_dataTable(dat, description=description)
   expect_is(s4, "dataTable")              
 })
 
 test_that("We can generate an dataset S4 object", {
-  dt <- EML:::eml_dataTable(dat, EML:::get_metadata(dat), description=description)
+  dt <- eml_dataTable(dat, description=description)
   creator <- new("ListOfcreator", list(as("Carl Boettiger <cboettig@ropensci.org>", "creator")))
   s4 <- new("dataset", 
       title = title, 
@@ -57,7 +57,7 @@ test_that("We can generate an dataset S4 object", {
 
 
 test_that("We can generate an eml S4 object", {
-  dt <- eml_dataTable(dat, EML:::get_metadata(dat), description=description)
+  dt <- eml_dataTable(dat, description=description)
   creator <- new("ListOfcreator", list(as("Carl Boettiger <cboettig@ropensci.org>", "creator")))
   ds <- new("dataset", 
       title = title, 

@@ -69,7 +69,7 @@ library(EML)
 ```
 
 
-We begin by reading in the CSV file providing the raw data that is to be annotated.  A copy of this file is distributed for demonstration purposes as part of the R package.  
+We begin by reading in the CSV file providing the raw data that is to be annotated.  
 
 ```{r}
 f <- eml_read("knb-lter-hfr.205.4")
@@ -77,6 +77,7 @@ dat <- eml_get(f, "data.frame")
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  
+
 
 
 ```{r}
@@ -123,11 +124,11 @@ As a _metadata_ format, we do not encode the actual data file itself into the EM
 
 
 ```{r}
-dataTable <- EML::eml_dataTable(dat,
+dataTable <- eml_dataTable(dat,
                            col.defs = col.defs,
                            unit.defs = unit.defs,
                            description = "Metadata documentation for S1.csv", 
-                           file = "S1.csv")
+                           filename = "S1.csv")
 ```
 
 CSV file conventions can differ across platforms and continents. To remove any ambiguity, EML explicitly describes how the csv file is constructed (noting that it is actually comma delimited as the name implies and not tab delimited, and noting other details such as the number of rows, the character used to indicate and end of a row, and so forth).  Because R is writing the csv file itself after all, it already knows all of these details and we are able to automatically fill out this section of the metadata.  This information is summarized in the `dataTable@physical` element.  

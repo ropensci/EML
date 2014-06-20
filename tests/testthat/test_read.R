@@ -77,7 +77,6 @@ test_that("We can access a file by its URL", {
 })
 
 
-### These should be moved into seperate tests
 
 
 test_that("we can access the dataTable", {

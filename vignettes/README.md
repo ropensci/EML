@@ -73,14 +73,28 @@ Writing R data into EML
 -----------------------
 
 
-Consider a standard data frame:
+Consider a standard data frame in R:
 
 
 ```r
-dat = data.frame(river = c("SAC",  "SAC",   "AM"),
-                 spp   = c("king",  "king", "ccho"),
-                 stg   = c("smolt", "parr", "smolt"),
-                 ct    = c(293L,    410L,    210L))
+dat <- data.frame(river = factor(c("SAC",  
+                                   "SAC",   
+                                   "AM")),
+                  spp   = c("Oncorhynchus tshawytscha",  
+                            "Oncorhynchus tshawytscha", 
+                            "Oncorhynchus kisutch"),
+                  stg   = ordered(c("smolt", 
+                                    "parr", 
+                                    "smolt"), 
+                                  levels=c("parr", 
+                                           "smolt")), # => parr < smolt
+                  ct    = c(293L,    
+                            410L,    
+                            210L),
+                  day   = as.Date(c("2013-09-01", 
+                                    "2013-09-1", 
+                                    "2013-09-02")),
+                  stringsAsFactors = FALSE)
 ```
 
 
@@ -90,80 +104,76 @@ dat = data.frame(river = c("SAC",  "SAC",   "AM"),
 |   SAC   | king  | parr  | 410  |
 |   AM    | ccho  | smolt | 210  |
 
-Like many real data sets, the column headings are convenient for data entry and manipulation, but not particularly descriptive to a user not already familiar with this data. More important still, they don't
-let us know what units they are measured in (or in the case of categorical / factor data like species names or life stages, what the factor abbreviations refer to).  So let us take a moment to be more explicit:  
+
+Note that we have taken care to get the column classes right.
+
+
+Like many real data sets, the column headings are convenient for data
+entry and manipulation, but not particularly descriptive to a user not
+already familiar with this data. More important still, they don't let
+us know what units they are measured in (or in the case of categorical
+/ factor data like species names or life stages, what the factor
+abbreviations refer to).  So let us take a moment to be more explicit:
 
 
 ```r
-col.defs = c("River site used for collection",
-             "Species common name",
-             "Life Stage",
-             "count of live fish in traps")
+col.defs <- c("River site used for collection",
+              "Species scientific name",
+              "Life Stage", 
+              "count of live fish in traps",
+              "The day on which traps were sampled")
 
-unit.defs = list(c(SAC = "The Sacramento River",
-                   AM = "The American River"),
-                 c(king = "King Salmon",
-                   ccho = "Coho Salmon"),
-                 c(parr = "third life stage",
-                   smolt = "fourth life stage"),
-                 "number")
+
+unit.defs <- list(
+  c(SAC = "The Sacramento River",     # Factor 
+    AM = "The American River"),
+ "Scientific name",                   # Character string 
+  c(parr = "third life stage",        # Ordered factor 
+    smolt = "fourth life stage"),
+  c(unit = "number", 
+    precision = 1, 
+    bounds = c(0, Inf)),              # Integer
+  c(format = "YYYY-MM-DD",            # Date
+    precision = 1))
 ```
 
-We are careful to enter these in the order of the columns given. <!-- Otherwise, we should name the elements using the corresponding column header names.  -->
+Note that we are careful to enter these in the order of the columns given. <!-- Otherwise, we should name the elements using the corresponding column header names.  -->
 
+`col.defs` are relatively self explanatory, but `unit.defs` can be a little tricky.  
 
-A few notes about how these are constructed:
+- For `factors`, this is a definition of the levels involved, as shown.  
+- For `numeric` data, you must specify the units from [this list](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary), or [define a custom unit](# "tutorial coming soon").  Optionally you can express the precision and bounds of the unit as well.  
+- For `Dates` or times, specify the format, (e.g. YYYY or MM-DD-YY). Optionally you can also express the precision.  
+- For character strings, a definition of the kind of string can be given, or otherwise the column description will be used.
 
-- `col.defs`: These are usually just plain text definitions, though a
-  URI to a semantic definition can be particularly powerful. See "Advanced
-  Use" for details on adding richer information, such as the method used to
-  collect the data or set the geographic, taxanomic, or temporal coverage
-  of an individual column.
+With this information in place, we just about have all the required
+metadata to generate a minimally valid EML file documenting this
+dataset. We just need to also specify a default creator who will also
+be used as the contact person for EML files created in this session,
+including a contact address in angle brackets, and we are good to go:
 
-- `unit.defs`:   For factors, this is a definition of
-  the levels involved.  For numeric data, specify the units from [this
-  list](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/./eml-unitTypeDefinitions.html#StandardUnitDictionary).
-  For dates, specify the format, (e.g. YYYY or MM-DD-YY). For character
-  strings, a definition of the kind of string can be given, (e.g. species
-  scientific name), otherwise the column description will be used.
-
-
-
-We will also specify a default creator who will also be used as the
-contact person for EML files created in this session.
-
-
-```r
-eml_config(creator="Carl Boettiger <cboettig@gmail.com>")
-```
-
-While we will always be able to provide alternative or additional creators
-or contact person later, `eml_config` can store the defaults to save
-us the trouble of entering this data repeatedly.  See `?eml_config`
-for more information and other configurable defaults.
-
-
-With this information in place, we have all the required metadata to
-generate a minimally valid EML file documenting this dataset.
 
 
 
 ```r
-eml_write(dat, col.defs = col.defs, unit.defs = unit.defs, file = "EML_example.xml")
+eml_write(dat, 
+          col.defs = col.defs, 
+          unit.defs = unit.defs, 
+          creator = "Carl Boettiger <cboettig@ropensci.org>", 
+          file = "EML_example.xml")
 ```
 
 ```
 [1] "EML_example.xml"
 ```
 
-*for convenience, had we omitted `col.defs` and `unit.defs`, 
+*for convenience, if had we omitted `col.defs` and `unit.defs`, 
 `EML` will launch its metadata wizard to assist in constructing the
 metadata based on the data.frame provided*.  While this may be helpful
 starting out, regular users will find it faster to define the columns
 and units directly in the format above.
 
-See the [EML
-generated](https://github.com/ropensci/EML/tree/master/inst/doc/EML_example.xml)
+See the [EML generated](https://github.com/ropensci/EML/tree/master/inst/doc/EML_example.xml)
 by this example.
 
 
@@ -272,7 +282,7 @@ eml_get(obj, "contact")
 ```
 
 ```
-[1] "Carl Boettiger <cboettig@gmail.com>"
+[1] "Carl Boettiger <cboettig@ropensci.org>"
 ```
 
 

@@ -1,7 +1,6 @@
 
 eml_dataset <- 
   function(dat = NULL,
-           meta = NULL, 
            title = "EML_metadata",
            creator = NULL, 
            contact = NULL, 
@@ -12,6 +11,7 @@ eml_dataset <-
            methods = new("methods"),
            col.defs = NULL,
            unit.defs = NULL,
+           col.classes = NULL, 
            ref_id = eml_id(),
            ...){
 
@@ -45,10 +45,9 @@ eml_dataset <-
                   coverage = coverage,
                   methods = methods, 
                   dataTable = c(eml_dataTable(dat = dat,
-                                              title = title,
-                                              meta = meta,
                                               col.defs = col.defs,
-                                              unit.defs = unit.defs)),
+                                              unit.defs = unit.defs,
+                                              col.classes = col.classes)),
                   ...)
 
 
