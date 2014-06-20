@@ -74,9 +74,9 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   ## Call fs_update if we have id, otherwise fs_create new fileset...
   if(!is.null(figshare_id)){
     id <- figshare_id
-    fs_update(article_id = id, title = title, description = description, type = "dataset")
+    fs_update(article_id = id, title = title, description = description, type = "fileset")
   } else {
-    id <- fs_create(title = title, description = description, type = "dataset")
+    id <- fs_create(title = title, description = description, type = "fileset")
   }
   fs_add_tags(id, tags)
   fs_add_categories(id, categories)
