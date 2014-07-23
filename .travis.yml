@@ -10,7 +10,7 @@ before_script:
 - Rscript inst/examples/install_RWordXML.R  
 - ./travis-tool.sh install_github duncantl/ROOXML
 - ./travis-tool.sh install_github duncantl/RWordXML
-  #- Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
+- Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RWordXML", repos="http://www.omegahat.org/R", type="source")'
 

@@ -16,6 +16,7 @@ Authors@R: c( person("Carl", "Boettiger", role = c("aut", "cre"), email =
     person("Duncan", "Temple Lang", role = "aut"), person("Claas-Thido",
     "Pfaff", role = c("aut")), person("Matt", "Jones", role="aut"))
 VignetteBuilder: knitr
+Additional_repositories: http://www.omegahat.org/R
 Suggests:
     knitr (>= 1.5),
     rfigshare (>= 0.3),
@@ -24,10 +25,11 @@ Suggests:
     testthat,
     dataone,
     rrdf,
+    RefManageR,
+    bibtex,
     RHTMLForms,
     RWordXML,
-    RefManageR,
-    bibtex
+    Sxslt
 Imports:
     XML,
     RCurl,
