@@ -170,7 +170,7 @@ metadata based on the data.frame provided*.  While this may be helpful
 starting out, regular users will find it faster to define the columns
 and units directly in the format above.
 
-See the [EML generated](https://github.com/ropensci/EML/tree/master/inst/doc/EML_example.xml)
+See the [EML generated](https://github.com/ropensci/EML/tree/master/inst/examples/EML_example.xml)
 by this example.
 
 

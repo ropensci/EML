@@ -164,7 +164,7 @@ metadata based on the data.frame provided*.  While this may be helpful
 starting out, regular users will find it faster to define the columns
 and units directly in the format above.
 
-See the [EML generated](https://github.com/ropensci/EML/tree/master/inst/doc/EML_example.xml)
+See the [EML generated](https://github.com/ropensci/EML/tree/master/inst/examples/EML_example.xml)
 by this example.
 
 
@@ -221,7 +221,7 @@ eml_publish("EML_example.xml",
 ```
 
 ```
-[1] 1064432
+[1] 1113824
 ```
 
 This creates a draft file visible only to the user configured in
