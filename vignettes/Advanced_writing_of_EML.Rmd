@@ -56,9 +56,6 @@ This schematic shows each of the metadata elements we will generate.  Most these
 
 The EML R package allows us to assemble these pieces bit by bit, allowing us to work either from the top down or bottom up.  
 
-Our `data.set` object captures all of the information required to generate the `dataTable` element: the `data.frame`, which will be written to an external CSV file descibed by the `physical` node, and the `attributeList`, containing the column and unit metadata descriptions.  
-
-
 
 ### Creating hf205.xml
 
@@ -373,9 +370,9 @@ eml     <- eml( dataset = dat,
               )
 ```
 
-The helper function handles certain steps automatically, such as the creation of a `uuid` for the package identifier.  The required fields `creator` and `contact` will use values set by `eml_config` or can take text strings or R `person` objects as arguments, as well as eml's `creator` or `contact` classes.  In this case we pass a `dataTable` (permitting additional customization we used above such as the description field).  Alternatively this could be the more basic `data.set` object as the first argument (`dataset = dat`) or an already constructed EML `dataset` class. 
+The helper function handles certain steps automatically, such as the creation of a `uuid` for the package identifier.  The required fields `creator` and `contact` will use values set by `eml_config` or can take text strings or R `person` objects as arguments, as well as eml's `creator` or `contact` classes.  In this case we pass a `dataTable` (permitting additional customization we used above such as the description field).  Alternatively this could be an already constructed EML `dataset` or `dataTable` class. 
 
-Because package identifer, creator and contact fields are required for valid EML, this constructor function is often more convenient then the stepwise process shown above. Typically a single call to this function can provide all the metadata needed to properly annotate a `data.set`.    This is similar to the behavior of the `eml_write` function, but returns the R eml object rather than writing out to an XML file.  Additional fields can then be added or manipulated using the standard R S4 subsetting methods (see Advanced Parsing tutorial).  
+Because package identifer, creator and contact fields are required for valid EML, this constructor function is often more convenient then the stepwise process shown above. Typically a single call to this function can provide all the metadata needed to properly annotate the `data.frame`.    This is similar to the behavior of the `eml_write` function, but returns the R eml object rather than writing out to an XML file.  Additional fields can then be added or manipulated using the standard R S4 subsetting methods (see Advanced Parsing tutorial).  
 
 
 Finally we are ready to write out our EML object to an XML file. 
@@ -384,7 +381,7 @@ Finally we are ready to write out our EML object to an XML file.
 eml_write(eml, file="hf205_from_EML.xml")
 ```
 
-When we used the `eml_write()` function for the first time in the [Basic tutorial](), we simply passed a `data.set` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `eml()` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
+When we used the `eml_write()` function for the first time in the [Basic tutorial](https://github.com/ropensci/EML/blob/master/README.md), we simply passed a `data.frame` object.  Internally the function made the remaining calls to `new("dataTable")`, `new("dataset")`, and `eml()` for us.  This time, the `eml_write` function can recognize that this is already an `eml` object, which it immediately converts to the XML representation and writes out as a file.  (If no file name is provided, the XML text will be returned to the console).  
 
 
 As before, we can now validate our EML document to ensure all the information has been formatted correctly:

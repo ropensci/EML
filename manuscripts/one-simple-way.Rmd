@@ -85,7 +85,7 @@ unit_metadata =
 
 
 ```{r}
-dat_with_metadata <- data.set(dat, col.defs = col_metadata, unit.defs = unit_metadata)
+dat_with_metadata <- eml_dataTable(dat, col.defs = col_metadata, unit.defs = unit_metadata)
 ```
 
 
