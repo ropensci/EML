@@ -4,10 +4,10 @@ NULL
 
 
 ## FIXME use the EML to determine read.csv options
-extract <- 
+setMethod("extract", "physical", 
 function(from, using=NA){
   dat <- read.csv(filepath(from)) 
-}
+})
 
 
 filepath <-
