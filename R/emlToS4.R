@@ -10,7 +10,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     ids = names(node)
     nodes = xmlChildren(node)
     ## isn't  that automatic from the class definition?   
-    obj = XML:::addXMLAttributes(obj, xmlAttrs(node)) ## treat attributes as slots. 
+    obj = addXMLAttributes(obj, xmlAttrs(node)) ## treat attributes as slots. 
     slotIds = slotNames(obj)
     slots = getClass(class(obj))@slots
 
@@ -40,4 +40,17 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 ## Hacks XML::xmlToS4 to deal with lists 
 listof <- function(kids, element, listclass = paste0("ListOf", element))
   new(listclass, lapply(kids[names(kids) == element], as, element))  ## subsets already 
+
+
+## Reproduce function not exported from XML to avoid NOTE
+addXMLAttributes <- 
+function (obj, attrs) 
+{
+    slots = getClass(class(obj))@slots
+    i = match(names(attrs), names(slots))
+    if (any(!is.na(i))) 
+        for (i in names(attrs)[!is.na(i)]) slot(obj, i) <- as(attrs[i], 
+            slots[[i]])
+    obj
+}
 

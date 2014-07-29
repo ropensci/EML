@@ -56,3 +56,11 @@ dat = data.set(river = c("SAC",  "SAC",   "AM"),
   unlink(f)
   unlink(paste0("figshare_", f))
 })
+
+
+
+test_that("We can download the associated CSV from a public EML file on figshare (published by EML R package)", {
+          eml <- eml_read("http://files.figshare.com/1239121/figshare_landings.xml")
+          dat <- eml_get(eml, "data.frame")
+          expect_is(dat, "data.frame")
+})
