@@ -81,6 +81,7 @@ Collate:
     'eml_publish.R'
     'eml_read.R'
     'eml_software.R'
+    'eml_unit_classes.R'
     'eml_validate.R'
     'eml_wizards.R'
     'eml_write.R'

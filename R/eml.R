@@ -50,24 +50,14 @@ eml <- function(dat = NULL,
   ## obtain uuids 
   uid <- eml_id()
 
-  ## Handle custom units
-  if(is.null(custom_units))
-    custom_units <- mget("custom_units", 
-                         envir = EMLConfig,  
-                         ifnotfound=list(list()))$custom_units
-  ## Handle custom units
-  if(is.null(custom_types))
-    custom_types <- mget("custom_types", 
-                         envir = EMLConfig,  
-                         ifnotfound=list(list()))$custom_types
-
-
 
   ref_id <- eml_id() # list(id="42") ## Links custom units to attribute defs 
   if(length(custom_units) > 0){
-    xml_unitList <- serialize_custom_units(custom_units = custom_units, 
-                                           id = ref_id[["id"]], 
-                                           custom_types = custom_types)
+    xml_unitList <- 
+      serialize_custom_units(custom_units = custom_units, 
+                             id = ref_id[["id"]], 
+                             custom_types = custom_types)
+
     if(!isEmpty(additionalMetadata@.Data))
       additionalMetadata <- new("ListOfadditionalMetadata", 
                                 c(additionalMetadata@.Data, xml_unitList))

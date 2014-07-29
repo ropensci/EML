@@ -30,20 +30,14 @@
 eml_define_unitType <- function(id,
                                 dimensions,
                                 name = id){
-  if(in_custom_library(id))
-    return(NULL)
-  else { 
-    unit_type <- list(id = id,
-                      dimensions = dimensions,
-                      name = name)
-    custom_types <- mget("custom_units", 
-                         envir = EMLConfig, 
-                         ifnotfound = list(list()))$custom_types
-    assign("custom_types",
-           c(custom_types, 
-             list(unit_type), 
-             envir = EMLConfig))
+  dims <- new("stmml:ListOfdimension",
+              lapply(dimensions, function(d)
+                     new("stmml:dimension", 
+                         name = d["name"],
+                         power = as.character(na.omit(d["power"])))))
+  unit_type <- new("stmml:unitType", 
+                   id = id,
+                   dimensions = dims,
+                   name = name)
 
-    invisible(unit_type)
-  }
 }

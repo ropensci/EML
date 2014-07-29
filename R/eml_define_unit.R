@@ -33,13 +33,8 @@ eml_define_unit <- function(id,
   ## FIXME Check that unitType is in the library.  
   ## Otherwise, add it with eml_define_unitType
 
-
-
   ## FIXME check that unit isn't already defined
 
-  if(in_custom_library(id))
-    return(NULL)
-  else { 
   # FIXME if is nomeric, convert multiplier to a character 
   # without, e.g.,  0.0001 becoming "1e-4"
    
@@ -57,26 +52,15 @@ eml_define_unit <- function(id,
       description <- camelCase_to_human(id)
 
 
-    unit.def <- list(id = id, 
+    unit.def <- new("stmml:unit", 
+                    id = id, 
                     multiplierToSI = multiplierToSI, 
                     name = name, 
                     parentSI = parentSI, 
                     unitType = unitType,
                     description = description)
-    custom_units <- mget("custom_units", envir = EMLConfig, 
-                         ifnotfound=list(list()))$custom_units
 
-    assign("custom_units", 
-           c(custom_units, list(unit.def)), 
-           envir=EMLConfig)
-
-    invisible(unit.def)
-  }
 }
-
-
-
-
 
 
 
@@ -85,6 +69,9 @@ camelCase_to_human <- function(x){
   x <- gsub('([a-z]+)([A-Z][a-z]+)', '\\1 \\2', x)
 }
 
+
+
+
 serialize_custom_units <- 
 function(custom_units, 
          id, 
@@ -92,21 +79,30 @@ function(custom_units,
   new_types <- 
     lapply(custom_types,
            function(type_def){
-            children <- lapply(type_def$dimensions, function(d)
-                         newXMLNode("dimension", attrs = d))
+             children <- lapply(type_def@dimensions, function(d){
+
+                ## Get non-empty slots
+                attrs <- sapply(slotNames(d), function(x) slot(d,x))
+                attrs <- attrs[sapply(attrs, length) > 0] 
+
+                newXMLNode("dimension", 
+                           attrs = attrs)
+              })
             newXMLNode("unitType", 
-                       attrs = c(id = type_def$id, 
-                                 name = type_def$name),
+                       attrs = c(id = type_def@id, 
+                                 name = type_def@name),
                        .children = children)
            })
   new_units <- 
     lapply(custom_units, 
            function(unit.def){
-             attrs <- 
-               unit.def[names(unit.def != "description")]
+             who <- slotNames(unit.def) 
+             is_attr <- who[who != "description"]
+             attrs <- sapply(is_attr, function(x) slot(unit.def, x))
+             attrs <- attrs[sapply(attrs, length) > 0]
              newXMLNode("unit", attrs = attrs, 
                         newXMLNode("description", 
-                                   unit.def$description))
+                                   unit.def@description))
            })
   unitList <- newXMLNode("unitList", 
                          .children = c(new_types, new_units))

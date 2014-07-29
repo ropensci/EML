@@ -42,25 +42,18 @@ unit.defs <- list(
 
 
 test_that("We can define custom units", {
-eml_reset_config()
-  eml_define_unit(id = "metersSquaredPerHectare",
+  unit <- eml_define_unit(id = "metersSquaredPerHectare",
                        parentSI = "dimensionless",
                        unitType = "dimensionless",
                        multiplierToSI = "0.0001")
 
-  custom_units <- mget("custom_units", envir = EML:::EMLConfig,
-                       ifnotfound = list(list()))$custom_units
-  expect_is(custom_units, "list")
-  expect_equal(length(custom_units), 1)
-  eml_reset_config()
 
                })
 
 
 test_that("We can serialize custom units as valid EML", {
-  eml_reset_config()
 
-  eml_define_unit(id = "metersSquaredPerHectare",
+ unit <-  eml_define_unit(id = "metersSquaredPerHectare",
                      parentSI = "dimensionless",
                      unitType = "dimensionless",
                      multiplierToSI = "0.0001",
@@ -69,6 +62,7 @@ test_that("We can serialize custom units as valid EML", {
   eml_write(dat, 
             col.defs = col.defs, 
             unit.defs = unit.defs, 
+            custom_units = c(unit),
             file = "customunit.xml", 
             contact = "Carl Boettiger <cboettig@ropensci.org>")
   o <- eml_validate("customunit.xml")
@@ -89,70 +83,22 @@ test_that("We can serialize custom units as valid EML", {
 })
 
 
-test_that("We can define custom units with new unit types", {
-  eml_reset_config()
-
- ## define gram per meter:
-
-  ## first, define a massPerLength type: 
-  eml_define_unitType("massPerLength", 
-                      dimensions = 
-                        list(c(name="mass"), 
-                             c(name="length", power="-1")))
-  ## Define the base SI unit
-  eml_define_unit("kilogramPerMeter",
-                  unitType = "massPerLength",
-                  abbreviation = "kg/m",
-                  parentSI = "kilogramPerMeter",
-                  multiplierToSI="1")
-  ##  define the desired unit, with SI conversion factor
-  eml_define_unit("gramPerMeter", 
-                  unitType = "massPerLength",
-                  parentSI = "kilogramPerMeter",
-                  multiplierToSI = "0.001",
-                  abbreviation = "g/m")
-
-
-  # Now when we do the usual creating of EML, units are automatically remembered.  
-eml_write(dat, 
-            col.defs = col.defs, 
-            unit.defs = unit.defs, 
-            file = "customunit.xml", 
-            contact = "Carl Boettiger <cboettig@ropensci.org>")
-  o <- eml_validate("customunit.xml")
-  expect_true(all(o)) # all cases validate
-
-  ## Make sure we actually wrote some additionalMetadata about unit defs...
-  eml <- eml_read("customunit.xml")
-  expect_more_than(length(eml@additionalMetadata), 0)
-
-  library(XML)
-  expect_output(xmlAttrs(eml@additionalMetadata[[1]]@metadata[["unitList"]][["unitType"]])[["id"]], "massPerLength")
-
-  
-  unlink("*.xml")
-  unlink("*.csv")
-  eml_reset_config()
-
-})
 
 
 
 
 test_that("We can define custom units with new unit types inline", {
 
-          eml_reset_config()
-
  ## define gram per meter:
 
   ## first, define a massPerLength type: 
-  new_type <-list( 
+  new_type <-c( 
   eml_define_unitType("massPerLength", 
                       dimensions = 
                         list(c(name="mass"), 
                              c(name="length", power="-1"))))
  ## Define the base SI unit
-  new_units <- list(
+  new_units <- c(
   eml_define_unit("kilogramPerMeter",
                   unitType = "massPerLength",
                   abbreviation = "kg/m",
@@ -164,8 +110,6 @@ test_that("We can define custom units with new unit types inline", {
                   parentSI = "kilogramPerMeter",
                   multiplierToSI = "0.001",
                   abbreviation = "g/m"))
-
-  eml_reset_config() # Clear any stored unit defs to prove this works by passing explicitly
 
   # Now when we do the usual creating of EML, units are automatically remembered.  
   eml_write(dat, 
