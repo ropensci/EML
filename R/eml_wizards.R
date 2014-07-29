@@ -42,7 +42,7 @@ prompt_for_units <- function(dataframe, n){
       out <- readline(paste(m1, m2, m3, "units are: "))
       if(out == "custom"){
 #        out<- readline("custom unit creation not yet supported. Define unit:") 
-        out <- create_custom_unit(column) 
+        out <- eml_define_unit(column) 
       }
     ## Date-time data
     } else if(is(column, "POSIXt")){

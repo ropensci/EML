@@ -154,7 +154,7 @@ eml_unit <- function(unit){
   } else {
     out <- new("unit", customUnit = unit)
     if(!in_custom_library(unit))
-      create_custom_unit(unit)
+      eml_define_unit(unit)
   }
   out
 }
@@ -164,7 +164,8 @@ eml_unit <- function(unit){
 
 in_custom_library <- function(unit){
   custom_units <- mget("custom_units", envir = EMLConfig, ifnotfound=list(list()))$custom_units
-  unit %in% sapply(custom_units, `[[`, "id")
+  custom_types <- mget("custom_types", envir = EMLConfig, ifnotfound=list(list()))$custom_types
+  unit %in% sapply(c(custom_types, custom_units), `[[`, "id")
 }
 
 

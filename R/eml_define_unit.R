@@ -13,23 +13,30 @@
 #' @return The unit definition (invisibly), as a list object.  A list of these returned objects
 #' can be passed to the \code{\link{eml}} function directly to define additional units, bypassing
 #' the config mechanism used by default.  
-#' @aliases eml_define_unit create_custom_unit
-#' @export eml_define_unit create_custom_unit
+#' @export eml_define_unit
 #' @examples
-#'  create_custom_unit(id = "metersSquaredPerHectare",
-#'                     parentSI = "dimensionless",
-#'                     unitType = "dimensionless",
-#'                     multiplierToSI = "0.0001",
-#'                     description = "Square meters per hectare")
+#'  eml_define_unit(id = "metersSquaredPerHectare",
+#'                  parentSI = "dimensionless",
+#'                  unitType = "dimensionless",
+#'                  multiplierToSI = "0.0001",
+#'                  description = "Square meters per hectare")
 #' 
 eml_define_unit <- function(id,
-                               unitType = NULL,
-                               parentSI = NULL, 
-                               multiplierToSI = NULL, 
-                               name = id, 
-                               constantToSI = NULL,
-                               abbreviation = NULL,
-                               description = NULL){
+                            unitType = NULL,
+                            parentSI = NULL, 
+                            multiplierToSI = NULL, 
+                            name = id, 
+                            constantToSI = NULL,
+                            abbreviation = NULL,
+                            description = NULL){
+
+  ## FIXME Check that unitType is in the library.  
+  ## Otherwise, add it with eml_define_unitType
+
+
+
+  ## FIXME check that unit isn't already defined
+
   if(in_custom_library(id))
     return(NULL)
   else { 
@@ -45,9 +52,10 @@ eml_define_unit <- function(id,
         parentSI <- readline(paste("parentSI for", id, "not defined. Please specify the parent unit in the SI system\n"))
     }
 
-    # FIXME Make sure id is camelcase or convert it to such
+    # FIXME Make sure id is camelcase first or convert it to such
     if(is.null(description))
       description <- camelCase_to_human(id)
+
 
     unit.def <- list(id = id, 
                     multiplierToSI = multiplierToSI, 
@@ -58,14 +66,18 @@ eml_define_unit <- function(id,
     custom_units <- mget("custom_units", envir = EMLConfig, 
                          ifnotfound=list(list()))$custom_units
 
-
-    assign("custom_units", c(custom_units, list(unit.def)), envir=EMLConfig)
+    assign("custom_units", 
+           c(custom_units, list(unit.def)), 
+           envir=EMLConfig)
 
     invisible(unit.def)
   }
 }
 
-create_custom_unit <- eml_define_unit
+
+
+
+
 
 
 camelCase_to_human <- function(x){
@@ -73,21 +85,35 @@ camelCase_to_human <- function(x){
   x <- gsub('([a-z]+)([A-Z][a-z]+)', '\\1 \\2', x)
 }
 
-serialize_custom_units <- function(custom_units, id){
-  unitList <- newXMLNode("unitList", .children =
-    lapply(custom_units, function(unit.def){
-      attrs <- unit.def[names(unit.def != "description")]
-      newXMLNode("unit", attrs = attrs, 
-                 newXMLNode("description", unit.def$description))
-            }
-    )
-  )
+serialize_custom_units <- 
+function(custom_units, 
+         id, 
+         custom_types=NULL){
+  new_types <- 
+    lapply(custom_types,
+           function(type_def){
+            children <- lapply(type_def$dimensions, function(d)
+                         newXMLNode("dimension", attrs = d))
+            newXMLNode("unitType", 
+                       attrs = c(id = type_def$id, 
+                                 name = type_def$name),
+                       .children = children)
+           })
+  new_units <- 
+    lapply(custom_units, 
+           function(unit.def){
+             attrs <- 
+               unit.def[names(unit.def != "description")]
+             newXMLNode("unit", attrs = attrs, 
+                        newXMLNode("description", 
+                                   unit.def$description))
+           })
+  unitList <- newXMLNode("unitList", 
+                         .children = c(new_types, new_units))
   new("additionalMetadata",
       describes = id,
       metadata = new("metadata", 
                      unitList))
-
-
 }
           
 

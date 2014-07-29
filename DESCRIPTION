@@ -70,6 +70,7 @@ Collate:
     'eml_dataTable.R'
     'eml_dataset.R'
     'eml_define_unit.R'
+    'eml_define_unitType.R'
     'eml_figshare.R'
     'eml_get.R'
     'eml_keyword.R'

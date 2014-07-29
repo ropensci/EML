@@ -7,7 +7,7 @@ eml(dat = NULL, title = "EML_metadata", creator = NULL, contact = NULL,
   coverage = eml_coverage(scientific_names = NULL, dates = NULL,
   geographic_description = NULL, NSEWbox = NULL), methods = new("methods"),
   col.defs = NULL, unit.defs = NULL, col.classes = NULL,
-  custom_units = NULL, ...,
+  custom_units = NULL, custom_types = NULL, ...,
   additionalMetadata = new("ListOfadditionalMetadata"), citation = NULL,
   software = NULL, protocol = NULL)
 }
@@ -35,8 +35,8 @@ a dataset OR citation OR software OR protocol as its top-level object)}
 
 \item{custom_units}{a list of custom units. Leave as NULL and these will be automatically
  detected from the EMLConfig after a user declares any custom units using
-\code{\link{create_custom_unit}}.  Advanced users can alternatively just give a list
-of custom_unit definitions here.  See \code{\link{create_custom_unit}} for details.}
+\code{\link{eml_define_unit}}.  Advanced users can alternatively just give a list
+of custom_unit definitions here.  See \code{\link{eml_define_unit}} for details.}
 
 \item{...}{additional slots passed to the dataset constructor `new("dataset", ...)`}
 

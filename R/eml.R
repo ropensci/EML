@@ -13,8 +13,8 @@
 #' @param methods a method object or plain text string, documenting additional methods 
 #' @param custom_units a list of custom units. Leave as NULL and these will be automatically
 #'  detected from the EMLConfig after a user declares any custom units using
-#' \code{\link{create_custom_unit}}.  Advanced users can alternatively just give a list
-#' of custom_unit definitions here.  See \code{\link{create_custom_unit}} for details.  
+#' \code{\link{eml_define_unit}}.  Advanced users can alternatively just give a list
+#' of custom_unit definitions here.  See \code{\link{eml_define_unit}} for details.  
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
 #' @param col.defs Natural language definitions of each column. Should be a character
@@ -39,6 +39,7 @@ eml <- function(dat = NULL,
                 unit.defs = NULL,
                 col.classes = NULL,
                 custom_units =  NULL,
+                custom_types = NULL,
                 ..., # reserved for the dataset level? 
                 additionalMetadata = new("ListOfadditionalMetadata"),
                 citation = NULL,
@@ -54,11 +55,19 @@ eml <- function(dat = NULL,
     custom_units <- mget("custom_units", 
                          envir = EMLConfig,  
                          ifnotfound=list(list()))$custom_units
+  ## Handle custom units
+  if(is.null(custom_types))
+    custom_types <- mget("custom_types", 
+                         envir = EMLConfig,  
+                         ifnotfound=list(list()))$custom_types
+
 
 
   ref_id <- eml_id() # list(id="42") ## Links custom units to attribute defs 
   if(length(custom_units) > 0){
-    xml_unitList <- serialize_custom_units(custom_units, id = ref_id[["id"]])
+    xml_unitList <- serialize_custom_units(custom_units = custom_units, 
+                                           id = ref_id[["id"]], 
+                                           custom_types = custom_types)
     if(!isEmpty(additionalMetadata@.Data))
       additionalMetadata <- new("ListOfadditionalMetadata", 
                                 c(additionalMetadata@.Data, xml_unitList))
