@@ -1042,7 +1042,7 @@ bibentryToCitation <-
                 type <- "conferenceProceedings" 
            }
 
-           if(type == "Misc"){
+           else {
                 type <- "generic" 
                 warning("Cannot determine the right citation type automatically. Coerced to eml generic citation type!")
            }

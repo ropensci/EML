@@ -2,11 +2,9 @@ context("citations")
 
 test_that("we can write EML to bibtex and vice versa", {
 
-library("bibtex"); library("EML"); library("RefManageR"); # get a citation from a crossref query
-  a_citation =  ReadCrossRef(query = 'Boettiger early warning', limit = 1, year="2013")
-
+#  a_citation = citation("knitr")[[2]]
 # library("rcrossref") 
-# a_citation = cr_cn("10.1098/rspb.2013.1372", 'bibentry')
+ a_citation = cr_cn("10.1098/rspb.2013.1372", 'bibentry')
 
 # Format the citation for EML and write to file
   eml_write(citation = a_citation, file="example.xml")

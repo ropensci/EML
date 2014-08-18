@@ -62,7 +62,7 @@ test_that("We can coerce a person to editor", {
 })
 
 ## Test citation classes
-
+## FIXME make sure these work when we have missing values!!
 # create an article
 eml_citation = new("article")  
 eml_citation@creator = a_creator 
@@ -222,7 +222,7 @@ test_that("We can coerce xml to thesis", {
   expect_that(as(converted_eml_citation, "thesis"), is_a('thesis'))
 })
 
-# create a manuscrip
+# create a manuscript
 eml_citation                  = new("manuscript")
 eml_citation@creator          = a_creator 
 eml_citation@title            = a_title 

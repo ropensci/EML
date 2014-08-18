@@ -1,4 +1,4 @@
-FROM cboettig/ropensci-docker:latest
+FROM cboettig/ropensci:latest
 MAINTAINER Carl Boettiger cboettig@ropensci.org
 
 ## Remain current
