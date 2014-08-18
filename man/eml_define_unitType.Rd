@@ -12,6 +12,8 @@ eml_define_unitType(id, dimensions, name = id)
 a value for "name" that corresponds to a fundamental unit
 type: either mass, length, or time.  Optionally include a value
 for "power" where appropriate, see examples.}
+
+\item{name}{the name for the unit, usually the same as the id (set by default)}
 }
 \value{
 the new unit type definition is stored for this R session

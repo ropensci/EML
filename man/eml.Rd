@@ -38,6 +38,8 @@ a dataset OR citation OR software OR protocol as its top-level object)}
 \code{\link{eml_define_unit}}.  Advanced users can alternatively just give a list
 of custom_unit definitions here.  See \code{\link{eml_define_unit}} for details.}
 
+\item{custom_types}{custom unit types, from \code{\link{eml_define_unitType}}}
+
 \item{...}{additional slots passed to the dataset constructor `new("dataset", ...)`}
 
 \item{additionalMetadata}{an additionalMetadata object}

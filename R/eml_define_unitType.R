@@ -6,7 +6,8 @@
 #' @param dimensions a list of named character vectors. Must include
 #' a value for "name" that corresponds to a fundamental unit
 #' type: either mass, length, or time.  Optionally include a value
-#' for "power" where appropriate, see examples. 
+#' for "power" where appropriate, see examples.
+#' @param name the name for the unit, usually the same as the id (set by default)
 #' @return the new unit type definition is stored for this R session
 #' and appended to any EML objects generated during that session.  
 #' Also invisibly returns the unit_type entry.  

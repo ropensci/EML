@@ -15,6 +15,7 @@
 #'  detected from the EMLConfig after a user declares any custom units using
 #' \code{\link{eml_define_unit}}.  Advanced users can alternatively just give a list
 #' of custom_unit definitions here.  See \code{\link{eml_define_unit}} for details.  
+#' @param custom_types custom unit types, from \code{\link{eml_define_unitType}}
 #' @param ... additional slots passed to the dataset constructor `new("dataset", ...)`
 #' @param additionalMetadata an additionalMetadata object
 #' @param col.defs Natural language definitions of each column. Should be a character
