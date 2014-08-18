@@ -1,3 +1,7 @@
+# Use:
+#  docker run -d -p 8787:8787 cboettig/eml 
+#
+
 FROM cboettig/ropensci:latest
 MAINTAINER Carl Boettiger cboettig@ropensci.org
 
@@ -17,10 +21,10 @@ RUN Rscript -e 'options(repos=c(CRAN="http://cran.rstudio.com")); devtools::inst
 
 ## Clone the repo and switch into manscripts directory
 RUN git clone http://github.com/ropensci/EML.git /tmp/EML
-WORKDIR /tmp/EML/manuscripts
+WORKDIR /tmp/EML/
 
 ## Compile the manuscript & supplement
 # RUN Rscript -e 'rmarkdown::render("manuscript.Rmd")'
 # RUN Rscript -e 'rmarkdown::render("supplement.Rmd")'
 
-
+# RStudio server available on 8787
