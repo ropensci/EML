@@ -7,12 +7,16 @@ before_script:
 - ./travis-tool.sh install_r_binary rjava
 - ./travis-tool.sh install_deps
 - sudo apt-get install fftw-dev libxml2-dev 
-- Rscript inst/examples/install_RWordXML.R  
-- ./travis-tool.sh install_github duncantl/ROOXML
-- ./travis-tool.sh install_github duncantl/RWordXML
+  #- Rscript inst/examples/install_RWordXML.R  
+  #- ./travis-tool.sh install_github duncantl/ROOXML
+  #- ./travis-tool.sh install_github duncantl/RWordXML
 - Rscript -e 'install.packages("Sxslt", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RWordXML", repos="http://www.omegahat.org/R", type="source")'
+- Rscript -e 'devtools::install_github("DataONEorg/rdataone", subdir="dataonelibs")'
+- Rscript -e 'devtools::install_github("ropensci/rdataone", subdir="dataone")'
+
+
 
 env:
  global:
