@@ -14,7 +14,7 @@ before_script:
 - Rscript -e 'install.packages("RHTMLForms", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'install.packages("RWordXML", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'devtools::install_github("DataONEorg/rdataone", subdir="dataonelibs")'
-- Rscript -e 'devtools::install_github("ropensci/rdataone", subdir="dataone", dependencies=c("IMPORTS", "DEPENDS"))'
+- Rscript -e 'devtools::install_github("ropensci/rdataone", subdir="dataone", dependencies=NA)'
 - Rscript -e 'devtools::install_github("egonw/rrdf", subdir="rrdflibs")'
 - Rscript -e 'devtools::install_github("egonw/rrdf", subdir="rrdf")'
 
