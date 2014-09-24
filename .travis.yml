@@ -1,5 +1,5 @@
 language: c
-script: ./travis-tool.sh run_tests
+script: "./travis-tool.sh run_tests"
 before_script:
 - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
 - chmod 755 ./travis-tool.sh
@@ -17,17 +17,14 @@ before_script:
 - Rscript -e 'devtools::install_github("ropensci/rdataone", subdir="dataone", dependencies=NA)'
 - Rscript -e 'devtools::install_github("egonw/rrdf", subdir="rrdflibs")'
 - Rscript -e 'devtools::install_github("egonw/rrdf", subdir="rrdf")'
-
-
-
 env:
- global:
-   - R_BUILD_ARGS="--no-manual"
-   - R_CHECK_ARGS="--as-cran --no-manual"
-   - BOOTSTRAP_LATEX=""
-
+  global:
+  - R_BUILD_ARGS="--no-manual"
+  - R_CHECK_ARGS="--as-cran --no-manual"
+  - BOOTSTRAP_LATEX=""
 notifications:
   email:
     on_success: change
     on_failure: always
-  slack: ropensci:GQJuD2zwNuvLDQU6PMvX7tgz
+  slack:
+    secure: oacF3vD8im7Aq/bepMHL8hMiAMxf0aByOC0T7PAjxVOStHngAf/pBsRDh5jEzjVj7lLv8vReij1T0vu0Ar1tdnmlp36XnZIX8vJGjf5sdapDjt0Uoly+IVkeiyrhCBGSMHRLC7YeweCPgfcNIvKMqpjdeCuMJx+K/kBp3q5Dmb0=
