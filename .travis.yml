@@ -21,7 +21,7 @@ env:
   global:
   - R_BUILD_ARGS="--no-manual"
   - R_CHECK_ARGS="--as-cran --no-manual"
-  - BOOTSTRAP_LATEX=""
+  - BOOTSTRAP_LATEX="1"
 notifications:
   email:
     on_success: change
