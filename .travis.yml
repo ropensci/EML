@@ -15,6 +15,8 @@ before_script:
 - Rscript -e 'install.packages("RWordXML", repos="http://www.omegahat.org/R", type="source")'
 - Rscript -e 'devtools::install_github("DataONEorg/rdataone", subdir="dataonelibs")'
 - Rscript -e 'devtools::install_github("ropensci/rdataone", subdir="dataone")'
+- Rscript -e 'devtools::install_github("egonw/rrdf", subdir="rrdflibs")'
+- Rscript -e 'devtools::install_github("egonw/rrdf", subdir="rrdf")'
 
 
 
