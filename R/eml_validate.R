@@ -68,8 +68,8 @@ function (eml = "",
   if(!success | schema_only){
 #    warning("Performing XML Schema validation only.\n
 #            Install RHTMLForms to provide additional EML-specific tests.")
-#    xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
-    out <- xmlSchemaValidate("http://cboettig.github.com/eml/eml.xsd", doctext)
+#    xmlSchemaValidate("http://cboettig.github.com/eml-schema/eml.xsd", doctext)
+    out <- xmlSchemaValidate(system.file("xsd", "eml.xsd", package=EML), doctext)
 
 
 
