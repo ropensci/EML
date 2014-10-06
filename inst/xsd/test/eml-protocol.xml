@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<prot:protocol
+    xmlns:prot="eml://ecoinformatics.org/protocol-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/protocol-2.1.1 eml-protocol.xsd">
+
+  <title>
+    fish counting
+  </title>
+  <creator>
+    <organizationName>
+      University of California
+    </organizationName>
+    <address>
+      <deliveryPoint>123 Campus Dr.</deliveryPoint>
+      <city>Santa Barbara</city>
+      <administrativeArea>CA</administrativeArea>
+      <postalCode>93101</postalCode>
+      <country>USA</country>
+    </address>
+    <phone phonetype="voice">
+      805-123-1234
+    </phone>
+    <electronicMailAddress>joe@something.org</electronicMailAddress>
+    <onlineUrl>www.something.org/~joe</onlineUrl>
+  </creator>
+  <pubDate>1999</pubDate>
+  <language>English</language>
+  <keywordSet>
+    <keyword>fish</keyword>
+    <keyword>lake</keyword>
+    <keywordThesaurus>jim's thesaurus</keywordThesaurus>
+  </keywordSet>
+  <additionalInfo>
+    <para>This is some other fake info.</para>
+  </additionalInfo>
+
+  <proceduralStep>
+    <description>
+      <para>
+        catch a fish, make a hash mark, weigh it,
+        enter the data in the spreadsheet
+      </para>
+    </description>
+    <instrumentation>scale</instrumentation>
+  </proceduralStep>
+</prot:protocol>

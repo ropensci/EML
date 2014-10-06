@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+  <key name="identifierKey">
+    <selector xpath="//dateTimeDomain|//nonNumericDomain|//numericDomain|//access|//attributeList|//constraint|//coverage|//temporalCoverage|//geographicCoverage|//taxonomicCoverage|/dataset|/eml/dataset|//dataSource|//dataTable|//otherEntity|//citation|//address|//conferenceLocation|//party|//originator|//creator|//contact|//publisher|//editor|//recipient|//performer|//institution|//metadataProvider|//associatedParty|//personnel|//physical|//connectionDefinition|//distribution|//researchProject|//project|//relatedProject|//software|//spatialRaster|//spatialReference|//spatialVector|//storedProcedure|//view|//protocol|//additionalMetadata"/>
+    <field xpath="@id"/>
+  </key>
+  <key name="attributeIdentifierKey">
+    <selector xpath="//attribute"/>
+    <field xpath="@id"/>
+  </key>
+  <key name="entityIdentifierKey">
+    <selector xpath="//dataTable|//spatialRaster|//spatialVector|//storedProcedure|//view"/>
+    <field xpath="@id"/>
+  </key>
+  <key name="unitIdentifierKey">
+    <selector xpath="//unitList/unit"/>
+    <field xpath="@id"/>
+  </key>
+
+  <keyref name="replacementReference" refer="identifierKey">
+    <selector xpath="//references"/>
+    <field xpath="."/>
+  </keyref>
+  <keyref name="describesReference" refer="identifierKey">
+    <selector xpath="//additionalMetadata/describes"/>
+    <field xpath="."/>
+  </keyref>
+  <keyref name="entityReference" refer="entityIdentifierKey">
+    <selector xpath="//entityReference"/>
+    <field xpath="."/>
+  </keyref>
+  <keyref name="attributeReference" refer="attributeIdentifierKey">
+    <selector xpath="//attributeReference|.//valueAttributeReference|.//definitionAttributeReference"/>
+    <field xpath="."/>
+  </keyref>
+  <keyref name="unitReference" refer="unitIdentifierKey">
+    <selector xpath="//unit/customUnit"/>
+    <field xpath="."/>
+  </keyref>
+  
+  <namespaces>@namespaces@</namespaces>
+</config>

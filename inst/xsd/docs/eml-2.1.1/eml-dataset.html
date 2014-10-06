@@ -1,0 +1,754 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-dataset Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-dataset</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+              The eml-dataset module - Dataset specific
+              information
+            </div>
+            
+<p>
+              The eml-dataset module contains general information that describes
+              dataset resources. It is intended to provide overview information
+              about the dataset: broad information such as the title, abstract,
+              keywords, contacts, maintenance history, purpose, and distribution
+              of the data themselves. The eml-dataset module also imports many
+              other modules that are used to describe the dataset in fine
+              detail.  Specifically, it uses the eml-methods module to
+              describe methodology used in collecting or processing the
+              dataset, the eml-project module to describe the overarching
+              research context and experimental design, the eml-access module
+              to define access control rules for the data and metadata, and
+              the eml-entity module to provide detailed information about the
+              logical structure of the dataset. A dataset can be (and often is)
+              composed of a series of data entities (tables) that are linked
+              together by particular integrity constraints.
+            </p>
+            
+<p>
+              The eml-dataset module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a dataset to be described once, and then used as a
+              reference in other locations within the EML document via its ID.
+            </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-dataset">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all datasets</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-resource, eml-party, eml-access, eml-entity, eml-dataTable, eml-project, eml-methods, eml-spatialRaster, eml-spatialVector, eml-storedProcedure, eml-text, eml-view</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-dataset.png" target="offline">eml-dataset image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="dataset">dataset&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DatasetType">DatasetType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The dataset field encompasses all information about
+        a single dataset.  A dataset is defined as all of the
+        information describing a data collection event.  This event may take
+        place over some period of time and include many actual collections (a
+        time series or remote sensing application)
+        or it could be just one actual collection
+        (a day in the field).</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="purpose">purpose&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of the purpose of this
+              dataset.  Note that this element requires DocBook style
+              formatting.  See eml-text for more information.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="maintenance">maintenance&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#MaintenanceType">MaintenanceType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of the maintenance of this data
+              resource. This includes information about the frequency of
+              update, and whether there is ongoing data
+              collection.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="contact">contact&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The contact field contains contact information
+              for this dataset. This is the
+              person or institution to contact with questions about the use,
+              interpretation of a data set.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="publisher">publisher&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The publisher of this data set. At times this is
+              a traditional publishing house, but it may also simply be an
+              institution that is making the data available in a published (ie,
+              citable) format.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="pubPlace">pubPlace&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The pubPlace field is the location where the
+              resource was published, which may be different from where the
+              resource was created.<br>
+<span class="boldtext">Example(s): </span>
+<br>San Francisco, CA, USA<br>New York, NY, USA<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="methods">methods&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-methods.html#MethodsType">md:MethodsType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The methods field documents scientific methods
+              used in the collection of this dataset.  It includes information
+              on items such as tools, instrument calibration and
+              software.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="project">project&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-project.html#ResearchProjectType">proj:ResearchProjectType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The project field contains information on
+              the project in which this dataset was collected.  It includes
+              information such as project personnel, funding, study area,
+              project design and related projects.  The project description
+              can also contain documentation on subprojects.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="dataTable">dataTable&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-dataTable.html#DataTableType">dat:DataTableType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The dataTable field documents the dataTable(s)
+                that make up this dataset.  A dataTable could be anything from
+                a Comma Separated Value (CSV) file to a spreadsheet to a table
+                in an RDBMS.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialRaster">spatialRaster&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-spatialRaster.html#SpatialRasterType">sr:SpatialRasterType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The spatialRaster field describes any
+                spatial raster images included in this dataset.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialVector">spatialVector&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-spatialVector.html#SpatialVectorType">sv:SpatialVectorType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The spatialVector field describes any
+                spatial vectors included in this dataset.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="storedProcedure">storedProcedure&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-storedProcedure.html#StoredProcedureType">sp:StoredProcedureType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The storedProcedure field contains information
+                about any stored procedures included with this dataset.
+                This usually implies that the dataset is stored in a DBMS or
+                some other data management system capable of processing your
+                dataset.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="view">view&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-view.html#ViewType">v:ViewType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The view field contains information
+                about any view included with this dataset.
+                This usually implies that the dataset is stored in a DBMS or
+                some other data management system capable of processing your
+                dataset.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="otherEntity">otherEntity&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-entity.html#OtherEntityType">ent:OtherEntityType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The otherEntity field contains information
+                about any entity in the dataset that is not any of the
+                preceding entities.  (i.e. it is not a table, spatialRaster,
+                spatialVector, storedProcedure or view.)  OtherEntity allows
+                the documentation of basic entity fields as well as
+                a plain text field to allow you to type your
+                entity.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="description">description&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A text description of the maintenance of this data
+              resource.  Note that this field must be marked up using DocBook
+              like tagging.  See eml-text for more information.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="maintenanceUpdateFrequency">maintenanceUpdateFrequency&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#MaintUpFreqType">MaintUpFreqType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Frequency with which changes and additions are made
+            to the dataset
+            after the initial dataset is completed.  The values for this
+            field must come from the enumeration MaintUpFreqType.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="changeHistory">changeHistory&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#changeScope">changeScope</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#oldValue">oldValue</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#changeDate">changeDate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#comment">comment</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of changes made to the data since
+            its release.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="changeScope">changeScope&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The expression should unambiguously identify
+                  the entity(s) and attribute(s) that were
+                  changed.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="oldValue">oldValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The previous value or an expression that
+                  describes the previous value of the
+                  data.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="changeDate">changeDate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:date</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The date the changes were
+                  applied.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="comment">comment&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Explanation or justification for the change
+                  made to the data.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="DatasetType">DatasetType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ResourceGroup">res:ResourceGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#purpose">purpose</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#maintenance">maintenance</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#contact">contact</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#publisher">publisher</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#pubPlace">pubPlace</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#methods">methods</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#project">project</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#dataTable">dataTable</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#spatialRaster">spatialRaster</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#spatialVector">spatialVector</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#storedProcedure">storedProcedure</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#view">view</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#otherEntity">otherEntity</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>DatasetType is the base type for the dataset element.
+        The dataset field encompasses all information about
+        a single dataset.  A dataset is defined as all of the
+        information describing a data collection event.  This event may take
+        place over some period of time and include many actual collections (a
+        time series or remote sensing application)
+        or it could be just one actual collection
+        (a day in the field).</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="MaintenanceType">MaintenanceType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#description">description</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#maintenanceUpdateFrequency">maintenanceUpdateFrequency</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#changeHistory">changeHistory</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The maintenance type defines the fields for the
+        maintenance element.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="MaintUpFreqType">MaintUpFreqType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>annually</li>
+<li>asNeeded</li>
+<li>biannually</li>
+<li>continually</li>
+<li>daily</li>
+<li>irregular</li>
+<li>monthly</li>
+<li>notPlanned</li>
+<li>weekly</li>
+<li>unkown</li>
+<li>otherMaintenancePeriod</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

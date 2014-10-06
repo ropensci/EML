@@ -1,0 +1,547 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-spatialVector Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-spatialVector</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+              The eml-spatialVector module - Logical information about
+              non-gridded geospatial image data
+            </div>
+            
+<p>
+              The eml-spatialVector module allows for the description of
+              spatial objects in a GIS system that are not defined in a
+              regularly gridded pattern.  These geometries include points and
+              vectors and the relationships among them.  Specific attributes of
+              a spatial vector can be documented here including the vector's
+              geometry type, count and topology level.
+            </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-spatialVector">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all spatial datasets that contain spatial data entities represented as vector features.</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-spatialReference, eml-entity, eml-resource, eml-attribute, eml-constraint</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-spatialVector.png" target="offline">eml-spatialVector image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialVector">spatialVector&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#SpatialVectorType">SpatialVectorType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Description of a spatial data entity based on features
+        represented by vectors</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeList">attributeList&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-attribute.html#AttributeListType">att:AttributeListType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The list of attributes associated with this
+              entity.  For more information see the eml-attribute
+              module.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="constraint">constraint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-constraint.html#ConstraintType">con:ConstraintType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Description of any relational constraints on 
+              this entity.  For more information see the eml-constraint
+              module.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geometry">geometry&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#GeometryType">GeometryType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Geometric feature classification is based on an
+              enumeration of simple feature classes defined by the OpenGIS
+              consortium and implemented in Geographic Markup Language as
+              simple feature types.<br>
+<span class="boldtext">Example(s): </span>
+<br>polygon<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geometricObjectCount">geometricObjectCount&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Total number of the geometric objects
+              occurring in the dataset.<br>
+<span class="boldtext">Example(s): </span>
+<br>24<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="topologyLevel">topologyLevel&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#TopologyLevel">TopologyLevel</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element describes the relative complexity
+              of the geometric information in the data file.<br>
+<span class="boldtext">Example(s): </span>
+<br>geometryOnly<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialReference">spatialReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-spatialReference.html#SpatialReferenceType">spref:SpatialReferenceType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="horizontalAccuracy">horizontalAccuracy&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DataQuality">DataQuality</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Horizontal positional accuracy of the data
+              expressed as either text or quantitative assessment.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="verticalAccuracy">verticalAccuracy&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DataQuality">DataQuality</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Vertical positional accuracy of the data
+              expressed as either text or quantitative assessment.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="accuracyReport">accuracyReport&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A text statement of the data quality, included the means by which it was determined.
+            </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAccuracyReport">quantitativeAccuracyReport&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAccuracyValue">quantitativeAccuracyValue</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAccuracyMethod">quantitativeAccuracyMethod</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A quantitative assessment of the data quality expressed as a value and 
+            the method of its determination.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAccuracyValue">quantitativeAccuracyValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The value resulting from the accuracy test. Typically, this will be expressed
+                  in units corresponding to those declared for the parameter being assessed.<br>
+<span class="boldtext">Example(s): </span>
+<br>4.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAccuracyMethod">quantitativeAccuracyMethod&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Identification and explanation of the method used to calculate the quantitative 
+                  accuracy assessment.<br>
+<span class="boldtext">Example(s): </span>
+<br>Error expressed as root mean square of 5 control points. <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="SpatialVectorType">SpatialVectorType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-entity.html#EntityGroup">ent:EntityGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeList">attributeList</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#constraint">constraint</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#geometry">geometry</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#geometricObjectCount">geometricObjectCount</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#topologyLevel">topologyLevel</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#spatialReference">spatialReference</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#horizontalAccuracy">horizontalAccuracy</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#verticalAccuracy">verticalAccuracy</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="DataQuality">DataQuality&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#accuracyReport">accuracyReport</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAccuracyReport">quantitativeAccuracyReport</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="GeometryType">GeometryType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>Point</li>
+<li>LineString</li>
+<li>LinearRing</li>
+<li>Polygon</li>
+<li>MultiPoint</li>
+<li>MultiLineString</li>
+<li>MultiPolygon</li>
+<li>MultiGeometry</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="TopologyLevel">TopologyLevel</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>geometryOnly</li>
+<li>nonPlanarGraph</li>
+<li>planarLineGraph</li>
+<li>fullPlanarGraph</li>
+<li>surfaceGraph</li>
+<li>fullTopology3D</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

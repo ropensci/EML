@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>EML and Dublin Core</title>
+
+
+  <link type="text/css" href="../default.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+<h1 class="title">Dublin Core Elements and their EML
+Equivalent</h1>
+
+EML was designed with the <a href="http://dublincore.org/documents/dces/">Dublin Core
+Metadata Initiative</a> in mind. By and large, the EML
+equivalents of these elements can be found in the <a href="index.html#N1005D">resource module</a>.
+The element name was changed for a few elements to reflect the
+terminology commonly used by the scientific community.
+Also, while the Dublin Core was designed primarily to
+describe digital media, EML is designed to accommodate the full range
+of ecological information, which is quite heterogeneous. To
+achieve this flexibility, it was
+necessary to slightly alter the concept of some of the descriptors.
+&nbsp;For these elements then, the EML equivalent is only an
+approximate match. The Dublin Core elements, and their corresponding representation in EML, are shown in the table below.<br>
+
+<br>
+
+<h2 class="title">Dublin Core Elements in EML</h2>
+
+<table class="tabledefault">
+<tbody style="vertical-align:text-top">
+
+    <tr style="vertical-align:middle">
+
+      <td class="tablehead" style="padding-left: 10px;">Dublin
+Core
+Element</td>
+
+      <td class="tablehead" style="padding-left: 10px;">EML
+Equivalent </td>
+
+    </tr>
+
+    <tr>
+
+      <td>Title</td>
+
+      <td><a href="eml-resource.html#title">title</a></td>
+
+    </tr>
+
+    <tr>
+
+      <td>Creator</td>
+
+      <td><a href="eml-resource.html#creator">creator</a> - While the
+Dublin Core Creator element is a single field used to document the
+creator's name, the EML creator element and its sub-elements allow the
+name, address, and other contact information of the creator to be
+stored in discrete fields.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Subject</td>
+
+      <td><a href="eml-resource.html#keywordSet">keywordSet</a>
+- Dublin Core states that the Subject should be "expressed as keywords,
+key phrases or classification codes that describe a topic of the
+resource." It also suggests that the keywords be selected
+from "a controlled vocabulary or formal classification scheme." This concept is best expressed by the keywordSet element in
+EML, which allows the source of the controlled vocabulary to be
+documented, as well as the individual keywords.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Description</td>
+
+      <td><a href="eml-resource.html#abstract">abstract</a>
+- The Dublin Core suggests that the Description can take the form of an
+abstract, as well as several other forms. As abstracts are the
+most commonly used method of describing data and research, the abstract
+element of EML is best suited to fill this role. </td>
+
+    </tr>
+
+    <tr>
+
+      <td>Publisher</td>
+
+      <td><a href="eml-dataset.html#publisher">publisher</a>
+- Because not all types of information documented in EML, such as
+protocols, will be published, &nbsp;the publisher element is not
+included in the resource module. Instead, it can be found as
+part of the modules that describe information that is likely to be
+published. The most commonly used location for this element
+is /eml/dataset/publisher.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Contributor</td>
+
+      <td><a href="eml-resource.html#associatedParty">associatedParty</a>
+- The Contributor element of Dublin Core defines "An entity responsible
+for making contributions to the content of the resource."
+&nbsp;While this is one means by which an entity can be affiliated
+with a resource, it is not the only on. EML thus created the
+associatedParty element, in which both the entity and it's specific
+relationship to the resource can be documented. As with the
+creator element, much more than the entity's name can be recorded
+within the subdivisions of this element.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Date</td>
+
+      <td><a href="eml-resource.html#pubDate">pubDate</a></td>
+
+    </tr>
+
+    <tr>
+
+      <td>Type</td>
+
+      <td>[<a href="eml.html#dataset">dataset</a>
+| <a href="eml.html#citation">citation</a> | <a href="eml.html#protocol">protocol</a> | <a href="eml.html#software">software</a>] - Dublin Core's Type element describes "the nature or genre of the content of the resource"
+in a single field. &nbsp;EML tries to document a good deal of the
+structure of the resource as well, and the types of metadata needed
+will vary by the genre of the resource. &nbsp;Because of this,
+the resource type is shown by the choice of element in EML, rather than
+by a specific field value. Thus, this is only an approximate match to
+the Dublin Core. </td>
+
+    </tr>
+
+    <tr>
+
+      <td>Format</td>
+
+      <td><a href="eml-entity.html#physical">physical</a>
+- This is an approximate mapping. Dublin Core describes the information to be contained in the Format element as follows: "Typically, Format may include the media-type or dimensions of the
+resource. Format may be used to identify the software, hardware, or
+other equipment needed to display or operate the resource. Examples of
+dimensions include size and duration." EML
+attempts to capture these different pieces of information in separate
+elements, so that they can be isolated as needed. &nbsp;Also, as with
+publisher, not all types of resources, such as protocols, with have a
+format. The physical element of EML, which captures many aspects of the
+structure of the resource, is the closest match to this Dublin Core
+element. The most commonly used location for the EML physical element
+is
+/eml/dataset/dataTable/physical.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Identifier</td>
+
+      <td><a href="eml.html#packageId">packageId</a>
+- EML's packageId is technically an attribute of the eml element, rather than an element of its own.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Source</td>
+
+      <td><a href="eml-methods.html#dataSource">dataSource</a>
+- This is an approximate mapping. The Source element of Dublin Core is used to describe a
+"[r]eference to a resource from which the present resource is derived."
+&nbsp;If a resource is derived from another resource, however, thus
+should be some description of how the new resource was derived from the
+old one. &nbsp;EML allows sources to be described in the methods module
+via the dataSource element, accompanied by descriptions of the process
+by which the present resource was derived. &nbsp;The dataSource element
+is located at /eml/dataset/methods/methodStep/dataSource .</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Language</td>
+
+      <td>xml:lang - The Dublin Core Language element is used to state
+the langauge of the content of the resource. &nbsp;Since XML defines a
+language attribute to document this information in
+its specification, EML uses this structure rather than defining its
+own field.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Relation</td>
+
+      <td><a href="eml-methods.html#citation">citation</a>
+- The Relation element of Dublin Core is used to list a "A
+reference to a related resource." Such references are handled by the
+citation element of EML, which can hold a great deal of information
+beyond the name. EML citation elements can be located in various places
+in the scehma, depending on how the reference is related to teh
+resource. &nbsp;For example, a reference to an external protocol would
+go in /eml/dataset/methods/methodstep/citation, while a reference to a
+taxonomic classification system would go in
+/eml/dataset/coverage/taxonomicCoverage/taxonomicSystem/classificationSystemCitation.</td>
+
+    </tr>
+
+    <tr>
+
+      <td>Coverage</td>
+
+      <td><a href="eml-resource.html#coverage">coverage</a></td>
+
+    </tr>
+
+    <tr>
+
+      <td>Rights</td>
+
+      <td><a href="eml-resource.html#coverage">intellectualRights</a></td>
+
+    </tr>
+</tbody>
+</table>
+
+</body>
+</html>

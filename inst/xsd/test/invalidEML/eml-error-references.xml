@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml packageId="test.1.4" system="KNB" 
+         xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd">
+  <dataset id="a">
+    <title>Sample datset Description</title>
+    <creator id="23445" scope="document">
+      <individualName>
+        <surName>Smith</surName>
+      </individualName>
+    </creator>
+    <contact id="b">
+      <individualName>
+        <surName>Johnson</surName>
+      </individualName>
+    </contact>
+    <!-- this file is invalid because contact has both an id and a reference -->
+    <contact id="c">
+      <references>23445</references>
+    </contact>
+  </dataset>
+</eml:eml>

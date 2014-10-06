@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
+         packageId="sbclter-bibliography.232.1"
+         system="knb"
+         scope="system">
+   <citation id="sbclter-bibliography.232">
+      <alternateIdentifier system="sbclter-bibliography">232</alternateIdentifier>
+      <title>Molecular community analysis in environmental monitoring</title>
+      <creator scope="document">
+         <individualName>
+            <givenName>P</givenName>
+            <givenName>A</givenName>
+            <surName>Holden</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>M</givenName>
+            <givenName>G</givenName>
+            <surName>LaMontagne</surName>
+         </individualName>
+      </creator>
+      <pubDate>2004</pubDate>
+      <presentation>
+         <conferenceName>Association of Environmental Health Sciences (AEHS)</conferenceName>
+         <conferenceDate>March 16, 2004</conferenceDate>
+         <conferenceLocation>
+            <city>San Diego</city>
+            <administrativeArea>CA</administrativeArea>
+         </conferenceLocation>
+      </presentation>
+   </citation>
+</eml:eml>

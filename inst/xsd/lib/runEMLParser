@@ -1,0 +1,4 @@
+# echo "usage: runEMLParser <emlfile>"
+# echo "where <emlfile> is the file you want to parse."
+java -cp ./eml.jar:./configxml.jar:./apache/xercesImpl.jar:./apache/xmlParserAPIs.jar:./apache/xalan.jar:./apache/xml-apis.jar org.ecoinformatics.eml.EMLParser -q ./config.xml $1
+java -cp ./eml.jar:./configxml.jar:./apache/xercesImpl.jar:./apache/xmlParserAPIs.jar:./apache/xalan.jar:./apache/xml-apis.jar org.ecoinformatics.eml.SAXValidate $1

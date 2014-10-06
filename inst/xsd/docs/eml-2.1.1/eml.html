@@ -1,0 +1,438 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle"> The eml module - A metadata container </div>
+            
+<p> The eml module is a wrapper container that allows the inclusion of any metadata
+              content in a single EML document. The eml module is used as a container to hold
+              structured descriptions of ecological resources. In EML, the definition of a resource
+              comes from the <a href="http://dublincore.org/documents/usageguide/">
+                 The Dublin Core Metadata Initiative 
+              </a>, which describes a general element set used to describe "networked digital
+              resources". The top-level structure of EML has been designed to be compatible with the
+              Dublin Core syntax. In general, dataset resources, literature resources, software
+              resources, and protocol resources comprise the list of information that may be
+              described in EML. EML is largely designed to describe digital resources, however, it
+              may also be used to describe non-digital resources such as paper maps and other
+              non-digital media.  In EML, the definition of a "Data Package" is the
+                combination of both the data and metadata for a resource.  So, data
+              packages are built by using the &lt;eml&gt; wrapper, which will include all of
+              the metadata, and optionally the data (or references to them). All EML packages must
+              begin with the &lt;eml&gt; tag and end with the &lt;/eml&gt; tag. </p>
+            
+<p> The eml module may be extended to describe other resources by means of its
+              optional sub-field, &lt;additionalMetadata&gt;. This field is largely reserved
+              for the inclusion of metadata that may be highly discipline specific and not covered
+              in this version of EML, or it may be used to internally extend fields within the EML
+              standard. </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all datasets</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-dataset, eml-literature, eml-software, eml-protocol, eml-resource, eml-access, http://www.w3.org/2009/01/xml</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml.png" target="offline">eml image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="eml">eml&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#access">access</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#dataset">dataset</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#citation">citation</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#software">software</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#protocol">protocol</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#additionalMetadata">additionalMetadata</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#packageId">packageId</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xml:lang">xml:lang</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The "eml" element allows for the inclusion of any metadata content in a
+          single EML document. In general, dataset resources, literature resources, and software
+          resources, or another type that extends eml-resource are described using an eml document.
+          The eml document represents a "package" that can contain both metadata and data. It can
+          optionally include non-EML metadata through the flexibility of the "additionalMetadata"
+          element. Any additional metadata that is provided can provide a pointer into the EML
+          metadata indicating what the context of the additional metadata is (i.e., what it
+          describes). For example, a spatial raster image might be described in EML, and an FGDC
+          CSDGM metadata document could be included in the additionalMetadata element with a pointer
+          to the EML spatialRaster element to indicate that the FGDC metadata is providing
+          supplemental documentation about that particular image entity. There is no validity
+          constraint that restricts what metadata may be present in additionalMetadata. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="access">access&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-access.html#AccessType">acc:AccessType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>An optional access tree at this location controls access to the entire metadata document. If this access element is omitted from the document, then the package submitter should be given full access to the package but all other users should be denied all access. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="dataset">dataset&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-dataset.html#DatasetType">ds:DatasetType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A resource that describes a data set, which can include one or more
+                  data entities such as data tables and spatial images (raster and vector). If
+                  included, this represents the primary resource that is described in this eml
+                  document. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="citation">citation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A resource that describes a literature citation that one might find
+                  in a bibliography. If included, this represents the primary resource that is
+                  described in this eml document. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="software">software&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-software.html#SoftwareType">sw:SoftwareType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A resource that describes a software package, which can include
+                  commercial and non-commercial software as well as data processing programs. If
+                  included, this represents the primary resource that is described in this eml
+                  document. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="protocol">protocol&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-protocol.html#ProtocolType">prot:ProtocolType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A resource that describes a scientific protocol, which can include
+                  one or more descriptions of methods and procedures. If included, this represents
+                  the primary resource that is described in this eml document. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="additionalMetadata">additionalMetadata&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#describes">describes</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#metadata">metadata</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A flexible field for including any other relevant metadata that
+                pertains to the resource being described. This field allows EML to be extensible in
+                that any XML-based metadata can be included in this element, including metadata from
+                other standards such as the FGDC CSDGM. The "describes" element of this field allows
+                the specific part of the resource which is described by the additional metadata to
+                be indicated formally. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="describes">describes&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A pointer to the id attribute for the sub-portion of the
+                      resource that is described by this additional metadata. This is a formal field
+                      in that it is an error to provide a value in the "describes" element that does
+                      not correspond to the value of one of the "id" attributes in another eml
+                      module. This is designed to allow automated processors to discover the
+                      contextual relationship between the additional metadata and the resource it
+                      describes. <br>
+<span class="boldtext">Example(s): </span>
+<br>knb.343.22<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="metadata">metadata&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element contains the additional metadata to be included in
+                      the document. This element should be used for extending EML to include
+                      metadata that is not already available in another part of the EML
+                      specification, or to include site- or system-specific extensions that are
+                      needed beyond the core metadata. The additional metadata contained in this
+                      field describes the element referenced in the 'describes' element preceding
+                      it. The content of this field is any well-formed XML fragment. If that content
+                      contains namespace declarations, and if the namespace declaration can be
+                      resolved to a schema definition, then the content will be validated against
+                      that schema definition. If no namespace is present, or if no schema can be
+                      resolved, validation for this fragment will be skipped (validation is "lax"). <br>
+<span class="boldtext">Example(s): </span>
+<br>
+                      &lt;embargoDate&gt;2006-10-10&lt;/embargoDate&gt;
+                      <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="packageId">packageId</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A unique identifier for this entire EML metadata document that can be
+              used to reference it elsewhere. This identifier can be interpreted as the formal
+              accession number for this EML package, and is therefore required. It must be unique
+              within a particular data management system (see the "system" attribute). <br>
+<span class="boldtext">Example(s): </span>
+<br>knb.343.22<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The scope of the identifier. Scope is generally set to either "system",
+              meaning that it is scoped according to the "system" attribute, or "document" if it is
+              only to be in scope within this single document instance. In this particular use of
+              scope, it is FIXED to be "system" because the packageId is required and always has the
+              scope of the required "system". <br>
+<span class="boldtext">Example(s): </span>
+<br>system<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="xml:lang">xml:lang</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

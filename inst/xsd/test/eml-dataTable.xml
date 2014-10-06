@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dt:dataTable id="knb.345.1" scope="document"
+    system="http://knb.ecoinformatics.org"
+    xmlns:dt="eml://ecoinformatics.org/dataTable-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/dataTable-2.1.1
+    eml-dataTable.xsd">
+    <alternateIdentifier>TEMPID234</alternateIdentifier>
+    <entityName>Test Data</entityName>
+    <entityDescription>This is a test entity that is fake.</entityDescription>
+    <additionalInfo><para>This is test data</para></additionalInfo>
+    <attributeList>
+      <attribute>
+        <attributeName>rain</attributeName>
+        <attributeLabel>Surface Rainfall</attributeLabel>
+        <attributeDefinition>The amount of rainfall on the sampling unit.
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <storageType typeSystem="http://java.sun.com/docs/books/jls/second_edition/html">double</storageType>
+        <measurementScale>
+          <interval>
+            <unit><standardUnit>millimeter</standardUnit></unit>
+            <precision>0.5</precision>
+            <numericDomain id="nd.1">
+              <numberType>real</numberType>
+              <bounds>
+                <minimum exclusive="false">0</minimum>
+              </bounds>
+            </numericDomain>
+          </interval>
+        </measurementScale>
+      </attribute>
+    </attributeList>
+</dt:dataTable>

@@ -1,0 +1,37 @@
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+        "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+    <display-name>emlparser</display-name>
+
+    <context-param>
+      <param-name>berkley</param-name>
+      <param-value>berkley@nceas.ucsb.edu</param-value>
+      <description>
+      </description>
+    </context-param>
+
+    <servlet>
+      <servlet-name>emlparser</servlet-name>
+      <servlet-class>org.ecoinformatics.eml.EMLParserServlet</servlet-class>
+      <init-param>
+        <param-name>debug</param-name>
+        <param-value>1</param-value>
+      </init-param>
+      <init-param>
+        <param-name>listings</param-name>
+        <param-value>true</param-value>
+      </init-param>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>invoker</servlet-name>
+        <url-pattern>/servlet/*</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+      <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>

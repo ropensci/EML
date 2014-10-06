@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd">
+
+<dataset>
+  <title>Data from Cedar Creek LTER on productivity and species richness
+  for use in a workshop titled "An Analysis of the Relationship between
+  Productivity and Diversity using Experimental Results from the Long-Term
+  Ecological Research Network" held at NCEAS in September 1996.</title>
+  <creator id="clarence.lehman">
+    <individualName>
+      <salutation>Mr.</salutation>
+      <givenName>Clarence</givenName>
+      <surName>Lehman</surName>
+    </individualName>
+    <address>
+      <deliveryPoint>Department of Ecology Evolution and Behavior
+      </deliveryPoint>
+      <deliveryPoint>100 Ecology Bldg</deliveryPoint>
+      <deliveryPoint>1987 Upper Buford Circle</deliveryPoint>
+      <city>St. Paul</city>
+      <administrativeArea>MN</administrativeArea>
+      <postalCode>55108-6097</postalCode>
+      <country>USA</country>
+    </address>
+    <phone>612-624-6731</phone>
+    <electronicMailAddress>lehman@lter.umn.edu</electronicMailAddress>
+  </creator>
+  <creator id="richard.inouye">
+    <individualName>
+      <salutation>Mr.</salutation>
+      <givenName>Richard</givenName>
+      <surName>Inouye</surName>
+    </individualName>
+    <address>
+      <deliveryPoint>Department of Biological Science</deliveryPoint>
+      <deliveryPoint>Idaho State University</deliveryPoint>
+      <deliveryPoint>Campus Box 8007</deliveryPoint>
+      <city>Pocatello</city>
+      <administrativeArea>ID</administrativeArea>
+      <postalCode>83209-8007</postalCode>
+      <country>USA</country>
+    </address>
+    <phone>208-236-2933</phone>
+    <electronicMailAddress>inouye@lter.umn.edu</electronicMailAddress>
+  </creator>
+  <keywordSet>
+    <keyword>Old field grassland</keyword>
+    <keyword>biomass</keyword>
+    <keyword>productivity</keyword>
+    <keyword>species-area</keyword>
+    <keyword>species richness</keyword>
+  </keywordSet>
+  <contact>
+    <references>clarence.lehman</references>
+  </contact>
+  <contact>
+    <references>richard.inouye</references>
+  </contact>
+  <dataTable id="xyz">
+    <entityName>CDR LTER-patterns among communities.txt</entityName>
+    <entityDescription>patterns amoung communities at CDR</entityDescription>
+    <physical>
+      <objectName>CDR LTER-patterns among communities.txt</objectName>
+      <size unit="bytes">1245</size>
+      <characterEncoding>ASCII</characterEncoding>
+      <dataFormat>
+        <textFormat>
+          <numHeaderLines>1</numHeaderLines>
+          <attributeOrientation>column</attributeOrientation>
+          <simpleDelimited>
+            <fieldDelimiter>\t</fieldDelimiter>
+          </simpleDelimited>
+        </textFormat>
+      </dataFormat>
+      <distribution>
+        <online>
+          <url>http://metacat.nceas.ucsb.edu/knb/servlet/metacat?action=read&amp;docid=knb.46.1</url>
+        </online>
+      </distribution>
+    </physical>
+    <attributeList id="at.1">
+      <attribute id="att.1">
+        <attributeName>fld</attributeName>
+        <attributeLabel>Field</attributeLabel>
+        <attributeDefinition>Field where the data was collected
+        </attributeDefinition>
+        <storageType>string</storageType>
+        <measurementScale>
+          <nominal>
+            <nonNumericDomain id="nd.1">
+              <textDomain>
+                <definition>Valid names of fields</definition>
+              </textDomain>
+            </nonNumericDomain>
+          </nominal>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.2">
+        <attributeName>year</attributeName>
+        <attributeLabel>year</attributeLabel>
+        <attributeDefinition>The year the data was collected
+        </attributeDefinition>
+        <storageType>gYear</storageType>
+        <measurementScale>
+          <dateTime>
+            <formatString>YYYY</formatString>
+            <dateTimePrecision>1</dateTimePrecision>
+            <dateTimeDomain id="dd.2">
+              <bounds>
+                <minimum exclusive="false">1944</minimum>
+              </bounds>
+            </dateTimeDomain>
+          </dateTime>
+        </measurementScale>
+      </attribute>
+      <attribute  id="att.3">
+        <attributeName>sr</attributeName>
+        <attributeLabel>Species Richness</attributeLabel>
+        <attributeDefinition>Species richness for CDR</attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <interval>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.5</precision>
+            <numericDomain id="nd.3">
+              <numberType>real</numberType>
+              <bounds>
+                <minimum exclusive="true">0</minimum>
+              </bounds>
+            </numericDomain>
+          </interval>
+        </measurementScale>
+      </attribute>
+      <attribute  id="att.4">
+        <attributeName>pctcov</attributeName>
+        <attributeLabel>percent cover</attributeLabel>
+        <attributeDefinition>The percent ground cover on the field
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain id="nd.4">
+              <numberType>real</numberType>
+              <bounds>
+                <minimum exclusive="true">0</minimum>
+                <maximum exclusive="true">100</maximum>
+              </bounds>
+            </numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute  id="att.5">
+        <attributeName>avesr91</attributeName>
+        <attributeLabel>Average Species Richness for 1991</attributeLabel>
+        <attributeDefinition>The average species richness for the field in 1991
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain id="nd.5">
+              <numberType>real</numberType>
+              <bounds>
+                <minimum exclusive="true">0</minimum>
+              </bounds>
+            </numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute  id="att.6">
+        <attributeName>avesr92</attributeName>
+        <attributeLabel>Average Species Richness for 1992</attributeLabel>
+        <attributeDefinition>The average species richness for the field in 1992
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain><references>nd.5</references></numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute  id="att.7">
+        <attributeName>avesr93</attributeName>
+        <attributeLabel>Average Species Richness for 1993</attributeLabel>
+        <attributeDefinition>The average species richness for the field in 1993
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain><references>nd.5</references></numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.8">
+        <attributeName>avesr94</attributeName>
+        <attributeLabel>Average Species Richness for 1994</attributeLabel>
+        <attributeDefinition>The average species richness for the field in 1994
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain><references>nd.5</references></numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.9">
+        <attributeName>avesr95</attributeName>
+        <attributeLabel>Average Species Richness for 1995</attributeLabel>
+        <attributeDefinition>The average species richness for the field in 1995
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain><references>nd.5</references></numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.10">
+        <attributeName>avesr96</attributeName>
+        <attributeLabel>Average Species Richness for 1996</attributeLabel>
+        <attributeDefinition>The average species richness for the field in 1996
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain><references>nd.5</references></numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.11">
+        <attributeName>MeanSR</attributeName>
+        <attributeLabel>mean species richness</attributeLabel>
+        <attributeDefinition>the mean species richness from 1991 to 1996
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><standardUnit>dimensionless</standardUnit></unit>
+            <precision>0.1</precision>
+            <numericDomain><references>nd.5</references></numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.12">
+        <attributeName>biomass</attributeName>
+        <attributeLabel>Biomass</attributeLabel>
+        <attributeDefinition>The total biomass measured in this field
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><customUnit>gramsPerSquareMeter</customUnit></unit>
+            <precision>0.01</precision>
+            <numericDomain id="nd.6">
+              <numberType>real</numberType>
+              <bounds>
+                <minimum exclusive="true">0</minimum>
+              </bounds>
+            </numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.13">
+        <attributeName>sppm2</attributeName>
+        <attributeLabel>Species Per Square Meter</attributeLabel>
+        <attributeDefinition>Calculated species per square meter
+        </attributeDefinition>
+        <storageType>float</storageType>
+        <measurementScale>
+          <ratio>
+            <unit><customUnit>speciesPerSquareMeter</customUnit></unit>
+            <precision>0.01</precision>
+            <numericDomain id="nd.7">
+              <numberType>real</numberType>
+              <bounds>
+                <minimum exclusive="true">0</minimum>
+              </bounds>
+            </numericDomain>
+          </ratio>
+        </measurementScale>
+      </attribute>
+      <attribute id="att.14">
+        <attributeName>time</attributeName>
+        <attributeLabel>Time</attributeLabel>
+        <attributeDefinition>The time of day for this observation, 24 hour clock
+        </attributeDefinition>
+        <storageType>time</storageType>
+        <measurementScale>
+          <dateTime>
+            <formatString>hh:mm:ss.s</formatString>
+            <dateTimePrecision>0.1</dateTimePrecision>
+            <dateTimeDomain id="dd.3">
+              <bounds>
+                <minimum exclusive="true">15:00:00.0</minimum>
+                <maximum exclusive="true">19:00:00.0</maximum>
+              </bounds>
+            </dateTimeDomain>
+          </dateTime>
+        </measurementScale>
+      </attribute>
+    </attributeList>
+    <caseSensitive>no</caseSensitive>
+    <numberOfRecords>22</numberOfRecords>
+  </dataTable>
+</dataset>
+<additionalMetadata>
+<metadata>
+<stmml:unitList xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1"
+    xsi:schemaLocation="http://www.xml-cml.org/schema/stmml-1.1 stmml.xsd">
+    <!--note that the unitTypes here are taken from the eml-unitDictionary.xml-->
+    <stmml:unit name="gramsPerSquareMeter" unitType="arealMassDensity" id="gramsPerSquareMeter" parentSI="kilogramsPerSquareMeter" multiplierToSI=".001"/>
+    <stmml:unit name="speciesPerSquareMeter" unitType="arealDensity" id="speciesPerSquareMeter" parentSI="numberPerSquareMeter" multiplierToSI="1"/>
+  </stmml:unitList>
+  </metadata>
+</additionalMetadata>
+</eml:eml>

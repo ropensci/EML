@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<rp:party
+    xmlns:rp="eml://ecoinformatics.org/party-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/party-2.1.1 eml-party.xsd">
+
+  <organizationName>
+    University of California
+  </organizationName>
+  <address>
+    <deliveryPoint>123 Campus Dr.</deliveryPoint>
+    <city>Santa Barbara</city>
+    <administrativeArea>CA</administrativeArea>
+    <postalCode>93101</postalCode>
+    <country>USA</country>
+  </address>
+  <phone phonetype="voice">
+    805-123-1234
+  </phone>
+  <electronicMailAddress>joe@something.org</electronicMailAddress>
+  <onlineUrl>www.something.org/~joe</onlineUrl>
+  <userId directory="ldap">joe</userId>
+</rp:party>

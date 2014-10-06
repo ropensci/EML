@@ -1,0 +1,1749 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-spatialRaster Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-spatialRaster</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+              The eml-spatialRaster module - Logical information about
+              regularly gridded geospatial image data
+            </div>
+            
+<p>
+              The eml-spatialRaster module allows for the description of
+              entities composed of rectangular grids of data values that are
+              usually georeferenced to a portion of the earth's surface.
+              Specific attributes of a spatial raster can be documented
+              here including the spatial organization of the raster cells,
+              the cell data values, and if derived via imaging sensors,
+              characteristics about the image and its individual bands.
+            </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-spatialRaster">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all spatial datasets that use spatial gridded data</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-spatialReference, eml-coverage, eml-entity, eml-resource, eml-attribute, eml-constraint</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-spatialRaster.png" target="offline">eml-spatialRaster image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialRaster">spatialRaster&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#SpatialRasterType">SpatialRasterType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Description of a GIS layer composed of raster pixels
+        comprising a regular-pattern grid. Generally, a raster object may be
+        thought of as a pattern of closely spaced rows of dots that
+        collectively form an image. Raster spatial objects are used to locate
+        zero-, two-, or three-dimensional locations in the
+        dataset<br>
+<span class="boldtext">Example(s): </span>
+<br>An interpolated grid of irregularly spaced data is an
+        example of this element.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeList">attributeList&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-attribute.html#AttributeListType">att:AttributeListType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The list of attributes associated with this
+              entity.  For more information see the eml-attribute
+              module.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="constraint">constraint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-constraint.html#ConstraintType">con:ConstraintType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Description of any relational constraints on 
+              this entity.  For more information see the eml-constraint
+              module.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialReference">spatialReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-spatialReference.html#SpatialReferenceType">spref:SpatialReferenceType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Spatial Referencing systems define the coordinates used to
+              describe horizontal and vertical locations. These are typically either geographic, projected
+              planar, or arbitrary planar.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="georeferenceInfo">georeferenceInfo&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#cornerPoint">cornerPoint</a></td><td class="tablepanel">required</td><td class="tablepanel">4</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#controlPoint">controlPoint</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#bilinearFit">bilinearFit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information on how to position the grid within the coordinate
+                    system defined in the spatial reference module. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="cornerPoint">cornerPoint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xCoordinate">xCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#yCoordinate">yCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#pointInPixel">pointInPixel</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#corner">corner</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Location of a corner on the coordinate system defined in
+                    the spatial reference module. Use this element when the rows and columns
+                     of the grid are aligned with the coordinate system. One or more corner 
+                     points are needed to locate a rectified grid.
+                          </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="xCoordinate">xCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Location of the georeferencing point expressed in units of the
+                           coordinate system
+                      defined in the spatial Reference module.<br>
+<span class="boldtext">Example(s): </span>
+<br>455000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="yCoordinate">yCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Y Location of the georeferencing point expressed in units of the coordinate system
+                      defined in the spatial Reference module.<br>
+<span class="boldtext">Example(s): </span>
+<br>3455000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="pointInPixel">pointInPixel&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Location within the pixel of the georeferencing point.<br>
+<span class="boldtext">Example(s): </span>
+<br>upperLeft<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>upperLeft</li>
+<li>upperRight</li>
+<li>lowerRight</li>
+<li>lowerLeft</li>
+<li>center</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="corner">corner&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#rasterOriginType">rasterOriginType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Identification of the corner in the grid corresponding to the   
+                    coordinates provided. 
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>Upper Left<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="controlPoint">controlPoint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#column">column</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#row">row</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xCoordinate">xCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#yCoordinate">yCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#pointInPixel">pointInPixel</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>If the grid is rectified to the coordinate system, then
+                     a single point may be used to position the grid. Otherwise, a series of 
+                     points is necessary to fit the grid to the coordinate system. 
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="column">column&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:int</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Column location of the georeferencing point indicated as the nth column
+                      counting the cell indicated in rasterOrigin as column 1.<br>
+<span class="boldtext">Example(s): </span>
+<br>1<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="row">row&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:int</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Row location of the georeferencing point indicated as the nth row
+                      counting the cell indicated in rasterOrigin as row 1.<br>
+<span class="boldtext">Example(s): </span>
+<br>1<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="xCoordinate">xCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Location of the georeferencing point expressed in units of the coordinate system
+                      defined in the spatial Reference module.<br>
+<span class="boldtext">Example(s): </span>
+<br>455000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="yCoordinate">yCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Y Location of the georeferencing point expressed in units of the
+                           coordinate system
+                      defined in the spatial Reference module.<br>
+<span class="boldtext">Example(s): </span>
+<br>3455000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="pointInPixel">pointInPixel&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Location within the pixel of the georeferencing point.<br>
+<span class="boldtext">Example(s): </span>
+<br>upperLeft<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>upperLeft</li>
+<li>upperRight</li>
+<li>lowerRight</li>
+<li>lowerLeft</li>
+<li>center</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="bilinearFit">bilinearFit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xIntercept">xIntercept</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xSlope">xSlope</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#yIntercept">yIntercept</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#ySlope">ySlope</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Intercept and slope terms to describe the orientation and position of the
+                          grid to the coordinate system based on corner point identified in the rasterOrigin element.
+                      defined in the spatial Reference module.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="xIntercept">xIntercept&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>X Intercept of the rasterOrigin point within the coordinate system.
+                          <br>
+<span class="boldtext">Example(s): </span>
+<br>3455000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="xSlope">xSlope&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Slope describing transformation of grid cell distances into x coordinates.
+                           <br>
+<span class="boldtext">Example(s): </span>
+<br>5.0123<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="yIntercept">yIntercept&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Location of the rasterOrigin point on the y axis of the the coordinate
+                           system. <br>
+<span class="boldtext">Example(s): </span>
+<br>455000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ySlope">ySlope&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Slope describing transformation of grid cell distances into y axis 
+                          coordinates. <br>
+<span class="boldtext">Example(s): </span>
+<br>5.0123<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="horizontalAccuracy">horizontalAccuracy&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DataQuality">DataQuality</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Horizontal accuracy may be reported either as a quantitative estimate
+              expressed in the units of the coordinate system or as a text assessment.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="verticalAccuracy">verticalAccuracy&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DataQuality">DataQuality</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Vertical accuracy may be reported either as a quantitative estimate
+              expressed in the units of the height or depth measurement system or as a text
+              assessment.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="cellSizeXDirection">cellSizeXDirection&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Cell sizes should be expressed in the units declared in the spatialReference module.
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>28.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="cellSizeYDirection">cellSizeYDirection&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Cell sizes should be expressed in the units declared in the spatialReference module.
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>28.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="numberOfBands">numberOfBands&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Image data may have more than one sensor band represented for each pixel.
+               <br>
+<span class="boldtext">Example(s): </span>
+<br>7<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="rasterOrigin">rasterOrigin&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#rasterOriginType">rasterOriginType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Identification the corner of the grid where the
+              first values for both the x and y axes begin in the
+              file. <br>
+<span class="boldtext">Example(s): </span>
+<br>Upper Left<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="rows">rows&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Maximum number of raster objects along the
+              ordinate (y) axis<br>
+<span class="boldtext">Example(s): </span>
+<br>455<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="columns">columns&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Maximum number of raster objects along the
+              abscissa (x) axis<br>
+<span class="boldtext">Example(s): </span>
+<br>455<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="verticals">verticals&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Maximum number of raster objects along the
+              vertical (z) axis.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="cellGeometry">cellGeometry&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#CellGeometryType">CellGeometryType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Indication of whether the cell value is representative of a single   
+              point(matrix) within the cell or the entire cell (pixel)<br>
+<span class="boldtext">Example(s): </span>
+<br>pixel<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="toneGradation">toneGradation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:integer</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Number of colors present in the
+              image.<br>
+<span class="boldtext">Example(s): </span>
+<br>255<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="scaleFactor">scaleFactor&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The scale factor is used for raster-rescaling
+              operations, where the following operation is applied to each
+              pixel in the data in the source:
+              rescaled=(source*scaleFactor)+offset.<br>
+<span class="boldtext">Example(s): </span>
+<br>2<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="offset">offset&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The offset is used for raster-rescaling
+              operations, where the following operation is applied to each
+              pixel in the data in the source:
+              rescaled=(source*scaleFactor)+offset.<br>
+<span class="boldtext">Example(s): </span>
+<br>20<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="imageDescription">imageDescription&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#illuminationElevationAngle">illuminationElevationAngle</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#illuminationAzimuthAngle">illuminationAzimuthAngle</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#imageOrientationAngle">imageOrientationAngle</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#imagingCondition">imagingCondition</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#imageQualityCode">imageQualityCode</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#cloudCoverPercentage">cloudCoverPercentage</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#preProcessingTypeCode">preProcessingTypeCode</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#compressionGenerationQuality">compressionGenerationQuality</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#triangulationIndicator">triangulationIndicator</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#radiometricDataAvailability">radiometricDataAvailability</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#cameraCalibrationInformationAvailability">cameraCalibrationInformationAvailability</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#filmDistortionInformationAvailability">filmDistortionInformationAvailability</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#lensDistortionInformationAvailability">lensDistortionInformationAvailability</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#bandDescription">bandDescription</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Provides information about the image's
+              suitability for use, sensor properties, and individual band
+              descriptions.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="illuminationElevationAngle">illuminationElevationAngle&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Illumination elevation measured in degrees
+                    clockwise from the target plane at intersection of the
+                    optical line of sight with the earth's
+                    surface.<br>
+<span class="boldtext">Example(s): </span>
+<br>45.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="illuminationAzimuthAngle">illuminationAzimuthAngle&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Illumination azimuth measured in degrees
+                    clockwise from true north at the time the image is
+                    taken.<br>
+<span class="boldtext">Example(s): </span>
+<br>45.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="imageOrientationAngle">imageOrientationAngle&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Angle from the first row of the image to
+                    true north in degrees, clockwise.<br>
+<span class="boldtext">Example(s): </span>
+<br>45.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="imagingCondition">imagingCondition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ImagingConditionCode">ImagingConditionCode</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Code which indicates conditions which
+                    affect the quality of the image.<br>
+<span class="boldtext">Example(s): </span>
+<br>cloud<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="imageQualityCode">imageQualityCode&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Specifies the image
+                    quality.<br>
+<span class="boldtext">Example(s): </span>
+<br>Excellent<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="cloudCoverPercentage">cloudCoverPercentage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Area of the dataset obscured by clouds,
+                    expressed as a percentage of the spatial
+                    extent.<br>
+<span class="boldtext">Example(s): </span>
+<br>12<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="preProcessingTypeCode">preProcessingTypeCode&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Image distributor's code that identifies
+                    the level of radiometric and geometric processing applied
+                    against the image.<br>
+<span class="boldtext">Example(s): </span>
+<br>LEVELl1A, SPOTVIEWORTHO<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="compressionGenerationQuality">compressionGenerationQuality&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:integer</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Counts the number of lossy compression
+                    cycles performed on the image.<br>
+<span class="boldtext">Example(s): </span>
+<br>2<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="triangulationIndicator">triangulationIndicator&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:boolean</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Code which indicates whether or not
+                    triangulation has been performed upon the
+                    image.<br>
+<span class="boldtext">Example(s): </span>
+<br>false<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="radiometricDataAvailability">radiometricDataAvailability&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:boolean</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Code which indicates whether or not
+                    Standard Radiometric Product data is
+                    available.<br>
+<span class="boldtext">Example(s): </span>
+<br>false<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="cameraCalibrationInformationAvailability">cameraCalibrationInformationAvailability&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:boolean</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Code which indicates whether or not
+                    constants are available which allow for camera calibration
+                    corrections.<br>
+<span class="boldtext">Example(s): </span>
+<br>false<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="filmDistortionInformationAvailability">filmDistortionInformationAvailability&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:boolean</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Code which indicates whether or not
+                    Calibration Reseau information is
+                    available<br>
+<span class="boldtext">Example(s): </span>
+<br>true<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="lensDistortionInformationAvailability">lensDistortionInformationAvailability&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:boolean</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Code which indicates whether or not lens
+                    aberration correction information is
+                    available<br>
+<span class="boldtext">Example(s): </span>
+<br>true<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="bandDescription">bandDescription&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#BandType">BandType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Description of the wavelength domain that the sensor operates
+                    in</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="sequenceIdentifier">sequenceIdentifier&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Number that uniquely identifies instances of bands
+            of wavelengths on which a sensor operates.<br>
+<span class="boldtext">Example(s): </span>
+<br>3<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="highWavelength">highWavelength&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Highest wavelength that the sensor is capable of
+            collecting within a designated band.<br>
+<span class="boldtext">Example(s): </span>
+<br>2.456<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="lowWaveLength">lowWaveLength&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:float</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Lowest wavelength that the sensor is capable of
+            collecting within a designated band.<br>
+<span class="boldtext">Example(s): </span>
+<br>0.1234<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="waveLengthUnits">waveLengthUnits&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-spatialReference.html#lengthUnits">spref:lengthUnits</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Units of measure for the wavelength at which the
+            sensor collected the data.<br>
+<span class="boldtext">Example(s): </span>
+<br>microns<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="peakResponse">peakResponse&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="accuracyReport">accuracyReport&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A text statement of the data quality, included the means by which it was determined.
+            </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAccuracyReport">quantitativeAccuracyReport&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAccuracyValue">quantitativeAccuracyValue</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAccuracyMethod">quantitativeAccuracyMethod</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A quantitative assessment of the data quality expressed as a value and 
+            the method of its determination.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAccuracyValue">quantitativeAccuracyValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The value resulting from the accuracy test. Typically, this will be expressed
+                  in units corresponding to those declared for the parameter being assessed.<br>
+<span class="boldtext">Example(s): </span>
+<br>4.5<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAccuracyMethod">quantitativeAccuracyMethod&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Identification and explanation of the method used to calculate the quantitative 
+                  accuracy assessment.<br>
+<span class="boldtext">Example(s): </span>
+<br>Error expressed as root mean square of 5 control points. <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="SpatialRasterType">SpatialRasterType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-entity.html#EntityGroup">ent:EntityGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeList">attributeList</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#constraint">constraint</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#spatialReference">spatialReference</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#georeferenceInfo">georeferenceInfo</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#horizontalAccuracy">horizontalAccuracy</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#verticalAccuracy">verticalAccuracy</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#cellSizeXDirection">cellSizeXDirection</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#cellSizeYDirection">cellSizeYDirection</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#numberOfBands">numberOfBands</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#rasterOrigin">rasterOrigin</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#rows">rows</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#columns">columns</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#verticals">verticals</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#cellGeometry">cellGeometry</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#toneGradation">toneGradation</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scaleFactor">scaleFactor</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#offset">offset</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#imageDescription">imageDescription</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="BandType">BandType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#sequenceIdentifier">sequenceIdentifier</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#highWavelength">highWavelength</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#lowWaveLength">lowWaveLength</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#waveLengthUnits">waveLengthUnits</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#peakResponse">peakResponse</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="DataQuality">DataQuality&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#accuracyReport">accuracyReport</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAccuracyReport">quantitativeAccuracyReport</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="CellValueType">CellValueType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>Values</li>
+<li>Coded</li>
+<li>RGB</li>
+<li>Codes</li>
+<li>HIS</li>
+<li>HLS</li>
+<li>tekHVC</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="ImagingConditionCode">ImagingConditionCode</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>blurredimage</li>
+<li>cloud</li>
+<li>degradingObliquity</li>
+<li>fog</li>
+<li>heavySmokeorDust</li>
+<li>night</li>
+<li>rain</li>
+<li>semiDarkness</li>
+<li>shadow</li>
+<li>snow</li>
+<li>terrainMasking</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="rasterOriginType">rasterOriginType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>Upper Left</li>
+<li>Lower Left</li>
+<li>Upper Right</li>
+<li>Lower Right</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="CellGeometryType">CellGeometryType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>pixel</li>
+<li>matrix</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

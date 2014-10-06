@@ -1,0 +1,2117 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-resource Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-resource</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+              The eml-resource module - Base information for
+              all resources
+            </div>
+            
+<p>
+              The eml-resource module contains general information that
+              describes dataset resources, literature resources, protocol
+              resources, and software resources. Each of the above four types of
+              resources share a common set of information, but also have
+              information that is unique to that particular resource type.  Each
+              resource type uses the eml-resource module to document the
+              information common to all resources, but then extend
+              eml-resource with modules that are specific to that particular
+              resource type.  For instance, all resources have creators,
+              titles, and perhaps keywords, but only the dataset resource would
+              have a "data table" within it.  Likewise, a literature
+              resource may have an "ISBN" number associated with it,
+              whereas the other resource types would not.
+            </p>
+            
+<p>
+              The eml-resource module is exclusively used by other modules, and is
+              therefore not a stand-alone module.
+            </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-resource">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all datasets</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">no</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-party, eml-coverage, eml-text, http://www.w3.org/2009/01/xml</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-resource.png" target="offline">eml-resource image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="alternateIdentifier">alternateIdentifier&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>An additional, secondary identifier for this
+            entity. The primary identifier belongs in the "id" attribute, but
+            additional identifiers that are used to label this entity, possibly
+            from different data management systems, can be listed
+            here.<br>
+<span class="boldtext">Example(s): </span>
+<br>VCR3465<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="shortName">shortName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'shortName' field provides a concise name that
+            describes the resource that is being documented. It is the
+            appropriate place to store a filename associated with other storage
+            systems.<br>
+<span class="boldtext">Example(s): </span>
+<br>vernal-data-1999<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="title">title&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#i18nNonEmptyStringType">i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'title' field provides a description of the
+            resource that is being documented that is long enough to
+            differentiate it from other similar resources. Multiple titles may
+            be provided, particularly when trying to express the title in more
+            than one language (use the "xml:lang" attribute to indicate the
+            language if not English/en).<br>
+<span class="boldtext">Example(s): </span>
+<br>Vernal pool amphibian density data, Isla Vista,
+            1990-1996.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="creator">creator&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'creator' element provides the full name of
+            the person, organization, or position who created the resource. The
+            list of creators for a resource represent the people and
+            organizations who should be cited for the
+            resource.<br>
+<span class="boldtext">Example(s): </span>
+<br>For a book, the creators are its
+            authors.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="metadataProvider">metadataProvider&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'metadataProvider' element provides the full
+            name of the person, organization, or position who created
+            documentation for the resource.<br>
+<span class="boldtext">Example(s): </span>
+<br>The scientist who collected the data, sometimes a data
+            technician, or other individual.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="associatedParty">associatedParty&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a> (by xs:extension) </p>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#role">role</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'associatedParty' element provides the full
+            name of other people, organizations, or positions who should be
+            associated with the resource. These parties might play various
+            roles in the creation or maintenance of the resource, and these
+            roles should be indicated in the "role" element.<br>
+<span class="boldtext">Example(s): </span>
+<br>The technician who collected the data.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="role">role&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#RoleType">rp:RoleType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Use this field to describe the role the
+                      party played with respect to the resource. Some potential
+                      roles include technician, reviewer, principal
+                      investigator, and many others.<br>
+<span class="boldtext">Example(s): </span>
+<br>principalInvestigator<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="pubDate">pubDate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#yearDate">yearDate</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'pubDate' field represents the date that the
+            resource was published. The format should be represented as: CCYY,
+            which represents a 4 digit year, or as CCYY-MM-DD, which denotes
+            the full year, month, and day. Note that month and day are optional
+            components. Formats must conform to ISO 8601.<br>
+<span class="boldtext">Example(s): </span>
+<br>1999-10-26<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="language">language&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#i18nNonEmptyStringType">i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The language in which the resource is written.
+            This can be a well-known language name, or one of the ISO language
+            codes to be more precise.<br>
+<span class="boldtext">Example(s): </span>
+<br>English<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="series">series&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field describes the series of resources that
+            include the resource being described. For example, a volume of a
+            journal may be part of a series of the journal for a particular
+            year.<br>
+<span class="boldtext">Example(s): </span>
+<br>Volume 20<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="abstract">abstract&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A brief overview of the resource that is being
+            documented. The abstract should include basic information that
+            summarizes the resource.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="keywordSet">keywordSet&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#keyword">keyword</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#keywordThesaurus">keywordThesaurus</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'keywordSet' element is a container for the
+            'keyword' and 'keywordThesaurus' fields. Each keywordSet field can
+            contain one or more keywords and a name of a thesaurus for the set
+            of keywords. Each keyword field should contain one and only one
+            keyword (i.e., keywords should not be separated by commas or other
+            delimiters).<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the examples for the subfields contained
+            within this field.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="keyword">keyword&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><a class="sitelink" href="#i18nNonEmptyStringType">i18nNonEmptyStringType</a> (by xs:extension) </p>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#keywordType">keywordType</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field names a keyword or key phrase that
+                  concisely describes the resource or is related to the
+                  resource. Each keyword field should contain one and only one
+                  keyword (i.e., keywords should not be separated by commas or
+                  other delimiters).<br>
+<span class="boldtext">Example(s): </span>
+<br>biodiversity<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="keywordThesaurus">keywordThesaurus&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field provides the name of the official
+                  keyword thesaurus from which keyword was derived. The keyword
+                  thesauri are usually discipline specific.<br>
+<span class="boldtext">Example(s): </span>
+<br>IRIS keyword thesaurus<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="additionalInfo">additionalInfo&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field provides any information that is not
+            characterized by the other resource metadata
+            fields.<br>
+<span class="boldtext">Example(s): </span>
+<br>Copyright 2001, Robert Warner<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="intellectualRights">intellectualRights&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Typically, an intellectual Rights element will
+            contain a rights management statement for the resource, or
+            reference a service providing such information. Rights information
+            encompasses Intellectual Property Rights (IPR), Copyright, and
+            various Property Rights. In the case of a data set, rights might
+            include requirements for use, requirements for attribution, or other
+            requirements the owner would like to impose.<br>
+<span class="boldtext">Example(s): </span>
+<br>Copyright 2001 Regents of the University of California
+            Santa Barbara. Free for use by all individuals provided that the
+            owners are acknowledged in any use or publication.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="distribution">distribution&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DistributionType">DistributionType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element provides information on how the
+            resource is distributed. When used at the resource level, this element can provide
+             only general information, but elements for describing connections to online
+            systems are provided. See the Type for specific recommendations and examples.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="coverage">coverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-coverage.html#Coverage">cov:Coverage</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element describes the extent of the coverage
+            of the resource in terms of its spatial extent, temporal extent,
+            and taxonomic extent. For data sets, this is useful to specify the
+            entire extent to which all of the data might
+            apply.<br>
+<span class="boldtext">Example(s): </span>
+<br>See the coverage module for examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="references">references&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The id of another element in
+            this EML document to be used to here in this context.
+            This is used instead of duplicating information when an identical
+            piece of information needs to be used multiple times in an
+            EML document. For example, if the same person is the creator,
+            metadataProvider, and contact for a dataset, their name and address
+            can be provided once as part of the "creator" element, and then
+            their "id" can be used in the "references" element of 
+            metadataProvider and contact.  This reduces the likelihood of
+            error by reducing redundancy, and allows one to specify that
+            two pieces of information are identical.  To be a valid EML
+            document, the content of every "references" element MUST be
+            defined in the document as the value of an "id" attribute on
+            some element within the document.  Other critical rules
+            about the use of IDs and references in EML are provided in the
+            text of the EML specification.<br>
+<span class="boldtext">Example(s): </span>
+<br>knb.45.3<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="online">online&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#OnlineType">OnlineType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element contains information for accessing the
+              resource online, represented either as a URL a connection, or 
+              a connectionDefinition which may be referenced in other parts of
+              the EML document. See the Type definition for more information. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="offline">offline&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#OfflineType">OfflineType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element is for data which are distributed offline, 
+         generally by request. See the Type 
+        definition for more information.         </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="inline">inline&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#InlineType">InlineType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The data are distributed inline, with the metadata. See the Type 
+        definition for more information.         </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="schemeName">schemeName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name of the scheme used to identify this
+              connection.  The scheme name is qualified by its system attribute.
+              The scheme name implies a particular protocol for
+              accessing information from the connection.  Applications must
+              have a knowledge of the scheme or be able to deduce the protocol
+              from the scheme description in order to effectively access data
+              over the connection.  Many schemes will be unknown to client
+              applications.  At some later point in time a registry for
+              connection schemes may be established in order to promote
+              application interoperability, and we may expand this portion of
+              EML to adopt a more comprehensive standard such as WSDL, but for
+              now this simpler description is provided.<br>
+<span class="boldtext">Example(s): </span>
+<br>metacat<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="description">description&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The description of the scheme used to identify
+              this connection. The scheme name implies a particular protocol for
+              accessing information from the connection.  Applications must
+              have a knowledge of the scheme or be able to deduce the protocol
+              from the scheme description in order to effectively access data
+              over the connection.<br>
+<span class="boldtext">Example(s): </span>
+<br>The metacat application protocol.  Applications
+              must first log into metacat by sending an HTTP POST request
+              in http-url-encoded format with the parameters action, username,
+              and password.  Action must be set to "login".
+              If authentication is successful, the metacat
+              server will respond with a session cookie.  All future requests
+              should include the session cookie in the HTTP header.  To
+              retrieve an object, the client then would send an HTTP POST
+              in http-url-encoded format, with an action parameter set to
+              "get" and the docid parameter set to the identifier for the
+              desired object.  The response will either be an XML document
+              or a multipart-form-encoded response containing data.
+              <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="parameterDefinition">parameterDefinition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#definition">definition</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#defaultValue">defaultValue</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The definition of a parameter that is needed to
+              properly use this connection scheme.  Each parameter has a name
+              and a definition that are used by applications to assess the type
+              of information needed for the request.  Parameters may also set
+              default values that are used if a connection does not provide a
+              value for a parameter.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="name">name&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name of a parameter that is needed to
+                    properly use this connection scheme.<br>
+<span class="boldtext">Example(s): </span>
+<br>hostname<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="definition">definition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The definition of a parameter that is
+                    needed to properly use this connection scheme.  The
+                    definition is used by applications to assess the type
+                    of information needed for the request.<br>
+<span class="boldtext">Example(s): </span>
+<br>The fully qualified name of the internet host
+                    that is providing the metacat service, as would be returned
+                    by a Domain Name System (DNS) query.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="defaultValue">defaultValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The default value for a parameter that is
+                    needed to properly use this connection scheme.  If a default
+                    value is set, then it should be used for connections that
+                    do not override the default with a connection-specific
+                    value. This allows a definition to be established that
+                    declares common information that might be shared by several
+                    connections as default values.  Parameter values provided
+                    in the connection always override any default values
+                    provided in the connection definition.<br>
+<span class="boldtext">Example(s): </span>
+<br>metacat.nceas.ucsb.edu<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="mediumName">mediumName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Name of the medium on which this resource
+                    is distributed. Can be various digital media such as tapes
+                    and disks, or printed media which can collectively be
+                    termed 'hardcopy'.<br>
+<span class="boldtext">Example(s): </span>
+<br>Tape, 3.5 inch Floppy Disk,
+                    hardcopy<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="mediumDensity">mediumDensity&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>the density of the digital medium if this
+                    is relevant. Used mainly for floppy disks or
+                    tape.<br>
+<span class="boldtext">Example(s): </span>
+<br>High Density (HD), Double Density
+                    (DD)<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="mediumDensityUnits">mediumDensityUnits&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>if a density is given numerically, the
+                    units should be given here.<br>
+<span class="boldtext">Example(s): </span>
+<br>B/cm<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="mediumVolume">mediumVolume&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>the total volume of the storage medium on
+                    which this resource is shipped.<br>
+<span class="boldtext">Example(s): </span>
+<br>650 MB<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="mediumFormat">mediumFormat&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>the file system format of the medium on
+                    which the resource is shipped<br>
+<span class="boldtext">Example(s): </span>
+<br>NTFS, FAT32, EXT2, QIK80<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="mediumNote">mediumNote&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>any additional pertinent information about
+                    the media</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="onlineDescription">onlineDescription&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#i18nNonEmptyStringType">i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element can hold a brief description of the content 
+            of the online element's online|offline|inline child. This description element could 
+            supply content for an html anchor tag. 
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="url">url&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#UrlType">UrlType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A URL (Uniform Resource Locator) from which this additional 
+              information can be obtained, or from which the resource can be downloaded 
+              directly. In the resource module, the distribution URL is generally meant for 
+              informational purposes, and the "function" attribute should be set to "information". 
+              However, if the URL returns the data stream itself, then the "function" attribute 
+              should be set to "download".  See the Type Definition for more information.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="connection">connection&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ConnectionType">ConnectionType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of the information needed to make an application 
+              connection to a data service. The connection contains a connectionDefinition 
+              and optional parameters for overriding defaults. See the Type Definition for 
+              more information.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="connectionDefinition">connectionDefinition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ConnectionDefinitionType">ConnectionDefinitionType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+The definition of a type of connection
+        that will be used in another location in the EML
+        document. The connectionDefinition element only provides the definition of the
+        protocol and its parameters, but not the actual values
+        to be used to make the connection (instead, see the
+        connection element).  This connectionDefinition may be
+        used by multiple connections (e.g., to download different files
+        from the same database), but each connection must provide or
+        reference a valid connection definition.              
+              
+     The definition has a "scheme" which identifies the
+                            protocol by name, with a detailed description 
+                            and its required parameters. A connectionDefinition 
+                    lists all of the parameters needed for the connection
+                    and possible default values for each. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="connectionDefinition">connectionDefinition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ConnectionDefinitionType">ConnectionDefinitionType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>In a ConnectionType, the connectionDefinition element provides the definition of the protocol and its parameters. The definition has a "scheme" which identifies the protocol by name, with a detailed description and its required parameters. A connectionDefinition lists all of the parameters needed for the connection and possible default values for each.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="parameter">parameter&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#value">value</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A parameter to be used to make
+                            this connection. This value overrides any
+                            default value that may have been provided in the
+                            connection definition.
+                            </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="name">name&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name of the parameter
+                                  to be used to make this connection.
+                                  <br>
+<span class="boldtext">Example(s): </span>
+<br>hostname<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="value">value&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonEmptyStringType">NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The value of the parameter
+                                  to be used to make this connection. This
+                                  value overrides any default value that may
+                                  have been provided in the connection
+                                  definition.<br>
+<span class="boldtext">Example(s): </span>
+<br>nceas.ucsb.edu<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="value">value&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xml:lang">xml:lang</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#SystemType">SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="keywordType">keywordType</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#KeyTypeCode">KeyTypeCode</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field classifies the keyword
+                          that has been provided from a list of pre-determined
+                          categories. The possible types are listed in the
+                          example.<br>
+<span class="boldtext">Example(s): </span>
+<br>
+                          "place","stratum","temporal","theme",
+                          or "taxonomic"<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#SystemType">SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#IDType">IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#SystemType">SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#ScopeType">ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#SystemType">SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The computing system within which this
+                      scheme name has relevance. This attribute qualifies the
+                      scheme name in order to decrease the likelihood of scheme
+                      name collisions when more that one EML user defines a
+                      scheme name with the same name but different semantics.
+                      <br>
+<span class="boldtext">Example(s): </span>
+<br>
+                      http://knb.ecoinformatics.org/knb/<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#IDType">IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#SystemType">SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#ScopeType">ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="function">function</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#FunctionType">FunctionType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">download</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#IDType">IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#SystemType">SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#ScopeType">ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="xml:lang">xml:lang</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="xml:lang">xml:lang</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="DistributionType">DistributionType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#online">online</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#offline">offline</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#inline">inline</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#ReferencesGroup">ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+            
+<p>Distribution information for accessing the
+              resource by one of three methods: online, offline or inline. Generally, 
+              the Type at the resource level is intended to be informational, although 
+              elements are
+              included to describe a complex connection protocol.
+             </p>
+            
+<p>For more information, see the sub-elements. Also
+             compare to 
+             <a href="./eml-physical.html#PhysicalDistributionType">
+                
+             phys:PhysicalDistributionType
+              </a>.
+             
+             
+             </p>
+          
+        
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ConnectionDefinitionType">ConnectionDefinitionType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#schemeName">schemeName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#description">description</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#parameterDefinition">parameterDefinition</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#ReferencesGroup">ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Definition of the connection protocol.   
+        The definition has a "scheme" which identifies the
+                            protocol by name, with a detailed description 
+                            and its required parameters. A connectionDefinition 
+                    lists all of the parameters needed for the connection
+                    and possible default values for each. A definition provided in this
+                    element may be used in other parts of the EML document.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="InlineType">InlineType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top" colspan="3">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:anyType</span> (by xs:restriction) </p>
+</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:anyType</span> (by xs:restriction) </p>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Object data distributed inline in the metadata.
+              Users have the option of including the data right inline in the
+              metadata by providing it inside of the "inline" element.  For
+              many text formats, the data can be simply included directly in
+              the element.  However, certain character sequences are invalid in
+              an XML document (e.g., &lt;), so care will need to be taken to 
+              either 1) wrap the data in a CDATA section if needed, or 
+              2) encode the data using a text encoding algorithm such as
+              base64, and then include that in a CDATA section.  The latter
+              will be necessary for binary formats.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="OfflineType">OfflineType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#mediumName">mediumName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#mediumDensity">mediumDensity</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#mediumDensityUnits">mediumDensityUnits</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#mediumVolume">mediumVolume</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#mediumFormat">mediumFormat</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#mediumNote">mediumNote</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>the medium on which this resource is distributed
+              digitally, such as 3.5" floppy disk, or various tape media types,
+              or 'hardcopy'<br>
+<span class="boldtext">Example(s): </span>
+<br>CD-ROM, 3.5 in. floppy disk, Zip disk<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="OnlineType">OnlineType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#onlineDescription">onlineDescription</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#url">url</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#connection">connection</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#connectionDefinition">connectionDefinition</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+            
+<p>Distribution information for accessing the
+              resource online, represented either as a URL or as the series of
+              named parameters needed to connect. The URL field can contain 
+              a simple web address or an entire query string. The connection
+               element allows the components of a complex protocol to 
+               be described individually. The connectionDefinition element 
+               can also be appear outside of the connection elements, 
+               so that it can be defined once and referenced by several connections. 
+               </p>
+            
+<p>
+               Also see the 
+               <a href="./eml-physical.html#PhysicalOnlineType">
+                phys:PhysicalOnlineType</a>, 
+               which may be more
+               appropriate for describing the online connections to a specific entity
+               described by this metadata document.
+               </p>
+          
+        
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="UrlType">UrlType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:anyURI</span> (by xs:extension) </p>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#function">function</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">download</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A URL (Uniform Resource Locator) from
+                    which this resource can be downloaded or additional
+                    information can be obtained. If the URL
+                    provides further information about downloading the
+                    object but does not directly return the data stream, then
+                    the "function" attribute should be set to "information".
+                    If accessing the URL would directly return the data stream, 
+                    then the "function" attribute should be set to "download".  
+                    If the "function" attribute is omitted, then "download"
+                    is implied for the URL function.
+                    In more complex cases where a non-standard connection
+                    must be established that complies with application
+                    specific procedures beyond what can be described in the
+                    simple URL, then the "connection" element should
+                    be used instead of the URL element.<br>
+<span class="boldtext">Example(s): </span>
+<br>
+                    http://data.org/getdata?id=98332<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ConnectionType">ConnectionType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#connectionDefinition">connectionDefinition</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#parameter">parameter</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#ReferencesGroup">ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of the information needed
+                    to make an application connection to a data service.
+                    The connection starts with a connectionDefinition which
+                    lists all of the parameters needed for the connection
+                    and possible default values for each.  It may also include a
+                    list of parameter values (one for each), that
+                    override the defaults for this particular connection.
+                    One parameter element should exist for every
+                    parameterDefinition that is present in the
+                    connectionDefinition, although parameters that were
+                    defined with a defaultValue in their parameterDefinition
+                    can be omitted. All information about how to use the
+                    parameters to establish a session and extract data is
+                    present in the connectionDefinition, possibly implicitly
+                    by naming a connection schemeName that is well-known. 
+                    See descriptions
+                    of the child element types for further information.
+                    </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="i18nNonEmptyStringType">i18nNonEmptyStringType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#value">value</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#xml:lang">xml:lang</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This type specifies a content pattern for all elements 
+	          that require language translations. The xml:lang attribute
+	          can be used to define the default language for element content.
+	          Additional translations should be included as child 'value'
+	          elements that also have an optional xml:lang attribute.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="KeyTypeCode">KeyTypeCode</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>place</li>
+<li>stratum</li>
+<li>temporal</li>
+<li>theme</li>
+<li>taxonomic</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field provides a restricted list of categories
+        that a keyword may fall under.<br>
+<span class="boldtext">Example(s): </span>
+<br>place<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="yearDate">yearDate</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel"></td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This type is the union of the built-in types for year
+        and date.<br>
+<span class="boldtext">Example(s): </span>
+<br>1999, or 2001-03-15<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="IDType">IDType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel"></td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A unique identifier for this additional
+        metadata that can be used to reference it elsewhere.
+        This is a formal field in that it is an error to provide
+        a value for the id attribute that is not unique within
+        the document's set of id attributes. This is designed to
+        allow other portions of the metadata to reference this
+        section formally.<br>
+<span class="boldtext">Example(s): </span>
+<br>knb.343.22<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="SystemType">SystemType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel"></td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The data management system within which an
+        identifier is in scope and therefore unique. This is typically
+        a URL (Uniform Resource Locator) that indicates a data
+        management system.  All identifiers that share a system must
+        be unique. In other words, if the same identifier is used in
+        two locations with identical systems, then by definition the
+        objects at which they point are in fact the same object.
+        <br>
+<span class="boldtext">Example(s): </span>
+<br>http://metacat.somewhere.org/svc/mc/<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="ScopeType">ScopeType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>system</li>
+<li>document</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The scope of the identifier.  Scope is generally
+        set to either "system", meaning that it is scoped according to
+        the "system" attribute, or "document" if it is only to be in scope
+        within this single document instance.  In this particular use of
+        scope, it is FIXED to be "system" because the packageId is
+        required and always has the scope of the required "system".
+        <br>
+<span class="boldtext">Example(s): </span>
+<br>system<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="FunctionType">FunctionType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>download</li>
+<li>information</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="NonEmptyStringType">NonEmptyStringType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul></ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This type specifies a content pattern for all elements 
+          that are required by EML to ensure that there is actual content (i.e., 
+          not just whitespace). The pattern described can be interpreted as
+          "at least one non-whitespace character, followed
+          by any number of whitespace plus not-whitespace characters. "
+          Leading and/or trailing whitespace is allowed, and whitespace 
+          may include carriage returns and newlines.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ResourceGroup">ResourceGroup&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#alternateIdentifier">alternateIdentifier</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#shortName">shortName</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#title">title</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#creator">creator</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#metadataProvider">metadataProvider</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#associatedParty">associatedParty</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#pubDate">pubDate</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#language">language</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#series">series</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#abstract">abstract</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#keywordSet">keywordSet</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#additionalInfo">additionalInfo</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#intellectualRights">intellectualRights</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#distribution">distribution</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#coverage">coverage</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'ResourceBase' complexType contains information
+        that is inherited by each resource type that is being documented. The
+        sub-elements with the resource base are common to all
+        resources.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-fields for specific
+        examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ReferencesGroup">ReferencesGroup&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#references">references</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A group containing the "references" element that
+        is used throughout EML.</blockquote>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<eml:eml xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eml="eml://ecoinformatics.org/eml-2.0.1" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.1 eml.xsd" system="knb" packageId="meredith.5.3">
+   <dataset scope="document" system="" id="">
+         <title>Georeferenced Spatial Raster</title>
+         <creator scope="document" system="" id="">
+                 <individualName>
+                   <salutation>Mr</salutation>
+                   <givenName>Dan</givenName>
+                   <surName>Higgins</surName>
+                 </individualName>
+               <address scope="document" system="" id="">
+                     <deliveryPoint>735 State Street</deliveryPoint>
+                     <city>Santa Barbara</city>
+                     <administrativeArea>CA</administrativeArea>
+                     <postalCode>93105</postalCode>
+                     <country>USA</country>
+               </address>
+               <electronicMailAddress>higgins@nceas.ucsb.edu</electronicMailAddress>
+         </creator>
+         <contact scope="document" system="" id="">
+                 <individualName>
+                   <surName>higgins</surName>
+                 </individualName>
+         </contact>
+           <spatialRaster scope="document" system="" id="">
+                 <entityName>Spatial Raster test entity</entityName>
+                 <physical scope="document" system="" id="">
+                       <objectName>world_20k.jpg</objectName>
+                       <size unit="bytes">28173</size>
+                       <dataFormat>
+                           <textFormat>
+                             <attributeOrientation>column</attributeOrientation>
+                               <simpleDelimited>
+                                 <fieldDelimiter>N/A</fieldDelimiter>
+                               </simpleDelimited>
+                           </textFormat>
+                       </dataFormat>
+                 </physical>
+                 <coverage>
+                   <geographicCoverage>
+                     <geographicDescription>geodescription</geographicDescription>
+                     <boundingCoordinates>
+                       <westBoundingCoordinate>-180.0</westBoundingCoordinate>
+                       <eastBoundingCoordinate>180.0</eastBoundingCoordinate>
+                       <northBoundingCoordinate>90.0</northBoundingCoordinate>
+                       <southBoundingCoordinate>-90.0</southBoundingCoordinate>
+                     </boundingCoordinates>
+                   </geographicCoverage>
+                 </coverage>
+                 <attributeList id="">
+                     <attribute scope="document" system="" id="">
+                           <attributeName>Raster Description</attributeName>
+                           <attributeDefinition>This is a simple raster image(map) of the entire earth</attributeDefinition>
+                           <measurementScale>
+                               <nominal>
+                                 <nonNumericDomain id="">
+                                       <textDomain>
+                                         <definition>any text</definition>
+                                       </textDomain>
+                                 </nonNumericDomain>
+                               </nominal>
+                           </measurementScale>
+                     </attribute>
+                 </attributeList>
+                 <spatialReference scope="document" system="" id=""> 
+                         <horizCoordSysName>World_Mercator</horizCoordSysName>
+                 </spatialReference>
+                 <georeferenceInfo>
+                     <cornerPoint>
+                       <xCoordinate>-180.0</xCoordinate>
+                       <yCoordinate>90.0</yCoordinate>
+                       <pointInPixel>upperLeft</pointInPixel>
+                       <corner>Upper Left</corner>
+                     </cornerPoint>
+                 </georeferenceInfo>
+                 <horizontalAccuracy>
+                   <accuracyReport>unknown, but consider the number of pixels and the region being represented</accuracyReport>
+                 </horizontalAccuracy>
+                 <verticalAccuracy>
+                   <accuracyReport>Not applicable</accuracyReport>
+                 </verticalAccuracy>
+                 <cellSizeXDirection>0.4806      (360 deg / 749 columns)</cellSizeXDirection>
+                 <cellSizeYDirection>2.078  (180 deg /. 374 rows)</cellSizeYDirection>
+                 <numberOfBands>1</numberOfBands>
+                 <rasterOrigin>Upper Left</rasterOrigin>
+                 <rows>374</rows>
+                 <columns>749</columns>
+                 <verticals>
+                 </verticals>
+                 <cellGeometry>pixel</cellGeometry>
+           </spatialRaster>
+   </dataset>
+</eml:eml>
+

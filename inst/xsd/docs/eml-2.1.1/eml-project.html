@@ -1,0 +1,693 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-project Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-project</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">The eml-project module - Research context information for
+            resources</div>
+            
+<p>The eml-project module describes the research context in
+            which the dataset was created, including descriptions of over-all
+            motivations and goals, funding, personnel, description of the study
+            area etc. This is also the module to describe the design of the
+            project: the scientific questions being asked, the architecture of
+            the design, etc. This module is used to place the dataset that is
+            being documented into its larger research context.</p>
+            
+<p>The eml-project module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag. This allows a research
+            project to be described once, and then used as a reference in other
+            locations within the EML document via its ID.</p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-project">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">Use eml-project to document the research context of any dataset or project.</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">no</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-resource, eml-party, eml-coverage, eml-literature, eml-text</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-project.png" target="offline">eml-project image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="researchProject">researchProject&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ResearchProjectType">ResearchProjectType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The root element of this module. This is used for
+        testing or if you want to instantiate a stand-alone project
+        file.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="title">title&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A descriptive title for the research
+              project.<br>
+<span class="boldtext">Example(s): </span>
+<br>Species diversity in Tennessee riparian
+              habitats.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="personnel">personnel&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a> (by xs:extension) </p>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#role">role</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The Personnel field extends ResponsibleParty
+              with role information and is used to document people involved in
+              a research project by providing contact information and their
+              role in the project. A project must have at least one
+              originator.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="role">role&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#RoleType">rp:RoleType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The role field contains information
+                        about role a person plays in a research project. There
+                        are a number of suggested roles, however, it is
+                        possible to add a role if the suggested roles are not
+                        adequate.<br>
+<span class="boldtext">Example(s): </span>
+<br>author<br>contentProvider<br>custodianSteward<br>distributor<br>editor<br>metadataProvider<br>originator<br>owner<br>pointOfContact<br>principalInvestigator<br>processor<br>publisher<br>user<br>fieldStationManager<br>informationManager<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="abstract">abstract&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Descriptive abstract that summarizes information
+              about the research project.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="funding">funding&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The funding field is used to provide information
+              about funding sources for the project such as: grant and contract
+              numbers; names and addresses of funding sources. Other
+              funding-related information may also be
+              included.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="studyAreaDescription">studyAreaDescription&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#descriptor">descriptor</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#citation">citation</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#coverage">coverage</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The studyAreaDescription field documents the
+              physical area associated with the research project. It can
+              include descriptions of the geographic, temporal, and taxonomic
+              coverage of the research location and descriptions of domains
+              (themes) of interest such as climate, geology, soils or
+              disturbances or reference to citable biological or geophysical
+              classification systems such as the Bailey Ecoregions or the
+              Holdridge Life Zones.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="descriptor">descriptor&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#descriptorValue">descriptorValue</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#citation">citation</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#citableClassificationSystem">citableClassificationSystem</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The descriptor field is used to document
+                    domains (themes) of interest such as climate, geology,
+                    soils or disturbances or references to citable biological
+                    or geophysical classification systems such as the Bailey
+                    Ecoregions or the Holdridge Life Zones.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="descriptorValue">descriptorValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name_or_id">name_or_id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The descriptorValue field contains
+                          the value of a descriptor, describing some aspect of
+                          the study area. This may either be a general
+                          description in textual form or the value part of a
+                          "name/value" pair where the name is entered in the
+                          attribute "name_or_id". For example, if the value of
+                          the "name" attribute" of the element "descriptor" is
+                          "climate", and the value of the attribute
+                          "name_or_id" of the element "descriptorValue" is
+                          "Annual Precipitation" then the value of this element
+                          could be "12.5 inches".<br>
+<span class="boldtext">Example(s): </span>
+<br>12.5 inches<br>tundra-forest<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="citation">citation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A citation for this
+                          descriptor.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="citation">citation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The citation for this
+                    descriptor.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="coverage">coverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-coverage.html#Coverage">cov:Coverage</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The coverage of this
+                    descriptor.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="designDescription">designDescription&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#description">description</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#citation">citation</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The field designDescription contains general
+              textual descriptions of research design. It can include detailed
+              accounts of goals, motivations, theory, hypotheses, strategy,
+              statistical design, and actual work. Literature citations may
+              also be used to describe the research design.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="description">description&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-text.html#TextType">txt:TextType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The field designDescription contains
+                    general textual descriptions of research design. It can
+                    include detailed accounts of goals, motivations, theory,
+                    hypotheses, strategy, statistical design, and actual
+                    work.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="citation">citation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The citation field is a citation to
+                    literature that describes elements of the research design,
+                    such as goals, motivations, theory, hypotheses, strategy,
+                    statistical design, and actual work.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="relatedProject">relatedProject&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ResearchProjectType">ResearchProjectType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field is a recursive link to another
+              project. This allows projects to be nested under one another for
+              the case where one project spawns another.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name_or_id">name_or_id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name_or_id field is the
+                                  name part of a name/value pair of a
+                                  descriptor; or ID portion of a
+                                  classification, if applicable. The values of
+                                  biogeophysical classification systems, e.g.
+                                  Bailey-Ecoregions, often take the form of an
+                                  ID or Code along with a text representation.
+                                  For example, the ID/Code M131 refers to the
+                                  phrase "Open Woodland -Tundra". M131 is an
+                                  unambiguous reference to a more detailed
+                                  description. If one is using a published
+                                  classification system then there should be a
+                                  corresponding citation to the source, e.g.,
+                                  Bailey,R.G., 1996 "Ecosystem
+                                  Geography".<br>
+<span class="boldtext">Example(s): </span>
+<br>M131<br>Average Annual
+                                  Rainfall<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#DescriptorType">DescriptorType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name of the descriptor system. The
+                        name can be either a theme such as climate or
+                        hydrology, or the name of a citable classification
+                        system.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="citableClassificationSystem">citableClassificationSystem</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:boolean</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This boolean attribute defines whether
+                        this descriptor comes from a citable classification
+                        system or not.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ResearchProjectType">ResearchProjectType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#title">title</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#personnel">personnel</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#abstract">abstract</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#funding">funding</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#studyAreaDescription">studyAreaDescription</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#designDescription">designDescription</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#relatedProject">relatedProject</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The researchProject complex type describes the
+        structure for documenting the research context of a dataset or another
+        project. It can include research goals, motivations, theory,
+        hypotheses, etc., as well as a description of research efforts that
+        form the basis for other work. (To document methods specific to a
+        dataset use eml-methods.) This field can be associated with a dataset
+        using the project field of eml-dataset, and can be associated with
+        another project using the relatedProject field of eml-project (this
+        module).</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="DescriptorType">DescriptorType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel"></td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The DescriptorType is used to represent either the
+        name of a citable classification system/controlled vocabulary such as
+        the Bailey classification of ecoregions or a domain of physical
+        descriptors such as climate or disturbances.<br>
+<span class="boldtext">Example(s): </span>
+<br>climate<br>soils<br>hydrology<br>"bailey"<br>biome<br>disturbance<br>geology<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

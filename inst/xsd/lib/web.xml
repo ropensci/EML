@@ -1,0 +1,40 @@
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+        "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<web-app>
+
+    <display-name>EML Parser</display-name>
+    <description>
+      Parser to parse EML files.
+    </description>
+
+    <context-param>
+      <param-name>jones</param-name>
+      <param-value>jones@nceas.ucsb.edu</param-value>
+      <description>
+        The EMAIL address of the administrator to whom questions
+        and comments about this application should be addressed.
+      </description>
+    </context-param>
+
+    <servlet>
+      <servlet-name>emlparser</servlet-name>
+      <description>
+        the parser servlet interface
+      </description>
+      <servlet-class>org.ecoinformatics.eml.EMLParserServlet</servlet-class>
+      <!-- Load this servlet at server startup time -->
+      <load-on-startup>5</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>emlparser</servlet-name>
+      <url-pattern>/parse</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+      <session-timeout>30</session-timeout>    <!-- 30 minutes -->
+    </session-config>
+
+</web-app>

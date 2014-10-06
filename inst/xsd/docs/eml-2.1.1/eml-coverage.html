@@ -1,0 +1,2333 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-coverage Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-coverage</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+            The eml-coverage module - Geographic, temporal, and taxonomic extents
+            of resources
+          </div>
+            
+<p>
+            The eml-coverage module contains fields for describing the coverage
+            of a resource in terms of time, space, and taxonomy. These
+            coverages (temporal, spatial, and taxonomic) represent the extent
+            of applicability of the resource in those domains.
+            The Geographic coverage section allows for 2 means of expressing
+            coverage
+            on the surface of the earth: 1) via a set of bounding coordinates
+            that define the North, South, East and West points in a rectangular
+            area, optionally including a bounding altitude,
+            and 2) using a G-Ring polygon definition, where an irregularly
+            shaped area may be defined using a ordered list of
+            latitude/longitude coordinates.  A G-Ring may also include an
+            "inner G-Ring" that defines one or more
+            "cut-outs" in the area, i.e. the donut hole concept.
+          </p>
+            
+<p>
+            The temporal coverage section allows for the definition of either a
+            single date or time, or a range of dates or times. These may be
+            expressed as a calendar date according to the ISO 8601 Date and Time
+            Specification, or by using an alternate time scale, such as the
+            geologic time scale. Currently, EML does not have specific fields to indicate
+            that a data resource may be "ongoing." Two examples are data tables 
+			that are planned to be appended in the future, or resources 
+            with complex connection definitions (such as to a database) which may return 
+			data in real time. It is important that EML be 
+            able to  handle data from both the "producer" and "consumer" points of view,
+            although currently the temporal coverage modules are designed for the latter.
+            There is no universally acceptable recommendation for describing "ongoing" data
+            within EML. Some groups have chosen to use the &lt;alternateTimeScale&gt; 
+            node for the end date, with a value of "ongoing," although this practice
+            is not endorsed by the EML authors. A better solution could be to use very
+			general content for the endDate (such as only the current year) so that the 
+			data are accurately described, and searches return datasets as expected.
+			A future version of EML will 
+            accommodate such data types with coverage elements specific to their needs.
+          </p>
+            
+<p>
+            The taxonomic coverage section allows for detailed description of
+            the taxonomic extent of the dataset or resource.  The taxonomic
+            classification consists of a recursive set of taxon rank names,
+            their values, and their common names.  This construct allows for a
+            taxonomic hierarchy to be built to show the level of identification
+            (e.g. Rank Name = Kingdom, Rank Value = Animalia, Common Name =
+            Animals, and so on down the hierarchy.) The taxonomic coverage
+            module also allows for the definition of the classification system
+            in cases where alternative systems are used.
+          </p>
+            
+<p>
+            The eml-coverage module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This allows
+            the coverage extent to be described once, and then used as a
+            reference in other locations within the EML document via its ID.
+          </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-coverage">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all datasets where spatial, temporal or taxonomic coverage is important</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">no</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-literature, eml-documentation, eml-party, eml-resource, eml-unitTypeDefinitions</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-coverage.png" target="offline">eml-coverage image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geographicCoverage">geographicCoverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#GeographicCoverage">GeographicCoverage</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Geographic Coverage is a container for spatial
+              information about a project, a resource, or an entity within a
+              resource. It allows a bounding box for the overall coverage (in
+              lat long), and also allows description of arbitrary polygons with
+              exclusions.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub fields for specific
+              examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="temporalCoverage">temporalCoverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><a class="sitelink" href="#TemporalCoverage">TemporalCoverage</a> (by xs:extension) </p>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field specifies temporal coverage, and
+              allows coverages to be a single point in time, multiple points in
+              time, or a range of dates. Dates can be expressed in terms of both
+              calendar dates and geologic dating systems.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub fields for specific
+              examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonomicCoverage">taxonomicCoverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><a class="sitelink" href="#TaxonomicCoverage">TaxonomicCoverage</a> (by xs:extension) </p>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Taxonomic Coverage is a container for Taxonomic
+              information about a project, a resource, or an entity within a
+              resource. It includes a list of species names (or higher level
+              ranks) from one or more classification systems.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub fields for specific
+              examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="singleDateTime">singleDateTime&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#SingleDateTimeType">SingleDateTimeType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The singleDateTime field is intended to
+              describe a
+              single date and time for an event. There is a choice between two
+              options: a calendar date with a time, or a geologic
+              age.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-elements for
+              example.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="rangeOfDates">rangeOfDates&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#beginDate">beginDate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#endDate">endDate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'RangeOfDatesType' field is intended to be used for
+        describing a range of dates and/or times. It may be used multiple times
+        to document multiple date ranges. It allows for two 'singleDateTime'
+        fields, the first to be used as the beginning dateTime, and the second
+        to be used as the ending dateTime of the range.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the examples from the 'singleDateTime'
+        field for specific examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="beginDate">beginDate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#SingleDateTimeType">SingleDateTimeType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A single time stamp signifying the beginning of
+              some time period.  There is a choice between two
+              options: a calendar date with a time, or a geologic
+              age.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-elements for
+              example.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="endDate">endDate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#SingleDateTimeType">SingleDateTimeType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A single time stamp signifying the end of
+              some time period.  There is a choice between two
+              options: a calendar date with a time, or a geologic
+              age.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-elements for
+              example.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="calendarDate">calendarDate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#yearDate">res:yearDate</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The calendar date field is used to express a
+              date, giving the year, month, and day. The format should be one
+              that complies with the International Standards Organization's
+              standard 8601. The recommended format for EML is YYYY-MM-DD,
+              where Y is the four digit year, M is the two digit month code
+              (01 - 12, where January = 01), and D is the two digit day of
+              the month (01 - 31). This field can also be used to enter just 
+	      the year portion of a date.<br>
+<span class="boldtext">Example(s): </span>
+<br>2001-01-01<br>2001-10-12<br>2001<br>1895<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="time">time&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:time</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The time field is used to express the hour
+              (and optionally minute, or minute and second) of the day for an
+              event, and should comply with the International Standards
+              Organization's standard 8601. The recommended format for EML is
+              hh:mm:ssTZD, where hh is the two digit hour of the day, mm is
+              the two digit minute of the hour, and ss is the two digit
+              second of the minute. TZD stands for Time Zone Designator which
+              is used to handle time zone offsets. Times may be expressed in
+              two ways: 1) UTC (Coordinated Universal Time, also known as
+              Greenwich Mean Time, or GMT), with a special UTC designator
+              ("Z"), 2) local time, together with a time zone offset in hours
+              and minutes. A time zone offset of "+hh:mm" indicates that the
+              date or time uses a local time zone which is "hh" hours and "mm"
+              minutes ahead of UTC. A time zone offset of "-hh:mm" indicates
+              a local time zone which is "hh" hours
+              and "mm" minutes behind UTC.<br>
+<span class="boldtext">Example(s): </span>
+<br>1) 08:31:22Z , which means eight thirty one and 22
+              seconds in the morning at Coordinated Universal Time (Greenwich
+              Mean Time). 2) 14:06:09-08:00 , which means six minutes, nine
+              seconds past two o'clock p.m., Pacific Standard Time (which is
+              offset eight hours behind UTC)<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="alternativeTimeScale">alternativeTimeScale&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#timeScaleName">timeScaleName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#timeScaleAgeEstimate">timeScaleAgeEstimate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#timeScaleAgeUncertainty">timeScaleAgeUncertainty</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#timeScaleAgeExplanation">timeScaleAgeExplanation</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#timeScaleCitation">timeScaleCitation</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A name, code, or date describing an event or
+            period in an alternative time scale, for instance as an absolute
+            date calculated using a named dating method, or as a relative
+            date that is drawn from stratigraphy or biostratigraphy.
+            Calendar dates as provided in the ISO
+            8601 dating system used in the standard CSDGM are not adequate to
+            describe geologic time periods. Absolute geologic time is usually
+            measured in millions of years before present, but may use different
+            units and relative base times. Relative geologic time is measured by
+            subdivisions of the earth's geology. in an order based upon relative
+            age, most commonly, vertical or stratigraphic position. The actual
+            dating systems used in geologic studies often tie relative times
+            measured through stratigraphy or biostratigraphy to a particular
+            absolute time using radioisotope dating techniques, among others. As
+            these methods for absolute dating have improved, the estimates of
+            the dates for strata have changed, consequently, it would be
+            inaccurate to record absolute dates in situations where relative
+            dates were measured.  This structure is provided as an optional
+            alternative to the standard calendar dates provided by ISO 8601.
+            <br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-fields for specific
+            examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="timeScaleName">timeScaleName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Name of a recognized alternative time scale.
+                  This includes 'Absolute' as the name of the time scale for
+                  measuring geologic dates before the present and names of
+                  geologic dating systems that are arrangements of symbols or
+                  names in order of relative geologic time.<br>
+<span class="boldtext">Example(s): </span>
+<br>'Absolute', 'Geomagnetic Polarity Time Scale',
+                  'International Geological Time Scale',
+                  'Oxygen-Isotope'<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="timeScaleAgeEstimate">timeScaleAgeEstimate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Either an absolute date or a relative age
+                  name describing an event or period in an alternative time
+                  scale such as the Geologic Time Scale.<br>
+<span class="boldtext">Example(s): </span>
+<br>For example, '300 Ma' (300 million years before
+                  present) is a Geologic_Age_Estimate based on the Absolute
+                  Geologic_Time_Scale, 'C28r' is a chron name from the
+                  Geomagnetic Polarity Time Scale, and 'Maastrichtian' and
+                  'Jurassic' are names from the International Geological Time
+                  Scale. Since different relative geologic time scales are
+                  often not aligned, multiple geologic dates may need to be
+                  specified. For example, the Geomagnetic Polarity Time Scale
+                  chron 'C29r', at the K/T boundary lies in both the
+                  'Maastrichtian' and the 'Danian' stages from the
+                  International Geological Time Scale, thus if you were
+                  documenting this event using the International Geological
+                  Time Scale, both 'Maastrichtian' and 'Danian' should be
+                  included here.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="timeScaleAgeUncertainty">timeScaleAgeUncertainty&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The error estimate for the alternative time.
+                  This should include the units of measure, a description of
+                  what the error estimate represents and how it was
+                  calculated.<br>
+<span class="boldtext">Example(s): </span>
+<br>+/- 5 Ma (Million Years)<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="timeScaleAgeExplanation">timeScaleAgeExplanation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name and/or description of the method
+                  used to calculate the age estimate. Detailed information
+                  about the method may be provided through references
+                  contained in the Time Scale Citation field.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="timeScaleCitation">timeScaleCitation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Citation for works providing detailed
+                  information about any element of the time scale
+                  age.<br>
+<span class="boldtext">Example(s): </span>
+<br>For example, a publication describing the
+                  methodology used for carbon dating or describing the basic
+                  geologic time scale in more detail could be cited
+                  here.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geographicDescription">geographicDescription&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                
+                  
+<p>geographicDescription is a short text description of a dataset's 
+              geographic areal domain. A text description is especially important to 
+              provide a geographic                           setting 
+               when the extent of the data set cannot be well described
+              by the "boundingCoordinates", or in the case of data
+              which are not specifically geospatial. Assuming the
+              "boundingCoordinates" do not adequately describe the
+              extent of the data set, the discrepancy can be identified and
+              described here. The coordinates may define a rectangle around a
+              country, with this geographicDescription element
+              containing a disclaimer  
+               and/or further details concerning the border.
+             A study of the diseases of salmon may not have a
+              specific geographic extent associated with it, but the salmon
+               were collected in the states of Washington and Oregon.
+              The "boundingCoordinates" might form a
+              general rectangle around the states of Washington and Oregon, but
+              the "geographicDescription" might describe the fact
+              that the study took place only along
+              certain rivers within those states. </p>
+                  
+<p>
+              This data element differs
+              from the standard data element "Place_Keyword" in that it allows
+              a free text description of the geographic extent, rather than
+              just a list of words or phrases useful as an index of location
+              names associated with the data set.  </p>
+                  
+<p>This element can also contain information
+              about the collection of the boundingCoordinates, e.g., an altitude value that is referenced
+              to Mean Lower Low Water, or the projection system that the latitude and 
+              longitude coordinates were taken from.</p>
+                
+              
+<br>
+<span class="boldtext">Example(s): </span>
+<br>"Manistee River watershed"<br>
+              "extent of 7 1/2 minute quads containing any property belonging
+              to Yellowstone National Park"<br> "ponds and reservoirs larger
+              than 2 acres in Jefferson County, Colorado". <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="boundingCoordinates">boundingCoordinates&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#westBoundingCoordinate">westBoundingCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#eastBoundingCoordinate">eastBoundingCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#northBoundingCoordinate">northBoundingCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#southBoundingCoordinate">southBoundingCoordinate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#boundingAltitudes">boundingAltitudes</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                
+                  Bounding Coordinates are the four margins (N, S, E, W) of a bounding box, 
+              or when considered in lat-lon pairs, the corners of the box. These elements are meant to convey general 
+              information and are not for accurate mapping.  More specific information may be
+              included by using the elements in the spatialReference schema.
+                  The limits of coverage of a data set should be expressed
+              as decimal latitudes and longitudes, and in the order western-most,
+              eastern-most, northern-most, and southern-most. By convention, 
+              latitudes and longitudes are referenced to the  Equator and to the Prime Meridian
+              (the datums), respectively. 
+              By definition, the 0 and 180 meridians themselves do not belong in either hemisphere, 
+              but local conventions may place them in either. All coordinates are typed as decimals. 
+              Since all four elements are required, a bounding area that is a 
+              single point should use the same values for
+              northBoundingCoordinate and southBoundingCoordinate, and likewise
+             for westBoundingCoordinate and eastBoundingCoordinate. 
+                  In the case of a data set that comprises 
+                    all longitudes (e.g., a horizontal band between 2 parallels that fully 
+                    encompasses the earth ), please use a westBoundingCoordinate of -180.0, and an
+                    eastBoundingCoordinate of 180.0 (or +180.0). In this case, it could be considered geographically                
+                    appropriate to specify both values as "180" (or any other meridian), but this could 
+                    also be interpreted as only the  meridian itself, so this is not recommended
+                
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-fields.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="westBoundingCoordinate">westBoundingCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The westBoundingCoordinate field defines
+                    the longitude of the western-most point of the bounding box that is being
+                    described. A longitude coordinate is typed as a decimal, i.e.,
+                    decimal degrees from -180 to 180, inclusive. Decimal degrees may be expressed to 
+                    any precision desired. Fractions of a degree in minutes and seconds should be 
+                    converted to degree fractions. Strings denoting direction or hemisphere (e.g., 'W' or 'west') are 
+                    not allowed. Longitudes east of the prime meridian must be specified by
+                    a plus sign (+), or by the absence of a minus sign (-), and longitudes west of 
+                    the meridian shall be  prefixed with minus sign (-). In the case of a data set that comprises 
+                    all longitudes (e.g., a horizontal band between 2 parallels that fully 
+                    encompasses the earth ), please use a westBoundingCoordinate of -180.0, and an
+                    eastBoundingCoordinate of 180.0 (or +180.0). In this case, it could be considered geographically                
+                    appropriate to specify both values as "180" (or any other meridian), but this could 
+                    also be interpreted as only the  meridian itself, so this is not recommended.<br>
+<span class="boldtext">Example(s): </span>
+<br>-118.25<br>+25<br>45.24755<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:decimal</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-180.0</li>
+<li>
+<span class="boldtext">Maximum: </span>180.0</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="eastBoundingCoordinate">eastBoundingCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The eastBoundingCoordinate field defines
+                    the longitude of the eastern-most point of the bounding box that is being
+                    described. A longitude coordinate is typed as a decimal, i.e.,
+                    decimal degrees from -180 to 180, inclusive. Decimal degrees may be expressed to 
+                    any precision desired. Fractions of a degree in minutes and seconds should be 
+                    converted to degree fractions. Strings denoting direction or hemisphere (e.g., 'W' or 'west') are 
+                    not allowed. Longitudes east of the prime meridian must be specified by
+                    a plus sign (+), or by the absence of a minus sign (-), and longitudes west of 
+                    the meridian shall be  prefixed with minus sign (-). In the case of a data set that comprises 
+                    all longitudes (e.g., a horizontal band between 2 parallels that fully 
+                    encompasses the earth ), please use a westBoundingCoordinate of -180.0, and an
+                    eastBoundingCoordinate of 180.0 (or +180.0). In this case, it could be considered geographically                
+                    appropriate to specify both values as "180" (or any other meridian), but this could 
+                    also be interpreted as only the  meridian itself, so this is not recommended.<br>
+<span class="boldtext">Example(s): </span>
+<br>-118.25<br>+25<br>45.24755<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:decimal</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-180.0</li>
+<li>
+<span class="boldtext">Maximum: </span>180.0</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="northBoundingCoordinate">northBoundingCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The northBoundingCoordinate field defines
+                    the latitude of the northern-most point of the bounding box that is being
+                    described. A latitude coordinate is typed as a decimal, i.e.,
+                    decimal degrees from -180 to 180, inclusive. Decimal degrees may be expressed to 
+                    any precision desired. Fractions of a degree in minutes and seconds should be 
+                    converted to degree fractions. Strings denoting direction or hemisphere (e.g., 'N' or north') are 
+                    not allowed. Latitudes north of the equator must be denoted by
+                    a plus sign (+), or by the absence of a minus sign (-), and latitudes south of 
+                    the equator shall be  prefixed with minus sign (-).  A location with latitude of +90 (90)
+                     or -90 degrees will specify the position at the North or South Pole,
+                    respectively.<br>
+<span class="boldtext">Example(s): </span>
+<br>-18.25<br>+25<br>65.24755<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:decimal</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-90.0</li>
+<li>
+<span class="boldtext">Maximum: </span>90.0</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="southBoundingCoordinate">southBoundingCoordinate&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The southBoundingCoordinate field defines
+                    the latitude of the southern-most point of the bounding box that is being
+                    described. A latitude coordinate is typed as a decimal, i.e.,
+                    decimal degrees from -180 to 180, inclusive. Decimal degrees may be expressed to 
+                    any precision desired. Fractions of a degree in minutes and seconds should be 
+                    converted to degree fractions. Strings denoting direction or hemisphere (e.g., 'N' or north') are 
+                    not allowed. Latitudes north of the equator must be denoted by
+                    a plus sign (+), or by the absence of a minus sign (-), and latitudes south of 
+                    the equator shall be  prefixed with minus sign (-).  A location with latitude of +90 (90)
+                     or -90 degrees will specify the position at the North or South Pole,
+                    respectively.<br>
+<span class="boldtext">Example(s): </span>
+<br>-118.25<br>+25<br>84.24755<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:decimal</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-90.0</li>
+<li>
+<span class="boldtext">Maximum: </span>90.0</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="boundingAltitudes">boundingAltitudes&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeMinimum">altitudeMinimum</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeMaximum">altitudeMaximum</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeUnits">altitudeUnits</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The bounding altitude field is intended to
+                    contain altitudinal (elevation) measurements for
+                    the bounding box being described. It allows for minimum and
+                    maximum altitude fields, as well as a field for the units
+                    of measure. The combination of these fields provide the
+                    vertical extent information for the bounding box. <br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-fields for
+                    specific examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeMinimum">altitudeMinimum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:decimal</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The minimum altitude extent of
+                          coverage for the bounding box that is being
+                          described. The minimum altitude should be in
+                          reference to a known datum (e.g., Mean Sea Level), which should be part of the geographicDescription.<br>
+<span class="boldtext">Example(s): </span>
+<br>100.6 <br>-12 <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeMaximum">altitudeMaximum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:decimal</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The maximum altitude extent of
+                          coverage for the bounding box that is being
+                          described. The maximum altitude should be in
+                          reference to a known datum, which should be part of the geographicDescription.<br>
+<span class="boldtext">Example(s): </span>
+<br>100.6<br>-10<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeUnits">altitudeUnits&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-unitTypeDefinitions.html#LengthUnitType">unit:LengthUnitType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The unit that the altitude is expressed in. See the description under the Type definition</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="datasetGPolygon">datasetGPolygon&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#datasetGPolygonOuterGRing">datasetGPolygonOuterGRing</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#datasetGPolygonExclusionGRing">datasetGPolygonExclusionGRing</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This construct creates a spatial ring with a
+              hollow center.  This doughnut shape is specified by the outer
+              ring (datasetGPolygonOuterRing) and the inner exclusion zone
+              (datasetGPolygonExclusionGRing) which can be thought of as the
+              hole in the center of a doughnut.  This is useful for defining
+              areas such as the shores of a pond where you only want to specify
+              the shore excluding the pond itself.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-fields for specific
+              examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="datasetGPolygonOuterGRing">datasetGPolygonOuterGRing&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#gRingPoint">gRingPoint</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#gRing">gRing</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                      
+                        
+<p>The outer containment loop of a
+                    datasetGPolygon.  This is the outer part of the doughnut
+                    shape that encompasses the broadest area of coverage. 
+                    It can be created either by a gRing (list of points) or 3 or more gRingPoints. 
+                    See the sub-elements and their Type definitions for more specific 
+                    information.</p>
+                        
+<p>
+                    This element is generally analogous to the FGDC outer ring although
+                    somewhat differently specified.  Documentation for an FGDC G-Ring 
+                    states that 4 points are required 
+                    to define a polygon, and the first and last should be identical. 
+                    However this is not enforceable in XML Schema, and so in EML
+                    a minimum of 3 &lt;gRingPoint&gt;s is required to define a polygon, and
+                    it can be assumed that a polygon is closed by joining the last point to the
+                    first.
+                    XSL stylesheets that transform EML instances to the FGDC specification 
+                    should repeat the first gRingPoint node as the last when creating a list of points.
+                    </p>
+                      
+                    
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="gRingPoint">gRingPoint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#GRingPointType">GRingPointType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A single geographic location.  As a child of &lt;datasetGPolygonOuterGRing&gt;
+                            a minimum of 3 are required to define a polygon. The polygon is presumed to be closed. Please see the sub elements and the Type description for more information about creating a point location.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="gRing">gRing&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#GRingType">GRingType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A set of ordered pairs of floating-point numbers,
+        The number of points in the string is not enforced by EML. 
+        However, authors should note that in order for this field is to be directly translated to FGDC, 4 points should
+        be included in the string. See the Type for more information on constructing the string. </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="datasetGPolygonExclusionGRing">datasetGPolygonExclusionGRing&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#gRingPoint">gRingPoint</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#gRing">gRing</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                      
+                        
+<p> the
+                    closed nonintersecting boundary of a void area (or hole in
+                    an interior area).  This is the center of the doughnut
+                    shape created by the datasetGPolygon. It can be created either by
+                    a gRing (list of points) or one or more gRingPoints. See the sub-elements and their 
+                    Type definitions for more information.</p>
+                        
+<p>
+                        This element is generally analogous to an FGDC exclusion ring "Data Set G-Polygon 
+                        Exclusion G-Ring", although it's children are
+                    somewhat differently described.  Documentation for the FGDC component states that
+                    4 points are required to define a polygon, and the first and last should be identical. 
+                    However this EML element requires only one point so that a single point can be
+                    excluded,  presumably, a single station.  If multiple single stations are to be 
+                    excluded, then authors should include multiple &lt;datasetGPolygonExclusionGRing&gt;s.
+                                                </p>
+                      
+                    
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="gRingPoint">gRingPoint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#GRingPointType">GRingPointType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A single geographic location.  This is useful if you
+        register your datasets by a single geospatial point, such as the
+        lat/long of your research station. Please see the sub elements and the Type description 
+		for more information on constructing a gRingPoint</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="gRing">gRing&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#GRingType">GRingType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A set of ordered pairs of floating-point numbers,
+        See the Type for more information</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="gRingLatitude">gRingLatitude&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote> A latitude coordinate is typed as a decimal, i.e.,
+                    decimal degrees from -90 to 90, inclusive. Decimal degrees may be expressed to 
+                    any precision desired. Fractions of a degree in minutes and seconds should be 
+                    converted to degree fractions. Strings denoting direction or hemisphere (e.g., 'S' or 'south') are 
+                    not allowed. Latitudes north of the equator must be specified by
+                    a plus sign (+), or by the absence of a minus sign (-), and latitudes south of 
+                    the equator shall be  prefixed with minus sign (-). <br>
+<span class="boldtext">Example(s): </span>
+<br>34.123<br>-18.25<br>+78.25<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:decimal</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-90.0</li>
+<li>
+<span class="boldtext">Maximum: </span>90.0</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="gRingLongitude">gRingLongitude&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The longitude of a point of the
+            g-ring A longitude coordinate is typed as a decimal, i.e.,
+                    decimal degrees from -180 to 180, inclusive. Decimal degrees may be expressed to 
+                    any precision desired. Fractions of a degree in minutes and seconds should be 
+                    converted to degree fractions. Strings denoting direction or hemisphere (e.g., 'W' or 'west') are 
+                    not allowed. Longitudes east of the prime meridian must be specified by
+                    a plus sign (+), or by the absence of a minus sign (-), and longitudes west of 
+                    the meridian shall be  prefixed with minus sign (-).<br>
+<span class="boldtext">Example(s): </span>
+<br>-118.25<br>+25<br>45.24755<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:decimal</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-180.0</li>
+<li>
+<span class="boldtext">Maximum: </span>180.0</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonomicSystem">taxonomicSystem&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#classificationSystem">classificationSystem</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#identificationReference">identificationReference</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#identifierName">identifierName</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonomicProcedures">taxonomicProcedures</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonomicCompleteness">taxonomicCompleteness</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#vouchers">vouchers</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Documentation of taxonomic sources, procedures,
+              and treatments.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="classificationSystem">classificationSystem&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#classificationSystemCitation">classificationSystemCitation</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#classificationSystemModifications">classificationSystemModifications</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information about the classification
+                    system or authority used.<br>
+<span class="boldtext">Example(s): </span>
+<br>Flora of North America<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="classificationSystemCitation">classificationSystemCitation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Relevant literature for documenting
+                          the used classification system.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="classificationSystemModifications">classificationSystemModifications&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of any modifications
+                          or exceptions made to the classification system or
+                          authority used.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="identificationReference">identificationReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information on any non-authoritative
+                    materials (e.g. field guides) useful for reconstructing the
+                    actual identification process.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="identifierName">identifierName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information about the individual(s)
+                    responsible for the identification(s) of the specimens or
+                    sightings, etc.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonomicProcedures">taxonomicProcedures&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Description of the methods used for the
+                    taxonomic identification.<br>
+<span class="boldtext">Example(s): </span>
+<br>specimen processing, comparison with museum
+                    materials, keys and key characters, chemical or genetic
+                    analyses<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonomicCompleteness">taxonomicCompleteness&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information concerning the proportions and
+                    treatment of unidentified materials, estimates of the
+                    importance and possible identities of uncertain
+                    determinations, synonyms or other incorrect usages, taxa
+                    not well treated or requiring further work, and expertise
+                    of field workers.<br>
+<span class="boldtext">Example(s): </span>
+<br>materials sent to experts, and not yet
+                    determined<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="vouchers">vouchers&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#specimen">specimen</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#repository">repository</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information on the types of specimen, the
+                    repository, and the individuals who identified the
+                    vouchers.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="specimen">specimen&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A word or phrase describing the type
+                          of specimen collected.<br>
+<span class="boldtext">Example(s): </span>
+<br>herbarium specimens, blood samples,
+                          photographs, individuals, or batches<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="repository">repository&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#originator">originator</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information about the curator or
+                          contact person and/or agency responsible for the
+                          specimens.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="originator">originator&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-party.html#ResponsibleParty">rp:ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The 'originator' element
+                                provides the full name of the person,
+                                organization, or position associated with the
+                                resource. Typically, the originator role is set
+                                to "owner" to indicate the list of parties who
+                                "own" the resource, but other roles such as
+                                "principal investigator", "author", and
+                                "editor" are provided.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the examples within the
+                                sub fields for the responsible
+                                party.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="generalTaxonomicCoverage">generalTaxonomicCoverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A description of the range of taxa addressed in
+              the data set or collection.<br>
+<span class="boldtext">Example(s): </span>
+<br>"All vascular plants were identified to family or
+              species, mosses and lichens were identified as moss or
+              lichen."<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonomicClassification">taxonomicClassification&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#TaxonomicClassificationType">TaxonomicClassificationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information about the range of taxa addressed in the
+        data set or collection. See the Type definition for more information.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonRankName">taxonRankName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name of the taxonomic rank for which the
+            Taxon rank value is provided. This field allows for the name one
+            of the accepted levels of Taxa.<br>
+<span class="boldtext">Example(s): </span>
+<br>'Kingdom', 'Division/Phylum', 'Class', 'Order',
+            'Family', 'Genus', and 'Species'<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonRankValue">taxonRankValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name representing the taxonomic rank of the
+            taxon being described. The values included may be referenced from
+            an authoritative source such as the Integrated Taxonomic
+            Information System (ITIS)in the U.S. (http://www/itis.usda.gov)
+            and in Canada (http://sis.agr.gc.ca/pls/itisca/taxaget). Also,
+            Species2000 is another source of taxonomic information, found at
+            (http://www.sp2000.org)<br>
+<span class="boldtext">Example(s): </span>
+<br>Acer would be an example of a genus rank value, and
+            rubrum would be an example of a species rank value, together
+            indicating the common name of red maple. It is recommended to
+            start with Kingdom and include ranks down to the most detailed
+            level possible.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="commonName">commonName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Specification of applicable common names. These
+            common names may be general descriptions of a group of organisms
+            if appropriate.<br>
+<span class="boldtext">Example(s): </span>
+<br>insects, vertebrate, grasses, waterfowl, vascular
+            plants, red maple.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="taxonomicClassification">taxonomicClassification&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#TaxonomicClassificationType">TaxonomicClassificationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information about the range of taxa addressed in the
+        data set or collection. See the Type definition for more information.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="Coverage">Coverage&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#geographicCoverage">geographicCoverage</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#temporalCoverage">temporalCoverage</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonomicCoverage">taxonomicCoverage</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field is a container for the spatial, temporal
+        and taxonomic coverages that apply to various resources, often dataset
+        resources.  Please see the individual descriptions of the sub fields for
+        more detail.
+        <br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub fields for specific
+        examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="TemporalCoverage">TemporalCoverage&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#singleDateTime">singleDateTime</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#rangeOfDates">rangeOfDates</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The temporal coverage fields are intended to be used
+        in describing the date and time of an event. It allows for three
+        general descriptions: a single date or time, multiple dates or times, and a
+        range of date or times.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub fields for specific
+        examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="SingleDateTimeType">SingleDateTimeType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#calendarDate">calendarDate</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#time">time</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#alternativeTimeScale">alternativeTimeScale</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The SingleDateTimeType field is intended to describe a
+        single date and time for an event. There is a choice between two
+        options: a calendar date with a time, or a geologic
+        age.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-elements for
+        example.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="GeographicCoverage">GeographicCoverage&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#geographicDescription">geographicDescription</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#boundingCoordinates">boundingCoordinates</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#datasetGPolygon">datasetGPolygon</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Geographic Coverage is a container for spatial
+        information about a a project, a resource, or an entity within a
+        resource. It is meant for general information and not for accurate
+mapping.  More specific information, including mapping projections, is covered by EML in
+the spatialReference schema.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-elements for specific
+        examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="GRingPointType">GRingPointType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#gRingLatitude">gRingLatitude</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#gRingLongitude">gRingLongitude</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A single geographic location.  This is useful if you
+        register your datasets by a single geospatial point, such as the
+        lat/long of your research station.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="TaxonomicCoverage">TaxonomicCoverage&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonomicSystem">taxonomicSystem</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#generalTaxonomicCoverage">generalTaxonomicCoverage</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonomicClassification">taxonomicClassification</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Taxonomic Coverage is a container for taxonomic
+        information about a project, a resource, or an entity within a
+        resource.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the individual sub-fields for specific
+        examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="TaxonomicClassificationType">TaxonomicClassificationType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonRankName">taxonRankName</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonRankValue">taxonRankValue</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#commonName">commonName</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#taxonomicClassification">taxonomicClassification</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Information about the range of taxa addressed in the
+        data set or collection. It is recommended that one provide information
+        starting from the taxonomic rank of kingdom, to a level which reflects
+        the data set or collection being documented. The levels of Kingdom,
+        Division/Phylum, Class, Order, Family, Genus, and Species should be
+        included as ranks as appropriate. Because the taxonomic ranks are
+        hierarchical, the Taxonomic Classification field is self-referencing to
+        allow for an arbitrary depth of rank, down to
+        species.<br>
+<span class="boldtext">Example(s): </span>
+<br>The Taxonomic Classification field consists of a sequence
+        of 4 fields: taxonomic rank, taxonomic rank value, common name, and
+        finally Taxonomic Classification (self-referencing). Please see the
+        sub-fields for specific examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="GRingType">GRingType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul></ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+            
+<p>A set of ordered pairs of floating-point numbers,
+        separated by commas, in which the first number in each pair is the
+        longitude of a point and the second is the latitude of the point.
+        Longitude and latitude are specified in decimal degrees with north
+        latitudes positive and south negative, east longitude positive and west
+        negative</p>
+            
+<p>Note on the relationship to FGDC:
+        This element is generally analogous to the FGDC component for ring, 
+        although implemented somewhat differently. Documentation for FGDC
+        states that 4 points are required to define a polygon, and the first and last 
+        should be identical, although this is not enforceable in XML Schema. In addition,
+        EML does not enforce any pattern on the string used for a GRingType, so that
+        it may be used differently as a child of EML's &lt;datasetGPolygonOuterGRing&gt;  
+        or &lt;datasetGPolygonExclusionGRing&gt; elements.
+        If authors of EML instance documents wish the contents of this element  to be 
+        directly translated to FGDC, they should comply with the example below when
+        constructing their strings. Alternatively, in most cases, a sequence of gRingPoints 
+        can be used in EML instances, which can be processed into content for an 
+        FGDC Data Set G-Polygon G-Ring.</p>
+          
+        
+<br>
+<span class="boldtext">Example(s): </span>
+<br>This is an acceptable gRing:
+<br>
+        12, 2.0987
+        12, -7.5555
+        34.345,10.40
+        <br>However, for translation to FGDC, construct your string like this:<br>
+        -119.453,35.0
+        -125,37.5555
+        -122,40
+        -119.453,35.0
+        <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

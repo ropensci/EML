@@ -1,0 +1,348 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EML Frequently Asked Questions</title><link type="text/css" href="../default.css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.50.0" name="generator"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article"><div class="titlepage"><div><h2 class="title"><a name="N10002"></a>EML Frequently Asked Questions</h2></div><hr></div><p>
+    <a href="./index.html" target="_top">Back to EML Contents</a>
+  </p><div class="qandaset"><dl><dt>1.  <a href="#N10010">What is EML?</a></dt><dt>2.  <a href="#N10018">Who is responsible for EML?</a></dt><dt>3.  <a href="#N10028">Why would I want to use EML when FGDC now supports biological
+        data through the CSDGM?</a></dt><dt>4.  <a href="#N10033">Is there documentation for EML in English?</a></dt><dt>5.  <a href="#N1003F">Why is EML such an important development?</a></dt><dt>6.  <a href="#N10047">How do I get EML?</a></dt><dt>7.  <a href="#N10053">The EML Schema documents are quite complex. An average ecologist
+        probably cannot and more likely does not want to mark up content in an
+        XML editor. How then do you get content into EML?</a></dt><dt>8.  <a href="#N10063">EML contains provisions for communication. Is it possible to
+        document in EML dynamic online data resources?</a></dt><dt>9.  <a href="#N1006B">Do I need to download special software to use EML?</a></dt><dt>10.  <a href="#N10077">How can I get my existing metadata into EML?</a></dt><dt>11.  <a href="#N100CC">Once I convert my metadata into EML, what do I do with it? If I
+        am storing all my metadata in text-based EML files, how am I supposed
+        to query them or use them for data management?</a></dt><dt>12.  <a href="#N100E0">Does the modularity of EML mean that one description can be
+        shared by many documents?</a></dt><dt>13.  <a href="#N100E8">How are EML modules linked together?</a></dt><dt>14.  <a href="#N100F9">Can I put data into EML as well as metadata?</a></dt><dt>15.  <a href="#N10101">What can I do with my EML structured metadata?</a></dt><dt>16.  <a href="#N10109">Can I validate my EML documents against the DTD?</a></dt><dt>17.  <a href="#N10115">Are there required elements in EML?</a></dt><dt>18.  <a href="#N1011D">There appear to be multiple places to put some types of metadata
+        in EML. How do I know which of these places is the right place for my
+        information?</a></dt><dt>19.  <a href="#N1012D">The differences between "method" and "protocol" seem
+        to be very subtle in EML. How do I distinguish between
+        the two?</a></dt><dt>20.  <a href="#N10137">How can 'references' be treated in XSLT transformations of EML?</a></dt><dt>21.  <a href="#N10143">How do the elements of the Dublin Core Metadata Initiative map onto EML?</a></dt><dt>22.  <a href="#N1014F">I'm interested in contributing to EML. Can I?</a></dt><dt>23.  <a href="#N10161">Where can I get EML?</a></dt><dt>24.  <a href="#N10171">How is EML 2.1.0 different from EML 2.0.0/1, and how do I upgrade my documents?</a></dt></dl><table border="0"><col align="left" width="1%"><tbody><tr class="question"><td valign="top" align="left"><a name="id.1"></a><a name="N10010"></a><b>1. </b></td><td valign="top" align="left"><p>What is EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>EML stands for Ecological Metadata Language. It exists as a set
+        of XML Schema documents that allow for the structural expression of
+        metadata necessary to document a typical data set in the ecological
+        sciences.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.2"></a><a name="N10018"></a><b>2. </b></td><td valign="top" align="left"><p>Who is responsible for EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>The first two released versions of EML, EML 1.0 and EML 1.4.1
+        were developed at the National Center for Ecological Analysis and
+        Synthesis (NCEAS), University of California at Santa Barbara, in Santa
+        Barbara, California USA. The effort to produce EML 2.x (and all of
+        the beta releases preceding it) is organized through the EML Project,
+        an open source, community oriented project
+        dedicated to providing a high-quality metadata specification
+        for describing data relevant to the ecological discipline.
+        The project is completely comprised of
+        <a href="../members.html" target="_top">voluntary project members</a> 
+        who donate their time and experience in order to advance
+        information management for ecology. Project decisions are made by
+        consensus according to the voting procedures described in the <a href="http://www.ecoinformatics.org/charter.html" target="_top">ecoinformatics.org
+        Charter</a>.  Significant contributions for these recent releases
+        have come from individuals at NCEAS, the Long Term Ecological
+        Research Program (CAP, NET, KBS, JRN), and the Joseph W. Jones
+        Ecological Research Center in Newton, GA.
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.3"></a><a name="N10028"></a><b>3. </b></td><td valign="top" align="left"><p>Why would I want to use EML when FGDC now supports biological
+        data through the CSDGM?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>EML is modular and extensible.</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>The Content Standard for Digital Geospatial Metadata (CSDGM)
+        developed by the Federal Geographic Data Committee (FGDC) is a
+        monolithic standard, and so it is difficult to mix and match parts of
+        it with other standards -- mainly because of all of the spatial
+        requirements. So, we built EML as a series of modules that can be
+        linked together and can be linked to other metadata standards. This
+        gives us the most flexibility, and given that we can easily translate
+        into CSDGM compliant documents, there is little cost. Second, we're
+        building advanced data processing tools that can automatically parse
+        data sets and analyze them based on the EML metadata descriptions. Due
+        to various shortcomings in the FGDC standard, mostly oriented around
+        its tight focus on spatial data, we have found that the CSDGM isn't
+        adequate for these needs, e.g., how can one add machine parsable,
+        semantically oriented attribute tags to CSDGM? Answer, you can't,
+        because it is monolithic and doesn't permit dynamic ties to other
+        metadata specs -- the only extension method is via the administrative
+        challenge of creating a superset of the CSDGM -- not very maintainable.
+        In addition, the level of granularity for metadata in FGDC is very
+        patchy -- it goes into great detail for spatial projections, etc., but
+        is incredibly terse with respect to describing methods and non-standard
+        data formats. This is appropriate in the spatial world where there are
+        few data formats (&lt; 100, many sensor derived streams), but not so
+        good in ecology where there is no standardization of data formats
+        (&gt;&gt;&gt;5000, very few sensor derived).</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.4"></a><a name="N10033"></a><b>4. </b></td><td valign="top" align="left"><p>Is there documentation for EML in English?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>Yes, there is a <a href="index.html" target="_top">formal
+        specification</a> of EML describing its development history,
+        architecture, and modules.  The intent of each module is described
+        in narrative and there is a technical description of each module
+        in XML notation. Included as part of the technical description is
+        an element-by-element description of the module. We will eventually
+        provide examples on usage.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.5"></a><a name="N1003F"></a><b>5. </b></td><td valign="top" align="left"><p>Why is EML such an important development?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>The last decade has witnessed a tremendous explosion of
+        ecological and environmental data, catalyzed by societal concerns and
+        facilitated by advancing technologies. These data have the potential to
+        greatly enhance understanding of the complexity of the biosphere.
+        However, broad-scale or synthetic research is stymied because data are
+        largely unorganized and inaccessible as a consequence of their
+        tremendous heterogeneity, complexity, and spatial dispersion in many
+        separate repositories. EML is the first content standard designed
+        specifically to address these issues for ecological data. Wide adoption
+        and use of EML will create exciting new opportunities for data
+        discovery, access, integration and synthesis.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.6"></a><a name="N10047"></a><b>6. </b></td><td valign="top" align="left"><p>How do I get EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>All the documents associated with the EML development effort are
+        available via the project web server at
+        <a href="http://knb.ecoinformatics.org/software/eml/" target="_top">
+        http://knb.ecoinformatics.org/software/eml/</a>.
+
+        These projects are licensed under the GPL (Gnu Public License)
+        agreement and can be freely distributed and modified.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.7"></a><a name="N10053"></a><b>7. </b></td><td valign="top" align="left"><p>The EML Schema documents are quite complex. An average ecologist
+        probably cannot and more likely does not want to mark up content in an
+        XML editor. How then do you get content into EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>The Knowledge Network for Biocomplexity project has developed a
+        software client specifically to address this need.
+        <a href="http://knb.ecoinformatics.org/software/" target="_top">Morpho</a>
+
+        (after the butterfly genus) is written in java (making portable across
+        computer platforms) combines an easy to use interface to EML with a
+        number of tools to make it easier for ecologists to document data.
+        These include a reverse-engineering wizard. Morpho is available from
+        <a href="http://knb.ecoinformatics.org/software" target="_top">
+        http://knb.ecoinformatics.org/software</a>.  Morpho currently
+        supports the EML 2.1.0 release.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.8"></a><a name="N10063"></a><b>8. </b></td><td valign="top" align="left"><p>EML contains provisions for communication. Is it possible to
+        document in EML dynamic online data resources?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>Yes, there are provisions in the eml-physical module for
+        descriptions of online data resources. The eml-physical module
+        describes the structural characteristics of data formats as delivered
+        over the wire or as found in a file system. One physical object (which
+        can be a bytestream or an object in a file system) might contain
+        multiple entities (for example, this would be typical in a MS Access
+        file that contained multiple tables of data). However, it is typically
+        used to describe a file or stream that is in some text-based format
+        such as ASCII or UTF-8, and includes the information needed to parse
+        the data stream to extract the entity and its attributes from the
+        stream. There are 3 distribution types, online, offline, and inline. To
+        describe an online dataset in EML you would populate the online element
+        with the distribution information.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.9"></a><a name="N1006B"></a><b>9. </b></td><td valign="top" align="left"><p>Do I need to download special software to use EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>No, but there is software available to work with EML. See
+        <a href="#id.7">FAQ 7</a>
+
+        .</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.10"></a><a name="N10077"></a><b>10. </b></td><td valign="top" align="left"><p>How can I get my existing metadata into EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>There are several approaches that can be used to convert existing
+        metadata into EML depending on what form your existing metadata
+        take.</p><div class="itemizedlist"><ul type="disc"><li><p>Case 1: If your metadata is currently in a text format
+            (not stored in a database) use the following conversion methods.
+
+            <div class="orderedlist"><ol type="1"><li><p>Write a script (PERL, PHP, JAVA, etc.) to convert the
+                text into EML compliant XML.</p></li><li><p>Convert the text metadata into XHTML (HTML that is XML
+                compliant). Write an XSLT script to transform the XHTML file
+                into EML compliant XML.</p></li><li><p>Use an special purpose XML editor that generates EML (
+                <a href="http://knb.ecoinformatics.org/software" target="_top">
+                Morpho</a>
+
+                or
+                <a href="http://ces.asu.edu/bdi/Subjects/xylographa" target="_top">
+                Xylographa</a>
+
+                ) and manually retype the metadata.</p></li><li><p>Use a general purpose XML development tool such as XML
+                Spy that can create a sample document from an XML Schema and
+                retype the metadata manually.</p></li><li><p>Use a simple text editor and do everything from
+                scratch.</p></li><li><p>Use specialized data transformation software such as the
+                Data Junction suite to extract text data and then map it into
+                an EML structure.</p></li></ol></div>
+            </p></li><li><p>Case 2: If your metadata is stored in a relational database
+            use the following conversion methods.
+            <div class="orderedlist"><ol type="1"><li><p>Both Microsoft SQL Server and Oracle have utilities to
+                generate XML from their database. If you use a tool like that,
+                then you will have to write an XSLT script to transform the
+                generated XML into EML.</p></li><li><p>Use a vendor neutral Database-to-XML generator such as
+                <a href="http://cocoon.apache.org/" target="_top">Cocoon</a>
+
+                (an Apache open source free tool). Cocoon can query the
+                database, generate XML, and has a tool for creating the XSL
+                Transformation scripts to convert the first stage XML output
+                into EML format.</p></li><li><p>Use a specialized tool such as
+                <a href="http://ces.asu.edu/bdi/Subjects/Xanthoria/" target="_top">
+                Xanthoria</a>
+
+                (like Cocoon in may respects, but is easier to use) to generate
+                XML from the database. Then use a tool such as XML Spy or
+                Stylus Studio to develop the XSLT script to convert the
+                generated XML into EML compliant XML.</p></li><li><p>Use specialized data transformation software such as the
+                Data Junction query the database and map it into an EML
+                structure.</p></li></ol></div>
+            </p></li><li><p>Case 3: If your metadata is already in XML but in some other
+            form such as NBII or FGDC use the following conversion method.
+            <div class="orderedlist"><ol type="1"><li><p>Write an XSLT script to convert from the current format
+                to EML (e.g. FGDC to EML).</p></li></ol></div>
+            </p></li></ul></div><p>NOTE: In each of the cases it may be necessary to add some
+        additional metadata in order to produce EML compliant documents.
+        <a href="http://knb.ecoinformatics.org/software" target="_top">Morpho</a>
+
+        will automatically create EML compliant metadata either by adding it
+        for you or indicating that certain fields are mandatory.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.11"></a><a name="N100CC"></a><b>11. </b></td><td valign="top" align="left"><p>Once I convert my metadata into EML, what do I do with it? If I
+        am storing all my metadata in text-based EML files, how am I supposed
+        to query them or use them for data management?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>EML is an exchange standard for communication of metadata but it
+        can be used as the framework for a data management system.
+        <a href="http://knb.ecoinformatics.org/software" target="_top">Metacat</a>
+
+        is a multipurpose XML metadata and data repository that is optimized
+        for use with EML. If you store your metadata in a relational database
+        management system or plan to then there are also solutions.
+        <a href="http://xml.apache.org/cocoon/" target="_top">Cocoon</a>
+
+        and
+        <a href="http://ces.asu.edu/bdi/Subjects/Xanthoria/" target="_top">
+        Xanthoria</a>
+
+        are examples of programs that can get EML out of an RDBMS. Cocoon and
+        Xanthoria are both java applications that use java database connection
+        hooks and style sheets to retrieve and format data. Xanthoria is a
+        light-weight solution and the XSLT stylesheets for EML 2.0 have already
+        been written. This solution lets a site stick with the RDBMS system
+        that they probably have integrated with their site management
+        activities, yet also have their metadata exposed via EML.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.12"></a><a name="N100E0"></a><b>12. </b></td><td valign="top" align="left"><p>Does the modularity of EML mean that one description can be
+        shared by many documents?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>In a previous version, EML packages (via RDF like triples)
+        supported linking across packages, so you could re-use the same
+        document in multiple packages. In EML 2.0.0 Release Candidate 1 we
+        redesigned the packaging structure to only allow linking within a
+        single package. Thus, one could re-use a party description or attribute
+        list within a package, but not across several. This is a compromise
+        that keeps some reusability but has fewer management problems. Along
+        with this change is an ability to put all metadata and data in a single
+        document for transport -- while still not limiting ourselves to a
+        monolithic structure. This has benefits (akin to db normalization) and
+        costs (access control, ownership, and multiple update problems).</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.13"></a><a name="N100E8"></a><b>13. </b></td><td valign="top" align="left"><p>How are EML modules linked together?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>With "id" attributes and "references" elements
+        in each module. Certain modules within EML allow you to
+        identify specific sub-trees with a unique identifier (id). This 
+        identifier can then be used in place of content in other parts 
+        of the EML document by placing it in a "references" element.</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>Our general approach in EML has been to create ComplexTypes (CT)
+        when we wanted a particular block to be reusable. This concept was
+        extended for linking modules together by adding an optional attribute
+        named "id" of type "xs:string" for each ComplexType. This allows us to
+        uniquely address each block defined by a CT.
+        For the "ResourceBase" CT, this id element replaces the "identifier"
+        element and acts as the overall identifier for the package. The content
+        model for each CT is a choice between the existing content model and a
+        new element named "references" of type "xs:string". This element is
+        used to hold a reference to an existing sub-tree identified by its id.
+        This relationship between the "references" element and the "id"
+        identifiers is enforced by defining a "key" for the "id"
+        elements and a "keyref" for the "references" elements. This use of
+        a key and keyref differs slightly from the XML Schema case because
+        in XML Schema, keys can not be null, whereas we want people to be
+        able to optionally omit the "id" attribute.  Consequently, we have
+        incorporated the rules about the correspondence between keys and
+        keyrefs into the EML specification, but not into the schemas directly.
+        Thus, in order to validate that an EML document is valid EML, you must
+        use a parser that understands the referencing system in EML and can
+        check that it is used correctly.  An example system that handles this
+        key validation is shipped with the EML distribution (see the
+        "EML Parser").
+        
+        Here's a fragment of an example xml doc to illustrate:
+        <pre class="programlisting">
+            ...
+            &lt;creator id="id.p1"&gt;
+              &lt;individualName&gt;&lt;surName&gt;Jones&lt;/surName&gt;&lt;/individualName&gt;
+            &lt;/creator&gt;
+            &lt;associatedParty&gt;
+              &lt;references&gt;id.p1&lt;/references&gt;
+              &lt;role&gt;lackey&lt;/role&gt;
+            &lt;/associatedParty&gt;
+            &lt;contact&gt;
+              &lt;references&gt;id.p1&lt;/references&gt;
+            &lt;/contact&gt;
+            ...
+        </pre>
+        </p><p>This even works for types that extend other types as long as the
+        subclass is the one that does the referencing (e.g., associatedParty
+        can reference creator, but not vice versa). 
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.14"></a><a name="N100F9"></a><b>14. </b></td><td valign="top" align="left"><p>Can I put data into EML as well as metadata?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>Yes, there are provisions in the eml-physical module for
+        inclusion of data. The module describes the structural characteristics
+        of data formats as delivered over the wire or as found in a file
+        system. One physical object (which can be a bytestream or an object in
+        a file system) might contain multiple entities (for example, this would
+        be typical in a MS Access file that contained multiple tables of data).
+        However, it is typically used to describe a file or stream that is in
+        some text-based format such as ASCII or UTF-8, and includes the
+        information needed to parse the data stream to extract the entity and
+        its attributes from the stream. There are 3 distribution types, online,
+        offline, and inline. To include data in EML you would populate the
+        inline element with the data file described in the data format element.
+        The data that is in the inline element should conform to the
+        description provided by the eml-physical module.
+        Binary data files can be included using Base64 encoding.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.15"></a><a name="N10101"></a><b>15. </b></td><td valign="top" align="left"><p>What can I do with my EML structured metadata?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>Tools are currently being developed to allow automated
+        heterogeneous data integration, analytical processing and quality
+        testing based on EML metadata. In general, using a metadata standard
+        such as EML will lessen your data entropy and make it more useful to
+        you and others in the future.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.16"></a><a name="N10109"></a><b>16. </b></td><td valign="top" align="left"><p>Can I validate my EML documents against the DTD?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>No. As of EML 2.0.0 we are no longer creating DTDs as part of
+        the EML release. Only
+        <a href="http://www.w3.org/XML/Schema" target="_top">XML Schemas</a>
+
+        will be released. Even then, there are some EML rules which are not
+        expressible in XML Schema and for which you must use a specialized
+        validator, such as the "EML Parser" that ships with the distribution.
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.17"></a><a name="N10115"></a><b>17. </b></td><td valign="top" align="left"><p>Are there required elements in EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>Yes, although we've made every attempt to limit required elements
+        in the cause of flexibility there are a number of pieces of information
+        required to make sense of the metadata document. To make the metadata
+        more useful we do have recommended usages on the modules. See
+        specification for details about required fields and recommended usage.
+        In the future we may provide usage compliance information such that if
+        you want your data and metadata to be useful in a particular analytical
+        context you will be provided with those elements of EML that are
+        required for that purpose.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.18"></a><a name="N1011D"></a><b>18. </b></td><td valign="top" align="left"><p>There appear to be multiple places to put some types of metadata
+        in EML. How do I know which of these places is the right place for my
+        information?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>The <a href="index.html" target="_top">EML Specification</a>
+        describes each element in a detailed normative manner. EML is
+        hierarchical so where you use different elements is very important. For
+        instance, if you use a TemporalCoverage element and reference it to a
+        dataset element, you are saying that that entire dataset took place
+        during that time. If, instead, you reference it to a dataTable, you
+        are saying that only that table was covered by that time period. You
+        must gauge exactly what you are trying to describe in the structure
+        that you are using. Questions about possible bugs in the definitions
+        of elements can be posed via email to the
+        <a href="mailto:eml-dev@ecoinformatics.org" target="_top">eml-dev mailing
+        list</a>
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.19"></a><a name="N1012D"></a><b>19. </b></td><td valign="top" align="left"><p>The differences between "method" and "protocol" seem
+        to be very subtle in EML. How do I distinguish between
+        the two?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p> The eml-methods module describes the methods followed
+        in the creation of the dataset being described, including
+        description of field, laboratory and processing steps,
+        sampling methods and units, quality control procedures. The
+        eml-methods module is used to describe the "actual" procedures
+        that are used in the creation or the subsequent processing of
+        a dataset. Likewise, eml-methods is used to describe
+        processes that have been used to define / improve the quality
+        of a data file, or to identify potential problems with the
+        data file. The eml-protocol module is intended to be used to
+        document a "prescribed" procedure, whereas the eml-method
+        module is used to describe procedures that were actually
+        performed. The distinction is that the use of the term
+        "protocol" is used in the "prescriptive" sense, and the term
+        "method" is used in the "descriptive" sense. This distinction
+        allows managers to build a protocol library of well-known,
+        established protocols (procedures), but also document what
+        procedure was truly performed in relation to the established
+        protocol. The method may have diverged from the protocol
+        purposefully, or perhaps incidentally, but the procedural
+        lineage is still preserved and understandable.
+        </p><p>The eml-methods module, like other modules, may be
+        referenced via the &lt;references&gt; tag. This allows a method
+        to be described once, and then used as a reference in other
+        locations within the EML document via it's ID.
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.20"></a><a name="N10137"></a><b>20. </b></td><td valign="top" align="left"><p>How can 'references' be treated in XSLT transformations of EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>XSLT can be used to transform EML to other formats, but the treatment
+        of 'references' elements is somewhat complicated. A text file describing the
+        details of one method for handling the 'references' elements is available at
+        <a href="http://knb.ecoinformatics.org/software/eml/eml-2.0.1/references_XSLT.txt" target="_top">
+        http://knb.ecoinformatics.org/software/eml/eml-2.0.1/references_XSLT.txt</a>
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.21"></a><a name="N10143"></a><b>21. </b></td><td valign="top" align="left"><p>How do the elements of the Dublin Core Metadata Initiative map onto EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>EML attempts to capture the metadata elements of the Dublin Core in its
+        specification, while still maintaining the flexibility to be able to document the full range
+        of ecological resources.  More detailed information on the representation of the Dublin
+        Core elements in EML can be found at 
+        <a href="http://knb.ecoinformatics.org/software/eml/eml-2.0.1/eml-dublinCore.html" target="_top">
+        http://knb.ecoinformatics.org/software/eml/eml-2.0.1/eml-dublinCore.html</a>
+        </p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.22"></a><a name="N1014F"></a><b>22. </b></td><td valign="top" align="left"><p>I'm interested in contributing to EML. Can I?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>We welcome contributions to this work in any form.
+        Individuals who invest substantial amounts of time and make valuable
+        contributions to the development and maintenance of EML (in the
+        opinion of current project members) will be invited to become EML
+        project members according to the rules set forth in the <a href="http://www.ecoinformatics.org/charter.html" target="_top">ecoinformatics.org
+        Charter</a>. Contributions can take many forms, including the
+        development of the EML schemas, writing documentation, and helping
+        with maintenance, among others.
+        </p><p>You can contact the
+        <a href="mailto:eml-dev@ecoinformatics.org" target="_top">eml-dev mailing
+        list</a>
+        if you would like to make a contribution in person-hours to this
+        project and would like to discuss how that might occur.  In general,
+        we want all of the help we can get!</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.23"></a><a name="N10161"></a><b>23. </b></td><td valign="top" align="left"><p>Where can I get EML?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>You can download archived releases from
+        <a href="http://knb.ecoinformatics.org/software/eml/" target="_top">
+        http://knb.ecoinformatics.org/software/eml/</a>
+
+        or you can check out the latest development version from our
+        <a href="https://code.ecoinformatics.org/code/eml/" target="_top">SVN</a>
+
+        server.</p></td></tr><tr class="question"><td valign="top" align="left"><a name="id.24"></a><a name="N10171"></a><b>24. </b></td><td valign="top" align="left"><p>How is EML 2.1.0 different from EML 2.0.0/1, and how do I upgrade my documents?</p></td></tr><tr class="answer"><td valign="top" align="left"><b></b></td><td valign="top" align="left"><p>There are several improvements to EML in version 2.1.0 -- too many to put here. For more 
+      information,  see the EML 2.1.0 Information page: <a href="./eml-210info.html" target="_top">
+      <i>Information for EML 2.1.0 Document Authors</i>.  </a>
+      That page also contains instructions for using the 
+      transformation stylesheet that comes with EML2.1.0 to convert v2.0.0/1 documents 
+      to v2.1.0.</p></td></tr></tbody></table></div></div></body></html>
