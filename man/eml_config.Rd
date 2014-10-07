@@ -6,7 +6,7 @@
 Default options for generating EML objects}
 \usage{
 eml_config(creator = "", contact = "", defaultRights = "CC0",
-  datesAsStrings = FALSE)
+  datesAsStrings = TRUE)
 }
 \arguments{
 \item{creator}{a character string, person object, or creator object}

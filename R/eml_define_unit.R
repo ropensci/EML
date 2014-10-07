@@ -52,7 +52,7 @@ eml_define_unit <- function(id,
       description <- camelCase_to_human(id)
 
 
-    unit.def <- new("stmml:unit", 
+    unit.def <- new("stmml_unit", 
                     id = id, 
                     multiplierToSI = multiplierToSI, 
                     name = name, 

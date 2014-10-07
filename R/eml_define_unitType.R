@@ -31,12 +31,12 @@
 eml_define_unitType <- function(id,
                                 dimensions,
                                 name = id){
-  dims <- new("stmml:ListOfdimension",
+  dims <- new("stmml_ListOfdimension",
               lapply(dimensions, function(d)
-                     new("stmml:dimension", 
+                     new("stmml_dimension", 
                          name = d["name"],
                          power = as.character(na.omit(d["power"])))))
-  unit_type <- new("stmml:unitType", 
+  unit_type <- new("stmml_unitType", 
                    id = id,
                    dimensions = dims,
                    name = name)

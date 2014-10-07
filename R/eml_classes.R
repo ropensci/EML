@@ -46,7 +46,7 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
                    ds = "eml://ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
-                   stmml = "http://www.xml-cml.org/schema/stmml-1.1")
+                   stmml = "http://www.xml-cml.org/schema/stmml_1.1")
 
 
 

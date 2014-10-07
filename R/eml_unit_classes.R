@@ -1,5 +1,5 @@
 
-setClass("stmml:unit",
+setClass("stmml_unit",
          slots = c(id = "character",
                    unitType = "character",
                    parentSI = "character", 
@@ -9,17 +9,17 @@ setClass("stmml:unit",
                    abbreviation = "character",
                    description = "character"))
 
-setClass("stmml:dimension", slots = c(name = "character",
+setClass("stmml_dimension", slots = c(name = "character",
                                       power = "character"))
-setClass("stmml:ListOfdimension", contains="list")
+setClass("stmml_ListOfdimension", contains="list")
 
-setClass("stmml:unitType",
+setClass("stmml_unitType",
          slots = c(id = "character",
-                   dimensions = "stmml:ListOfdimension",
+                   dimensions = "stmml_ListOfdimension",
                    name = "character"))
 
-setClass("stmml:ListOfunitType", contains="list")
-setClass("stmml:ListOfunit", contains="list")
+setClass("stmml_ListOfunitType", contains="list")
+setClass("stmml_ListOfunit", contains="list")
 
 #' concatenate
 #' 
@@ -27,8 +27,9 @@ setClass("stmml:ListOfunit", contains="list")
 #' @param x,... units to concatenate
 #' @param recursive Needed for compatibility with generic, otherwise ignored
 #' @rdname class-stmmlunit
-#' @name class-stmml:unit
-setMethod("c", signature("stmml:unit"), function(x, ..., recursive = FALSE) new("stmml:ListOfunit", list(x, ...)))
+# @name class-stmml_unit
+#' @aliases c,stmml_unit-method
+setMethod("c", signature("stmml_unit"), function(x, ..., recursive = FALSE) new("stmml_ListOfunit", list(x, ...)))
 
 #' concatenate
 #' 
@@ -36,6 +37,7 @@ setMethod("c", signature("stmml:unit"), function(x, ..., recursive = FALSE) new(
 #' @param x,... objects to concatenate
 #' @param recursive Needed for compatibility with generic, otherwise ignored
 #' @rdname class-stmmlunitType
-#' @name class-stmml:unitType
-setMethod("c", signature("stmml:unitType"), function(x, ..., recursive = FALSE) new("stmml:ListOfunitType", list(x, ...)))
+# @name class-stmml_unitType
+#' @aliases c,stmml_unitType-method
+setMethod("c", signature("stmml_unitType"), function(x, ..., recursive = FALSE) new("stmml_ListOfunitType", list(x, ...)))
 
