@@ -54,6 +54,13 @@ function(dat = NULL,
 }
 
 
+
+## abstract out meta problem.  
+
+
+
+
+
 #' Helper function to attach classes to metadata
 #' @param meta a list containing attribute-level 
 #' metadata for each column.  see details. 

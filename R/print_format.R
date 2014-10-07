@@ -6,7 +6,10 @@
 # those columns are formatted as characters using the representation
 # dictated by the metadata.  
 print_format <- function(dat, unit.defs){
-  col.classes <- sapply(dat, class)
+  if(is(dat, "data.set")){
+    meta <- get_metadata(dat)
+    unit.defs <- lapply(meta, `[[`, 3)
+  }
   who <- sapply(dat, is.datetime)
   for(i in which(who)){
     dat[[i]] <- format(dat[[i]], 
