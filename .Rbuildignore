@@ -4,6 +4,6 @@
 manuscripts
 CONTRIBUTING.md
 LICENSE
-
+inst/xsd
 ^.*\.Rproj$
 ^\.Rproj\.user$
