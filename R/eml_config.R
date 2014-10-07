@@ -23,7 +23,7 @@
 #' @include party_classes.R 
 #' @import methods
 #' @export
-eml_config <- function(creator = "", contact = "", defaultRights = "CC0", datesAsStrings=FALSE){
+eml_config <- function(creator = "", contact = "", defaultRights = "CC0", datesAsStrings=TRUE){
   if(defaultRights == "CC0")
 #    defaultRights <- "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"
   defaultRights <- "CC0, http://creativecommons.org/publicdomain/zero/1.0"

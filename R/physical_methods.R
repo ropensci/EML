@@ -10,6 +10,14 @@ function(from, using=NA){
 })
 
 
+
+## Load or download file
+## 
+## A helper function to figure out where the CSV file
+## can be found, given an EML S4 object. Search is:
+## 1) If file exists locally in the stored path, use that
+## 2) Else attempt to download file from distribution@online@url
+## 3) Else Fail
 filepath <-
 function(from){
   path <- catpaths(from@dirname, from@objectName)

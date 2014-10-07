@@ -98,12 +98,13 @@ match_column_classes <- function(attribute, dat){
   }
 
   factor_cols <- which(attrs == "Date")
-  for(i in factor_cols){
-   fmt <- slot(attribute[[i]]@measurementScale@dateTime, "formatString")
-   fmt <- datetime_to_R(fmt)
-   dat[[i]] <- as.POSIXlt(dat[[i]], format = fmt)
+  if(!eml_get_config("datesAsStrings", "TRUE")){
+    for(i in factor_cols){
+     fmt <- slot(attribute[[i]]@measurementScale@dateTime, "formatString")
+     fmt <- datetime_to_R(fmt)
+     dat[[i]] <- as.POSIXlt(dat[[i]], format = fmt)
+    }
   }
-
   # "character" columns already have class 'character'
   dat
 }
