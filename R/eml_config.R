@@ -21,7 +21,7 @@
 #' @include party_classes.R 
 #' @import methods
 #' @export
-eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
+eml_config <- function(creator = "", contact = "", defaultRights = "CC0", datesAsStrings=TRUE){
   if(defaultRights == "CC0")
 #    defaultRights <- "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"
   defaultRights <- "CC0, http://creativecommons.org/publicdomain/zero/1.0"
@@ -33,6 +33,7 @@ eml_config <- function(creator = "", contact = "", defaultRights = "CC0"){
   assign('defaultRights', defaultRights, envir=EMLConfig)
   assign('defaultCreator', defaultCreator, envir=EMLConfig)
   assign('defaultContact', defaultContact, envir=EMLConfig)
+  assign('datesAsStrings', datesAsStrings, envir=EMLConfig)
 }
 eml_config()
 
@@ -41,10 +42,14 @@ eml_config()
 #'
 #' eml get config
 #' @param x name of the configuration option desired (gives all by default)
+#' @param default default value to use if not found
 #' @return display the current configuration options
 #' @export
-eml_get_config <- function(x=ls(envir=EMLConfig)){
-  get(x, envir = EMLConfig)
+eml_get_config <- function(x=ls(envir=EMLConfig), default=NULL){
+  if(x %in% ls(envir=EMLConfig))
+    get(x, envir = EMLConfig)
+  else
+    default
 }
 
 

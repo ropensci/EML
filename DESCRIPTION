@@ -87,5 +87,6 @@ Collate:
     'eml_write.R'
     'person_wizard.R'
     'physical_methods.R'
+    'print_format.R'
     'software_methods.R'
     'xsl_coercions.R'
