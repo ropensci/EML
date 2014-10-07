@@ -11,6 +11,8 @@
 #' @param creator a character string, person object, or creator object
 #' @param contact  a character string, person object, or contact object
 #' @param defaultRights a text string specifying the default intellectual rights text that should be indicated.  
+#' @param datesAsStrings logical. EML should not attempt to coerce columns containing dates into POSIX datetime objects
+#'  based on the metadata.  
 #' @return Nothing, but updates the EMLConfig environment where this information is stored.  
 #' @details Configuration settings will be used as the default values when creating a new eml file or dataset object
 #'   unless alternative values are provided at the time of creation.  Configuration settings last only for the duration
@@ -21,7 +23,7 @@
 #' @include party_classes.R 
 #' @import methods
 #' @export
-eml_config <- function(creator = "", contact = "", defaultRights = "CC0", datesAsStrings=TRUE){
+eml_config <- function(creator = "", contact = "", defaultRights = "CC0", datesAsStrings=FALSE){
   if(defaultRights == "CC0")
 #    defaultRights <- "<a rel='license' property='http://creativecommons.org/ns#license' href='http://creativecommons.org/publicdomain/zero/1.0/'>CC0</a>"
   defaultRights <- "CC0, http://creativecommons.org/publicdomain/zero/1.0"

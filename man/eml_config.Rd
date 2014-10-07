@@ -6,7 +6,7 @@
 Default options for generating EML objects}
 \usage{
 eml_config(creator = "", contact = "", defaultRights = "CC0",
-  datesAsStrings = TRUE)
+  datesAsStrings = FALSE)
 }
 \arguments{
 \item{creator}{a character string, person object, or creator object}
@@ -14,6 +14,9 @@ eml_config(creator = "", contact = "", defaultRights = "CC0",
 \item{contact}{a character string, person object, or contact object}
 
 \item{defaultRights}{a text string specifying the default intellectual rights text that should be indicated.}
+
+\item{datesAsStrings}{logical. EML should not attempt to coerce columns containing dates into POSIX datetime objects
+based on the metadata.}
 }
 \value{
 Nothing, but updates the EMLConfig environment where this information is stored.
