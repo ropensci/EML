@@ -16,7 +16,8 @@ Authors@R: c( person("Carl", "Boettiger", role = c("aut", "cre"), email =
     person("Duncan", "Temple Lang", role = "aut"), person("Claas-Thido",
     "Pfaff", role = c("aut")), person("Matt", "Jones", role="aut"))
 VignetteBuilder: knitr
-Additional_repositories: http://www.omegahat.org/R
+Additional_repositories: http://www.omegahat.org/R,
+    http://server.carlboettiger.info:5555/R
 Suggests:
     knitr (>= 1.5),
     rfigshare (>= 0.3),

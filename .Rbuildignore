@@ -7,3 +7,4 @@ LICENSE
 inst/xsd
 ^.*\.Rproj$
 ^\.Rproj\.user$
+docker/*
