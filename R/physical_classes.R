@@ -1,36 +1,44 @@
 ## Physical ##
 
-## Definitions of subclasses, and their coercions to/from XML: 
+## Definitions of subclasses, and their coercions to/from XML:
 
 ### Data Format ###
-setClass("simpleDelimited", 
+setClass("simpleDelimited",
          slots = c(fieldDelimiter = "character"))
 setAs("XMLInternalElementNode", "simpleDelimited",  function(from) emlToS4(from))
 setAs("simpleDelimited", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-setClass("textFormat", 
+setClass("textFormat",
          slots = c(numHeaderLines = "integer",
                         numFooterLines = "integer",
                         recordDelimiter = "character",
-                        attributeOrientation = "character", 
+                        attributeOrientation = "character",
                         simpleDelimited = "simpleDelimited"))
 setAs("XMLInternalElementNode", "textFormat",  function(from) emlToS4(from))
 setAs("textFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
+setClass("externallyDefinedFormat",
+         slots = c(formatName = "character",
+                        formatVersion = "character"))
+                        #citation = "Citation"))
+setAs("XMLInternalElementNode", "externallyDefinedFormat",  function(from) emlToS4(from))
+setAs("externallyDefinedFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
+
 setClass("dataFormat",
-         slots = c(textFormat = "textFormat"))
+         slots = c(textFormat = "textFormat",
+                   externallyDefinedFormat = "externallyDefinedFormat"))
 setAs("XMLInternalElementNode", "dataFormat", function(from) emlToS4(from))
 setAs("dataFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
-### Distribution ##  
-## FIXME Flush out, this isn't the full distribution defs 
+### Distribution ##
+## FIXME Flush out, this isn't the full distribution defs
 setClass("offline", slots = c(
-                              mediumName = "character",          # required  
-                              mediumDensity = "character",       # optional  
-                              mediumDensityUnits = "character",  # optional  
-                              mediumVolume = "character",        # optional  
+                              mediumName = "character",          # required
+                              mediumDensity = "character",       # optional
+                              mediumDensityUnits = "character",  # optional
+                              mediumVolume = "character",        # optional
                               mediumFormat = "character",        # optional  unbounded
                               mediumNote = "character"           # optional
                               ))
@@ -40,7 +48,7 @@ setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 ########################
 
-## FIXME should include function *attribute* as well (e.g. function=download)  
+## FIXME should include function *attribute* as well (e.g. function=download)
 setClass("online",
          slots = c(url = "character",
                    onlineDescription = "character"))
@@ -65,18 +73,18 @@ setAs("character", "distribution", function(from)
 
 setClass("physical",
          slots = c(objectName = "character",
-                        size = "numeric", # "object_size", # R class  
+                        size = "numeric", # "object_size", # R class
                         characterEncoding = "character",
                         dataFormat = "dataFormat",
                         distribution = "distribution",
-                        dirname = "character"))  ## An internal notation only to assist in reading in from correct filepath  
+                        dirname = "character"))  ## An internal notation only to assist in reading in from correct filepath
 
 setAs("XMLInternalElementNode", "physical", function(from) emlToS4(from))
 setAs("physical", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-## Methods to convert into native R types 
+## Methods to convert into native R types
 setAs("physical", "data.frame", function(from)
-      extract(from)) 
+      extract(from))
 
 
 
