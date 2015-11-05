@@ -22,8 +22,23 @@ setClass("ListOfcodeDefinition", contains="list")
 #' @rdname class-codeDefinition
 setMethod("c", signature("codeDefinition"), function(x, ..., recursive = FALSE) new("ListOfcodeDefinition", list(x, ...)))
 
+setClass("entityCodeList", slots = c(entityReference = "character",
+                                     valueAttributeReference = "character",
+                                     definitionAttributeReference = "character"))
+setAs("entityCodeList", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("XMLInternalElementNode", "entityCodeList",  function(from) emlToS4(from))
+
+setClass("externalCodeSet", slots = c(codesetName = "character",
+                                      codesetURL = "character",
+                                      citation = "Citation"))
+setAs("externalCodeSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
+setAs("XMLInternalElementNode", "externalCodeSet",  function(from) emlToS4(from))
+
+
 setClass("enumeratedDomain", 
-         slots = c(codeDefinition = "ListOfcodeDefinition"))
+         slots = c(codeDefinition = "ListOfcodeDefinition",
+                   entityCodeList = "entityCodeList",
+                   externalCodeSet = "externalCodeSet"))
 setAs("enumeratedDomain", "XMLInternalElementNode",  function(from) S4Toeml(from))
 setAs("XMLInternalElementNode", "enumeratedDomain", function(from) emlToS4(from))
 
