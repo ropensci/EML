@@ -282,7 +282,7 @@ rights <- "This dataset is released to the public and may be freely
 
 For larger blocks of text we might rather write these Word.  We can read them in from there, with the help of a few additional R packages.   
 
-```{r}
+```{r eval=FALSE}
 library(RWordXML)
 library(XML)
 f2 <- wordDoc(system.file("examples", "methods.docx", package="EML"))
@@ -292,8 +292,9 @@ txt <- xpathSApply(doc, "//w:t", xmlValue)
 method <- paste(txt, collapse = "\n\n") 
 ```
 
-
-
+```{r include=FALSE}
+method <- f@dataset@methods@methodStep[[1]]@description
+```
  
 We can then construct a methods node containing this text as the description: 
 

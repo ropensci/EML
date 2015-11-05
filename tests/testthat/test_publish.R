@@ -2,6 +2,8 @@ context("publish")
 
 test_that("We can publish a draft to figshare", {
 
+  testthat::skip("Skipping tests for publication methods")
+  
   library(EML)
   library(XML)
 

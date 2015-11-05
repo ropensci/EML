@@ -33,25 +33,6 @@ using [README.Rmd](https://github.com/ropensci/EML/blob/master//vingettes/README
 as the source._
 
 
-```{r include=FALSE, cache=FALSE}
-library("knitr")
-library("devtools")
-opts_chunk$set(tidy=FALSE, warning=FALSE, message=FALSE, cache=1,
-               comment=NA, verbose=TRUE, fig.width=6, fig.height=4)
-opts_chunk$set(fig.path = paste("figure/",
-                                gsub(".Rmd", "", knitr:::knit_concord$get('infile')),
-                                "-", sep=""),
-               cache.path = paste("cache/",
-                                  gsub(".Rmd", "", knitr:::knit_concord$get('infile') ),
-                                "/", sep=""))
-
-library("rfigshare")
-fs_auth(token = "xdBjcKOiunwjiovwkfTF2QjGhROeLMw0y0nSCSgvg3YQxdBjcKOiunwjiovwkfTF2Q", token_secret = "4mdM3pfekNGO16X4hsvZdg")
-
-
-
-```
-
 
 Installation
 ============
@@ -194,36 +175,7 @@ Once we have generated a basic EML file, we can publish it to a variety
 of academic repositories where it will be indexed, permenently archived,
 more easily citable, and publicly discoverable.
 
-
-### Publishing to figshare
-
-In this example, we will publish the above
-EML to [figshare](http://figshare.com) using the
-[rfigshare](https://github.com/ropensci/rfigshare) package. Like most
-academic repostories, figshare requires some basic metadata for any entry.
-Much of this we can automatically extract from our existing EML file.
-Additional metadata unique to figshare (e.g. matching it's allowed "categories"
-can also be provided.
-
-_Note: this example assumes `rfigshare` is installed, even though it is not
-required to use EML and run the examples in the other sections.  See the
-`rfigshare` documentation for authenticating `rfigshare` with your user account_
-
-<!-- We don't want to generate a DOI every time we run the vignette -->
-
-```{r publish_figshare}
-eml_publish("EML_example.xml", 
-            description="Example EML file from EML",
-            categories = "Ecology", 
-            tags = "EML", 
-            destination="figshare") 
-```
-
-This creates a draft file visible only to the user configured in
-`rfigshare`.  The document can be made (permanently) public using
-either the figshare web interface, the `rfigshare` package (using
-`fs_make_public(id)`) or just by adding the argument `visibility = TRUE`
-to the above `eml_publish` command.
+Publishing to a metadata-aware repository like the KNB is the most valuable use of EML.  Instructions to come.  
 
 
 #### In development

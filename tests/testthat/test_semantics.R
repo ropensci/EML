@@ -4,6 +4,9 @@ library(EML)
 
 
 test_that("We can encode and parse semantic data", {
+  
+  testthat::skip_if_not_installed("rrdf")
+  
 ## Define the data and metadata
   dat = data.set(spp   = c("king",  "ccho"),
                  temp    = c(24,   20),

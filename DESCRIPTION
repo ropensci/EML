@@ -16,21 +16,7 @@ Authors@R: c( person("Carl", "Boettiger", role = c("aut", "cre"), email =
     person("Duncan", "Temple Lang", role = "aut"), person("Claas-Thido",
     "Pfaff", role = c("aut")), person("Matt", "Jones", role="aut"))
 VignetteBuilder: knitr
-Additional_repositories: http://www.omegahat.org/R,
-    http://server.carlboettiger.info:5555/R
-Suggests:
-    knitr (>= 1.5),
-    rfigshare (>= 0.3),
-    pander,
-    devtools,
-    testthat,
-    dataone,
-    rrdf,
-    RefManageR,
-    bibtex,
-    RHTMLForms,
-    RWordXML,
-    Sxslt
+Additional_repositories: http://www.omegahat.org/R, http://packages.ropensci.org
 Imports:
     XML,
     RCurl,
@@ -41,6 +27,7 @@ Imports:
 Depends:
     R (>= 2.15),
     methods
+Suggests: pander, knitr, testthat
 Collate:
     'reml_environment.R'
     'S4Toeml.R'
@@ -59,7 +46,6 @@ Collate:
     'software_classes.R'
     'methods_classes.R'
     'entity_classes.R'
-    'eml_config.R'
     'dataTable_classes.R'
     'eml_config.R'
     'dataset_classes.R'
