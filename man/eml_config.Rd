@@ -2,9 +2,7 @@
 % Please edit documentation in R/eml_config.R
 \name{eml_config}
 \alias{eml_config}
-\title{Configure EML default values 
-
-Default options for generating EML objects}
+\title{Configure EML default values}
 \usage{
 eml_config(creator = "", contact = "", defaultRights = "CC0",
   datesAsStrings = TRUE)
@@ -21,6 +19,9 @@ based on the metadata.}
 }
 \value{
 Nothing, but updates the EMLConfig environment where this information is stored.
+}
+\description{
+Default options for generating EML objects
 }
 \details{
 Configuration settings will be used as the default values when creating a new eml file or dataset object

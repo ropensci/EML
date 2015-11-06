@@ -41,8 +41,7 @@ Install the R package:
 
 
 ```{r, results="hide", message=FALSE, warning=FALSE, eval=FALSE}
-library("devtools")
-install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
+devtools::install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
 ```
 
 The additional arguments avoid installing packages that are suggested for use in some advanced examples but not needed for the basic functionality. We can now load the package:

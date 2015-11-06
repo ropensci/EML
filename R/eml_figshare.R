@@ -42,15 +42,7 @@ eml_figshare <- function(file, title = NULL, description = NULL,
 
   visibility = match.arg(visibility)
 
-  success <- require("rfigshare", character.only = TRUE, quietly = TRUE)
-  if(!success){
-    message("rfigshare package not found. Attempting to install")
-    install.packages("rfigshare")
-    success <- require("rfigshare", character.only = TRUE, quietly = TRUE)
-     if(!success)  
-      stop("The rfigshare package must be installed to publish data to figshare")
-  }
-
+  
   ## FIXME this workflow is rather crude.  Should eml_read into S4, modify, and then eml_write XML
   ## as modified EML file, and upload that instead.  
   doc <- xmlParse(file) 
@@ -74,21 +66,21 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   ## Call fs_update if we have id, otherwise fs_create new fileset...
   if(!is.null(figshare_id)){
     id <- figshare_id
-    fs_update(article_id = id, title = title, description = description, type = "fileset")
+    rfigshare::fs_update(article_id = id, title = title, description = description, type = "fileset")
   } else {
-    id <- fs_create(title = title, description = description, type = "fileset")
+    id <- rfigshare::fs_create(title = title, description = description, type = "fileset")
   }
-  fs_add_tags(id, tags)
-  fs_add_categories(id, categories)
+  rfigshare::fs_add_tags(id, tags)
+  rfigshare::fs_add_categories(id, categories)
 
 
   ## Upload data file
-  fs_upload(id, csv)
+  rfigshare::fs_upload(id, csv)
 
   ## Extract URL for file (constructed from metadata since can't access download_url until public)
   ## Still, don't think this link will work until file is public.
   ## download_urls should be supported by figshare for private docs eventually... see [47](https://github.com/ropensci/rfigshare/issues/47)
-  details <- fs_details(id, mine=TRUE)
+  details <- rfigshare::fs_details(id, mine=TRUE)
   csv_id <- details$files[[1]]$id
   csv_name <- details$files[[1]]$name
   csv_url <- paste("http://files.figshare.com", csv_id, csv_name, sep="/")
@@ -125,17 +117,17 @@ eml_figshare <- function(file, title = NULL, description = NULL,
   saveXML(doc, file = modified_eml_filename)
 
   ## Upload updated EML file
-  fs_upload(id, file = modified_eml_filename)
+  rfigshare::fs_upload(id, file = modified_eml_filename)
 
 
-  details <- fs_details(id, mine=TRUE)
+  details <- rfigshare::fs_details(id, mine=TRUE)
   package_id <- details$files[[2]]$id
 
   if(visibility == "private")
-    fs_make_private(id)
+    rfigshare::fs_make_private(id)
 
   else if(visibility == "public"){
-    fs_make_public(id)
+    rfigshare::fs_make_public(id)
     ## If public, add the DOI and other citation information to the EML
   }
   id

@@ -17,21 +17,12 @@ eml_knb <- function(file,
                     permanent = FALSE,
                     public = TRUE,
                     mn_nodeid = "urn:node:KNB",
-                    cli = D1Client("PROD", mn_nodeid)){
+                    cli = dataone::D1Client("PROD", mn_nodeid)){
 
-  # require call leads to a warning when package is not on the SUGGESTS list.  A problem for TRAVIS, not for CRAN.  
-  success <- require("dataone", character.only = TRUE, quietly = TRUE)
-  if(!success){
-    message("dataone package not found. Attempting to install")
-    install.packages("dataone")
-    success <- require("dataone", character.only = TRUE, quietly = TRUE)
-     if(!success)  
-      stop("The dataone package must be installed to publish data to the KNB")
-  }
   # Declare the metadata format ## FIXME get namespace from the file 
   if(permanent == FALSE){
     mn_nodeid <- "urn:node:mnDemo5" # A Development server for testing
-    cli <- D1Client("DEV", mn_nodeid)
+    cli <- dataone::D1Client("DEV", mn_nodeid)
 
   }
 
@@ -56,15 +47,15 @@ eml_knb <- function(file,
 
 
   # Query the object to show its identifier
-  csv_pid <- getIdentifier(csv_object)
+  csv_pid <- dataone::getIdentifier(csv_object)
   message(paste("CSV file identifier is :", csv_pid))
-  eml_pid <- getIdentifier(eml_object)
+  eml_pid <- dataone::getIdentifier(eml_object)
   message(paste("EML file identifier is :", eml_pid))
 
   if(public){
   # Set access control on the data object to be public
-    setPublicAccess(csv_object)
-    setPublicAccess(eml_object)
+    dataone::setPublicAccess(csv_object)
+    dataone::setPublicAccess(eml_object)
     if (canRead(eml_object,"public")) {
       message("successfully set public access");
     } else {
@@ -75,12 +66,12 @@ eml_knb <- function(file,
   # Assemble our data package containing both metadata and data
   pkg.id <- paste0(package_id, "_package")
   data.package <- new("DataPackage", packageId=pkg.id)
-  addData(data.package, csv_object)
-  addData(data.package, eml_object)
-  insertRelationship(data.package, package_id, csv["id"])
+  dataone::addData(data.package, csv_object)
+  dataone::addData(data.package, eml_object)
+  dataone::insertRelationship(data.package, package_id, csv["id"])
 
   # Now upload the whole package to the member node
-  createDataPackage(cli, data.package)
+  dataone::createDataPackage(cli, data.package)
 
   #  test <- getD1Object(cli, eml_pid)
   c(eml = eml_pid, csv = csv_pid, package = pkg.id)

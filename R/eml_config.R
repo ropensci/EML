@@ -7,7 +7,7 @@
 
 #' @title Configure EML default values 
 #' 
-#' Default options for generating EML objects
+#' @description Default options for generating EML objects
 #' @param creator a character string, person object, or creator object
 #' @param contact  a character string, person object, or contact object
 #' @param defaultRights a text string specifying the default intellectual rights text that should be indicated.  
