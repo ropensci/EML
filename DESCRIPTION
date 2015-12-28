@@ -28,8 +28,16 @@ Depends:
     R (>= 2.15),
     methods
 Suggests:
+    bibtex,
+    dataone,
     pander,
     knitr,
+    rfigshare (>= 0.3),
+    rrdf,
+    RefManageR,
+    RHTMLForms,
+    RWordXML,
+    Sxslt,
     testthat
 Collate:
     'reml_environment.R'

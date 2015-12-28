@@ -59,9 +59,9 @@ function (eml = "",
 
   # CRAN will WARN since RHTMLForms isn't on CRAN (and hence not on the SUGGESTS list).  Well, let it, because
   # that is just stupid. 
-  success <- TRUE
+  success <- FALSE
   if(!schema_only)
-    success <- require("RHTMLForms", character.only = TRUE, quietly = TRUE)
+    success <- requireNamespace("RHTMLForms", character.only = TRUE, quietly = TRUE)
 
   
 
