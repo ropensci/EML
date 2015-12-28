@@ -1,25 +1,9 @@
-language: c
-script: "./travis-tool.sh run_tests"
-before_script:
-- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-- chmod 755 ./travis-tool.sh
-- ./travis-tool.sh bootstrap
-- ./travis-tool.sh install_r_binary rjava
-- ./travis-tool.sh install_deps
-- sudo apt-get install fftw-dev libxml2-dev 
-  #- Rscript inst/examples/install_RWordXML.R  
-  #- ./travis-tool.sh install_github duncantl/ROOXML
-  #- ./travis-tool.sh install_github duncantl/RWordXML
-- Rscript -e 'install.packages(c("Sxslt","RHTMLForms", "RWordXML"), repos=list("http://www.omegahat.org/R", "http://cran.rstudio.com"), type="source")'
-- ./travis-tool.sh install_github DataONEorg/rdataone/dataonelibs s-u/PKI ropensci/rdataone/dataone egonw/rrdf/rrdflibs egonw/rrdf/rrdf
-env:
-  global:
-  - R_BUILD_ARGS="--no-manual"
-  - R_CHECK_ARGS="--as-cran --no-manual"
-  - BOOTSTRAP_LATEX="1"
-notifications:
-  email:
-    on_success: change
-    on_failure: always
-  slack:
-    secure: oacF3vD8im7Aq/bepMHL8hMiAMxf0aByOC0T7PAjxVOStHngAf/pBsRDh5jEzjVj7lLv8vReij1T0vu0Ar1tdnmlp36XnZIX8vJGjf5sdapDjt0Uoly+IVkeiyrhCBGSMHRLC7YeweCPgfcNIvKMqpjdeCuMJx+K/kBp3q5Dmb0=
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker run -ti --rm rocker/ropensci R --version
+  - docker run -ti --rm rocker/ropensci R -e "devtools::check()"
+

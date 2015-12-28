@@ -7,8 +7,6 @@
 # FIXME Classes inheriting coverage really need a ListOfcoverage
 # FIXME check needs of ListOf elsewhere
 
-setClass("proceduralStep")
-
 setClass("ListOfprotocol", contains="list")
 
 setClass("proceduralStep", 
@@ -16,8 +14,8 @@ setClass("proceduralStep",
                    citation = "ListOfcitation",
                    protocol = "ListOfprotocol",
                    software = "software",
-                   instrumentation = "character", 
-                   subStep = "proceduralStep"  # Ugh, recursion creating errors
+                   instrumentation = "character",
+                   subStep = "character" ## S4 cannot allocate recursive steps 
                    ),
           contains = "eml.2.1.1") 
 setAs("XMLInternalElementNode", "proceduralStep",  function(from) emlToS4(from))

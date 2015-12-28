@@ -70,7 +70,7 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 
 ```{r}
 f <- eml_read("knb-lter-hfr.205.4")
-#dat <- eml_get(f, "data.frame")
+dat <- eml_get(f, "data.frame")
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  
