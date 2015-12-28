@@ -1,10 +1,11 @@
 ## Physical ##
-
+#' @include literature_classes.R
 ## Definitions of subclasses, and their coercions to/from XML:
 
 ### Data Format ###
 setClass("simpleDelimited",
-         slots = c(fieldDelimiter = "character"))
+         slots = c(fieldDelimiter = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "simpleDelimited",  function(from) emlToS4(from))
 setAs("simpleDelimited", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -13,21 +14,24 @@ setClass("textFormat",
                         numFooterLines = "integer",
                         recordDelimiter = "character",
                         attributeOrientation = "character",
-                        simpleDelimited = "simpleDelimited"))
+                        simpleDelimited = "simpleDelimited"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "textFormat",  function(from) emlToS4(from))
 setAs("textFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
-
+setClass("Citation") # dummy class, defined in literature_classes.R
 setClass("externallyDefinedFormat",
          slots = c(formatName = "character",
-                        formatVersion = "character"))
-                        #citation = "Citation"))
+                   formatVersion = "character",
+                   citation = "Citation"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "externallyDefinedFormat",  function(from) emlToS4(from))
 setAs("externallyDefinedFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("dataFormat",
          slots = c(textFormat = "textFormat",
-                   externallyDefinedFormat = "externallyDefinedFormat"))
+                   externallyDefinedFormat = "externallyDefinedFormat"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "dataFormat", function(from) emlToS4(from))
 setAs("dataFormat", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -41,7 +45,8 @@ setClass("offline", slots = c(
                               mediumVolume = "character",        # optional
                               mediumFormat = "character",        # optional  unbounded
                               mediumNote = "character"           # optional
-                              ))
+                              ),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "offline", function(from) emlToS4(from))
 setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -51,7 +56,8 @@ setAs("offline", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## FIXME should include function *attribute* as well (e.g. function=download)
 setClass("online",
          slots = c(url = "character",
-                   onlineDescription = "character"))
+                   onlineDescription = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "online", function(from) emlToS4(from))
 setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -61,7 +67,8 @@ setAs("online", "XMLInternalElementNode",   function(from) S4Toeml(from))
 setClass("distribution",
          slots = c(online = "online",
                    offline = "offline",
-                   inline = "character"))
+                   inline = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "distribution", function(from) emlToS4(from))
 setAs("distribution", "XMLInternalElementNode",   function(from) S4Toeml(from))
 ## FIXME Should check that 'from' is a internet protocol (e.g http)
@@ -77,7 +84,8 @@ setClass("physical",
                         characterEncoding = "character",
                         dataFormat = "dataFormat",
                         distribution = "distribution",
-                        dirname = "character"))  ## An internal notation only to assist in reading in from correct filepath
+                        dirname = "character"),
+         contains = "eml.2.1.1")  ## An internal notation only to assist in reading in from correct filepath
 
 setAs("XMLInternalElementNode", "physical", function(from) emlToS4(from))
 setAs("physical", "XMLInternalElementNode",   function(from) S4Toeml(from))

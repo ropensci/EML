@@ -27,10 +27,14 @@ Imports:
 Depends:
     R (>= 2.15),
     methods
-Suggests: pander, knitr, testthat
+Suggests:
+    pander,
+    knitr,
+    testthat
 Collate:
     'reml_environment.R'
     'S4Toeml.R'
+    'eml_base_class.R'
     'party_classes.R'
     'coverage_classes.R'
     'physical_classes.R'
@@ -78,4 +82,4 @@ Collate:
     'print_format.R'
     'software_methods.R'
     'xsl_coercions.R'
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1

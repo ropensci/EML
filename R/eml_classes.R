@@ -7,14 +7,15 @@
 
 
 #' @import methods
-setClass("metadata", contains="XMLInternalElementNode")
+setClass("metadata", contains=c("XMLInternalElementNode", "eml.2.1.1"))
 setAs("metadata", "XMLInternalElementNode", function(from) newXMLNode("metadata", from))
 setAs("XMLInternalElementNode", "metadata", function(from) new("metadata", from))
 
 setClass("additionalMetadata", 
          slots = c(describes = "character",
                    id = "character",
-                   metadata = "metadata"))
+                   metadata = "metadata"),
+         contains = "eml.2.1.1")
 
 setAs("additionalMetadata", "XMLInternalElementNode", function(from) S4Toeml(from))
 setAs("XMLInternalElementNode", "additionalMetadata", 
@@ -65,7 +66,8 @@ setClass("eml",
          # slots 'namespaces' and 'dirnames' are for internal use
          # only and not written as XML child elements.
 
-         prototype = prototype(namespaces = eml_namespaces))
+         prototype = prototype(namespaces = eml_namespaces),
+         contains = "eml.2.1.1")
 
 ## Define to/from XML coercions
 setAs("XMLInternalElementNode", "eml", function(from) emlToS4(from))

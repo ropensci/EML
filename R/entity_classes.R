@@ -8,7 +8,8 @@ setClass("entityGroup",
                    physical = "physical",
                    coverage = "coverage",
                    methods = "methods",
-                   additionalInfo = "character"))
+                   additionalInfo = "character"),
+         contains = "eml.2.1.1")
 
 setAs("XMLInternalElementNode", "entityGroup",  function(from) emlToS4(from))
 setAs("entityGroup", "XMLInternalElementNode",   function(from) S4Toeml(from))

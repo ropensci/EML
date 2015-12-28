@@ -5,7 +5,8 @@
 
 
 setClass("keyword",
-         slots = c(keyword = "character"))
+         slots = c(keyword = "character",
+                   contains = "eml.2.1.1"))
 setAs("XMLInternalElementNode", "keyword",   function(from) emlToS4(from))
 setAs("keyword", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -13,7 +14,8 @@ setClass("ListOfkeyword", contains="list")
 
 setClass("keywordSet",
          slots = c(keyword = "ListOfkeyword",
-                        keywordThesaurus = "character"))
+                        keywordThesaurus = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "keywordSet",   function(from) emlToS4(from))
 setAs("keywordSet", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -34,7 +36,8 @@ setClass("resourceGroup",
                          "additionalInfo" = "character",
                          "intellectualRights" = "character",
                          "distribution" = "distribution",
-                         "coverage" = "coverage"))
+                         "coverage" = "coverage"),
+         contains = "eml.2.1.1")
 
 setAs("XMLInternalElementNode", "resourceGroup",   function(from) emlToS4(from))
 setAs("resourceGroup", "XMLInternalElementNode",   function(from) S4Toeml(from))

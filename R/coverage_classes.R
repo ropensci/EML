@@ -9,14 +9,16 @@ setClass("ListOfcitation") # Dummy declaration to avoid warning, replaced when c
 
 setClass("classificationSystem",
          slots = c(classificationSystemCitation = "ListOfcitation",
-                        classificationSystemModifications = "character"))
+                        classificationSystemModifications = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "classificationSystem",   function(from) emlToS4(from))
 setAs("classificationSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 
 setClass("vouchers",
          slots = c(specimen = "character",
-                        repository = "ListOforiginator")) 
+                        repository = "ListOforiginator"),
+         contains = "eml.2.1.1") 
 setAs("XMLInternalElementNode", "vouchers",   function(from) emlToS4(from))
 setAs("vouchers", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -26,7 +28,8 @@ setClass("taxonomicSystem",
                         identifierName = "responsibleParty",
                         taxonomicProcedures = "character",
                         taxonomicCompleteness = "character", 
-                        vouchers = "vouchers")
+                        vouchers = "vouchers"),
+         contains = "eml.2.1.1"
          )
 setAs("XMLInternalElementNode", "taxonomicSystem",   function(from) emlToS4(from))
 setAs("taxonomicSystem", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -37,7 +40,8 @@ setClass("taxonomicClassification",
                         taxonRankValue = "character",
                         commonName = "character", 
                         taxonomicClassification = "taxonomicClassification" ## FIXME this recursive def is asking for trouble!! 
-         ))
+         ),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "taxonomicClassification",   function(from) emlToS4(from))
 setAs("taxonomicClassification", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -116,7 +120,8 @@ setClass("alternativeTimeScale",
                         timeScaleAgeEstimate = "character",
                         timeScaleAgeUncertainty = "character",
                         timeScaleAgeExplanation = "character",
-                        timeScaleCitation = "ListOfcitation") 
+                        timeScaleCitation = "ListOfcitation"),
+         contains = "eml.2.1.1" 
         )
 setAs("XMLInternalElementNode", "alternativeTimeScale",   function(from) emlToS4(from))
 setAs("alternativeTimeScale", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -125,7 +130,8 @@ setAs("alternativeTimeScale", "XMLInternalElementNode",   function(from) S4Toeml
 setClass("singleDateTime",
          slots = c(calendarDate = "character",
                         time = "character",
-                        alternativeTimeScale = "alternativeTimeScale"))
+                        alternativeTimeScale = "alternativeTimeScale"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "singleDateTime",   function(from) emlToS4(from))
 setAs("singleDateTime", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -139,7 +145,8 @@ setAs("endDate", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
 setClass("rangeOfDates", 
          slots = c(beginDate = "beginDate",  
-                        endDate = "endDate"))
+                        endDate = "endDate"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "rangeOfDates",   function(from) emlToS4(from))
 setAs("rangeOfDates", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -163,7 +170,8 @@ setAs("temporalCoverage", "XMLInternalElementNode",   function(from) S4Toeml(fro
 setClass("boundingAltitudes", 
          slots = c(altitudeMinimum = "numeric",
                         altitudeMaximum = "numeric",
-                        altitudeUnits = "character"))
+                        altitudeUnits = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "boundingAltitudes",   function(from) emlToS4(from))
 setAs("boundingAltitudes", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -172,7 +180,8 @@ setClass("boundingCoordinates",
                         eastBoundingCoordinate = "numeric",
                         northBoundingCoordinate = "numeric",
                         southBoundingCoordinate = "numeric", 
-                        boundingAltitudes = "boundingAltitudes"))
+                        boundingAltitudes = "boundingAltitudes"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "boundingCoordinates",   function(from) emlToS4(from))
 setAs("boundingCoordinates", "XMLInternalElementNode",   function(from) S4Toeml(from))
 

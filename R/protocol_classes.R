@@ -15,7 +15,8 @@ setMethod("c", signature("proceduralStep"), function(x, ..., recursive = FALSE) 
 
 
 setClass("protocol_elements", 
-         slots = c(proceduralStep = "ListOfproceduralStep"))
+         slots = c(proceduralStep = "ListOfproceduralStep"),
+         contains = "eml.2.1.1")
 
 setClass("protocol", 
          contains = c("resourceGroup", 

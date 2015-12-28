@@ -5,7 +5,7 @@
 \title{Upload EML to knb}
 \usage{
 eml_knb(file, permanent = FALSE, public = TRUE,
-  mn_nodeid = "urn:node:KNB", cli = D1Client("PROD", mn_nodeid))
+  mn_nodeid = "urn:node:KNB", cli = dataone::D1Client("PROD", mn_nodeid))
 }
 \arguments{
 \item{file}{the filename of the EML file to upload}

@@ -7,15 +7,19 @@
 # FIXME Classes inheriting coverage really need a ListOfcoverage
 # FIXME check needs of ListOf elsewhere
 
+setClass("proceduralStep")
+
+setClass("ListOfprotocol", contains="list")
+
 setClass("proceduralStep", 
          slots = c(description = "character",
                    citation = "ListOfcitation",
-## FIXME uncomment when type is defined
-#                   protocol = "ListOfprotocol",
-#                   software = "software",
-                   instrumentation = "character" 
-#                   subStep = "proceduralStep"  # Ugh, recursion creating errors
-                   )) 
+                   protocol = "ListOfprotocol",
+                   software = "software",
+                   instrumentation = "character", 
+                   subStep = "proceduralStep"  # Ugh, recursion creating errors
+                   ),
+          contains = "eml.2.1.1") 
 setAs("XMLInternalElementNode", "proceduralStep",  function(from) emlToS4(from))
 setAs("proceduralStep", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -48,7 +52,8 @@ setClass("sampling",
          slots = c(studyExtent = "studyExtent",
                    samplingDescription = "character",
                    spatialSamplingUnits = "spatialSamplingUnits",
-                   citation = "ListOfcitation"))
+                   citation = "ListOfcitation"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "sampling",  function(from) emlToS4(from))
 setAs("sampling", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -84,7 +89,8 @@ setMethod("c", signature("qualityControl"), function(x, ..., recursive = FALSE) 
 setClass("methods", 
          slots = c(methodStep = "ListOfmethodStep",
                    sampling = "sampling",
-                   qualityControl = "ListOfqualityControl"))
+                   qualityControl = "ListOfqualityControl"),
+         contains = "eml.2.1.1")
 
 
 setAs("XMLInternalElementNode", "methods",  function(from) emlToS4(from))

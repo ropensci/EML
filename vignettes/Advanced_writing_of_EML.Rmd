@@ -62,7 +62,7 @@ The EML R package allows us to assemble these pieces bit by bit, allowing us to 
 In this example, we will use R to re-generate the EML metadata originally published by [Ellison _et al_ (2012)]() through the Harvard Forest Long Term Ecological Research Center.  <!-- The original metadata file was created in association with the publication in PNAS based on a Microsoft Word document template that Harvard Forest provides to the academic researchers.  Metadata from this template is then read off by hand and an EML file is generated using a combination of a commercial XML editing platform (Oxygen) for commonly used higher-level elements, and the Java platform `Morpho` provided by the EML development team for lower level attribute metadata. -->
 
 ```{r}
-library(EML)
+library("EML")
 ```
 
 
@@ -70,7 +70,7 @@ We begin by reading in the CSV file providing the raw data that is to be annotat
 
 ```{r}
 f <- eml_read("knb-lter-hfr.205.4")
-dat <- eml_get(f, "data.frame")
+#dat <- eml_get(f, "data.frame")
 ```
 
 As in our [Basic tutorial](), essential metadata describes the columns and units used in the CSV file.  

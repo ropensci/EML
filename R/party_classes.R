@@ -1,7 +1,8 @@
 
 ###### referencesGroup ####
 setClass("references", 
-         slots = c(references = "character")) # A special case handles this
+         slots = c(references = "character"),
+         contains = "eml.2.1.1") # A special case handles this
 setAs("XMLInternalElementNode", "references", function(from) emlToS4(from))
 setAs("references", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -16,10 +17,12 @@ setClass("ListOfreferences",
 #' @param x,... referencess to concatenate
 #' @param recursive Needed for compatibility with generic, otherwise ignored
 #' @rdname class-references
+#' @include eml_base_class.R
 setMethod("c", signature("references"), function(x, ..., recursive = FALSE) new("ListOfreferences", list(x, ...)))
 
 setClass("referencesGroup", 
-         slots = c("references" = "ListOfreferences"))
+         slots = c("references" = "ListOfreferences"),
+         contains = "eml.2.1.1")
 
 setAs("XMLInternalElementNode", "referencesGroup", function(from) emlToS4(from))
 setAs("referencesGroup", "XMLInternalElementNode",   function(from) S4Toeml(from))
@@ -32,7 +35,8 @@ setAs("referencesGroup", "XMLInternalElementNode",   function(from) S4Toeml(from
 setClass("individualName",
          slots = c(salutation = "character",
                         givenName = "character",
-                        surName = "character"))
+                        surName = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "individualName",   function(from) emlToS4(from))
 setAs("individualName", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -128,7 +132,8 @@ setMethod("c", signature("originator"), function(x, ..., recursive = FALSE) new(
 
 
 # publisher + coercions
-setClass("person")
+setClass("person",
+         contains = "eml.2.1.1")
 
 setClass("publisher", contains="responsibleParty")
 

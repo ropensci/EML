@@ -13,7 +13,8 @@
 # See http://www.loc.gov/standards/iso639-2/ e.g. ISO639-2
 setClass("eml_language", 
          slots = c(languageValue = "character", 
-                   languageCodeStandard = "character")) 
+                   languageCodeStandard = "character"),
+         contains = "eml.2.1.1") 
 setAs("XMLInternalElementNode", "language",   function(from) emlToS4(from))
 setAs("language", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -22,7 +23,8 @@ setAs("language", "XMLInternalElementNode",   function(from) S4Toeml(from))
 # Not sure this is correctly defined? Simple types 
 setClass("action", 
          slots = c(install = "character",
-                   assert = "character"))
+                   assert = "character"),
+         contains = "eml.2.1.1")
 setAs("XMLInternalElementNode", "action",   function(from) emlToS4(from))
 setAs("action", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -31,7 +33,8 @@ setClass("software") # Dummy declarations are now required..
 
 setClass("dependency",
          slots = c("action" = "action",  # required
-                   "software" = "software")) # required 
+                   "software" = "software"),
+         contains = "eml.2.1.1") # required 
 setAs("XMLInternalElementNode", "dependency",   function(from) emlToS4(from))
 setAs("dependency", "XMLInternalElementNode",   function(from) S4Toeml(from))
 
@@ -56,7 +59,8 @@ setClass("implementation",
                    programmingLanguage = "character", # optional unbounded
                    checksum = "character"  # optional  
 #                   dependency = "ListOfdependency" # optional  unbounded
-                   ))
+                   ),
+          contains = "eml.2.1.1")
 
 setAs("XMLInternalElementNode", "implementation",   function(from) emlToS4(from))
 setAs("implementation", "XMLInternalElementNode",   function(from) S4Toeml(from))
