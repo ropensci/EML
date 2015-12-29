@@ -11,10 +11,14 @@ output:
 devtools::install_github(c("hadley/purrr", "ropensci/EML"))
 ```
 
-```{r}
+```{r message=FALSE}
 library("EML")
 library("purrr")
 library("dplyr")
+knitr::opts_chunk$set(comment=NA, warning=FALSE)
+
+# Wide tables, since we can scroll left/right
+options("dplyr.width" = Inf, "width" = 1000)
 ```
 
 ```{r}
@@ -25,14 +29,14 @@ obj <- eml_read("http://harvardforest.fas.harvard.edu/data/eml/hf001.xml")
 ```{r}
 stuff <- obj@dataset@dataTable[[4]]@attributeList@attribute
 
-stuff[[1]]
+stuff[1]
 ```
 
 
 R has summarized the output using the [YAML](https://en.wikipedia.org/wiki/YAML) format, which is a bit more human readable than the XML format that EML language uses.  YAML uses a `key: value` structure, where the `key` corresponds to the name of a tag/element (or occassionally an XML attribute instead of an XML tag, but attributes are used rarely in EML, mostly just for ids) in the EML language, followed by its value.  Some of these don't appear to have a value, like `attribute:`, but look closely and you'll see the next two keys are indented further.  This means that an `attribute` tag consists of two child tags, `attributeName` and `attributeDefinition`.  We can see this in the subsetting, as 
 
 ```{r}
-slotNames(stuff[1])
+slotNames(stuff[[1]])
 
 stuff[[1]]@attributeName
 stuff[[1]]@attributeDefinition
@@ -42,15 +46,15 @@ So, we want to see all the `attributeName`s and `attributeDefinition`s for Table
 
 ```{r}
 purrr::map_df(stuff, function(x) data.frame(column.name = x@attributeName, definition = x@attributeDefinition))
-
-# Or identically with dplyr alone:
-#dplyr::bind_rows(lapply(stuff, function(x) data.frame(column.name = x@attributeName, definition = x@attributeDefinition)))
-
-do.call(rbind, lapply(stuff, function(x) data.frame(column.name = x@attributeName, definition = x@attributeDefinition)))
-
 ```
 
-This creates a `data.frame` with two columns: the name of every column in Table 4, and a description of what each of those 29 columns contains.  Similarly we can create a `data.frame` that summarizes all of the tables in the dataset:
+(Or if you don't like `purrr` and the hadley magic, the same thing with base R:)
+
+```{r eval=FALSE}
+do.call(rbind, lapply(stuff, function(x) data.frame(column.name = x@attributeName, definition = x@attributeDefinition)))
+```
+
+Either way, this creates a `data.frame` with two columns: the name of every column in Table 4, and a description of what each of those 29 columns contains.  Similarly we can create a `data.frame` that summarizes all of the tables in the dataset:
 
 ```{r}
 purrr::map_df(obj@dataset@dataTable, function(dt) 
