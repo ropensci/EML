@@ -45,10 +45,10 @@ eml_temporalCoverage <- function(dates){
                 new("rangeOfDates", 
                      beginDate = 
                      new("beginDate", 
-                         calendarDate = to_ISO8601(dates[1])),
+                         calendarDate = dates[1]),
                      endDate = 
                      new("endDate", 
-                         calendarDate = to_ISO8601(dates[2]))))
+                         calendarDate = dates[2])))
    }
    node
   }
