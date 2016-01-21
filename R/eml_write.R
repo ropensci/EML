@@ -9,7 +9,7 @@
 #' R person object, or text string recognizable as a name or vector of names.  
 #' @param contact an EML contact, R person object with email address, or text
 #' string with email in angle brackets.  
-#' @param ... additional arguments to the dataset constructor, see ?dataset
+#' @param ... additional arguments to dataset and dataTable, see \code{\link{eml_dataTable}}
 #' @aliases eml_write write.eml 
 #' @import XML
 #' @export eml_write write.eml

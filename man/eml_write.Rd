@@ -23,7 +23,7 @@ R person object, or text string recognizable as a name or vector of names.}
 \item{contact}{an EML contact, R person object with email address, or text
 string with email in angle brackets.}
 
-\item{...}{additional arguments to the dataset constructor, see ?dataset}
+\item{...}{additional arguments to dataset and dataTable, see \code{\link{eml_dataTable}}}
 }
 \description{
 Top-level API function for writing eml
