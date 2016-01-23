@@ -84,15 +84,18 @@ unit_defs
 
 # if you have already figured out which cols are enumerated values
 # lists then pass this vector of numbers identifying those cols
-unit_defs <- eml_boilerplate(dat, enumerated = c(5,6,7))
+enums  <- which(names(dat) %in% c("i.flag", "variable", "value.i"))
+unit_defs <- eml_boilerplate(dat, enumerated = enums)
 unit_defs
 
 # if you have a variable in a format that can be coerced to date with
 # as.Date, this will write the correct units (YYYY-MM-DD)
-table(dat$day)
-dat$datevar <- paste(dat$year, dat$day, sep =" ")
+names(dat)
+str(dat@.Data)
+dat[1,]
+dat$datevar <- paste(dat$year, dat$doy, sep =" ")
 dat$datevar <- as.Date(strptime(dat$datevar, "%Y %j"))
-unit_defs <- eml_boilerplate(dat, enumerated = c(5,6,7))
+unit_defs <- eml_boilerplate(dat, enumerated = enums)
 
 unit_defs
 
