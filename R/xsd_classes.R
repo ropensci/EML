@@ -119,19 +119,23 @@ create_classes <- function(xsd_file, file = "classes.R"){
 
   ## Define class for all elements which declare a type attribute
   typed_elements <- xml2::xml_find_all(xsd, "//xs:element[@type]", ns = ns)
+  typed_elements %>% purrr::map(set_class_element, file = file)
 
+  ## Now get those elements without type
   untyped_elements <- xml2::xml_find_all(xsd, "//xs:element[not(@type)]", ns = ns)
-  simple <- xml2::xml_find_all(untyped_elements, "./xs:simpleType", ns = ns)
 
 
+  ## For those with one-or-more complexType, define setClass(element-name, slots = <children-of-complex-type)
   untyped_elements %>%
     purrr::map(function(e){
       xml2::xml_find_all(e, "./xs:complexType", ns = ns) %>%
       purrr::map(set_class_complex_type, class = xml_attr(e, "name"), ns = ns, file = file)
     })
-  ## For elements without type, look for child simpleType or complexType (should be either/or)
-    ## For those with a child simpleType, define setClass(element-name, slots = c(element-name = "character")
-    ## For those with one-or-more complexType, define setClass(element-name, slots = <children-of-complex-type>
+
+  ## For those with a child simpleType, define setClass(element-name, slots = c(element-name = "character")
+  xml2::xml_find_all(untyped_elements, "./xs:simpleType/..", ns = ns) %>%
+    purrr::map(set_class_element, file = file)
+
 
   ## Define a class for complextTypes with names
   xml2::xml_find_all(xsd, "//xs:complexType[@name]", ns) %>%
@@ -145,8 +149,7 @@ create_classes <- function(xsd_file, file = "classes.R"){
 ##
 file.remove("classes.R")
 file.remove("methods.R")
-#create_classes("inst/xsd/eml-access.xsd")
-create_classes("inst/xsd/eml-attribute.xsd")
+create_classes("../inst/xsd/eml-access.xsd")
+#create_classes("../inst/xsd/eml-attribute.xsd")
 
-#  xsd_file <- "inst/xsd/eml-attribute.xsd"; xsd <- xml2::read_xml(xsd_file); ns <- xml2::xml_ns(xsd);
-# complex_types <- xml2::xml_find_all(xsd, "//xs:complexType", ns)
+#  xsd_file <- "../inst/xsd/eml-access.xsd"; xsd <- xml2::read_xml(xsd_file); ns <- xml2::xml_ns(xsd);
