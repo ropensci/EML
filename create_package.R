@@ -11,7 +11,7 @@ write("#' @importFrom XML XMLInternalElementNode\n", "R/methods.R", append = TRU
 c("eml-2.1.1", "ReferencesGroup", "AccessRule", "Coverage", "MethodsType") %>% purrr::map(set_dummy_class, "R/classes.R")
 #
 
-# create_classes("inst/xsd/stmml.xsd", "R/classes.R", "R/methods.R")
+create_classes("inst/xsd/stmml.xsd", "R/classes.R", "R/methods.R", ns = xml_ns(read_xml("inst/xsd/eml.xsd")))
 
 collate <- c(
 
