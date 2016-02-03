@@ -28,7 +28,15 @@ sanitize_type <- function(type, name = rep("character", length(type))){
 }
 
 strip_namespace <- function(x){
-  gsub("^.*:", "", x)
+  if(length(x) > 0){
+    if(grepl("^xs:",  x))
+      x
+    else if(grepl("^xsd:",  x))
+      x <- gsub("^.*:(.*)", "xs:\\1", x)
+    else
+      x <- gsub("^.*:", "", x)
+  }
+  x
 }
 
 set_dummy_class <- function(class, file = "classes.R"){
@@ -76,7 +84,7 @@ column_check <- function(df){
 
 ref_as_name <- function(df){
   nans <- is.na(df$name)
-  df$name(nans) <- df$ref(nans)
+  df$name[nans] <- df$ref[nans]
   df
 }
 
@@ -138,8 +146,8 @@ set_class_complex_type <- function(complex_type,
 }
 
 xs_base_classes <- function(file = "classes.R"){
-  data.frame(class =    c("float", "string", "anyURI"),
-             contains = c("numeric", "character", "character")) %>%
+  data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date"),
+             contains = c("numeric", "character", "character", "character", "numeric", "integer", "integer", "integer", "integer", "integer", "logical", "Date")) %>%
   purrr::by_row(function(x)
     write(sprintf("setClass('%s', contains = '%s')", x[["class"]], x[["contains"]]), file, append = TRUE)
   )
@@ -191,6 +199,7 @@ create_classes <- function(xsd_file, classes_file = "classes.R", methods_file = 
   TRUE
 
 }
+
 
 
 ##
