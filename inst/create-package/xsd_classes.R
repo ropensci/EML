@@ -226,6 +226,10 @@ create_classes <- function(xsd_file,
       purrr::map(set_class_complex_type, class = xml_attr(e, "name"), ns = ns, file = classes_file)
     })
 
+  ## Define a class for named xs:group
+  xml2::xml_find_all(xsd, "//xs:group[@name]", ns) %>%
+    purrr::map(set_class_complex_type, ns = ns, file = classes_file)
+
 
   ## Define a class for complexTypes with names
   xml2::xml_find_all(xsd, "//xs:complexType[@name]", ns) %>%

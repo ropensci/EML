@@ -14,7 +14,8 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 
   slot_classes <- getClass(node_name)@slots
   attrs <- xmlAttrs(node)
-  children <- xmlChildren(node)
+
+  children <- drop_comment_nodes(xmlChildren(node))
 
   if(is(s4, "character"))
     s4 <- new(node_name, xmlValue(node))
@@ -31,8 +32,17 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
       else if(cls == "character")
         slot(s4,child) <- xmlValue(children[[child]])
       else
-        slot(s4,child) <- as(children[child], child)
+        slot(s4,child) <- as(children[[child]], child)
     }
   }
   s4
 }
+
+##  HTML-style comments create: XMLInternalCommentNode as xmlChildren, which can cause problems.
+## Rather than just drop them, we are assuming in the XML-parsing world that we only work with XMLInternalElementNode objects
+## anyway (e.g. the setAs methods are defined only for that class), so just get them.
+drop_comment_nodes <- function(nodes){
+  keep <- sapply(nodes, function(x) is(x, "XMLInternalElementNode"))
+  nodes[keep]
+  }
+

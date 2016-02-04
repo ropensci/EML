@@ -18,13 +18,15 @@ file.remove(methods_file)
 xs_base_classes <- function(file = "classes.R"){
 
   ## Define some dummy classes defined later, but we define first at start to avoid tricky or unsatisfiable collate order issues
-  c("eml-2.1.1", "ReferencesGroup", "AccessRule", "Coverage",
+  c("ReferencesGroup", "AccessRule", "Coverage",
     "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup",
     "CitationType", "PhysicalType", "DatasetType",
     "ProcedureStepType") %>%
     purrr::map(set_dummy_class, file)
 
   ## Some basic classes we'll use
+  write("setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute'))", file, append = TRUE)
+
   write("setClass('NonEmptyStringType', contains='character')", file, append = TRUE)
   write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
 
