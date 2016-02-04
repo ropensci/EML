@@ -13,3 +13,4 @@ Imports: XML,
     xml2,
     dplyr,
     purrr
+Suggests: testthat

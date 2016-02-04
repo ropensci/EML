@@ -14,29 +14,34 @@ print_cmd <- function(l){
     out <- ""
     if(length(l) > 1)
     for(i in 1:(length(l)-1))
-      out <- paste0(out, n[i], " = '", l[i], "', ")
-    out <- paste0(out, n[length(l)], " = '", l[length(l)], "'")
+      out <- paste0(out, "'", n[i], "'", " = '", l[i], "', ")
+    out <- paste0(out, "'", n[length(l)], "'", " = '", l[length(l)], "'")
   }
 
   out
 }
 
 sanitize_type <- function(type, name = rep("character", length(type))){
-  replace <- is.na(type) | grepl(c("NonEmptyStringType"), type)
-    type[replace] <- name[replace]
+  untyped <- is.na(type)
+  str_type <- grepl(c("NonEmptyStringType"), type)
+  type[untyped] <- name[untyped]
+  type[str_type] <- "character"
   strip_namespace(type)
 }
 
 strip_namespace <- function(x){
-  if(length(x) > 0){
-    if(grepl("^xs:",  x))
-      x
-    else if(grepl("^xsd:",  x))
-      x <- gsub("^.*:(.*)", "xs:\\1", x)
-    else
-      x <- gsub("^.*:", "", x)
-  }
-  x
+  purrr::map_chr(x,
+  function(x){
+    if(length(x) > 0){
+      if(grepl("^xs:",  x))
+        x
+      else if(grepl("^xsd:",  x))
+        x <- gsub("^.*:(.*)", "xs:\\1", x)
+      else
+        x <- gsub("^.*:", "", x)
+    }
+    x
+  })
 }
 
 set_dummy_class <- function(class, file = "classes.R"){
@@ -54,21 +59,35 @@ set_coerces <- function(class, file = "methods.R"){
 set_class_list <- function(class, file = "classes.R"){
   #setClass(class, contains = "list")
   write(sprintf("setClass('%s', contains = 'list')", class), file, append = TRUE)
+
+
 }
 
 
 set_class_element <- function(element, file = "classes.R"){
   class <- xml2::xml_attr(element, "name")
   type <- xml2::xml_attr(element, "type") %>% sanitize_type()
+  maxOccurs <- xml2::xml_attr(element, "maxOccurs")
+  multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
 
-  #setClass(class, contains = type)
+  if(multiples | type != "character")
+    write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
+
+
+}
+
+
+set_class_simpletype <- function(element, file = "classes.R"){
+  class <- xml2::xml_attr(element, "name")
+  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
   write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
 }
 
 
-slotify <- function(type, maxOccurs){
+slotify <- function(name, type, maxOccurs){
+
   multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
-  type[multiples] <- paste0("ListOf", type[multiples])
+  type[multiples] <- paste0("ListOf", name[multiples])
   type
 }
 
@@ -96,7 +115,7 @@ element_attrs_table <- function(elements){
       column_check() %>%
       ref_as_name() %>%
       dplyr::mutate(type = sanitize_type(type, name)) %>%
-      dplyr::mutate(slot = slotify(type, maxOccurs))
+      dplyr::mutate(slot = slotify(name, type, maxOccurs))
 
 }
 
@@ -107,8 +126,10 @@ set_class_complex_type <- function(complex_type,
                                    ns = character(), file = "classes.R"){
 
 
-  ## Get all immediate child elements in the complex_type
-  elements <- xml2::xml_find_all(complex_type, "./*/*/xs:element | ./*/xs:element", ns = ns)
+  ## Get all immediate child elements in the complex_type (except those that are inside another complex type)
+  # "*" here should really be just one of the schema indicator terms, http://www.w3schools.com/xml/schema_complex_indicators.asp
+  # e.g. ".[child::xs:choice | child::xs:sequence | child::xs:all]".  Unclear what depth it could be between element and complexType
+  elements <- xml2::xml_find_all(complex_type, "./*/*/*/xs:element | ./*/*/xs:element | ./*/xs:element", ns = ns)
 
   ## Define class for the complex_type with a slot for each element. First, determine slot types:
   if(length(elements) > 0){
@@ -128,9 +149,12 @@ set_class_complex_type <- function(complex_type,
   contains <- c(group, "eml-2.1.1")
 
   ## complex_type attributes as slots of type "character"
-  att <- xml2::xml_find_all(complex_type, "./xs:attribute | ./xs:simpleContent/xs:extension/xs:attribute", ns = ns) %>%
-    xml_attr("name")
-  att <- setNames(rep("character", length(att)), att)
+  att_df <- xml2::xml_find_all(complex_type, "./xs:attribute | ./xs:simpleContent/xs:extension/xs:attribute", ns = ns) %>%
+    purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
+    ref_as_name()
+  att <- att_df$name
+  att <- setNames(rep("xml_attribute", length(att)), att)
+  slots = c(slots, att)
 
   ## Get any simpleType element extension
   extension <- xml2::xml_find_all(complex_type, "./xs:simpleContent/xs:extension", ns = ns) %>%
@@ -145,7 +169,30 @@ set_class_complex_type <- function(complex_type,
   }
 }
 
+## function(class)
+## Declare a method making it easier to create "new" when object is a list.
+#  paste0("setMethod('initialize', '", class, "'\n",
+#             function(.Object, ...){
+#              gsub(.Object@VAR <- new("ListOfVAR", lapply(VAR, function(x) new("VAR", x)))
+#
+#              .Object@surName <- surName
+#              .Object
+#            })
+## Declare a method making it easier to create "new" when object is a list.
+#  setMethod("initialize", "Person",
+#            function(.Object, salutation=character(0), givenName=character(0), surName){
+#              .Object@salutation <- new("ListOfsalutation", lapply(salutation, function(x) new("salutation", x)))
+#              .Object@givenName <- new("ListOfgivenName", lapply(givenName, function(x) new("givenName", x)))
+#              .Object@surName <- surName
+#              .Object
+#            })
+
+
+
 xs_base_classes <- function(file = "classes.R"){
+
+  write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
+
   data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date"),
              contains = c("numeric", "character", "character", "character", "numeric", "integer", "integer", "integer", "integer", "integer", "logical", "Date")) %>%
   purrr::by_row(function(x)
@@ -154,16 +201,23 @@ xs_base_classes <- function(file = "classes.R"){
 }
 
 
-create_classes <- function(xsd_file, classes_file = "classes.R", methods_file = "methods.R",
+filename <- function(x){
+  strsplit(basename(x), "\\.")[[1]][1]
+}
+
+
+create_classes <- function(xsd_file,
+                           classes_file = paste0("R/", filename(xsd_file), "-classes.R"),
+                           methods_file = paste0("R/", filename(xsd_file), "-methods.R"),
                            ns = xml2::xml_ns(xml2::read_xml(xsd_file))){
 
   xsd <- xml2::read_xml(xsd_file)
-
   write(paste0("\n\n#####  ", xsd_file, "  ####\n\n"), classes_file, append = TRUE)
+
 
   ## Create all named <xs:simpleType> elements:
   xml2::xml_find_all(xsd, "//xs:simpleType[@name]", ns = ns) %>%
-    purrr::map(set_class_element, file = classes_file)
+    purrr::map(set_class_simpletype, file = classes_file)
 
   ## Now get those <xs:element> nodes without a type
   ## For those with one-or-more complexType, define setClass(element-name, slots = <children-of-complex-type)
@@ -184,15 +238,19 @@ create_classes <- function(xsd_file, classes_file = "classes.R", methods_file = 
   typed_elements <- xml2::xml_find_all(xsd, "//xs:element[@type]", ns = ns)
   typed_elements %>% purrr::map(set_class_element, file = classes_file)
 
+
   ## Create additional ListOf classes for any element that can appear multiple times
-  if(length(typed_elements) > 0){
-    element <- element_attrs_table(typed_elements)
+  named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name]", ns = ns)
+
+  if(length(named_elements) > 0){
+    element <- element_attrs_table(named_elements)
     element$slot[grepl("ListOf", element$slot)] %>%
       purrr::map(set_class_list, file = classes_file)
   }
 
+
   ## Define coercions
-  xml2::xml_find_all(xsd, "//xs:element[@name]", ns = ns) %>%
+  xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:simpleType[@name] | //xs:complexType[@name]", ns = ns) %>%
     purrr::map(xml2::xml_attr, "name") %>%
     set_coerces(file = methods_file)
 
@@ -202,21 +260,3 @@ create_classes <- function(xsd_file, classes_file = "classes.R", methods_file = 
 
 
 
-##
-#file.remove("classes.R")
-#file.remove("methods.R")
-#c("eml-2.1.1", "ReferencesGroup", "xs:string") %>% purrr::map(set_dummy_class, "classes.R")
-
-#create_classes("../inst/xsd/eml-text.xsd")
-#create_classes("../inst/xsd/eml-documentation.xsd")
-#create_classes("../inst/xsd/eml-party.xsd")
-#create_classes("../inst/xsd/eml-resource.xsd")
-#create_classes("../inst/xsd/eml-access.xsd")
-#create_classes("../inst/xsd/eml-attribute.xsd")
-#create_classes("../inst/xsd/eml-constraint.xsd")
-#create_classes("../inst/xsd/eml-dataset.xsd")
-#create_classes("../inst/xsd/eml-dataTable.xsd")
-
-
-
-#  xsd_file <- "../inst/xsd/eml-access.xsd"; xsd <- xml2::read_xml(xsd_file); ns <- xml2::xml_ns(xsd);
