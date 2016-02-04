@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
+         packageId="sbclter-bibliography.289.1"
+         system="knb"
+         scope="system">
+   <citation id="sbclter-bibliography.289">
+      <alternateIdentifier system="sbclter-bibliography">289</alternateIdentifier>
+      <alternateIdentifier system="DOI">10.1029/2005GL023017</alternateIdentifier>
+      <title>Sub-mesoscale coastal eddies observed by high frequency radar: A new mechanism for delivering nutrients to kelp forests in the Southern California Bight</title>
+      <creator scope="document">
+         <individualName>
+            <givenName>C</givenName>
+            <givenName>J</givenName>
+            <surName>Bassin</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>L</givenName>
+            <surName>Washburn</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>M</givenName>
+            <givenName>A</givenName>
+            <surName>Brzezinski</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>E</givenName>
+            <givenName>E</givenName>
+            <surName>McPhee-Shaw</surName>
+         </individualName>
+      </creator>
+      <pubDate>2005</pubDate>
+      <contact>
+         <individualName>
+            <givenName>Libe</givenName>
+            <surName>Washburn</surName>
+         </individualName>
+         <electronicMailAddress>washburn@icess.ucsb.edu</electronicMailAddress>
+      </contact>
+      <article>
+         <journal>Geophysical Research Letters</journal>
+         <volume>32</volume>
+         <pageRange>LI2604</pageRange>
+      </article>
+   </citation>
+</eml:eml>

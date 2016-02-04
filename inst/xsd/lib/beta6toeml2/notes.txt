@@ -1,0 +1,23 @@
+Jan 29, 2003
+
+eml2dsout.xsl is a stylesheet for converting eml-beta6 dataset+access docs to eml2 format. It is thus a test for converting the simplest emlbeta6 packages to eml2. The nrs and obfs packages on metacat are examples of these types of packages (i.e. no data in package).
+
+The current is hard coded to use the files 'obfs.dsb6' and 'obfs.acb6' as input. Resulting eml2 doc ('eml2dsout.xml') will pass the eml2 parser validation.
+
+current stylesheet is very preliminary! Tested using the XSLT Processor plugin in JEdit and Xalan
+
+
+Issues?
+
+in beta6 obfs and nrs metadata:
+  geographicCov/descgeog has " " data
+  temporalCov/**/caldate has data in form (23July1987) format, not dd-mm-year (preliminary conversion template included)     
+  in taxonomicCov, where does keywtax (required) map to in eml2???
+ 
+  Under NumericDomainType, 'numberType' is one of 'natural(>0)', 'whole'(>=0), 'integer', or 'real'  Why not include positive-real (>0), nonnegative-real(>=0)?
+
+  'exclusive' attribute of minimum and maximum elements always set to 'false' due to lack of information (?)
+
+In access/allow or deny, both the principal and permission elements are seperately repeatable; does 3 principles and 2 permissions make any sense?
+
+Question: Do we simply copy id? increment version?

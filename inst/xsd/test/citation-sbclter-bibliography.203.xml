@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
+         packageId="sbclter-bibliography.203.1"
+         system="knb"
+         scope="system">
+   <citation id="sbclter-bibliography.203">
+      <alternateIdentifier system="sbclter-bibliography">203</alternateIdentifier>
+      <title>Dispersal forcing of southern California river plumes based on field and remote sensing observations</title>
+      <creator scope="document">
+         <individualName>
+            <givenName>J</givenName>
+            <givenName>A</givenName>
+            <surName>Warrick</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>L</givenName>
+            <givenName>A</givenName>
+            <givenName>K</givenName>
+            <surName>Mertes</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>L</givenName>
+            <surName>Washburn</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>D</givenName>
+            <givenName>A</givenName>
+            <surName>Siegel</surName>
+         </individualName>
+      </creator>
+      <pubDate>2004</pubDate>
+      <article>
+         <journal>Geo-Marine Letters</journal>
+         <volume>24</volume>
+         <pageRange>46-52</pageRange>
+      </article>
+   </citation>
+</eml:eml>

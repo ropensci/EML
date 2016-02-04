@@ -1,0 +1,3235 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-spatialReference Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-spatialReference</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+              Schema for validating spatial referencing descriptions.
+            </div>
+            
+<p>
+             This module defines both projected and unprojected coordinate systems for
+             referencing the spatial coordinates of a dataset to the earth. The schema is based on
+             that used by Environmental Systems Research Inc (ESRI) for its .prj file format. EML provides a library of
+             pre-defined coordinate systems that may be referred to by name in the horizCoordSysName element. A
+             custom projection may be defined using this schema for any projection that does not appear in this
+             dictionary.
+            </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-spatialReference">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all spatial entities</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-resource</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-spatialReference.png" target="offline">eml-spatialReference image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="horizCoordSysName">horizCoordSysName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The name of a coordinate system for which a definition has been
+                provided in the eml-spatialReferenceDictionary.xsl file.<br>
+<span class="boldtext">Example(s): </span>
+<br>NAD_1927_StatePlane_Arizona_Central_FIPS_0202<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>GCS_Abidjan_1987</li>
+<li>GCS_Accra</li>
+<li>GCS_Adindan</li>
+<li>GCS_Afgooye</li>
+<li>GCS_Agadez</li>
+<li>GCS_Ain_el_Abd_1970</li>
+<li>GCS_Arc_1950</li>
+<li>GCS_Arc_1960</li>
+<li>GCS_Ayabelle</li>
+<li>GCS_Beduaram</li>
+<li>GCS_Bissau</li>
+<li>GCS_Camacupa</li>
+<li>GCS_Cape</li>
+<li>GCS_Carthage_Degree</li>
+<li>GCS_Carthage_Paris</li>
+<li>GCS_Carthage</li>
+<li>GCS_Conakry_1905</li>
+<li>GCS_Cote_d_Ivoire</li>
+<li>GCS_Dabola</li>
+<li>GCS_Douala</li>
+<li>GCS_Egypt_1907</li>
+<li>GCS_European_1950</li>
+<li>GCS_European_Libyan_Datum_1979</li>
+<li>GCS_Garoua</li>
+<li>GCS_Hartebeesthoek_1994</li>
+<li>GCS_Kuwait_Oil_Company</li>
+<li>GCS_KUDAMS</li>
+<li>GCS_Leigon</li>
+<li>GCS_Liberia_1964</li>
+<li>GCS_Locodjo_1965</li>
+<li>GCS_Lome</li>
+<li>GCS_Mporaloko</li>
+<li>GCS_Madzansua</li>
+<li>GCS_Mahe_1971</li>
+<li>GCS_Malongo_1987</li>
+<li>GCS_Manoca</li>
+<li>GCS_Massawa</li>
+<li>GCS_Merchich_Degree</li>
+<li>GCS_Merchich</li>
+<li>GCS_Mhast</li>
+<li>GCS_Minna</li>
+<li>GCS_Moznet</li>
+<li>GCS_Nahrwan_1967</li>
+<li>GCS_NGN</li>
+<li>GCS_Nord_Sahara_1959</li>
+<li>GCS_Observatario</li>
+<li>GCS_Oman</li>
+<li>GCS_Palestine_1923</li>
+<li>GCS_PDO_1993</li>
+<li>GCS_Point_58</li>
+<li>GCS_Pointe_Noire</li>
+<li>GCS_Qatar_1948</li>
+<li>GCS_Qatar</li>
+<li>GCS_Schwarzeck</li>
+<li>GCS_Sierra_Leone_1924</li>
+<li>GCS_Sierra_Leone_1960</li>
+<li>GCS_Sierra_Leone_1968</li>
+<li>GCS_South_Yemen</li>
+<li>GCS_Sudan</li>
+<li>GCS_Tananarive_1925_Paris</li>
+<li>GCS_Tananarive_1925</li>
+<li>GCS_Tete</li>
+<li>GCS_Trucial_Coast_1948</li>
+<li>GCS_Voirol_1875_Degree</li>
+<li>GCS_Voirol_1875_Paris</li>
+<li>GCS_Voirol_1875</li>
+<li>GCS_Voirol_Unifie_1960_Degree</li>
+<li>GCS_Voirol_Unifie_1960_Paris</li>
+<li>GCS_Voirol_Unifie_1960</li>
+<li>GCS_Yemen_NGN_1996</li>
+<li>GCS_Yoff</li>
+<li>GCS_Camp_Area</li>
+<li>GCS_Deception_Island</li>
+<li>GCS_Ain_el_Abd_1970</li>
+<li>GCS_Batavia_Jakarta</li>
+<li>GCS_Batavia</li>
+<li>GCS_Beijing_1954</li>
+<li>GCS_Bukit_Rimpah</li>
+<li>GCS_Deir_ez_Zor</li>
+<li>GCS_European_1950_ED77</li>
+<li>GCS_European_1950</li>
+<li>GCS_Everest_def_1962</li>
+<li>GCS_Everest_def_1967</li>
+<li>GCS_Everest_def_1975</li>
+<li>GCS_Everest_Bangladesh</li>
+<li>GCS_Everest_India_Nepal</li>
+<li>GCS_Everest_1830</li>
+<li>GCS_Everest_Modified</li>
+<li>GCS_Fahud</li>
+<li>GCS_FD_1958</li>
+<li>GCS_Gandajika_1970</li>
+<li>GCS_Gunung_Segara</li>
+<li>GCS_Hanoi_1972</li>
+<li>GCS_Herat_North</li>
+<li>GCS_Hong_Kong_1963</li>
+<li>GCS_Hong_Kong_1980</li>
+<li>GCS_Hu_Tzu_Shan</li>
+<li>GCS_Indian_1954</li>
+<li>GCS_Indian_1960</li>
+<li>GCS_Indian_1975</li>
+<li>GCS_Indonesian_1974</li>
+<li>GCS_Israel</li>
+<li>GCS_JGD_2000</li>
+<li>GCS_Kalianpur_1880</li>
+<li>GCS_Kalianpur_1937</li>
+<li>GCS_Kalianpur_1962</li>
+<li>GCS_Kalianpur_1975</li>
+<li>GCS_Kandawala</li>
+<li>GCS_Kertau</li>
+<li>GCS_Korean_Datum_1985</li>
+<li>GCS_Korean_Datum_1995</li>
+<li>GCS_Kuwait_Oil_Company</li>
+<li>GCS_KUDAMS</li>
+<li>GCS_Luzon_1911</li>
+<li>GCS_Makassar_Jakarta</li>
+<li>GCS_Makassar</li>
+<li>GCS_Nahrwan_1967</li>
+<li>GCS_NGN</li>
+<li>GCS_Oman</li>
+<li>GCS_Padang_1884_Jakarta</li>
+<li>GCS_Padang_1884</li>
+<li>GCS_Palestine_1923</li>
+<li>GCS_Pulkovo_1942</li>
+<li>GCS_Pulkovo_1995</li>
+<li>GCS_Qatar_1948</li>
+<li>GCS_Qatar</li>
+<li>GCS_Rassadiran</li>
+<li>GCS_Samboja</li>
+<li>GCS_Segora</li>
+<li>GCS_Serindung</li>
+<li>GCS_South_Asia_Singapore</li>
+<li>GCS_Timbalai_1948</li>
+<li>GCS_Tokyo</li>
+<li>GCS_Trucial_Coast_1948</li>
+<li>GCS_Australian_1966</li>
+<li>GCS_Australian_1984</li>
+<li>GCS_GDA_1994</li>
+<li>GCS_New_Zealand_1949</li>
+<li>GCS_NZGD_2000</li>
+<li>GCS_Amersfoort</li>
+<li>GCS_ATF_Paris</li>
+<li>GCS_Belge_1950_Brussels</li>
+<li>GCS_Belge_1972</li>
+<li>GCS_Bern_1898_Bern</li>
+<li>GCS_Bern_1898</li>
+<li>GCS_Bern_1938</li>
+<li>GCS_CH1903+</li>
+<li>GCS_CH1903</li>
+<li>GCS_Datum_73</li>
+<li>GCS_Datum_Lisboa_Bessel</li>
+<li>GCS_Datum_Lisboa_Bessel</li>
+<li>GCS_Dealul_Piscului_1933</li>
+<li>GCS_Dealul_Piscului_1970</li>
+<li>GCS_Deutsche_Hauptdreiecksnetz</li>
+<li>GCS_Estonia_1937</li>
+<li>GCS_Estonia_1992</li>
+<li>GCS_ETRF_1989</li>
+<li>GCS_European_1979</li>
+<li>GCS_European_1950</li>
+<li>GCS_European_1987</li>
+<li>GCS_Greek_Athens</li>
+<li>GCS_Greek</li>
+<li>GCS_Hermannskogel</li>
+<li>GCS_Hjorsey_1955</li>
+<li>GCS_Hungarian_1972</li>
+<li>GCS_IRENET95</li>
+<li>GCS_KKJ</li>
+<li>GCS_Lisbon_Lisbon</li>
+<li>GCS_Lisbon</li>
+<li>GCS_LKS_1994</li>
+<li>GCS_Madrid_1870_Madrid</li>
+<li>GCS_MGI_Ferro</li>
+<li>GCS_MGI</li>
+<li>GCS_Monte_Mario_Rome</li>
+<li>GCS_Monte_Mario</li>
+<li>GCS_NGO_1948_Oslo</li>
+<li>GCS_NGO_1948</li>
+<li>GCS_Nord_de_Guerre_Paris</li>
+<li>GCS_NTF</li>
+<li>GCS_NTF_Paris</li>
+<li>GCS_OS_SN_1980</li>
+<li>GCS_OSGB_1936</li>
+<li>GCS_OSGB_1970_SN</li>
+<li>GCS_Pulkovo_1942</li>
+<li>GCS_Pulkovo_1995</li>
+<li>GCS_Qornoq</li>
+<li>GCS_Belge_1950</li>
+<li>GCS_Belge_1972</li>
+<li>GCS_RGF_1993</li>
+<li>GCS_RT_1990</li>
+<li>GCS_RT38_Stockholm</li>
+<li>GCS_RT38</li>
+<li>GCS_S42_Hungary</li>
+<li>GCS_S_JTSK</li>
+<li>GCS_Swiss_TRF_1995</li>
+<li>GCS_TM65</li>
+<li>GCS_TM75</li>
+<li>GCS_Alaskan_Islands</li>
+<li>GCS_American_Samoa_1962</li>
+<li>GCS_ATS_1977</li>
+<li>GCS_Barbados</li>
+<li>GCS_Bermuda_1957</li>
+<li>GCS_Cape_Canaveral</li>
+<li>GCS_Guam_1963</li>
+<li>GCS_Jamaica_1875</li>
+<li>GCS_Jamaica_1969</li>
+<li>GCS_NAD_1927_CGQ77</li>
+<li>GCS_NAD_1927_Definition_1976</li>
+<li>GCS_North_American_Michigan</li>
+<li>GCS_North_American_1983_CSRS98</li>
+<li>GCS_North_American_1983_HARN</li>
+<li>GCS_North_American_1927</li>
+<li>GCS_North_American_1983</li>
+<li>GCS_Old_Hawaiian</li>
+<li>GCS_Puerto_Rico</li>
+<li>GCS_Qornoq</li>
+<li>GCS_St_George_Island</li>
+<li>GCS_St_Lawrence_Island</li>
+<li>GCS_St_Paul_Island</li>
+<li>GCS_Alaskan_Islands</li>
+<li>GCS_American_Samoa_1962</li>
+<li>GCS_Anguilla_1957</li>
+<li>GCS_Anna_1_1965</li>
+<li>GCS_Antigua_1943</li>
+<li>GCS_Ascension_Island_1958</li>
+<li>GCS_Beacon_E_1945</li>
+<li>GCS_DOS_71_4</li>
+<li>GCS_Astro_1952</li>
+<li>GCS_Bab_South</li>
+<li>GCS_Barbados_1938</li>
+<li>GCS_Barbados</li>
+<li>GCS_Bellevue_IGN</li>
+<li>GCS_Bermuda_1957</li>
+<li>GCS_Canton_1966</li>
+<li>GCS_Chatham_Island_1971</li>
+<li>GCS_Dominica_1945</li>
+<li>GCS_DOS_1968</li>
+<li>GCS_Easter_Island_1967</li>
+<li>GCS_Fort_Thomas_1955</li>
+<li>GCS_Gan_1970</li>
+<li>GCS_Graciosa_Base_SW_1948</li>
+<li>GCS_Grenada_1953</li>
+<li>GCS_Guam_1963</li>
+<li>GCS_GUX_1</li>
+<li>GCS_Hjorsey_1955</li>
+<li>GCS_ISTS_061_1968</li>
+<li>GCS_ISTS_073_1969</li>
+<li>GCS_Jamaica_1875</li>
+<li>GCS_Jamaica_1969</li>
+<li>GCS_Johnston_Island_1961</li>
+<li>GCS_Kerguelen_Island_1949</li>
+<li>GCS_Kusaie_1951</li>
+<li>GCS_LC5_1961</li>
+<li>GCS_Mahe_1971</li>
+<li>GCS_Majuro</li>
+<li>GCS_Midway_1961</li>
+<li>GCS_Montserrat_1958</li>
+<li>GCS_Observ_Meteorologico_1939</li>
+<li>GCS_Old_Hawaiian</li>
+<li>GCS_Pico_de_Las_Nieves</li>
+<li>GCS_Pitcairn_1967</li>
+<li>GCS_Pohnpei</li>
+<li>GCS_Porto_Santo_1936</li>
+<li>GCS_Puerto_Rico</li>
+<li>GCS_Reunion</li>
+<li>GCS_Santo_DOS_1965</li>
+<li>GCS_Sao_Braz</li>
+<li>GCS_Sapper_Hill_1943</li>
+<li>GCS_Selvagem_Grande_1938</li>
+<li>GCS_St_Kitts_1955</li>
+<li>GCS_St_Lucia_1955</li>
+<li>GCS_St_Vincent_1945</li>
+<li>GCS_Tern_Island_1961</li>
+<li>GCS_Tristan_1968</li>
+<li>GCS_Viti_Levu_1916</li>
+<li>GCS_Wake_Island_1952</li>
+<li>GCS_Wake_Eniwetok_1960</li>
+<li>GCS_Aratu</li>
+<li>GCS_Bogota_Bogota</li>
+<li>GCS_Bogota</li>
+<li>GCS_Campo_Inchauspe</li>
+<li>GCS_Chos_Malal_1914</li>
+<li>GCS_Chua</li>
+<li>GCS_Corrego_Alegre</li>
+<li>GCS_Guyane_Francaise</li>
+<li>GCS_Hito_XVIII_1963</li>
+<li>GCS_La_Canoa</li>
+<li>GCS_Lake</li>
+<li>GCS_Loma_Quintana</li>
+<li>GCS_Mount_Dillon</li>
+<li>GCS_Naparima_1955</li>
+<li>GCS_Naparima_1972</li>
+<li>GCS_Pampa_del_Castillo</li>
+<li>GCS_POSGAR</li>
+<li>GCS_REGVEN</li>
+<li>GCS_Sapper_Hill_1943</li>
+<li>GCS_SIRGAS</li>
+<li>GCS_South_American_1969</li>
+<li>GCS_Trinidad_1903</li>
+<li>GCS_Yacare</li>
+<li>GCS_Zanderij</li>
+<li>GCS_Airy_1830</li>
+<li>GCS_Airy_Modified</li>
+<li>GCS_Australian</li>
+<li>GCS_Sphere_ARC_INFO</li>
+<li>GCS_Sphere</li>
+<li>GCS_ATS_1977</li>
+<li>GCS_Bessel_1841</li>
+<li>GCS_Bessel_Modified</li>
+<li>GCS_Bessel_Namibia</li>
+<li>GCS_Clarke_1858</li>
+<li>GCS_Clarke_1866_Michigan</li>
+<li>GCS_Clarke_1866</li>
+<li>GCS_Clarke_1880_Arc</li>
+<li>GCS_Clarke_1880_Benoit</li>
+<li>GCS_Clarke_1880_IGN</li>
+<li>GCS_Clarke_1880_RGS</li>
+<li>GCS_Clarke_1880_SGA</li>
+<li>GCS_Clarke_1880</li>
+<li>GCS_Everest_def_1967</li>
+<li>GCS_Everest_def_1975</li>
+<li>GCS_Everest_1830</li>
+<li>GCS_Everest_Modified_1969</li>
+<li>GCS_Everest_Modified</li>
+<li>GCS_Fischer_1960</li>
+<li>GCS_Fischer_1968</li>
+<li>GCS_Fischer_Modified</li>
+<li>GCS_GEM_10C</li>
+<li>GCS_GRS_1967</li>
+<li>GCS_GRS_1980</li>
+<li>GCS_Helmert_1906</li>
+<li>GCS_Hough_1960</li>
+<li>GCS_Indonesian</li>
+<li>GCS_International_1924</li>
+<li>GCS_International_1967</li>
+<li>GCS_Krasovsky_1940</li>
+<li>GCS_OSU_86F</li>
+<li>GCS_OSU_91A</li>
+<li>GCS_Plessis_1817</li>
+<li>GCS_Struve_1860</li>
+<li>GCS_NWL_9D</li>
+<li>GCS_Walbeck</li>
+<li>GCS_War_Office</li>
+<li>GCS_WGS_1966</li>
+<li>GCS_NSWC_9Z_2</li>
+<li>GCS_WGS_1966</li>
+<li>GCS_WGS_1972_BE</li>
+<li>GCS_WGS_1972</li>
+<li>GCS_WGS_1984</li>
+<li>Africa_Albers_Equal_Area_Conic</li>
+<li>Africa_Equidistant_Conic</li>
+<li>Africa_Lambert_Conformal_Conic</li>
+<li>Africa_Sinusoidal</li>
+<li>Asia_Lambert_Conformal_Conic</li>
+<li>Asia_North_Albers_Equal_Area_Conic</li>
+<li>Asia_North_Equidistant_Conic</li>
+<li>Asia_North_Lambert_Conformal_Conic</li>
+<li>Asia_South_Albers_Equal_Area_Conic</li>
+<li>Asia_South_Equidistant_Conic</li>
+<li>Asia_South_Lambert_Conformal_Conic</li>
+<li>Europe_Albers_Equal_Area_Conic</li>
+<li>Europe_Equidistant_Conic</li>
+<li>Europe_Lambert_Conformal_Conic</li>
+<li>Alaska_Albers_Equal_Area_Conic</li>
+<li>Canada_Albers_Equal_Area_Conic</li>
+<li>Canada_Lambert_Conformal_Conic</li>
+<li>Hawaii_Albers_Equal_Area_Conic</li>
+<li>North_America_Albers_Equal_Area_Conic</li>
+<li>North_America_Equidistant_Conic</li>
+<li>North_America_Lambert_Conformal_Conic</li>
+<li>USA_Contiguous_Albers_Equal_Area_Conic_USGS_version</li>
+<li>USA_Contiguous_Albers_Equal_Area_Conic</li>
+<li>USA_Contiguous_Equidistant_Conic</li>
+<li>USA_Contiguous_Lambert_Conformal_Conic</li>
+<li>South_America_Albers_Equal_Area_Conic</li>
+<li>South_America_Equidistant_Conic</li>
+<li>South_America_Lambert_Conformal_Conic</li>
+<li>Beijing_1954_GK_Zone_13</li>
+<li>Beijing_1954_GK_Zone_13N</li>
+<li>Beijing_1954_GK_Zone_14</li>
+<li>Beijing_1954_GK_Zone_14N</li>
+<li>Beijing_1954_GK_Zone_15</li>
+<li>Beijing_1954_GK_Zone_15N</li>
+<li>Beijing_1954_GK_Zone_16</li>
+<li>Beijing_1954_GK_Zone_16N</li>
+<li>Beijing_1954_GK_Zone_17</li>
+<li>Beijing_1954_GK_Zone_17N</li>
+<li>Beijing_1954_GK_Zone_18</li>
+<li>Beijing_1954_GK_Zone_18N</li>
+<li>Beijing_1954_GK_Zone_19</li>
+<li>Beijing_1954_GK_Zone_19N</li>
+<li>Beijing_1954_GK_Zone_20</li>
+<li>Beijing_1954_GK_Zone_20N</li>
+<li>Beijing_1954_GK_Zone_21</li>
+<li>Beijing_1954_GK_Zone_21N</li>
+<li>Beijing_1954_GK_Zone_22</li>
+<li>Beijing_1954_GK_Zone_22N</li>
+<li>Beijing_1954_GK_Zone_23</li>
+<li>Beijing_1954_GK_Zone_23N</li>
+<li>Hanoi_1972_GK_Zone_18</li>
+<li>Hanoi_1972_GK_Zone_19</li>
+<li>South_Yemen_GK_Zone_8</li>
+<li>South_Yemen_GK_Zone_9</li>
+<li>Pulkovo_1942_GK_Zone_10</li>
+<li>Pulkovo_1942_GK_Zone_10N</li>
+<li>Pulkovo_1942_GK_Zone_11</li>
+<li>Pulkovo_1942_GK_Zone_11N</li>
+<li>Pulkovo_1942_GK_Zone_12</li>
+<li>Pulkovo_1942_GK_Zone_12N</li>
+<li>Pulkovo_1942_GK_Zone_13</li>
+<li>Pulkovo_1942_GK_Zone_13N</li>
+<li>Pulkovo_1942_GK_Zone_14</li>
+<li>Pulkovo_1942_GK_Zone_14N</li>
+<li>Pulkovo_1942_GK_Zone_15</li>
+<li>Pulkovo_1942_GK_Zone_15N</li>
+<li>Pulkovo_1942_GK_Zone_16</li>
+<li>Pulkovo_1942_GK_Zone_16N</li>
+<li>Pulkovo_1942_GK_Zone_17</li>
+<li>Pulkovo_1942_GK_Zone_17N</li>
+<li>Pulkovo_1942_GK_Zone_18</li>
+<li>Pulkovo_1942_GK_Zone_18N</li>
+<li>Pulkovo_1942_GK_Zone_19</li>
+<li>Pulkovo_1942_GK_Zone_19N</li>
+<li>Pulkovo_1942_GK_Zone_2</li>
+<li>Pulkovo_1942_GK_Zone_20</li>
+<li>Pulkovo_1942_GK_Zone_20N</li>
+<li>Pulkovo_1942_GK_Zone_21</li>
+<li>Pulkovo_1942_GK_Zone_21N</li>
+<li>Pulkovo_1942_GK_Zone_22</li>
+<li>Pulkovo_1942_GK_Zone_22N</li>
+<li>Pulkovo_1942_GK_Zone_23</li>
+<li>Pulkovo_1942_GK_Zone_23N</li>
+<li>Pulkovo_1942_GK_Zone_24</li>
+<li>Pulkovo_1942_GK_Zone_24N</li>
+<li>Pulkovo_1942_GK_Zone_25</li>
+<li>Pulkovo_1942_GK_Zone_25N</li>
+<li>Pulkovo_1942_GK_Zone_26</li>
+<li>Pulkovo_1942_GK_Zone_26N</li>
+<li>Pulkovo_1942_GK_Zone_27</li>
+<li>Pulkovo_1942_GK_Zone_27N</li>
+<li>Pulkovo_1942_GK_Zone_28</li>
+<li>Pulkovo_1942_GK_Zone_28N</li>
+<li>Pulkovo_1942_GK_Zone_29</li>
+<li>Pulkovo_1942_GK_Zone_29N</li>
+<li>Pulkovo_1942_GK_Zone_2N</li>
+<li>Pulkovo_1942_GK_Zone_3</li>
+<li>Pulkovo_1942_GK_Zone_30</li>
+<li>Pulkovo_1942_GK_Zone_30N</li>
+<li>Pulkovo_1942_GK_Zone_31</li>
+<li>Pulkovo_1942_GK_Zone_31N</li>
+<li>Pulkovo_1942_GK_Zone_32</li>
+<li>Pulkovo_1942_GK_Zone_32N</li>
+<li>Pulkovo_1942_GK_Zone_3N</li>
+<li>Pulkovo_1942_GK_Zone_4</li>
+<li>Pulkovo_1942_GK_Zone_4N</li>
+<li>Pulkovo_1942_GK_Zone_5</li>
+<li>Pulkovo_1942_GK_Zone_5N</li>
+<li>Pulkovo_1942_GK_Zone_6</li>
+<li>Pulkovo_1942_GK_Zone_6N</li>
+<li>Pulkovo_1942_GK_Zone_7</li>
+<li>Pulkovo_1942_GK_Zone_7N</li>
+<li>Pulkovo_1942_GK_Zone_8</li>
+<li>Pulkovo_1942_GK_Zone_8N</li>
+<li>Pulkovo_1942_GK_Zone_9</li>
+<li>Pulkovo_1942_GK_Zone_9N</li>
+<li>Pulkovo_1995_GK_Zone_10</li>
+<li>Pulkovo_1995_GK_Zone_10N</li>
+<li>Pulkovo_1995_GK_Zone_11</li>
+<li>Pulkovo_1995_GK_Zone_11N</li>
+<li>Pulkovo_1995_GK_Zone_12</li>
+<li>Pulkovo_1995_GK_Zone_12N</li>
+<li>Pulkovo_1995_GK_Zone_13</li>
+<li>Pulkovo_1995_GK_Zone_13N</li>
+<li>Pulkovo_1995_GK_Zone_14</li>
+<li>Pulkovo_1995_GK_Zone_14N</li>
+<li>Pulkovo_1995_GK_Zone_15</li>
+<li>Pulkovo_1995_GK_Zone_15N</li>
+<li>Pulkovo_1995_GK_Zone_16</li>
+<li>Pulkovo_1995_GK_Zone_16N</li>
+<li>Pulkovo_1995_GK_Zone_17</li>
+<li>Pulkovo_1995_GK_Zone_17N</li>
+<li>Pulkovo_1995_GK_Zone_18</li>
+<li>Pulkovo_1995_GK_Zone_18N</li>
+<li>Pulkovo_1995_GK_Zone_19</li>
+<li>Pulkovo_1995_GK_Zone_19N</li>
+<li>Pulkovo_1995_GK_Zone_2</li>
+<li>Pulkovo_1995_GK_Zone_20</li>
+<li>Pulkovo_1995_GK_Zone_20N</li>
+<li>Pulkovo_1995_GK_Zone_21</li>
+<li>Pulkovo_1995_GK_Zone_21N</li>
+<li>Pulkovo_1995_GK_Zone_22</li>
+<li>Pulkovo_1995_GK_Zone_22N</li>
+<li>Pulkovo_1995_GK_Zone_23</li>
+<li>Pulkovo_1995_GK_Zone_23N</li>
+<li>Pulkovo_1995_GK_Zone_24</li>
+<li>Pulkovo_1995_GK_Zone_24N</li>
+<li>Pulkovo_1995_GK_Zone_25</li>
+<li>Pulkovo_1995_GK_Zone_25N</li>
+<li>Pulkovo_1995_GK_Zone_26</li>
+<li>Pulkovo_1995_GK_Zone_26N</li>
+<li>Pulkovo_1995_GK_Zone_27</li>
+<li>Pulkovo_1995_GK_Zone_27N</li>
+<li>Pulkovo_1995_GK_Zone_28</li>
+<li>Pulkovo_1995_GK_Zone_28N</li>
+<li>Pulkovo_1995_GK_Zone_29</li>
+<li>Pulkovo_1995_GK_Zone_29N</li>
+<li>Pulkovo_1995_GK_Zone_2N</li>
+<li>Pulkovo_1995_GK_Zone_3</li>
+<li>Pulkovo_1995_GK_Zone_30</li>
+<li>Pulkovo_1995_GK_Zone_30N</li>
+<li>Pulkovo_1995_GK_Zone_31</li>
+<li>Pulkovo_1995_GK_Zone_31N</li>
+<li>Pulkovo_1995_GK_Zone_32</li>
+<li>Pulkovo_1995_GK_Zone_32N</li>
+<li>Pulkovo_1995_GK_Zone_3N</li>
+<li>Pulkovo_1995_GK_Zone_4</li>
+<li>Pulkovo_1995_GK_Zone_4N</li>
+<li>Pulkovo_1995_GK_Zone_5</li>
+<li>Pulkovo_1995_GK_Zone_5N</li>
+<li>Pulkovo_1995_GK_Zone_6</li>
+<li>Pulkovo_1995_GK_Zone_6N</li>
+<li>Pulkovo_1995_GK_Zone_7</li>
+<li>Pulkovo_1995_GK_Zone_7N</li>
+<li>Pulkovo_1995_GK_Zone_8</li>
+<li>Pulkovo_1995_GK_Zone_8N</li>
+<li>Pulkovo_1995_GK_Zone_9</li>
+<li>Pulkovo_1995_GK_Zone_9N</li>
+<li>Abidjan_1987_TM_5_NW</li>
+<li>Accra_Ghana_Grid</li>
+<li>Accra_TM_1_NW</li>
+<li>Samoa_1962_Samoa_Lambert</li>
+<li>Anguilla_1957_British_West_Indies_Grid</li>
+<li>Antigua_1943_British_West_Indies_Grid</li>
+<li>Argentina_Zone_1</li>
+<li>Argentina_Zone_2</li>
+<li>Argentina_Zone_3</li>
+<li>Argentina_Zone_4</li>
+<li>Argentina_Zone_5</li>
+<li>Argentina_Zone_6</li>
+<li>Argentina_Zone_7</li>
+<li>AGD_1966_AMG_Zone_48</li>
+<li>AGD_1966_AMG_Zone_49</li>
+<li>AGD_1966_AMG_Zone_50</li>
+<li>AGD_1966_AMG_Zone_51</li>
+<li>AGD_1966_AMG_Zone_52</li>
+<li>AGD_1966_AMG_Zone_53</li>
+<li>AGD_1966_AMG_Zone_54</li>
+<li>AGD_1966_AMG_Zone_55</li>
+<li>AGD_1966_AMG_Zone_56</li>
+<li>AGD_1966_AMG_Zone_57</li>
+<li>AGD_1966_AMG_Zone_58</li>
+<li>AGD_1966_VICGRID</li>
+<li>AGD_1984_AMG_Zone_48</li>
+<li>AGD_1984_AMG_Zone_49</li>
+<li>AGD_1984_AMG_Zone_50</li>
+<li>AGD_1984_AMG_Zone_51</li>
+<li>AGD_1984_AMG_Zone_52</li>
+<li>AGD_1984_AMG_Zone_53</li>
+<li>AGD_1984_AMG_Zone_54</li>
+<li>AGD_1984_AMG_Zone_55</li>
+<li>AGD_1984_AMG_Zone_56</li>
+<li>AGD_1984_AMG_Zone_57</li>
+<li>AGD_1984_AMG_Zone_58</li>
+<li>GDA_1994_MGA_Zone_48</li>
+<li>GDA_1994_MGA_Zone_49</li>
+<li>GDA_1994_MGA_Zone_50</li>
+<li>GDA_1994_MGA_Zone_51</li>
+<li>GDA_1994_MGA_Zone_52</li>
+<li>GDA_1994_MGA_Zone_53</li>
+<li>GDA_1994_MGA_Zone_54</li>
+<li>GDA_1994_MGA_Zone_55</li>
+<li>GDA_1994_MGA_Zone_56</li>
+<li>GDA_1994_MGA_Zone_57</li>
+<li>GDA_1994_MGA_Zone_58</li>
+<li>GDA_1994_South_Australia_Lambert</li>
+<li>GDA_1994_VICGRID94</li>
+<li>Austria_Central_Zone</li>
+<li>Austria_East_Zone</li>
+<li>Austria_West_Zone</li>
+<li>Bahrain_State_Grid</li>
+<li>Barbados_1938_Barbados_Grid</li>
+<li>Barbados_1938_British_West_Indies_Grid</li>
+<li>Belge_Lambert_1950</li>
+<li>Belge_Lambert_1972</li>
+<li>Bern_1898_Bern_LV03C</li>
+<li>British_National_Grid</li>
+<li>Camacupa_TM_11_30_SE</li>
+<li>Camacupa_TM_12_SE</li>
+<li>ATS_1977_MTM_4_Nova_Scotia</li>
+<li>ATS_1977_MTM_5_Nova_Scotia</li>
+<li>ATS_1977_New_Brunswick_Stereographic</li>
+<li>NAD_1927_10TM_AEP_Forest</li>
+<li>NAD_1927_10TM_AEP_Resource</li>
+<li>NAD_1927_3TM_111</li>
+<li>NAD_1927_3TM_114</li>
+<li>NAD_1927_3TM_117</li>
+<li>NAD_1927_3TM_120</li>
+<li>NAD_1927_CGQ77_MTM_10_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_2_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_3_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_4_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_5_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_6_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_7_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_8_SCoPQ</li>
+<li>NAD_1927_CGQ77_MTM_9_SCoPQ</li>
+<li>NAD_1927_CGQ77_Quebec_Lambert</li>
+<li>NAD_1927_CGQ77_UTM_Zone_17N</li>
+<li>NAD_1927_CGQ77_UTM_Zone_18N</li>
+<li>NAD_1927_CGQ77_UTM_Zone_19N</li>
+<li>NAD_1927_CGQ77_UTM_Zone_20N</li>
+<li>NAD_1927_CGQ77_UTM_Zone_21N</li>
+<li>NAD_1927_DEF_1976_MTM_10</li>
+<li>NAD_1927_DEF_1976_MTM_11</li>
+<li>NAD_1927_DEF_1976_MTM_12</li>
+<li>NAD_1927_DEF_1976_MTM_13</li>
+<li>NAD_1927_DEF_1976_MTM_14</li>
+<li>NAD_1927_DEF_1976_MTM_15</li>
+<li>NAD_1927_DEF_1976_MTM_16</li>
+<li>NAD_1927_DEF_1976_MTM_17</li>
+<li>NAD_1927_DEF_1976_MTM_8</li>
+<li>NAD_1927_DEF_1976_MTM_9</li>
+<li>NAD_1927_DEF_1976_UTM_Zone_15N</li>
+<li>NAD_1927_DEF_1976_UTM_Zone_16N</li>
+<li>NAD_1927_DEF_1976_UTM_Zone_17N</li>
+<li>NAD_1927_DEF_1976_UTM_Zone_18N</li>
+<li>NAD_1927_MTM_1</li>
+<li>NAD_1927_MTM_2</li>
+<li>NAD_1927_MTM_3</li>
+<li>NAD_1927_MTM_4</li>
+<li>NAD_1927_MTM_5</li>
+<li>NAD_1927_MTM_6</li>
+<li>NAD_1927_Quebec_Lambert</li>
+<li>NAD_1983_10TM_AEP_Forest</li>
+<li>NAD_1983_10TM_AEP_Resource</li>
+<li>NAD_1983_3TM_111</li>
+<li>NAD_1983_3TM_114</li>
+<li>NAD_1983_3TM_117</li>
+<li>NAD_1983_3TM_120</li>
+<li>NAD_1983_BC_Environment_Albers</li>
+<li>NAD_1983_CRS98_MTM_10</li>
+<li>NAD_1983_CSRS98_MTM_2_SCoPQ</li>
+<li>NAD_1983_CRS98_MTM_3</li>
+<li>NAD_1983_CRS98_MTM_4</li>
+<li>NAD_1983_CRS98_MTM_5</li>
+<li>NAD_1983_CRS98_MTM_6</li>
+<li>NAD_1983_CRS98_MTM_7</li>
+<li>NAD_1983_CRS98_MTM_8</li>
+<li>NAD_1983_CRS98_MTM_9</li>
+<li>NAD_1983_CSRS98_New_Brunswick_Stereographic</li>
+<li>NAD_1983_CSRS98_Prince_Edward_Island</li>
+<li>NAD_1983_CSRS98_UTM_Zone_21N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_11N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_12N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_13N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_17N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_18N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_19N</li>
+<li>NAD_1983_CSRS98_UTM_Zone_20N</li>
+<li>NAD_1983_MTM_1</li>
+<li>NAD_1983_MTM_10</li>
+<li>NAD_1983_MTM_11</li>
+<li>NAD_1983_MTM_12</li>
+<li>NAD_1983_MTM_13</li>
+<li>NAD_1983_MTM_14</li>
+<li>NAD_1983_MTM_15</li>
+<li>NAD_1983_MTM_16</li>
+<li>NAD_1983_MTM_17</li>
+<li>NAD_1983_MTM_2_SCoPQ</li>
+<li>NAD_1983_MTM_2</li>
+<li>NAD_1983_MTM_3</li>
+<li>NAD_1983_MTM_4</li>
+<li>NAD_1983_MTM_5</li>
+<li>NAD_1983_MTM_6</li>
+<li>NAD_1983_MTM_7</li>
+<li>NAD_1983_MTM_8</li>
+<li>NAD_1983_MTM_9</li>
+<li>NAD_1983_Quebec_Lambert</li>
+<li>Prince_Edward_Island_Stereographic</li>
+<li>Carthage_TM_11_NE</li>
+<li>Centre_France</li>
+<li>CH1903_LV03</li>
+<li>CH1903+_LV95</li>
+<li>Chos_Malal_1914_Argentina_2</li>
+<li>Colombia_Bogota_Zone</li>
+<li>Colombia_East_Central_Zone</li>
+<li>Colombia_East_Zone</li>
+<li>Colombia_West_Zone</li>
+<li>Corse</li>
+<li>Datum_73_Hayford_Gauss_IGeoE</li>
+<li>Datum_73_Hayford_Gauss_IPCC</li>
+<li>Deir_ez_Zor_Levant_Stereographic</li>
+<li>Deir_ez_Zor_Levant_Zone</li>
+<li>Deir_ez_Zor_Syria_Lambert</li>
+<li>DHDN_3_Degree_Gauss_Zone_1</li>
+<li>DHDN_3_Degree_Gauss_Zone_2</li>
+<li>DHDN_3_Degree_Gauss_Zone_3</li>
+<li>DHDN_3_Degree_Gauss_Zone_4</li>
+<li>DHDN_3_Degree_Gauss_Zone_5</li>
+<li>Dominica_1945_British_West_Indies_Grid</li>
+<li>ED_1950_TM_0_N</li>
+<li>ED_1950_TM_5_NE</li>
+<li>Egypt_Blue_Belt</li>
+<li>Egypt_Extended_Purple_Belt</li>
+<li>Egypt_Purple_Belt</li>
+<li>Egypt_Red_Belt</li>
+<li>ELD_1979_Libya_10</li>
+<li>ELD_1979_Libya_11</li>
+<li>ELD_1979_Libya_12</li>
+<li>ELD_1979_Libya_13</li>
+<li>ELD_1979_Libya_5</li>
+<li>ELD_1979_Libya_6</li>
+<li>ELD_1979_Libya_7</li>
+<li>ELD_1979_Libya_8</li>
+<li>ELD_1979_Libya_9</li>
+<li>ELD_1979_TM_12_NE</li>
+<li>Estonian_Coordinate_System_of_1992</li>
+<li>ETRF_1989_TM_Baltic_1993</li>
+<li>FD_1958_Iraq</li>
+<li>Finland_Zone_1</li>
+<li>Finland_Zone_2</li>
+<li>Finland_Zone_3</li>
+<li>Finland_Zone_4</li>
+<li>France_I</li>
+<li>France_II</li>
+<li>France_III</li>
+<li>France_IV</li>
+<li>Germany_Zone_1</li>
+<li>Germany_Zone_2</li>
+<li>Germany_Zone_3</li>
+<li>Germany_Zone_4</li>
+<li>Germany_Zone_5</li>
+<li>Ghana_Metre_Grid</li>
+<li>Greek_Grid</li>
+<li>Grenada_1953_British_West_Indies_Grid</li>
+<li>Hanoi_1972_GK_106_NE</li>
+<li>HD_1972_Egyseges_Orszagos_Vetuleti</li>
+<li>Hito_XVIII_1963_Argentina_2</li>
+<li>Hong_Kong_1980_Grid</li>
+<li>Indian_1960_TM_106NE</li>
+<li>Kalianpur_1880_India_Zone_0</li>
+<li>Kalianpur_1880_India_Zone_I</li>
+<li>Kalianpur_1880_India_Zone_IIa</li>
+<li>Kalianpur_1880_India_Zone_IIb</li>
+<li>Kalianpur_1880_India_Zone_III</li>
+<li>Kalianpur_1880_India_Zone_IV</li>
+<li>Kalianpur_1937_India_Zone_IIb</li>
+<li>Kalianpur_1937_UTM_Zone_45N</li>
+<li>Kalianpur_1937_UTM_Zone_46N</li>
+<li>Kalianpur_1962_India_Zone_I</li>
+<li>Kalianpur_1962_India_Zone_IIa</li>
+<li>Kalianpur_1962_UTM_Zone_41N</li>
+<li>Kalianpur_1962_UTM_Zone_42N</li>
+<li>Kalianpur_1962_UTM_Zone_43N</li>
+<li>Kalianpur_1975_India_Zone_I</li>
+<li>Kalianpur_1975_India_Zone_IIa</li>
+<li>Kalianpur_1975_India_Zone_IIb</li>
+<li>Kalianpur_1975_India_Zone_III</li>
+<li>Kalianpur_1975_India_Zone_IV</li>
+<li>Kalianpur_1975_UTM_Zone_42N</li>
+<li>Kalianpur_1975_UTM_Zone_43N</li>
+<li>Kalianpur_1975_UTM_Zone_44N</li>
+<li>Kalianpur_1975_UTM_Zone_45N</li>
+<li>Kalianpur_1975_UTM_Zone_46N</li>
+<li>Kalianpur_1975_UTM_Zone_47N</li>
+<li>IRENET95_IRISH_Transverse_Mercator</li>
+<li>Irish_National_Grid</li>
+<li>Israel_TM_Grid</li>
+<li>Jamaica_1875_Old_Grid</li>
+<li>Jamaica_Grid</li>
+<li>Japan_Zone_1</li>
+<li>Japan_Zone_10</li>
+<li>Japan_Zone_11</li>
+<li>Japan_Zone_12</li>
+<li>Japan_Zone_13</li>
+<li>Japan_Zone_14</li>
+<li>Japan_Zone_15</li>
+<li>Japan_Zone_16</li>
+<li>Japan_Zone_17</li>
+<li>Japan_Zone_18</li>
+<li>Japan_Zone_19</li>
+<li>Japan_Zone_2</li>
+<li>Japan_Zone_3</li>
+<li>Japan_Zone_4</li>
+<li>Japan_Zone_5</li>
+<li>Japan_Zone_6</li>
+<li>Japan_Zone_7</li>
+<li>Japan_Zone_8</li>
+<li>Japan_Zone_9</li>
+<li>Kertau_Singapore_Grid</li>
+<li>KOC_Lambert</li>
+<li>Korean_1985_Korea_Central_Belt</li>
+<li>Korean_1985_Korea_East_Belt</li>
+<li>Korean_1985_Korea_West_Belt</li>
+<li>KUDAMS_KTM</li>
+<li>KOC_Lambert</li>
+<li>KUDAMS_KTM</li>
+<li>Lake_Maracaibo_Grid_M1</li>
+<li>Lake_Maracaibo_Grid_M3</li>
+<li>Lake_Maracaibo_Grid</li>
+<li>Lake_Maracaibo_La_Rosa_Grid</li>
+<li>Lietuvos_Koordinaciu_Sistema</li>
+<li>Lisboa_Bessel_Bonne</li>
+<li>Lisboa_Hayford_Gauss_IGeoE</li>
+<li>Lisboa_Hayford_Gauss_IPCC</li>
+<li>Locodjo_1965_TM_5_NW</li>
+<li>Madrid_1870_Madrid_Spain</li>
+<li>MGI_3_Degree_Gauss_Zone_5</li>
+<li>MGI_3_Degree_Gauss_Zone_6</li>
+<li>MGI_3_Degree_Gauss_Zone_7</li>
+<li>MGI_3_Degree_Gauss_Zone_8</li>
+<li>MGI_Austria_Lambert</li>
+<li>MGI_Balkans_5</li>
+<li>MGI_Balkans_6</li>
+<li>MGI_Balkans_8</li>
+<li>MGI_Balkans_8</li>
+<li>MGI_M28</li>
+<li>MGI_M31</li>
+<li>MGI_M34</li>
+<li>Monte_Mario_Rome_Italy_1</li>
+<li>Monte_Mario_Rome_Italy_2</li>
+<li>Monte_Mario_Italy_1</li>
+<li>Monte_Mario_Italy_2</li>
+<li>Montserrat_1958_British_West_Indies_Grid</li>
+<li>Mount_Dillon_Tobago_Grid</li>
+<li>NAD_1927_Cuba_Norte</li>
+<li>NAD_1927_Cuba_Sur</li>
+<li>NAD_1927_Guatemala_Norte</li>
+<li>NAD_1927_Guatemala_Sur</li>
+<li>NAD_1927_Michigan_GeoRef_Meters</li>
+<li>NAD_1927_Michigan_GeoRef_Feet_US</li>
+<li>NAD_1983_HARN_Guam_Map_Grid</li>
+<li>NAD_1983_Michigan_GeoRef_Meters</li>
+<li>NAD_1983_Michigan_GeoRef_Feet_US</li>
+<li>GD_1949_New_Zealand_Map_Grid</li>
+<li>New_Zealand_North_Island</li>
+<li>New_Zealand_South_Island</li>
+<li>NZGD_1949_Amuri_Circuit</li>
+<li>NZGD_1949_Bay_of_Plenty_Circuit</li>
+<li>NZGD_1949_Bluff_Circuit</li>
+<li>NZGD_1949_Buller_Circuit</li>
+<li>NZGD_1949_Collingwood_Circuit</li>
+<li>NZGD_1949_Gawler_Circuit</li>
+<li>NZGD_1949_Grey_Circuit</li>
+<li>NZGD_1949_Hawkes_Bay_Circuit</li>
+<li>NZGD_1949_Hokitika_Circuit</li>
+<li>NZGD_1949_Jacksons_Bay_Circuit</li>
+<li>NZGD_1949_Karamea_Circuit</li>
+<li>NZGD_1949_Lindis_Peak_Circuit</li>
+<li>NZGD_1949_Marlborough_Circuit</li>
+<li>NZGD_1949_Mount_Eden_Circuit</li>
+<li>NZGD_1949_Mount_Nicholas_Circuit</li>
+<li>NZGD_1949_Mount_Pleasant_Circuit</li>
+<li>NZGD_1949_Mount_York_Circuit</li>
+<li>NZGD_1949_Nelson_Circuit</li>
+<li>NZGD_1949_North_Taieri_Circuit</li>
+<li>NZGD_1949_Observation_Point_Circuit</li>
+<li>NZGD_1949_Okarito_Circuit</li>
+<li>NZGD_1949_Poverty_Bay_Circuit</li>
+<li>NZGD_1949_Taranaki_Circuit</li>
+<li>NZGD_1949_Timaru_Circuit</li>
+<li>NZGD_1949_Tuhirangi_Circuit</li>
+<li>NZGD_1949_UTM_Zone_58S</li>
+<li>NZGD_1949_UTM_Zone_59S</li>
+<li>NZGD_1949_UTM_Zone_60S</li>
+<li>NZGD_1949_Wairarapa_Circuit</li>
+<li>NZGD_1949_Wanganui_Circuit</li>
+<li>NZGD_1949_Wellington_Circuit</li>
+<li>NZGD_2000_Amuri_Circuit</li>
+<li>NZGD_2000_Bay_of_Plenty_Circuit</li>
+<li>NZGD_2000_Bluff_Circuit</li>
+<li>NZGD_2000_Buller_Circuit</li>
+<li>NZGD_2000_Collingwood_Circuit</li>
+<li>NZGD_2000_Gawler_Circuit</li>
+<li>NZGD_2000_Grey_Circuit</li>
+<li>NZGD_2000_Hawkes_Bay_Circuit</li>
+<li>NZGD_2000_Hokitika_Circuit</li>
+<li>NZGD_2000_Jacksons_Bay_Circuit</li>
+<li>NZGD_2000_Karamea_Circuit</li>
+<li>NZGD_2000_Lindis_Peak_Circuit</li>
+<li>NZGD_2000_Marlborough_Circuit</li>
+<li>NZGD_2000_Mount_Eden_Circuit</li>
+<li>NZGD_2000_Mount_Nicholas_Circuit</li>
+<li>NZGD_2000_Mount_Pleasant_Circuit</li>
+<li>NZGD_2000_Mount_York_Circuit</li>
+<li>NZGD_2000_Nelson_Circuit</li>
+<li>NZGD_2000_North_Taieri_Circuit</li>
+<li>NZGD_2000_Observation_Point_Circuit</li>
+<li>NZGD_2000_Okarito_Circuit</li>
+<li>NZGD_2000_Poverty_Bay_Circuit</li>
+<li>NZGD_2000_Taranaki_Circuit</li>
+<li>NZGD_2000_Timaru_Circuit</li>
+<li>NZGD_2000_Tuhirangi_Circuit</li>
+<li>NZGD_2000_UTM_Zone_58S</li>
+<li>NZGD_2000_UTM_Zone_59S</li>
+<li>NZGD_2000_UTM_Zone_60S</li>
+<li>NZGD_2000_Wairarapa_Circuit</li>
+<li>NZGD_2000_Wanganui_Circuit</li>
+<li>NZGD_2000_Wellington_Circuit</li>
+<li>GD_1949_New_Zealand_Map_Grid</li>
+<li>New_Zealand_North_Island</li>
+<li>New_Zealand_South_Island</li>
+<li>Nigeria_East_Belt</li>
+<li>Nigeria_Mid_Belt</li>
+<li>Nigeria_West_Belt</li>
+<li>Nord_Algerie_Degree</li>
+<li>Nord_Algerie_Ancienne_Degree</li>
+<li>Sud_Algerie_Ancienne</li>
+<li>Nord_Algerie</li>
+<li>Nord_de_Guerre</li>
+<li>Nord_France</li>
+<li>Nord_Maroc_Degree</li>
+<li>Nord_Maroc</li>
+<li>Nord_Tunisie</li>
+<li>NGO_1948_Baerum_Kommune</li>
+<li>NGO_1948_Bergenhalvoen</li>
+<li>NGO_1948_Norway_Zone_1</li>
+<li>NGO_1948_Norway_Zone_2</li>
+<li>NGO_1948_Norway_Zone_3</li>
+<li>NGO_1948_Norway_Zone_4</li>
+<li>NGO_1948_Norway_Zone_5</li>
+<li>NGO_1948_Norway_Zone_6</li>
+<li>NGO_1948_Norway_Zone_7</li>
+<li>NGO_1948_Norway_Zone_8</li>
+<li>NGO_1948_Oslo_Kommune</li>
+<li>NGO_1948_Oslo_Norway_Zone_1</li>
+<li>NGO_1948_Oslo_Norway_Zone_2</li>
+<li>NGO_1948_Oslo_Norway_Zone_3</li>
+<li>NGO_1948_Oslo_Norway_Zone_4</li>
+<li>NGO_1948_Oslo_Norway_Zone_5</li>
+<li>NGO_1948_Oslo_Norway_Zone_6</li>
+<li>NGO_1948_Oslo_Norway_Zone_7</li>
+<li>NGO_1948_Oslo_Norway_Zone_8</li>
+<li>NTF_France_I_degrees</li>
+<li>NTF_France_II_degrees</li>
+<li>NTF_France_III_degrees</li>
+<li>NTF_France_IV_degrees</li>
+<li>Palestine_1923_Israel_CS_Grid</li>
+<li>Palestine_1923_Palestine_Belt</li>
+<li>Palestine_1923_Palestine_Grid</li>
+<li>Pampa_del_Castillo_Argentina_2</li>
+<li>Peru_Central_Zone</li>
+<li>Peru_East_Zone</li>
+<li>Peru_West_Zone</li>
+<li>Philippines_Zone_I</li>
+<li>Philippines_Zone_II</li>
+<li>Philippines_Zone_III</li>
+<li>Philippines_Zone_IV</li>
+<li>Philippines_Zone_V</li>
+<li>Portuguese_National_Grid</li>
+<li>Qatar_1948_Qatar_Grid</li>
+<li>Qatar_National_Grid</li>
+<li>RD_Old</li>
+<li>RGF_1993_Lambert_93</li>
+<li>Rijksdriehoekstelsel_New</li>
+<li>RT90_25_gon_W</li>
+<li>S-JTSK_Ferro_Krovak_East_North</li>
+<li>S-JTSK_Ferro_Krovak</li>
+<li>S-JTSK_Krovak_East_North</li>
+<li>S-JTSK_Krovak</li>
+<li>SAD_1969_Brazil_Polyconic</li>
+<li>Sahara_Degree</li>
+<li>Sahara</li>
+<li>Sierra_Leone_1924_New_Colony_Grid</li>
+<li>Sierra_Leone_1924_New_War_Office_Grid</li>
+<li>St_Kitts_1955_British_West_Indies_Grid</li>
+<li>St_Lucia_1955_British_West_Indies_Grid</li>
+<li>St_Vincent_1945_British_West_Indies_Grid</li>
+<li>Stereo_33</li>
+<li>Stereo_70</li>
+<li>Sud_Algerie_Degree</li>
+<li>Sud_Algerie_Ancienne_Degree</li>
+<li>Sud_Algerie</li>
+<li>Sud_France</li>
+<li>Sud_Maroc_Degree</li>
+<li>Sud_Maroc</li>
+<li>Sud_Tunisie</li>
+<li>Swedish_National_Grid</li>
+<li>Trinidad_1903_Trinidad_Grid</li>
+<li>UWPP_1992</li>
+<li>UWPP_2000_pas_5</li>
+<li>UWPP_2000_pas_6</li>
+<li>UWPP_2000_pas_7</li>
+<li>UWPP_2000_pas_8</li>
+<li>WGS_1972_BE_TM_106_NE</li>
+<li>WGS_1984_TM_36_SE</li>
+<li>Zanderij_Suriname_Old_TM</li>
+<li>Zanderij_Suriname_TM</li>
+<li>Zanderij_TM_54_NW</li>
+<li>North_Pole_Azimuthal_Equidistant</li>
+<li>North_Pole_Gnomonic</li>
+<li>North_Pole_Lambert_Azimuthal_Equal_Area</li>
+<li>North_Pole_Orthographic</li>
+<li>North_Pole_Stereographic</li>
+<li>South_Pole_Azimuthal_Equidistant</li>
+<li>South_Pole_Gnomonic</li>
+<li>South_Pole_Lambert_Azimuthal_Equal_Area</li>
+<li>South_Pole_Orthographic</li>
+<li>South_Pole_Stereographic</li>
+<li>UPS_North</li>
+<li>UPS_South</li>
+<li>NAD_1927_StatePlane_Alabama_East_FIPS_0101</li>
+<li>NAD_1927_StatePlane_Alabama_West_FIPS_0102</li>
+<li>NAD_1927_StatePlane_Alaska_1_FIPS_5001</li>
+<li>NAD_1927_StatePlane_Alaska_10_FIPS_5010</li>
+<li>NAD_1927_StatePlane_Alaska_2_FIPS_5002</li>
+<li>NAD_1927_StatePlane_Alaska_3_FIPS_5003</li>
+<li>NAD_1927_StatePlane_Alaska_4_FIPS_5004</li>
+<li>NAD_1927_StatePlane_Alaska_5_FIPS_5005</li>
+<li>NAD_1927_StatePlane_Alaska_6_FIPS_5006</li>
+<li>NAD_1927_StatePlane_Alaska_7_FIPS_5007</li>
+<li>NAD_1927_StatePlane_Alaska_8_FIPS_5008</li>
+<li>NAD_1927_StatePlane_Alaska_9_FIPS_5009</li>
+<li>NAD_1927_StatePlane_Arizona_Central_FIPS_0202</li>
+<li>NAD_1927_StatePlane_Arizona_East_FIPS_0201</li>
+<li>NAD_1927_StatePlane_Arizona_West_FIPS_0203</li>
+<li>NAD_1927_StatePlane_Arkansas_North_FIPS_0301</li>
+<li>NAD_1927_StatePlane_Arkansas_South_FIPS_0302</li>
+<li>NAD_1927_StatePlane_California_I_FIPS_0401</li>
+<li>NAD_1927_StatePlane_California_II_FIPS_0402</li>
+<li>NAD_1927_StatePlane_California_III_FIPS_0403</li>
+<li>NAD_1927_StatePlane_California_IV_FIPS_0404</li>
+<li>NAD_1927_StatePlane_California_V_FIPS_0405</li>
+<li>NAD_1927_StatePlane_California_VI_FIPS_0406</li>
+<li>NAD_1927_StatePlane_California_VII_FIPS_0407</li>
+<li>NAD_1927_StatePlane_Colorado_Central_FIPS_0502</li>
+<li>NAD_1927_StatePlane_Colorado_North_FIPS_0501</li>
+<li>NAD_1927_StatePlane_Colorado_South_FIPS_0503</li>
+<li>NAD_1927_StatePlane_Connecticut_FIPS_0600</li>
+<li>NAD_1927_StatePlane_Delaware_FIPS_0700</li>
+<li>NAD_1927_StatePlane_Florida_East_FIPS_0901</li>
+<li>NAD_1927_StatePlane_Florida_North_FIPS_0903</li>
+<li>NAD_1927_StatePlane_Florida_West_FIPS_0902</li>
+<li>NAD_1927_StatePlane_Georgia_East_FIPS_1001</li>
+<li>NAD_1927_StatePlane_Georgia_West_FIPS_1002</li>
+<li>NAD_1927_StatePlane_Guam_FIPS_5400</li>
+<li>NAD_1927_StatePlane_Idaho_Central_FIPS_1102</li>
+<li>NAD_1927_StatePlane_Idaho_East_FIPS_1101</li>
+<li>NAD_1927_StatePlane_Idaho_West_FIPS_1103</li>
+<li>NAD_1927_StatePlane_Illinois_East_FIPS_1201</li>
+<li>NAD_1927_StatePlane_Illinois_West_FIPS_1202</li>
+<li>NAD_1927_StatePlane_Indiana_East_FIPS_1301</li>
+<li>NAD_1927_StatePlane_Indiana_West_FIPS_1302</li>
+<li>NAD_1927_StatePlane_Iowa_North_FIPS_1401</li>
+<li>NAD_1927_StatePlane_Iowa_South_FIPS_1402</li>
+<li>NAD_1927_StatePlane_Kansas_North_FIPS_1501</li>
+<li>NAD_1927_StatePlane_Kansas_South_FIPS_1502</li>
+<li>NAD_1927_StatePlane_Kentucky_North_FIPS_1601</li>
+<li>NAD_1927_StatePlane_Kentucky_South_FIPS_1602</li>
+<li>NAD_1927_StatePlane_Louisiana_North_FIPS_1701</li>
+<li>NAD_1927_StatePlane_Louisiana_South_FIPS_1702</li>
+<li>NAD_1927_StatePlane_Maine_East_FIPS_1801</li>
+<li>NAD_1927_StatePlane_Maine_West_FIPS_1802</li>
+<li>NAD_1927_StatePlane_Maryland_FIPS_1900</li>
+<li>NAD_1927_StatePlane_Massachusetts_Island_FIPS_2002</li>
+<li>NAD_1927_StatePlane_Massachusetts_Mainland_FIPS_2001</li>
+<li>NAD_1927_StatePlane_Michigan_Central_FIPS_2112</li>
+<li>NAD_1927_StatePlane_Michigan_North_FIPS_2111</li>
+<li>NAD_1927_StatePlane_Michigan_South_FIPS_2113</li>
+<li>NAD_1927_StatePlane_Minnesota_Central_FIPS_2202</li>
+<li>NAD_1927_StatePlane_Minnesota_North_FIPS_2201</li>
+<li>NAD_1927_StatePlane_Minnesota_South_FIPS_2203</li>
+<li>NAD_1927_StatePlane_Mississippi_East_FIPS_2301</li>
+<li>NAD_1927_StatePlane_Mississippi_West_FIPS_2302</li>
+<li>NAD_1927_StatePlane_Missouri_Central_FIPS_2402</li>
+<li>NAD_1927_StatePlane_Missouri_East_FIPS_2401</li>
+<li>NAD_1927_StatePlane_Missouri_West_FIPS_2403</li>
+<li>NAD_1927_StatePlane_Montana_Central_FIPS_2502</li>
+<li>NAD_1927_StatePlane_Montana_North_FIPS_2501</li>
+<li>NAD_1927_StatePlane_Montana_South_FIPS_2503</li>
+<li>NAD_1927_StatePlane_Nebraska_North_FIPS_2601</li>
+<li>NAD_1927_StatePlane_Nebraska_South_FIPS_2602</li>
+<li>NAD_1927_StatePlane_Nevada_Central_FIPS_2702</li>
+<li>NAD_1927_StatePlane_Nevada_East_FIPS_2701</li>
+<li>NAD_1927_StatePlane_Nevada_West_FIPS_2703</li>
+<li>NAD_1927_StatePlane_New_Hampshire_FIPS_2800</li>
+<li>NAD_1927_StatePlane_New_Jersey_FIPS_2900</li>
+<li>NAD_1927_StatePlane_New_Mexico_Central_FIPS_3002</li>
+<li>NAD_1927_StatePlane_New_Mexico_East_FIPS_3001</li>
+<li>NAD_1927_StatePlane_New_Mexico_West_FIPS_3003</li>
+<li>NAD_1927_StatePlane_New_York_Central_FIPS_3102</li>
+<li>NAD_1927_StatePlane_New_York_East_FIPS_3101</li>
+<li>NAD_1927_StatePlane_New_York_Long_Island_FIPS_3104</li>
+<li>NAD_1927_StatePlane_New_York_West_FIPS_3103</li>
+<li>NAD_1927_StatePlane_North_Carolina_FIPS_3200</li>
+<li>NAD_1927_StatePlane_North_Dakota_North_FIPS_3301</li>
+<li>NAD_1927_StatePlane_North_Dakota_South_FIPS_3302</li>
+<li>NAD_1927_StatePlane_Ohio_North_FIPS_3401</li>
+<li>NAD_1927_StatePlane_Ohio_South_FIPS_3402</li>
+<li>NAD_1927_StatePlane_Oklahoma_North_FIPS_3501</li>
+<li>NAD_1927_StatePlane_Oklahoma_South_FIPS_3502</li>
+<li>NAD_1927_StatePlane_Oregon_North_FIPS_3601</li>
+<li>NAD_1927_StatePlane_Oregon_South_FIPS_3602</li>
+<li>NAD_1927_StatePlane_Pennsylvania_North_FIPS_3701</li>
+<li>NAD_1927_StatePlane_Pennsylvania_South_FIPS_3702</li>
+<li>NAD_1927_StatePlane_Puerto_Rico_FIPS_5201</li>
+<li>NAD_1927_StatePlane_Rhode_Island_FIPS_3800</li>
+<li>NAD_1927_StatePlane_South_Carolina_North_FIPS_3901</li>
+<li>NAD_1927_StatePlane_South_Carolina_South_FIPS_3902</li>
+<li>NAD_1927_StatePlane_South_Dakota_North_FIPS_4001</li>
+<li>NAD_1927_StatePlane_South_Dakota_South_FIPS_4002</li>
+<li>NAD_1927_StatePlane_Tennessee_FIPS_4100</li>
+<li>NAD_1927_StatePlane_Texas_Central_FIPS_4203</li>
+<li>NAD_1927_StatePlane_Texas_North_Central_FIPS_4202</li>
+<li>NAD_1927_StatePlane_Texas_North_FIPS_4201</li>
+<li>NAD_1927_StatePlane_Texas_South_Central_FIPS_4204</li>
+<li>NAD_1927_StatePlane_Texas_South_FIPS_4205</li>
+<li>NAD_1927_StatePlane_Utah_Central_FIPS_4302</li>
+<li>NAD_1927_StatePlane_Utah_North_FIPS_4301</li>
+<li>NAD_1927_StatePlane_Utah_South_FIPS_4303</li>
+<li>NAD_1927_StatePlane_Vermont_FIPS_3400</li>
+<li>NAD_1927_StatePlane_Virginia_North_FIPS_4501</li>
+<li>NAD_1927_StatePlane_Virginia_South_FIPS_4502</li>
+<li>NAD_1927_StatePlane_Washington_North_FIPS_4601</li>
+<li>NAD_1927_StatePlane_Washington_South_FIPS_4602</li>
+<li>NAD_1927_StatePlane_West_Virginia_North_FIPS_4701</li>
+<li>NAD_1927_StatePlane_West_Virginia_South_FIPS_4702</li>
+<li>NAD_1927_StatePlane_Wisconsin_Central_FIPS_4802</li>
+<li>NAD_1927_StatePlane_Wisconsin_North_FIPS_4801</li>
+<li>NAD_1927_StatePlane_Wisconsin_South_FIPS_4803</li>
+<li>NAD_1927_StatePlane_Wyoming_East_Central_FIPS_4902</li>
+<li>NAD_1927_StatePlane_Wyoming_East_FIPS_4901</li>
+<li>NAD_1927_StatePlane_Wyoming_West_Central_FIPS_4903</li>
+<li>NAD_1927_StatePlane_Wyoming_West_FIPS_4904</li>
+<li>NAD_1983_StatePlane_Alabama_East_FIPS_0101</li>
+<li>NAD_1983_StatePlane_Alabama_West_FIPS_0102</li>
+<li>NAD_1983_StatePlane_Alaska_1_FIPS_5001</li>
+<li>NAD_1983_StatePlane_Alaska_10_FIPS_5010</li>
+<li>NAD_1983_StatePlane_Alaska_2_FIPS_5002</li>
+<li>NAD_1983_StatePlane_Alaska_3_FIPS_5003</li>
+<li>NAD_1983_StatePlane_Alaska_4_FIPS_5004</li>
+<li>NAD_1983_StatePlane_Alaska_5_FIPS_5005</li>
+<li>NAD_1983_StatePlane_Alaska_6_FIPS_5006</li>
+<li>NAD_1983_StatePlane_Alaska_7_FIPS_5007</li>
+<li>NAD_1983_StatePlane_Alaska_8_FIPS_5008</li>
+<li>NAD_1983_StatePlane_Alaska_9_FIPS_5009</li>
+<li>NAD_1983_StatePlane_Arizona_Central_FIPS_0202</li>
+<li>NAD_1983_StatePlane_Arizona_East_FIPS_0201</li>
+<li>NAD_1983_StatePlane_Arizona_West_FIPS_0203</li>
+<li>NAD_1983_StatePlane_Arkansas_North_FIPS_0301</li>
+<li>NAD_1983_StatePlane_Arkansas_South_FIPS_0302</li>
+<li>NAD_1983_StatePlane_California_I_FIPS_0401</li>
+<li>NAD_1983_StatePlane_California_II_FIPS_0402</li>
+<li>NAD_1983_StatePlane_California_III_FIPS_0403</li>
+<li>NAD_1983_StatePlane_California_IV_FIPS_0404</li>
+<li>NAD_1983_StatePlane_California_V_FIPS_0405</li>
+<li>NAD_1983_StatePlane_California_VI_FIPS_0406</li>
+<li>NAD_1983_StatePlane_Colorado_Central_FIPS_0502</li>
+<li>NAD_1983_StatePlane_Colorado_North_FIPS_0501</li>
+<li>NAD_1983_StatePlane_Colorado_South_FIPS_0503</li>
+<li>NAD_1983_StatePlane_Connecticut_FIPS_0600</li>
+<li>NAD_1983_StatePlane_Delaware_FIPS_0700</li>
+<li>NAD_1983_StatePlane_Florida_East_FIPS_0901</li>
+<li>NAD_1983_StatePlane_Florida_North_FIPS_0903</li>
+<li>NAD_1983_StatePlane_Florida_West_FIPS_0902</li>
+<li>NAD_1983_StatePlane_Georgia_East_FIPS_1001</li>
+<li>NAD_1983_StatePlane_Georgia_West_FIPS_1002</li>
+<li>NAD_1983_StatePlane_Guam_FIPS_5400</li>
+<li>NAD_1983_StatePlane_Hawaii_1_FIPS_5101</li>
+<li>NAD_1983_StatePlane_Hawaii_2_FIPS_5102</li>
+<li>NAD_1983_StatePlane_Hawaii_3_FIPS_5103</li>
+<li>NAD_1983_StatePlane_Hawaii_4_FIPS_5104</li>
+<li>NAD_1983_StatePlane_Hawaii_5_FIPS_5105</li>
+<li>NAD_1983_StatePlane_Idaho_Central_FIPS_1102</li>
+<li>NAD_1983_StatePlane_Idaho_East_FIPS_1101</li>
+<li>NAD_1983_StatePlane_Idaho_West_FIPS_1103</li>
+<li>NAD_1983_StatePlane_Illinois_East_FIPS_1201</li>
+<li>NAD_1983_StatePlane_Illinois_West_FIPS_1202</li>
+<li>NAD_1983_StatePlane_Indiana_East_FIPS_1301</li>
+<li>NAD_1983_StatePlane_Indiana_West_FIPS_1302</li>
+<li>NAD_1983_StatePlane_Iowa_North_FIPS_1401</li>
+<li>NAD_1983_StatePlane_Iowa_South_FIPS_1402</li>
+<li>NAD_1983_StatePlane_Kansas_North_FIPS_1501</li>
+<li>NAD_1983_StatePlane_Kansas_South_FIPS_1502</li>
+<li>NAD_1983_StatePlane_Kentucky_FIPS_1600</li>
+<li>NAD_1983_StatePlane_Kentucky_North_FIPS_1601</li>
+<li>NAD_1983_StatePlane_Kentucky_South_FIPS_1602</li>
+<li>NAD_1983_StatePlane_Louisiana_North_FIPS_1701</li>
+<li>NAD_1983_StatePlane_Louisiana_South_FIPS_1702</li>
+<li>NAD_1983_StatePlane_Maine_East_FIPS_1801</li>
+<li>NAD_1983_StatePlane_Maine_West_FIPS_1802</li>
+<li>NAD_1983_StatePlane_Maryland_FIPS_1900</li>
+<li>NAD_1983_StatePlane_Massachusetts_Island_FIPS_2002</li>
+<li>NAD_1983_StatePlane_Massachusetts_Mainland_FIPS_2001</li>
+<li>NAD_1983_StatePlane_Michigan_Central_FIPS_2202</li>
+<li>NAD_1983_StatePlane_Michigan_North_FIPS_2111</li>
+<li>NAD_1983_StatePlane_Michigan_South_FIPS_2113</li>
+<li>NAD_1983_StatePlane_Minnesota_Central_FIPS_2202</li>
+<li>NAD_1983_StatePlane_Minnesota_North_FIPS_2201</li>
+<li>NAD_1983_StatePlane_Minnesota_South_FIPS_2203</li>
+<li>NAD_1983_StatePlane_Mississippi_East_FIPS_2301</li>
+<li>NAD_1983_StatePlane_Mississippi_West_FIPS_2302</li>
+<li>NAD_1983_StatePlane_Missouri_Central_FIPS_2402</li>
+<li>NAD_1983_StatePlane_Missouri_East_FIPS_2401</li>
+<li>NAD_1983_StatePlane_Missouri_West_FIPS_2403</li>
+<li>NAD_1983_StatePlane_Montana_FIPS_2500</li>
+<li>NAD_1983_StatePlane_Nebraska_FIPS_2600</li>
+<li>NAD_1983_StatePlane_Nevada_Central_FIPS_2702</li>
+<li>NAD_1983_StatePlane_Nevada_East_FIPS_2701</li>
+<li>NAD_1983_StatePlane_Nevada_West_FIPS_2703</li>
+<li>NAD_1983_StatePlane_New_Hampshire_FIPS_2800</li>
+<li>NAD_1983_StatePlane_New_Jersey_FIPS_2900</li>
+<li>NAD_1983_StatePlane_New_Mexico_Central_FIPS_3002</li>
+<li>NAD_1983_StatePlane_New_Mexico_East_FIPS_3001</li>
+<li>NAD_1983_StatePlane_New_Mexico_West_FIPS_3003</li>
+<li>NAD_1983_StatePlane_New_York_Central_FIPS_3102</li>
+<li>NAD_1983_StatePlane_New_York_East_FIPS_3101</li>
+<li>NAD_1983_StatePlane_New_York_Long_Island_FIPS_3104</li>
+<li>NAD_1983_StatePlane_New_York_West_FIPS_3103</li>
+<li>NAD_1983_StatePlane_North_Carolina_FIPS_3200</li>
+<li>NAD_1983_StatePlane_North_Dakota_North_FIPS_3301</li>
+<li>NAD_1983_StatePlane_North_Dakota_South_FIPS_3302</li>
+<li>NAD_1983_StatePlane_Ohio_North_FIPS_3401</li>
+<li>NAD_1983_StatePlane_Ohio_South_FIPS_3402</li>
+<li>NAD_1983_StatePlane_Oklahoma_North_FIPS_3501</li>
+<li>NAD_1983_StatePlane_Oklahoma_South_FIPS_3502</li>
+<li>NAD_1983_StatePlane_Oregon_North_FIPS_3601</li>
+<li>NAD_1983_StatePlane_Oregon_South_FIPS_3602</li>
+<li>NAD_1983_StatePlane_Pennsylvania_North_FIPS_3701</li>
+<li>NAD_1983_StatePlane_Pennsylvania_South_FIPS_3702</li>
+<li>NAD_1983_StatePlane_Puerto_Rico_Virgin_Islands_FIPS_5200</li>
+<li>NAD_1983_StatePlane_Rhode_Island_FIPS_3800</li>
+<li>NAD_1983_StatePlane_South_Carolina_FIPS_3900</li>
+<li>NAD_1983_StatePlane_South_Dakota_North_FIPS_4001</li>
+<li>NAD_1983_StatePlane_South_Dakota_South_FIPS_4002</li>
+<li>NAD_1983_StatePlane_Tennessee_FIPS_4100</li>
+<li>NAD_1983_StatePlane_Texas_Central_FIPS_4203</li>
+<li>NAD_1983_StatePlane_Texas_North_Central_FIPS_4202</li>
+<li>NAD_1983_StatePlane_Texas_North_FIPS_4201</li>
+<li>NAD_1983_StatePlane_Texas_South_Central_FIPS_4204</li>
+<li>NAD_1983_StatePlane_Texas_South_FIPS_4205</li>
+<li>NAD_1983_StatePlane_Utah_Central_FIPS_4302</li>
+<li>NAD_1983_StatePlane_Utah_North_FIPS_4301</li>
+<li>NAD_1983_StatePlane_Utah_South_FIPS_4303</li>
+<li>NAD_1983_StatePlane_Vermont_FIPS_4400</li>
+<li>NAD_1983_StatePlane_Virginia_North_FIPS_4501</li>
+<li>NAD_1983_StatePlane_Virginia_South_FIPS_4502</li>
+<li>NAD_1983_StatePlane_Washington_North_FIPS_4601</li>
+<li>NAD_1983_StatePlane_Washington_South_FIPS_4602</li>
+<li>NAD_1983_StatePlane_West_Virginia_North_FIPS_4701</li>
+<li>NAD_1983_StatePlane_West_Virginia_South_FIPS_4702</li>
+<li>NAD_1983_StatePlane_Wisconsin_Central_FIPS_4802</li>
+<li>NAD_1983_StatePlane_Wisconsin_North_FIPS_4801</li>
+<li>NAD_1983_StatePlane_Wisconsin_South_FIPS_4803</li>
+<li>NAD_1983_StatePlane_Wyoming_East_Central_FIPS_4902</li>
+<li>NAD_1983_StatePlane_Wyoming_East_FIPS_4901</li>
+<li>NAD_1983_StatePlane_Wyoming_West_Central_FIPS_4903</li>
+<li>NAD_1983_StatePlane_Wyoming_West_FIPS_4904</li>
+<li>NAD_1983_StatePlane_Alabama_East_FIPS_0101_Feet</li>
+<li>NAD_1983_StatePlane_Alabama_West_FIPS_0102_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_1_FIPS_5001_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_10_FIPS_5010_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_2_FIPS_5002_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_3_FIPS_5003_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_4_FIPS_5004_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_5_FIPS_5005_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_6_FIPS_5006_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_7_FIPS_5007_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_8_FIPS_5008_Feet</li>
+<li>NAD_1983_StatePlane_Alaska_9_FIPS_5009_Feet</li>
+<li>NAD_1983_StatePlane_Arizona_Central_FIPS_0202_Feet</li>
+<li>NAD_1983_StatePlane_Arizona_East_FIPS_0201_Feet</li>
+<li>NAD_1983_StatePlane_Arizona_West_FIPS_0203_Feet</li>
+<li>NAD_1983_StatePlane_Arkansas_North_FIPS_0301_Feet</li>
+<li>NAD_1983_StatePlane_Arkansas_South_FIPS_0302_Feet</li>
+<li>NAD_1983_StatePlane_California_I_FIPS_0401_Feet</li>
+<li>NAD_1983_StatePlane_California_II_FIPS_0402_Feet</li>
+<li>NAD_1983_StatePlane_California_III_FIPS_0403_Feet</li>
+<li>NAD_1983_StatePlane_California_IV_FIPS_0404_Feet</li>
+<li>NAD_1983_StatePlane_California_V_FIPS_0405_Feet</li>
+<li>NAD_1983_StatePlane_California_VI_FIPS_0406_Feet</li>
+<li>NAD_1983_StatePlane_Colorado_Central_FIPS_0502_Feet</li>
+<li>NAD_1983_StatePlane_Colorado_North_FIPS_0501_Feet</li>
+<li>NAD_1983_StatePlane_Colorado_South_FIPS_0503_Feet</li>
+<li>NAD_1983_StatePlane_Connecticut_FIPS_0600_Feet</li>
+<li>NAD_1983_StatePlane_Delaware_FIPS_0700_Feet</li>
+<li>NAD_1983_StatePlane_Florida_East_FIPS_0901_Feet</li>
+<li>NAD_1983_StatePlane_Florida_North_FIPS_0903_Feet</li>
+<li>NAD_1983_StatePlane_Florida_West_FIPS_0902_Feet</li>
+<li>NAD_1983_StatePlane_Georgia_East_FIPS_1001_Feet</li>
+<li>NAD_1983_StatePlane_Georgia_West_FIPS_1002_Feet</li>
+<li>NAD_1983_StatePlane_Guam_FIPS_5400_Feet</li>
+<li>NAD_1983_StatePlane_Hawaii_1_FIPS_5101_Feet</li>
+<li>NAD_1983_StatePlane_Hawaii_2_FIPS_5102_Feet</li>
+<li>NAD_1983_StatePlane_Hawaii_3_FIPS_5103_Feet</li>
+<li>NAD_1983_StatePlane_Hawaii_4_FIPS_5104_Feet</li>
+<li>NAD_1983_StatePlane_Hawaii_5_FIPS_5105_Feet</li>
+<li>NAD_1983_StatePlane_Idaho_Central_FIPS_1102_Feet</li>
+<li>NAD_1983_StatePlane_Idaho_East_FIPS_1101_Feet</li>
+<li>NAD_1983_StatePlane_Idaho_West_FIPS_1103_Feet</li>
+<li>NAD_1983_StatePlane_Illinois_East_FIPS_1201_Feet</li>
+<li>NAD_1983_StatePlane_Illinois_West_FIPS_1202_Feet</li>
+<li>NAD_1983_StatePlane_Indiana_East_FIPS_1301_Feet</li>
+<li>NAD_1983_StatePlane_Indiana_West_FIPS_1302_Feet</li>
+<li>NAD_1983_StatePlane_Iowa_North_FIPS_1401_Feet</li>
+<li>NAD_1983_StatePlane_Iowa_South_FIPS_1402_Feet</li>
+<li>NAD_1983_StatePlane_Kansas_North_FIPS_1501_Feet</li>
+<li>NAD_1983_StatePlane_Kansas_South_FIPS_1502_Feet</li>
+<li>NAD_1983_StatePlane_Kentucky_FIPS_1600_Feet</li>
+<li>NAD_1983_StatePlane_Kentucky_North_FIPS_1601_Feet</li>
+<li>NAD_1983_StatePlane_Kentucky_South_FIPS_1602_Feet</li>
+<li>NAD_1983_StatePlane_Louisiana_North_FIPS_1701_Feet</li>
+<li>NAD_1983_StatePlane_Louisiana_South_FIPS_1702_Feet</li>
+<li>NAD_1983_StatePlane_Maine_East_FIPS_1801_Feet</li>
+<li>NAD_1983_StatePlane_Maine_West_FIPS_1802_Feet</li>
+<li>NAD_1983_StatePlane_Maryland_FIPS_1900_Feet</li>
+<li>NAD_1983_StatePlane_Massachusetts_Island_FIPS_2002_Feet</li>
+<li>NAD_1983_StatePlane_Massachusetts_Mainland_FIPS_2001_Feet</li>
+<li>NAD_1983_StatePlane_Michigan_Central_FIPS_2202_Feet</li>
+<li>NAD_1983_StatePlane_Michigan_North_FIPS_2111_Feet</li>
+<li>NAD_1983_StatePlane_Michigan_South_FIPS_2113_Feet</li>
+<li>NAD_1983_StatePlane_Minnesota_Central_FIPS_2202_Feet</li>
+<li>NAD_1983_StatePlane_Minnesota_North_FIPS_2201_Feet</li>
+<li>NAD_1983_StatePlane_Minnesota_South_FIPS_2203_Feet</li>
+<li>NAD_1983_StatePlane_Mississippi_East_FIPS_2301_Feet</li>
+<li>NAD_1983_StatePlane_Mississippi_West_FIPS_2302_Feet</li>
+<li>NAD_1983_StatePlane_Missouri_Central_FIPS_2402_Feet</li>
+<li>NAD_1983_StatePlane_Missouri_East_FIPS_2401_Feet</li>
+<li>NAD_1983_StatePlane_Missouri_West_FIPS_2403_Feet</li>
+<li>NAD_1983_StatePlane_Montana_FIPS_2500_Feet</li>
+<li>NAD_1983_StatePlane_Nebraska_FIPS_2600_Feet</li>
+<li>NAD_1983_StatePlane_Nevada_Central_FIPS_2702_Feet</li>
+<li>NAD_1983_StatePlane_Nevada_East_FIPS_2701_Feet</li>
+<li>NAD_1983_StatePlane_Nevada_West_FIPS_2703_Feet</li>
+<li>NAD_1983_StatePlane_New_Hampshire_FIPS_2800_Feet</li>
+<li>NAD_1983_StatePlane_New_Jersey_FIPS_2900_Feet</li>
+<li>NAD_1983_StatePlane_New_Mexico_Central_FIPS_3002_Feet</li>
+<li>NAD_1983_StatePlane_New_Mexico_East_FIPS_3001_Feet</li>
+<li>NAD_1983_StatePlane_New_Mexico_West_FIPS_3003_Feet</li>
+<li>NAD_1983_StatePlane_New_York_Central_FIPS_3102_Feet</li>
+<li>NAD_1983_StatePlane_New_York_East_FIPS_3101_Feet</li>
+<li>NAD_1983_StatePlane_New_York_Long_Island_FIPS_3104_Feet</li>
+<li>NAD_1983_StatePlane_New_York_West_FIPS_3103_Feet</li>
+<li>NAD_1983_StatePlane_North_Carolina_FIPS_3200_Feet</li>
+<li>NAD_1983_StatePlane_North_Dakota_North_FIPS_3301_Feet</li>
+<li>NAD_1983_StatePlane_North_Dakota_South_FIPS_3302_Feet</li>
+<li>NAD_1983_StatePlane_Ohio_North_FIPS_3401_Feet</li>
+<li>NAD_1983_StatePlane_Ohio_South_FIPS_3402_Feet</li>
+<li>NAD_1983_StatePlane_Oklahoma_North_FIPS_3501_Feet</li>
+<li>NAD_1983_StatePlane_Oklahoma_South_FIPS_3502_Feet</li>
+<li>NAD_1983_StatePlane_Oregon_North_FIPS_3601_Feet</li>
+<li>NAD_1983_StatePlane_Oregon_South_FIPS_3602_Feet</li>
+<li>NAD_1983_StatePlane_Pennsylvania_North_FIPS_3701_Feet</li>
+<li>NAD_1983_StatePlane_Pennsylvania_South_FIPS_3702_Feet</li>
+<li>NAD_1983_StatePlane_Puerto_Rico_Virgin_Islands_FIPS_5200_Feet</li>
+<li>NAD_1983_StatePlane_Rhode_Island_FIPS_3800_Feet</li>
+<li>NAD_1983_StatePlane_South_Carolina_FIPS_3900_Feet</li>
+<li>NAD_1983_StatePlane_South_Dakota_North_FIPS_4001_Feet</li>
+<li>NAD_1983_StatePlane_South_Dakota_South_FIPS_4002_Feet</li>
+<li>NAD_1983_StatePlane_Tennessee_FIPS_4100_Feet</li>
+<li>NAD_1983_StatePlane_Texas_Central_FIPS_4203_Feet</li>
+<li>NAD_1983_StatePlane_Texas_North_Central_FIPS_4202_Feet</li>
+<li>NAD_1983_StatePlane_Texas_North_FIPS_4201_Feet</li>
+<li>NAD_1983_StatePlane_Texas_South_Central_FIPS_4204_Feet</li>
+<li>NAD_1983_StatePlane_Texas_South_FIPS_4205_Feet</li>
+<li>NAD_1983_StatePlane_Utah_Central_FIPS_4302_Feet</li>
+<li>NAD_1983_StatePlane_Utah_North_FIPS_4301_Feet</li>
+<li>NAD_1983_StatePlane_Utah_South_FIPS_4303_Feet</li>
+<li>NAD_1983_StatePlane_Vermont_FIPS_4400_Feet</li>
+<li>NAD_1983_StatePlane_Virginia_North_FIPS_4501_Feet</li>
+<li>NAD_1983_StatePlane_Virginia_South_FIPS_4502_Feet</li>
+<li>NAD_1983_StatePlane_Washington_North_FIPS_4601_Feet</li>
+<li>NAD_1983_StatePlane_Washington_South_FIPS_4602_Feet</li>
+<li>NAD_1983_StatePlane_West_Virginia_North_FIPS_4701_Feet</li>
+<li>NAD_1983_StatePlane_West_Virginia_South_FIPS_4702_Feet</li>
+<li>NAD_1983_StatePlane_Wisconsin_Central_FIPS_4802_Feet</li>
+<li>NAD_1983_StatePlane_Wisconsin_North_FIPS_4801_Feet</li>
+<li>NAD_1983_StatePlane_Wisconsin_South_FIPS_4803_Feet</li>
+<li>NAD_1983_StatePlane_Wyoming_East_Central_FIPS_4902_Feet</li>
+<li>NAD_1983_StatePlane_Wyoming_East_FIPS_4901_Feet</li>
+<li>NAD_1983_StatePlane_Wyoming_West_Central_FIPS_4903_Feet</li>
+<li>NAD_1983_StatePlane_Wyoming_West_FIPS_4904_Feet</li>
+<li>NAD_1983_HARN_StatePlane_Alabama_East_FIPS_0101</li>
+<li>NAD_1983_HARN_StatePlane_Alabama_West_FIPS_0102</li>
+<li>NAD_1983_HARN_StatePlane_Arizona_Central_FIPS_0202</li>
+<li>NAD_1983_HARN_StatePlane_Arizona_East_FIPS_0201</li>
+<li>NAD_1983_HARN_StatePlane_Arizona_West_FIPS_0203</li>
+<li>NAD_1983_HARN_StatePlane_California_I_FIPS_0401</li>
+<li>NAD_1983_HARN_StatePlane_California_II_FIPS_0402</li>
+<li>NAD_1983_HARN_StatePlane_California_III_FIPS_0403</li>
+<li>NAD_1983_HARN_StatePlane_California_IV_FIPS_0404</li>
+<li>NAD_1983_HARN_StatePlane_California_V_FIPS_0405</li>
+<li>NAD_1983_HARN_StatePlane_California_VI_FIPS_0406</li>
+<li>NAD_1983_HARN_StatePlane_Colorado_Central_FIPS_0502</li>
+<li>NAD_1983_HARN_StatePlane_Colorado_North_FIPS_0501</li>
+<li>NAD_1983_HARN_StatePlane_Colorado_South_FIPS_0503</li>
+<li>NAD_1983_HARN_StatePlane_Connecticut_FIPS_0600</li>
+<li>NAD_1983_HARN_StatePlane_Delaware_FIPS_0700</li>
+<li>NAD_1983_HARN_StatePlane_Florida_East_FIPS_0901</li>
+<li>NAD_1983_HARN_StatePlane_Florida_North_FIPS_0903</li>
+<li>NAD_1983_HARN_StatePlane_Florida_West_FIPS_0902</li>
+<li>NAD_1983_HARN_StatePlane_Georgia_East_FIPS_1001</li>
+<li>NAD_1983_HARN_StatePlane_Georgia_West_FIPS_1002</li>
+<li>NAD_1983_HARN_StatePlane_Hawaii_1_FIPS_5101</li>
+<li>NAD_1983_HARN_StatePlane_Hawaii_2_FIPS_5102</li>
+<li>NAD_1983_HARN_StatePlane_Hawaii_3_FIPS_5103</li>
+<li>NAD_1983_HARN_StatePlane_Hawaii_4_FIPS_5104</li>
+<li>NAD_1983_HARN_StatePlane_Hawaii_5_FIPS_5105</li>
+<li>NAD_1983_HARN_StatePlane_Idaho_Central_FIPS_1102</li>
+<li>NAD_1983_HARN_StatePlane_Idaho_East_FIPS_1101</li>
+<li>NAD_1983_HARN_StatePlane_Idaho_West_FIPS_1103</li>
+<li>NAD_1983_HARN_StatePlane_Illinois_East_FIPS_1201</li>
+<li>NAD_1983_HARN_StatePlane_Illinois_West_FIPS_1202</li>
+<li>NAD_1983_HARN_StatePlane_Indiana_East_FIPS_1301</li>
+<li>NAD_1983_HARN_StatePlane_Indiana_West_FIPS_1302</li>
+<li>NAD_1983_HARN_StatePlane_Kansas_North_FIPS_1501</li>
+<li>NAD_1983_HARN_StatePlane_Kansas_South_FIPS_1502</li>
+<li>NAD_1983_HARN_StatePlane_Kentucky_North_FIPS_1601</li>
+<li>NAD_1983_HARN_StatePlane_Kentucky_South_FIPS_1602</li>
+<li>NAD_1983_HARN_StatePlane_Louisiana_North_FIPS_1701</li>
+<li>NAD_1983_HARN_StatePlane_Louisiana_South_FIPS_1702</li>
+<li>NAD_1983_HARN_StatePlane_Maine_East_FIPS_1801</li>
+<li>NAD_1983_HARN_StatePlane_Maine_West_FIPS_1802</li>
+<li>NAD_1983_HARN_StatePlane_Maryland_FIPS_1900</li>
+<li>NAD_1983_HARN_StatePlane_Massachusetts_Island_FIPS_2002</li>
+<li>NAD_1983_HARN_StatePlane_Massachusetts_Mainland_FIPS_2001</li>
+<li>NAD_1983_HARN_StatePlane_Michigan_Central_FIPS_2202</li>
+<li>NAD_1983_HARN_StatePlane_Michigan_North_FIPS_2111</li>
+<li>NAD_1983_HARN_StatePlane_Michigan_South_FIPS_2113</li>
+<li>NAD_1983_HARN_StatePlane_Mississippi_East_FIPS_2301</li>
+<li>NAD_1983_HARN_StatePlane_Mississippi_West_FIPS_2302</li>
+<li>NAD_1983_HARN_StatePlane_Montana_FIPS_2500</li>
+<li>NAD_1983_HARN_StatePlane_Nebraska_FIPS_2600</li>
+<li>NAD_1983_HARN_StatePlane_Nevada_Central_FIPS_2702</li>
+<li>NAD_1983_HARN_StatePlane_Nevada_East_FIPS_2701</li>
+<li>NAD_1983_HARN_StatePlane_Nevada_West_FIPS_2703</li>
+<li>NAD_1983_HARN_StatePlane_New_Hampshire_FIPS_2800</li>
+<li>NAD_1983_HARN_StatePlane_New_Jersey_FIPS_2900</li>
+<li>NAD_1983_HARN_StatePlane_New_Mexico_Central_FIPS_3002</li>
+<li>NAD_1983_HARN_StatePlane_New_Mexico_East_FIPS_3001</li>
+<li>NAD_1983_HARN_StatePlane_New_Mexico_West_FIPS_3003</li>
+<li>NAD_1983_HARN_StatePlane_New_York_Central_FIPS_3102</li>
+<li>NAD_1983_HARN_StatePlane_New_York_East_FIPS_3101</li>
+<li>NAD_1983_HARN_StatePlane_New_York_Long_Island_FIPS_3104</li>
+<li>NAD_1983_HARN_StatePlane_New_York_West_FIPS_3103</li>
+<li>NAD_1983_HARN_StatePlane_North_Dakota_North_FIPS_3301</li>
+<li>NAD_1983_HARN_StatePlane_North_Dakota_South_FIPS_3302</li>
+<li>NAD_1983_HARN_StatePlane_Ohio_North_FIPS_3401</li>
+<li>NAD_1983_HARN_StatePlane_Ohio_South_FIPS_3402</li>
+<li>NAD_1983_HARN_StatePlane_Oklahoma_North_FIPS_3501</li>
+<li>NAD_1983_HARN_StatePlane_Oklahoma_South_FIPS_3502</li>
+<li>NAD_1983_HARN_StatePlane_Oregon_North_FIPS_3601</li>
+<li>NAD_1983_HARN_StatePlane_Oregon_South_FIPS_3602</li>
+<li>NAD_1983_HARN_StatePlane_Puerto_Rico_Virgin_Islands_FIPS_5200</li>
+<li>NAD_1983_HARN_StatePlane_Rhode_Island_FIPS_3800</li>
+<li>NAD_1983_HARN_StatePlane_South_Dakota_North_FIPS_4001</li>
+<li>NAD_1983_HARN_StatePlane_South_Dakota_South_FIPS_4002</li>
+<li>NAD_1983_HARN_StatePlane_Tennessee_FIPS_4100</li>
+<li>NAD_1983_HARN_StatePlane_Texas_Central_FIPS_4203</li>
+<li>NAD_1983_HARN_StatePlane_Texas_North_Central_FIPS_4202</li>
+<li>NAD_1983_HARN_StatePlane_Texas_North_FIPS_4201</li>
+<li>NAD_1983_HARN_StatePlane_Texas_South_Central_FIPS_4204</li>
+<li>NAD_1983_HARN_StatePlane_Texas_South_FIPS_4205</li>
+<li>NAD_1983_HARN_StatePlane_Utah_Central_FIPS_4302</li>
+<li>NAD_1983_HARN_StatePlane_Utah_North_FIPS_4301</li>
+<li>NAD_1983_HARN_StatePlane_Utah_South_FIPS_4303</li>
+<li>NAD_1983_HARN_StatePlane_Vermont_FIPS_4400</li>
+<li>NAD_1983_HARN_StatePlane_Virginia_North_FIPS_4501</li>
+<li>NAD_1983_HARN_StatePlane_Virginia_South_FIPS_4502</li>
+<li>NAD_1983_HARN_StatePlane_Washington_North_FIPS_4601</li>
+<li>NAD_1983_HARN_StatePlane_Washington_South_FIPS_4602</li>
+<li>NAD_1983_HARN_StatePlane_West_Virginia_North_FIPS_4701</li>
+<li>NAD_1983_HARN_StatePlane_West_Virginia_South_FIPS_4702</li>
+<li>NAD_1983_HARN_StatePlane_Wisconsin_Central_FIPS_4802</li>
+<li>NAD_1983_HARN_StatePlane_Wisconsin_North_FIPS_4801</li>
+<li>NAD_1983_HARN_StatePlane_Wisconsin_South_FIPS_4803</li>
+<li>NAD_1983_HARN_StatePlane_Wyoming_East_FIPS_4901</li>
+<li>NAD_1983_HARN_StatePlane_Wyoming_East_Central_FIPS_4902</li>
+<li>NAD_1983_HARN_StatePlane_Wyoming_West_Central_FIPS_4903</li>
+<li>NAD_1983_HARN_StatePlane_Wyoming_West_FIPS_4904</li>
+<li>American_Samoa_1962_StatePlane_American_Samoa_FIPS_5300</li>
+<li>NAD_1983_HARN_Guam_Map_Grid</li>
+<li>NAD_1983_HARN_UTM_Zone_2S</li>
+<li>NAD_Michigan_StatePlane_Michigan_Central_FIPS_2112</li>
+<li>NAD_Michigan_StatePlane_Michigan_Central_Old_FIPS_2102</li>
+<li>NAD_Michigan_StatePlane_Michigan_East_Old_FIPS_2101</li>
+<li>NAD_Michigan_StatePlane_Michigan_North_FIPS_2111</li>
+<li>NAD_Michigan_StatePlane_Michigan_South_FIPS_2113</li>
+<li>NAD_Michigan_StatePlane_Michigan_West_Old_FIPS_2103</li>
+<li>Old_Hawaiian_StatePlane_Hawaii_1_FIPS_5101</li>
+<li>Old_Hawaiian_StatePlane_Hawaii_2_FIPS_5102</li>
+<li>Old_Hawaiian_StatePlane_Hawaii_3_FIPS_5103</li>
+<li>Old_Hawaiian_StatePlane_Hawaii_4_FIPS_5104</li>
+<li>Old_Hawaiian_StatePlane_Hawaii_5_FIPS_5105</li>
+<li>Puerto_Rico_StatePlane_Puerto_Rico_FIPS_5201</li>
+<li>Puerto_Rico_StatePlane_Virgin_Islands_St_Croix_FIPS_5202</li>
+<li>NAD_1927_UTM_Zone_10N</li>
+<li>NAD_1927_UTM_Zone_11N</li>
+<li>NAD_1927_UTM_Zone_12N</li>
+<li>NAD_1927_UTM_Zone_13N</li>
+<li>NAD_1927_UTM_Zone_14N</li>
+<li>NAD_1927_UTM_Zone_15N</li>
+<li>NAD_1927_UTM_Zone_16N</li>
+<li>NAD_1927_UTM_Zone_17N</li>
+<li>NAD_1927_UTM_Zone_18N</li>
+<li>NAD_1927_UTM_Zone_19N</li>
+<li>NAD_1927_UTM_Zone_20N</li>
+<li>NAD_1927_UTM_Zone_21N</li>
+<li>NAD_1927_UTM_Zone_22N</li>
+<li>NAD_1927_UTM_Zone_3N</li>
+<li>NAD_1927_UTM_Zone_4N</li>
+<li>NAD_1927_UTM_Zone_5N</li>
+<li>NAD_1927_UTM_Zone_6N</li>
+<li>NAD_1927_UTM_Zone_7N</li>
+<li>NAD_1927_UTM_Zone_8N</li>
+<li>NAD_1927_UTM_Zone_9N</li>
+<li>NAD_1983_UTM_Zone_10N</li>
+<li>NAD_1983_UTM_Zone_11N</li>
+<li>NAD_1983_UTM_Zone_12N</li>
+<li>NAD_1983_UTM_Zone_13N</li>
+<li>NAD_1983_UTM_Zone_14N</li>
+<li>NAD_1983_UTM_Zone_15N</li>
+<li>NAD_1983_UTM_Zone_16N</li>
+<li>NAD_1983_UTM_Zone_17N</li>
+<li>NAD_1983_UTM_Zone_18N</li>
+<li>NAD_1983_UTM_Zone_19N</li>
+<li>NAD_1983_UTM_Zone_20N</li>
+<li>NAD_1983_UTM_Zone_21N</li>
+<li>NAD_1983_UTM_Zone_22N</li>
+<li>NAD_1983_UTM_Zone_23N</li>
+<li>NAD_1983_UTM_Zone_3N</li>
+<li>NAD_1983_UTM_Zone_4N</li>
+<li>NAD_1983_UTM_Zone_5N</li>
+<li>NAD_1983_UTM_Zone_6N</li>
+<li>NAD_1983_UTM_Zone_7N</li>
+<li>NAD_1983_UTM_Zone_8N</li>
+<li>NAD_1983_UTM_Zone_9N</li>
+<li>Abidjan_1987_UTM_Zone_29N</li>
+<li>Abidjan_1987_UTM_Zone_30N</li>
+<li>Adindan_UTM_Zone_37N</li>
+<li>Adindan_UTM_Zone_38N</li>
+<li>Afgooye_UTM_Zone_38N</li>
+<li>Afgooye_UTM_Zone_39N</li>
+<li>Ain_el_Abd_UTM_Zone_37N</li>
+<li>Ain_el_Abd_UTM_Zone_38N</li>
+<li>Ain_el_Abd_UTM_Zone_39N</li>
+<li>Aratu_UTM_Zone_22S</li>
+<li>Aratu_UTM_Zone_23S</li>
+<li>Aratu_UTM_Zone_24S</li>
+<li>Arc_1950_UTM_Zone_34S</li>
+<li>Arc_1950_UTM_Zone_35S</li>
+<li>Arc_1950_UTM_Zone_36S</li>
+<li>Arc_1960_UTM_Zone_35N</li>
+<li>Arc_1960_UTM_Zone_35S</li>
+<li>Arc_1960_UTM_Zone_36N</li>
+<li>Arc_1960_UTM_Zone_36S</li>
+<li>Arc_1960_UTM_Zone_37N</li>
+<li>Arc_1960_UTM_Zone_37S</li>
+<li>ATS_1977_UTM_Zone_19N</li>
+<li>ATS_1977_UTM_Zone_20N</li>
+<li>Batavia_UTM_Zone_48S</li>
+<li>Batavia_UTM_Zone_49S</li>
+<li>Batavia_UTM_Zone_50S</li>
+<li>Bissau_UTM_Zone_28N</li>
+<li>Bogota_UTM_Zone_17N</li>
+<li>Bogota_UTM_Zone_18N</li>
+<li>Camacupa_UTM_Zone_32S</li>
+<li>Camacupa_UTM_Zone_33S</li>
+<li>Cape_UTM_Zone_34S</li>
+<li>Cape_UTM_Zone_35S</li>
+<li>Cape_UTM_Zone_36S</li>
+<li>Carthage_UTM_Zone_32N</li>
+<li>Conakry_1905_UTM_Zone_28N</li>
+<li>Conakry_1905_UTM_Zone_29N</li>
+<li>Corrego_Alegre_UTM_Zone_23S</li>
+<li>Corrego_Alegre_UTM_Zone_24S</li>
+<li>Dabola_UTM_Zone_28N</li>
+<li>Dabola_UTM_Zone_29N</li>
+<li>Datum_73_UTM_Zone_29N</li>
+<li>Douala_UTM_Zone_32N</li>
+<li>ED_1950_ED77_UTM_Zone_38N</li>
+<li>ED_1950_ED77_UTM_Zone_39N</li>
+<li>ED_1950_ED77_UTM_Zone_40N</li>
+<li>ED_1950_ED77_UTM_Zone_41N</li>
+<li>ELD_1979_UTM_Zone_32N</li>
+<li>ELD_1979_UTM_Zone_33N</li>
+<li>ELD_1979_UTM_Zone_34N</li>
+<li>ELD_1979_UTM_Zone_35N</li>
+<li>ETRF_1989_UTM_Zone_28N</li>
+<li>ETRF_1989_UTM_Zone_29N</li>
+<li>ETRF_1989_UTM_Zone_30N</li>
+<li>ETRF_1989_UTM_Zone_31N</li>
+<li>ETRF_1989_UTM_Zone_32N</li>
+<li>ETRF_1989_UTM_Zone_33N</li>
+<li>ETRF_1989_UTM_Zone_34N</li>
+<li>ETRF_1989_UTM_Zone_35N</li>
+<li>ETRF_1989_UTM_Zone_36N</li>
+<li>ETRF_1989_UTM_Zone_37N</li>
+<li>ETRF_1989_UTM_Zone_38N</li>
+<li>ED_1950_UTM_Zone_28N</li>
+<li>ED_1950_UTM_Zone_29N</li>
+<li>ED_1950_UTM_Zone_30N</li>
+<li>ED_1950_UTM_Zone_31N</li>
+<li>ED_1950_UTM_Zone_32N</li>
+<li>ED_1950_UTM_Zone_33N</li>
+<li>ED_1950_UTM_Zone_34N</li>
+<li>ED_1950_UTM_Zone_35N</li>
+<li>ED_1950_UTM_Zone_36N</li>
+<li>ED_1950_UTM_Zone_37N</li>
+<li>ED_1950_UTM_Zone_38N</li>
+<li>Fahud_UTM_Zone_39N</li>
+<li>Fahud_UTM_Zone_40N</li>
+<li>Garoua_UTM_Zone_33N</li>
+<li>Graciosa_Base_SW_1948_UTM_Zone_26N</li>
+<li>Hito_XVIII_1963_UTM_19S</li>
+<li>Hong_Kong_1980_UTM_Zone_49N</li>
+<li>Hong_Kong_1980_UTM_Zone_50N</li>
+<li>Indian_1954_UTM_Zone_46N</li>
+<li>Indian_1954_UTM_Zone_47N</li>
+<li>Indian_1954_UTM_Zone_48N</li>
+<li>Indian_1960_UTM_Zone_48N</li>
+<li>Indian_1960_UTM_Zone_49N</li>
+<li>Indian_1975_UTM_Zone_47N</li>
+<li>Indian_1975_UTM_Zone_48N</li>
+<li>Indonesian_1974_UTM_Zone_46N</li>
+<li>Indonesian_1974_UTM_Zone_46S</li>
+<li>Indonesian_1974_UTM_Zone_47N</li>
+<li>Indonesian_1974_UTM_Zone_47S</li>
+<li>Indonesian_1974_UTM_Zone_48N</li>
+<li>Indonesian_1974_UTM_Zone_48S</li>
+<li>Indonesian_1974_UTM_Zone_49N</li>
+<li>Indonesian_1974_UTM_Zone_49S</li>
+<li>Indonesian_1974_UTM_Zone_50N</li>
+<li>Indonesian_1974_UTM_Zone_50S</li>
+<li>Indonesian_1974_UTM_Zone_51N</li>
+<li>Indonesian_1974_UTM_Zone_51S</li>
+<li>Indonesian_1974_UTM_Zone_52N</li>
+<li>Indonesian_1974_UTM_Zone_52S</li>
+<li>Indonesian_1974_UTM_Zone_53N</li>
+<li>Indonesian_1974_UTM_Zone_53S</li>
+<li>Indonesian_1974_UTM_Zone_54S</li>
+<li>IRENET95_UTM_Zone_29N</li>
+<li>Kertau_UTM_Zone_47N</li>
+<li>Kertau_UTM_Zone_48N</li>
+<li>La_Canoa_UTM_Zone_18N</li>
+<li>La_Canoa_UTM_Zone_19N</li>
+<li>La_Canoa_UTM_Zone_20N</li>
+<li>La_Canoa_UTM_Zone_21N</li>
+<li>Locodjo_1965_UTM_Zone_29N</li>
+<li>Locodjo_1965_UTM_Zone_30N</li>
+<li>Lome_UTM_Zone_31N</li>
+<li>Mporaloko_UTM_Zone_32N</li>
+<li>Mporaloko_UTM_Zone_32S</li>
+<li>Malongo_1987_UTM_Zone_32S</li>
+<li>Massawa_UTM_Zone_37N</li>
+<li>Mhast_UTM_Zone_32S</li>
+<li>Minna_UTM_Zone_31N</li>
+<li>Minna_UTM_Zone_32N</li>
+<li>Moznet_UTM_Zone_36S</li>
+<li>Moznet_UTM_Zone_37S</li>
+<li>NAD_1927_BLM_Zone_14N</li>
+<li>NAD_1927_BLM_Zone_15N</li>
+<li>NAD_1927_BLM_Zone_16N</li>
+<li>NAD_1927_BLM_Zone_17N</li>
+<li>NAD_1983_HARN_UTM_Zone_2S</li>
+<li>Nahrwan_1967_UTM_Zone_38N</li>
+<li>Nahrwan_1967_UTM_Zone_39N</li>
+<li>Nahrwan_1967_UTM_Zone_40N</li>
+<li>Naparima_1955_UTM_Zone_20N</li>
+<li>Naparima_1972_UTM_Zone_20N</li>
+<li>NGN_UTM_Zone_38N</li>
+<li>NGN_UTM_Zone_39N</li>
+<li>NGO_1948_UTM_Zone_32N</li>
+<li>NGO_1948_UTM_Zone_33N</li>
+<li>NGO_1948_UTM_Zone_34N</li>
+<li>NGO_1948_UTM_Zone_35N</li>
+<li>Nord_Sahara_1959_UTM_Zone_29N</li>
+<li>Nord_Sahara_1959_UTM_Zone_30N</li>
+<li>Nord_Sahara_1959_UTM_Zone_31N</li>
+<li>Nord_Sahara_1959_UTM_Zone_32N</li>
+<li>NZGD_1949_UTM_Zone_58S</li>
+<li>NZGD_1949_UTM_Zone_59S</li>
+<li>NZGD_1949_UTM_Zone_60S</li>
+<li>NZGD_2000_UTM_Zone_58S</li>
+<li>NZGD_2000_UTM_Zone_59S</li>
+<li>NZGD_2000_UTM_Zone_60S</li>
+<li>Observ_Meteorologico_1939_UTM_Zone_25N</li>
+<li>Old_Hawaiian_UTM_Zone_4N</li>
+<li>Old_Hawaiian_UTM_Zone_5N</li>
+<li>PDO_1993_UTM_Zone_39N</li>
+<li>PDO_1993_UTM_Zone_40N</li>
+<li>Pointe_Noire_UTM_Zone_32S</li>
+<li>Porto_Santo_1936_UTM_Zone_28N</li>
+<li>PSAD_1956_UTM_Zone_17S</li>
+<li>PSAD_1956_UTM_Zone_18N</li>
+<li>PSAD_1956_UTM_Zone_18S</li>
+<li>PSAD_1956_UTM_Zone_19N</li>
+<li>PSAD_1956_UTM_Zone_19S</li>
+<li>PSAD_1956_UTM_Zone_20N</li>
+<li>PSAD_1956_UTM_Zone_20S</li>
+<li>PSAD_1956_UTM_Zone_21N</li>
+<li>PSAD_1956_UTM_Zone_22S</li>
+<li>Puerto_Rico_UTM_Zone_20N</li>
+<li>Samboja_UTM_Zone_50S</li>
+<li>Sao_Braz_UTM_Zone_26N</li>
+<li>Sapper_Hill_1943_UTM_Zone_20S</li>
+<li>Sapper_Hill_1943_UTM_Zone_21S</li>
+<li>Schwarzeck_UTM_Zone_33S</li>
+<li>Selvagem_Grande_1938_UTM_Zone_28N</li>
+<li>Sierra_Leone_1968_UTM_Zone_28N</li>
+<li>Sierra_Leone_1968_UTM_Zone_29N</li>
+<li>SIRGAS_UTM_Zone_17N</li>
+<li>SIRGAS_UTM_Zone_17S</li>
+<li>SIRGAS_UTM_Zone_18N</li>
+<li>SIRGAS_UTM_Zone_18S</li>
+<li>SIRGAS_UTM_Zone_19N</li>
+<li>SIRGAS_UTM_Zone_19S</li>
+<li>SIRGAS_UTM_Zone_20N</li>
+<li>SIRGAS_UTM_Zone_20S</li>
+<li>SIRGAS_UTM_Zone_21N</li>
+<li>SIRGAS_UTM_Zone_21S</li>
+<li>SIRGAS_UTM_Zone_22N</li>
+<li>SIRGAS_UTM_Zone_22S</li>
+<li>SIRGAS_UTM_Zone_23S</li>
+<li>SIRGAS_UTM_Zone_24S</li>
+<li>SIRGAS_UTM_Zone_25S</li>
+<li>SAD_1969_UTM_Zone_17S</li>
+<li>SAD_1969_UTM_Zone_18N</li>
+<li>SAD_1969_UTM_Zone_18S</li>
+<li>SAD_1969_UTM_Zone_19N</li>
+<li>SAD_1969_UTM_Zone_19S</li>
+<li>SAD_1969_UTM_Zone_20N</li>
+<li>SAD_1969_UTM_Zone_20S</li>
+<li>SAD_1969_UTM_Zone_21N</li>
+<li>SAD_1969_UTM_Zone_21S</li>
+<li>SAD_1969_UTM_Zone_22N</li>
+<li>SAD_1969_UTM_Zone_22S</li>
+<li>SAD_1969_UTM_Zone_23S</li>
+<li>SAD_1969_UTM_Zone_24S</li>
+<li>SAD_1969_UTM_Zone_25S</li>
+<li>Sudan_UTM_Zone_35N</li>
+<li>Sudan_UTM_Zone_36N</li>
+<li>Tananarive_1925_UTM_Zone_38S</li>
+<li>Tananarive_1925_UTM_Zone_39S</li>
+<li>Tete_UTM_Zone_36S</li>
+<li>Tete_UTM_Zone_37S</li>
+<li>Timbalai_1948_UTM_Zone_49N</li>
+<li>Timbalai_1948_UTM_Zone_50N</li>
+<li>Tokyo_UTM_Zone_51N</li>
+<li>Tokyo_UTM_Zone_52N</li>
+<li>Tokyo_UTM_Zone_53N</li>
+<li>Tokyo_UTM_Zone_54N</li>
+<li>Tokyo_UTM_Zone_55N</li>
+<li>Tokyo_UTM_Zone_56N</li>
+<li>TC_1948_UTM_Zone_39N</li>
+<li>TC_1948_UTM_Zone_40N</li>
+<li>Yemen_NGN_1996_UTM_Zone_38N</li>
+<li>Yemen_NGN_1996_UTM_Zone_39N</li>
+<li>Yoff_1972_UTM_Zone_28N</li>
+<li>Zanderij_1972_UTM_Zone_21N</li>
+<li>WGS_1972_UTM_Zone_10N</li>
+<li>WGS_1972_UTM_Zone_10S</li>
+<li>WGS_1972_UTM_Zone_11N</li>
+<li>WGS_1972_UTM_Zone_11S</li>
+<li>WGS_1972_UTM_Zone_12N</li>
+<li>WGS_1972_UTM_Zone_12S</li>
+<li>WGS_1972_UTM_Zone_13N</li>
+<li>WGS_1972_UTM_Zone_13S</li>
+<li>WGS_1972_UTM_Zone_14N</li>
+<li>WGS_1972_UTM_Zone_14S</li>
+<li>WGS_1972_UTM_Zone_15N</li>
+<li>WGS_1972_UTM_Zone_15S</li>
+<li>WGS_1972_UTM_Zone_16N</li>
+<li>WGS_1972_UTM_Zone_16S</li>
+<li>WGS_1972_UTM_Zone_17N</li>
+<li>WGS_1972_UTM_Zone_17S</li>
+<li>WGS_1972_UTM_Zone_18N</li>
+<li>WGS_1972_UTM_Zone_18S</li>
+<li>WGS_1972_UTM_Zone_19N</li>
+<li>WGS_1972_UTM_Zone_19S</li>
+<li>WGS_1972_UTM_Zone_1N</li>
+<li>WGS_1972_UTM_Zone_1S</li>
+<li>WGS_1972_UTM_Zone_20N</li>
+<li>WGS_1972_UTM_Zone_20S</li>
+<li>WGS_1972_UTM_Zone_21N</li>
+<li>WGS_1972_UTM_Zone_21S</li>
+<li>WGS_1972_UTM_Zone_22N</li>
+<li>WGS_1972_UTM_Zone_22S</li>
+<li>WGS_1972_UTM_Zone_23N</li>
+<li>WGS_1972_UTM_Zone_23S</li>
+<li>WGS_1972_UTM_Zone_24N</li>
+<li>WGS_1972_UTM_Zone_24S</li>
+<li>WGS_1972_UTM_Zone_25N</li>
+<li>WGS_1972_UTM_Zone_25S</li>
+<li>WGS_1972_UTM_Zone_26N</li>
+<li>WGS_1972_UTM_Zone_26S</li>
+<li>WGS_1972_UTM_Zone_27N</li>
+<li>WGS_1972_UTM_Zone_27S</li>
+<li>WGS_1972_UTM_Zone_28N</li>
+<li>WGS_1972_UTM_Zone_28S</li>
+<li>WGS_1972_UTM_Zone_29N</li>
+<li>WGS_1972_UTM_Zone_29S</li>
+<li>WGS_1972_UTM_Zone_2N</li>
+<li>WGS_1972_UTM_Zone_2S</li>
+<li>WGS_1972_UTM_Zone_30N</li>
+<li>WGS_1972_UTM_Zone_30S</li>
+<li>WGS_1972_UTM_Zone_31N</li>
+<li>WGS_1972_UTM_Zone_31S</li>
+<li>WGS_1972_UTM_Zone_32N</li>
+<li>WGS_1972_UTM_Zone_32S</li>
+<li>WGS_1972_UTM_Zone_33N</li>
+<li>WGS_1972_UTM_Zone_33S</li>
+<li>WGS_1972_UTM_Zone_34N</li>
+<li>WGS_1972_UTM_Zone_34S</li>
+<li>WGS_1972_UTM_Zone_35N</li>
+<li>WGS_1972_UTM_Zone_35S</li>
+<li>WGS_1972_UTM_Zone_36N</li>
+<li>WGS_1972_UTM_Zone_36S</li>
+<li>WGS_1972_UTM_Zone_37N</li>
+<li>WGS_1972_UTM_Zone_37S</li>
+<li>WGS_1972_UTM_Zone_38N</li>
+<li>WGS_1972_UTM_Zone_38S</li>
+<li>WGS_1972_UTM_Zone_39N</li>
+<li>WGS_1972_UTM_Zone_39S</li>
+<li>WGS_1972_UTM_Zone_3N</li>
+<li>WGS_1972_UTM_Zone_3S</li>
+<li>WGS_1972_UTM_Zone_40N</li>
+<li>WGS_1972_UTM_Zone_40S</li>
+<li>WGS_1972_UTM_Zone_41N</li>
+<li>WGS_1972_UTM_Zone_41S</li>
+<li>WGS_1972_UTM_Zone_42N</li>
+<li>WGS_1972_UTM_Zone_42S</li>
+<li>WGS_1972_UTM_Zone_43N</li>
+<li>WGS_1972_UTM_Zone_43S</li>
+<li>WGS_1972_UTM_Zone_44N</li>
+<li>WGS_1972_UTM_Zone_44S</li>
+<li>WGS_1972_UTM_Zone_45N</li>
+<li>WGS_1972_UTM_Zone_45S</li>
+<li>WGS_1972_UTM_Zone_46N</li>
+<li>WGS_1972_UTM_Zone_46S</li>
+<li>WGS_1972_UTM_Zone_47N</li>
+<li>WGS_1972_UTM_Zone_47S</li>
+<li>WGS_1972_UTM_Zone_48N</li>
+<li>WGS_1972_UTM_Zone_48S</li>
+<li>WGS_1972_UTM_Zone_49N</li>
+<li>WGS_1972_UTM_Zone_49S</li>
+<li>WGS_1972_UTM_Zone_4N</li>
+<li>WGS_1972_UTM_Zone_4S</li>
+<li>WGS_1972_UTM_Zone_50N</li>
+<li>WGS_1972_UTM_Zone_50S</li>
+<li>WGS_1972_UTM_Zone_51N</li>
+<li>WGS_1972_UTM_Zone_51S</li>
+<li>WGS_1972_UTM_Zone_52N</li>
+<li>WGS_1972_UTM_Zone_52S</li>
+<li>WGS_1972_UTM_Zone_53N</li>
+<li>WGS_1972_UTM_Zone_53S</li>
+<li>WGS_1972_UTM_Zone_54N</li>
+<li>WGS_1972_UTM_Zone_54S</li>
+<li>WGS_1972_UTM_Zone_55N</li>
+<li>WGS_1972_UTM_Zone_55S</li>
+<li>WGS_1972_UTM_Zone_56N</li>
+<li>WGS_1972_UTM_Zone_56S</li>
+<li>WGS_1972_UTM_Zone_57N</li>
+<li>WGS_1972_UTM_Zone_57S</li>
+<li>WGS_1972_UTM_Zone_58N</li>
+<li>WGS_1972_UTM_Zone_58S</li>
+<li>WGS_1972_UTM_Zone_59N</li>
+<li>WGS_1972_UTM_Zone_59S</li>
+<li>WGS_1972_UTM_Zone_5N</li>
+<li>WGS_1972_UTM_Zone_5S</li>
+<li>WGS_1972_UTM_Zone_60N</li>
+<li>WGS_1972_UTM_Zone_60S</li>
+<li>WGS_1972_UTM_Zone_6N</li>
+<li>WGS_1972_UTM_Zone_6S</li>
+<li>WGS_1972_UTM_Zone_7N</li>
+<li>WGS_1972_UTM_Zone_7S</li>
+<li>WGS_1972_UTM_Zone_8N</li>
+<li>WGS_1972_UTM_Zone_8S</li>
+<li>WGS_1972_UTM_Zone_9N</li>
+<li>WGS_1972_UTM_Zone_9S</li>
+<li>WGS_1984_UTM_Zone_10N</li>
+<li>WGS_1984_UTM_Zone_10S</li>
+<li>WGS_1984_UTM_Zone_11N</li>
+<li>WGS_1984_UTM_Zone_11S</li>
+<li>WGS_1984_UTM_Zone_12N</li>
+<li>WGS_1984_UTM_Zone_12S</li>
+<li>WGS_1984_UTM_Zone_13N</li>
+<li>WGS_1984_UTM_Zone_13S</li>
+<li>WGS_1984_UTM_Zone_14N</li>
+<li>WGS_1984_UTM_Zone_14S</li>
+<li>WGS_1984_UTM_Zone_15N</li>
+<li>WGS_1984_UTM_Zone_15S</li>
+<li>WGS_1984_UTM_Zone_16N</li>
+<li>WGS_1984_UTM_Zone_16S</li>
+<li>WGS_1984_UTM_Zone_17N</li>
+<li>WGS_1984_UTM_Zone_17S</li>
+<li>WGS_1984_UTM_Zone_18N</li>
+<li>WGS_1984_UTM_Zone_18S</li>
+<li>WGS_1984_UTM_Zone_19N</li>
+<li>WGS_1984_UTM_Zone_19S</li>
+<li>WGS_1984_UTM_Zone_1N</li>
+<li>WGS_1984_UTM_Zone_1S</li>
+<li>WGS_1984_UTM_Zone_20N</li>
+<li>WGS_1984_UTM_Zone_20S</li>
+<li>WGS_1984_UTM_Zone_21N</li>
+<li>WGS_1984_UTM_Zone_21S</li>
+<li>WGS_1984_UTM_Zone_22N</li>
+<li>WGS_1984_UTM_Zone_22S</li>
+<li>WGS_1984_UTM_Zone_23N</li>
+<li>WGS_1984_UTM_Zone_23S</li>
+<li>WGS_1984_UTM_Zone_24N</li>
+<li>WGS_1984_UTM_Zone_24S</li>
+<li>WGS_1984_UTM_Zone_25N</li>
+<li>WGS_1984_UTM_Zone_25S</li>
+<li>WGS_1984_UTM_Zone_26N</li>
+<li>WGS_1984_UTM_Zone_26S</li>
+<li>WGS_1984_UTM_Zone_27N</li>
+<li>WGS_1984_UTM_Zone_27S</li>
+<li>WGS_1984_UTM_Zone_28N</li>
+<li>WGS_1984_UTM_Zone_28S</li>
+<li>WGS_1984_UTM_Zone_29N</li>
+<li>WGS_1984_UTM_Zone_29S</li>
+<li>WGS_1984_UTM_Zone_2N</li>
+<li>WGS_1984_UTM_Zone_2S</li>
+<li>WGS_1984_UTM_Zone_30N</li>
+<li>WGS_1984_UTM_Zone_30S</li>
+<li>WGS_1984_UTM_Zone_31N</li>
+<li>WGS_1984_UTM_Zone_31S</li>
+<li>WGS_1984_UTM_Zone_32N</li>
+<li>WGS_1984_UTM_Zone_32S</li>
+<li>WGS_1984_UTM_Zone_33N</li>
+<li>WGS_1984_UTM_Zone_33S</li>
+<li>WGS_1984_UTM_Zone_34N</li>
+<li>WGS_1984_UTM_Zone_34S</li>
+<li>WGS_1984_UTM_Zone_35N</li>
+<li>WGS_1984_UTM_Zone_35S</li>
+<li>WGS_1984_UTM_Zone_36N</li>
+<li>WGS_1984_UTM_Zone_36S</li>
+<li>WGS_1984_UTM_Zone_37N</li>
+<li>WGS_1984_UTM_Zone_37S</li>
+<li>WGS_1984_UTM_Zone_38N</li>
+<li>WGS_1984_UTM_Zone_38S</li>
+<li>WGS_1984_UTM_Zone_39N</li>
+<li>WGS_1984_UTM_Zone_39S</li>
+<li>WGS_1984_UTM_Zone_3N</li>
+<li>WGS_1984_UTM_Zone_3S</li>
+<li>WGS_1984_UTM_Zone_40N</li>
+<li>WGS_1984_UTM_Zone_40S</li>
+<li>WGS_1984_UTM_Zone_41N</li>
+<li>WGS_1984_UTM_Zone_41S</li>
+<li>WGS_1984_UTM_Zone_42N</li>
+<li>WGS_1984_UTM_Zone_42S</li>
+<li>WGS_1984_UTM_Zone_43N</li>
+<li>WGS_1984_UTM_Zone_43S</li>
+<li>WGS_1984_UTM_Zone_44N</li>
+<li>WGS_1984_UTM_Zone_44S</li>
+<li>WGS_1984_UTM_Zone_45N</li>
+<li>WGS_1984_UTM_Zone_45S</li>
+<li>WGS_1984_UTM_Zone_46N</li>
+<li>WGS_1984_UTM_Zone_46S</li>
+<li>WGS_1984_UTM_Zone_47N</li>
+<li>WGS_1984_UTM_Zone_47S</li>
+<li>WGS_1984_UTM_Zone_48N</li>
+<li>WGS_1984_UTM_Zone_48S</li>
+<li>WGS_1984_UTM_Zone_49N</li>
+<li>WGS_1984_UTM_Zone_49S</li>
+<li>WGS_1984_UTM_Zone_4N</li>
+<li>WGS_1984_UTM_Zone_4S</li>
+<li>WGS_1984_UTM_Zone_50N</li>
+<li>WGS_1984_UTM_Zone_50S</li>
+<li>WGS_1984_UTM_Zone_51N</li>
+<li>WGS_1984_UTM_Zone_51S</li>
+<li>WGS_1984_UTM_Zone_52N</li>
+<li>WGS_1984_UTM_Zone_52S</li>
+<li>WGS_1984_UTM_Zone_53N</li>
+<li>WGS_1984_UTM_Zone_53S</li>
+<li>WGS_1984_UTM_Zone_54N</li>
+<li>WGS_1984_UTM_Zone_54S</li>
+<li>WGS_1984_UTM_Zone_55N</li>
+<li>WGS_1984_UTM_Zone_55S</li>
+<li>WGS_1984_UTM_Zone_56N</li>
+<li>WGS_1984_UTM_Zone_56S</li>
+<li>WGS_1984_UTM_Zone_57N</li>
+<li>WGS_1984_UTM_Zone_57S</li>
+<li>WGS_1984_UTM_Zone_58N</li>
+<li>WGS_1984_UTM_Zone_58S</li>
+<li>WGS_1984_UTM_Zone_59N</li>
+<li>WGS_1984_UTM_Zone_59S</li>
+<li>WGS_1984_UTM_Zone_5N</li>
+<li>WGS_1984_UTM_Zone_5S</li>
+<li>WGS_1984_UTM_Zone_60N</li>
+<li>WGS_1984_UTM_Zone_60S</li>
+<li>WGS_1984_UTM_Zone_6N</li>
+<li>WGS_1984_UTM_Zone_6S</li>
+<li>WGS_1984_UTM_Zone_7N</li>
+<li>WGS_1984_UTM_Zone_7S</li>
+<li>WGS_1984_UTM_Zone_8N</li>
+<li>WGS_1984_UTM_Zone_8S</li>
+<li>WGS_1984_UTM_Zone_9N</li>
+<li>WGS_1984_UTM_Zone_9S</li>
+<li>World_Aitoff</li>
+<li>World_Behrmann</li>
+<li>World_Bonne</li>
+<li>World_Craster_Parabolic</li>
+<li>World_Cylindrical_Equal_Area</li>
+<li>World_Eckert_I</li>
+<li>World_Eckert_II</li>
+<li>World_Eckert_III</li>
+<li>World_Eckert_IV</li>
+<li>World_Eckert_V</li>
+<li>World_Eckert_VI</li>
+<li>World_Equidistant_Conic</li>
+<li>World_Equidistant_Cylindrical</li>
+<li>World_Flat_Polar_Quartic</li>
+<li>World_Gall_Stereographic</li>
+<li>World_Hammer_Aitoff</li>
+<li>World_Loximuthal</li>
+<li>World_Mercator</li>
+<li>World_Miller_Cylindrical</li>
+<li>World_Mollweide</li>
+<li>World_Plate_Carree</li>
+<li>World_Polyconic</li>
+<li>World_Quartic_Authalic</li>
+<li>World_Robinson</li>
+<li>World_Sinusoidal</li>
+<li>Sphere_Aitoff</li>
+<li>Sphere_Behrmann</li>
+<li>Sphere_Bonne</li>
+<li>Sphere_Craster_Parabolic</li>
+<li>Sphere_Cylindrical_Equal_Area</li>
+<li>Sphere_Eckert_I</li>
+<li>Sphere_Eckert_II</li>
+<li>Sphere_Eckert_III</li>
+<li>Sphere_Eckert_IV</li>
+<li>Sphere_Eckert_V</li>
+<li>Sphere_Eckert_VI</li>
+<li>Sphere_Equidistant_Conic</li>
+<li>Sphere_Equidistant_Cylindrical</li>
+<li>Sphere_Flat_Polar_Quartic</li>
+<li>Sphere_Gall_Stereographic</li>
+<li>Sphere_Hammer_Aitoff</li>
+<li>Sphere_Loximuthal</li>
+<li>Sphere_Mercator</li>
+<li>Sphere_Miller_Cylindrical</li>
+<li>Sphere_Mollweide</li>
+<li>Sphere_Plate_Carree</li>
+<li>Sphere_Polyconic</li>
+<li>Sphere_Quartic_Authalic</li>
+<li>Sphere_Robinson</li>
+<li>Sphere_Sinusoidal</li>
+<li>Sphere_Times</li>
+<li>Sphere_Van_der_Grinten_I</li>
+<li>Sphere_Vertical_Perspective</li>
+<li>Sphere_Winkel_I</li>
+<li>Sphere_Winkel_II</li>
+<li>Sphere_Winkel_Tripel_NGS</li>
+<li>The_World_From_Space</li>
+<li>World_Times</li>
+<li>World_Van_der_Grinten_I</li>
+<li>World_Vertical_Perspective</li>
+<li>World_Winkel_I</li>
+<li>World_Winkel_II</li>
+<li>World_Winkel_Tripel_NGS</li>
+</ul>
+</p>
+</td>
+</tr>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="horizCoordSysDef">horizCoordSysDef&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#horizCoordSysType">horizCoordSysType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Terms and parameters necessary to define a geographic or projected coordinate
+                system for horizonal distances.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="vertCoordSys">vertCoordSys&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeSysDef">altitudeSysDef</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#depthSysDef">depthSysDef</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeSysDef">altitudeSysDef&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeDatumName">altitudeDatumName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeResolution">altitudeResolution</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeDistanceUnits">altitudeDistanceUnits</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#altitudeEncodingMethod">altitudeEncodingMethod</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The term "altitude"' is used instead of
+                    the common term "elevation" to conform to the terminology
+                    in Federal Information Processing Standards 70-1 and
+                    173.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeDatumName">altitudeDatumName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>WGS_datum<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeResolution">altitudeResolution&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>1<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeDistanceUnits">altitudeDistanceUnits&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>1<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="altitudeEncodingMethod">altitudeEncodingMethod&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="depthSysDef">depthSysDef&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#depthDatumName">depthDatumName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#depthResolution">depthResolution</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#depthDistanceUnits">depthDistanceUnits</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#depthEncodingMethod">depthEncodingMethod</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="depthDatumName">depthDatumName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="depthResolution">depthResolution&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="depthDistanceUnits">depthDistanceUnits&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="depthEncodingMethod">depthEncodingMethod&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="datum">datum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>WGS_1984<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spheroid">spheroid&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#semiAxisMajor">semiAxisMajor</a></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#denomFlatRatio">denomFlatRatio</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>An ellipse is used to define a idealized surface that ignores variation in elevation.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="primeMeridian">primeMeridian&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#longitude">longitude</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="unit">unit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>degrees<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geogCoordSys">geogCoordSys&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#geogCoordSysType">geogCoordSysType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="projCoordSys">projCoordSys&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#geogCoordSys">geogCoordSys</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#projection">projection</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geogCoordSys">geogCoordSys&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#geogCoordSysType">geogCoordSysType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="projection">projection&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#parameter">parameter</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#unit">unit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="parameter">parameter&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#description">description</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#value">value</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Most projections require one or more parameters to control the
+                          orientation and positon of the projected coordinate plane.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="unit">unit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="projectionList">projectionList&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#horizCoordSysDef">horizCoordSysDef</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="horizCoordSysDef">horizCoordSysDef&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#horizCoordSysType">horizCoordSysType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Terms and parameters necessary to define a geographic or projected coordinate
+                system for horizonal distances.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="spatialReference">spatialReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#SpatialReferenceType">SpatialReferenceType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Bessel 1866<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="semiAxisMajor">semiAxisMajor</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:float</span></span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Meter<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="denomFlatRatio">denomFlatRatio</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:float</span></span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Greenwich<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="longitude">longitude</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:float</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>
+<span class="boldtext">Minimum: </span>-180</li>
+<li>
+<span class="boldtext">Maximum: </span>180</li>
+</ul>
+</p>
+</td>
+</tr>
+<td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>0.0<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#angleUnits">angleUnits</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Degrees<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>If the paramter corresponds to one that has been
+                            defined in the existing eml-SpatialReferenceDictionary, then that name should be
+                            used to enhance recogonizability.<br>
+<span class="boldtext">Example(s): </span>
+<br>False_Easting<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="description">description</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>An offset by which x origin has been adjusted,
+                            expressed in projection units<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="value">value</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:anySimpleType</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>500000<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="#lengthUnits">lengthUnits</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Meter<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>EML does not attempt to document the details
+                      of the particular projection algorithm. It is incumbent on metadata provider
+                      to ensure that the meaning of the names used to identify the method and its parameters will be
+                      as clear as possible.<br>
+<span class="boldtext">Example(s): </span>
+<br>Transverse_Mercator<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="name">name</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="SpatialReferenceType">SpatialReferenceType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#horizCoordSysName">horizCoordSysName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#horizCoordSysDef">horizCoordSysDef</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#vertCoordSys">vertCoordSys</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A spatial reference description provides the
+        information for relating the positional information in a spatial
+        dataset to real-world locations. A description typically includes
+        identification of a reference datum, a spheroid definition, and
+        projection algorithm. It also provides any constants required by that
+        algorithm.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="geogCoordSysType">geogCoordSysType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#datum">datum</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#spheroid">spheroid</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#primeMeridian">primeMeridian</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#unit">unit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="horizCoordSysType">horizCoordSysType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#geogCoordSys">geogCoordSys</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#projCoordSys">projCoordSys</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#name">name</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="lengthUnits">lengthUnits</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>meter</li>
+<li>nanometer</li>
+<li>micrometer</li>
+<li>micron</li>
+<li>millimeter</li>
+<li>centimeter</li>
+<li>decimeter</li>
+<li>dekameter</li>
+<li>hectometer</li>
+<li>kilometer</li>
+<li>megameter</li>
+<li>angstrom</li>
+<li>inch</li>
+<li>Foot_US</li>
+<li>foot</li>
+<li>Foot_Gold_Coast</li>
+<li>fathom</li>
+<li>nauticalMile</li>
+<li>yard</li>
+<li>Yard_Indian</li>
+<li>Link_Clarke</li>
+<li>Yard_Sears</li>
+<li>mile</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="angleUnits">angleUnits</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>radian</li>
+<li>degree</li>
+<li>grad</li>
+<li>degree</li>
+<li>grad</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

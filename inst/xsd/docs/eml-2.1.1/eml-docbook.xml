@@ -1,0 +1,3797 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.0/docbookx.dtd">
+<book xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<bookinfo xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<title>Ecological Metadata Language (EML) Specification</title>
+</bookinfo>
+<chapter xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" id="preface">
+<title>Preface</title>
+<section id="introduction">
+<title>Introduction</title>
+<para>
+       The Ecological Metadata Language (EML) is a metadata standard developed by
+       the ecology discipline and for the ecology discipline. It is based on
+       prior work done by the Ecological Society of America and associated
+       efforts (Michener et al., 1997, Ecological Applications). EML is
+       implemented as a series of XML document types that can by used in a
+       modular and extensible manner to document ecological data. Each EML
+       module is designed to describe one logical part of the total metadata
+       that should be included with any ecological dataset.
+      </para>
+</section>
+<section id="purpose">
+<title>Purpose Statement</title>
+<para>
+        To provide the ecological community with an extensible, flexible,
+        metadata standard for use in data analysis and archiving that will
+        allow automated machine processing, searching and retrieval.
+      </para>
+</section>
+<section id="features">
+<title>Features</title>
+<para>
+        The architecture of EML was designed to serve the needs of the
+        ecological community, and has benefitted from previous work in other
+        related metadata languages. EML has adopted the strengths of many of
+        these languages, but also addresses a number of short-comings that
+        have proved to inhibit the automated processing and integration of
+        dataset resources via their metadata.
+      </para>
+<para>
+        The following list represents some of the features of EML:
+      </para>
+<itemizedlist>
+<listitem>
+<para>
+        Modularity: EML was designed as a collection of modules rather than
+        one large standard to facilitate future growth of the language in both
+        breadth and depth.  By implementing EML with an extensible
+        architecture, groups may choose which of the core modules are
+        pertinent to describing their data, literature, and software
+        resources.  Also, if EML falls short in a particular area, it may be
+        extended by creating a new module that describes the resource (e.g. a
+        detailed soils metadata profile that extends eml-dataset).  The intent
+        is to provide a common set of core modules for information exchange,
+        but to allow for future customizations of the language without the
+        need of going through a lengthy 'approval' process.
+        </para>
+</listitem>
+<listitem>
+<para>
+        Detailed Structure: EML strives to balance the tradeoff of too much
+        detail with enough detail to enable advanced services in terms of
+        processing data through the parsing of accompanied metadata.
+        Therefore, a driving question throughout the design was: 'Will this
+        particular piece of information be machine-processed, just human
+        readable, or both?'  Information was then broken down into more highly
+        structured elements when the answer involved machine processing.
+        </para>
+</listitem>
+<listitem>
+<para>
+        Compatibility: EML adopts much of it's syntax from the other metadata
+        standards that have evolved from the expertise of groups in other
+        disciplines.  Whenever possible, EML adopted entire trees of
+        information in order to facilitate conversion of EML documents into
+        other metadata languages.  EML was designed with the following
+        standards in mind: Dublin Core Metadata Initiative, the Content
+        Standard for Digital Geospatial Metadata (CSDGM from the US geological
+        Survey's Federal Geographic Data Committee (FGDC)), the Biological
+        Profile of the CSDGM (from the National Biological Information
+        Infrastructure), the International Standards Organization's Geographic
+        Information Standard (ISO 19115), the ISO 8601 Date and Time Standard,
+        the OpenGIS Consortiums's Geography Markup Language (GML), the
+        Scientific, Technical, and Medical Markup Language (STMML), and the
+        Extensible Scientific Interchange Language (XSIL).
+        </para>
+</listitem>
+<listitem>
+<para>
+        Strong Typing: EML is implemented in an Extensible Markup Language
+        (XML) known as <ulink url="http://www.w3.org/XML/Schema">XML
+        Schema</ulink>, which is a language that defines the rules
+        that govern the EML syntax.  XML Schema is an internet recommendation
+        from the <ulink url="http://www.w3.org">World Wide Web Consortium</ulink>,
+        and so a
+        metadata document that is said to comply with the syntax of EML will
+        structurally meet the criteria defined in the XML Schema documents for
+        EML.  Over and above the structure (what elements can be nested within
+        others, cardinality, etc.), XML Schema provides the ability to use
+        strong
+        data typing within elements.  This allows for finer validation of the
+        contents of the element, not just it's structure.  For instance, an
+        element may be of type 'date', and so the value that is inserted in
+        the field will be checked against XML Schema's definition of a date.
+        Traditionally, XML documents (including previous versions of EML)
+        have been validated against Document Type
+        Definitions (DTDs), which do not provide a means to employ strong
+        validation on field values through typing.
+        </para>
+</listitem>
+<listitem>
+<para>
+        There is a distinction between the content model (i.e. the concepts
+        behind the structure of a document - which fields go where, cardinality,
+        etc.) and the syntactic implementation of that model (the technology
+        used to express the concepts defined in the content model).
+        The normative sections below define the content model and the
+        XML Schema documents distributed with EML define the syntactic
+        implementation. For the foreseeable future, XML Schema will be the
+        syntactic specification, although it may change later.
+        </para>
+</listitem>
+</itemizedlist>
+</section>
+</chapter>
+<chapter xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" id="moduleOverview">
+<title>Overview of EML modules and their use</title>
+<section>
+<title>Module Overview Foreword</title>
+<para>
+        The following section briefly describes each EML module and how they
+        are logically designed in order to document ecological resources.
+        Some of the modules are dependent on others, while others may be used
+        as stand-alone descriptions.  This section describes the modules using
+        a "top down" approach, starting from the top-level eml wrapper
+        module, followed by modules of increasing detail.  However, there are
+        modules that may be used at many levels, such as eml-access.
+        These modules are described when it is appropriate.
+      </para>
+</section>
+<section>
+<title>
+        Root-level structure
+      </title>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:acc="eml://ecoinformatics.org/access-2.1.1" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:prot="eml://ecoinformatics.org/protocol-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" xmlns:sw="eml://ecoinformatics.org/software-2.1.1">
+            <title> The eml module - A metadata container </title>
+            <para> The eml module is a wrapper container that allows the inclusion of any metadata
+              content in a single EML document. The eml module is used as a container to hold
+              structured descriptions of ecological resources. In EML, the definition of a resource
+              comes from the <ulink url="http://dublincore.org/documents/usageguide/">
+                <citetitle> The Dublin Core Metadata Initiative </citetitle>
+              </ulink>, which describes a general element set used to describe "networked digital
+              resources". The top-level structure of EML has been designed to be compatible with the
+              Dublin Core syntax. In general, dataset resources, literature resources, software
+              resources, and protocol resources comprise the list of information that may be
+              described in EML. EML is largely designed to describe digital resources, however, it
+              may also be used to describe non-digital resources such as paper maps and other
+              non-digital media. <emphasis> In EML, the definition of a "Data Package" is the
+                combination of both the data and metadata for a resource. </emphasis> So, data
+              packages are built by using the &lt;eml&gt; wrapper, which will include all of
+              the metadata, and optionally the data (or references to them). All EML packages must
+              begin with the &lt;eml&gt; tag and end with the &lt;/eml&gt; tag. </para>
+            <para> The eml module may be extended to describe other resources by means of its
+              optional sub-field, &lt;additionalMetadata&gt;. This field is largely reserved
+              for the inclusion of metadata that may be highly discipline specific and not covered
+              in this version of EML, or it may be used to internally extend fields within the EML
+              standard. </para>
+          </section>
+<section xmlns:txt="eml://ecoinformatics.org/text-2.1.1" xmlns:rp="eml://ecoinformatics.org/party-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1">
+            <title>
+              The eml-resource module - Base information for
+              all resources
+            </title>
+            <para>
+              The eml-resource module contains general information that
+              describes dataset resources, literature resources, protocol
+              resources, and software resources. Each of the above four types of
+              resources share a common set of information, but also have
+              information that is unique to that particular resource type.  Each
+              resource type uses the eml-resource module to document the
+              information common to all resources, but then extend
+              eml-resource with modules that are specific to that particular
+              resource type.  For instance, all resources have creators,
+              titles, and perhaps keywords, but only the dataset resource would
+              have a "data table" within it.  Likewise, a literature
+              resource may have an "ISBN" number associated with it,
+              whereas the other resource types would not.
+            </para>
+            <para>
+              The eml-resource module is exclusively used by other modules, and is
+              therefore not a stand-alone module.
+            </para>
+          </section>
+</section>
+<section>
+<title>
+          Top-level resources
+        </title>
+<para>
+        The following four modules are used to describe separate resources:
+        datasets, literature, software, and protocols.  However, note that
+        the dataset module makes use of the other top-level modules by
+        importing them at different levels.  For instance, a dataset may
+        have been produced using a particular protocol, and that protocol
+        may come from a protocol document in a library of protocols.
+        Likewise, citations are used throughout the top-level resource
+        modules by importing the literature module.
+        </para>
+<section xmlns:v="eml://ecoinformatics.org/view-2.1.1" xmlns:sp="eml://ecoinformatics.org/storedProcedure-2.1.1" xmlns:sv="eml://ecoinformatics.org/spatialVector-2.1.1" xmlns:md="eml://ecoinformatics.org/methods-2.1.1" xmlns:sr="eml://ecoinformatics.org/spatialRaster-2.1.1" xmlns:proj="eml://ecoinformatics.org/project-2.1.1" xmlns:dat="eml://ecoinformatics.org/dataTable-2.1.1" xmlns:ent="eml://ecoinformatics.org/entity-2.1.1" xmlns:acc="eml://ecoinformatics.org/access-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:rp="eml://ecoinformatics.org/party-2.1.1" xmlns:txt="eml://ecoinformatics.org/text-2.1.1">
+            <title>
+              The eml-dataset module - Dataset specific
+              information
+            </title>
+            <para>
+              The eml-dataset module contains general information that describes
+              dataset resources. It is intended to provide overview information
+              about the dataset: broad information such as the title, abstract,
+              keywords, contacts, maintenance history, purpose, and distribution
+              of the data themselves. The eml-dataset module also imports many
+              other modules that are used to describe the dataset in fine
+              detail.  Specifically, it uses the eml-methods module to
+              describe methodology used in collecting or processing the
+              dataset, the eml-project module to describe the overarching
+              research context and experimental design, the eml-access module
+              to define access control rules for the data and metadata, and
+              the eml-entity module to provide detailed information about the
+              logical structure of the dataset. A dataset can be (and often is)
+              composed of a series of data entities (tables) that are linked
+              together by particular integrity constraints.
+            </para>
+            <para>
+              The eml-dataset module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a dataset to be described once, and then used as a
+              reference in other locations within the EML document via its ID.
+            </para>
+          </section>
+<section xmlns:rp="eml://ecoinformatics.org/party-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:acc="eml://ecoinformatics.org/access-2.1.1" xmlns:proj="eml://ecoinformatics.org/project-2.1.1">
+            <title>
+              The eml-literature module - Citation specific
+              information
+            </title>
+            <para>
+              The eml-literature module contains information that describes
+              literature resources. It is intended to provide overview
+              information about the literature citation, including title,
+              abstract, keywords, and contacts. Citation types follow the
+              conventions laid out by
+              <ulink url="http://www.endnote.com">EndNote</ulink>,
+              and there is an attempt to
+              represent a compatible subset of the EndNote citation types.
+              These citation types include: article, book, chapter, edited
+              book, manuscript, report, thesis, conference proceedings,
+              personal communication, map, generic, audio visual, and
+              presentation.  The "generic" citation type would be
+              used when one of the other types will not work.
+            </para>
+            <para>
+              The eml-literature module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a citation to be described once, and then used as a
+              reference in other locations within the EML document via its ID.
+            </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:proj="eml://ecoinformatics.org/project-2.1.1" xmlns:acc="eml://ecoinformatics.org/access-2.1.1" xmlns:phys="eml://ecoinformatics.org/physical-2.1.1">
+            <title>
+              The eml-software module - Software specific
+              information
+            </title>
+            <para>
+              The eml-software module contains general information that
+              describes software resources.  This module is intended to fully
+              document software that is needed in order to view a resource
+              (such as a dataset) or to process a dataset.  The software
+              module is also imported into the eml-methods module in order to
+              document what software was used to process or perform quality
+              control procedures on a dataset.
+            </para>
+            <para>
+              The eml-software module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a software resource to be described once, and then used
+              as a reference in other locations within the EML document via
+              its ID.
+            </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:md="eml://ecoinformatics.org/methods-2.1.1" xmlns:acc="eml://ecoinformatics.org/access-2.1.1">
+            <title>
+              The eml-protocol module - Research protocol specific information
+            </title>
+            <para>
+              The EML Protocol Module is used to define
+              abstract, prescriptive procedures for generating or processing
+              data.  Conceptually, a protocol is a standardized method.
+            </para>
+            <para>
+              Eml-protocol resembles eml-methods; however, eml-methods is
+              descriptive (often
+              written in the declarative mood:  "I took five subsamples...")
+              whereas eml-protocol is prescriptive (often written in the
+              imperative mood:  "Take five subsamples...").  A protocol
+              may have versions, whereas methods (as used in eml-methods)
+              should not.
+            </para>
+          </section>
+</section>
+<section>
+<title>
+          Supporting Modules - Adding detail to top-level resources
+        </title>
+<para>
+            The following six modules are used to qualify the resources being
+            described in more detail.  They are used to describe access control
+            rules, distribution of the metadata and data themselves, parties
+            associated with the resource, the geographic, temporal, and
+            taxonomic extents of the resource, the overall research context of
+            the resource, and detailed methodology used for creating the
+            resource.  Some of these modules are imported directly into the
+            top-level resource modules, often in many locations in order to
+            limit the scope of the description.  For instance, the eml-coverage
+            module may be used for a particular column of a dataset, rather
+            than the entire dataset as a whole.
+          </para>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1">
+            <title>
+              The eml-access module - Access control rules for resources
+            </title>
+            <para>
+              The eml-access module describes the level of access that is
+              to be allowed or denied to a resource for a particular user or 
+              group of users, and can be described independently for metadata 
+              and data.  The eml-access
+              module uses a reference to a particular authentication system
+              to determine the set of principals (users or groups) that can be
+              specified in the access rules.
+              The special principal 'public' can be used to indicate that any
+              user or group has access permission, thereby making
+              it easier to specify that anonymous access is allowed. 
+             </para>
+            <para>        
+              There are two mechanisms for including access control 
+              via the eml-access module: 
+              <orderedlist inheritnum="ignore" continuation="restarts">
+                <listitem>
+                  <para>
+                    The top-level "eml" element may have an optional 
+                    &lt;access&gt; element that is used to establish the 
+                    default access control for the entire EML package. If 
+                    this access element is omitted from the document, then 
+                    the package submitter should be given full access to the 
+                    package but all other users should be denied all access. 
+                    To allow the package to be publicly viewable, the EML 
+                    author must explicitly include a rule stating so.  Barring 
+                    the existence of a distribution-level &lt;access&gt; element 
+                    (see below), access to data entities will be controlled by 
+                    the package-level &lt;access&gt; element in the 
+                    &lt;eml&gt; element.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Exceptions for particular entity-level components of the 
+                    package can be controlled at a finer grain by using an 
+                    access description in that entity's physical/distribution 
+                    tree. When access control rules are specified at this 
+                    level, they apply only to the data in the parent 
+                    distribution element, and not to the metadata. Thus, it 
+                    will control access to the content of the &lt;inline&gt; 
+                    element, as well as resources that are referenced by the 
+                    &lt;online/url&gt; and &lt;online/connection&gt; paths. 
+                    These exceptions to access for particular data resources 
+                    are applied after the default access rules at the 
+                    package-level have been applied, so they effectively 
+                    override the default rules when they overlap.
+                  </para>
+                </listitem>
+              </orderedlist>
+            </para>
+            <para>
+              In previous versions of EML access rules for entity-level 
+              distribution were contained in &lt;additionalMetadata&gt; 
+              sections and referenced via the &lt;describes&gt; tag. 
+              Although in theory these could have referenced any node, in 
+              application such node-level access control is problematic. 
+              Since the most common uses of access control rules were to 
+              limit access to specific data entities, the access tree has 
+              been placed there explicitly in EML 2.1.0.
+            </para>          
+            <para>
+              Access is specified with a choice of child elements, either 
+              &lt;allow&gt; or &lt;deny&gt;. Within these rules, values can 
+              be assigned for each &lt;principal&gt; using the 
+              &lt;permission&gt; element. Users given "read" permission can 
+              view the resource; "write" allows changes to the resource 
+              excluding changes to the access rules; "changePermission" 
+              includes "write" plus the changing of access rules. Users 
+              allowed "all" permissions; may do all of the above.  Access to 
+              data and metadata is affected by the order attribute of the 
+              &lt;access&gt; element. It is possible for a deny rule to 
+              override an allow rule, and vice versa.  In the case where the 
+              order attribute is set to "allowFirst", and there are rules 
+              similar to the following (with non-critical sections deleted):
+<literalLayout>
+  &lt;deny&gt;
+    &lt;principal&gt;public&lt;/principal&gt;
+    &lt;permission&gt;read&lt;/permission&gt;
+  &lt;/deny&gt;
+  &lt;allow&gt;
+    &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+    &lt;permission&gt;read&lt;/permission&gt;
+  &lt;/allow&gt;
+</literalLayout>
+              the principal "uid=alice ..." will be denied access, 
+              because it is a member of the special "public" 
+              principal, and the deny rule is processed second. For this 
+              allow rule to truly allow access to that principal, the order 
+              attribute should be set to "denyFirst", and the 
+              allow rule will override the deny rule when it is processed 
+              second.              
+            </para>
+            <para>
+              An example is given below, with non-critical sections deleted:
+<literalLayout>
+  &lt;eml&gt;
+      &lt;access 
+          authSystem="ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org" 
+          order="allowFirst"&gt;
+        &lt;allow&gt;
+          &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+          &lt;permission&gt;read&lt;/permission&gt;
+          &lt;permission&gt;write&lt;/permission&gt;
+        &lt;allow&gt;
+      &lt;/access&gt;
+      &lt;dataset&gt;
+      ...
+      ...
+      &lt;dataTable id="entity123"&gt;
+      ...
+        &lt;physical&gt;
+        ...
+          &lt;distribution&gt;
+          ...
+            &lt;access id="access123"
+            authSystem="ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org" 
+            order="allowFirst"&gt;
+              &lt;deny&gt;
+                &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+                &lt;permission&gt;write&lt;/permission&gt;
+            &lt;/deny&gt;
+          &lt;/access&gt;
+         &lt;/distribution&gt;
+       &lt;/physical&gt;
+      &lt;/dataTable&gt;
+      &lt;dataTable id="entity234"&gt;
+        ...
+        &lt;physical&gt;
+        ...
+          &lt;distribution&gt;
+            ...
+            &lt;access&gt;
+              &lt;references&gt;access123&lt;/references&gt;
+            &lt;/access&gt;
+          &lt;/distribution&gt;
+        &lt;/physical&gt;
+      &lt;/dataTable&gt;
+      ...    
+    &lt;/dataset&gt;
+  &lt;eml&gt;
+</literalLayout>
+              In this example, the overall default access is to allow the 
+              user=alice (but no one else) to read and write all metadata 
+              and data. However, under "entity123" and 
+              "entity234", there is an additional rule saying 
+              that user=alice does not have write permission. The net 
+              effect is that Alice can read and make changes to the 
+              metadata, but cannot make changes to the two data entities. 
+              In addition, Alice cannot change these access rules; although 
+              the submitter can.
+            </para>
+            <para>
+              This example also shows how the eml-access module, like other modules,
+              may be "referenced" via the &lt;references&gt; tag.  This
+              allows an access control document to be described once, and then
+              used as a reference in other locations within the EML document
+              via its ID.
+            </para>
+            <para>
+            In summary, access rules can be applied in two places in an
+            eml document. Default access rules are established
+            in the top &lt;access&gt; element for the main eml document (e.g.,
+            "/eml/access").  These default rules can be overridden
+            for particular data entities by adding additional &lt;access&gt;
+            elements in the physical/distribution trees of those entities.
+           </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" xmlns:acc="eml://ecoinformatics.org/access-2.1.1">
+            <title>The eml-physical module - Physical file format</title>
+            <para>
+        The eml-physical module describes the external
+        and internal physical characteristics of a data object as well as the
+        information required for its distribution. Examples of the external
+        physical characteristics of a data object would be the filename,
+        size, compression, encoding methods, and authentication of a file
+        or byte stream.  Internal physical characteristics describe the
+        format of the data object being described.  Both named binary or
+        otherwise proprietary formats can be cited (e.g., Microsoft Access
+        2000), or text formats can be precisely described (e.g., ASCII text
+        delimited with commas).  For these text formats, it also includes the
+        information needed to parse the data object to extract the entity
+        and its attributes from the data object.  Distribution information
+        describes how to retrieve the data object.  The retrieval information
+        can be either online (e.g., a URL or other connection information)
+        or offline (e.g., a data object residing on an archival tape).
+        </para>
+            <para>
+          The eml-physical module, like other modules, may be
+          "referenced" via the &lt;references&gt; tag.  This
+          allows a physical document to be described once, and then
+          used as a reference in other locations within the EML document
+          via its ID.
+        </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1">
+            <title>
+            The eml-party module - People and organization information
+          </title>
+            <para>
+            The eml-party module describes a responsible party 
+            and is typically used to name the creator of a
+            resource or metadata document. A responsible party may be 
+			an individual person, an organization or a named position within
+			an organization. The eml-party module contains detailed contact
+            information. It is used throughout the other EML modules where
+            detailed contact information is needed.
+          </para>
+            <para>
+            The eml-party module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This allows
+            a party to be described once, and then used as a reference in
+            other locations within the EML document via its ID.
+          </para>
+          </section>
+<section xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" xmlns:rp="eml://ecoinformatics.org/party-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:unit="eml://ecoinformatics.org/units-2.1.1">
+            <title>
+            The eml-coverage module - Geographic, temporal, and taxonomic extents
+            of resources
+          </title>
+            <para>
+            The eml-coverage module contains fields for describing the coverage
+            of a resource in terms of time, space, and taxonomy. These
+            coverages (temporal, spatial, and taxonomic) represent the extent
+            of applicability of the resource in those domains.
+            The Geographic coverage section allows for 2 means of expressing
+            coverage
+            on the surface of the earth: 1) via a set of bounding coordinates
+            that define the North, South, East and West points in a rectangular
+            area, optionally including a bounding altitude,
+            and 2) using a G-Ring polygon definition, where an irregularly
+            shaped area may be defined using a ordered list of
+            latitude/longitude coordinates.  A G-Ring may also include an
+            "inner G-Ring" that defines one or more
+            "cut-outs" in the area, i.e. the donut hole concept.
+          </para>
+            <para>
+            The temporal coverage section allows for the definition of either a
+            single date or time, or a range of dates or times. These may be
+            expressed as a calendar date according to the ISO 8601 Date and Time
+            Specification, or by using an alternate time scale, such as the
+            geologic time scale. Currently, EML does not have specific fields to indicate
+            that a data resource may be "ongoing." Two examples are data tables 
+			that are planned to be appended in the future, or resources 
+            with complex connection definitions (such as to a database) which may return 
+			data in real time. It is important that EML be 
+            able to  handle data from both the "producer" and "consumer" points of view,
+            although currently the temporal coverage modules are designed for the latter.
+            There is no universally acceptable recommendation for describing "ongoing" data
+            within EML. Some groups have chosen to use the &lt;alternateTimeScale&gt; 
+            node for the end date, with a value of "ongoing," although this practice
+            is not endorsed by the EML authors. A better solution could be to use very
+			general content for the endDate (such as only the current year) so that the 
+			data are accurately described, and searches return datasets as expected.
+			A future version of EML will 
+            accommodate such data types with coverage elements specific to their needs.
+          </para>
+            <para>
+            The taxonomic coverage section allows for detailed description of
+            the taxonomic extent of the dataset or resource.  The taxonomic
+            classification consists of a recursive set of taxon rank names,
+            their values, and their common names.  This construct allows for a
+            taxonomic hierarchy to be built to show the level of identification
+            (e.g. Rank Name = Kingdom, Rank Value = Animalia, Common Name =
+            Animals, and so on down the hierarchy.) The taxonomic coverage
+            module also allows for the definition of the classification system
+            in cases where alternative systems are used.
+          </para>
+            <para>
+            The eml-coverage module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This allows
+            the coverage extent to be described once, and then used as a
+            reference in other locations within the EML document via its ID.
+          </para>
+          </section>
+<section xmlns:txt="eml://ecoinformatics.org/text-2.1.1" xmlns:prot="eml://ecoinformatics.org/protocol-2.1.1" xmlns:rp="eml://ecoinformatics.org/party-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1">
+            <title>The eml-project module - Research context information for
+            resources</title>
+            <para>The eml-project module describes the research context in
+            which the dataset was created, including descriptions of over-all
+            motivations and goals, funding, personnel, description of the study
+            area etc. This is also the module to describe the design of the
+            project: the scientific questions being asked, the architecture of
+            the design, etc. This module is used to place the dataset that is
+            being documented into its larger research context.</para>
+            <para>The eml-project module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag. This allows a research
+            project to be described once, and then used as a reference in other
+            locations within the EML document via its ID.</para>
+          </section>
+<section xmlns:txt="eml://ecoinformatics.org/text-2.1.1" xmlns:sw="eml://ecoinformatics.org/software-2.1.1" xmlns:pro="eml://ecoinformatics.org/protocol-2.1.1" xmlns:rp="eml://ecoinformatics.org/party-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.1" xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1">
+            <title>
+            The eml-methods module - Methodological information for resources
+          </title>
+            <para>
+            The eml-methods module describes the methods
+            followed in the creation of the dataset, including description of
+            field, laboratory and processing steps, sampling methods and units,
+            quality control procedures.  The eml-methods module is used
+            to describe the <emphasis>actual</emphasis>
+            procedures that are used in the creation or the subsequent
+            processing of a dataset. Likewise, eml-methods is used to describe
+            processes that have been used to define / improve the quality of a
+            data file, or to identify potential problems with the data file.
+            Note that the eml-protocol module is intended to be used to document
+            a <emphasis>prescribed</emphasis> procedure, whereas the eml-method
+            module is used to describe procedures that <emphasis>were actually
+            performed</emphasis>.  The distinction is that the use of the term
+            "protocol" is used in the "prescriptive" sense,
+            and the term "method" is used in the
+            "descriptive" sense.  This distinction allows managers to
+            build a protocol library of well-known, established protocols
+            (procedures), but also document what procedure was truly performed
+            in relation to the established protocol.  The method may have
+            diverged from the protocol purposefully, or perhaps incidentally,
+            but the procedural lineage is still preserved and understandable.
+          </para>
+          </section>
+</section>
+<section>
+<title>
+          Data organization - Modules describing dataset structures
+        </title>
+<para>
+            The following three modules are used to document the logical layout
+            of a dataset.  Many datasets are comprised of multiple entities
+            (e.g. a series of tabular data files, or a set of GIS features, or a
+            number of tables in a relational database).  Each entity within a
+            dataset may contain one or more attributes (e.g. multiple columns in
+            a data file, multiple attributes of a GIS feature, or multiple
+            columns of a database table).  Lastly, there may be both simple or
+            complex  relationships among the entities within a dataset.  The
+            relationships, or the constraints that are to be enforced in the
+            dataset, are described using the eml-constraint module.  All
+            entities share a common set of information (described using
+            eml-entity), but some discipline specific entities have
+            characteristics that are unique to that entity type.  Therefore, the
+            eml-entity module is extended for each of these types (dataTable,
+            spatialRaster, spatialVector, etc...) which are described
+            in the next section.
+          </para>
+<section xmlns:con="eml://ecoinformatics.org/constraint-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:phys="eml://ecoinformatics.org/physical-2.1.1" xmlns:md="eml://ecoinformatics.org/methods-2.1.1" xmlns:att="eml://ecoinformatics.org/attribute-2.1.1" xmlns:txt="eml://ecoinformatics.org/text-2.1.1">
+            <title>
+              The eml-entity module - Entity level information within datasets
+            </title>
+            <para>
+              The eml-entity module defines the logical characteristics of
+              each entity in the dataset. Entities are usually tables of
+              data (eml-dataTable). Data tables may be ascii text files,
+              relational database tables, spreadsheets or other type of
+              tabular data with a fixed logical structure. Related to data
+              tables are views (eml-view) and stored
+              procedures (eml-storedProcedure). Views and stored procedures
+              are produced by an RDBMS or related system. Other types of data
+              such as: raster (eml-spatialRaster), vector (eml-spatialVector) or
+              spatialReference image data are also data entities. An
+              otherEntity element would be used to describe types of entities
+              that are not described by any other entity type.
+            </para>
+            <para>
+              The eml-entity module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows an entity document to be described once, and then
+              used as a reference in other locations within the EML document
+              via its ID.
+            </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:md="eml://ecoinformatics.org/methods-2.1.1" xmlns:unit="eml://ecoinformatics.org/units-2.1.1">
+            <title>
+            The eml-attribute module - Attribute level information within
+            dataset entities
+          </title>
+            <para>
+            The eml-attribute module describes all attributes (variables)
+            in a data entity: dataTable, spatialRaster, spatialVector,
+            storedProcedure, view or otherEntity. The description includes the
+            name and definition of each attribute, its domain, definitions of
+            coded values, and other pertinent information. Two structures exist
+            in this module: 1.  attribute is used to define a single attribute;
+            2. attributeList is used to define a list of attributes that go
+            together in some logical way.
+          </para>
+            <para>
+            The eml-attribute module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This
+            allows an attribute document to be described once, and then
+            used as a reference in other locations within the EML document
+            via its ID.
+            </para>
+            <section>
+              <title>Philosophy of Attribute Units</title>
+              <para>The concept of "unit" represents one of the most fundamental
+            categories of metadata. The classic example of data entropy is the
+            case in which a reported numeric value loses meaning due to lack of
+            associated units. Much of Ecology is driven by measurement, and
+            most measurements are inherently comparative. Good data description
+            requires a representation of the basis for comparison, i.e., the
+            unit. In modeling the attribute element, the authors of EML drew
+            inspiration from the
+            <ulink url="http://physics.nist.gov/cuu/Units/introduction.html">
+            NIST Reference on Constants, Units, and Uncertainty</ulink>.
+            This document defines a unit as "a particular physical quantity,
+            defined and adopted by convention, with which other particular
+            quantities of the same kind are compared to express their value."
+            The authors of the EML 2.0 specification (hereafter "the authors")
+            decided to make the unit element required, wherever
+            possible.</para>
+              <para>Units may also be one of the most problematic categories of
+            metadata. For instance, there are many candidate attributes that
+            clearly have no units, such as named places and letter grades.
+            There are other candidate attributes for which units are difficult
+            to identify, despite some suspicion that they should exist (e.g.
+            pH, dates, times). In still other cases, units may be meaningful,
+            but apparently absent due to dimensional analysis (e.g. grams of
+            carbon per gram of soil). The relationship between units and
+            dimensions likewise is not completely clear.</para>
+              <para>The authors decided to sharpen the model of attribute by
+            nesting unit under measurementScale. Measurement Scale is a data
+            typology, borrowed from Statistics, that was introduced in the
+            1940's. Under the adopted model, attributes are classified as
+            nominal, ordinal, interval, and ratio. Though widely criticized,
+            this classification is well-known and provides at least first-order
+            utility in EML. For example, nesting unit under measurementScale
+            allows EML to prevent its meaningless inclusion for categorical
+            data -- an approach judged superior to making unit universally
+            required or universally optional.</para>
+              <para>The sharpening of the attribute model allowed the elimination
+            of the unit type "undefined" from the standard unit dictionary (see
+            eml-unitDictionary.xml). It seemed self-defeating to require the
+            unit element exactly where appropriate, yet still allow its content
+            to be undefined. An attribute that requires a unit definition is
+            malformed until one is provided. The unit type "dimensionless" is
+            preserved, however. In EML 2.0, it is synonymous with "unitless"
+            and represents the case in which units cannot be associated with an
+            attribute for some reason, despite the proper classification of
+            that attribute as interval or ratio. Dimensionless may itself be an
+            anomaly arising from the limitations of the adopted measurement
+            scale typology.</para>
+              <para>Closely related to the concept of unit is the concept of
+            attribute domain. The authors decided that a well-formed
+            description of an attribute must include some indication of the set
+            of possible values for that attribute. The set of possible values
+            is useful, perhaps necessary, for interpreting any particular
+            observed value. While universally required, attribute domain has
+            different forms, depending on the associated measurement
+            scale.</para>
+              <para>The element storageType has an obvious relationship to
+            domain. It gives some indication of the range of possible values of
+            an attribute, and also gives some (potentially critical)
+            operability information about the way the attribute is represented
+            or construed in the local storage system. The storageType element
+            seems to fall in a gray area between the logical and physical
+            aspects of stored data. Neither comfortable with eliminating it nor
+            with making it required, the authors left it available but optional
+            under attribute. In addition, it is repeatable so that different 
+            storage types can be provided for various systems (e.g., different
+            databases might use different types for columns, even though the
+            domain of the attribute is the same regardless of which database
+            is used).</para>
+              <para>Attributes representing dates, times, or combinations thereof
+            (hereafter "dateTime") were the most difficult to model in EML. Is
+            dateTime of type interval or ordinal? Does it have units or not?
+            Strong cases can be made on each side of the issue. The confusion
+            may reflect the limitations of the measurement scale typology. The
+            final resolution of the dateTime model is probably somewhat
+            arbitrary. There was clearly a need, however, to allow for the
+            interoperability of dateTime formats. EML 2.0 tries to provide an
+            unambiguous mechanism for describing the format of dateTime
+            values by providing a separate category for date and  time values. This
+            "dateTime" measurement scale allows users to explicitly label 
+            attributes that contain Gregorian date and time values, and allows
+            them to provide the information needed to parse these values into
+            their appropriate components (e.g., days, months, years)./</para>
+            </section>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1">
+          <title>
+            The eml-constraint module - Relationships among and within
+            dataset entities
+          </title>
+          <para>
+            The eml-constraint schema defines the integrity constraints
+            between entities (e.g., data tables) as they would be maintained in
+            a relational management system.  These constraints include primary
+            key constraints, foreign key constraints, unique key constraints,
+            check constraints, and not null constraints, among potential others.
+          </para>
+        </section>
+</section>
+<section>
+<title>
+          Entity types - Detailed information for discipline specific entities
+        </title>
+<para>
+             The following six modules are used to describe a number of common
+             types of entities found in datasets.  Each entity type uses the
+             eml-entity module elements as it's base set of elements, but then
+             extends the base with entity-specific elements.  Note that the
+             eml-spatialReference module is not an entity type, but is rather a
+             common set of elements used to describe spatial reference systems
+             in both eml-spatialRaster and eml-spatialVector.  It is described
+             here in relation to those two modules.
+          </para>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:ent="eml://ecoinformatics.org/entity-2.1.1" xmlns:att="eml://ecoinformatics.org/attribute-2.1.1" xmlns:con="eml://ecoinformatics.org/constraint-2.1.1">
+          <title>
+            The eml-dataTable module - Logical information
+            about data table entities
+          </title>
+          <para>
+            The eml-dataTable module is used to describe the logical
+            characteristics of each tabular set of information in a dataset. A
+            series of comma-separated text files may be considered a dataset,
+            and each file would subsequently be considered a dataTable entity
+            within the dataset.  Since the eml-dataTable module extends the
+            eml-entity module, it uses all of the common entity elements to
+            describe the table, along with a few elements specific to just data
+            table entities.  The eml-dataTable module allows for the
+            description of each attribute (column/field/variable) within the
+            data table through the use of the eml-attribute module.  Likewise,
+            there are fields used to describe the physical distribution of the
+            data table, its overall coverage, the methodology used in creating
+            the data, and other logical structure information such as its
+            orientation, case sensitivity, etc.
+          </para>
+        </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:con="eml://ecoinformatics.org/constraint-2.1.1" xmlns:att="eml://ecoinformatics.org/attribute-2.1.1" xmlns:ent="eml://ecoinformatics.org/entity-2.1.1" xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:spref="eml://ecoinformatics.org/spatialReference-2.1.1">
+            <title>
+              The eml-spatialRaster module - Logical information about
+              regularly gridded geospatial image data
+            </title>
+            <para>
+              The eml-spatialRaster module allows for the description of
+              entities composed of rectangular grids of data values that are
+              usually georeferenced to a portion of the earth's surface.
+              Specific attributes of a spatial raster can be documented
+              here including the spatial organization of the raster cells,
+              the cell data values, and if derived via imaging sensors,
+              characteristics about the image and its individual bands.
+            </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:con="eml://ecoinformatics.org/constraint-2.1.1" xmlns:att="eml://ecoinformatics.org/attribute-2.1.1" xmlns:spref="eml://ecoinformatics.org/spatialReference-2.1.1" xmlns:ent="eml://ecoinformatics.org/entity-2.1.1">
+            <title>
+              The eml-spatialVector module - Logical information about
+              non-gridded geospatial image data
+            </title>
+            <para>
+              The eml-spatialVector module allows for the description of
+              spatial objects in a GIS system that are not defined in a
+              regularly gridded pattern.  These geometries include points and
+              vectors and the relationships among them.  Specific attributes of
+              a spatial vector can be documented here including the vector's
+              geometry type, count and topology level.
+            </para>
+          </section>
+<section xmlns:res="eml://ecoinformatics.org/resource-2.1.1">
+            <title>
+              Schema for validating spatial referencing descriptions.
+            </title>
+            <para>
+             This module defines both projected and unprojected coordinate systems for
+             referencing the spatial coordinates of a dataset to the earth. The schema is based on
+             that used by Environmental Systems Research Inc (ESRI) for its .prj file format. EML provides a library of
+             pre-defined coordinate systems that may be referred to by name in the horizCoordSysName element. A
+             custom projection may be defined using this schema for any projection that does not appear in this
+             dictionary.
+            </para>
+          </section>
+<section xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:prot="eml://ecoinformatics.org/protocol-2.1.1" xmlns:phys="eml://ecoinformatics.org/physical-2.1.1" xmlns:att="eml://ecoinformatics.org/attribute-2.1.1" xmlns:ent="eml://ecoinformatics.org/entity-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:con="eml://ecoinformatics.org/constraint-2.1.1">
+          <title>
+            The eml-storedProcedure module - Data tables
+            resulting from procedures stored in a database
+          </title>
+          <para>
+            The storedProcedure module is meant to capture information on
+            procedures that produce data output in the form of a data table.
+            In an RDBMS one can code complex queries and transactions into
+            stored procedures and then invoke them directly from front-end
+            applications. It allows the optional description of any parameters
+            that are expected to be passed to the procedure when it is called.
+          </para>
+        </section>
+<section xmlns:cov="eml://ecoinformatics.org/coverage-2.1.1" xmlns:prot="eml://ecoinformatics.org/protocol-2.1.1" xmlns:phys="eml://ecoinformatics.org/physical-2.1.1" xmlns:att="eml://ecoinformatics.org/attribute-2.1.1" xmlns:ent="eml://ecoinformatics.org/entity-2.1.1" xmlns:res="eml://ecoinformatics.org/resource-2.1.1" xmlns:con="eml://ecoinformatics.org/constraint-2.1.1">
+          <title>
+            The eml-view module - Data tables resulting from a
+            database query
+          </title>
+          <para>
+            The eml-view module describes a view from a database management system.
+            A view is a query statement that is stored as a database object and
+            executed each time the view is called.
+          </para>
+        </section>
+</section>
+<section>
+<title>
+          Utility modules - Metadata documentation enhancements
+        </title>
+<para>
+            The following modules are used to highlight the information being
+            documented in each of the above modules where prose may be needed to
+            convey the critical metadata.  The eml-text module provides a number
+            of text-based constructs to enhance a document (including sections,
+            paragraphs, lists, subscript, superscript, emphasis, etc.)
+          </para>
+<section xmlns:txt="eml://ecoinformatics.org/text-2.1.1">
+          <title>The eml-text module - Text field formatting</title>
+          <para>
+          The eml-text module is a wrapper container that allows general
+            text descriptions to be used within the various modules of eml.
+            It can include either structured or unstructured text blocks.
+            It isn't really appropriate to use this module outside of the
+            context of a parent module, because the parent module determines
+            the appropriate context to which this text description applies.
+            The eml-text module allows one to provide structure to a text
+            description in order to convey concepts such as sections
+            (paragraphs), hierarchy (ordered and unordered lists), emphasis
+            (bold, superscript, subscript) etc.  The structured elements
+            are a subset of <ulink url="http://www.docbook.org">DocBook</ulink>
+            so the predefined DocBook stylesheets can be used to style
+            EML fields that implement this module.
+          </para>
+        </section>
+<section>
+<title>Dependency Chart</title>
+<para>
+            The multiple modules in EML all depend on each other in complex
+            ways.  To easily see these dependencies see the
+            <ulink url="eml-dependencies.html">EML Dependency Chart.</ulink>
+</para>
+</section>
+</section>
+<section>
+<title>
+          Internationalization - Metadata in multiple languages
+        </title>
+<para>
+            EML supports internationalization using the i18nNonEmptyStringType. 
+            Fields defined as this type include:
+            <itemizedlist>
+<listitem>
+<para>Title</para>
+</listitem>
+<listitem>
+<para>Keyword</para>
+</listitem>
+<listitem>
+<para>Contact information (e.g. names, organizations, addresses)</para>
+</listitem>
+</itemizedlist>
+</para>
+<para>
+            TextType fields also support language translations. These fields include:
+            <itemizedlist>
+<listitem>
+<para>Abstract</para>
+</listitem>
+<listitem>
+<para>Methods</para>
+</listitem>
+<listitem>
+<para>Protocol</para>
+</listitem>
+</itemizedlist>
+</para>
+<example>
+<title>Internationalization techniques</title>
+<para>
+	            Core metadata should be provided in English. 
+	            The core elements can be augmented with translations in a native language. 
+	            Detailed metadata can be provided in the native language as declared using the xml:lang attribute. 
+	            Authors can opt to include English translations of this detailed metadata as they see fit.
+	          </para>
+<para>
+	          	The following example metadata document is provided primarily in Portuguese but includes English translations
+	          	of core metadata fields. 
+	          	The xml:lang="pt_BR" attribute at the root of the EML document indicates that, unless otherwise specified, 
+	          	the content of the document is supplied in Portuguese (Brazil).
+	          	The xml:lang="en_US" attributes on child elements denote that the content of that element is provided in English.
+
+	          	Core metadata (i.e. title) is provided in English, supplemented with a Portuguese translation using the 
+	          	value tag with an xml:lang attribute. Note that child elements can override the 
+	          	root language declaration of the document as well as the language declaration of their containing elements.
+	          	
+	          	The abstract element is primarily given in Portuguese (as inherited from the root language declaration), 
+	          	with an English translation.
+	          </para>
+<para>
+	          	Many EML fields are repeatable (i.e. keyword) so that multiple values can be provided for the same concept. 
+	          	Translations for these fields should be included as nested value tags to indicate that they are equivalent concepts 
+	          	expressed in different languages rather than entirely different concepts.
+	          </para>
+<literalLayout>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb" 
+    xml:lang="pt_BR"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+  
+    &lt;!-- English title with Portuguese translation --&gt;    
+    &lt;title xml:lang=""en_US"&gt;
+    	Sample Dataset Description
+    	&lt;value xml:lang="pt_BR"&gt;Exemplo Descrição Dataset&lt;/value&gt;
+    &lt;/title&gt;
+    ...
+    &lt;!-- Portuguese abstract with English translation --&gt;    
+    &lt;abstract&gt;
+    	&lt;para&gt;
+	    	Neste exemplo, a tradução em Inglês é secundário
+	    	&lt;value xml:lang="en_US"&gt;In this example, the English translation is secondary&lt;/value&gt;
+    	&lt;para&gt;
+    &lt;/abstract&gt;
+    ...
+    &lt;!-- two keywords, each with an equivalent translation --&gt;    
+    &lt;keywordSet&gt;
+    	&lt;keyword keywordType="theme"&gt;
+	    	árvore
+	    	&lt;value xml:lang="en_US"&gt;tree&lt;/value&gt;
+    	&lt;keyword&gt;
+    	&lt;keyword keywordType="theme"&gt;
+	    	água
+	    	&lt;value xml:lang="en_US"&gt;water&lt;/value&gt;
+    	&lt;keyword&gt;
+    &lt;/keywordSet&gt;
+    ...
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+				</literalLayout>
+</example>
+</section>
+</chapter>
+<chapter xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" id="technicalArch">
+<title>Technical Architecture (Normative)</title>
+<section>
+<title>Introduction</title>
+<para>
+        This section explains the rules of EML.  There are some rules that cannot
+        be written directly into the XML Schemas nor enforced by an XML parser.
+        These are guidelines that every EML package must follow in order for
+        it to be considered EML compliant.
+      </para>
+</section>
+<section>
+<title>Module Structure</title>
+<para>
+        Each EML module, with the exception of "eml" itself, has a top level
+        choice between the structured content of that modules or a
+        "references" field.  This enables the reuse of content
+        previously defined elsewhere in the document.  Methods for defining
+        and referencing content are described in the
+        <link linkend="reusableContent">next</link> section
+      </para>
+</section>
+<section id="reusableContent">
+<title>Reusable Content</title>
+<para>
+        EML allows the reuse of previously defined structured content (DOM
+        sub-trees) through the use of key/keyRef type references.  In order
+        for an EML package to remain cohesive and to allow for the cross
+        platform compatibility of packages, the following rules with respect
+        to packaging must be followed.
+      </para>
+<itemizedlist>
+<listitem>
+<para>
+          An ID is required on the eml root element.
+          </para>
+</listitem>
+<listitem>
+<para>
+          IDs are optional on all other elements.
+          </para>
+</listitem>
+<listitem>
+<para>
+          If an ID is not provided, that content must be interpreted as
+          representing a distinct object.
+          </para>
+</listitem>
+<listitem>
+<para>
+          If an ID is provided for content then that content is distinct from
+          all other content except for that content that references its ID.
+          </para>
+</listitem>
+<listitem>
+<para>
+          If a user wants to reuse content to indicate the repetition of an
+          object, a reference must be used. Two identical ids with the same system 
+	  attribute cannot exist in a single document.
+          </para>
+</listitem>
+<listitem>
+<para>
+          "Document" scope is defined as identifiers unique only to a
+          single instance document (if a document does not have a system
+          attribute or if scope is set to 'document' then all IDs are defined
+          as distinct content).
+          </para>
+</listitem>
+<listitem>
+<para>
+          "System" scope is defined as identifiers unique to an entire data
+          management system (if two documents share a system string, then
+          any IDs in those two documents that are identical refer to the
+          same object).
+          </para>
+</listitem>
+<listitem>
+<para>
+          If an element references another element, it must not have an
+          ID itself. The system attribute must have the same value in both the
+	  target and referencing elements or it must be absent in both.
+          </para>
+</listitem>
+<listitem>
+<para>
+          All EML packages must have the 'eml' module as the root.
+          </para>
+</listitem>
+<listitem>
+<para>
+          The system and scope attribute are always optional except for at the
+          'eml' module where the scope attribute is fixed as 'system'.  The scope
+          attribute defaults to 'document' for all other modules.
+          </para>
+</listitem>
+</itemizedlist>
+<section>
+<section>
+<title>EML Parser</title>
+<para>
+        Because some of these rules cannot be enforced in XML-Schema, we have
+        written a parser which checks the validity of the references and IDs
+        used in your document.  This parser is included with the 2.1.0 release
+        of EML.  To run the parser, you must have Java 1.3.1 or higher.  To
+        execute it change into the lib directory of the release and run
+        the 'runEMLParser' script passing your EML instance file as a
+        parameter.  There is also an <ulink url="http://knb.ecoinformatics.org/emlparser">online
+        version</ulink> of this parser which is publicly accessible.  The online
+        parser will both validate your XML document against the schema as
+        well as check the integrity of your references.
+        </para>
+</section>
+<title>ID and Scope Examples</title>
+<section>
+<title>Example Documents</title>
+<example>
+<title>Invalid EML due to duplicate identifiers</title>
+<literalLayout>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;!-- the two creators have the same id.  this should be an error--&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Myer&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </literalLayout>
+<section>
+<para>This instance document is invalid because both creator
+              elements have the same id.  No two elements can have the
+              same string as an id.</para>
+</section>
+</example>
+<example>
+<title>Invalid EML due to a non-existent reference</title>
+<literalLayout>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23446" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Myer&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+    &lt;contact&gt;
+      &lt;references&gt;23447&lt;/references&gt;
+    &lt;/contact&gt;
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </literalLayout>
+<section>
+<para>This instance document is invalid because the contact
+              element references an id that does not exist. Any referenced
+              id must exist.</para>
+</section>
+</example>
+<example>
+<title>Invalid EML due to a conflicting id attribute and a
+            &lt;references&gt; element</title>
+<literalLayout>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23446" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Meyer&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+    &lt;contact id="522"&gt;
+      &lt;references&gt;23445&lt;/references&gt;
+    &lt;/contact&gt;
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </literalLayout>
+<section>
+<para>This instance document is invalid because the contact
+              element both references another element and has an id itself.
+              If an element references another element, it may not have
+              an id.  This prevents circular references.</para>
+</section>
+</example>
+<example>
+<title>A valid EML document</title>
+<literalLayout>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23446" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+    &lt;contact&gt;
+      &lt;references&gt;23446&lt;/references&gt;
+    &lt;/contact&gt;
+    &lt;contact&gt;
+      &lt;references&gt;23445&lt;/references&gt;
+    &lt;/contact&gt;
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </literalLayout>
+<section>
+<para>This instance document is valid.  Each contact is
+              referencing one of the creators above and all the ids are
+              unique.</para>
+</section>
+</example>
+</section>
+</section>
+</section>
+</chapter>
+<chapter xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" id="moduleDescriptions">
+<title>Module Descriptions (Normative)</title>
+<section id="eml">
+<title>eml</title>
+<para>Normative technical docs for
+  <ulink url="./eml.html">eml</ulink>
+</para>
+</section>
+<section id="eml-access">
+<title>eml-access</title>
+<para>Normative technical docs for
+  <ulink url="./eml-access.html">eml-access</ulink>
+</para>
+</section>
+<section id="eml-attribute">
+<title>eml-attribute</title>
+<para>Normative technical docs for
+  <ulink url="./eml-attribute.html">eml-attribute</ulink>
+</para>
+</section>
+<section id="eml-constraint">
+<title>eml-constraint</title>
+<para>Normative technical docs for
+  <ulink url="./eml-constraint.html">eml-constraint</ulink>
+</para>
+</section>
+<section id="eml-coverage">
+<title>eml-coverage</title>
+<para>Normative technical docs for
+  <ulink url="./eml-coverage.html">eml-coverage</ulink>
+</para>
+</section>
+<section id="eml-dataset">
+<title>eml-dataset</title>
+<para>Normative technical docs for
+  <ulink url="./eml-dataset.html">eml-dataset</ulink>
+</para>
+</section>
+<section id="eml-dataTable">
+<title>eml-dataTable</title>
+<para>Normative technical docs for
+  <ulink url="./eml-dataTable.html">eml-dataTable</ulink>
+</para>
+</section>
+<section id="eml-entity">
+<title>eml-entity</title>
+<para>Normative technical docs for
+  <ulink url="./eml-entity.html">eml-entity</ulink>
+</para>
+</section>
+<section id="eml-literature">
+<title>eml-literature</title>
+<para>Normative technical docs for
+  <ulink url="./eml-literature.html">eml-literature</ulink>
+</para>
+</section>
+<section id="eml-methods">
+<title>eml-methods</title>
+<para>Normative technical docs for
+  <ulink url="./eml-methods.html">eml-methods</ulink>
+</para>
+</section>
+<section id="eml-party">
+<title>eml-party</title>
+<para>Normative technical docs for
+  <ulink url="./eml-party.html">eml-party</ulink>
+</para>
+</section>
+<section id="eml-physical">
+<title>eml-physical</title>
+<para>Normative technical docs for
+  <ulink url="./eml-physical.html">eml-physical</ulink>
+</para>
+</section>
+<section id="eml-project">
+<title>eml-project</title>
+<para>Normative technical docs for
+  <ulink url="./eml-project.html">eml-project</ulink>
+</para>
+</section>
+<section id="eml-protocol">
+<title>eml-protocol</title>
+<para>Normative technical docs for
+  <ulink url="./eml-protocol.html">eml-protocol</ulink>
+</para>
+</section>
+<section id="eml-resource">
+<title>eml-resource</title>
+<para>Normative technical docs for
+  <ulink url="./eml-resource.html">eml-resource</ulink>
+</para>
+</section>
+<section id="eml-software">
+<title>eml-software</title>
+<para>Normative technical docs for
+  <ulink url="./eml-software.html">eml-software</ulink>
+</para>
+</section>
+<section id="eml-spatialRaster">
+<title>eml-spatialRaster</title>
+<para>Normative technical docs for
+  <ulink url="./eml-spatialRaster.html">eml-spatialRaster</ulink>
+</para>
+</section>
+<section id="eml-spatialReference">
+<title>eml-spatialReference</title>
+<para>Normative technical docs for
+  <ulink url="./eml-spatialReference.html">eml-spatialReference</ulink>
+</para>
+</section>
+<section id="eml-spatialVector">
+<title>eml-spatialVector</title>
+<para>Normative technical docs for
+  <ulink url="./eml-spatialVector.html">eml-spatialVector</ulink>
+</para>
+</section>
+<section id="eml-storedProcedure">
+<title>eml-storedProcedure</title>
+<para>Normative technical docs for
+  <ulink url="./eml-storedProcedure.html">eml-storedProcedure</ulink>
+</para>
+</section>
+<section id="eml-text">
+<title>eml-text</title>
+<para>Normative technical docs for
+  <ulink url="./eml-text.html">eml-text</ulink>
+</para>
+</section>
+<section id="eml-unitTypeDefinitions">
+<title>eml-unitTypeDefinitions</title>
+<para>Normative technical docs for
+  <ulink url="./eml-unitTypeDefinitions.html">eml-unitTypeDefinitions</ulink>
+</para>
+</section>
+<section id="eml-view">
+<title>eml-view</title>
+<para>Normative technical docs for
+  <ulink url="./eml-view.html">eml-view</ulink>
+</para>
+</section>
+</chapter>
+<index id="index">
+<title>Index</title>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">A</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#abstract">abstract</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#abstract">abstract</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#access">access</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-access.html#access">access</ulink>-eml-access</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#access">access</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#accuracy">accuracy</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#accuracyReport">accuracyReport</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#accuracyReport">accuracyReport</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#action">action</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#additionalInfo">additionalInfo</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#additionalInfo">additionalInfo</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#additionalMetadata">additionalMetadata</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#address">address</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#administrativeArea">administrativeArea</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-access.html#allow">allow</ulink>-eml-access</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#alternateIdentifier">alternateIdentifier</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#alternateIdentifier">alternateIdentifier</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#alternativeTimeScale">alternativeTimeScale</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#altitudeDatumName">altitudeDatumName</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#altitudeDistanceUnits">altitudeDistanceUnits</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#altitudeEncodingMethod">altitudeEncodingMethod</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#altitudeMaximum">altitudeMaximum</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#altitudeMinimum">altitudeMinimum</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#altitudeResolution">altitudeResolution</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#altitudeSysDef">altitudeSysDef</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#altitudeUnits">altitudeUnits</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#article">article</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#associatedParty">associatedParty</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attribute">attribute</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attribute">attribute</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeAccuracyExplanation">attributeAccuracyExplanation</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeAccuracyReport">attributeAccuracyReport</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeAccuracyValue">attributeAccuracyValue</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeDefinition">attributeDefinition</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeLabel">attributeLabel</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeList">attributeList</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataTable.html#attributeList">attributeList</ulink>-eml-dataTable</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#attributeList">attributeList</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#attributeList">attributeList</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#attributeList">attributeList</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#attributeList">attributeList</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-view.html#attributeList">attributeList</ulink>-eml-view</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#attributeName">attributeName</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#attributeOrientation">attributeOrientation</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#attributeReference">attributeReference</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#attributeReference">attributeReference</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#attributeReference">attributeReference</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#attributeReference">attributeReference</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#attributeReference">attributeReference</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#audioVisual">audioVisual</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#authentication">authentication</ulink>-eml-physical</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">B</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#bandDescription">bandDescription</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#bandgapbytes">bandgapbytes</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#bandrowbytes">bandrowbytes</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#beginDate">beginDate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#bilinearFit">bilinearFit</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#binaryRasterFormat">binaryRasterFormat</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#book">book</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#bookTitle">bookTitle</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#boundingAltitudes">boundingAltitudes</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#boundingCoordinates">boundingCoordinates</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#bounds">bounds</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#bounds">bounds</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#byteorder">byteorder</ulink>-eml-physical</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">C</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#calendarDate">calendarDate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#cameraCalibrationInformationAvailability">cameraCalibrationInformationAvailability</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#cardinality">cardinality</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataTable.html#caseSensitive">caseSensitive</ulink>-eml-dataTable</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#cellGeometry">cellGeometry</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#cellSizeXDirection">cellSizeXDirection</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#cellSizeYDirection">cellSizeYDirection</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#changeDate">changeDate</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#changeHistory">changeHistory</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#changeScope">changeScope</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#chapter">chapter</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#chapterNumber">chapterNumber</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#characterEncoding">characterEncoding</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#checkCondition">checkCondition</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#checkConstraint">checkConstraint</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#checksum">checksum</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#childOccurences">childOccurences</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#citation">citation</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#citation">citation</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#citation">citation</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#citation">citation</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#citation">citation</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#citation">citation</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#citation">citation</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#citation">citation</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#citation">citation</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#citetitle">citetitle</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#city">city</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#classificationSystem">classificationSystem</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#classificationSystemCitation">classificationSystemCitation</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#classificationSystemModifications">classificationSystemModifications</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#cloudCoverPercentage">cloudCoverPercentage</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#code">code</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#code">code</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#codeDefinition">codeDefinition</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#codeExplanation">codeExplanation</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#codesetName">codesetName</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#codesetURL">codesetURL</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#collapseDelimiters">collapseDelimiters</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#collapseDelimiters">collapseDelimiters</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#column">column</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#columns">columns</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#comment">comment</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#commonName">commonName</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#communicationType">communicationType</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#complex">complex</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#compressionGenerationQuality">compressionGenerationQuality</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#compressionMethod">compressionMethod</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceDate">conferenceDate</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceDate">conferenceDate</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceLocation">conferenceLocation</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceLocation">conferenceLocation</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceName">conferenceName</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceName">conferenceName</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#conferenceProceedings">conferenceProceedings</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#connection">connection</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#connection">connection</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#connectionDefinition">connectionDefinition</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#connectionDefinition">connectionDefinition</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataTable.html#constraint">constraint</ulink>-eml-dataTable</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#constraint">constraint</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#constraint">constraint</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#constraint">constraint</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#constraint">constraint</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-view.html#constraint">constraint</ulink>-eml-view</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#constraintDescription">constraintDescription</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#constraintName">constraintName</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#contact">contact</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#contact">contact</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#controlPoint">controlPoint</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#corner">corner</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#cornerPoint">cornerPoint</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#country">country</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#coverage">coverage</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#coverage">coverage</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#coverage">coverage</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#coverage">coverage</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#coverage">coverage</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#coverage">coverage</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#creator">creator</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#customUnit">customUnit</ulink>-eml-attribute</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">D</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#dataFormat">dataFormat</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#dataset">dataset</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#dataset">dataset</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#datasetGPolygon">datasetGPolygon</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#datasetGPolygonExclusionGRing">datasetGPolygonExclusionGRing</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#datasetGPolygonOuterGRing">datasetGPolygonOuterGRing</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#dataSource">dataSource</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#dataTable">dataTable</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataTable.html#dataTable">dataTable</ulink>-eml-dataTable</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#dateTime">dateTime</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#dateTimeDomain">dateTimeDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#dateTimePrecision">dateTimePrecision</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#datum">datum</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#defaultValue">defaultValue</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#definition">definition</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#definition">definition</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#definition">definition</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#definitionAttributeReference">definitionAttributeReference</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#degree">degree</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#deliveryPoint">deliveryPoint</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-access.html#deny">deny</ulink>-eml-access</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#dependency">dependency</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#depthDatumName">depthDatumName</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#depthDistanceUnits">depthDistanceUnits</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#depthEncodingMethod">depthEncodingMethod</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#depthResolution">depthResolution</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#depthSysDef">depthSysDef</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#describes">describes</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#description">description</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#description">description</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#description">description</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#description">description</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#description">description</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#descriptor">descriptor</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#descriptorValue">descriptorValue</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#designDescription">designDescription</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#diskUsage">diskUsage</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#distribution">distribution</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#distribution">distribution</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#distribution">distribution</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#domainDescription">domainDescription</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">E</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#eastBoundingCoordinate">eastBoundingCoordinate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#editedBook">editedBook</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#edition">edition</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#edition">edition</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#edition">edition</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#editor">editor</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#electronicMailAddress">electronicMailAddress</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#eml">eml</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#emphasis">emphasis</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#encodingMethod">encodingMethod</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#endDate">endDate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#entityCodeList">entityCodeList</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#entityDescription">entityDescription</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#entityName">entityName</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#entityReference">entityReference</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#entityReference">entityReference</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#entityType">entityType</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#enumeratedDomain">enumeratedDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#externalCodeSet">externalCodeSet</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#externallyDefinedFormat">externallyDefinedFormat</ulink>-eml-physical</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">F</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#fieldDelimiter">fieldDelimiter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#fieldDelimiter">fieldDelimiter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#fieldStartColumn">fieldStartColumn</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#fieldWidth">fieldWidth</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#filmDistortionInformationAvailability">filmDistortionInformationAvailability</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#foreignKey">foreignKey</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#formatName">formatName</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#formatString">formatString</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#formatVersion">formatVersion</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#funding">funding</ulink>-eml-project</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">G</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#generalTaxonomicCoverage">generalTaxonomicCoverage</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#generic">generic</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#geogCoordSys">geogCoordSys</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#geogCoordSys">geogCoordSys</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#geographicCoverage">geographicCoverage</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#geographicCoverage">geographicCoverage</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#geographicDescription">geographicDescription</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#geometricObjectCount">geometricObjectCount</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#geometry">geometry</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#georeferenceInfo">georeferenceInfo</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#givenName">givenName</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#gRing">gRing</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#gRing">gRing</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#gRingLatitude">gRingLatitude</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#gRingLongitude">gRingLongitude</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#gRingPoint">gRingPoint</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#gRingPoint">gRingPoint</ulink>-eml-coverage</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">H</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#highWavelength">highWavelength</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#horizCoordSysDef">horizCoordSysDef</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#horizCoordSysDef">horizCoordSysDef</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#horizCoordSysName">horizCoordSysName</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#horizontalAccuracy">horizontalAccuracy</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#horizontalAccuracy">horizontalAccuracy</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">I</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#identificationReference">identificationReference</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#identifierName">identifierName</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#illuminationAzimuthAngle">illuminationAzimuthAngle</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#illuminationElevationAngle">illuminationElevationAngle</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#imageDescription">imageDescription</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#imageOrientationAngle">imageOrientationAngle</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#imageQualityCode">imageQualityCode</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#imagingCondition">imagingCondition</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#implementation">implementation</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#individualName">individualName</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#inline">inline</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#inline">inline</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#institution">institution</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#institution">institution</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#instrumentation">instrumentation</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#intellectualRights">intellectualRights</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#interval">interval</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#issue">issue</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#itemizedlist">itemizedlist</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#itemizedlist">itemizedlist</ulink>-eml-text</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">J</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#joinCondition">joinCondition</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#journal">journal</ulink>-eml-literature</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">k</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#key">key</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#key">key</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#key">key</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#key">key</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#keyword">keyword</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#keywordSet">keywordSet</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#keywordThesaurus">keywordThesaurus</ulink>-eml-resource</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">L</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#language">language</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#language">language</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#layout">layout</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#lensDistortionInformationAvailability">lensDistortionInformationAvailability</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#license">license</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#licenseURL">licenseURL</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#lineNumber">lineNumber</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#lineNumber">lineNumber</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#listitem">listitem</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#literalCharacter">literalCharacter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#literalCharacter">literalCharacter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#literalLayout">literalLayout</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#lowWaveLength">lowWaveLength</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">M</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#machineProcessor">machineProcessor</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#maintenance">maintenance</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#maintenanceUpdateFrequency">maintenanceUpdateFrequency</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#manuscript">manuscript</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#map">map</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#maximum">maximum</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#maximum">maximum</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#maxRecordLength">maxRecordLength</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#measurementScale">measurementScale</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#mediumDensity">mediumDensity</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#mediumDensityUnits">mediumDensityUnits</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#mediumFormat">mediumFormat</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#mediumName">mediumName</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#mediumNote">mediumNote</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#mediumVolume">mediumVolume</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#metadata">metadata</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#metadataProvider">metadataProvider</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#methods">methods</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#methods">methods</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#methods">methods</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#methods">methods</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#methodStep">methodStep</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#minimum">minimum</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#minimum">minimum</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#missingValueCode">missingValueCode</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#multiBand">multiBand</ulink>-eml-physical</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">N</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#name">name</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#name">name</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#name">name</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#nbands">nbands</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#nbits">nbits</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#nominal">nominal</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#nonNumericDomain">nonNumericDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#nonNumericDomain">nonNumericDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#northBoundingCoordinate">northBoundingCoordinate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#notNullConstraint">notNullConstraint</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#numberOfBands">numberOfBands</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataTable.html#numberOfRecords">numberOfRecords</ulink>-eml-dataTable</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#numberOfVolumes">numberOfVolumes</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#numberOfVolumes">numberOfVolumes</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#numberType">numberType</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#numericDomain">numericDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#numericDomain">numericDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#numFooterLines">numFooterLines</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#numHeaderLines">numHeaderLines</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#numPhysicalLinesPerRecord">numPhysicalLinesPerRecord</ulink>-eml-physical</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">O</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#objectName">objectName</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#offline">offline</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#offline">offline</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#offset">offset</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#oldValue">oldValue</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#online">online</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#online">online</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#onlineDescription">onlineDescription</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#onlineDescription">onlineDescription</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#onlineUrl">onlineUrl</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#operatingSystem">operatingSystem</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#orderAttributeReference">orderAttributeReference</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#orderedlist">orderedlist</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#orderedlist">orderedlist</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#ordinal">ordinal</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#organizationName">organizationName</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#originalPublication">originalPublication</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#originator">originator</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#otherEntity">otherEntity</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#otherEntity">otherEntity</ulink>-eml-entity</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">P</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#pageRange">pageRange</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#pageRange">pageRange</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#para">para</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#para">para</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#para">para</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#parameter">parameter</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#parameter">parameter</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#parameter">parameter</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#parameterDefinition">parameterDefinition</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#parentOccurences">parentOccurences</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#party">party</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#pattern">pattern</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#peakResponse">peakResponse</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#performer">performer</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-access.html#permission">permission</ulink>-eml-access</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#personalCommunication">personalCommunication</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#personnel">personnel</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#phone">phone</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-entity.html#physical">physical</ulink>-eml-entity</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#physical">physical</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#physicalLineDelimiter">physicalLineDelimiter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#pointInPixel">pointInPixel</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#pointInPixel">pointInPixel</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#positionName">positionName</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#postalCode">postalCode</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#precision">precision</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#precision">precision</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#preProcessingTypeCode">preProcessingTypeCode</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#presentation">presentation</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#primaryKey">primaryKey</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#primeMeridian">primeMeridian</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-access.html#principal">principal</ulink>-eml-access</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-protocol.html#proceduralStep">proceduralStep</ulink>-eml-protocol</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#programmingLanguage">programmingLanguage</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#projCoordSys">projCoordSys</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#project">project</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#project">project</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#projection">projection</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#projectionList">projectionList</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#protocol">protocol</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#protocol">protocol</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-protocol.html#protocol">protocol</ulink>-eml-protocol</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#pubDate">pubDate</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publicationPlace">publicationPlace</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publicationPlace">publicationPlace</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publicationPlace">publicationPlace</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publicationPlace">publicationPlace</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publicationPlace">publicationPlace</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publicationPlace">publicationPlace</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#publisher">publisher</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#publisher">publisher</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#pubPlace">pubPlace</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#purpose">purpose</ulink>-eml-dataset</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">Q</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#qualityControl">qualityControl</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#quantitativeAccuracyMethod">quantitativeAccuracyMethod</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#quantitativeAccuracyMethod">quantitativeAccuracyMethod</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#quantitativeAccuracyReport">quantitativeAccuracyReport</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#quantitativeAccuracyReport">quantitativeAccuracyReport</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#quantitativeAccuracyValue">quantitativeAccuracyValue</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#quantitativeAccuracyValue">quantitativeAccuracyValue</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#quantitativeAttributeAccuracyAssessment">quantitativeAttributeAccuracyAssessment</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-view.html#queryStatement">queryStatement</ulink>-eml-view</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#quoteCharacter">quoteCharacter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#quoteCharacter">quoteCharacter</ulink>-eml-physical</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#radiometricDataAvailability">radiometricDataAvailability</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#rangeOfDates">rangeOfDates</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#rasterOrigin">rasterOrigin</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#ratio">ratio</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#recipient">recipient</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#recordDelimiter">recordDelimiter</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#referencedEntityId">referencedEntityId</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#referencedKey">referencedKey</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#references">references</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#referenceType">referenceType</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#relatedProject">relatedProject</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#relationshipType">relationshipType</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#repeats">repeats</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#report">report</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#reportNumber">reportNumber</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#repository">repository</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#reprintEdition">reprintEdition</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#required">required</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#researchProject">researchProject</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#reviewedItem">reviewedItem</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#role">role</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#role">role</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#row">row</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#rowColumnOrientation">rowColumnOrientation</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#rows">rows</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#runtimeMemoryUsage">runtimeMemoryUsage</ulink>-eml-software</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">S</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#salutation">salutation</ulink>-eml-party</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#sampling">sampling</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#samplingDescription">samplingDescription</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#scale">scale</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#scaleFactor">scaleFactor</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#schemeName">schemeName</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#section">section</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#section">section</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#sequenceIdentifier">sequenceIdentifier</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#series">series</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#shortName">shortName</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#simpleDelimited">simpleDelimited</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#singleDateTime">singleDateTime</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#size">size</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#size">size</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#skipbytes">skipbytes</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml.html#software">software</ulink>-eml</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#software">software</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#software">software</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#source">source</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#source">source</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#southBoundingCoordinate">southBoundingCoordinate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#spatialRaster">spatialRaster</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#spatialRaster">spatialRaster</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#spatialReference">spatialReference</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#spatialReference">spatialReference</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#spatialReference">spatialReference</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#spatialSamplingUnits">spatialSamplingUnits</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#spatialVector">spatialVector</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#spatialVector">spatialVector</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#specimen">specimen</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#spheroid">spheroid</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#standardUnit">standardUnit</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#storageType">storageType</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#storedProcedure">storedProcedure</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-storedProcedure.html#storedProcedure">storedProcedure</ulink>-eml-storedProcedure</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#studyAreaDescription">studyAreaDescription</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#studyExtent">studyExtent</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#subscript">subscript</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#subscript">subscript</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-methods.html#subStep">subStep</ulink>-eml-methods</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#superscript">superscript</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#superscript">superscript</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#surName">surName</ulink>-eml-party</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">T</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonomicClassification">taxonomicClassification</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonomicClassification">taxonomicClassification</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonomicCompleteness">taxonomicCompleteness</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonomicCoverage">taxonomicCoverage</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonomicProcedures">taxonomicProcedures</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonomicSystem">taxonomicSystem</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonRankName">taxonRankName</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#taxonRankValue">taxonRankValue</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#temporalCoverage">temporalCoverage</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#text">text</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#textDelimited">textDelimited</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#textDomain">textDomain</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#textFixed">textFixed</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#textFormat">textFormat</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#thesis">thesis</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#time">time</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#timeScaleAgeEstimate">timeScaleAgeEstimate</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#timeScaleAgeExplanation">timeScaleAgeExplanation</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#timeScaleAgeUncertainty">timeScaleAgeUncertainty</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#timeScaleCitation">timeScaleCitation</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#timeScaleName">timeScaleName</ulink>-eml-coverage</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-project.html#title">title</ulink>-eml-project</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#title">title</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#title">title</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#toneGradation">toneGradation</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#topologyLevel">topologyLevel</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalFigures">totalFigures</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalFigures">totalFigures</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalPages">totalPages</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalPages">totalPages</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalPages">totalPages</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalPages">totalPages</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalPages">totalPages</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#totalrowbytes">totalrowbytes</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalTables">totalTables</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#totalTables">totalTables</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#triangulationIndicator">triangulationIndicator</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">U</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#ulink">ulink</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-constraint.html#uniqueKey">uniqueKey</ulink>-eml-constraint</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#unit">unit</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#unit">unit</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#unit">unit</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#unit">unit</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-physical.html#url">url</ulink>-eml-physical</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#url">url</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-party.html#userId">userId</ulink>-eml-party</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">V</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#value">value</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-resource.html#value">value</ulink>-eml-resource</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#value">value</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#value">value</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#value">value</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-text.html#value">value</ulink>-eml-text</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-attribute.html#valueAttributeReference">valueAttributeReference</ulink>-eml-attribute</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#version">version</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialReference.html#vertCoordSys">vertCoordSys</ulink>-eml-spatialReference</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#verticalAccuracy">verticalAccuracy</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialVector.html#verticalAccuracy">verticalAccuracy</ulink>-eml-spatialVector</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#verticals">verticals</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-dataset.html#view">view</ulink>-eml-dataset</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-view.html#view">view</ulink>-eml-view</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-software.html#virtualMachine">virtualMachine</ulink>-eml-software</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#volume">volume</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#volume">volume</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-literature.html#volume">volume</ulink>-eml-literature</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#vouchers">vouchers</ulink>-eml-coverage</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">W</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#waveLengthUnits">waveLengthUnits</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-coverage.html#westBoundingCoordinate">westBoundingCoordinate</ulink>-eml-coverage</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">X</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#xCoordinate">xCoordinate</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#xCoordinate">xCoordinate</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#xIntercept">xIntercept</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#xSlope">xSlope</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">Y</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#yCoordinate">yCoordinate</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#yCoordinate">yCoordinate</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#yIntercept">yIntercept</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">
+<ulink url="./eml-spatialRaster.html#ySlope">ySlope</ulink>-eml-spatialRaster</primaryie>
+</indexentry>
+</indexdiv>
+<indexdiv>
+<title xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1">Z</title>
+<indexentry>
+<primaryie xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1"/>
+</indexentry>
+</indexdiv>
+</index>
+</book>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0//EN">
+<html>
+<head>
+  <title>EML ID and References Parser</title>
+
+  <link rel="stylesheet" type="text/css" href="http://knb.ecoinformatics.org/default.css">
+</head>
+   <body>
+
+<table class="tabledefault" width="100%">
+ <tbody>
+ <tr>
+   <td rowspan="2"><img src="http://knb.ecoinformatics.org/images/KNBLogo.gif"></td>
+   <td colspan="7"><div class="title">EML ID and References Parser</div></td>
+ </tr>
+ <tr>
+   <td><a href="http://knb.ecoinformatics.org/" class="toollink"> KNB Home </a></td>
+   <td><a href="http://knb.ecoinformatics.org/data.html" class="toollink"> Data </a></td>
+   <td><a href="http://knb.ecoinformatics.org/people.html" class="toollink"> People </a></td>
+   <td><a href="http://knb.ecoinformatics.org/informatics" class="toollink"> Informatics </a></td>
+   <td><a href="http://knb.ecoinformatics.org/biodiversity" class="toollink"> Biocomplexity </a></td>
+   <td><a href="http://knb.ecoinformatics.org/education" class="toollink"> Education </a></td>
+   <td><a href="http://knb.ecoinformatics.org/software" class="toollink"> Software </a></td>
+ </tr>
+ </tbody>
+</table>
+<hr>
+<body>
+  <p>This parser will validate that your EML instance file conforms to the rules
+    set forth in the EML spec.  It also runs a SAX validation parse to check
+    if your document is schema valid according to the EML schemas.</p>  <hr>
+
+  <p>Browse the file you would like to validate in the space below and click
+    'submit'. If you would like a file to play with, you can download this
+    <a href="./eml-sample.xml">sample EML file</a>.</p>
+  </p>
+  <br>
+  <form enctype="multipart/form-data" method="post" action="/emlparser/parse">
+    <input type="hidden" name="action" value="parse"/>
+    File Name:<input type="file" name="filename"/><br><br>
+    <input type="submit" value="Parse Document"></input>
+  </form><br><hr><br>
+  OR....You can paste the text of your file in here:<br>
+  <form method="post" action="/emlparser/parse">
+    <input type="hidden" name="action" value="textparse"/>
+    <textarea name="doctext" cols="65" rows="15"></textarea><br><br>
+    <input type="submit" value="Parse Document"/>
+  </form>
+</body>
+</html>

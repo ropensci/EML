@@ -1,0 +1,373 @@
+ /*
+  *   '$RCSfile: browse.css,v $'
+  *     Purpose: Default style sheet for KNB project web pages 
+  *              Using this stylesheet rather than placing styles directly in 
+  *              the KNB web documents allows us to globally change the 
+  *              formatting styles of the entire site in one easy place.
+  *   Copyright: 2000 Regents of the University of California and the
+  *               National Center for Ecological Analysis and Synthesis
+  *     Authors: Matt Jones
+  *
+  *    '$Author: jones $'
+  *      '$Date: 2005-08-30 18:42:18 $'
+  *  '$Revision: 1.1 $'
+  *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation; either version 2 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  */
+
+
+
+/*
+ *  import eml css:
+ */
+
+@import url(/esa/style/common/eml_xsl.css);
+b {
+font-weight: bold;
+}
+
+/**
+ *  set the correct iframe sizes to accomodate the 
+ *  header, footer, left and right areas.
+ *  NOTE: these styles apply only to each 
+ *  container frame, *NOT* to the document within it!
+ */  
+.iframeheaderclass {
+  height:   155px; 
+  width:    100%;
+  border:   0px;
+  margin:   0px;
+  margin-left: 10px;
+}
+
+.iframesearchboxclass { /* not used */ }
+.iframeleftcolclass  { /* not used */ }
+.iframerightcolclass { /* not used */ }
+.iframefooterclass   { /* not used */ }
+
+/**
+ *  set the size and alignment etc of the top-level layout table
+ */  
+.templatetableclass {
+  width:   100%; 
+  border:   0px;
+  padding:  0px;
+  margin:   0px;
+}
+
+
+/**
+ *  set the style of the main content area and its contents
+ */ 
+.templatecontentareaclass {
+  border:   0px;
+  padding:  0px;
+  margin:   0px;
+}
+
+
+/**
+ *  set the correct <td> sizes to accomodate the 
+ *  header, footer, left and right iframes.
+ *  NOTE: these styles apply only to each 
+ *  container frame, *NOT* to the document in
+ *  the iframe within it!
+ */  
+.templateheaderrowclass {
+  height:   155px; 
+/*
+  no width allowed - uses same width as table class
+*/
+  border:   0px;
+  padding:  0px;
+  margin:   0px;
+}
+
+
+.templateleftcolclass {
+  height:   100%; 
+  width:    0px;
+  border:   0px;
+  padding:  0px;
+  margin:   0px;
+}
+
+
+.templaterightcolclass {
+  height:   100%; 
+  width:    0px;
+  border:   0px;
+  padding:  0px;
+  margin:   0px;
+}
+
+
+.templatefooterrowclass {
+  height:   0px; 
+/*
+  no width allowed - uses same width as table class
+*/
+  border:   0px;
+  padding:  0px;
+  margin:   0px;
+}
+
+
+/**
+ *  these override styles imported from eml css 
+ */
+
+
+	 
+.sectionnames{
+    font-weight: bold;
+    font-size: 16px;
+    color: #096B79;
+}
+
+.linkedHeaderStyle{
+    
+    background-color: #A3DADA;
+    padding-left: 16%;
+ }
+
+.title {
+    font-family: Georgia, Times New Roman, Times, serif;
+    color:      black;
+    background: white;
+    font-size: 24px; 
+    font-weight: bold;
+}
+
+.secondCol{
+    background-color: #ffffff; 
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.highlight  {
+    color: #096B79;
+    background-color: #FFFFFF;
+    font-style: italic;    
+    font-size: 1em; 
+    padding-left: 10px;
+}
+
+.tablehead {
+    color: #096B79;
+    background: #FFFFFF;
+    text-align: left;
+    font-size: 14px; 
+    font-weight: bold;
+    border-top: solid #ffffff 2px;
+    border-bottom: solid #ffffff 2px;
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+th.tablehead {
+
+    text-align: center;
+    border-bottom: solid #006666 1px;
+    margin: 0px;
+    padding: 0px;
+    height:  21px;
+}
+
+.tablehead_lcorner {
+    background-position: right top;
+    background-repeat: no-repeat;
+    padding: 0px;
+    margin:  0px;
+    width:   10px;
+    height:  21px;
+}    
+    
+.tablehead_rcorner {
+    background-position: left top;
+    background-repeat: no-repeat;
+    padding: 0px;
+    margin:  0px;
+    width:   10px;
+    height:  21px;
+}    
+
+a {
+    color: #096B79;
+    font-weight: bold;
+    font-size: 12px; 
+    text-decoration: underline; }
+    
+a:hover {
+    color: #ECCE00;
+    text-decoration: underline; }
+
+/**
+ *  these are used only in the metacat pages
+ */
+
+p.emphasis {
+
+  font-size: 18px;
+  color: #dd7744; 
+  font-weight: bold;
+  font-style:  normal;
+}
+
+.searchresultsdivider {
+    background-color: #dddddd;   
+}
+
+/**
+ *  these are used only in the registry skins
+ */
+
+ 
+ 
+ 
+p.searchbox {
+    color: #096B79;
+    font-weight: bold;
+    font-size: 12px; 
+    text-decoration: none; 
+}
+
+br {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.headertopmargin {
+margin-top:    10;
+}
+
+.intro {
+        width:   760px;
+        margin-left:    15px;
+}
+
+textarea {
+   width: 80%;
+}
+
+.required {
+    font-weight: bold;
+    color: #b00000;
+}
+
+.label {
+    font-weight: bold;
+}
+
+
+.emphasis {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+}
+
+.colorbold {
+	font-weight: bold;
+	color: #096B79;
+	font-size: 12px;
+}
+	
+.boldlink {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+
+.redbold {
+	font-weight: bold;
+	color: #b00000;
+	font-size: 12px;
+}
+
+.greenbold {
+	font-weight: bold;
+	color: #096B79;
+	font-size: 12px;
+}
+
+.smalltext {
+	font-weight: bold;
+	font-size: 10px;
+	vertical-align: super;
+}
+
+.largetext {
+	font-weight: bold;
+	font-size: 16px;
+} 
+
+.italicized {
+	font-style: italic;
+	font-size: 12px;
+}
+
+.regtext {
+	font-weight: normal;
+	font-size: 12px;
+}
+.sectbody {
+	background: #DEF1F1;
+	font-size: 12px;
+        font-weight: bold;}
+
+.sectheader {
+	background: #A3DADA;
+	font-size: 12px;
+        font-weight: bold;}
+
+.tables {
+        width:   760px;
+        margin-left:      20px;
+        border-top: solid black 1px;
+        border-left: solid black 1px;
+        border-right: solid black 1px;      
+      }
+
+.hide {
+      display:none;
+  }
+
+.bordertop {
+        border-top: solid black 1px;
+      }
+      
+.borderbottom {
+        border-bottom: 1px solid black;}
+	
+.topbottom {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black; 
+	}
+
+.longwidth {
+	width: 80%;
+	}
+
+.shortwidth {
+	width: 40%;
+	}
+	
+.rightCol {
+       width:  24%;
+       text-align: right;
+    }
+

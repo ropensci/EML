@@ -1,0 +1,1194 @@
+/*   '$RCSfile: pisco.css,v $'                                              */
+/*     Purpose: Default style sheet for PISCO project web pages             */
+/*              Using this stylesheet rather than placing styles directly   */
+/*              into PISCO web documents allows us to globally change the   */
+/*              formatting styles of the entire site in one easy place.     */
+/*              Versioning information for this document can be found at    */
+/*              cvs.piscoweb.org.                                           */
+/*   Copyright: 2000 Regents of the University of California and the        */
+/*              Partnership for Interdisciplinary Studies of Coastal Oceans */
+/*     Authors: Chris Jones, James Woods                                    */
+/*                                                                          */
+/*    '$Author: leinfelder $'                                                   */
+/*      '$Date: 2011-01-13 15:01:00 -0800 (Thu, 13 Jan 2011) $'                                      */
+/*  '$Revision: 5804 $'                                                      */
+/*                                                                          */
+
+
+/* Color Scheme:
+ *    dark blue:                  #003366
+ *    aqua blue:                  #0066CC
+ *    aqua green:                 #006666
+ *    white:                      #FFFFFF
+ *    dark tan(kelp color):       #666600
+ *    light tan:                  #CCCC99
+ */
+
+
+/*
+*  import eml css:
+*/
+
+body {
+    width:                   100%;
+    min-width:			800px;
+    /* width:expression(document.body.clientWidth < 800? "800px": "auto");  */ /* hack for ie min width */
+
+    margin:                     0px 0px 0px 0px;
+    background-color:           #ffffff;
+    padding:                    0px;
+    border:                     0px;
+/*  background-image:           url('images/bg.gif');
+/*  background-position:        top left;     /* No NN4 */
+/*  background-repeat:          repeat-y;     /* No NN4 */
+
+    font-style:                 normal;
+    font-weight:                normal;
+    font-size:                  100%;
+    font-family:                "Myriad Pro", "Myriad Web Pro", "Myriad Web", "Myriad", Verdana, Arial, Helvetica, sans-serif;
+    text-decoration:            none;
+  }
+
+body>div img {
+    padding:                    0px 0px 0px 0px;
+    }
+
+
+#content_wrapper {
+	margin:                     0px 10px 10px 10px;
+}
+
+
+#header {
+  width:                        100%;
+  min-width:			800px; 
+  width:expression(document.documentElement.clientWidth < 800? "800px": "auto");   /* hack for ie min width */
+   /* position:                   absolute;  
+    top:                        0px;
+    left:                       10px; 
+    right:                      10px; */
+/*  margin:                     0px 10px 0px 10px; /* T R B L */
+    padding:                    0px;
+    border:                     0px;
+    background-color:           #ffffff;
+/*  background-image:           url('images/data_catalog_header_bg.jpg'); */
+
+    height:                     60px; /* begin hack for ie5win */
+    width:                      100%;
+    voice-family:               "\"}\"";
+    voice-family:               inherit;
+    height:                     60px;
+    }
+
+html>body #header {
+    height:                     60px; 
+    width:                      auto;
+    min-width:                  800px; /* end hack for ie5win */
+    }
+
+
+/* div "content" should be sibling to div "header" */ 
+/* top margin required to clear sibling (logo is 100px tall)*/
+
+#content {
+    margin:                     0px 0px 0px 0px ; 
+    background-color:           #ffffff;
+    border:                     0px;
+    /* margin:                     0px 0px 0px 0px;
+ */
+    }
+
+
+
+/* these elements positioned to be in header below */
+
+#left_logo {
+    position:                   absolute;
+    top:                        5px;
+    z-index:                    2;  /* stack on top of header menu */
+    left:                       10px; /* we want the logo on the left */
+    margin:                     0px 0px 0px 0px; /* T R B L */
+    padding:                    0px;
+    border:                     0px;
+    background-image:           url('images/sbclter-logo.gif');
+    background-position:        top left;     /* No NN4 */
+    background-repeat:          no-repeat;         /* No NN4 */
+    width:                      99px; /* begin hack for 1e5win */
+    height:                     100px; 
+    voice-family:               "\"}\"";
+    voice-family:               inherit;
+    width:                      99px;
+    height:                     100px;
+    }
+
+html>body #left_logo {
+    width:                      99px;
+    height:                     100px; /* end hack for ie5win */
+    }
+
+#right_logo {
+    position:                   absolute;
+    top:                        0px;
+    right:                      10px; /* we want the logo near the right */
+    margin:                     0px 0px 0px 0px; /* T R B L */
+    padding:                    0px;
+    border:                     0px;
+    background-image:           url('images/sbclter-coastal-header.jpg');
+    background-position:        top right;     /* No NN4 */
+    background-repeat:          no-repeat;         /* No NN4 */
+    height:                     60px; /* begin hack for 1e5win */
+    width:                      223px;
+    voice-family:               "\"}\"";
+    voice-family:               inherit;
+    height:                     60px;
+    width:                      223px;
+    }
+
+html>body #right_logo {
+    width:                      223px;
+    height:                     60px; /* end hack for ie5win */
+    }
+
+/* banner holds the title and subtitle */
+#banner {
+    margin:                     0px 0px 0px 110px; /* T R B L */
+    padding:                    0px;
+    border:                     0px;
+    background-color:           #ffffff;
+/*  background-image:           url('images/data_catalog_header_search.jpg') */
+    background-position:        top left;     /* No NN4 */
+    background-repeat:          no-repeat;         /* No NN4 */
+/*  height:                     60px; /* begin hack for ie5win */
+    voice-family:               "\"}\"";
+    voice-family:               inherit;
+/*  height:                     60px;
+ */
+    }
+
+html>body #banner {
+/*  height:                     60px; /* end hack for ie5win */
+    }
+
+
+
+/* Header Sub-Title Classes
+ * title and subtitle in the left portion of the banner */
+
+div.header-title {
+    position:           absolute;
+    top:                5px;
+    left:               110px;
+    color:              #003366;
+/*  padding:            1px 4px 1px 100px;
+ */
+    font-size:          26px;
+    font-family:        serif;
+    font-style:         normal;
+    font-weight:        800;
+}
+
+
+div.header-subtitle {
+    position:           absolute;
+    top:                40px;
+    left:               115px;
+    color:              #006666;
+/*  padding:            1px 4px 1px 110px; */
+    font-size:          12px;
+}
+
+div.header-menu {
+    position:           absolute;
+    top:                60px;
+    width:              100%;
+    z-index:            1;       /* put menu underneath logos */
+    border-top:         1px solid #006666;
+    border-bottom:      1px solid #006666;                    
+    color:              #666600;                                  
+    background-color:   #CCCC99;                                  
+    padding:            2px 2px 2px 110px;                        
+    font-size:          14px;                                     
+}                                                                 
+
+
+
+
+/* header doesnt currently accomodate this class  */
+div.header-submenu {                                              
+    color:              #003366;                                  
+    background-color:   #FFFFFF;                                  
+    padding:            2px 10px 2px 110px;                       
+    font-size:          14px;                                     
+}                                                                 
+                                                                  
+
+
+
+#left_sidebar {
+    position:                   absolute;
+    top:                        0px;
+    left:                       0px;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px;
+    background-color:           #003366;
+    width:                      10px; /* begin hack for 1e5win */
+    voice-family:               "\"}\"";
+    voice-family:               inherit;
+    width:                      10px;
+    }
+
+html>body #left_sidebar {
+    width:                      10px; /* end hack for ie5win */
+    }
+
+#right_sidebar {
+    position:                   absolute;
+    top:                        0px;
+    right:                      0px;
+    margin:                     0px;
+    padding:                    0px;
+    border:                     0px;
+    background-color:           #003366;
+    width:                      10px; /* begin hack for 1e5win */
+    voice-family:               "\"}\"";
+    voice-family:               inherit;
+    width:                      10px;
+    }
+
+html>body #right_sidebar {
+    width:                      10px; /* end hack for ie5win */
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+/* these classes to be children of div "content" */
+
+
+/* for the skip-to box */
+
+ div.skipto-box {
+      vertical-align:	  middle;
+      text-align:         center;
+      color:              #003366;
+      background-color:   #CCCC99;
+      /* turned off float, placed with a table cell */
+      /*float:              left; */
+      padding:            6px;
+      /* set border for NN4 only change in advanced.css */
+      border:             0.1px solid #006666;
+      margin:             8px;
+      /* width: 		  50%; */
+      width:              300px; 
+     /* height:             20px; */
+      font-size:          12px;
+  }
+
+div.r-box {
+      vertical-align:     middle;
+      text-align:         center;
+      color:              #003366;
+      background-color:   #CCCC99;
+      float:              right;
+      padding:            6px 6px;
+      /* set border for NN4 only change in advanced.css */
+      border:             0.1px solid #006666;
+      margin:             0px;
+      width:              50%;
+   /*   height:             auto; */
+      font-size:          12px;
+   /*   clear:              both; */
+  }
+
+
+div.content-area {
+       /* for padding area within parent area */
+    background-color:   #FFFFFF;
+    color:              #003366;
+    text-align:         left;
+   padding:            30px 40px 15px 40px; 
+   /*padding:            0px 0px 0px 0px; */
+
+}
+
+div.content-area-dense {
+       /* for padding area within parent area */
+    background-color:   #FFFFFF;
+    color:              #003366;
+    text-align:         left;
+  /*  padding:            30px 40px 15px 40px; */
+   padding:            0px 0px 0px 0px; 
+
+}
+
+
+
+div.hanging-paragraph {
+	margin-left:	20px;
+	text-indent:	-20px;
+
+}
+
+div.smaller-font {
+    	font-size:		smaller;
+}
+
+div.bottom-padding {
+/*	padding:		0px 0px 10px 0px; */
+	padding-bottom:		10px;
+}
+
+div.left-padding {
+	padding-left:		10px;
+}
+
+#search-box { 
+  /* background and text style set by table .group */
+  position:           relative;
+  margin-left:        50%;
+  /* top: 110px; */
+ }
+
+
+#search-box_right {
+    text-align:     right;
+    }
+
+#loginbox {
+    border:                     0px;
+    position:                   absolute;
+    top:                        55px;
+    right:                      65px;
+    }
+
+#footer {
+    position:                   absolute;
+    right:                      10px;
+    bottom:                     0;
+    left:                       167px;
+    margin:                     0px 10px 10px 177px;
+    }
+
+#debug {
+    position:                   absolute;
+    right:                      20px;
+    bottom:                     0;
+    left:                       167px;
+    margin:                     0px 10px 10px 177px;
+    }
+
+p,ul,ol,dl,li,dt {
+    color:                      #555555;
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+  }
+  
+p ol,p ul, p dl, ol ul {
+    color:                      #555555;
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none; 
+  } 
+
+ul,ol {
+    padding:                    0px;
+    /* margin:                     0px 0px 0px 15px; */
+    }
+
+
+
+.ol-lower-alpha { 
+    list-style-type: lower-alpha;
+    margin-top:       2px;
+
+  }
+
+
+.ul-bulleted-list { 
+    list-style-type:  disc;
+    margin-top:       2px;
+    margin-bottom:    10px;
+    margin-left:      15px;
+  }
+
+/* add a little space before items in a list ?*/
+/* ol li { margin-top : 5px; } */
+/* ul li { margin-top : 5px; } */
+
+
+
+
+div {
+    color:                      #003366;
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+  }
+
+  
+/* NN 4.xx needs the font weight reset for b and strong tags */ 
+strong, b {
+    font-weight:                800;
+  }
+
+/* to emphasize words, use it inline with a <span> class*/ 
+big {
+    font-size:                  larger;
+  }
+
+/* to shrink words, use it inline with a <span> class*/
+small {
+    font-size:                  smaller;
+  }
+  
+/* for pre-formated text: adds a small padding around it
+ * font is set to the default style, 
+ * but could be changed for different effect
+ */
+pre {
+    color:                      #003366;
+    padding:                    10px;
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+  }
+  
+pre.inline {
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}  
+
+/* for creating block quotes. 
+ * set off with a slight indent to the left & right margins
+ * font is set to default style,
+ * but could be changed for different effect
+ */
+blockquote {
+    color:                      #003366;
+    padding:                    0;
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+  }
+
+/* Headings Tags : 
+ * Headings are used to break up straight text. 
+ * They are used to present topics, or subsections, chapters, etc.
+ * There are 6 headings tag which can be styled as we wish.
+ * All of our headings will be rendered in the same font and color as the
+ * default settings.
+ */  
+
+/* h1: very large font, set bold */
+h1 {
+    color:                      #003366;
+    background-color:           #ffffff;
+    padding:                    0;
+    font-size:                  18pt;
+    font-style:                 normal;
+    font-weight:                bold;
+    text-decoration:            none;
+  }
+
+/* large font, set bold */
+h2 {
+    color:                      #003366;
+    background-color:           #ffffff;
+    padding:                    0;
+    font-size:                  16pt;
+    font-style:                 normal;
+    font-weight:                bold;
+    text-decoration:            none;
+  }
+
+/* slightly larger font, set bold */
+h3 {
+    color:                      #003366;
+    background-color:           #ffffff;
+    padding:                    0;
+    font-size:                  14pt;
+    font-style:                 normal;
+    font-weight:                700;
+    text-decoration:            none;
+   /*  margin-bottom:                 0px; */
+  }
+
+
+/* an italic header w border */
+/*
+h3 {
+  border-bottom:                #94c1d4 solid 1px;
+  color:                        #003366;
+  padding:                      0;
+  font-size:                    14pt;
+  margin:                       3px;
+  text-align:                   left;
+  font-style:                   italic;
+  font-weight:                  200;
+  }
+*/
+
+
+
+/* slightly larger, no bold */  
+/* make margins around h4 all the same, and a little larger than h5 */
+h4 {
+    color:                      #003366;
+    padding:                    0;
+    font-size:                  12pt;
+    font-style:                 normal;
+    font-weight:                400;
+    text-decoration:            none;
+    margin-top:			10px;
+    margin-bottom:                 0px;
+
+  }
+
+/* slightly smaller font */  
+/* moz-net-fox and ie have different default margins for h5 - make them uniform */
+h5 {
+    color:                      #003366;
+    padding:                    0;
+    font-size:                  12pt;
+    font-style:                 normal;
+    font-weight:                400;
+    text-decoration:            none;
+    margin-bottom:                 0px; 
+    margin-top:                 7px; 
+
+
+  }
+
+/* very small font */  
+h6 {
+    color:                      #003366;
+    background-color:           #FFFFFF;
+    padding:                    0;
+    font-size:                  10pt;
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+  }  
+
+
+
+/* Old style hr command - will be depreciated
+ * Netscape 4.x does not like this
+ * should use new style below
+ * used anywhere? remove?
+ */
+hr {
+    border-top:                 #003366 0px solid;
+    width:                      450px;
+    height:                     2px;
+    color:                      #003366;
+    background-color:           #003366;
+    /*border-width:               none;
+    border-color:               #003366; */
+  }
+
+/* New horizontal rule. Netscape 4.x should render this fine.
+ * apply this class to a <div> tag for the desired effect.
+ * the rule is 1px wide, blue with a slight margin on the left and right.
+ */
+.rule {
+    border-top-width:           2px;
+    border-top-style:           solid;
+    border-color:               #003366; 
+    margin:                     4px 4px
+  }
+  
+ /* Default link properties
+ * currently set the links to the dark tan
+ * with no additional decorations
+ * except underline on hover
+*/
+a:link {
+    color:                      #333333;
+    background:                 transparent;
+/*    background-color:           #FFFFFF; */
+    text-decoration:            none;
+  }
+a:visited {
+    color:                      #333333;
+    background:                  transparent;
+/*    background-color:           #FFFFFF; */
+    text-decoration:            none;
+  } 
+a:hover {
+    color:                      #000000;
+    background:                 transparent;
+/*    background-color:           #FFFFFF; */
+    text-decoration:            underline;
+  } 
+a:active { 
+    color:                      #333333;
+    background:                 transparent;
+/*    background-color:           #FFFFFF; */
+    text-decoration:            none;
+  }
+
+/* Menu Link properties
+ * the Menu is currently identical to the dafault
+ * but this may change so it is defined here                      
+ */                                                               
+a.menu:link {                                                     
+    color:                      #003366;                          
+    background:                 transparent;                      
+    /*background-color:           #CCCC9A;*/                      
+    text-decoration:            none;                             
+  }                                                               
+a.menu:visited {                                                  
+    color:                      #003366;                          
+    background:                 transparent;                      
+    /*background-color:           #CCCC9A;*/
+    text-decoration:            none;                             
+  }                                                               
+a.menu:hover {                                                    
+    color:                      #003366;                          
+    background:                 transparent;                      
+   /* background-color:           #CCCC9A;*/                      
+    text-decoration:            underline;                        
+  }                                                               
+a.menu:active {                                                   
+    color:                      #003366;                          
+    background:                 transparent;                      
+   /* background-color:           #CCCC9A; */                     
+    text-decoration:            none;                             
+  }                                                               
+                                                                  
+/* SubMenu Link Properties                                        
+ * Set the color to dark tan with underline on hover              
+ */                                                               
+a.submenu:link {                                                  
+    color:                      #003366;                          
+/*  color:                      #003366; */                       
+    background:                 transparent;                      
+    /*background-color:           #CCCC9A;*/                      
+    text-decoration:            none;                             
+  }                                                               
+a.submenu:visited {                                               
+    color:                      #003366;                          
+/*  color:                      #003366; */                       
+    background:                 transparent;                      
+    /*background-color:           #CCCC9A;*/                      
+    text-decoration:            none;                             
+  }                                                               
+a.submenu:hover {                                                 
+    color:                      #003366;                          
+/*  color:                      #003366; */                       
+    background:                 transparent;                      
+   /* background-color:           #CCCC9A;*/                      
+    text-decoration:            underline;                        
+  }                                                               
+a.submenu:active {                                                
+    color:                      #003366;                          
+/*  color:                      #003366; */                       
+    background:                 transparent;                      
+   /* background-color:           #CCCC9A; */                     
+    text-decoration:            none;                             
+  }                                                               
+                                                                  
+
+/* image styles */
+/* no padding or border around images by default */
+img {
+    border:                     0px; 
+    border-style:               none;
+    border-width:               0px;
+    padding:                    0px;
+    text-decoration:            none;
+  }
+
+/* this class is needed to remove some extra space along the top of images
+ * this attribute can not be put into default img class because it prevents
+ * text from wrapping correctly
+ */
+img.vtop {  
+    vertical-align:             top;
+  }
+
+/* Add a blue border around an image */
+
+img.border {
+    border:                     medium;
+    border-style:               solid;
+    border-color:               #003366;
+    padding:                    0px;
+  }
+
+/* Format the headshot images in the who section */
+
+img.headshot {
+    margin-right:               20px;
+    margin-bottom:              40px;
+  }
+
+/* Format the headshot images in the who section 
+ * that have alot of text aligned to the right */
+img.headshot_long {
+    margin-right:               20px;
+    margin-bottom:              80px;
+  }
+  
+/* Format inline images justified to the left in the text*/
+
+img.inlineleft {
+    border:                     medium;
+    border-style:               solid;
+    border-color:               #003366;
+    margin-right:               8px;
+    margin-top:                 8px;
+    margin-bottom:              8px;
+  }
+
+/* Format inline images justified to the right in the text*/
+
+img.inlineright {
+    border:                     medium;
+    border-style:               solid;
+    border-color:               #003366;
+    margin-left:                8px;
+    margin-top:                 8px;
+    margin-bottom:              8px;
+  }
+  
+/* Default behavior for linked images 
+ * no border, no padding, aligned to the top
+ */
+
+a img {
+    border:                     0px; 
+    border-style:               none;
+    border-width:               0px;
+    padding:                    0px;
+    vertical-align:             top;
+    text-decoration:            none;
+  }
+
+/* Default for table cells. 
+ * No border or padding. 
+ * Keep the relative font size and set color to blue
+ */
+
+ td {
+    color:                      #003366;
+    font-style:                 normal;
+    font-size:                  95%;
+    font-weight:                normal;
+    text-decoration:            none;    
+    border:                     0px;
+    padding:                    0px;
+    vertical-align:             top; 
+  }
+  
+/* Classes for the footer area */
+  
+/* Basic footer class to get the correct font size
+ * default footer style.
+ * colors are the same, but font size is smaller
+ */
+.footer {
+    color:                      #003366;
+    background-color:           #FFFFFF;
+    margin-top:                 20px;
+    margin-bottom:              20px;
+    margin-left:                5px;
+    margin-right:               0px;
+    font-size:                  75%;      /* No EM in NN4 */
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+    text-align:                 center;
+  }
+/* extra class to handle the small table in the footer */ 
+.tblfooter {
+    color:                      #003366;
+    background-color:           #FFFFFF;
+    font-size:                  75%;      /* No EM in NN4 */
+    font-style:                 normal;
+    font-weight:                normal;
+    text-decoration:            none;
+  }
+
+/* Classes for positioning: use with div tags for desired effect */
+.indent1 {
+    white-space:                nowrap;
+    padding-left:               10px;
+}
+
+.indent2 {
+    padding-left:               15px;
+}
+
+.indent3 {
+    padding-left:               50px;
+}
+
+/* Classes for the <em> tag (emphasis) */
+.italic {
+    font-style:                 italic;
+    font-weight:                normal;
+  }
+
+.italics {
+    font-style:                 italic;
+    font-weight:                normal;
+  }
+
+.bold {
+    font-style:                 normal;
+    font-weight:                bold;
+  }
+
+.waybold {
+    font-style:                 italic;
+    font-weight:                bolder;
+  }
+
+/* Additions for the data catalog pages */
+
+/* Define a border for groups of elements.  This uses the 
+   -moz-border-radius (Mozilla, Netscape, Opera only) 
+   attribute for the time being.  Once
+   browsers support the CSS3 border-radius attribute, this 
+   should be switched.*/
+.group {
+    padding:                    0;
+    color:                      #003366;
+    min-width:                  800px;
+    voice-family:               "\"}\""; /* begin ie5win hack */
+    voice-family:               inherit;
+    -moz-border-radius:         10px; /* end ie5win hack */
+    }
+/* Children of the group get some padding */
+.group * {
+    padding:                    2px;
+    }
+ 
+.group_border {
+    /* aqua-green border */
+    border:                     #006666 solid 1px;
+    }
+
+.subGroup {
+    padding:                    3px;
+    color:                      #003366;
+    voice-family:               "\"}\""; /* begin ie5win hack */
+    voice-family:               inherit;
+    -moz-border-radius:         10px; /* end ie5win hack */
+    }
+ 
+.subGroup_border {
+    /* blue-ish border */
+    border:                     #94c1d4 solid 1px;
+    }
+
+/* This selector causes the 'section' tables to indent under the overarching div
+ * tags */
+div>table.subGroup {
+    padding-left:               15px;
+    padding-right:              15px;
+    }
+
+div.left {
+    position:                   absolute;
+    left:                       20px;
+    clear:                      right;
+    }
+
+div.right {
+    position:                   absolute;
+    right:                      20px;
+    clear:                      left;
+    }
+
+table.left {
+    position:                   absolute;
+    left:                       20px;
+    }
+
+table.right {
+    float:                      right;
+    margin-right:               10px;
+    clear:                      left;
+    }
+
+th {
+    border-bottom:              #006666 solid 1px;
+    color:                      #003366;
+    padding:                    0;
+    margin:                     0;
+    text-align:                 left;
+    font-style:                 normal;
+    font-weight:                700;
+}
+
+th.rowheader {
+    background:                 #f1f8f8;
+    border-right:               #94c1d4 solid 1px;
+    }
+
+.rowodd {
+    border-bottom:              #94c1d4 dotted 1px;
+    border-top:                 #94c1d4 dotted 1px;
+    background-color:           #f1f8f8;
+    padding:                    0;
+    margin:                     0;
+} 
+
+.roweven {
+    padding:                    0;
+    margin:                     0;
+} 
+
+.coleven {
+    border-left:                #94c1d4 dotted 1px;
+    border-right:               #94c1d4 dotted 1px;
+    background-color:           #f1f8f8;
+    padding-left:               2px;
+    padding-right:              2px;
+    text-align: left;
+}
+
+.colodd {
+    padding-left:               2px;
+    padding-right:              2px;
+    text-align:                 left;
+}
+
+.innercolodd {
+    border:                     solid #94c1d4 1px;
+    font-size:                  .75em;
+    padding-left:               2px;
+    padding-right:              2px;
+    text-align:                 left;
+}
+
+.innercoleven {
+    border:                     solid #94c1d4 1px;
+    background-color:           #f1f8f8;
+    font-size:                  .75em;
+    padding-left:               2px;
+    padding-right:              2px;
+    text-align:                 left;
+}    
+
+.onehundred_percent {
+    width:                      100%;
+    }
+
+.eighty_percent {
+    width:                      80%;
+    }
+
+
+.seventyfive_percent {
+    width:                      75%;
+    }
+
+.seventy_percent {
+    width:                      70%;
+    }
+
+.fifty_percent {
+    width:                      50%;
+    }
+
+.fortyfive_percent {
+    width:                      45%;
+    }
+
+.forty_percent {
+    width:                      40%;
+    }
+
+.twentyfive_percent {
+    width:                      25%;
+    }
+
+
+.twenty_percent {
+    width:                      20%;
+    }
+
+
+.fifteen_percent {
+    width:                      15%;
+    }
+
+input, select, textarea {
+    color:                      #003366;
+    border:                     1px solid #94c1d4;
+    margin:                     5px;
+    }
+    
+input.submit {
+    margin-left:                5px;
+    border:                     #94c1d4 dotted 1px;
+    background-color:           #f1f8f8;
+    font-size:                  85%;
+    }
+
+label {
+    text-align:                 right;
+    vertical-align:             middle;
+    color:                      #94c1d4;
+    }
+
+.login {
+    font-size:                  85%;
+    width:                      6em;
+    }
+input.view.data-button{
+ /*  color:		#666600; */
+   font-size:		1.25em;
+ /*  font-weight:		bold; */
+   text-decoration:		underline;
+   background:		#ffffff;
+
+}
+
+/***
+iframe classes
+****/
+.iframeheaderclass {
+    height:   85px; 
+    width:    100%;
+    border:   0px;
+    /*margin-bottom:   10px;*/
+    margin: 10px;
+}
+
+.iframesearchboxclass {
+    height:   450px; 
+    width:    100%;
+    border:   0px;
+    margin:   0px;
+}
+
+.iframeadvancedsearchboxclass {
+    height:   1250px; 
+    width:    100%;
+    border:   0px;
+    margin:   0px;
+}
+
+.iframemapclass {
+    height:   570px; 
+    width:    100%;
+    border:   0px;
+    margin:   0px;
+}
+
+.iframeloginboxclass {
+    height:   305px; 
+    width:    100%;
+    border:   0px;
+    margin:   0px;
+}
+
+.iframeleftcolclass  { /* not used */ }
+.iframerightcolclass { /* not used */ }
+.iframefooterclass   { /* not used */ }
+
+/**
+ *  set the size and alignment etc of the top-level layout table
+ */  
+.templatetableclass {
+    width:   100%; 
+    border:   0px;
+    padding:  0px;
+    margin:   0px;
+}
+
+/**
+ *  set the style of the main content area and its contents
+ */ 
+.templatecontentareaclass {
+    border:   0px;
+    padding:  0px;
+    margin:   0px;
+}
+
+/**
+ *  set the correct <td> sizes to accomodate the 
+ *  header, footer, left and right iframes.
+ *  NOTE: these styles apply only to each 
+ *  container frame, *NOT* to the document in
+ *  the iframe within it!
+ */  
+.templateheaderrowclass {
+    height:   80px; 
+    /*
+      no width allowed - uses same width as table class
+    */
+    border:   0px;
+    padding:  0px;
+    margin:   0px;
+}
+
+.templateleftcolclass {
+    height:   100%; 
+    width:    0px;
+    border:   0px;
+    padding:  0px;
+    margin:   0px;
+}
+
+.templaterightcolclass {
+    height:   100%; 
+    width:    0px;
+    border:   0px;
+    padding:  0px;
+    margin:   0px;
+}
+
+.templatefooterrowclass {
+    height:   0px; 
+    /*
+      no width allowed - uses same width as
+      table class
+    */
+    border:   0px;
+    padding:  0px;
+    margin:   0px;
+}
+
+.banner {
+	background-image: url("./images/banner_background.jpg");
+	background-repeat: repeat-x;
+}
+.sectionheader {
+	font-weight: bold;
+}
+.searchresultsdivider {
+	height:	10px;
+}
+.highlight {
+    border-bottom:              #94c1d4 dotted 1px;
+    border-top:                 #94c1d4 dotted 1px;
+    background-color:           #f1f8f8;
+    padding:                    0;
+    margin:                     0;
+}
+.tablehead {
+    border-bottom:              #006666 solid 1px;
+    color:                      #003366;
+    padding:                    0;
+    margin:                     0;
+    text-align:                 left;
+    font-style:                 normal;
+    font-weight:                700;
+}

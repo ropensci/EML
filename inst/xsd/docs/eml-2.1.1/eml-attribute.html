@@ -1,0 +1,2755 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-attribute Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-attribute</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+            The eml-attribute module - Attribute level information within
+            dataset entities
+          </div>
+            
+<p>
+            The eml-attribute module describes all attributes (variables)
+            in a data entity: dataTable, spatialRaster, spatialVector,
+            storedProcedure, view or otherEntity. The description includes the
+            name and definition of each attribute, its domain, definitions of
+            coded values, and other pertinent information. Two structures exist
+            in this module: 1.  attribute is used to define a single attribute;
+            2. attributeList is used to define a list of attributes that go
+            together in some logical way.
+          </p>
+            
+<p>
+            The eml-attribute module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This
+            allows an attribute document to be described once, and then
+            used as a reference in other locations within the EML document
+            via its ID.
+            </p>
+            
+              
+<div class="sectiontitle">Philosophy of Attribute Units</div>
+              
+<p>The concept of "unit" represents one of the most fundamental
+            categories of metadata. The classic example of data entropy is the
+            case in which a reported numeric value loses meaning due to lack of
+            associated units. Much of Ecology is driven by measurement, and
+            most measurements are inherently comparative. Good data description
+            requires a representation of the basis for comparison, i.e., the
+            unit. In modeling the attribute element, the authors of EML drew
+            inspiration from the
+            <a href="http://physics.nist.gov/cuu/Units/introduction.html">
+            NIST Reference on Constants, Units, and Uncertainty</a>.
+            This document defines a unit as "a particular physical quantity,
+            defined and adopted by convention, with which other particular
+            quantities of the same kind are compared to express their value."
+            The authors of the EML 2.0 specification (hereafter "the authors")
+            decided to make the unit element required, wherever
+            possible.</p>
+              
+<p>Units may also be one of the most problematic categories of
+            metadata. For instance, there are many candidate attributes that
+            clearly have no units, such as named places and letter grades.
+            There are other candidate attributes for which units are difficult
+            to identify, despite some suspicion that they should exist (e.g.
+            pH, dates, times). In still other cases, units may be meaningful,
+            but apparently absent due to dimensional analysis (e.g. grams of
+            carbon per gram of soil). The relationship between units and
+            dimensions likewise is not completely clear.</p>
+              
+<p>The authors decided to sharpen the model of attribute by
+            nesting unit under measurementScale. Measurement Scale is a data
+            typology, borrowed from Statistics, that was introduced in the
+            1940's. Under the adopted model, attributes are classified as
+            nominal, ordinal, interval, and ratio. Though widely criticized,
+            this classification is well-known and provides at least first-order
+            utility in EML. For example, nesting unit under measurementScale
+            allows EML to prevent its meaningless inclusion for categorical
+            data -- an approach judged superior to making unit universally
+            required or universally optional.</p>
+              
+<p>The sharpening of the attribute model allowed the elimination
+            of the unit type "undefined" from the standard unit dictionary (see
+            eml-unitDictionary.xml). It seemed self-defeating to require the
+            unit element exactly where appropriate, yet still allow its content
+            to be undefined. An attribute that requires a unit definition is
+            malformed until one is provided. The unit type "dimensionless" is
+            preserved, however. In EML 2.0, it is synonymous with "unitless"
+            and represents the case in which units cannot be associated with an
+            attribute for some reason, despite the proper classification of
+            that attribute as interval or ratio. Dimensionless may itself be an
+            anomaly arising from the limitations of the adopted measurement
+            scale typology.</p>
+              
+<p>Closely related to the concept of unit is the concept of
+            attribute domain. The authors decided that a well-formed
+            description of an attribute must include some indication of the set
+            of possible values for that attribute. The set of possible values
+            is useful, perhaps necessary, for interpreting any particular
+            observed value. While universally required, attribute domain has
+            different forms, depending on the associated measurement
+            scale.</p>
+              
+<p>The element storageType has an obvious relationship to
+            domain. It gives some indication of the range of possible values of
+            an attribute, and also gives some (potentially critical)
+            operability information about the way the attribute is represented
+            or construed in the local storage system. The storageType element
+            seems to fall in a gray area between the logical and physical
+            aspects of stored data. Neither comfortable with eliminating it nor
+            with making it required, the authors left it available but optional
+            under attribute. In addition, it is repeatable so that different 
+            storage types can be provided for various systems (e.g., different
+            databases might use different types for columns, even though the
+            domain of the attribute is the same regardless of which database
+            is used).</p>
+              
+<p>Attributes representing dates, times, or combinations thereof
+            (hereafter "dateTime") were the most difficult to model in EML. Is
+            dateTime of type interval or ordinal? Does it have units or not?
+            Strong cases can be made on each side of the issue. The confusion
+            may reflect the limitations of the measurement scale typology. The
+            final resolution of the dateTime model is probably somewhat
+            arbitrary. There was clearly a need, however, to allow for the
+            interoperability of dateTime formats. EML 2.0 tries to provide an
+            unambiguous mechanism for describing the format of dateTime
+            values by providing a separate category for date and  time values. This
+            "dateTime" measurement scale allows users to explicitly label 
+            attributes that contain Gregorian date and time values, and allows
+            them to provide the information needed to parse these values into
+            their appropriate components (e.g., days, months, years)./</p>
+            
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-attribute">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">any dataset that uses dataTable, spatialRaster, spatialVector, storedProcedure, view or otherEntity or in a custom module where one wants to document an attribute (variable)</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-methods, eml-coverage, eml-literature, eml-resource, eml-unitTypeDefinitions</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-attribute.png" target="offline">eml-attribute image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attribute">attribute&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#AttributeType">AttributeType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The content model for attribute is a CHOICE between
+        "references" and all of the elements that let you describe the
+        attribute (e.g., attributeName, attributeDefinition, precision). The
+        attribute element allows a user to document the characteristics that
+        describe a 'field' or 'variable' in a data entity (e.g. dataTable).
+        Complete attribute descriptions are perhaps the most important aspect
+        to making data understandable to others. An attribute element describes
+        a single attribute or an attribute element can contain a reference
+        to an attribute defined elsewhere. Using a reference means that the
+        referenced attribute is (semantically) identical, not just in name
+        but identical in its complete description. For example, if attribute
+        "measurement1" in dataTable "survey1" has a precision of 0.1 and
+        you are documenting dataTable survey2 which has an attribute called
+        "measurement1" but the survey2's measurement1 has a precision of
+        0.001 then these are different attributes and must be described
+        separately.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attribute">attribute&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#AttributeType">AttributeType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeName">attributeName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Attribute name is official name of the
+              attribute.  This is usually a short, sometimes cryptic name
+              that is used to refer to the attribute.  Many systems have
+              restrictions on the length of attribute names, and on the
+              use of special characters like spaces in the name, so the
+              attribute name is often not particularly useful for display
+              (use attributeLabel for display).  The attributeName is
+              usually the name of the variable that is found in the header
+              of a data file.
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>spden<br>spatialden<br>site<br>spcode<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeLabel">attributeLabel&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A descriptive label that can be used to display
+              the name of an attribute.  This is often a longer, possibly
+              multiple word name for the attribute than the attributeName. It
+              is not constrained by system limitations on length or special
+              characters.  For example, an attribute with a name of 'spcode'
+              might have an attributeLabel of 'Species Code'.
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>Species Density<br>Spatial Density<br>Name of Site<br>Species Code<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeDefinition">attributeDefinition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element gives a precise definition of
+              attribute in the data entity (dataTable, spatialRaster,
+              spatialVector, storedProcedure, view or otherEntity) being
+              documented. It explains the contents of the attribute fully so
+              that a data user could interpret the attribute accurately.
+              Some additional information may also be found in the
+              methods element as well.
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>"spden" is the number of individuals of all
+              macro invertebrate species found in the plot<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="storageType">storageType&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#typeSystem">typeSystem</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">http://www.w3.org/2001/XMLSchema-datatypes</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element describes the storage type,
+              for data in a RDBMS (or other data management system) field. 
+              As many systems do not
+              provide for fine-grained restrictions on types, this type will
+              often be a superset of the allowed domain defined in
+              attributeDomain. Values for this field are by default drawn from
+              the XML Schema Datatypes standard values, such as: integer,
+              double, string, etc. If the XML Schema Datatypes are not used,
+              the type system from which the values are derived should be
+              listed in the 'typeSystem' attribute described below. This field
+              represents a 'hint' to processing systems as to how the attribute
+              might be represented in a system or language, but is distinct
+              from the actual expression of the domain of the attribute. The
+              field is repeatable so that the storageType can be indicated for
+              multiple type systems (e.g., Oracle data types and Java data
+              types).<br>
+<span class="boldtext">Example(s): </span>
+<br>integer<br>int<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="measurementScale">measurementScale&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#nominal">nominal</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#ordinal">ordinal</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#interval">interval</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#ratio">ratio</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#dateTime">dateTime</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The measurementScale element indicates the
+              type of scale from which values are drawn for the
+              attribute. This provides information about the scale in
+              which the data was collected.<br>
+<span class="boldtext">Example(s): </span>
+<br>Nominal is used when numbers have only been assigned
+              to a variable for the purpose of categorizing the
+              variable.  An example of a nominal scale is assigning the
+              number 1 for male and 2 for female.<br>Ordinal is used when the categories have a logical
+              or ordered relationship to each other. These types of scale
+              allow one to distinguish the order of values, but not the
+              magnitude of the difference between values. An example of an
+              ordinal scale is a categorical survey where you rank a variable
+              1=good, 2=fair, 3=poor.<br>Interval is used for data which consist of
+              equidistant points on a scale. The Celsius scale is an interval
+              scale, since each degree is equal but there is no natural
+              zero point (so, 20 C is not twice as hot as 10 C).
+              <br>Ratio is used for data which consists not only of
+              equidistant points but also has a meaningful zero
+              point, which allows ratios to have meaning. An example of a
+              ratio scale would be the Kelvin temperature scale (200K is
+              half as hot as 400K), and length in
+              meters (e.g., 10 meters is twice as long as 5 meters).
+              <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="nominal">nominal&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#nonNumericDomain">nonNumericDomain</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field is used for defining the
+                    characteristics of this variable if it is a
+                    nominal scale variable, which are variables that are
+                    categorical in nature.
+                    Nominal is used when numbers have only been
+                    assigned to a variable for the purpose of categorizing the
+                    variable.  An example of a nominal scale is assigning the
+                    number 1 for male and 2 for female.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="nonNumericDomain">nonNumericDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonNumericDomainType">NonNumericDomainType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ordinal">ordinal&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#nonNumericDomain">nonNumericDomain</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field is used for defining the
+                    characteristics of this variable if it is an
+                    ordinal scale variable, which specify ordered values
+                    without specifying the magnitude of the difference between
+                    values. Ordinal is used when the categories have
+                    a logical or ordered relationship to each other. These
+                    types of scale allow one to distinguish the order
+                    of values, but not the magnitude of the difference
+                    between values. An example of an ordinal scale is a
+                    categorical survey where you rank a variable 1=good,
+                    2=fair, 3=poor.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="nonNumericDomain">nonNumericDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NonNumericDomainType">NonNumericDomainType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="interval">interval&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#unit">unit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#precision">precision</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#numericDomain">numericDomain</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field is used for defining the
+                    characteristics of this variable if it is an
+                    interval scale variable, which specifies both the order
+                    and magnitude of values, but has no natural zero point.
+                    Interval is used for data which consist of
+                    equidistant points on a scale. The Celsius scale is an
+                    interval scale, since each degree is equal but there is
+                    no natural zero point (so, 20 C is not twice as hot as
+                    10 C).  zero point (so, 20 C is not twice as hot as 10
+                    C).</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="unit">unit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#UnitType">UnitType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="precision">precision&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#PrecisionType">PrecisionType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="numericDomain">numericDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NumericDomainType">NumericDomainType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ratio">ratio&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#unit">unit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#precision">precision</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#numericDomain">numericDomain</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field is used for defining the
+                    characteristics of this variable if it is a
+                    ratio scale variable, which specifies the order and
+                    magnitude of values and has a natural zero point, allowing
+                    for ratio comparisons to be valid.
+                    Ratio is used for data which consists not
+                    only of equidistant points but also has a meaningful zero
+                    point, which allows ratios to have meaning. An example
+                    of a ratio scale would be the Kelvin temperature scale
+                    (200K is half as hot as 400K), and length in meters (e.g.,
+                    10 meters is twice as long as 5 meters).</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="unit">unit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#UnitType">UnitType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="precision">precision&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#PrecisionType">PrecisionType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="numericDomain">numericDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NumericDomainType">NumericDomainType</a></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="dateTime">dateTime&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#formatString">formatString</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#dateTimePrecision">dateTimePrecision</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#dateTimeDomain">dateTimeDomain</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                      
+<p>The dateTime field is used for defining the
+                    characteristics of the attribute if it contains
+                    date and time values. DateTime is used when the values
+                    fall on the Gregorian calendar system.  DateTime values
+                    are special because the have properties of interval
+                    values (most of the time it is legitimate to treat them
+                    as interval values by converting them to a duration from
+                    a fixed point) but they sometimes only behave as ordinals
+                    (because the calendar is not predetermined, for some
+                    dateTime values one can only find out the order of
+                    the points and not the magnitude of the duration 
+                    between those points).  Thus, the dateTime scale provides
+                    the information necessary to properly understand and
+                    parse date and time values without improperly 
+                    labeling them under one of the more traditional scales.</p>
+                      
+<p>Date and time values are unlike any other measured values.  
+                      Note that the dateTime field would not be used if
+              one is recording time durations.  In that case, one should use a
+              standard unit such as seconds, nominalMinute or nominalDay, or a
+              customUnit that defines the unit in terms of its relationship to
+              SI second.</p>
+                    
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="formatString">formatString&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                            
+<p>A format string that describes
+                            the format for a dateTime value from the
+                            Gregorian calendar.  DateTime values should be
+                            expressed in a format that conforms to the ISO
+                            8601 standard.  This field allows one to specify
+                            the format string that should be used to decode
+                            the date or time value.  To describe the format
+                            of an attribute containing dateTime values,
+                            construct a string representation of the format
+                            using the following symbols:
+                            </p>
+                            
+<p>
+                              
+<pre>
+              Y   year
+              M   month
+              W   month abbreviation (e.g., JAN)
+              D   day
+              h   hour
+              m   minute
+              s   second
+              T   time designator (demarcates date and time parts of date-time)
+              Z   UTC designator, indicating value is in UTC time
+              .   indicates a decimal fraction of a unit
+              +/- indicates a positive or negative number,
+                  or a positive or negative time zone adjustment relative to UTC
+              -   indicates a separator between date components
+              A/P am or pm designator
+              </pre>
+                            
+</p>
+                            
+<p>
+              Any other character in the format string is interpreted as a
+              separator character.  Here are some examples of the format
+              strings that can be constructed.
+              </p>
+                            
+<p>
+                              
+<pre>
+                                 Format string          Example value
+                                 -------------------    ------------------
+                  ISO Date       YYYY-MM-DD             2002-10-14
+                  ISO Datetime   YYYY-MM-DDThh:mm:ss    2002-10-14T09:13:45
+                  ISO Time       hh:mm:ss               17:13:45
+                  ISO Time       hh:mm:ss.sss           09:13:45.432
+                  ISO Time       hh:mm.mm               09:13.42
+                  Non-standard   DD/MM/YYYY             14/10/2002
+                  Non-standard   MM/DD/YYYY             10/14/2002
+                  Non-standard   MM/DD/YY               10/14/02
+                  Non-standard   YYYY-WWW-DD            2002-OCT-14
+                  Non-standard   YYYYWWWDD              2002OCT14
+                  Non-standard   YYYY-MM-DD hh:mm:ss    2002-10-14 09:13:45
+              </pre>
+                            
+</p>
+                            
+<p>
+              Some notes about these examples.  First, the ISO 8601 standard is
+              strict about the order of date components and the separators that
+              are legal.  Best practice is to follow the ISO 8601 format
+              precisely.  However, we recognize that existing data contain
+              non-standard dates, and existing equipment (e.g., sensors) may
+              still be producing non-standard dates.  Consequently, we have
+              provided the formatting string with additional characters to
+              describe the date formats. In particular note that the use of a
+              slash (/) to separate date components, a space to separate date
+              and time components, using a twelve-hour time with am/pm
+              designator, and placing any of the components out of
+              descending order is non-standard according to ISO.  Nevertheless,
+              these formats can be described using the format string to
+              accommodate existing data.
+              </p>
+                            
+<p>
+              Decimal dateTime values can be extended by indicating in
+              the format that additional decimals can be used.  Only the final
+              unit (e.g., seconds in a time value) can use the extended digits
+              according to the ISO 8601 standard.  For example, to show
+              indicate that seconds are represented to the nearest 1/1000
+              of a second, the format string would be "hh:mm:ss.sss".
+              Note that this only indicates the number of decimals used to
+              record the value, and not the precision of the measurement
+              (see dateTimePrecision for that).
+              </p>
+                            
+<p>
+              Date and time values are from an interval scale, but it is extremely
+              complex because of the vagaries of the calendar (e.g., leap
+              years, and leap seconds).  The duration between date and time values
+              in the future is not even deterministic because leap seconds are
+              based on current measurements of the earth's orbit. Consequently,
+              date and time values are unlike any other measured values.  The format
+              string for dateTime values allows one to accurately calculate the
+              duration in SI second units between two measured dateTime values,
+              assuming that the conversion software has a detailed knowledge of
+              the Gregorian calendar. 
+              </p>
+                          
+<br>
+<span class="boldtext">Example(s): </span>
+<br>YYYY-MM-DDThh:mm:ss<br>YYYY-MM-DD<br>YYYY<br>hh:mm:ss<br>hh:mm:ss.sss<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="dateTimePrecision">dateTimePrecision&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A quantitative indication of
+                          the precision of a date or time measurement.
+                          The precision should be interpreted in the
+                          smallest units represented by the dateTime format.
+                          For example, if a dateTime value has a format of
+                          "hh:mm:ss.sss", then "seconds" are the smallest unit
+                          and the precision should be expressed in seconds.
+                          Thus, a precision value of "0.01" would mean that
+                          measurements were precise to the nearest hundredth
+                          of a second, even though the format string might
+                          indicate that values were written down with 3
+                          decimal places.<br>
+<span class="boldtext">Example(s): </span>
+<br>0.1<br>0.01<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="dateTimeDomain">dateTimeDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#DateTimeDomainType">DateTimeDomainType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>See the description for the type: DateTimeDomainType</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="missingValueCode">missingValueCode&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#code">code</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#codeExplanation">codeExplanation</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element is to specify missing value in the
+              data of the field. It is repeatable to allow for multiple
+              different codes to be present in the attribute. Note that missing
+              value codes should not be considered when determining if the
+              observed values of an attribute all fall within the domain
+              of the attribute (i.e., missing value codes should be parsed out
+              of the data stream before examining the data for domain
+              violations.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="code">code&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The code element is the missing value code
+                    itself. Each missing value code should be entered in a
+                    separate element instance. The value entered is what is
+                    placed into a data grid if the value is missing for some
+                    reason.<br>
+<span class="boldtext">Example(s): </span>
+<br>-9999<br>-1<br>N/A<br>MISSING<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="codeExplanation">codeExplanation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The codeExplanation element is an
+                    explanation of the meaning of the missing value code that
+                    was used, that is, the reason that there is a missing
+                    value. For example, an attribute might have a missing
+                    value code of '-99' to indicate that the data observation
+                    was not actually taken, and a code of '-88' to indicate
+                    that the data value was removed because of
+                    calibration errors.<br>
+<span class="boldtext">Example(s): </span>
+<br>Sensor down time.<br>Technician error.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="accuracy">accuracy&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#Accuracy">Accuracy</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The accuracy element represents the accuracy of
+              the attribute. This information should describe any accuracy
+              information that is known about the collection of this data
+              attribute. The content model of this metadata is taken directly
+              from FGDC FGDC-STD-001-1998 section 2 with the exception of
+              processContact, sourceCitation, and timePeriodInformation which
+              either user XMLSchema types or use predefined EML types for these
+              purposes.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="coverage">coverage&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-coverage.html#Coverage">cov:Coverage</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>An explanation of the coverage of the attribute.
+              This specifically indicates the spatial, temporal, and taxonomic
+              coverage of the attribute in question when that coverage deviates
+              from coverages expressed at a higher level (e.g., entity or
+              dataset).  Please see the eml-coverage module for complete
+              documentation.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="methods">methods&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-methods.html#MethodsType">md:MethodsType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>An explanation of the methods involved in the
+              collection of this attribute. These specifically supplement or
+              possibly override methods provided at a higher level such as
+              entity or dataset.
+              Please see the eml-methods module for complete documentation.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeAccuracyReport">attributeAccuracyReport&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The attributeAccuracyReport element is an
+            explanation of the accuracy of the observation recorded in this
+            attribute. It will often include a description of the tests used to
+            determine the accuracy of the observation. These reports are
+            generally prepared for remote sensing or other measurement
+            devices.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="quantitativeAttributeAccuracyAssessment">quantitativeAttributeAccuracyAssessment&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeAccuracyValue">attributeAccuracyValue</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeAccuracyExplanation">attributeAccuracyExplanation</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The quantitativeAttributeAccuracyAssessment
+            element is composed of two parts, a value that represents the
+            accuracy of the recorded observation an explanation of the tests
+            used to determine the accuracy.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeAccuracyValue">attributeAccuracyValue&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The attributeAccuracyValue element is an
+                  estimate of the accuracy of the identification of the
+                  entities and assignments of attribute values in the data set.
+                  </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeAccuracyExplanation">attributeAccuracyExplanation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The attributeAccuracyExplanation element is
+                  the identification of the test that yielded the Attribute
+                  Accuracy Value.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="attributeList">attributeList&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#AttributeListType">AttributeListType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This is the root element of the eml-attribute module.
+        It is mainly used for testing, but can also be used for creating
+        stand-alone eml-attribute modules where a list of attributes is
+        needed.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="standardUnit">standardUnit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-unitTypeDefinitions.html#StandardUnitDictionary">unit:StandardUnitDictionary</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Use the standardUnit element if the unit for this attribute has 
+            been defined in the Standard Unit Dictionary.
+            The list of "standard" units includes the SI base units and many compound units based
+            on SI, plus and some commonly used units which are not SI. The list is by no means
+            exhaustive. If the unit you need is not part of this list, then the customUnit field should be used
+            instead. Standard units have been described using STMML. See the documentation
+            for the Type for more information.<br>
+<span class="boldtext">Example(s): </span>
+<br>meter<br>second<br>joule<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="customUnit">customUnit&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The customUnit element is for units that are
+             not part of the standard list provided with EML. The customUnit 
+             must correspond to an id in the
+            document where its definition is provided using the STMML
+            syntax. The customUnit definition will most likely be in
+            the additionalMetadata section.<br>
+<span class="boldtext">Example(s): </span>
+<br>gramsPerOneThirdMeter<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="enumeratedDomain">enumeratedDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#codeDefinition">codeDefinition</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#externalCodeSet">externalCodeSet</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#entityCodeList">entityCodeList</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#enforced">enforced</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">yes</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The enumeratedDomain element describes
+              any code that is used as a value of an attribute. These
+              codes can be defined here in the metadata as a list with
+              definitions (preferred), can be referenced by pointing to
+              an external citation or URL where the codes are defined,
+              or can be referenced by pointing at an entity that contains
+              the code value and code definition as two attributes. For
+              example, data might have a variable named 'site' with
+              values 'A', 'B', and 'C', and the enumeratedDomain would
+              explain how to interpret those codes.
+              </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="codeDefinition">codeDefinition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#code">code</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#definition">definition</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#source">source</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#order">order</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This element gives the value of a
+                    particular code and its definition.  It is repeatable
+                    to allow for a list of codes to be provided.
+                    </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="code">code&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The code element specifies a
+                          code value that can be used in the domain
+                          <br>
+<span class="boldtext">Example(s): </span>
+<br>1<br>HIGH<br>BEPA<br>24<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="definition">definition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The definition describes the
+                          code with which it is associated in enough 
+                          detail for scientists to interpret the meaning
+                          of the coded values.<br>
+<span class="boldtext">Example(s): </span>
+<br>high density, above 10 per square 
+                          meter<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="source">source&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The source element is the name
+                          of the source from which this code and its
+                          associated definition are drawn. This is
+                          commonly used for identifying standard coding
+                          systems, like the FIPS standard for postal
+                          abbreviations for states in the US. In other
+                          cases, the coding may be the researcher's
+                          customized way of recording and classifying
+                          their data, and no external "source" would
+                          exist.<br>
+<span class="boldtext">Example(s): </span>
+<br>ISO country codes<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="externalCodeSet">externalCodeSet&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#codesetName">codesetName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#citation">citation</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#codesetURL">codesetURL</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The externalCodeSet element is a
+                    reference to an externally defined set of codes used
+                    in this attribute. This can either be a citation
+                    (using the eml-citation module) or a
+                    URL. Using an externally defined codeset (rather
+                    than a codeDefinition) means that interpretation of the
+                    data is dependent upon future users being able to
+                    obtain the code definitions, so care should be taken
+                    to only use highly standardized external code sets that
+                    will be available for many years.  If at all possible,
+                    it is preferable to define the codes inline using the
+                    codeDefinition element.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="codesetName">codesetName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The codesetName element is the
+                          name of an externally defined code
+                          set.<br>
+<span class="boldtext">Example(s): </span>
+<br>FIPS State Abbreviation
+                          Codes<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="citation">citation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-literature.html#CitationType">cit:CitationType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The citation element is a
+                            citation for the code set
+                            reference</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="codesetURL">codesetURL&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:anyURI</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The codesetURL element is a
+                            URL for the code set
+                            reference.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="entityCodeList">entityCodeList&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#entityReference">entityReference</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#valueAttributeReference">valueAttributeReference</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#definitionAttributeReference">definitionAttributeReference</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#orderAttributeReference">orderAttributeReference</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The entityCodeList is a list of
+                    codes and their definitions in a data
+                    entity that is present in this dataset. The fields
+                    specify exactly which entity it is, and which 
+                    attributes of that entity contain the codes, their
+                    definitions, and the order of the values.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="entityReference">entityReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The entityReference element is
+                          a reference to the id of the entity in which
+                          the code list has been defined. This entity
+                          must have been defined elsewhere in the
+                          metadata and have an id that matches the value
+                          of this element.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="valueAttributeReference">valueAttributeReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The valueAttributeReference
+                          element is a reference to the id of the
+                          attribute that contains the list of codes. This
+                          attribute must have been defined elsewhere in
+                          the metadata and have an id that matches the
+                          value of this element.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="definitionAttributeReference">definitionAttributeReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The
+                          definitionAttributeReference element is a
+                          reference to the id of the attribute that
+                          contains the definition of codes. This
+                          attribute must have been defined elsewhere in
+                          the metadata and have an id that matches the
+                          value of this element.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="orderAttributeReference">orderAttributeReference&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The orderAttributeReference element
+                          is a reference to the id of the attribute that
+                          contains the order of codes. The values in this
+                          attribute are integers indicating increasing values
+                          of the categories.  This attribute must have been
+                          defined elsewhere in the metadata and have an id that
+                          matches the value of this element.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="textDomain">textDomain&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#definition">definition</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#pattern">pattern</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#source">source</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The textDomain element describes a free
+              text domain for the attribute. By default, if a pattern is
+              missing or empty, then any text is allowed. If a pattern is
+              present, then it is interpreted as a regular expression
+              constraining the allowable character sequences for the
+              attribute. This domain type is most useful for describing
+              extensive text domains that match a pattern but do not
+              have a finite set of values.  Another use is for
+              describing the domain of textual fields like comments
+              that allow any legal string value.<br>
+<span class="boldtext">Example(s): </span>
+<br>Typically, a text domain will have an empty
+              pattern or one that constrains allowable values. For
+              example, '[0-9]{3}-[0-9]{3}-[0-9]{4}' allows for only
+              numeric digits in the pattern of a US phone
+              number.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="definition">definition&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The element definition provides the
+                    text domain definition, that is, what kinds of text
+                    expressions are allowed for this attribute. If there
+                    is a pattern supplied, the definition element
+                    expresses the meaning of the pattern, For example, a
+                    particular pattern may be meant to represent phone
+                    numbers in the US phone system format. A definition
+                    element may also be used to extend an enumerated
+                    domain.<br>
+<span class="boldtext">Example(s): </span>
+<br>US telephone numbers in the format
+                    "(999) 888-7777"<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="pattern">pattern&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The pattern element specifies a
+                    regular expression pattern that constrains the set of
+                    allowable values for the attribute. This is commonly
+                    used to define template patterns for data such as
+                    phone numbers where the attribute is text but the
+                    values are not drawn from an enumeration. If the
+                    pattern field is empty or missing, it defaults to
+                    '.*', which matches any string, including the empty
+                    string. Repeated pattern elements are combined using
+                    logical OR. The regular expression syntax is the same
+                    as that used in the XML Schema Datatypes
+                    Recommendation from the W3C.<br>
+<span class="boldtext">Example(s): </span>
+<br>'[0-9a-zA-Z]' matches simple
+                    alphanumeric strings and '(\d\d\d) \d\d\d-\d\d\d\d'
+                    represents telephone strings in the US of the form
+                    '(704) 876-1734'<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="source">source&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The source element is the name of
+                    the source from which this text domain and its
+                    associated definition are drawn. This is commonly
+                    used for identifying standard coding systems, like
+                    the FIPS standard for postal abbreviations for states
+                    in the US. In other cases, the coding may be a
+                    researcher's custom way of recording and classifying
+                    their data, and no external "source" would
+                    exist.<br>
+<span class="boldtext">Example(s): </span>
+<br>ISO country codes<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="numberType">numberType&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#NumberType">NumberType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote></blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="bounds">bounds&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#minimum">minimum</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#maximum">maximum</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The bounds element in the BoundsGroup contains the
+        minimum and maximum values of a numeric attribute. These
+        are theoretical or permitted values (ie. prescriptive), and
+        not necessarily the actual minimum and maximum observed in
+        a given data set (descriptive). Either or both a minimum and maximum may 
+        be set, and each has an attribute "exclusive" to define how the value should
+        be interpreted.
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="minimum">minimum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#exclusive">exclusive</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The minimum element specifies the
+                minimum permitted value of a numeric
+                attribute.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="maximum">maximum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#exclusive">exclusive</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The maximum element specifies the
+                maximum permitted value of a numeric
+                attribute.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="bounds">bounds&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#minimum">minimum</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#maximum">maximum</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The bounds element in the BoundsDateGroup contains the
+        minimum and maximum dates of a dateTime attribute. These
+        are theoretical or permitted values (ie. prescriptive), and
+        not necessarily the actual minimum and maximum observed in
+        a given data set (descriptive). Either or both a minimum and maximum may 
+        be set, and each has an attribute "exclusive" to define how the value should
+        be interpreted.
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="minimum">minimum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#exclusive">exclusive</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The minimum element specifies the
+                minimum permitted value of a date
+                attribute.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="maximum">maximum&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#exclusive">exclusive</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The maximum element specifies the
+                maximum permitted value of a date
+                attribute.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="typeSystem">typeSystem</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">http://www.w3.org/2001/XMLSchema-datatypes</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The typeSystem attribute is the system
+                      used to define the storage types. This should be an
+                      identifier of a well known and published typing system.
+                      The default and recommended system is the XML Schema data
+                      type system. For details go to http://www.w3.org. If
+                      another system is used (such as Java or C++ types),
+                      typeSystem should be changed to match the
+                      system.<br>
+<span class="boldtext">Example(s): </span>
+<br>
+                      http://www.w3.org/2001/XMLSchema-datatypes<br>java<br>C<br>Oracle 8i<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="order">order</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:long</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Ordinal scale measurements have a discrete list 
+			of values with a specific ordering of those values. This attributes 
+			specifies that order from low to high. For example, for LOW, 
+            MEDIUM, HIGH, the order attribute might be "LOW=1, MEDIUM=2 and 
+            HIGH=3".
+                  	</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="enforced">enforced</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">yes</span>
+</p>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>yes</li>
+<li>no</li>
+</ul>
+</p>
+</td>
+</tr>
+<td valign="top" class="tablepanel" colspan="1">
+<blockquote>Indicates whether the enumerated
+                  domain values are the only allowable values for
+                  the domain.  In some exceedingly rare cases, users may
+                  wish to present a list of value codes in
+                  enumeratedDomain but not formally restrict the value
+                  space for the attribute to those values.  If so, they
+                  can indicate this by setting the enforced attribute
+                  to the value no.  Acceptable values are yes and no, and
+                  the default value is yes.
+                  </blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="exclusive">exclusive</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:boolean</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>If exclusive is set to true, then
+                        the value specifies a lower bound not including
+                        the value itself.  Setting exclusive to true is
+                        the equivalent of using a less-than or greater-than
+                        operator, while setting it to false is the same as
+                        using a less-than-or-equals or greater-than-or-equals
+                        operator. For example, if the minimum is "5" and
+                        exclusive is false, then all values must be greater
+                        than or equal to 5, but if exclusive is true than
+                        all values must be greater than 5 (not including
+                        5.0 itself).
+                        </blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="exclusive">exclusive</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:boolean</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>If exclusive is set to true, then
+                        the value specifies a lower bound not including
+                        the value itself.  Setting exclusive to true is
+                        the equivalent of using a less-than or greater-than
+                        operator, while setting it to false is the same as
+                        using a less-than-or-equals or greater-than-or-equals
+                        operator. For example, if the minimum is "5" and
+                        exclusive is false, then all values must be greater
+                        than or equal to 5, but if exclusive is true than
+                        all values must be greater than 5 (not including
+                        5.0 itself).
+                        </blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="exclusive">exclusive</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:boolean</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>If exclusive is set to true, then
+                        the value specifies a lower bound not including
+                        the value itself.  Setting exclusive to true is
+                        the equivalent of using a less-than or greater-than
+                        operator, while setting it to false is the same as
+                        using a less-than-or-equals or greater-than-or-equals
+                        operator. For example, if the minimum is "5" and
+                        exclusive is false, then all values must be greater
+                        than or equal to 5, but if exclusive is true than
+                        all values must be greater than 5 (not including
+                        5.0 itself).
+                        </blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="exclusive">exclusive</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:boolean</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>If exclusive is set to true, then
+                        the value specifies a lower bound not including
+                        the value itself.  Setting exclusive to true is
+                        the equivalent of using a less-than or greater-than
+                        operator, while setting it to false is the same as
+                        using a less-than-or-equals or greater-than-or-equals
+                        operator. For example, if the minimum is "5" and
+                        exclusive is false, then all values must be greater
+                        than or equal to 5, but if exclusive is true than
+                        all values must be greater than 5 (not including
+                        5.0 itself).
+                        </blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="AttributeListType">AttributeListType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attribute">attribute</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This complexType defines the structure of the
+        attributeList element. The content model is a choice between one or
+        more attribute elements, and references. References links to an
+        attribute list defined elsewhere.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="AttributeType">AttributeType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeName">attributeName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeLabel">attributeLabel</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeDefinition">attributeDefinition</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#storageType">storageType</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#measurementScale">measurementScale</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#missingValueCode">missingValueCode</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#accuracy">accuracy</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#coverage">coverage</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#methods">methods</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote> Type definition for the content of an
+        attribute (variable) that can be part of an entity.
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="Accuracy">Accuracy&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#attributeAccuracyReport">attributeAccuracyReport</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#quantitativeAttributeAccuracyAssessment">quantitativeAttributeAccuracyAssessment</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="UnitType">UnitType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#standardUnit">standardUnit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#customUnit">customUnit</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This field identifies the unit of measurement
+        for this attribute. It is a choice of either a standard unit,
+        or a custom unit. If it is a custom unit,
+        the definition of the unit must be provided in the document using
+        the STMML syntax, and the name provided in the customUnit element must
+        reference the id of its associated STMML definition precisely. For
+        further information on STMML (http://www.xml-cml.org/stmml/) or
+        see stmml.xsd which is included with the EML 2.0 distribution for
+        details.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="PrecisionType">PrecisionType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:float</span> (by xs:extension) </p>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>Precision indicates how close together or how 
+        repeatable measurements are.  A precise measuring instrument will give 
+        very nearly the same result each time it is used. This means that 
+        someone interpreting the data should expect that if a measurement were 
+        repeated, most measured values would fall within the interval specified 
+        by the precision. The value of precision should be expressed in the
+        same unit as the measurement. For example, for an attribute with unit 
+        "meter", a precision of "0.1" would be interpreted to mean that most 
+        repeat measurements would fall within an interval of 1/10th of a meter.
+        <br>
+<span class="boldtext">Example(s): </span>
+<br>0.1<br>0.5<br>1<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="NonNumericDomainType">NonNumericDomainType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#enumeratedDomain">enumeratedDomain</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#textDomain">textDomain</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The non-numeric domain field describes the domain
+        of the attribute being documented.  It can describe two
+        different types of domains: enumerated and text.  Enumerated
+        domains are lists of values that are explicitly provided as
+        legitimate values.  Only values from that list should occur
+        in the attribute.  They are often used for response codes
+        such as "HIGH" and "LOW".  Text domains are used for attributes
+        that allow more free-form text fields, but still permit some
+        specification of the value-space through pattern matching.  A
+        text domain is usually used for comment and notes attributes,
+        and other character attributes that don't have a precise set of
+        constrained values. This is an important field for post processing
+        and error checking of the dataset. It represents a formal 
+        specification of the value space for the attribute, and so there 
+        should never be a value for the attribute that falls outside of 
+        the set of values prescribed by the domain.</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="NumericDomainType">NumericDomainType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#numberType">numberType</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#BoundsGroup">BoundsGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The numericDomain element specifies the
+        minimum and maximum values of a numeric attribute. These
+        are theoretical or permitted values (ie. prescriptive), and
+        not necessarily the actual minimum and maximum observed in
+        a given data set (descriptive). The information in
+        numericDomain and in precision together constitute
+        sufficient information to decide upon an appropriate
+        system specific data type for representing a particular
+        attribute. For example, an attribute with a numeric domain
+        from 0-50,000 and a precision of 1 could be represented in
+        the C language using a 'long' value, but if the precision is
+        changed to '0.5' then a 'float' type would be needed.
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="DateTimeDomainType">DateTimeDomainType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#BoundsDateGroup">BoundsDateGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The DateTimeDomain specifies the
+        minimum and maximum values of a dateTime attribute. These
+        are theoretical or permitted values (ie. prescriptive), and
+        not necessarily the actual minimum and maximum observed in
+        a given data set (descriptive). The domain expressions should
+        be in the same dateTime format as is used in the "formatString"
+        description for the attribute.  For example, if the format
+        string is "YYYY-MM-DD", then a valid minimum in the domain
+        would be "2001-05-29".  The "bounds" element is optional, and
+        if it is missing then any legitimate value from the Gregorian 
+        calendar system is allowed in the attribute as long as its
+        representation matches its corresponding formatString.
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="NumberType">NumberType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>natural</li>
+<li>whole</li>
+<li>integer</li>
+<li>real</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This is the enumeration for the allowed values
+        of the element numberType.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="BoundsGroup">BoundsGroup&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#bounds">bounds</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The bounds element contains the
+        minimum and maximum values of a numeric attribute. These
+        are theoretical or permitted values (ie. prescriptive), and
+        not necessarily the actual minimum and maximum observed in
+        a given data set (descriptive). 
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="BoundsDateGroup">BoundsDateGroup&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#bounds">bounds</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The BoundsDateGroup specifies the
+        minimum and maximum dates allowed for a dateTime attribute. These
+        are theoretical or permitted values (ie. prescriptive), and
+        not necessarily the actual minimum and maximum observed in
+        a given data set (descriptive). The domain expressions should
+        be in the same dateTime format as is used in the attribute's "formatString".
+        For example, if the format
+        string is "YYYY-MM-DD", then a valid minimum in the domain
+        would be "2001-05-29".  The "bounds" element is optional, and
+        if it is missing then any legitimate value from the Gregorian 
+        calendar system is allowed in the attribute as long as its
+        representation matches its corresponding formatString.
+        </blockquote>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

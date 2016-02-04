@@ -1,0 +1,589 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-access Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-access</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+              The eml-access module - Access control rules for resources
+            </div>
+            
+<p>
+              The eml-access module describes the level of access that is
+              to be allowed or denied to a resource for a particular user or 
+              group of users, and can be described independently for metadata 
+              and data.  The eml-access
+              module uses a reference to a particular authentication system
+              to determine the set of principals (users or groups) that can be
+              specified in the access rules.
+              The special principal 'public' can be used to indicate that any
+              user or group has access permission, thereby making
+              it easier to specify that anonymous access is allowed. 
+             </p>
+            
+<p>        
+              There are two mechanisms for including access control 
+              via the eml-access module: 
+              
+                
+                  <p>
+                    The top-level "eml" element may have an optional 
+                    &lt;access&gt; element that is used to establish the 
+                    default access control for the entire EML package. If 
+                    this access element is omitted from the document, then 
+                    the package submitter should be given full access to the 
+                    package but all other users should be denied all access. 
+                    To allow the package to be publicly viewable, the EML 
+                    author must explicitly include a rule stating so.  Barring 
+                    the existence of a distribution-level &lt;access&gt; element 
+                    (see below), access to data entities will be controlled by 
+                    the package-level &lt;access&gt; element in the 
+                    &lt;eml&gt; element.
+                  </p>
+                
+                
+                  
+<p>
+                    Exceptions for particular entity-level components of the 
+                    package can be controlled at a finer grain by using an 
+                    access description in that entity's physical/distribution 
+                    tree. When access control rules are specified at this 
+                    level, they apply only to the data in the parent 
+                    distribution element, and not to the metadata. Thus, it 
+                    will control access to the content of the &lt;inline&gt; 
+                    element, as well as resources that are referenced by the 
+                    &lt;online/url&gt; and &lt;online/connection&gt; paths. 
+                    These exceptions to access for particular data resources 
+                    are applied after the default access rules at the 
+                    package-level have been applied, so they effectively 
+                    override the default rules when they overlap.
+                  </p>
+                
+              
+            
+</p>
+            
+<p>
+              In previous versions of EML access rules for entity-level 
+              distribution were contained in &lt;additionalMetadata&gt; 
+              sections and referenced via the &lt;describes&gt; tag. 
+              Although in theory these could have referenced any node, in 
+              application such node-level access control is problematic. 
+              Since the most common uses of access control rules were to 
+              limit access to specific data entities, the access tree has 
+              been placed there explicitly in EML 2.1.0.
+            </p>          
+            
+<p>
+              Access is specified with a choice of child elements, either 
+              &lt;allow&gt; or &lt;deny&gt;. Within these rules, values can 
+              be assigned for each &lt;principal&gt; using the 
+              &lt;permission&gt; element. Users given "read" permission can 
+              view the resource; "write" allows changes to the resource 
+              excluding changes to the access rules; "changePermission" 
+              includes "write" plus the changing of access rules. Users 
+              allowed "all" permissions; may do all of the above.  Access to 
+              data and metadata is affected by the order attribute of the 
+              &lt;access&gt; element. It is possible for a deny rule to 
+              override an allow rule, and vice versa.  In the case where the 
+              order attribute is set to "allowFirst", and there are rules 
+              similar to the following (with non-critical sections deleted):
+<pre>
+  &lt;deny&gt;
+    &lt;principal&gt;public&lt;/principal&gt;
+    &lt;permission&gt;read&lt;/permission&gt;
+  &lt;/deny&gt;
+  &lt;allow&gt;
+    &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+    &lt;permission&gt;read&lt;/permission&gt;
+  &lt;/allow&gt;
+</pre>
+              the principal "uid=alice ..." will be denied access, 
+              because it is a member of the special "public" 
+              principal, and the deny rule is processed second. For this 
+              allow rule to truly allow access to that principal, the order 
+              attribute should be set to "denyFirst", and the 
+              allow rule will override the deny rule when it is processed 
+              second.              
+            </p>
+            
+<p>
+              An example is given below, with non-critical sections deleted:
+<pre>
+  &lt;eml&gt;
+      &lt;access 
+          authSystem="ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org" 
+          order="allowFirst"&gt;
+        &lt;allow&gt;
+          &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+          &lt;permission&gt;read&lt;/permission&gt;
+          &lt;permission&gt;write&lt;/permission&gt;
+        &lt;allow&gt;
+      &lt;/access&gt;
+      &lt;dataset&gt;
+      ...
+      ...
+      &lt;dataTable id="entity123"&gt;
+      ...
+        &lt;physical&gt;
+        ...
+          &lt;distribution&gt;
+          ...
+            &lt;access id="access123"
+            authSystem="ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org" 
+            order="allowFirst"&gt;
+              &lt;deny&gt;
+                &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+                &lt;permission&gt;write&lt;/permission&gt;
+            &lt;/deny&gt;
+          &lt;/access&gt;
+         &lt;/distribution&gt;
+       &lt;/physical&gt;
+      &lt;/dataTable&gt;
+      &lt;dataTable id="entity234"&gt;
+        ...
+        &lt;physical&gt;
+        ...
+          &lt;distribution&gt;
+            ...
+            &lt;access&gt;
+              &lt;references&gt;access123&lt;/references&gt;
+            &lt;/access&gt;
+          &lt;/distribution&gt;
+        &lt;/physical&gt;
+      &lt;/dataTable&gt;
+      ...    
+    &lt;/dataset&gt;
+  &lt;eml&gt;
+</pre>
+              In this example, the overall default access is to allow the 
+              user=alice (but no one else) to read and write all metadata 
+              and data. However, under "entity123" and 
+              "entity234", there is an additional rule saying 
+              that user=alice does not have write permission. The net 
+              effect is that Alice can read and make changes to the 
+              metadata, but cannot make changes to the two data entities. 
+              In addition, Alice cannot change these access rules; although 
+              the submitter can.
+            </p>
+            
+<p>
+              This example also shows how the eml-access module, like other modules,
+              may be "referenced" via the &lt;references&gt; tag.  This
+              allows an access control document to be described once, and then
+              used as a reference in other locations within the EML document
+              via its ID.
+            </p>
+            
+<p>
+            In summary, access rules can be applied in two places in an
+            eml document. Default access rules are established
+            in the top &lt;access&gt; element for the main eml document (e.g.,
+            "/eml/access").  These default rules can be overridden
+            for particular data entities by adding additional &lt;access&gt;
+            elements in the physical/distribution trees of those entities.
+           </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-access">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all data where controlling user access to the dataset is an issue</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-resource</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-access.png" target="offline">eml-access image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="access">access&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#AccessType">AccessType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The access element contains a list of rules defining
+        permissions for this resource. For descriptions of the individual elements, 
+        see the AccessType.The permission rules defined here can be overridden 
+         by rules added to an access tree in the PhysicalDistributionType  
+        at the entity level. <br>
+<span class="boldtext">Example(s): </span>
+<br>See the description of the AccessType.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="allow">allow&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#AccessRule">AccessRule</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The allow element indicates that a particular
+              user or group is granted the defined permission.<br>
+<span class="boldtext">Example(s): </span>
+<br>allow<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="deny">deny&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#AccessRule">AccessRule</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The deny element indicates that a particular
+              user or group is not granted the defined
+              permission.<br>
+<span class="boldtext">Example(s): </span>
+<br>deny<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="principal">principal&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#NonEmptyStringType">res:NonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The principal element defines the user or group to
+            which the access control rule applies. The users and groups must be
+            defined in the authentication system described in the authSystem
+            element.  The special principal 'public' can be used to indicate
+            that any user or group has a particular access permission, thereby
+            making it easier to specify that anonymous access is allowed.
+            <br>
+<span class="boldtext">Example(s): </span>
+<br>public<br>uid=alice,o=LTER,dc=ecoinformatics,dc=org<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="permission">permission&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0"></table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+              
+                
+<p>
+            The permission that is being granted or denied
+            to a particular user or group for a given resource. The list of
+            permissions come from a predetermined list:
+            </p>
+                
+<p>'read' - allow or deny viewing of the resource, </p>
+                
+<p>'write' - allow or deny modification of the resource (except for access rules),  </p>
+                
+<p>'changePermission' - modifications including access rules, and  </p>
+                
+<p>'all' - all of the above. </p>
+                
+<p>
+               
+                This element also allows other permission values that may be applicable to some other authentication systems but are not defined in this specification (if these other values are used, access rule enforcement is indeterminate outside of the originating system).</p>
+              
+            
+<br>
+<span class="boldtext">Example(s): </span>
+<br>read<br>
+</blockquote>
+</td>
+<tr>
+<td class="tablepanel"></td>
+</tr>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="order">order</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">allowFirst</span>
+</p>
+</td>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>allowFirst</li>
+<li>denyFirst</li>
+</ul>
+</p>
+</td>
+</tr>
+<td valign="top" class="tablepanel" colspan="1">
+<blockquote>To obtain the desired access control, use the order 
+          attribute to define which rules should be applied first. The acceptable
+          values are 'allowFirst' and 'denyFirst'. If 'allowFirst' is
+          specified, then all 'allow' rules are processed, and then overridden
+          by all 'deny' rules.  If 'denyFirst' is specified, then all 'deny'
+          rules are processed, and then overridden by all 'allow' rules.  
+          <br>
+<span class="boldtext">Example(s): </span>
+<br>allowFirst<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="authSystem">authSystem</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The authentication system determines the set of
+          principals (users + groups) that can be used in the access control
+          list, and the membership of users in groups. This element is intended
+          to provide a reference to the authentication system that is used to
+          verify the user or group. This reference is typically in the form
+          of a URI, which includes the connection protocol, Internet host, and
+          path to the authentication mechanism.<br>
+<span class="boldtext">Example(s): </span>
+<br>
+          ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org
+          <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="AccessType">AccessType&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#allow">allow</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#deny">deny</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#order">order</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">allowFirst</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#authSystem">authSystem</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The access element contains a list of rules that define
+        the level of access for a resource. There are two uses of access trees: to
+        control access to either metadata or data. To control access to metadata 
+        use the eml/access tree. By default, these rules will also apply to the contained 
+        data. To override the default controls for specific data entities, use the 
+        access element available in the entity's physical/distribution tree.  A 
+        combination of access trees and their "order rules" (see description of 
+        the "order" attribute) allows EML authors
+        to have fine control over permissions for individuals and groups.
+        </blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="AccessRule">AccessRule&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#principal">principal</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#permission">permission</a></td><td class="tablepanel">required</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The AccessRule type defines a list of users that are
+        derived from a particular authentication system (such as an LDAP
+        directory), whether the user or group is allowed or denied access, the
+        extent of their access (read, write , or changePermission
+        access).</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

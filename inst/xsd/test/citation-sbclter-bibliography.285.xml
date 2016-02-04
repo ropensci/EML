@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
+         packageId="sbclter-bibliography.285.1"
+         system="knb"
+         scope="system">
+   <citation id="sbclter-bibliography.285">
+      <alternateIdentifier system="sbclter-bibliography">285</alternateIdentifier>
+      <alternateIdentifier system="DOI">10.1061/40761(175)73</alternateIdentifier>
+      <title>Ecological effects of grooming on exposed sandy beaches in Southern California</title>
+      <creator scope="document">
+         <individualName>
+            <givenName>J</givenName>
+            <givenName>E</givenName>
+            <surName>Dugan</surName>
+         </individualName>
+         <electronicMailAddress>j_dugan@lifesci.ucsb.edu</electronicMailAddress>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>D</givenName>
+            <givenName>M</givenName>
+            <surName>Hubbard</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>H</givenName>
+            <givenName>M</givenName>
+            <surName>Page</surName>
+         </individualName>
+      </creator>
+      <pubDate>2005</pubDate>
+      <conferenceProceedings>
+         <publisher>
+            <organizationName>American Society of Civil Engineers</organizationName>
+         </publisher>
+         <editor>
+            <individualName>
+               <givenName>Orville</givenName>
+               <surName>Magoon</surName>
+            </individualName>
+         </editor>
+         <editor>
+            <individualName>
+               <givenName>Hugh</givenName>
+               <surName>Converse</surName>
+            </individualName>
+         </editor>
+         <editor>
+            <individualName>
+               <givenName>Brian</givenName>
+               <surName>Baird</surName>
+            </individualName>
+         </editor>
+         <editor>
+            <individualName>
+               <givenName>Beth</givenName>
+               <surName>Jines</surName>
+            </individualName>
+         </editor>
+         <editor>
+            <individualName>
+               <givenName>Melissa</givenName>
+               <surName>Miller-Hessen</surName>
+            </individualName>
+         </editor>
+         <bookTitle>Proceedings of the Conference</bookTitle>
+         <pageRange>824-826</pageRange>
+         <conferenceName>California and the World Ocean '02: Revisiting and Revising California's Ocean Agenda</conferenceName>
+         <conferenceDate>Oct. 27-30, 2002</conferenceDate>
+         <conferenceLocation>
+            <city>Santa Barbara</city>
+            <administrativeArea>CA</administrativeArea>
+         </conferenceLocation>
+      </conferenceProceedings>
+   </citation>
+</eml:eml>
