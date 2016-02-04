@@ -1,8 +1,5 @@
 
 
-get_slots <- function(s4){
-  getSlots(getClass(class(s4)))
-}
 ## Used as the basis of most (all) coercion methods from EML S4
 ## to XML::XMLInternalElementNode class
 ##
@@ -11,6 +8,8 @@ get_slots <- function(s4){
 ## `setAs("someS4class", "XMLInternalElementNode", function(from) S4Toeml(from))`
 ## will fail!
 
+#' @import XML
+#' @import methods
 S4Toeml <- function(obj,
                     node = NULL,
                     excluded_slots = c("namespaces", "dirname", "xmlNodeName")){
@@ -99,3 +98,7 @@ isEmpty <- function(obj){
   }
 }
 
+
+get_slots <- function(s4){
+  getSlots(getClass(class(s4)))
+}

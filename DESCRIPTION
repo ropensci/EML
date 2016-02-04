@@ -1,16 +1,19 @@
 Package: eml2
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1
-Date: 2015-11-05
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Read and Write Ecological Metadata Language Files
+Version: 0.1.0.0
+Date: 2016-02-04
+Author: c(person("Carl", "Boettiger", role = c("aut", "cre"), email = "cboettig@gmail.com"),
+          person("Matt", "Jones", role="aut"))
+Maintainer: Carl Boettiger <cboettig@gmail.com>
+Description: Parse and serialize Ecological Metadata Language ('EML') files into S4 objects.
+License: BSD-2
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: XML,
+    yaml,
+    methods
+Suggests: testthat,
     xml2,
     dplyr,
     purrr
-Suggests: testthat
