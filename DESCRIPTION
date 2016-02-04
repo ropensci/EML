@@ -7,7 +7,7 @@ Author: c(person("Carl", "Boettiger", role = c("aut", "cre"), email = "cboettig@
           person("Matt", "Jones", role="aut"))
 Maintainer: Carl Boettiger <cboettig@gmail.com>
 Description: Parse and serialize Ecological Metadata Language ('EML') files into S4 objects.
-License: BSD-2
+License: FreeBSD
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: XML,

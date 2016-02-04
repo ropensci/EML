@@ -77,6 +77,13 @@ setClass('unit', slots = c('description' = 'character', 'annotation' = 'characte
 #####  inst/xsd/eml-text.xsd  ####
 
 
+setClass('ListOfsection', contains = 'list')
+setClass('ListOfpara', contains = 'list')
+setClass('ListOfvalue', contains = 'list')
+setClass('ListOfvalue', contains = 'list')
+setClass('ListOfvalue', contains = 'list')
+setClass('ListOflistitem', contains = 'list')
+setClass('ListOfvalue', contains = 'list')
 setClass('emphasis', slots = c('value' = 'ListOfvalue'), contains = c('eml-2.1.1'))
 setClass('literalLayout', slots = c('value' = 'ListOfvalue'), contains = c('eml-2.1.1'))
 setClass('ulink', slots = c('citetitle' = 'i18nString', 'url' = 'xml_attribute'), contains = c('eml-2.1.1'))
@@ -107,13 +114,6 @@ setClass('orderedlist', contains = 'ListType')
 setClass('value', contains = 'i18nString')
 setClass('subscript', contains = 'SubSuperScriptType')
 setClass('superscript', contains = 'SubSuperScriptType')
-setClass('ListOfsection', contains = 'list')
-setClass('ListOfpara', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOflistitem', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
 
 
 #####  inst/xsd/eml-documentation.xsd  ####
@@ -146,6 +146,14 @@ setClass('angleUnitType', contains = 'character')
 
 
 setClass('RoleType', contains = 'character')
+setClass('ListOfaddress', contains = 'list')
+setClass('ListOfphone', contains = 'list')
+setClass('ListOfelectronicMailAddress', contains = 'list')
+setClass('ListOfonlineUrl', contains = 'list')
+setClass('ListOfuserId', contains = 'list')
+setClass('ListOfsalutation', contains = 'list')
+setClass('ListOfgivenName', contains = 'list')
+setClass('ListOfdeliveryPoint', contains = 'list')
 setClass('phone', slots = c('phonetype' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('userId', slots = c('directory' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('ResponsibleParty', slots = c('individualName' = 'Person', 'organizationName' = 'character', 'positionName' = 'character', 'address' = 'ListOfaddress', 'phone' = 'ListOfphone', 'electronicMailAddress' = 'ListOfelectronicMailAddress', 'onlineUrl' = 'ListOfonlineUrl', 'userId' = 'ListOfuserId', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
@@ -159,14 +167,6 @@ setClass('salutation', contains = 'character')
 setClass('givenName', contains = 'character')
 setClass('deliveryPoint', contains = 'character')
 setClass('party', contains = 'ResponsibleParty')
-setClass('ListOfaddress', contains = 'list')
-setClass('ListOfphone', contains = 'list')
-setClass('ListOfelectronicMailAddress', contains = 'list')
-setClass('ListOfonlineUrl', contains = 'list')
-setClass('ListOfuserId', contains = 'list')
-setClass('ListOfsalutation', contains = 'list')
-setClass('ListOfgivenName', contains = 'list')
-setClass('ListOfdeliveryPoint', contains = 'list')
 
 
 #####  inst/xsd/eml-resource.xsd  ####
@@ -179,6 +179,19 @@ setClass('SystemType', contains = 'character')
 setClass('ScopeType', contains = 'character')
 setClass('FunctionType', contains = 'character')
 setClass('NonEmptyStringType', contains = 'character')
+setClass('ListOfalternateIdentifier', contains = 'list')
+setClass('ListOftitle', contains = 'list')
+setClass('ListOfcreator', contains = 'list')
+setClass('ListOfmetadataProvider', contains = 'list')
+setClass('ListOfassociatedParty', contains = 'list')
+setClass('ListOfkeywordSet', contains = 'list')
+setClass('ListOfkeyword', contains = 'list')
+setClass('ListOfadditionalInfo', contains = 'list')
+setClass('ListOfdistribution', contains = 'list')
+setClass('ListOfparameterDefinition', contains = 'list')
+setClass('ListOfmediumFormat', contains = 'list')
+setClass('ListOfparameter', contains = 'list')
+setClass('ListOfvalue', contains = 'list')
 setClass('alternateIdentifier', slots = c('system' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('associatedParty', slots = c('role' = 'RoleType'), contains = c('eml-2.1.1'))
 setClass('keywordSet', slots = c('keyword' = 'ListOfkeyword', 'keywordThesaurus' = 'character'), contains = c('eml-2.1.1'))
@@ -215,19 +228,6 @@ setClass('url', contains = 'UrlType')
 setClass('connection', contains = 'ConnectionType')
 setClass('connectionDefinition', contains = 'ConnectionDefinitionType')
 setClass('connectionDefinition', contains = 'ConnectionDefinitionType')
-setClass('ListOfalternateIdentifier', contains = 'list')
-setClass('ListOftitle', contains = 'list')
-setClass('ListOfcreator', contains = 'list')
-setClass('ListOfmetadataProvider', contains = 'list')
-setClass('ListOfassociatedParty', contains = 'list')
-setClass('ListOfkeywordSet', contains = 'list')
-setClass('ListOfkeyword', contains = 'list')
-setClass('ListOfadditionalInfo', contains = 'list')
-setClass('ListOfdistribution', contains = 'list')
-setClass('ListOfparameterDefinition', contains = 'list')
-setClass('ListOfmediumFormat', contains = 'list')
-setClass('ListOfparameter', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
 
 
 #####  inst/xsd/eml-spatialReference.xsd  ####
@@ -235,6 +235,10 @@ setClass('ListOfvalue', contains = 'list')
 
 setClass('lengthUnits', contains = 'character')
 setClass('angleUnits', contains = 'character')
+setClass('ListOfaltitudeResolution', contains = 'list')
+setClass('ListOfdepthResolution', contains = 'list')
+setClass('ListOfparameter', contains = 'list')
+setClass('ListOfhorizCoordSysDef', contains = 'list')
 setClass('vertCoordSys', slots = c('altitudeSysDef' = 'character', 'depthSysDef' = 'character'), contains = c('eml-2.1.1'))
 setClass('altitudeSysDef', slots = c('altitudeDatumName' = 'character', 'altitudeResolution' = 'ListOfaltitudeResolution', 'altitudeDistanceUnits' = 'character', 'altitudeEncodingMethod' = 'character'), contains = c('eml-2.1.1'))
 setClass('depthSysDef', slots = c('depthDatumName' = 'character', 'depthResolution' = 'ListOfdepthResolution', 'depthDistanceUnits' = 'character', 'depthEncodingMethod' = 'character'), contains = c('eml-2.1.1'))
@@ -257,29 +261,30 @@ setClass('geogCoordSys', contains = 'geogCoordSysType')
 setClass('geogCoordSys', contains = 'geogCoordSysType')
 setClass('horizCoordSysDef', contains = 'horizCoordSysType')
 setClass('spatialReference', contains = 'SpatialReferenceType')
-setClass('ListOfaltitudeResolution', contains = 'list')
-setClass('ListOfdepthResolution', contains = 'list')
-setClass('ListOfparameter', contains = 'list')
-setClass('ListOfhorizCoordSysDef', contains = 'list')
 
 
 #####  inst/xsd/eml-access.xsd  ####
 
 
+setClass('ListOfprincipal', contains = 'list')
+setClass('ListOfpermission', contains = 'list')
 setClass('AccessType', slots = c('allow' = 'AccessRule', 'deny' = 'AccessRule', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'order' = 'xml_attribute', 'authSystem' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('AccessRule', slots = c('principal' = 'ListOfprincipal', 'permission' = 'ListOfpermission'), contains = c('eml-2.1.1'))
 setClass('access', contains = 'AccessType')
 setClass('allow', contains = 'AccessRule')
 setClass('deny', contains = 'AccessRule')
 setClass('principal', contains = 'character')
-setClass('ListOfprincipal', contains = 'list')
-setClass('ListOfpermission', contains = 'list')
 
 
 #####  inst/xsd/eml-constraint.xsd  ####
 
 
 setClass('CardinalityChildOccurancesType', contains = 'character')
+setClass('ListOfattributeReference', contains = 'list')
+setClass('ListOfattributeReference', contains = 'list')
+setClass('ListOfattributeReference', contains = 'list')
+setClass('ListOfattributeReference', contains = 'list')
+setClass('ListOfattributeReference', contains = 'list')
 setClass('primaryKey', slots = c('key' = 'character'), contains = c('ConstraintBaseGroup', 'eml-2.1.1'))
 setClass('key', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1'))
 setClass('uniqueKey', slots = c('key' = 'character'), contains = c('ConstraintBaseGroup', 'eml-2.1.1'))
@@ -299,17 +304,26 @@ setClass('attributeReference', contains = 'character')
 setClass('attributeReference', contains = 'character')
 setClass('attributeReference', contains = 'character')
 setClass('childOccurences', contains = 'CardinalityChildOccurancesType')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
 
 
 #####  inst/xsd/eml-coverage.xsd  ####
 
 
 setClass('GRingType', contains = 'character')
+setClass('ListOfsingleDateTime', contains = 'list')
+setClass('ListOftimeScaleCitation', contains = 'list')
+setClass('ListOfdatasetGPolygon', contains = 'list')
+setClass('ListOfgRingPoint', contains = 'list')
+setClass('ListOfdatasetGPolygonExclusionGRing', contains = 'list')
+setClass('ListOfgRingPoint', contains = 'list')
+setClass('ListOfclassificationSystem', contains = 'list')
+setClass('ListOfidentificationReference', contains = 'list')
+setClass('ListOfidentifierName', contains = 'list')
+setClass('ListOfvouchers', contains = 'list')
+setClass('ListOforiginator', contains = 'list')
+setClass('ListOftaxonomicClassification', contains = 'list')
+setClass('ListOfcommonName', contains = 'list')
+setClass('ListOftaxonomicClassification', contains = 'list')
 setClass('temporalCoverage', contains = c('eml-2.1.1'))
 setClass('taxonomicCoverage', contains = c('eml-2.1.1'))
 setClass('rangeOfDates', slots = c('beginDate' = 'SingleDateTimeType', 'endDate' = 'SingleDateTimeType'), contains = c('eml-2.1.1'))
@@ -351,26 +365,21 @@ setClass('originator', contains = 'ResponsibleParty')
 setClass('taxonomicClassification', contains = 'TaxonomicClassificationType')
 setClass('commonName', contains = 'character')
 setClass('taxonomicClassification', contains = 'TaxonomicClassificationType')
-setClass('ListOfsingleDateTime', contains = 'list')
-setClass('ListOftimeScaleCitation', contains = 'list')
-setClass('ListOfdatasetGPolygon', contains = 'list')
-setClass('ListOfgRingPoint', contains = 'list')
-setClass('ListOfdatasetGPolygonExclusionGRing', contains = 'list')
-setClass('ListOfgRingPoint', contains = 'list')
-setClass('ListOfclassificationSystem', contains = 'list')
-setClass('ListOfidentificationReference', contains = 'list')
-setClass('ListOfidentifierName', contains = 'list')
-setClass('ListOfvouchers', contains = 'list')
-setClass('ListOforiginator', contains = 'list')
-setClass('ListOftaxonomicClassification', contains = 'list')
-setClass('ListOfcommonName', contains = 'list')
-setClass('ListOftaxonomicClassification', contains = 'list')
 
 
 #####  inst/xsd/eml-attribute.xsd  ####
 
 
 setClass('NumberType', contains = 'character')
+setClass('ListOfattribute', contains = 'list')
+setClass('ListOfattributeLabel', contains = 'list')
+setClass('ListOfstorageType', contains = 'list')
+setClass('ListOfmissingValueCode', contains = 'list')
+setClass('ListOfquantitativeAttributeAccuracyAssessment', contains = 'list')
+setClass('ListOfcodeDefinition', contains = 'list')
+setClass('ListOfpattern', contains = 'list')
+setClass('ListOfbounds', contains = 'list')
+setClass('ListOfbounds', contains = 'list')
 setClass('storageType', slots = c('typeSystem' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('measurementScale', slots = c('nominal' = 'character', 'ordinal' = 'character', 'interval' = 'character', 'ratio' = 'character', 'dateTime' = 'character'), contains = c('eml-2.1.1'))
 setClass('nominal', slots = c('nonNumericDomain' = 'NonNumericDomainType'), contains = c('eml-2.1.1'))
@@ -420,20 +429,15 @@ setClass('citation', contains = 'CitationType')
 setClass('codesetURL', contains = 'xs:anyURI')
 setClass('pattern', contains = 'character')
 setClass('numberType', contains = 'NumberType')
-setClass('ListOfattribute', contains = 'list')
-setClass('ListOfattributeLabel', contains = 'list')
-setClass('ListOfstorageType', contains = 'list')
-setClass('ListOfmissingValueCode', contains = 'list')
-setClass('ListOfquantitativeAttributeAccuracyAssessment', contains = 'list')
-setClass('ListOfcodeDefinition', contains = 'list')
-setClass('ListOfpattern', contains = 'list')
-setClass('ListOfbounds', contains = 'list')
-setClass('ListOfbounds', contains = 'list')
 
 
 #####  inst/xsd/eml-entity.xsd  ####
 
 
+setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfalternateIdentifier', contains = 'list')
+setClass('ListOfphysical', contains = 'list')
+setClass('ListOfadditionalInfo', contains = 'list')
 setClass('alternateIdentifier', slots = c('system' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('OtherEntityType', slots = c('attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'entityType' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('otherEntity', contains = 'OtherEntityType')
@@ -443,15 +447,20 @@ setClass('physical', contains = 'PhysicalType')
 setClass('coverage', contains = 'Coverage')
 setClass('methods', contains = 'MethodsType')
 setClass('additionalInfo', contains = 'TextType')
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfalternateIdentifier', contains = 'list')
-setClass('ListOfphysical', contains = 'list')
-setClass('ListOfadditionalInfo', contains = 'list')
 
 
 #####  inst/xsd/eml-physical.xsd  ####
 
 
+setClass('ListOfauthentication', contains = 'list')
+setClass('ListOfrecordDelimiter', contains = 'list')
+setClass('ListOfphysicalLineDelimiter', contains = 'list')
+setClass('ListOffieldDelimiter', contains = 'list')
+setClass('ListOfquoteCharacter', contains = 'list')
+setClass('ListOfliteralCharacter', contains = 'list')
+setClass('ListOfquoteCharacter', contains = 'list')
+setClass('ListOfliteralCharacter', contains = 'list')
+setClass('ListOfdistribution', contains = 'list')
 setClass('size', slots = c('unit' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('authentication', slots = c('method' = 'xml_attribute'), contains = c('xs:string', 'eml-2.1.1'))
 setClass('dataFormat', slots = c('textFormat' = 'character', 'externallyDefinedFormat' = 'character', 'binaryRasterFormat' = 'character'), contains = c('eml-2.1.1'))
@@ -493,15 +502,6 @@ setClass('inline', contains = 'InlineType')
 setClass('access', contains = 'AccessType')
 setClass('url', contains = 'UrlType')
 setClass('connection', contains = 'ConnectionType')
-setClass('ListOfauthentication', contains = 'list')
-setClass('ListOfrecordDelimiter', contains = 'list')
-setClass('ListOfphysicalLineDelimiter', contains = 'list')
-setClass('ListOffieldDelimiter', contains = 'list')
-setClass('ListOfquoteCharacter', contains = 'list')
-setClass('ListOfliteralCharacter', contains = 'list')
-setClass('ListOfquoteCharacter', contains = 'list')
-setClass('ListOfliteralCharacter', contains = 'list')
-setClass('ListOfdistribution', contains = 'list')
 
 
 #####  inst/xsd/eml-spatialVector.xsd  ####
@@ -509,6 +509,9 @@ setClass('ListOfdistribution', contains = 'list')
 
 setClass('GeometryType', contains = 'character')
 setClass('TopologyLevel', contains = 'character')
+setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfgeometry', contains = 'list')
+setClass('ListOfquantitativeAccuracyReport', contains = 'list')
 setClass('quantitativeAccuracyReport', slots = c('quantitativeAccuracyValue' = 'character', 'quantitativeAccuracyMethod' = 'character'), contains = c('eml-2.1.1'))
 setClass('SpatialVectorType', slots = c('attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'geometry' = 'ListOfgeometry', 'geometricObjectCount' = 'character', 'topologyLevel' = 'TopologyLevel', 'spatialReference' = 'SpatialReferenceType', 'horizontalAccuracy' = 'DataQuality', 'verticalAccuracy' = 'DataQuality', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('DataQuality', slots = c('accuracyReport' = 'character', 'quantitativeAccuracyReport' = 'ListOfquantitativeAccuracyReport'), contains = c('eml-2.1.1'))
@@ -520,9 +523,6 @@ setClass('topologyLevel', contains = 'TopologyLevel')
 setClass('spatialReference', contains = 'SpatialReferenceType')
 setClass('horizontalAccuracy', contains = 'DataQuality')
 setClass('verticalAccuracy', contains = 'DataQuality')
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfgeometry', contains = 'list')
-setClass('ListOfquantitativeAccuracyReport', contains = 'list')
 
 
 #####  inst/xsd/eml-spatialRaster.xsd  ####
@@ -532,6 +532,11 @@ setClass('CellValueType', contains = 'character')
 setClass('ImagingConditionCode', contains = 'character')
 setClass('rasterOriginType', contains = 'character')
 setClass('CellGeometryType', contains = 'character')
+setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfcornerPoint', contains = 'list')
+setClass('ListOfcontrolPoint', contains = 'list')
+setClass('ListOfbandDescription', contains = 'list')
+setClass('ListOfquantitativeAccuracyReport', contains = 'list')
 setClass('georeferenceInfo', slots = c('cornerPoint' = 'ListOfcornerPoint', 'controlPoint' = 'ListOfcontrolPoint', 'bilinearFit' = 'character'), contains = c('eml-2.1.1'))
 setClass('cornerPoint', slots = c('xCoordinate' = 'xs:float', 'yCoordinate' = 'xs:float', 'pointInPixel' = 'pointInPixel', 'corner' = 'rasterOriginType'), contains = c('eml-2.1.1'))
 setClass('controlPoint', slots = c('column' = 'xs:int', 'row' = 'xs:int', 'xCoordinate' = 'xs:float', 'yCoordinate' = 'xs:float', 'pointInPixel' = 'pointInPixel'), contains = c('eml-2.1.1'))
@@ -576,16 +581,13 @@ setClass('bandDescription', contains = 'BandType')
 setClass('highWavelength', contains = 'xs:float')
 setClass('lowWaveLength', contains = 'xs:float')
 setClass('waveLengthUnits', contains = 'lengthUnits')
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfcornerPoint', contains = 'list')
-setClass('ListOfcontrolPoint', contains = 'list')
-setClass('ListOfbandDescription', contains = 'list')
-setClass('ListOfquantitativeAccuracyReport', contains = 'list')
 
 
 #####  inst/xsd/eml-storedProcedure.xsd  ####
 
 
+setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfparameter', contains = 'list')
 setClass('StoredProcedureType', slots = c('attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'parameter' = 'ListOfparameter', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('ParameterType', slots = c('name' = 'character', 'domainDescription' = 'character', 'required' = 'xs:boolean', 'repeats' = 'xs:boolean'), contains = c('eml-2.1.1'))
 setClass('storedProcedure', contains = 'StoredProcedureType')
@@ -594,13 +596,18 @@ setClass('constraint', contains = 'ConstraintType')
 setClass('parameter', contains = 'ParameterType')
 setClass('required', contains = 'xs:boolean')
 setClass('repeats', contains = 'xs:boolean')
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfparameter', contains = 'list')
 
 
 #####  inst/xsd/eml-literature.xsd  ####
 
 
+setClass('ListOfcontact', contains = 'list')
+setClass('ListOfeditor', contains = 'list')
+setClass('ListOfinstitution', contains = 'list')
+setClass('ListOfrecipient', contains = 'list')
+setClass('ListOfgeographicCoverage', contains = 'list')
+setClass('ListOfpublicationPlace', contains = 'list')
+setClass('ListOfperformer', contains = 'list')
 setClass('CitationType', slots = c('contact' = 'ListOfcontact', 'article' = 'Article', 'book' = 'Book', 'chapter' = 'Chapter', 'editedBook' = 'Book', 'manuscript' = 'Manuscript', 'report' = 'Report', 'thesis' = 'Thesis', 'conferenceProceedings' = 'ConferenceProceedings', 'personalCommunication' = 'PersonalCommunication', 'map' = 'Map', 'generic' = 'Generic', 'audioVisual' = 'AudioVisual', 'presentation' = 'Presentation', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('Article', slots = c('journal' = 'character', 'volume' = 'character', 'issue' = 'character', 'pageRange' = 'character', 'publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'ISSN' = 'character'), contains = c('eml-2.1.1'))
 setClass('Book', slots = c('publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'edition' = 'character', 'volume' = 'character', 'numberOfVolumes' = 'character', 'totalPages' = 'character', 'totalFigures' = 'character', 'totalTables' = 'character', 'ISBN' = 'character'), contains = c('eml-2.1.1'))
@@ -645,29 +652,27 @@ setClass('performer', contains = 'ResponsibleParty')
 setClass('publisher', contains = 'ResponsibleParty')
 setClass('institution', contains = 'ResponsibleParty')
 setClass('conferenceLocation', contains = 'Address')
-setClass('ListOfcontact', contains = 'list')
-setClass('ListOfeditor', contains = 'list')
-setClass('ListOfinstitution', contains = 'list')
-setClass('ListOfrecipient', contains = 'list')
-setClass('ListOfgeographicCoverage', contains = 'list')
-setClass('ListOfpublicationPlace', contains = 'list')
-setClass('ListOfperformer', contains = 'list')
 
 
 #####  inst/xsd/eml-view.xsd  ####
 
 
+setClass('ListOfconstraint', contains = 'list')
 setClass('ViewType', slots = c('attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'queryStatement' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('view', contains = 'ViewType')
 setClass('attributeList', contains = 'AttributeListType')
 setClass('constraint', contains = 'ConstraintType')
-setClass('ListOfconstraint', contains = 'list')
 
 
 #####  inst/xsd/eml-project.xsd  ####
 
 
 setClass('DescriptorType', contains = 'character')
+setClass('ListOftitle', contains = 'list')
+setClass('ListOfpersonnel', contains = 'list')
+setClass('ListOfdescriptorValue', contains = 'list')
+setClass('ListOfcitation', contains = 'list')
+setClass('ListOfrelatedProject', contains = 'list')
 setClass('personnel', slots = c('role' = 'RoleType'), contains = c('eml-2.1.1'))
 setClass('studyAreaDescription', slots = c('descriptor' = 'descriptor', 'citation' = 'CitationType', 'coverage' = 'Coverage'), contains = c('eml-2.1.1'))
 setClass('descriptor', slots = c('descriptorValue' = 'ListOfdescriptorValue', 'citation' = 'ListOfcitation', 'name' = 'xml_attribute', 'citableClassificationSystem' = 'xml_attribute'), contains = c('eml-2.1.1'))
@@ -685,17 +690,18 @@ setClass('coverage', contains = 'Coverage')
 setClass('description', contains = 'TextType')
 setClass('citation', contains = 'CitationType')
 setClass('relatedProject', contains = 'ResearchProjectType')
-setClass('ListOftitle', contains = 'list')
-setClass('ListOfpersonnel', contains = 'list')
-setClass('ListOfdescriptorValue', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfrelatedProject', contains = 'list')
 
 
 #####  inst/xsd/eml-software.xsd  ####
 
 
 setClass('Action', contains = 'character')
+setClass('ListOfimplementation', contains = 'list')
+setClass('ListOfdistribution', contains = 'list')
+setClass('ListOflanguage', contains = 'list')
+setClass('ListOfoperatingSystem', contains = 'list')
+setClass('ListOfmachineProcessor', contains = 'list')
+setClass('ListOfprogrammingLanguage', contains = 'list')
 setClass('implementation', slots = c('distribution' = 'ListOfdistribution', 'size' = 'character', 'language' = 'ListOflanguage', 'operatingSystem' = 'ListOfoperatingSystem', 'machineProcessor' = 'ListOfmachineProcessor', 'virtualMachine' = 'character', 'diskUsage' = 'character', 'runtimeMemoryUsage' = 'character', 'programmingLanguage' = 'ListOfprogrammingLanguage', 'checksum' = 'character', 'dependency' = 'ListOfdependency'), contains = c('eml-2.1.1'))
 setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1'))
 setClass('dependency', slots = c('action' = 'Action', 'software' = 'software'), contains = c('eml-2.1.1'))
@@ -707,37 +713,33 @@ setClass('machineProcessor', contains = 'character')
 setClass('programmingLanguage', contains = 'character')
 setClass('project', contains = 'ResearchProjectType')
 setClass('action', contains = 'Action')
-setClass('ListOfimplementation', contains = 'list')
-setClass('ListOfdistribution', contains = 'list')
-setClass('ListOflanguage', contains = 'list')
-setClass('ListOfoperatingSystem', contains = 'list')
-setClass('ListOfmachineProcessor', contains = 'list')
-setClass('ListOfprogrammingLanguage', contains = 'list')
 
 
 #####  inst/xsd/eml-protocol.xsd  ####
 
 
+setClass('ListOfproceduralStep', contains = 'list')
 setClass('ProtocolType', slots = c('proceduralStep' = 'ListOfproceduralStep', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('proceduralStep', contains = 'ProcedureStepType')
 setClass('protocol', contains = 'ProtocolType')
-setClass('ListOfproceduralStep', contains = 'list')
 
 
 #####  inst/xsd/eml-dataTable.xsd  ####
 
 
+setClass('ListOfconstraint', contains = 'list')
 setClass('DataTableType', slots = c('attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'caseSensitive' = 'caseSensitive', 'numberOfRecords' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('dataTable', contains = 'DataTableType')
 setClass('attributeList', contains = 'AttributeListType')
 setClass('constraint', contains = 'ConstraintType')
-setClass('ListOfconstraint', contains = 'list')
 
 
 #####  inst/xsd/eml-dataset.xsd  ####
 
 
 setClass('MaintUpFreqType', contains = 'character')
+setClass('ListOfcontact', contains = 'list')
+setClass('ListOfchangeHistory', contains = 'list')
 setClass('changeHistory', slots = c('changeScope' = 'character', 'oldValue' = 'character', 'changeDate' = 'xs:date', 'comment' = 'character'), contains = c('eml-2.1.1'))
 setClass('DatasetType', slots = c('purpose' = 'TextType', 'maintenance' = 'MaintenanceType', 'contact' = 'ListOfcontact', 'publisher' = 'ResponsibleParty', 'pubPlace' = 'character', 'methods' = 'MethodsType', 'project' = 'ResearchProjectType', 'dataTable' = 'DataTableType', 'spatialRaster' = 'SpatialRasterType', 'spatialVector' = 'SpatialVectorType', 'storedProcedure' = 'StoredProcedureType', 'view' = 'ViewType', 'otherEntity' = 'OtherEntityType', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('ReferencesGroup', 'eml-2.1.1'))
 setClass('MaintenanceType', slots = c('description' = 'TextType', 'maintenanceUpdateFrequency' = 'MaintUpFreqType', 'changeHistory' = 'ListOfchangeHistory'), contains = c('eml-2.1.1'))
@@ -757,13 +759,18 @@ setClass('otherEntity', contains = 'OtherEntityType')
 setClass('description', contains = 'TextType')
 setClass('maintenanceUpdateFrequency', contains = 'MaintUpFreqType')
 setClass('changeDate', contains = 'xs:date')
-setClass('ListOfcontact', contains = 'list')
-setClass('ListOfchangeHistory', contains = 'list')
 
 
 #####  inst/xsd/eml-methods.xsd  ####
 
 
+setClass('ListOfmethodStep', contains = 'list')
+setClass('ListOfdataSource', contains = 'list')
+setClass('ListOfcitation', contains = 'list')
+setClass('ListOfqualityControl', contains = 'list')
+setClass('ListOfinstrumentation', contains = 'list')
+setClass('ListOfsoftware', contains = 'list')
+setClass('ListOfsubStep', contains = 'list')
 setClass('methodStep', slots = c('dataSource' = 'ListOfdataSource'), contains = c('eml-2.1.1'))
 setClass('sampling', slots = c('studyExtent' = 'studyExtent', 'samplingDescription' = 'TextType', 'spatialSamplingUnits' = 'spatialSamplingUnits', 'citation' = 'ListOfcitation'), contains = c('eml-2.1.1'))
 setClass('studyExtent', slots = c('coverage' = 'Coverage', 'description' = 'TextType'), contains = c('eml-2.1.1'))
@@ -784,18 +791,13 @@ setClass('protocol', contains = 'ProtocolType')
 setClass('instrumentation', contains = 'character')
 setClass('software', contains = 'SoftwareType')
 setClass('subStep', contains = 'ProcedureStepType')
-setClass('ListOfmethodStep', contains = 'list')
-setClass('ListOfdataSource', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfqualityControl', contains = 'list')
-setClass('ListOfinstrumentation', contains = 'list')
-setClass('ListOfsoftware', contains = 'list')
-setClass('ListOfsubStep', contains = 'list')
 
 
 #####  inst/xsd/eml.xsd  ####
 
 
+setClass('ListOfadditionalMetadata', contains = 'list')
+setClass('ListOfdescribes', contains = 'list')
 setClass('eml', slots = c('access' = 'AccessType', 'dataset' = 'DatasetType', 'citation' = 'CitationType', 'software' = 'SoftwareType', 'protocol' = 'ProtocolType', 'additionalMetadata' = 'ListOfadditionalMetadata', 'packageId' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'xml:lang' = 'xml_attribute'), contains = c('eml-2.1.1'))
 setClass('additionalMetadata', slots = c('describes' = 'ListOfdescribes', 'metadata' = 'metadata', 'id' = 'xml_attribute'), contains = c('eml-2.1.1'))
 setClass('metadata', contains = c('eml-2.1.1'))
@@ -805,5 +807,3 @@ setClass('citation', contains = 'CitationType')
 setClass('software', contains = 'SoftwareType')
 setClass('protocol', contains = 'ProtocolType')
 setClass('describes', contains = 'character')
-setClass('ListOfadditionalMetadata', contains = 'list')
-setClass('ListOfdescribes', contains = 'list')

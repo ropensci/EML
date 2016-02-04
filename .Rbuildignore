@@ -2,3 +2,7 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
+inst/xsd/lib
+inst/xsd/docs
+inst/xsd/src
+^\.travis\.yml$

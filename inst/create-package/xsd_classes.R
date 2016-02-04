@@ -209,6 +209,14 @@ create_classes <- function(xsd_file,
   xml2::xml_find_all(xsd, "//xs:simpleType[@name]", ns = ns) %>%
     purrr::map(set_class_simpletype, file = classes_file)
 
+  ## Create additional ListOf classes for any element that can appear multiple times
+  named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name]", ns = ns)
+  if(length(named_elements) > 0){
+    element <- element_attrs_table(named_elements)
+    element$slot[grepl("ListOf", element$slot)] %>%
+      purrr::map(set_class_list, file = classes_file)
+  }
+
   ## Now get those <xs:element> nodes without a type
   ## For those with one-or-more complexType, define setClass(element-name, slots = <children-of-complex-type)
   untyped_elements <- xml2::xml_find_all(xsd, "//xs:element[@name and not(@type)]", ns = ns)
@@ -229,14 +237,6 @@ create_classes <- function(xsd_file,
   typed_elements %>% purrr::map(set_class_element, file = classes_file)
 
 
-  ## Create additional ListOf classes for any element that can appear multiple times
-  named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name]", ns = ns)
-
-  if(length(named_elements) > 0){
-    element <- element_attrs_table(named_elements)
-    element$slot[grepl("ListOf", element$slot)] %>%
-      purrr::map(set_class_list, file = classes_file)
-  }
 
   ## Define coercions
   xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:simpleType[@name] | //xs:complexType[@name]", ns = ns) %>%
