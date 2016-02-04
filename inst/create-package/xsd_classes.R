@@ -1,9 +1,16 @@
 ## ToDo:
 #
-# - [ ] xs:extension should -> contains base
 # - [ ] Write out documentation strings (as roxygen?...) xs:annotation
 # - [ ] Generate constructor functions
 # - [ ] Should we be capturing required vs optional elements (e.g. add a class to indicate?) (what about choice-of?)
+
+
+## utils ##
+
+filename <- function(x){
+  strsplit(basename(x), "\\.")[[1]][1]
+}
+
 
 print_cmd <- function(l){
   n <- names(l)
@@ -29,6 +36,7 @@ sanitize_type <- function(type, name = rep("character", length(type))){
   strip_namespace(type)
 }
 
+## Contrary to name, doesn't strip "xs:" namespace; this helps to avoid a lot of clashes with protected types
 strip_namespace <- function(x){
   purrr::map_chr(x,
   function(x){
@@ -44,48 +52,9 @@ strip_namespace <- function(x){
   })
 }
 
-set_dummy_class <- function(class, file = "classes.R"){
-  write(sprintf("setClass('%s')", class), file, append = TRUE)
-}
-
-
-set_coerces <- function(class, file = "methods.R"){
-  write(sprintf("setAs('%s', 'XMLInternalElementNode',   function(from) S4Toeml(from))", class), file, append = TRUE)
-  write(sprintf("setAs('XMLInternalElementNode', '%s',  function(from) emlToS4(from))", class), file, append = TRUE)
-}
-
-
-
-set_class_list <- function(class, file = "classes.R"){
-  #setClass(class, contains = "list")
-  write(sprintf("setClass('%s', contains = 'list')", class), file, append = TRUE)
-
-
-}
-
-
-set_class_element <- function(element, file = "classes.R"){
-  class <- xml2::xml_attr(element, "name")
-  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
-  maxOccurs <- xml2::xml_attr(element, "maxOccurs")
-  multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
-
-  if(multiples | type != "character")
-    write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
-
-
-}
-
-
-set_class_simpletype <- function(element, file = "classes.R"){
-  class <- xml2::xml_attr(element, "name")
-  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
-  write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
-}
 
 
 slotify <- function(name, type, maxOccurs){
-
   multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
   type[multiples] <- paste0("ListOf", name[multiples])
   type
@@ -111,14 +80,47 @@ ref_as_name <- function(df){
 element_attrs_table <- function(elements){
 
   elements %>%
-      purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
-      column_check() %>%
-      ref_as_name() %>%
-      dplyr::mutate(type = sanitize_type(type, name)) %>%
-      dplyr::mutate(slot = slotify(name, type, maxOccurs))
+    purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
+    column_check() %>%
+    ref_as_name() %>%
+    dplyr::mutate(type = sanitize_type(type, name)) %>%
+    dplyr::mutate(slot = slotify(name, type, maxOccurs))
 
 }
 
+
+
+#### Functions that write R code as output #############################
+
+set_dummy_class <- function(class, file = "classes.R"){
+  write(sprintf("setClass('%s')", class), file, append = TRUE)
+}
+
+
+set_coerces <- function(class, file = "methods.R"){
+  write(sprintf("setAs('%s', 'XMLInternalElementNode',   function(from) S4Toeml(from))", class), file, append = TRUE)
+  write(sprintf("setAs('XMLInternalElementNode', '%s',  function(from) emlToS4(from))", class), file, append = TRUE)
+}
+
+set_class_list <- function(class, file = "classes.R"){
+  write(sprintf("setClass('%s', contains = 'list')", class), file, append = TRUE)
+}
+
+set_class_element <- function(element, file = "classes.R"){
+  class <- xml2::xml_attr(element, "name")
+  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
+  maxOccurs <- xml2::xml_attr(element, "maxOccurs")
+  multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
+
+  if(multiples | type != "character")
+    write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
+}
+
+set_class_simpletype <- function(element, file = "classes.R"){
+  class <- xml2::xml_attr(element, "name")
+  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
+  write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
+}
 
 #' @importFrom dplyr as_data_frame
 set_class_complex_type <- function(complex_type,
@@ -189,23 +191,11 @@ set_class_complex_type <- function(complex_type,
 
 
 
-xs_base_classes <- function(file = "classes.R"){
-
-  write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
-
-  data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date"),
-             contains = c("numeric", "character", "character", "character", "numeric", "integer", "integer", "integer", "integer", "integer", "logical", "Date")) %>%
-  purrr::by_row(function(x)
-    write(sprintf("setClass('%s', contains = '%s')", x[["class"]], x[["contains"]]), file, append = TRUE)
-  )
-}
 
 
-filename <- function(x){
-  strsplit(basename(x), "\\.")[[1]][1]
-}
 
 
+## Main method #######
 create_classes <- function(xsd_file,
                            classes_file = paste0("R/", filename(xsd_file), "-classes.R"),
                            methods_file = paste0("R/", filename(xsd_file), "-methods.R"),
@@ -248,15 +238,10 @@ create_classes <- function(xsd_file,
       purrr::map(set_class_list, file = classes_file)
   }
 
-
   ## Define coercions
   xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:simpleType[@name] | //xs:complexType[@name]", ns = ns) %>%
     purrr::map(xml2::xml_attr, "name") %>%
     set_coerces(file = methods_file)
 
   TRUE
-
 }
-
-
-
