@@ -29,9 +29,19 @@ xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
  # write("setClass('schemaLocation', slots = c('schemaLocation' = 'xml_attribute'))", file, append = TRUE)
 #  write("setMethod('initialize', 'schemaLocation', function(.Object, schemaLocation){ .Object@schemaLocation <- new('xml_attribute', character()); .Object})", methods_file, append = TRUE)
 
+
   write("setClass('eml-2.1.1')", file, append = TRUE)
-  write("setClass('NonEmptyStringType', contains='character')", file, append = TRUE)
   write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
+
+
+write("
+setClass('i18nNonEmptyStringType', contains='character')
+setClass('ReferencesGroup', slots = c('references' = 'character'), contains = c('eml-2.1.1'))
+setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'character'), contains = c('eml-2.1.1'))",
+      file, append = TRUE)
+
+
+
 
   ## Define classes for the these XSD schema types to correspond to the appropriate R object class
   data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date"),
@@ -61,8 +71,8 @@ collate <- c(
   "eml-physical.xsd",
   "eml-project.xsd",
   "eml-software.xsd",
-  "eml-methods.xsd",
   "eml-protocol.xsd",
+  "eml-methods.xsd",
   "eml-attribute.xsd",
   "eml-entity.xsd",
   "eml-dataTable.xsd",
@@ -88,13 +98,43 @@ R <- gsub("^setClass\\('matrix'", "setClass('eml:matrix'", R)
 R <- gsub("^setClass\\('table'", "setClass('eml:table'", R)
 R <- gsub("^setClass\\('list'", "setClass('eml:list'", R)
 R <- gsub("^setClass\\('complex'", "setClass('eml:complex'", R)
-
-## R <- gsub("(^setClass\\('eml'.* contains = c\\().*(\\))", "\\1 ", R)
-
 R <- gsub("c\\('class' = ", "c('eml:class' =", R)
+
+## Move this definition down below ForeignKeyGroup definition
+joinCondition <- "setClass('joinCondition', slots = c('referencedKey' = 'character'), contains = c('ForeignKeyGroup', 'eml-2.1.1'))"
+escape_parens <- function(x){
+  x <- gsub("\\(", "\\\\(", x)
+  gsub("\\)", "\\\\)", x)
+}
+R <- gsub(escape_parens(joinCondition), "", R)
+R <- sub("setClass\\('attributeReference', contains = 'character'\\)", joinCondition, R)
+
+## Remove first occurance of this:
+R <- sub("setClass\\('geographicCoverage'.*", "", R)
+
+
+## coverage repeats a couple times before defined. Remove it, replace with definition at end
+R <- gsub("^setClass\\('coverage'.*", "", R)
+
+## These need to be defined later than they appear.  Manually move to end.
+R <- gsub("^setClass\\('proceduralStep'.*", "", R)
+R <- gsub("^setClass\\('protocol'.*", "", R)
+R <- gsub("^setClass\\('temporalCoverage'.*", "", R)
+R <- gsub("^setClass\\('taxonomicCoverage'.*", "", R)
+R <- gsub("^setClass\\('methodStep'.*", "", R)
+R <- gsub("^setClass\\('dataSource'.*", "", R)
+
 write(R, classes_file, append = FALSE)
 
-write("setClass('online', contains=c('OnlineType', 'PhysicalOnlineType'))", classes_file, append = TRUE)
+write("
+setClass('proceduralStep', contains = 'ProcedureStepType')
+setClass('protocol', contains = 'ProtocolType')
+setClass('dataSource', contains = 'DatasetType')
+setClass('methodStep', slots = c('dataSource' = 'ListOfdataSource'), contains = c('ProcedureStepType', 'eml-2.1.1'))
+setClass('temporalCoverage', contains = c('TemporalCoverage', 'eml-2.1.1'))
+setClass('taxonomicCoverage', contains = c('TaxonomicCoverage', 'eml-2.1.1'))
+setClass('coverage', contains=c('Coverage'))
+setClass('online', contains=c('OnlineType', 'PhysicalOnlineType'))", classes_file, append = TRUE)
 
 
 

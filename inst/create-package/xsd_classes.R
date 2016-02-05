@@ -44,20 +44,33 @@ print_cmd <- function(l){
 }
 
 
-
-has_children <- function(elements, ns = character()){
-  elements %>% purrr::map_lgl(function(element){
-    length(xml_find_all(elements, ".//xs:element", ns = ns)) > 0
-  })
+has_extension <- function(element, ns = character()){
+    xml_find_all(element, "./*/xs:simpleContent/xs:extension | ./*/xs:complexContent/xs:extension", ns = ns) %>%
+      xml_attr("base") -> out
+    if(length(out) == 0) out <- NA
+    out
 }
 
-sanitize_type <- function(type, name = rep("character", length(type)), children = rep(TRUE, length(type))){
+has_children <- function(element, ns = character()){
+    length(xml_find_all(element, ".//xs:element", ns = ns)) > 0
+}
+
+
+
+sanitize_type <- function(type, name, children, extension){
+  ext_as_type <- is.na(type) & !is.na(extension)
+  type[ext_as_type] <- extension[ext_as_type]
+
   name_as_type <- is.na(type) & children
   char_as_type <- is.na(type) & !children
-  str_type <- grepl(c("NonEmptyStringType"), type)
+
   type[name_as_type] <- name[name_as_type]
   type[char_as_type] <- "character"
+
+  str_type <- grepl(c("NonEmptyStringType"), type)
   type[str_type] <- "character"
+
+
   strip_namespace(type)
 }
 
@@ -78,21 +91,25 @@ column_check <- function(df){
 }
 
 ref_as_name <- function(df){
-  nans <- is.na(df$name)
-  df$name[nans] <- df$ref[nans]
+  if(!is.null(df$name)){
+    nans <- is.na(df$name)
+    df$name[nans] <- df$ref[nans]
+  }
   df
 }
 
 #' @importFrom dplyr mutate
 element_attrs_table <- function(elements, ns = character()){
 
-  df <- elements %>%
-    purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x))))
-  df$children <- has_children(elements, ns = ns)
+  df <- elements %>% purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x))))
+
+  df$children <- elements %>% purrr::map_lgl(has_children, ns)
+  df$extension <- elements %>% purrr::map_chr(has_extension, ns = ns)
+
   df %>%
     column_check() %>%
     ref_as_name() %>%
-    dplyr::mutate(type = sanitize_type(type, name, children)) %>%
+    dplyr::mutate(type = sanitize_type(type, name, children, extension)) %>%
     dplyr::mutate(slot = slotify(name, type, maxOccurs))
 
 }
@@ -115,9 +132,12 @@ set_class_list <- function(class, file = "classes.R"){
   write(sprintf("setClass('%s', contains = 'list')", class), file, append = TRUE)
 }
 
-set_class_element <- function(element, file = "classes.R"){
+set_class_element <- function(element, ns = character(), file = "classes.R"){
   class <- xml2::xml_attr(element, "name")
-  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
+  type <- xml2::xml_attr(element, "type")
+  type <- sanitize_type(name = class, type = type,
+                        children = has_children(element, ns),
+                        extension = has_extension(element, ns))
   maxOccurs <- xml2::xml_attr(element, "maxOccurs")
   multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
 
@@ -125,9 +145,12 @@ set_class_element <- function(element, file = "classes.R"){
     write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
 }
 
-set_class_simpletype <- function(element, file = "classes.R"){
+set_class_simpletype <- function(element, ns = character(), file = "classes.R"){
   class <- xml2::xml_attr(element, "name")
-  type <- xml2::xml_attr(element, "type") %>% sanitize_type()
+  type <- xml2::xml_attr(element, "type")
+  type <- sanitize_type(name = class, type = type,
+                        children = has_children(element, ns),
+                        extension = has_extension(element, ns))
   write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
 }
 
@@ -216,13 +239,13 @@ create_classes <- function(xsd_file,
 
   ## Create all named <xs:simpleType> elements:
   xml2::xml_find_all(xsd, "//xs:simpleType[@name]", ns = ns) %>%
-    purrr::map(set_class_simpletype, file = classes_file)
+    purrr::map(set_class_simpletype, ns = ns, file = classes_file)
 
   ## Create additional ListOf classes for any element that can appear multiple times
-  named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name]", ns = ns)
+  named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:element[@ref]", ns = ns)
   if(length(named_elements) > 0){
     element <- element_attrs_table(named_elements, ns = ns)
-    element$slot[grepl("ListOf", element$slot)] %>%
+    unique(element$slot[grepl("ListOf", element$slot)]) %>%
       purrr::map(set_class_list, file = classes_file)
   }
 
@@ -247,7 +270,7 @@ create_classes <- function(xsd_file,
 
   ## Define class for all elements which declare a type attribute
   typed_elements <- xml2::xml_find_all(xsd, "//xs:element[@type]", ns = ns)
-  typed_elements %>% purrr::map(set_class_element, file = classes_file)
+  typed_elements %>% purrr::map(set_class_element, ns = ns, file = classes_file)
 
 
 
