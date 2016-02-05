@@ -10,4 +10,4 @@ show_yaml <- function(object)
           cat(yaml::as.yaml(XML::xmlToList(as(object, "XMLInternalElementNode"))))
 
 
-setMethod("show", signature("eml-2.1.1"), function(object) show_yaml(object))
+# setMethod("show", signature("eml-2.1.1"), function(object) show_yaml(object))

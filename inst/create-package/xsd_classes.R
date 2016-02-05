@@ -143,7 +143,7 @@ set_class_complex_type <- function(complex_type,
   }
 
   ## FIXME check this xpath: may or may not be inside an xs:choice?
-  group <- xml2::xml_find_all(complex_type, "./*/xs:group", ns = ns) %>%
+  group <- xml2::xml_find_all(complex_type, "./*/xs:group[@ref] | ./*/*/xs:group[@ref] | ./*/*/xs:group[@ref]", ns = ns) %>%
     xml_attr("ref") %>%
     strip_namespace()
 
@@ -158,8 +158,8 @@ set_class_complex_type <- function(complex_type,
   att <- setNames(rep("xml_attribute", length(att)), att)
   slots = c(slots, att)
 
-  ## Get any simpleType element extension
-  extension <- xml2::xml_find_all(complex_type, "./xs:simpleContent/xs:extension", ns = ns) %>%
+  ## Get any element extension
+  extension <- xml2::xml_find_all(complex_type, "./xs:simpleContent/xs:extension | ./xs:complexContent/xs:extension", ns = ns) %>%
     purrr::map(xml_attr, "base") %>%
     strip_namespace()
   contains <- c(extension, contains)

@@ -15,18 +15,21 @@ file.remove(methods_file)
 
 
 ## Create some boilerplate classes:
-xs_base_classes <- function(file = "classes.R"){
+xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
   ## Define some dummy classes defined later, but we define first at start to avoid tricky or unsatisfiable collate order issues
   c("ReferencesGroup", "AccessRule", "Coverage",
     "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup",
     "CitationType", "PhysicalType", "DatasetType",
-    "ProcedureStepType") %>%
+    "ProcedureStepType", "i18nNonEmptyStringType",
+    "TemporalCoverage", "TaxonomicCoverage") %>%
     purrr::map(set_dummy_class, file)
 
   ## Some basic classes we'll use
-  write("setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute'))", file, append = TRUE)
+ # write("setClass('schemaLocation', slots = c('schemaLocation' = 'xml_attribute'))", file, append = TRUE)
+#  write("setMethod('initialize', 'schemaLocation', function(.Object, schemaLocation){ .Object@schemaLocation <- new('xml_attribute', character()); .Object})", methods_file, append = TRUE)
 
+  write("setClass('eml-2.1.1')", file, append = TRUE)
   write("setClass('NonEmptyStringType', contains='character')", file, append = TRUE)
   write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
 
@@ -77,7 +80,7 @@ paste0("inst/xsd/", collate) %>% map(create_classes, "R/classes.R", "R/methods.R
 
 
 ## Fix protected classes
-R <- readLines("R/classes.R")
+R <- readLines(classes_file)
 R <- gsub("^setClass\\('language'", "setClass('eml:language'", R)
 R <- gsub("^setClass\\('name'", "setClass('eml:name'", R)
 R <- gsub("^setClass\\('array'", "setClass('eml:array'", R)
@@ -86,8 +89,10 @@ R <- gsub("^setClass\\('table'", "setClass('eml:table'", R)
 R <- gsub("^setClass\\('list'", "setClass('eml:list'", R)
 R <- gsub("^setClass\\('complex'", "setClass('eml:complex'", R)
 R <- gsub("c\\('class' = ", "c('eml:class' =", R)
+write(R, classes_file, append = FALSE)
 
-write(R, "R/classes.R", append = FALSE)
+write("setClass('online', contains=c('OnlineType', 'PhysicalOnlineType'))", classes_file, append = TRUE)
+
 
 
 ##
