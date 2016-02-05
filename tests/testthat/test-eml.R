@@ -1,0 +1,6 @@
+library(XML)
+f <- system.file("xsd/test", "eml.xml", package = "eml2")
+node <- xmlRoot(xmlParse(f))
+removeAttributes(node, .attrs = "xsi:schemaLocation")
+eml = as(node, "eml")
+as(eml, "XMLInternalElementNode")

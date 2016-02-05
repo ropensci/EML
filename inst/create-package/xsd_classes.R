@@ -1,5 +1,5 @@
 ## ToDo:
-#
+# - [ ] xml_attribute should just be XMLAttribute
 # - [ ] Write out documentation strings (as roxygen?...) xs:annotation
 # - [ ] Generate constructor functions
 # - [ ] Should we be capturing required vs optional elements (e.g. add a class to indicate?) (what about choice-of?)
@@ -11,6 +11,21 @@ filename <- function(x){
   strsplit(basename(x), "\\.")[[1]][1]
 }
 
+## Contrary to name, doesn't strip "xs:" namespace; this helps to avoid a lot of clashes with protected types
+strip_namespace <- function(x){
+  purrr::map_chr(x,
+                 function(x){
+                   if(length(x) > 0){
+                     if(grepl("^xs:",  x))
+                       x
+                     else if(grepl("^xsd:",  x))
+                       x <- gsub("^.*:(.*)", "xs:\\1", x)
+                     else
+                       x <- gsub("^.*:", "", x)
+                   }
+                   x
+                 })
+}
 
 print_cmd <- function(l){
   n <- names(l)
@@ -28,31 +43,23 @@ print_cmd <- function(l){
   out
 }
 
-sanitize_type <- function(type, name = rep("character", length(type))){
-  untyped <- is.na(type)
-  str_type <- grepl(c("NonEmptyStringType"), type)
-  type[untyped] <- name[untyped]
-  type[str_type] <- "character"
-  strip_namespace(type)
-}
 
-## Contrary to name, doesn't strip "xs:" namespace; this helps to avoid a lot of clashes with protected types
-strip_namespace <- function(x){
-  purrr::map_chr(x,
-  function(x){
-    if(length(x) > 0){
-      if(grepl("^xs:",  x))
-        x
-      else if(grepl("^xsd:",  x))
-        x <- gsub("^.*:(.*)", "xs:\\1", x)
-      else
-        x <- gsub("^.*:", "", x)
-    }
-    x
+
+has_children <- function(elements, ns = character()){
+  elements %>% purrr::map_lgl(function(element){
+    length(xml_find_all(elements, ".//xs:element", ns = ns)) > 0
   })
 }
 
-
+sanitize_type <- function(type, name = rep("character", length(type)), children = rep(TRUE, length(type))){
+  name_as_type <- is.na(type) & children
+  char_as_type <- is.na(type) & !children
+  str_type <- grepl(c("NonEmptyStringType"), type)
+  type[name_as_type] <- name[name_as_type]
+  type[char_as_type] <- "character"
+  type[str_type] <- "character"
+  strip_namespace(type)
+}
 
 slotify <- function(name, type, maxOccurs){
   multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
@@ -77,13 +84,15 @@ ref_as_name <- function(df){
 }
 
 #' @importFrom dplyr mutate
-element_attrs_table <- function(elements){
+element_attrs_table <- function(elements, ns = character()){
 
-  elements %>%
-    purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
+  df <- elements %>%
+    purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x))))
+  df$children <- has_children(elements, ns = ns)
+  df %>%
     column_check() %>%
     ref_as_name() %>%
-    dplyr::mutate(type = sanitize_type(type, name)) %>%
+    dplyr::mutate(type = sanitize_type(type, name, children)) %>%
     dplyr::mutate(slot = slotify(name, type, maxOccurs))
 
 }
@@ -135,7 +144,7 @@ set_class_complex_type <- function(complex_type,
 
   ## Define class for the complex_type with a slot for each element. First, determine slot types:
   if(length(elements) > 0){
-    element <- element_attrs_table(elements)
+    element <- element_attrs_table(elements, ns = ns)
     slots <- setNames(element$slot, element$name)
 
   } else { ## has no elements
@@ -212,7 +221,7 @@ create_classes <- function(xsd_file,
   ## Create additional ListOf classes for any element that can appear multiple times
   named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name]", ns = ns)
   if(length(named_elements) > 0){
-    element <- element_attrs_table(named_elements)
+    element <- element_attrs_table(named_elements, ns = ns)
     element$slot[grepl("ListOf", element$slot)] %>%
       purrr::map(set_class_list, file = classes_file)
   }

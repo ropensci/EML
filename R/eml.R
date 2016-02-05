@@ -10,9 +10,11 @@
 #' @import methods XML
 #' @examples
 #' f <- system.file("xsd/test", "eml.xml", package = "eml2")
-#' read_eml(f)
+#' eml <- read_eml(f)
 read_eml <- function(file, ...){
-  as(XML::xmlRoot(XML::xmlParse(file, ...)), "eml")
+  node <- xmlRoot(xmlParse(f))
+  removeAttributes(node, .attrs = "xsi:schemaLocation")
+  as(node, "eml")
 }
 
 

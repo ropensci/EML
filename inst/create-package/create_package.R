@@ -18,12 +18,12 @@ file.remove(methods_file)
 xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
   ## Define some dummy classes defined later, but we define first at start to avoid tricky or unsatisfiable collate order issues
-  c("ReferencesGroup", "AccessRule", "Coverage",
-    "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup",
-    "CitationType", "PhysicalType", "DatasetType",
-    "ProcedureStepType", "i18nNonEmptyStringType",
-    "TemporalCoverage", "TaxonomicCoverage") %>%
-    purrr::map(set_dummy_class, file)
+#  c("ReferencesGroup", "AccessRule", "Coverage",
+#    "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup",
+#    "CitationType", "PhysicalType", "DatasetType",
+#    "ProcedureStepType", "i18nNonEmptyStringType",
+#    "TemporalCoverage", "TaxonomicCoverage") %>%
+#    purrr::map(set_dummy_class, file)
 
   ## Some basic classes we'll use
  # write("setClass('schemaLocation', slots = c('schemaLocation' = 'xml_attribute'))", file, append = TRUE)
@@ -56,21 +56,21 @@ collate <- c(
   "eml-spatialReference.xsd",
   "eml-access.xsd",
   "eml-constraint.xsd",
-  "eml-coverage.xsd",
-  "eml-attribute.xsd",
-  "eml-entity.xsd",
-  "eml-physical.xsd",
-  "eml-spatialVector.xsd",
-  "eml-spatialRaster.xsd",
-  "eml-storedProcedure.xsd",
   "eml-literature.xsd",
-  "eml-view.xsd",
+  "eml-coverage.xsd",
+  "eml-physical.xsd",
   "eml-project.xsd",
   "eml-software.xsd",
-  "eml-protocol.xsd",
-  "eml-dataTable.xsd",
-  "eml-dataset.xsd",
   "eml-methods.xsd",
+  "eml-protocol.xsd",
+  "eml-attribute.xsd",
+  "eml-entity.xsd",
+  "eml-dataTable.xsd",
+  "eml-view.xsd",
+  "eml-storedProcedure.xsd",
+  "eml-spatialVector.xsd",
+  "eml-spatialRaster.xsd",
+  "eml-dataset.xsd",
   "eml.xsd"
 )
 
@@ -88,6 +88,9 @@ R <- gsub("^setClass\\('matrix'", "setClass('eml:matrix'", R)
 R <- gsub("^setClass\\('table'", "setClass('eml:table'", R)
 R <- gsub("^setClass\\('list'", "setClass('eml:list'", R)
 R <- gsub("^setClass\\('complex'", "setClass('eml:complex'", R)
+
+## R <- gsub("(^setClass\\('eml'.* contains = c\\().*(\\))", "\\1 ", R)
+
 R <- gsub("c\\('class' = ", "c('eml:class' =", R)
 write(R, classes_file, append = FALSE)
 
@@ -98,9 +101,10 @@ write("setClass('online', contains=c('OnlineType', 'PhysicalOnlineType'))", clas
 ##
 
 ## Misc code to determine collate order
-# schema <- list.files("inst/xsd/", pattern="*.xsd")
-# names(schema) = schema
-# schema %>% map(function(x){
-#  xsd <- read_xml(paste0("inst/xsd/", x))
-#  xml_find_all(xsd, "//xs:import", ns) %>% xml_attr("schemaLocation")
-# }) -> deps
+ns <- xml_ns(read_xml("inst/xsd/eml.xsd"))
+ schema <- list.files("inst/xsd/", pattern="*.xsd")
+ names(schema) = schema
+ schema %>% map(function(x){
+  xsd <- read_xml(paste0("inst/xsd/", x))
+  xml_find_all(xsd, "//xs:import", ns = ns) %>% xml_attr("schemaLocation")
+ }) -> deps
