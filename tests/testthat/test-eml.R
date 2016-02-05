@@ -1,4 +1,4 @@
-context("xsd/test/eml.xml")
+testthat::context("xsd/test/eml.xml")
 
 testthat::test_that("We can parse the sample EML file correctly", {
   library(XML)
