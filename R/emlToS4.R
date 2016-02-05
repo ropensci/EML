@@ -17,32 +17,37 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 
   children <- drop_comment_nodes(xmlChildren(node))
 
-  if(is(s4, "character"))
-    s4 <- new(node_name, xmlValue(node))
-
   for(child in names(attrs)){
     slot(s4, child) <- new("xml_attribute",attrs[[child]])
   }
 
-  if(!is(s4, "character")){
-    for(child in names(children)){
-      cls <- slot_classes[child]
+
+  for(child in unique(names(children))){
+    if(is(children[[child]], "XMLInternalTextNode")){
+      s4 <- new(node_name)
+      s4@.Data <- xmlValue(node)
+    } else {
+      cls <- slot_classes[[child]]
       if(grepl("^ListOf", cls))
-        slot(s4,child) <- new(cls[[1]], list(as(children[[child]], child)))
+        slot(s4,child) <- listof(children, child)
       else if(cls == "character")
         slot(s4,child) <- xmlValue(children[[child]])
       else
         slot(s4,child) <- as(children[[child]], child)
     }
   }
+
   s4
 }
 
-##  HTML-style comments create: XMLInternalCommentNode as xmlChildren, which can cause problems.
-## Rather than just drop them, we are assuming in the XML-parsing world that we only work with XMLInternalElementNode objects
-## anyway (e.g. the setAs methods are defined only for that class), so just get them.
+##
+listof <- function(kids, element, listclass = paste0("ListOf", element))
+  new(listclass, lapply(kids[names(kids) == element], as, element))  ## subsets already
+
+
+##  HTML-style comments create: XMLInternalCommentNode as xmlChildren, which we don't want
 drop_comment_nodes <- function(nodes){
-  keep <- sapply(nodes, function(x) is(x, "XMLInternalElementNode"))
-  nodes[keep]
+  drop <- sapply(nodes, function(x) is(x, "XMLInternalCommentNode"))
+  nodes[!drop]
   }
 

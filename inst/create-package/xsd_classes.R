@@ -118,8 +118,9 @@ element_attrs_table <- function(elements, ns = character()){
 
 #### Functions that write R code as output #############################
 
-set_dummy_class <- function(class, file = "classes.R"){
+set_dummy_class <- function(class, file = "classes.R", methods_file = "methods.R"){
   write(sprintf("setClass('%s')", class), file, append = TRUE)
+  set_coerces(class, methods_file)
 }
 
 
@@ -132,7 +133,7 @@ set_class_list <- function(class, file = "classes.R"){
   write(sprintf("setClass('%s', contains = 'list')", class), file, append = TRUE)
 }
 
-set_class_element <- function(element, ns = character(), file = "classes.R"){
+set_class_element <- function(element, ns = character(), file = "classes.R", methods_file = "methods.R"){
   class <- xml2::xml_attr(element, "name")
   type <- xml2::xml_attr(element, "type")
   type <- sanitize_type(name = class, type = type,
@@ -141,23 +142,26 @@ set_class_element <- function(element, ns = character(), file = "classes.R"){
   maxOccurs <- xml2::xml_attr(element, "maxOccurs")
   multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
 
-  if(multiples | type != "character")
+  if(multiples | type != "character"){
     write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
+    set_coerces(class, methods_file)
+  }
 }
 
-set_class_simpletype <- function(element, ns = character(), file = "classes.R"){
+set_class_simpletype <- function(element, ns = character(), file = "classes.R", methods_file = "methods.R"){
   class <- xml2::xml_attr(element, "name")
   type <- xml2::xml_attr(element, "type")
   type <- sanitize_type(name = class, type = type,
                         children = has_children(element, ns),
                         extension = has_extension(element, ns))
   write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
+  set_coerces(class, methods_file)
 }
 
 #' @importFrom dplyr as_data_frame
 set_class_complex_type <- function(complex_type,
                                    class = xml2::xml_attr(complex_type, "name"),
-                                   ns = character(), file = "classes.R"){
+                                   ns = character(), file = "classes.R", methods_file = "methods.R"){
 
 
   ## Get all immediate child elements in the complex_type (except those that are inside another complex type)
@@ -182,6 +186,11 @@ set_class_complex_type <- function(complex_type,
   # all complex types contain 'eml-2.1.1' class as well
   contains <- c(group, "eml-2.1.1")
 
+  mixed <- xml_attr(complex_type, "mixed")
+  if(!is.na(mixed) & mixed=="true"){
+    contains <- c("character", contains)
+  }
+
   ## complex_type attributes as slots of type "character"
   att_df <- xml2::xml_find_all(complex_type, "./xs:attribute | ./xs:simpleContent/xs:extension/xs:attribute", ns = ns) %>%
     purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
@@ -201,6 +210,7 @@ set_class_complex_type <- function(complex_type,
   } else {
     write(sprintf("setClass('%s', contains = c(%s))", class, print_cmd(contains)), file, append=TRUE)
   }
+  set_coerces(class, methods_file)
 }
 
 ## function(class)
@@ -239,7 +249,7 @@ create_classes <- function(xsd_file,
 
   ## Create all named <xs:simpleType> elements:
   xml2::xml_find_all(xsd, "//xs:simpleType[@name]", ns = ns) %>%
-    purrr::map(set_class_simpletype, ns = ns, file = classes_file)
+    purrr::map(set_class_simpletype, ns = ns, file = classes_file, methods_file = methods_file)
 
   ## Create additional ListOf classes for any element that can appear multiple times
   named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:element[@ref]", ns = ns)
@@ -255,29 +265,23 @@ create_classes <- function(xsd_file,
   untyped_elements %>%
     purrr::map(function(e){
       xml2::xml_find_all(e, "./xs:complexType", ns = ns) %>%
-      purrr::map(set_class_complex_type, class = xml_attr(e, "name"), ns = ns, file = classes_file)
+      purrr::map(set_class_complex_type, class = xml_attr(e, "name"), ns = ns, file = classes_file, methods_file = methods_file)
     })
 
   ## Define a class for named xs:group
   xml2::xml_find_all(xsd, "//xs:group[@name]", ns) %>%
-    purrr::map(set_class_complex_type, ns = ns, file = classes_file)
+    purrr::map(set_class_complex_type, ns = ns, file = classes_file, methods_file = methods_file)
 
 
   ## Define a class for complexTypes with names
   xml2::xml_find_all(xsd, "//xs:complexType[@name]", ns) %>%
-  purrr::map(set_class_complex_type, ns = ns, file = classes_file)
+  purrr::map(set_class_complex_type, ns = ns, file = classes_file, methods_file = methods_file)
 
 
   ## Define class for all elements which declare a type attribute
   typed_elements <- xml2::xml_find_all(xsd, "//xs:element[@type]", ns = ns)
-  typed_elements %>% purrr::map(set_class_element, ns = ns, file = classes_file)
+  typed_elements %>% purrr::map(set_class_element, ns = ns, file = classes_file, methods_file = methods_file)
 
-
-
-  ## Define coercions
-  xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:simpleType[@name] | //xs:complexType[@name]", ns = ns) %>%
-    purrr::map(xml2::xml_attr, "name") %>%
-    set_coerces(file = methods_file)
 
   TRUE
 }

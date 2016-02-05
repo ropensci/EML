@@ -11,7 +11,7 @@ write_eml(eml, file = NULL, ...)
 
 \item{file}{file name to write XML. If NULL, will return XML as character string.}
 
-\item{...}{additional arguments to \code{\link{XML::saveXML}}}
+\item{...}{additional arguments to \code{\link{saveXML}}}
 }
 \value{
 If file is not specified, the result is a character string containing
