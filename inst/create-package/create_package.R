@@ -36,6 +36,7 @@ xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
 write("
 setClass('i18nNonEmptyStringType', contains='character')
+setClass('i18nString', contains='character')
 setClass('ReferencesGroup', slots = c('references' = 'character'), contains = c('eml-2.1.1'))
 setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'character'), contains = c('eml-2.1.1'))",
       file, append = TRUE)
@@ -148,3 +149,12 @@ ns <- xml_ns(read_xml("inst/xsd/eml.xsd"))
   xsd <- read_xml(paste0("inst/xsd/", x))
   xml_find_all(xsd, "//xs:import", ns = ns) %>% xml_attr("schemaLocation")
  }) -> deps
+
+
+# shrink <- function(l){ l[sapply(l, length) > 0] }
+#
+#
+# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:sequence[@maxOccurs]", ns) }) %>% shrink()
+# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType/*/xs:choice[@maxOccurs]", ns) }) %>% shrink()
+# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType/xs:choice[@maxOccurs]", ns) }) %>% shrink()
+# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType[child::xs:choice[@maxOccurs] | child::xs:sequence[@maxOccurs]]", ns) }) %>% shrink()

@@ -106,7 +106,7 @@ element_attrs_table <- function(elements, ns = character()){
     column_check()
 
   nans <- is.na(df$maxOccurs)
-  df$maxOccurs[nans] <- attr(elements, "maxOccurs")[[1]]
+  df$maxOccurs[nans] <- attr(elements, "maxOccurs")
   df$children <- elements %>% purrr::map_lgl(has_children, ns)
   df$extension <- elements %>% purrr::map_chr(has_extension, ns = ns)
 
@@ -145,11 +145,24 @@ set_class_element <- function(element, ns = character(), file = "classes.R", met
   maxOccurs <- xml2::xml_attr(element, "maxOccurs")
   multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
 
-  if(multiples | type != "character"){
+#  if(multiples | type != "character"){
     write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
     set_coerces(class, methods_file)
-  }
+#  }
 }
+
+set_class_elements_df <- function(df, ns = character(), file = "classes.R", methods_file = "methods.R"){
+  df %>% by_row(function(.){
+    class  = .$name
+    type = .$type
+    multiples = !(is.na(.$maxOccurs) | .$maxOccurs == 1)
+    if(multiples | type != "character"){
+      write(sprintf("setClass('%s', contains = '%s')", class, type), file, append = TRUE)
+      set_coerces(class, methods_file)
+    }
+  })
+}
+
 
 set_class_simpletype <- function(element, class = xml2::xml_attr(element, "name"), ns = character(), file = "classes.R", methods_file = "methods.R"){
   type <- xml2::xml_attr(element, "type")
@@ -160,28 +173,6 @@ set_class_simpletype <- function(element, class = xml2::xml_attr(element, "name"
   set_coerces(class, methods_file)
 }
 
-
-parse_elements <- function(nodes, ns = character()){
-  children <- xml2::xml_find_all(nodes, "./xs:choice | ./xs:sequence | ./xs:all", ns = ns)
-  maxOccurs <- children %>% purrr::map(xml_attr, "maxOccurs")
-  elements <- xml2::xml_find_all(children, "./xs:element", ns = ns)
-  attr(elements, "maxOccurs") <- maxOccurs
-  if(length(elements) == 0){
-    children <- xml2::xml_find_all(children, "./xs:choice | ./xs:sequence | ./xs:all", ns = ns)
-    maxOccurs <- children %>% purrr::map(xml_attr, "maxOccurs")
-    elements <- xml2::xml_find_all(children, "./xs:element", ns = ns)
-    attr(elements, "maxOccurs") <- maxOccurs
-    if(length(elements) == 0){
-      children <- xml2::xml_find_all(children, "./xs:choice | ./xs:sequence | ./xs:all", ns = ns)
-      maxOccurs <- children %>% purrr::map(xml_attr, "maxOccurs")
-      elements <- xml2::xml_find_all(children, "./xs:element", ns = ns)
-      attr(elements, "maxOccurs") <- maxOccurs
-      #elements <- parse_elements(children, ns = ns)
-    }
-    #elements <- parse_elements(children, ns = ns)
-  }
-  elements
-}
 
 
 #' @importFrom dplyr as_data_frame
@@ -198,9 +189,10 @@ set_class_complex_type <- function(complex_type,
   ## e.g. ./xs:choice/xs:choice[@maxOccurs = 'unbounded']/xs:element[@name,@type]
   ### should inherit the @maxOccurs attr from the parent!
 
-  #elements <- xml2::xml_find_all(complex_type, "./*/*/*/xs:element | ./*/*/xs:element | ./*/xs:element", ns = ns)
-   elements <- parse_elements(complex_type, ns = ns)
-
+  maxOccurs <- xml2::xml_find_all(complex_type, "./*/*/xs:choice[@maxOccurs]/xs:element/.. | ./*/xs:choice[@maxOccurs]/xs:element/.. | ./xs:choice[@maxOccurs]/xs:element/..", ns = ns) %>% xml_attr("maxOccurs")
+  if(length(maxOccurs)==0) maxOccurs <- NA
+  elements <- xml2::xml_find_all(complex_type, "./*/*/*/xs:element | ./*/*/xs:element | ./*/xs:element", ns = ns)
+  attr(elements, "maxOccurs") <- maxOccurs
 
   ## Define class for the complex_type with a slot for each element. First, determine slot types:
   if(length(elements) > 0){
@@ -209,6 +201,9 @@ set_class_complex_type <- function(complex_type,
     ## Go ahead and define ListOf classes now
     unique(element$slot[grepl("ListOf", element$slot)]) %>%
            purrr::map(set_class_list, file = file)
+    ## Go ahead and define elements as well right now. NO, lots of redundant elements
+   # set_class_elements_df(element, ns, file, methods_file)
+
 
     slots <- setNames(element$slot, element$name)
 
@@ -289,14 +284,6 @@ create_classes <- function(xsd_file,
   xml2::xml_find_all(xsd, "//xs:simpleType[@name]", ns = ns) %>%
     purrr::map(set_class_simpletype, ns = ns, file = classes_file, methods_file = methods_file)
 
-  ## Create additional ListOf classes for any element that can appear multiple times
- # named_elements <- xml2::xml_find_all(xsd, "//xs:element[@name] | //xs:element[@ref]", ns = ns)
- #   if(length(named_elements) > 0){
- #    element <- element_attrs_table(named_elements, ns = ns)
- #   unique(element$slot[grepl("ListOf", element$slot)]) %>%
- #      purrr::map(set_class_list, file = classes_file)
-#  }
-
   ## Now get those <xs:element> nodes without a type
   ## For those with one-or-more complexType, define setClass(element-name, slots = <children-of-complex-type)
   untyped_elements <- xml2::xml_find_all(xsd, "//xs:element[@name and not(@type)]", ns = ns)
@@ -305,18 +292,16 @@ create_classes <- function(xsd_file,
       xml2::xml_find_all(e, "./xs:complexType", ns = ns) %>%
       purrr::map(set_class_complex_type, class = xml_attr(e, "name"), ns = ns, file = classes_file, methods_file = methods_file)
     })
+
   untyped_elements %>%
     purrr::map(function(e){
       xml2::xml_find_all(e, "./xs:simpleType", ns = ns) %>%
         purrr::map(set_class_simpletype, class = xml_attr(e, "name"), ns = ns, file = classes_file, methods_file = methods_file)
     })
 
-
-
   ## Define a class for named xs:group
   xml2::xml_find_all(xsd, "//xs:group[@name]", ns) %>%
     purrr::map(set_class_complex_type, ns = ns, file = classes_file, methods_file = methods_file)
-
 
   ## Define a class for complexTypes with names
   xml2::xml_find_all(xsd, "//xs:complexType[@name]", ns) %>%
