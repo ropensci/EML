@@ -221,12 +221,14 @@ set_class_complextype <- function(complex_type,
   #   attributes
   #   simpleContent/*/attribute
 
+
+
   ## FIXME choice slots may not come before element slots...
   slots <- c(
     choice_children$slots,
     sequence_children$slots,
     attrib_to_slots(attrib),
-    elements_to_slots(elements, ns = ns, maxOccurs = maxOccurs))
+    elements_to_slots(elements, ns = ns, maxOccurs = maxOccurs, class_file = class_file))
 
   contains <- c(
     choice_children$contains,
@@ -235,6 +237,9 @@ set_class_complextype <- function(complex_type,
     extensions %>% purrr::map(xml_attr, "base") %>% strip_namespace(),
     "eml-2.1.1"
   )
+
+  ## Drop repeated elements from contains list
+  contains <- unique(contains)
 
   mixed <- xml_attr(complex_type, "mixed")
   if(!is.na(mixed) & mixed=="true"){
@@ -277,10 +282,17 @@ attrib_to_slots <- function(attrib){
   }
 }
 
-elements_to_slots <- function(elements, ns, maxOccurs = NA){
+elements_to_slots <- function(elements, ns, maxOccurs = NA, class_file = "classes.R"){
   if(length(elements) > 0){
     df <- element_attrs_table(elements, ns = ns, maxOccurs = maxOccurs)
+
+    ## Go ahead and define ListOf classes now
+    unique(element$slot[grepl("ListOf", element$slot)]) %>%
+      purrr::map(set_class_list, class_file = class_file)
+
+
     setNames(df$slot, df$name)
+
   } else {
     list()
   }
@@ -344,52 +356,12 @@ create_classes <- function(xsd_file,
 ################ deprecated
 
 
-set_class_elements_df <- function(df, ns = character(),
-                                  class_file = "classes.R", methods_file = "methods.R"){
-  df %>% by_row(function(.){
-    class  = .$name
-    type = .$type
-    multiples = !(is.na(.$maxOccurs) | .$maxOccurs == 1)
-    if(multiples | type != "character"){
-      write(sprintf("setClass('%s', contains = '%s')", class, type), class_file, append = TRUE)
-      set_coerces(class, methods_file)
-    }
-  })
-}
 
 stuff <- function(){
 
-  ## Get any element extension
-  extension <- xml2::xml_find_all(complex_type, "./xs:simpleContent/xs:extension | ./xs:complexContent/xs:extension", ns = ns) %>%
-    purrr::map(xml_attr, "base") %>%
-    strip_namespace()
-  contains <- c(extension, contains)
 
-  maxOccurs <- xml2::xml_find_all(complex_type, "./*/*/xs:choice[@maxOccurs]/xs:element/.. | ./*/xs:choice[@maxOccurs]/xs:element/.. | ./xs:choice[@maxOccurs]/xs:element/..", ns = ns) %>% xml_attr("maxOccurs")
-  if(length(maxOccurs)==0) maxOccurs <- NA
-  elements <- xml2::xml_find_all(complex_type, "./*/*/*/xs:element | ./*/*/xs:element | ./*/xs:element", ns = ns)
-  attr(elements, "maxOccurs") <- maxOccurs
 
-  ## Define class for the complex_type with a slot for each element. First, determine slot types:
-  if(length(elements) > 0){
-    element <- element_attrs_table(elements, ns = ns)
 
-    ## Go ahead and define ListOf classes now
-    unique(element$slot[grepl("ListOf", element$slot)]) %>%
-      purrr::map(set_class_list, class_file = class_file)
 
-    slots <- setNames(element$slot, element$name)
-  } else { ## has no elements
-    slots <- list()
-  }
-  ## FIXME check this xpath: may or may not be inside an xs:choice?
-  group <- xml2::xml_find_all(complex_type, "./*/xs:group[@ref] | ./*/*/xs:group[@ref] | ./*/*/xs:group[@ref]", ns = ns) %>%
-    xml_attr("ref") %>%
-    strip_namespace()
-  contains <- c(group, "eml-2.1.1")
-  mixed <- xml_attr(complex_type, "mixed")
-  if(!is.na(mixed) & mixed=="true"){
-    contains <- c("character", contains)
-  }
 }
 
