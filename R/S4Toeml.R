@@ -11,10 +11,13 @@
 #' @import XML
 #' @import methods
 S4Toeml <- function(obj,
-                    node = NULL,
-                    excluded_slots = c("namespaces", "dirname", "xmlNodeName")){
+                    excluded_slots = c("namespaces", "dirname", "xmlNodeName"),
+                    ns = character()){
 
     who <- slotNames(obj)
+    if("namespaces" %in% who & length(ns) == 0){
+      ns <- obj@namespaces
+    }
 
     slot_classes <- get_slots(obj)
     is_attribute <- sapply(slot_classes, function(x) x == "xml_attribute")
@@ -22,12 +25,18 @@ S4Toeml <- function(obj,
     attribute_elements <- who[is_attribute]
 
     ## Allow XML node name to be defined using a special slot (instead of class name)
-    if(is.null(node)){
-      if("xmlNodeName" %in% who)
-        node <- newXMLNode(slot(obj, "xmlNodeName"))
-      else
-        node <- newXMLNode(class(obj)[1])
+
+    if("xmlNodeName" %in% who){
+      node_name <- slot(obj, "xmlNodeName")
+    } else {
+      node_name <- class(obj)[1]
     }
+
+
+    if(length(ns) > 0)
+      node_name <- paste0("eml:", node_name)
+    node <- newXMLNode(node_name, namespaceDefinitions = ns)
+
 
 
 
@@ -65,6 +74,8 @@ S4Toeml <- function(obj,
         }
       }
     }
+
+
     node
 }
 

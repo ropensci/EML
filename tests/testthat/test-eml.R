@@ -4,7 +4,7 @@ testthat::test_that("We can parse the sample EML file correctly", {
   library(XML)
   f <- system.file("xsd/test", "eml.xml", package = "eml2")
   node <- xmlRoot(xmlParse(f))
-  removeAttributes(node, .attrs = "xsi:schemaLocation")
+  #removeAttributes(node, .attrs = "xsi:schemaLocation")
   eml <- as(node, "eml")
   out <- as(eml, "XMLInternalElementNode")
 
@@ -27,5 +27,8 @@ testthat::test_that("We can parse the sample EML file correctly", {
 
   sink()
   unlink("test.log")
+
+  testthat::expect_true()
+
 })
 
