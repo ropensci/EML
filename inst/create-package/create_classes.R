@@ -6,6 +6,9 @@
 # - [ ] Generate constructor functions
 # - [ ] Should we be capturing required vs optional elements (e.g. add a class to indicate?) (what about choice-of?)
 
+library("dplyr")
+library("xml2")
+library("purrr")
 
 ## utils ##
 
@@ -69,6 +72,8 @@ sanitize_type <- function(type, name, children, extension){
   type[name_as_type] <- name[name_as_type]
   type[char_as_type] <- "character"
 
+  ### FIXME  create a bigger mapping set of types that should be replaced with "character" directly
+  ### FIXME likewise, identify other xs: base types (e.g. xs:float, xs:time, xs:date) that we can define with native R types directly
   str_type <- grepl(c("NonEmptyStringType"), type)
   type[str_type] <- "character"
 
@@ -128,38 +133,38 @@ set_coerces <- function(class, class_file = "methods.R"){
 }
 
 set_class_list <- function(class, class_file = "classes.R"){
-  write(sprintf("setClass('%s', contains = 'list')", class), class_file, append = TRUE)
-}
-
-set_class_element <- function(element, ns = character(),
-                              class_file = "classes.R", methods_file = "methods.R", maxOccurs = NA){
-
-  ## This should share more code with element_attr_table
-  class <- xml2::xml_attr(element, "name")
-  type <- xml2::xml_attr(element, "type")
-  type <- sanitize_type(name = class, type = type,
-                        children = has_children(element, ns),
-                        extension = has_extension(element, ns))
-  maxOccurs <- xml2::xml_attr(element, "maxOccurs")
-  multiples <- !(is.na(maxOccurs) | maxOccurs == 1)
-
-#  if(multiples | type != "character"){
-    write(sprintf("setClass('%s', contains = '%s')", class, type), class_file, append = TRUE)
-    set_coerces(class, methods_file)
-#  }
+  write(sprintf("setClass('%s', contains = 'list')", class), "list-classes.R", append = TRUE)
 }
 
 
 set_class_simpletype <- function(element, class = xml2::xml_attr(element, "name"),
                                  ns = character(), class_file = "classes.R", methods_file = "methods.R"){
 
-    type <- xml2::xml_attr(element, "type")
+  type <- xml2::xml_attr(element, "type")
   type <- sanitize_type(name = class, type = type,
                         children = has_children(element, ns),
                         extension = has_extension(element, ns))
-  write(sprintf("setClass('%s', contains = '%s')", class, type), class_file, append = TRUE)
-  set_coerces(class, methods_file)
+
+  restrictions <- xml2::xml_find_all(element, "./xs:restriction", ns) %>% xml_attr("base") %>% strip_namespace()
+  type <- c(type, restrictions)
+
+  if(!is.na(class)){
+    write(sprintf("setClass('%s', contains = c(%s)) ## D", class, print_cmd(type)), "D-classes.R", append = TRUE)
+    set_coerces(class, methods_file)
+  }
 }
+
+
+recursive_parse <- function(child_sets, ns = ns, class_file = class_file, methods_file = methods_file){
+  purrr::map(child_sets, function(set){
+      purrr::map(set, set_class_complextype, ns = ns, class_file = class_file, methods_file = methods_file) %>%
+        purrr::flatten()
+    }) -> s4_bits
+
+  list(slots = purrr::flatten(purrr::map(s4_bits, `[[`, "slots")),
+       contains = purrr::flatten(purrr::map(s4_bits, `[[`, "contains")))
+}
+
 
 
 
@@ -168,74 +173,57 @@ set_class_complextype <- function(complex_type,
                                   ns = character(),
                                   class_file = "classes.R",
                                   methods_file = "methods.R",
-                                  class = NA){
+                                  class = NA,
+                                  maxOccurs = NA){
 
-  maxOccurs <- xml_attr(complex_type, "maxOccurs")
+  if(is.na(class)){
+    class <- xml2::xml_attr(complex_type, "name")
+  }
+
+  if(is.na(maxOccurs)){
+    maxOccurs <- xml_attr(complex_type, "maxOccurs")
+  }
+
+  type <- xml_attr(complex_type, "type") %>% strip_namespace()
+  if(is.na(type))
+    type <- character(0)
 
   #### All possible children of complexType ####
-  documentation <- xml_find_all(complex_type, "./xs:annotation", ns)
-  simple_types <- xml_find_all(complex_type, "./xs:simpleType", ns)
-  groups <- xml_find_all(complex_type, "./xs:group", ns)
-  complex_types <- xml_find_all(complex_type, "./xs:complexType", ns)
-  elements <- xml_find_all(complex_type, "./xs:element", ns)
-  choice <- xml2::xml_find_all(complex_type, "./xs:choice", ns)
+  documentation <- xml2::xml_find_all(complex_type, "./xs:annotation", ns)
+  simple_types <- xml2::xml_find_all(complex_type, "./xs:simpleType", ns)
+  elements <- xml2::xml_find_all(complex_type, "./xs:element", ns)
+  groups <- xml2::xml_find_all(complex_type, "./xs:group", ns)
+  complex_types <- xml2::xml_find_all(complex_type, "./xs:complexType", ns)
+  choice <- xml2::xml_find_all(complex_type, "./xs:choice | ./xs:any", ns)
   sequence <- xml2::xml_find_all(complex_type, "./xs:sequence", ns)
-  attrib <- xml2::xml_find_all(complex_type, "./xs:attribute", ns)
   simple_content <- xml2::xml_find_all(complex_type, "./xs:simpleContent", ns)
   complex_content <- xml2::xml_find_all(complex_type, "./xs:complexContent", ns)
-  extensions <- xml_find_all(complex_type, "./xs:extension", ns)
-
+  attrib <- xml2::xml_find_all(complex_type, "./xs:attribute", ns)
+  extensions <- xml2::xml_find_all(complex_type, "./xs:extension", ns)
+  restrictions <- xml2::xml_find_all(complex_type, "./xs:restriction", ns)
 
   #### Create these additional classes ####
-  simple_types %>%  purrr::map(set_class_simpletype, ns = ns,
-                              class_file = class_file,
-                              methods_file = methods_file)
+  ## simple_type & elements become slots themselves, so don't spawn more slots/containers ##
+ # simple_types %>%  purrr::map(set_class_simpletype, ns = ns,
+#                              class_file = class_file,
+#                              methods_file = methods_file)
 
-  groups %>% purrr::map(set_class_complextype, ns = ns,
-                       class_file = class_file, methods_file = methods_file)
-
-  complex_types %>% purrr::map(set_class_complextype, ns = ns,
-                              class_file = class_file, methods_file = methods_file)
-
-  elements %>% purrr::map(set_class_element, ns = ns,
-                         class_file = class_file, methods_file = methods_file, maxOccurs = maxOccurs)
-
-  ##  should pass maxOccurs
-  choice %>% purrr::map(set_class_complextype, ns = ns,
-                        class_file = class_file, methods_file = methods_file) -> choice_children
-
-  ## Should use "sequence" version of method, which makes a shadowlist of sequence has attribute maxOccurs
-  sequence %>% purrr::map(set_class_complextype, ns = ns,
-                        class_file = class_file, methods_file = methods_file) -> sequence_children
-
-  choice_children <- unlist(choice_children, recursive = FALSE)
-  sequence_children <- unlist(sequence_children, recursive = FALSE)
-
-  ## Now to define the focal class.
-  # contains:
-  #   .[child::xs:simpleContent | child::xs:complexContent]/*/xs:extension[@base]
-  #   xs:group[@ref]
-  #   "contains" from any xs:choice or xs:sequence chain.
-  # slots:
-  #   elements
-  #   attributes
-  #   simpleContent/*/attribute
+  children <- list(simple_types, elements, groups, complex_types, choice, sequence, simple_content, complex_content, extensions, restrictions) %>%
+    recursive_parse(ns = ns, class_file = class_file, methods_file = methods_file)
 
 
-
-  ## FIXME choice slots may not come before element slots...
+  ## FIXME choice slots may not come before element slots...  Be more careful about creating a valid slot order!!!
   slots <- c(
-    choice_children$slots,
-    sequence_children$slots,
+    children$slots,
     attrib_to_slots(attrib),
     elements_to_slots(elements, ns = ns, maxOccurs = maxOccurs, class_file = class_file))
 
   contains <- c(
-    choice_children$contains,
-    sequence_children$contains,
+    as.character(children$contains),
     groups %>% purrr::map(xml_attr, "ref") %>% strip_namespace(),
     extensions %>% purrr::map(xml_attr, "base") %>% strip_namespace(),
-    "eml-2.1.1"
+    restrictions %>% purrr::map(xml_attr, "base") %>% strip_namespace(),
+    type
   )
 
   ## Drop repeated elements from contains list
@@ -247,17 +235,15 @@ set_class_complextype <- function(complex_type,
   }
 
   ## Inherit class
-  if(is.na(class)){
-    class <- xml2::xml_attr(complex_type, "name")
-  }
-
   if(!is.na(class)){  ## if we have a named element, then we declare a class
 
     if(length(slots) > 0){
-      write(sprintf("setClass('%s', slots = c(%s), contains = c(%s))", class,
-                    print_cmd(slots), print_cmd(contains)), class_file, append=TRUE)
+      write(sprintf("setClass('%s', slots = c(%s), contains = c(%s)) ## A", class,
+                    print_cmd(slots), print_cmd(c(contains, "eml-2.1.1"))), "A-classes.R", append=TRUE)
     } else {
-      write(sprintf("setClass('%s', contains = c(%s))", class, print_cmd(contains)), class_file, append=TRUE)
+      if(length(contains) == 0)  # hack?
+        contains = "character"
+      write(sprintf("setClass('%s', contains = c(%s)) ## B", class, print_cmd(contains)), "B-classes.R", append=TRUE)
     }
     set_coerces(class, methods_file)
     out <- list()
@@ -287,7 +273,7 @@ elements_to_slots <- function(elements, ns, maxOccurs = NA, class_file = "classe
     df <- element_attrs_table(elements, ns = ns, maxOccurs = maxOccurs)
 
     ## Go ahead and define ListOf classes now
-    unique(element$slot[grepl("ListOf", element$slot)]) %>%
+    unique(df$slot[grepl("ListOf", df$slot)]) %>%
       purrr::map(set_class_list, class_file = class_file)
 
 
@@ -304,64 +290,29 @@ elements_to_slots <- function(elements, ns, maxOccurs = NA, class_file = "classe
 
 
 create_classes <- function(xsd_file,
-                           ns = character(),
+                           ns = xml2::xml_ns(xml2::read_xml(xsd_file)),
                            class_file = paste0("R/", filename(xsd_file), "-classes.R"),
-                           methods_file = paste0("R/", filename(xsd_file), "-methods.R")){
+                           methods_file = paste0("R/", filename(xsd_file), "-methods.R"),
+                           append = TRUE){
   xsd <- xml2::read_xml(xsd_file)
-  imports <- xml_find_all(xsd, "./xs:import", ns)
-  documentation <- xml_find_all(xsd, "./xs:annotation", ns)
+  imports <- xml2::xml_find_all(xsd, "./xs:import", ns)
+  documentation <- xml2::xml_find_all(xsd, "./xs:annotation", ns)
 
   ## (all top-level elements should be named, since no name to inherit)
+  write(paste0("\n\n#####  ", xsd_file, "  ####\n\n"), class_file, append = append)
+  write(paste0("\n\n#####  ", xsd_file, "  ####\n\n"), methods_file, append = append)
 
-  simple_type <- xml_find_all(xsd, "./xs:simpleType", ns)
-  simple_type %>%  purrr::map(set_class_simpletype, ns = ns,
-               class_file = class_file, methods_file = methods_file)
+  set_class_complextype(xsd, ns = ns, class_file = class_file, methods_file = methods_file)
 
-  ##
-  group <- xml_find_all(xsd, "./xs:group", ns)
-  group %>% purrr::map(set_class_complextype, ns = ns,
-               class_file = class_file, methods_file = methods_file)
+  write(c(readclass("list-classes.R"), readclass("A-classes.R"), readclass("B-classes.R"), readclass("D-classes.R")),
+        class_file, append = append)
 
-  complex_type <- xml_find_all(xsd, "./xs:complexType", ns)
-  complex_type %>% purrr::map(set_class_complextype, ns = ns,
-               class_file = class_file, methods_file = methods_file)
-
-  element <- xml_find_all(xsd, "./xs:element", ns)
-  element %>% purrr::map(set_class_element, ns = ns,
-               class_file = class_file, methods_file = methods_file)
-
+  unlink(c("list-classes.R", "D-classes.R", "A-classes.R", "B-classes.R"))
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-################ deprecated
-
-
-
-stuff <- function(){
-
-
-
-
-
+readclass <- function(x){
+  if(file.exists(x))
+    readLines(x)
+  else
+    character()
 }
-
