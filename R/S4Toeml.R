@@ -121,5 +121,5 @@ isEmpty <- function(obj){
 
 
 get_slots <- function(class_name){
-  getSlots(getClass(class_name))
+  getClass(class_name)@slots
 }

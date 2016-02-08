@@ -22,8 +22,6 @@ xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
 
 write("
-setClass('i18nNonEmptyStringType', contains='character')
-setClass('i18nString', contains='character')
 setClass('PrecisionType', contains = c('numeric'))
 setClass('ReferencesGroup', slots = c('references' = 'character'), contains = c('eml-2.1.1'))
 setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'character'), contains = c('eml-2.1.1'))",
@@ -96,12 +94,13 @@ R <- gsub("c\\('class' = ", "c('eml:class' =", R)
 # R <- gsub(escape_parens(joinCondition), "", R)
 #R <- sub("setClass\\('attributeReference', contains = 'character'\\)", joinCondition, R)
 
-## Remove first occurance of these, which repeat later
-R <- sub("setClass\\('geographicCoverage'.*", "", R)
 
 
 ## coverage repeats a couple times before defined. Remove it, replace with definition at end
 R <- gsub("^setClass\\('coverage'.*", "", R)
+
+
+R <- gsub("^setClass\\('inline'.*", "", R)
 
 
 ## These need to be defined later than they appear.  Manually move to end.
@@ -109,6 +108,7 @@ R <- gsub("^setClass\\('proceduralStep'.*", "", R)
 R <- gsub("^setClass\\('protocol'.*", "", R)
 R <- gsub("^setClass\\('temporalCoverage'.*", "", R)
 R <- gsub("^setClass\\('taxonomicCoverage'.*", "", R)
+R <- gsub("setClass\\('geographicCoverage.*", "", R)
 R <- gsub("^setClass\\('methodStep'.*", "", R)
 R <- gsub("^setClass\\('dataSource'.*", "", R)
 R <- gsub("^setClass\\('inline'.*", "setClass('inline', contains='character')", R)
@@ -121,10 +121,14 @@ setClass('proceduralStep', contains = 'ProcedureStepType')
 setClass('protocol', contains = 'ProtocolType')
 setClass('dataSource', contains = 'DatasetType')
 setClass('methodStep', slots = c('dataSource' = 'ListOfdataSource'), contains = c('ProcedureStepType', 'eml-2.1.1'))
-setClass('temporalCoverage', contains = c('TemporalCoverage', 'eml-2.1.1'))
-setClass('taxonomicCoverage', contains = c('TaxonomicCoverage', 'eml-2.1.1'))
+setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))
+setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))
+setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))
 setClass('coverage', contains=c('Coverage'))
-setClass('online', contains=c('OnlineType', 'PhysicalOnlineType'))", classes_file, append = TRUE)
+
+setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))
+setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1'))",
+      classes_file, append = TRUE)
 
 
 

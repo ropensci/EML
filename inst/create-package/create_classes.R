@@ -60,6 +60,18 @@ has_children <- function(element, ns = character()){
     length(xml_find_all(element, ".//xs:element", ns = ns)) > 0
 }
 
+## vectorize
+is_character_type <- function(types){
+  purrr::map_lgl(types, function(type)
+    type %in% c("xs:string", "i18nString", "i18nNonEmptyStringType", "NonEmptyStringType", "character")
+  )
+}
+
+replace_character_type <- function(type){
+  is_chr <- is_character_type(type)
+  type[is_chr] <- "character"
+  type
+  }
 
 
 sanitize_type <- function(type, name, children, extension){
@@ -74,7 +86,7 @@ sanitize_type <- function(type, name, children, extension){
 
   ### FIXME  create a bigger mapping set of types that should be replaced with "character" directly
   ### FIXME likewise, identify other xs: base types (e.g. xs:float, xs:time, xs:date) that we can define with native R types directly
-  str_type <- grepl(c("NonEmptyStringType"), type)
+  str_type <- is_character_type(type)
   type[str_type] <- "character"
 
 
@@ -98,9 +110,12 @@ column_check <- function(df){
 }
 
 ref_as_name <- function(df){
+
   if(!is.null(df$name)){
     nans <- is.na(df$name)
     df$name[nans] <- df$ref[nans]
+  } else {
+    df$name <- df$ref
   }
   df
 }
@@ -137,22 +152,6 @@ set_class_list <- function(class, class_file = "classes.R"){
 }
 
 
-set_class_simpletype <- function(element, class = xml2::xml_attr(element, "name"),
-                                 ns = character(), class_file = "classes.R", methods_file = "methods.R"){
-
-  type <- xml2::xml_attr(element, "type")
-  type <- sanitize_type(name = class, type = type,
-                        children = has_children(element, ns),
-                        extension = has_extension(element, ns))
-
-  restrictions <- xml2::xml_find_all(element, "./xs:restriction", ns) %>% xml_attr("base") %>% strip_namespace()
-  type <- c(type, restrictions)
-
-  if(!is.na(class)){
-    write(sprintf("setClass('%s', contains = c(%s)) ## D", class, print_cmd(type)), "D-classes.R", append = TRUE)
-    set_coerces(class, methods_file)
-  }
-}
 
 
 recursive_parse <- function(child_sets, ns = ns, class_file = class_file, methods_file = methods_file){
@@ -202,16 +201,11 @@ set_class_complextype <- function(complex_type,
   extensions <- xml2::xml_find_all(complex_type, "./xs:extension", ns)
   restrictions <- xml2::xml_find_all(complex_type, "./xs:restriction", ns)
 
-  #### Create these additional classes ####
-  ## simple_type & elements become slots themselves, so don't spawn more slots/containers ##
- # simple_types %>%  purrr::map(set_class_simpletype, ns = ns,
-#                              class_file = class_file,
-#                              methods_file = methods_file)
 
   children <- list(simple_types, elements, groups, complex_types, choice, sequence, simple_content, complex_content, extensions, restrictions) %>%
     recursive_parse(ns = ns, class_file = class_file, methods_file = methods_file)
 
-  group_slots <- groups %>% purrr::map(xml_attr, "ref") %>% strip_namespace() %>% setNames(., .)
+  group_slots <- groups %>% purrr::map(xml_attr, "ref") %>% replace_character_type() %>% strip_namespace() %>% setNames(., .)
   ## FIXME choice slots may not come before element slots...  Be more careful about creating a valid slot order!!!
   slots <- c(
     group_slots,
@@ -228,13 +222,16 @@ set_class_complextype <- function(complex_type,
     type
   )
 
-  ## Drop repeated elements from contains list
-  contains <- unique(contains)
 
   mixed <- xml_attr(complex_type, "mixed")
   if(!is.na(mixed) & mixed=="true"){
     contains <- c("character", contains)
   }
+  contains <- replace_character_type(contains)
+
+  ## Drop repeated elements from contains list
+  contains <- unique(contains)
+
 
   ## Inherit class
   if(!is.na(class)){  ## if we have a named element, then we declare a class
@@ -263,7 +260,8 @@ attrib_to_slots <- function(attrib){
     attrib %>%
       purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
       ref_as_name() -> att_df
-    att <- att_df$name
+    att <- replace_character_type(att_df$name)
+
     setNames(rep("xml_attribute", length(att)), att)
   } else {
     list()
@@ -279,7 +277,7 @@ elements_to_slots <- function(elements, ns, maxOccurs = NA, class_file = "classe
       purrr::map(set_class_list, class_file = class_file)
 
 
-    setNames(df$slot, df$name)
+    setNames(replace_character_type(df$slot), df$name)
 
   } else {
     list()
