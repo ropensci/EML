@@ -96,7 +96,7 @@ R <- gsub("c\\('class' = ", "c('eml:class' =", R)
 # R <- gsub(escape_parens(joinCondition), "", R)
 #R <- sub("setClass\\('attributeReference', contains = 'character'\\)", joinCondition, R)
 
-## Remove first occurance of this:
+## Remove first occurance of these, which repeat later
 R <- sub("setClass\\('geographicCoverage'.*", "", R)
 
 

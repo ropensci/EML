@@ -211,16 +211,18 @@ set_class_complextype <- function(complex_type,
   children <- list(simple_types, elements, groups, complex_types, choice, sequence, simple_content, complex_content, extensions, restrictions) %>%
     recursive_parse(ns = ns, class_file = class_file, methods_file = methods_file)
 
-
+  group_slots <- groups %>% purrr::map(xml_attr, "ref") %>% strip_namespace() %>% setNames(., .)
   ## FIXME choice slots may not come before element slots...  Be more careful about creating a valid slot order!!!
   slots <- c(
+    group_slots,
+    elements_to_slots(elements, ns = ns, maxOccurs = maxOccurs, class_file = class_file),
     children$slots,
-    attrib_to_slots(attrib),
-    elements_to_slots(elements, ns = ns, maxOccurs = maxOccurs, class_file = class_file))
+    attrib_to_slots(attrib)
+    )
 
   contains <- c(
     as.character(children$contains),
-    groups %>% purrr::map(xml_attr, "ref") %>% strip_namespace(),
+#    groups %>% purrr::map(xml_attr, "ref") %>% strip_namespace(),
     extensions %>% purrr::map(xml_attr, "base") %>% strip_namespace(),
     restrictions %>% purrr::map(xml_attr, "base") %>% strip_namespace(),
     type

@@ -11,6 +11,7 @@
 #' @import XML
 #' @import methods
 S4Toeml <- function(obj,
+                    node = NULL,
                     excluded_slots = c("namespaces", "dirname", "xmlNodeName"),
                     ns = character()){
 
@@ -19,7 +20,7 @@ S4Toeml <- function(obj,
       ns <- obj@namespaces
     }
 
-    slot_classes <- get_slots(obj)
+    slot_classes <- get_slots(class(obj))
     is_attribute <- sapply(slot_classes, function(x) x == "xml_attribute")
 
     attribute_elements <- who[is_attribute]
@@ -35,7 +36,9 @@ S4Toeml <- function(obj,
 
     if(length(ns) > 0)
       node_name <- paste0("eml:", node_name)
-    node <- newXMLNode(node_name, namespaceDefinitions = ns)
+
+    if(is.null(node))
+      node <- newXMLNode(node_name, namespaceDefinitions = ns)
 
 
 
@@ -49,13 +52,20 @@ S4Toeml <- function(obj,
           names(attrs) <- s
           addAttributes(node, .attrs = attrs)
         }
+
+      ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
+      ## pass their children directly to their parent node.
+      } else if(grepl("^[A-Z]", s)){
+        X = slot(obj, s)
+        if(!isEmpty(X)){
+          addChildren(node, S4Toeml(X, node = node))
+        }
       } else {
         ## Complex child nodes
         X = slot(obj, s)
-
         if(!isEmpty(X)){
           if(is(X, "list")){
-            if(is.character(X[[1]]) & length(get_slots(X[[1]])) <= 1)
+            if(is.character(X[[1]]) & length(get_slots(class(X[[1]]))) <= 1)
               addChildren(node, lapply(X, function(x) newXMLNode(class(x), x)))
             else
               addChildren(node, lapply(X, as, "XMLInternalElementNode"))
@@ -110,6 +120,6 @@ isEmpty <- function(obj){
 }
 
 
-get_slots <- function(s4){
-  getSlots(getClass(class(s4)))
+get_slots <- function(class_name){
+  getSlots(getClass(class_name))
 }
