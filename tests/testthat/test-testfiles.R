@@ -15,7 +15,7 @@ testthat::test_that("eml-access.xml", {
 
 
 xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
-out <- lapply(xml_tests, safely(function(xml){
+out <- lapply(xml_tests, purrr::safely(function(xml){
   testthat::test_that(xml, {
     f <- system.file(paste0("xsd/test/", xml), package = "eml2")
     node <- xmlRoot(xmlParse(f))
