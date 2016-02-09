@@ -312,8 +312,8 @@ setAs('online', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'online',  function(from) emlToS4(from))
 setAs('offline', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'offline',  function(from) emlToS4(from))
-setAs('inline', 'XMLInternalElementNode',   function(from) S4Toeml(from))
-setAs('XMLInternalElementNode', 'inline',  function(from) emlToS4(from))
+
+
 setAs('DistributionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'DistributionType',  function(from) emlToS4(from))
 setAs('schemeName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -330,8 +330,8 @@ setAs('parameterDefinition', 'XMLInternalElementNode',   function(from) S4Toeml(
 setAs('XMLInternalElementNode', 'parameterDefinition',  function(from) emlToS4(from))
 setAs('ConnectionDefinitionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ConnectionDefinitionType',  function(from) emlToS4(from))
-setAs('InlineType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
-setAs('XMLInternalElementNode', 'InlineType',  function(from) emlToS4(from))
+
+
 setAs('mediumName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'mediumName',  function(from) emlToS4(from))
 setAs('mediumDensity', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -936,8 +936,8 @@ setAs('online', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'online',  function(from) emlToS4(from))
 setAs('offline', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'offline',  function(from) emlToS4(from))
-setAs('inline', 'XMLInternalElementNode',   function(from) S4Toeml(from))
-setAs('XMLInternalElementNode', 'inline',  function(from) emlToS4(from))
+
+
 setAs('PhysicalDistributionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'PhysicalDistributionType',  function(from) emlToS4(from))
 setAs('onlineDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))

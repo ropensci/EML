@@ -60,10 +60,10 @@ has_children <- function(element, ns = character()){
     length(xml_find_all(element, ".//xs:element", ns = ns)) > 0
 }
 
-## vectorize
+## vectorize. Note: xmlValue returns characters. if .Data not character but instead float or Date etc, would need coercion.
 is_character_type <- function(types){
   purrr::map_lgl(types, function(type)
-    type %in% c("xs:string", "i18nString", "i18nNonEmptyStringType", "NonEmptyStringType", "character")
+    type %in% c("xs:string", "xs:date", "i18nString", "i18nNonEmptyStringType", "NonEmptyStringType", "character")
   )
 }
 
@@ -228,7 +228,7 @@ set_class_complextype <- function(complex_type,
     contains <- c("character", contains)
   }
   contains <- replace_character_type(contains)
-
+  contains <- c(contains, "eml-2.1.1")
   ## Drop repeated elements from contains list
   contains <- unique(contains)
 
@@ -238,10 +238,10 @@ set_class_complextype <- function(complex_type,
 
     if(length(slots) > 0){
       write(sprintf("setClass('%s', slots = c(%s), contains = c(%s)) ## A", class,
-                    print_cmd(slots), print_cmd(c(contains, "eml-2.1.1"))), "A-classes.R", append=TRUE)
+                    print_cmd(slots), print_cmd(contains)), "A-classes.R", append=TRUE)
     } else {
-      if(length(contains) == 0)  # hack?
-        contains = "character"
+      if(identical(contains, "eml-2.1.1"))  # hack to avoid no .Data error??
+        contains = c("character", contains)
       write(sprintf("setClass('%s', contains = c(%s)) ## B", class, print_cmd(contains)), "B-classes.R", append=TRUE)
     }
     set_coerces(class, methods_file)
@@ -260,7 +260,7 @@ attrib_to_slots <- function(attrib){
     attrib %>%
       purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
       ref_as_name() -> att_df
-    att <- replace_character_type(att_df$name)
+    att <- replace_character_type(att_df$name) %>% strip_namespace()
 
     setNames(rep("xml_attribute", length(att)), att)
   } else {

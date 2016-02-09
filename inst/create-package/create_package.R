@@ -17,9 +17,11 @@ file.remove(methods_file)
 ## Create some boilerplate classes:
 xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
-  write("setClass('eml-2.1.1')", file, append = TRUE)
-  write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
-
+  write("
+setClass('xml_attribute', contains = 'character')
+setClass('eml-2.1.1', slots = c(schemaLocation = 'xml_attribute', lang = 'xml_attribute'))
+setClass('any_xml', contains = 'XMLInternalElementNode')",
+        file, append = TRUE)
 
 write("
 setClass('PrecisionType', contains = c('numeric'))
@@ -111,8 +113,8 @@ R <- gsub("^setClass\\('taxonomicCoverage'.*", "", R)
 R <- gsub("setClass\\('geographicCoverage.*", "", R)
 R <- gsub("^setClass\\('methodStep'.*", "", R)
 R <- gsub("^setClass\\('dataSource'.*", "", R)
-R <- gsub("^setClass\\('inline'.*", "setClass('inline', contains='character')", R)
-R <- gsub("^setClass\\('InlineType'.*", "setClass('InlineType', contains='character')", R)
+R <- gsub("^setClass\\('unit'.*", "", R)
+R <- gsub("^setClass\\('InlineType'.*", "setClass('InlineType', contains='XMLInternalElementNode')", R)
 
 write(R, classes_file, append = FALSE)
 
@@ -125,13 +127,19 @@ setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xm
 setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))
 setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))
 setClass('coverage', contains=c('Coverage'))
+setClass('inline', contains='InlineType')
 
+setClass('unit', slots = c('description' = 'ListOfdescription', 'annotation' = 'ListOfannotation', 'id' = 'xml_attribute', 'abbreviation' = 'xml_attribute', 'name' = 'xml_attribute', 'parentSI' = 'xml_attribute', 'unitType' = 'xml_attribute', 'multiplierToSI' = 'xml_attribute', 'constantToSI' = 'xml_attribute'), contains = c('UnitType', 'eml-2.1.1'))
 setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))
 setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1'))",
       classes_file, append = TRUE)
 
-
-
+M <- readLines(methods_file)
+M <- gsub("^setAs\\('inline',.*", "", M)
+M <- gsub("setAs\\('XMLInternalElementNode', 'inline',.*", "", M)
+M <- gsub("^setAs\\('InlineType',.*", "", M)
+M <- gsub("setAs\\('XMLInternalElementNode', 'InlineType',.*", "", M)
+write(M, methods_file)
 ##
 
 ## Misc code to determine collate order
