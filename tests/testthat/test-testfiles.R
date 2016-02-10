@@ -13,9 +13,8 @@ testthat::test_that("eml-access.xml", {
   testthat::expect_is(element, "XMLInternalElementNode")
 })
 
-## FIXME should work withou purrr::safely
 xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
-out <- lapply(xml_tests, purrr::safely(function(xml){
+lapply(xml_tests, function(xml){
   testthat::test_that(xml, {
     f <- system.file(paste0("xsd/test/", xml), package = "eml2")
     node <- xmlRoot(xmlParse(f))
@@ -23,7 +22,7 @@ out <- lapply(xml_tests, purrr::safely(function(xml){
     element <- as(s4, "XMLInternalElementNode")
     testthat::expect_is(element, "XMLInternalElementNode")
   })
-}))
+})
 
 
 ### Errors:

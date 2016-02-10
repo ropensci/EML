@@ -140,7 +140,7 @@ M <- gsub("setAs\\('XMLInternalElementNode', 'inline',.*", "", M)
 M <- gsub("^setAs\\('InlineType',.*", "", M)
 M <- gsub("setAs\\('XMLInternalElementNode', 'InlineType',.*", "", M)
 write(M, methods_file)
-##
+
 
 ## Misc code to determine collate order
 ns <- xml_ns(read_xml("inst/xsd/eml.xsd"))
