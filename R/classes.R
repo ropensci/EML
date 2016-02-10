@@ -1024,7 +1024,7 @@ setClass('ListOfotherEntity', contains = 'list')
 setClass('ListOfcontact', contains = 'list')
 setClass('ListOfchangeHistory', contains = 'list')
 setClass('DatasetType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'ResourceGroup' = 'ResourceGroup', 'purpose' = 'TextType', 'maintenance' = 'MaintenanceType', 'contact' = 'ListOfcontact', 'publisher' = 'ResponsibleParty', 'pubPlace' = 'character', 'methods' = 'MethodsType', 'project' = 'ResearchProjectType', 'dataTable' = 'ListOfdataTable', 'spatialRaster' = 'ListOfspatialRaster', 'spatialVector' = 'ListOfspatialVector', 'storedProcedure' = 'ListOfstoredProcedure', 'view' = 'ListOfview', 'otherEntity' = 'ListOfotherEntity', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
-setClass('changeHistory', slots = c('changeScope' = 'character', 'oldValue' = 'character', 'changeDate' = 'xs:date', 'comment' = 'character'), contains = c('eml-2.1.1')) ## A
+setClass('changeHistory', slots = c('changeScope' = 'character', 'oldValue' = 'character', 'changeDate' = 'character', 'comment' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('MaintenanceType', slots = c('description' = 'TextType', 'maintenanceUpdateFrequency' = 'MaintUpFreqType', 'changeHistory' = 'ListOfchangeHistory'), contains = c('eml-2.1.1')) ## A
 setClass('MaintUpFreqType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('dataset', contains = c('DatasetType', 'eml-2.1.1')) ## B
@@ -1045,7 +1045,7 @@ setClass('description', contains = c('TextType', 'eml-2.1.1')) ## B
 setClass('maintenanceUpdateFrequency', contains = c('MaintUpFreqType', 'eml-2.1.1')) ## B
 setClass('changeScope', contains = c('character', 'eml-2.1.1')) ## B
 setClass('oldValue', contains = c('character', 'eml-2.1.1')) ## B
-setClass('changeDate', contains = c('xs:date', 'eml-2.1.1')) ## B
+setClass('changeDate', contains = c('character', 'eml-2.1.1')) ## B
 setClass('comment', contains = c('character', 'eml-2.1.1')) ## B
 
 

@@ -9,44 +9,8 @@
 library("dplyr")
 library("xml2")
 library("purrr")
-
-## utils ##
-
-filename <- function(x){
-  strsplit(basename(x), "\\.")[[1]][1]
-}
-
-## Contrary to name, doesn't strip "xs:" namespace; this helps to avoid a lot of clashes with protected types
-strip_namespace <- function(x){
-  purrr::map_chr(x,
-                 function(x){
-                   if(length(x) > 0){
-                     if(grepl("^xs:",  x))
-                       x
-                     else if(grepl("^xsd:",  x))
-                       x <- gsub("^.*:(.*)", "xs:\\1", x)
-                     else
-                       x <- gsub("^.*:", "", x)
-                   }
-                   x
-                 })
-}
-
-print_cmd <- function(l){
-  n <- names(l)
-
-  if(is.null(n)){
-    out <- paste0("'", as.character(l), "'", collapse = ", ")
-  } else {
-    out <- ""
-    if(length(l) > 1)
-    for(i in 1:(length(l)-1))
-      out <- paste0(out, "'", n[i], "'", " = '", l[i], "', ")
-    out <- paste0(out, "'", n[length(l)], "'", " = '", l[length(l)], "'")
-  }
-
-  out
-}
+source("inst/create-package/utils.R")
+source("inst/create-package/create_methods.R")
 
 
 has_extension <- function(element, ns = character()){
@@ -84,8 +48,6 @@ sanitize_type <- function(type, name, children, extension){
   type[name_as_type] <- name[name_as_type]
   type[char_as_type] <- "character"
 
-  ### FIXME  create a bigger mapping set of types that should be replaced with "character" directly
-  ### FIXME likewise, identify other xs: base types (e.g. xs:float, xs:time, xs:date) that we can define with native R types directly
   str_type <- is_character_type(type)
   type[str_type] <- "character"
 
@@ -142,13 +104,40 @@ element_attrs_table <- function(elements, ns = character(), maxOccurs = NA){
 
 #### Functions that write R code as output #############################
 
-set_coerces <- function(class, class_file = "methods.R"){
-  write(sprintf("setAs('%s', 'XMLInternalElementNode',   function(from) S4Toeml(from))", class), class_file, append = TRUE)
-  write(sprintf("setAs('XMLInternalElementNode', '%s',  function(from) emlToS4(from))", class), class_file, append = TRUE)
-}
-
 set_class_list <- function(class, class_file = "classes.R"){
   write(sprintf("setClass('%s', contains = 'list')", class), "list-classes.R", append = TRUE)
+}
+
+
+
+
+attrib_to_slots <- function(attrib){
+  if(length(attrib) > 0){
+    attrib %>%
+      purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
+      ref_as_name() -> att_df
+    att <- replace_character_type(att_df$name) %>% strip_namespace()
+
+    setNames(rep("xml_attribute", length(att)), att)
+  } else {
+    list()
+  }
+}
+
+elements_to_slots <- function(elements, ns, maxOccurs = NA, class_file = "classes.R"){
+  if(length(elements) > 0){
+    df <- element_attrs_table(elements, ns = ns, maxOccurs = maxOccurs)
+
+    ## Go ahead and define ListOf classes now
+    unique(df$slot[grepl("ListOf", df$slot)]) %>%
+      purrr::map(set_class_list, class_file = class_file)
+
+
+    setNames(replace_character_type(df$slot), df$name)
+
+  } else {
+    list()
+  }
 }
 
 
@@ -239,6 +228,8 @@ set_class_complextype <- function(complex_type,
     if(length(slots) > 0){
       write(sprintf("setClass('%s', slots = c(%s), contains = c(%s)) ## A", class,
                     print_cmd(slots), print_cmd(contains)), "A-classes.R", append=TRUE)
+
+      create_initialize_method(slots, class, methods_file)
     } else {
       if(identical(contains, "eml-2.1.1"))  # hack to avoid no .Data error??
         contains = c("character", contains)
@@ -255,34 +246,17 @@ set_class_complextype <- function(complex_type,
 }
 
 
-attrib_to_slots <- function(attrib){
-  if(length(attrib) > 0){
-    attrib %>%
-      purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
-      ref_as_name() -> att_df
-    att <- replace_character_type(att_df$name) %>% strip_namespace()
 
-    setNames(rep("xml_attribute", length(att)), att)
-  } else {
-    list()
-  }
+
+readclass <- function(x){
+  if(file.exists(x))
+    readLines(x)
+  else
+    character()
 }
 
-elements_to_slots <- function(elements, ns, maxOccurs = NA, class_file = "classes.R"){
-  if(length(elements) > 0){
-    df <- element_attrs_table(elements, ns = ns, maxOccurs = maxOccurs)
-
-    ## Go ahead and define ListOf classes now
-    unique(df$slot[grepl("ListOf", df$slot)]) %>%
-      purrr::map(set_class_list, class_file = class_file)
 
 
-    setNames(replace_character_type(df$slot), df$name)
-
-  } else {
-    list()
-  }
-}
 
 
 
@@ -308,11 +282,4 @@ create_classes <- function(xsd_file,
         class_file, append = append)
 
   unlink(c("list-classes.R", "D-classes.R", "A-classes.R", "B-classes.R"))
-}
-
-readclass <- function(x){
-  if(file.exists(x))
-    readLines(x)
-  else
-    character()
 }
