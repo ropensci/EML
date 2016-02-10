@@ -5,7 +5,7 @@ library("dplyr")
 
 ## Filepaths assume working directory is package root
 
-source("inst/create-package/xsd_classes.R")
+source("inst/create-package/create_classes.R")
 classes_file <- "R/classes.R"
 methods_file <- "R/methods.R"
 ## Start clean
@@ -17,36 +17,21 @@ file.remove(methods_file)
 ## Create some boilerplate classes:
 xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
-  ## Define some dummy classes defined later, but we define first at start to avoid tricky or unsatisfiable collate order issues
-#  c("ReferencesGroup", "AccessRule", "Coverage",
-#    "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup",
-#    "CitationType", "PhysicalType", "DatasetType",
-#    "ProcedureStepType", "i18nNonEmptyStringType",
-#    "TemporalCoverage", "TaxonomicCoverage") %>%
-#    purrr::map(set_dummy_class, file)
-
-  ## Some basic classes we'll use
- # write("setClass('schemaLocation', slots = c('schemaLocation' = 'xml_attribute'))", file, append = TRUE)
-#  write("setMethod('initialize', 'schemaLocation', function(.Object, schemaLocation){ .Object@schemaLocation <- new('xml_attribute', character()); .Object})", methods_file, append = TRUE)
-
-
-  write("setClass('eml-2.1.1')", file, append = TRUE)
-  write(sprintf("setClass('xml_attribute', contains = 'character')"), file, append = TRUE)
-
+  write("
+setClass('xml_attribute', contains = 'character')
+setClass('eml-2.1.1', slots = c(schemaLocation = 'xml_attribute', lang = 'xml_attribute'))
+setClass('any_xml', contains = 'XMLInternalElementNode')",
+        file, append = TRUE)
 
 write("
-setClass('i18nNonEmptyStringType', contains='character')
-setClass('i18nString', contains='character')
+setClass('PrecisionType', contains = c('numeric'))
 setClass('ReferencesGroup', slots = c('references' = 'character'), contains = c('eml-2.1.1'))
 setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'character'), contains = c('eml-2.1.1'))",
       file, append = TRUE)
 
-
-
-
   ## Define classes for the these XSD schema types to correspond to the appropriate R object class
-  data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date"),
-             contains = c("numeric", "character", "character", "character", "numeric", "integer", "integer", "integer", "integer", "integer", "logical", "Date")) %>%
+  data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date", "xs:positiveInteger"),
+             contains = c("numeric", "character", "character", "character", "numeric", "integer", "integer", "integer", "integer", "integer", "logical", "Date", "integer")) %>%
     purrr::by_row(function(x)
       write(sprintf("setClass('%s', contains = '%s')", x[["class"]], x[["contains"]]), file, append = TRUE)
     )
@@ -86,7 +71,7 @@ collate <- c(
 )
 
 ## Okay, here we go! Create all the classes...
-paste0("inst/xsd/", collate) %>% map(create_classes, "R/classes.R", "R/methods.R")
+paste0("inst/xsd/", collate) %>% map(create_classes, class_file = "R/classes.R", methods_file = "R/methods.R")
 
 
 
@@ -102,28 +87,34 @@ R <- gsub("^setClass\\('complex'", "setClass('eml:complex'", R)
 R <- gsub("c\\('class' = ", "c('eml:class' =", R)
 
 ## Move this definition down below ForeignKeyGroup definition
-joinCondition <- "setClass('joinCondition', slots = c('referencedKey' = 'character'), contains = c('ForeignKeyGroup', 'eml-2.1.1'))"
-escape_parens <- function(x){
-  x <- gsub("\\(", "\\\\(", x)
-  gsub("\\)", "\\\\)", x)
-}
-R <- gsub(escape_parens(joinCondition), "", R)
-R <- sub("setClass\\('attributeReference', contains = 'character'\\)", joinCondition, R)
 
-## Remove first occurance of this:
-R <- sub("setClass\\('geographicCoverage'.*", "", R)
+# joinCondition <- "setClass('joinCondition', slots = c('referencedKey' = 'character'), contains = c('ForeignKeyGroup', 'eml-2.1.1'))"
+# escape_parens <- function(x){
+#   x <- gsub("\\(", "\\\\(", x)
+#   gsub("\\)", "\\\\)", x)
+# }
+# R <- gsub(escape_parens(joinCondition), "", R)
+#R <- sub("setClass\\('attributeReference', contains = 'character'\\)", joinCondition, R)
+
 
 
 ## coverage repeats a couple times before defined. Remove it, replace with definition at end
 R <- gsub("^setClass\\('coverage'.*", "", R)
+
+
+R <- gsub("^setClass\\('inline'.*", "", R)
+
 
 ## These need to be defined later than they appear.  Manually move to end.
 R <- gsub("^setClass\\('proceduralStep'.*", "", R)
 R <- gsub("^setClass\\('protocol'.*", "", R)
 R <- gsub("^setClass\\('temporalCoverage'.*", "", R)
 R <- gsub("^setClass\\('taxonomicCoverage'.*", "", R)
+R <- gsub("setClass\\('geographicCoverage.*", "", R)
 R <- gsub("^setClass\\('methodStep'.*", "", R)
 R <- gsub("^setClass\\('dataSource'.*", "", R)
+R <- gsub("^setClass\\('unit'.*", "", R)
+R <- gsub("^setClass\\('InlineType'.*", "setClass('InlineType', contains='XMLInternalElementNode')", R)
 
 write(R, classes_file, append = FALSE)
 
@@ -132,13 +123,23 @@ setClass('proceduralStep', contains = 'ProcedureStepType')
 setClass('protocol', contains = 'ProtocolType')
 setClass('dataSource', contains = 'DatasetType')
 setClass('methodStep', slots = c('dataSource' = 'ListOfdataSource'), contains = c('ProcedureStepType', 'eml-2.1.1'))
-setClass('temporalCoverage', contains = c('TemporalCoverage', 'eml-2.1.1'))
-setClass('taxonomicCoverage', contains = c('TaxonomicCoverage', 'eml-2.1.1'))
+setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))
+setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))
+setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))
 setClass('coverage', contains=c('Coverage'))
-setClass('online', contains=c('OnlineType', 'PhysicalOnlineType'))", classes_file, append = TRUE)
+setClass('inline', contains='InlineType')
 
+setClass('unit', slots = c('description' = 'ListOfdescription', 'annotation' = 'ListOfannotation', 'id' = 'xml_attribute', 'abbreviation' = 'xml_attribute', 'name' = 'xml_attribute', 'parentSI' = 'xml_attribute', 'unitType' = 'xml_attribute', 'multiplierToSI' = 'xml_attribute', 'constantToSI' = 'xml_attribute'), contains = c('UnitType', 'eml-2.1.1'))
+setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))
+setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1'))",
+      classes_file, append = TRUE)
 
-
+M <- readLines(methods_file)
+M <- gsub("^setAs\\('inline',.*", "", M)
+M <- gsub("setAs\\('XMLInternalElementNode', 'inline',.*", "", M)
+M <- gsub("^setAs\\('InlineType',.*", "", M)
+M <- gsub("setAs\\('XMLInternalElementNode', 'InlineType',.*", "", M)
+write(M, methods_file)
 ##
 
 ## Misc code to determine collate order

@@ -1,4 +1,21 @@
 
+## Default XML namespaces -- consider moving to separate file
+eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
+                   ds = "eml://ecoinformatics.org/dataset-2.1.1",
+                   xs = "http://www.w3.org/2001/XMLSchema",
+                   xsi = "http://www.w3.org/2001/XMLSchema-instance",
+                   stmml = "http://www.xml-cml.org/schema/stmml_1.1")
+
+
+
+setClass("eml:eml",
+         slots = c(namespaces = "character", "xsi:schemaLocation" = "xml_attribute", xmlNodeName = "character"),
+         contains = "eml",
+         prototype = list(namespaces = eml_namespaces,
+                          xmlNodeName = "eml",
+                          "xsi:schemaLocation" =
+                            new("xml_attribute", "eml://ecoinformatics.org/eml-2.1.1 eml.xsd")))
+
 #' read_eml
 #'
 #' read_eml
@@ -34,5 +51,22 @@ read_eml <- function(file, ...){
 #' eml <- read_eml(f)
 #' write_eml(eml)
 write_eml <- function(eml, file = NULL, ...){
-  XML::saveXML(as(eml, "XMLInternalElementNode"), file = file, ...)
+  node <- as(as(eml, "eml:eml"), "XMLInternalElementNode")
+
+  XML::saveXML(node, file = file, ...)
+}
+
+#' validate_eml
+#'
+#' validate_eml
+#' @param eml an eml class object, file, or xml document
+#' @export
+eml_validate <- function(eml){
+
+  schema <- system.file("xsd/eml.xsd", package = "eml2") #"http://ropensci.github.io/EML/eml.xsd"
+
+  if(is(eml, "eml"))
+    eml <- write_eml(eml)
+
+  xmlSchemaValidate(schema, eml)
 }
