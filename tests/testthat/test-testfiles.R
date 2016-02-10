@@ -4,12 +4,8 @@ library(XML)
 testthat::test_that("eml-access.xml", {
   f <- system.file(paste0("xsd/test/", "eml-access.xml"), package = "eml2")
   node <- xmlRoot(xmlParse(f))
-  removeAttributes(node, .attrs = "xsi:schemaLocation")
-
   s4 <- as(node, xmlName(node))
   element <- as(s4, "XMLInternalElementNode")
-
-
   testthat::expect_is(element, "XMLInternalElementNode")
 })
 
