@@ -12,7 +12,4 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: XML,
     methods
-Suggests: testthat,
-    xml2,
-    dplyr,
-    purrr
+Suggests: testthat

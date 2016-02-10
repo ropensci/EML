@@ -51,6 +51,7 @@ read_eml <- function(file, ...){
 #' write_eml(eml)
 write_eml <- function(eml, file = NULL, ...){
   node <- as(as(eml, "eml:eml"), "XMLInternalElementNode")
+
   XML::saveXML(node, file = file, ...)
 }
 

@@ -16,12 +16,13 @@ testthat::test_that("eml-access.xml", {
   element <- as(s4, "XMLInternalElementNode")
 
   ## Test: is our XML still schema-valid?
-  xmlNamespaces(element) <- xmlNamespaces(node)
-  setXMLNamespace(element, "acc")
+  ns <- xmlNamespaces(node)
+  xmlNamespaces(element) <- ns
+  setXMLNamespace(element, ns[[1]]$id)
 
   saveXML(xmlDoc(element), "test.xml")
   v <- eml_validate("test.xml")
-
+  unlink("test.xml")
   testthat::expect_equal(v$status, 0)
 
 })
@@ -30,6 +31,8 @@ xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
 lapply(xml_tests, function(xml){
   testthat::test_that(xml, {
     f <- system.file(paste0("xsd/test/", xml), package = "eml2")
+    node <- xmlRoot(xmlParse(f))
+
     ## This can cause trouble if not namespaced, and is not required
     XML::removeAttributes(node, .attrs = "xsi:schemaLocation")
 
@@ -40,8 +43,9 @@ lapply(xml_tests, function(xml){
     element <- as(s4, "XMLInternalElementNode")
 
     ## Test: is our XML still schema-valid?
-    xmlNamespaces(element) <- xmlNamespaces(node)
-    setXMLNamespace(element, "acc")
+    ns <- xmlNamespaces(node)
+    xmlNamespaces(element) <- ns
+    setXMLNamespace(element, ns[[1]]$id)
 
     saveXML(xmlDoc(element), "test.xml")
     v <- eml_validate("test.xml")
