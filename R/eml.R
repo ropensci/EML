@@ -1,20 +1,19 @@
-
-## Default XML namespaces -- consider moving to separate file
+## Default XML namespaces
 eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
-                   ds = "eml://ecoinformatics.org/dataset-2.1.1",
                    xs = "http://www.w3.org/2001/XMLSchema",
                    xsi = "http://www.w3.org/2001/XMLSchema-instance",
                    stmml = "http://www.xml-cml.org/schema/stmml_1.1")
-
-
-
+## extend the auto-created eml class to include namespaces & schemaLocation by default
 setClass("eml:eml",
-         slots = c(namespaces = "character", "xsi:schemaLocation" = "xml_attribute", xmlNodeName = "character"),
+         slots = c(namespaces = "character", xmlNodeName = "character"),
          contains = "eml",
          prototype = list(namespaces = eml_namespaces,
                           xmlNodeName = "eml",
-                          "xsi:schemaLocation" =
+                          schemaLocation =
                             new("xml_attribute", "eml://ecoinformatics.org/eml-2.1.1 eml.xsd")))
+## Create a 'show' method so that eml S4 elements display in XML format instead of the
+## impossible-to-read S4 format
+setMethod("show", signature("eml-2.1.1"), function(object) show(S4Toeml(object)))
 
 #' read_eml
 #'
