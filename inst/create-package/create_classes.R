@@ -85,6 +85,8 @@ ref_as_name <- function(df){
 #' @importFrom dplyr mutate
 element_attrs_table <- function(elements, ns = character(), maxOccurs = NA){
 
+    ## FIXME consider extracting doc-string and adding as column in df
+
     df <- elements %>% purrr::map_df(function(x) dplyr::as_data_frame(as.list(xml2::xml_attrs(x)))) %>%
       column_check()
 
@@ -105,7 +107,13 @@ element_attrs_table <- function(elements, ns = character(), maxOccurs = NA){
 #### Functions that write R code as output #############################
 
 set_class_list <- function(class, class_file = "classes.R"){
-  write(sprintf("setClass('%s', contains = 'list')", class), "list-classes.R", append = TRUE)
+  base <- gsub("^ListOf", "", class)
+  write(sprintf("setClass('%s', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, '%s')))
+                          'not all elements are %s objects'
+                       else
+                         TRUE)", class, base, base), "list-classes.R", append = TRUE)
 }
 
 
@@ -155,7 +163,8 @@ recursive_parse <- function(child_sets, ns = ns, class_file = class_file, method
 
 
 
-
+## FIXME: rename fn + first arg, since this applies to all types now.
+## FIXME: tidy up function
 #' @importFrom dplyr as_data_frame
 set_class_complextype <- function(complex_type,
                                   ns = character(),
@@ -195,13 +204,17 @@ set_class_complextype <- function(complex_type,
     recursive_parse(ns = ns, class_file = class_file, methods_file = methods_file)
 
   group_slots <- groups %>% purrr::map(xml_attr, "ref") %>% replace_character_type() %>% strip_namespace() %>% setNames(., .)
-  ## FIXME choice slots may not come before element slots...  Be more careful about creating a valid slot order!!!
+
+  ## FIXME choice slots may not come before element slots...  Be more careful about creating a valid slot order!!
+  ## In particular, we should always obey xs:sequence orderings
   slots <- c(
     group_slots,
     elements_to_slots(elements, ns = ns, maxOccurs = maxOccurs, class_file = class_file),
     children$slots,
     attrib_to_slots(attrib)
     )
+
+  slot_descriptions <- list( )
 
   contains <- c(
     as.character(children$contains),
@@ -226,6 +239,7 @@ set_class_complextype <- function(complex_type,
   if(!is.na(class)){  ## if we have a named element, then we declare a class
 
     if(length(slots) > 0){
+      add_roxygen(slots, slot_descriptions, "A-classes.R")
       write(sprintf("setClass('%s', slots = c(%s), contains = c(%s)) ## A", class,
                     print_cmd(slots), print_cmd(contains)), "A-classes.R", append=TRUE)
 
@@ -245,7 +259,9 @@ set_class_complextype <- function(complex_type,
   out
 }
 
-
+add_roxygen <- function(slots, slot_descriptions, class_file = "A-classes.R"){
+  write(sprintf("#' "), class_file, append = TRUE)
+}
 
 
 readclass <- function(x){

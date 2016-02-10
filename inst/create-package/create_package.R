@@ -19,7 +19,7 @@ xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
   write("
 setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c(schemaLocation = 'xml_attribute', lang = 'xml_attribute'))
+setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
 setClass('any_xml', contains = 'XMLInternalElementNode')",
         file, append = TRUE)
 

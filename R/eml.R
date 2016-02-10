@@ -9,7 +9,7 @@ setClass("eml:eml",
          contains = "eml",
          prototype = list(namespaces = eml_namespaces,
                           xmlNodeName = "eml",
-                          schemaLocation =
+                          schemaLocation = # should be xsi:schemaLocation... inherited from eml-2.1.1
                             new("xml_attribute", "eml://ecoinformatics.org/eml-2.1.1 eml.xsd")))
 ## Create a 'show' method so that eml S4 elements display in XML format instead of the
 ## impossible-to-read S4 format
@@ -51,7 +51,6 @@ read_eml <- function(file, ...){
 #' write_eml(eml)
 write_eml <- function(eml, file = NULL, ...){
   node <- as(as(eml, "eml:eml"), "XMLInternalElementNode")
-
   XML::saveXML(node, file = file, ...)
 }
 

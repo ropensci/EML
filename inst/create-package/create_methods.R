@@ -50,6 +50,7 @@ print_init <- function(l){
   x <- names(l)
   listof <- grepl("ListOf", as.character(l))
   list_set <- character()
+  plain_set <- character()
   if(any(listof)){
     list_set <- empty_to_zero(paste(x[listof], '= character()', collapse = ", "))
   }

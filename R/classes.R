@@ -1,6 +1,6 @@
 
 setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c(schemaLocation = 'xml_attribute', lang = 'xml_attribute'))
+setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
 setClass('any_xml', contains = 'XMLInternalElementNode')
 
 setClass('PrecisionType', contains = c('numeric'))
@@ -24,24 +24,114 @@ setClass('xs:positiveInteger', contains = 'integer')
 #####  inst/xsd/stmml.xsd  ####
 
 
-setClass('ListOfarray', contains = 'list')
-setClass('ListOfunitList', contains = 'list')
-setClass('ListOfannotation', contains = 'list')
-setClass('ListOfdescription', contains = 'list')
-setClass('ListOfentry', contains = 'list')
-setClass('ListOfalternative', contains = 'list')
-setClass('ListOfannotation', contains = 'list')
-setClass('ListOfdescription', contains = 'list')
-setClass('ListOfenumeration', contains = 'list')
-setClass('ListOfrelatedEntry', contains = 'list')
-setClass('ListOfdocumentation', contains = 'list')
-setClass('ListOfappinfo', contains = 'list')
-setClass('ListOfmetadata', contains = 'list')
-setClass('ListOfunitType', contains = 'list')
-setClass('ListOfunit', contains = 'list')
-setClass('ListOfdimension', contains = 'list')
-setClass('ListOfdescription', contains = 'list')
-setClass('ListOfannotation', contains = 'list')
+setClass('ListOfarray', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'array')))
+                          'not all elements are array objects'
+                       else
+                         TRUE)
+setClass('ListOfunitList', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'unitList')))
+                          'not all elements are unitList objects'
+                       else
+                         TRUE)
+setClass('ListOfannotation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'annotation')))
+                          'not all elements are annotation objects'
+                       else
+                         TRUE)
+setClass('ListOfdescription', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'description')))
+                          'not all elements are description objects'
+                       else
+                         TRUE)
+setClass('ListOfentry', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'entry')))
+                          'not all elements are entry objects'
+                       else
+                         TRUE)
+setClass('ListOfalternative', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'alternative')))
+                          'not all elements are alternative objects'
+                       else
+                         TRUE)
+setClass('ListOfannotation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'annotation')))
+                          'not all elements are annotation objects'
+                       else
+                         TRUE)
+setClass('ListOfdescription', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'description')))
+                          'not all elements are description objects'
+                       else
+                         TRUE)
+setClass('ListOfenumeration', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'enumeration')))
+                          'not all elements are enumeration objects'
+                       else
+                         TRUE)
+setClass('ListOfrelatedEntry', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'relatedEntry')))
+                          'not all elements are relatedEntry objects'
+                       else
+                         TRUE)
+setClass('ListOfdocumentation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'documentation')))
+                          'not all elements are documentation objects'
+                       else
+                         TRUE)
+setClass('ListOfappinfo', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'appinfo')))
+                          'not all elements are appinfo objects'
+                       else
+                         TRUE)
+setClass('ListOfmetadata', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'metadata')))
+                          'not all elements are metadata objects'
+                       else
+                         TRUE)
+setClass('ListOfunitType', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'unitType')))
+                          'not all elements are unitType objects'
+                       else
+                         TRUE)
+setClass('ListOfunit', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'unit')))
+                          'not all elements are unit objects'
+                       else
+                         TRUE)
+setClass('ListOfdimension', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'dimension')))
+                          'not all elements are dimension objects'
+                       else
+                         TRUE)
+setClass('ListOfdescription', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'description')))
+                          'not all elements are description objects'
+                       else
+                         TRUE)
+setClass('ListOfannotation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'annotation')))
+                          'not all elements are annotation objects'
+                       else
+                         TRUE)
 setClass('eml:array', slots = c('dataType' = 'xml_attribute', 'errorValues' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValues' = 'xml_attribute', 'maxValues' = 'xml_attribute', 'units' = 'xml_attribute', 'delimiter' = 'xml_attribute', 'size' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('scalar', slots = c('dataType' = 'xml_attribute', 'errorValue' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValue' = 'xml_attribute', 'maxValue' = 'xml_attribute', 'units' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('eml:matrix', slots = c('dataType' = 'xml_attribute', 'delimiter' = 'xml_attribute', 'rows' = 'xml_attribute', 'columns' = 'xml_attribute', 'units' = 'xml_attribute', 'matrixType' = 'xml_attribute', 'errorValues' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValues' = 'xml_attribute', 'maxValues' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
@@ -92,28 +182,138 @@ setClass('documentation', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-text.xsd  ####
 
 
-setClass('ListOfsection', contains = 'list')
-setClass('ListOfpara', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOfcitetitle', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOfitemizedlist', contains = 'list')
-setClass('ListOforderedlist', contains = 'list')
-setClass('ListOfemphasis', contains = 'list')
-setClass('ListOfsubscript', contains = 'list')
-setClass('ListOfsuperscript', contains = 'list')
-setClass('ListOfliteralLayout', contains = 'list')
-setClass('ListOfulink', contains = 'list')
-setClass('ListOfpara', contains = 'list')
-setClass('ListOfsection', contains = 'list')
-setClass('ListOfpara', contains = 'list')
-setClass('ListOfitemizedlist', contains = 'list')
-setClass('ListOforderedlist', contains = 'list')
-setClass('ListOflistitem', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
-setClass('ListOfsubscript', contains = 'list')
-setClass('ListOfsuperscript', contains = 'list')
+setClass('ListOfsection', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'section')))
+                          'not all elements are section objects'
+                       else
+                         TRUE)
+setClass('ListOfpara', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'para')))
+                          'not all elements are para objects'
+                       else
+                         TRUE)
+setClass('ListOfvalue', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'value')))
+                          'not all elements are value objects'
+                       else
+                         TRUE)
+setClass('ListOfvalue', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'value')))
+                          'not all elements are value objects'
+                       else
+                         TRUE)
+setClass('ListOfcitetitle', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citetitle')))
+                          'not all elements are citetitle objects'
+                       else
+                         TRUE)
+setClass('ListOfvalue', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'value')))
+                          'not all elements are value objects'
+                       else
+                         TRUE)
+setClass('ListOfitemizedlist', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'itemizedlist')))
+                          'not all elements are itemizedlist objects'
+                       else
+                         TRUE)
+setClass('ListOforderedlist', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'orderedlist')))
+                          'not all elements are orderedlist objects'
+                       else
+                         TRUE)
+setClass('ListOfemphasis', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'emphasis')))
+                          'not all elements are emphasis objects'
+                       else
+                         TRUE)
+setClass('ListOfsubscript', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'subscript')))
+                          'not all elements are subscript objects'
+                       else
+                         TRUE)
+setClass('ListOfsuperscript', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'superscript')))
+                          'not all elements are superscript objects'
+                       else
+                         TRUE)
+setClass('ListOfliteralLayout', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'literalLayout')))
+                          'not all elements are literalLayout objects'
+                       else
+                         TRUE)
+setClass('ListOfulink', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'ulink')))
+                          'not all elements are ulink objects'
+                       else
+                         TRUE)
+setClass('ListOfpara', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'para')))
+                          'not all elements are para objects'
+                       else
+                         TRUE)
+setClass('ListOfsection', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'section')))
+                          'not all elements are section objects'
+                       else
+                         TRUE)
+setClass('ListOfpara', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'para')))
+                          'not all elements are para objects'
+                       else
+                         TRUE)
+setClass('ListOfitemizedlist', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'itemizedlist')))
+                          'not all elements are itemizedlist objects'
+                       else
+                         TRUE)
+setClass('ListOforderedlist', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'orderedlist')))
+                          'not all elements are orderedlist objects'
+                       else
+                         TRUE)
+setClass('ListOflistitem', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'listitem')))
+                          'not all elements are listitem objects'
+                       else
+                         TRUE)
+setClass('ListOfvalue', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'value')))
+                          'not all elements are value objects'
+                       else
+                         TRUE)
+setClass('ListOfsubscript', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'subscript')))
+                          'not all elements are subscript objects'
+                       else
+                         TRUE)
+setClass('ListOfsuperscript', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'superscript')))
+                          'not all elements are superscript objects'
+                       else
+                         TRUE)
 setClass('TextType', slots = c('section' = 'ListOfsection', 'para' = 'ListOfpara', 'lang' = 'xml_attribute'), contains = c('character', 'eml-2.1.1')) ## A
 setClass('emphasis', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('character', 'eml-2.1.1')) ## A
 setClass('literalLayout', slots = c('value' = 'ListOfvalue'), contains = c('character', 'eml-2.1.1')) ## A
@@ -175,17 +375,72 @@ setClass('angleUnitType', contains = c('eml-2.1.1', 'character')) ## B
 #####  inst/xsd/eml-party.xsd  ####
 
 
-setClass('ListOfindividualName', contains = 'list')
-setClass('ListOforganizationName', contains = 'list')
-setClass('ListOfpositionName', contains = 'list')
-setClass('ListOfaddress', contains = 'list')
-setClass('ListOfphone', contains = 'list')
-setClass('ListOfelectronicMailAddress', contains = 'list')
-setClass('ListOfonlineUrl', contains = 'list')
-setClass('ListOfuserId', contains = 'list')
-setClass('ListOfsalutation', contains = 'list')
-setClass('ListOfgivenName', contains = 'list')
-setClass('ListOfdeliveryPoint', contains = 'list')
+setClass('ListOfindividualName', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'individualName')))
+                          'not all elements are individualName objects'
+                       else
+                         TRUE)
+setClass('ListOforganizationName', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'organizationName')))
+                          'not all elements are organizationName objects'
+                       else
+                         TRUE)
+setClass('ListOfpositionName', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'positionName')))
+                          'not all elements are positionName objects'
+                       else
+                         TRUE)
+setClass('ListOfaddress', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'address')))
+                          'not all elements are address objects'
+                       else
+                         TRUE)
+setClass('ListOfphone', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'phone')))
+                          'not all elements are phone objects'
+                       else
+                         TRUE)
+setClass('ListOfelectronicMailAddress', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'electronicMailAddress')))
+                          'not all elements are electronicMailAddress objects'
+                       else
+                         TRUE)
+setClass('ListOfonlineUrl', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'onlineUrl')))
+                          'not all elements are onlineUrl objects'
+                       else
+                         TRUE)
+setClass('ListOfuserId', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'userId')))
+                          'not all elements are userId objects'
+                       else
+                         TRUE)
+setClass('ListOfsalutation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'salutation')))
+                          'not all elements are salutation objects'
+                       else
+                         TRUE)
+setClass('ListOfgivenName', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'givenName')))
+                          'not all elements are givenName objects'
+                       else
+                         TRUE)
+setClass('ListOfdeliveryPoint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'deliveryPoint')))
+                          'not all elements are deliveryPoint objects'
+                       else
+                         TRUE)
 setClass('phone', slots = c('phonetype' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('userId', slots = c('directory' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ResponsibleParty', slots = c('ReferencesGroup' = 'ReferencesGroup', 'address' = 'ListOfaddress', 'phone' = 'ListOfphone', 'electronicMailAddress' = 'ListOfelectronicMailAddress', 'onlineUrl' = 'ListOfonlineUrl', 'userId' = 'ListOfuserId', 'individualName' = 'ListOfindividualName', 'organizationName' = 'ListOforganizationName', 'positionName' = 'ListOfpositionName', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
@@ -212,19 +467,84 @@ setClass('country', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-resource.xsd  ####
 
 
-setClass('ListOfkeyword', contains = 'list')
-setClass('ListOfalternateIdentifier', contains = 'list')
-setClass('ListOftitle', contains = 'list')
-setClass('ListOfcreator', contains = 'list')
-setClass('ListOfmetadataProvider', contains = 'list')
-setClass('ListOfassociatedParty', contains = 'list')
-setClass('ListOfkeywordSet', contains = 'list')
-setClass('ListOfadditionalInfo', contains = 'list')
-setClass('ListOfdistribution', contains = 'list')
-setClass('ListOfparameterDefinition', contains = 'list')
-setClass('ListOfmediumFormat', contains = 'list')
-setClass('ListOfparameter', contains = 'list')
-setClass('ListOfvalue', contains = 'list')
+setClass('ListOfkeyword', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'keyword')))
+                          'not all elements are keyword objects'
+                       else
+                         TRUE)
+setClass('ListOfalternateIdentifier', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'alternateIdentifier')))
+                          'not all elements are alternateIdentifier objects'
+                       else
+                         TRUE)
+setClass('ListOftitle', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'title')))
+                          'not all elements are title objects'
+                       else
+                         TRUE)
+setClass('ListOfcreator', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'creator')))
+                          'not all elements are creator objects'
+                       else
+                         TRUE)
+setClass('ListOfmetadataProvider', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'metadataProvider')))
+                          'not all elements are metadataProvider objects'
+                       else
+                         TRUE)
+setClass('ListOfassociatedParty', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'associatedParty')))
+                          'not all elements are associatedParty objects'
+                       else
+                         TRUE)
+setClass('ListOfkeywordSet', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'keywordSet')))
+                          'not all elements are keywordSet objects'
+                       else
+                         TRUE)
+setClass('ListOfadditionalInfo', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'additionalInfo')))
+                          'not all elements are additionalInfo objects'
+                       else
+                         TRUE)
+setClass('ListOfdistribution', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'distribution')))
+                          'not all elements are distribution objects'
+                       else
+                         TRUE)
+setClass('ListOfparameterDefinition', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'parameterDefinition')))
+                          'not all elements are parameterDefinition objects'
+                       else
+                         TRUE)
+setClass('ListOfmediumFormat', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'mediumFormat')))
+                          'not all elements are mediumFormat objects'
+                       else
+                         TRUE)
+setClass('ListOfparameter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'parameter')))
+                          'not all elements are parameter objects'
+                       else
+                         TRUE)
+setClass('ListOfvalue', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'value')))
+                          'not all elements are value objects'
+                       else
+                         TRUE)
 setClass('alternateIdentifier', slots = c('system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('associatedParty', slots = c('role' = 'RoleType'), contains = c('eml-2.1.1', 'ResponsibleParty')) ## A
 setClass('keyword', slots = c('keywordType' = 'xml_attribute'), contains = c('character', 'eml-2.1.1')) ## A
@@ -290,10 +610,30 @@ setClass('value', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-spatialReference.xsd  ####
 
 
-setClass('ListOfhorizCoordSysDef', contains = 'list')
-setClass('ListOfaltitudeResolution', contains = 'list')
-setClass('ListOfdepthResolution', contains = 'list')
-setClass('ListOfparameter', contains = 'list')
+setClass('ListOfhorizCoordSysDef', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'horizCoordSysDef')))
+                          'not all elements are horizCoordSysDef objects'
+                       else
+                         TRUE)
+setClass('ListOfaltitudeResolution', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'altitudeResolution')))
+                          'not all elements are altitudeResolution objects'
+                       else
+                         TRUE)
+setClass('ListOfdepthResolution', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'depthResolution')))
+                          'not all elements are depthResolution objects'
+                       else
+                         TRUE)
+setClass('ListOfparameter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'parameter')))
+                          'not all elements are parameter objects'
+                       else
+                         TRUE)
 setClass('projectionList', slots = c('horizCoordSysDef' = 'ListOfhorizCoordSysDef'), contains = c('eml-2.1.1')) ## A
 setClass('altitudeSysDef', slots = c('altitudeDatumName' = 'character', 'altitudeResolution' = 'ListOfaltitudeResolution', 'altitudeDistanceUnits' = 'character', 'altitudeEncodingMethod' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('depthSysDef', slots = c('depthDatumName' = 'character', 'depthResolution' = 'ListOfdepthResolution', 'depthDistanceUnits' = 'character', 'depthEncodingMethod' = 'character'), contains = c('eml-2.1.1')) ## A
@@ -330,10 +670,30 @@ setClass('geogCoordSys', contains = c('geogCoordSysType', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-access.xsd  ####
 
 
-setClass('ListOfallow', contains = 'list')
-setClass('ListOfdeny', contains = 'list')
-setClass('ListOfprincipal', contains = 'list')
-setClass('ListOfpermission', contains = 'list')
+setClass('ListOfallow', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'allow')))
+                          'not all elements are allow objects'
+                       else
+                         TRUE)
+setClass('ListOfdeny', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'deny')))
+                          'not all elements are deny objects'
+                       else
+                         TRUE)
+setClass('ListOfprincipal', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'principal')))
+                          'not all elements are principal objects'
+                       else
+                         TRUE)
+setClass('ListOfpermission', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'permission')))
+                          'not all elements are permission objects'
+                       else
+                         TRUE)
 setClass('AccessType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'allow' = 'ListOfallow', 'deny' = 'ListOfdeny', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'order' = 'xml_attribute', 'authSystem' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('AccessRule', slots = c('principal' = 'ListOfprincipal', 'permission' = 'ListOfpermission'), contains = c('eml-2.1.1')) ## A
 setClass('access', contains = c('AccessType', 'eml-2.1.1')) ## B
@@ -346,11 +706,36 @@ setClass('permission', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-constraint.xsd  ####
 
 
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
-setClass('ListOfattributeReference', contains = 'list')
+setClass('ListOfattributeReference', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attributeReference')))
+                          'not all elements are attributeReference objects'
+                       else
+                         TRUE)
+setClass('ListOfattributeReference', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attributeReference')))
+                          'not all elements are attributeReference objects'
+                       else
+                         TRUE)
+setClass('ListOfattributeReference', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attributeReference')))
+                          'not all elements are attributeReference objects'
+                       else
+                         TRUE)
+setClass('ListOfattributeReference', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attributeReference')))
+                          'not all elements are attributeReference objects'
+                       else
+                         TRUE)
+setClass('ListOfattributeReference', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attributeReference')))
+                          'not all elements are attributeReference objects'
+                       else
+                         TRUE)
 setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('key', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1')) ## A
 setClass('cardinality', slots = c('parentOccurences' = 'character', 'childOccurences' = 'CardinalityChildOccurancesType'), contains = c('eml-2.1.1')) ## A
@@ -384,13 +769,48 @@ setClass('attributeReference', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-literature.xsd  ####
 
 
-setClass('ListOfcontact', contains = 'list')
-setClass('ListOfeditor', contains = 'list')
-setClass('ListOfinstitution', contains = 'list')
-setClass('ListOfrecipient', contains = 'list')
-setClass('ListOfgeographicCoverage', contains = 'list')
-setClass('ListOfpublicationPlace', contains = 'list')
-setClass('ListOfperformer', contains = 'list')
+setClass('ListOfcontact', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'contact')))
+                          'not all elements are contact objects'
+                       else
+                         TRUE)
+setClass('ListOfeditor', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'editor')))
+                          'not all elements are editor objects'
+                       else
+                         TRUE)
+setClass('ListOfinstitution', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'institution')))
+                          'not all elements are institution objects'
+                       else
+                         TRUE)
+setClass('ListOfrecipient', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'recipient')))
+                          'not all elements are recipient objects'
+                       else
+                         TRUE)
+setClass('ListOfgeographicCoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'geographicCoverage')))
+                          'not all elements are geographicCoverage objects'
+                       else
+                         TRUE)
+setClass('ListOfpublicationPlace', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'publicationPlace')))
+                          'not all elements are publicationPlace objects'
+                       else
+                         TRUE)
+setClass('ListOfperformer', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'performer')))
+                          'not all elements are performer objects'
+                       else
+                         TRUE)
 setClass('CitationType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'ResourceGroup' = 'ResourceGroup', 'contact' = 'ListOfcontact', 'article' = 'Article', 'book' = 'Book', 'chapter' = 'Chapter', 'editedBook' = 'Book', 'manuscript' = 'Manuscript', 'report' = 'Report', 'thesis' = 'Thesis', 'conferenceProceedings' = 'ConferenceProceedings', 'personalCommunication' = 'PersonalCommunication', 'map' = 'Map', 'generic' = 'Generic', 'audioVisual' = 'AudioVisual', 'presentation' = 'Presentation', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('Article', slots = c('journal' = 'character', 'volume' = 'character', 'issue' = 'character', 'pageRange' = 'character', 'publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'ISSN' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('Book', slots = c('publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'edition' = 'character', 'volume' = 'character', 'numberOfVolumes' = 'character', 'totalPages' = 'character', 'totalFigures' = 'character', 'totalTables' = 'character', 'ISBN' = 'character'), contains = c('eml-2.1.1')) ## A
@@ -485,23 +905,108 @@ setClass('conferenceLocation', contains = c('Address', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-coverage.xsd  ####
 
 
-setClass('ListOfgeographicCoverage', contains = 'list')
-setClass('ListOftemporalCoverage', contains = 'list')
-setClass('ListOftaxonomicCoverage', contains = 'list')
-setClass('ListOfsingleDateTime', contains = 'list')
-setClass('ListOftimeScaleCitation', contains = 'list')
-setClass('ListOfgRingPoint', contains = 'list')
-setClass('ListOfgRingPoint', contains = 'list')
-setClass('ListOfdatasetGPolygonExclusionGRing', contains = 'list')
-setClass('ListOfdatasetGPolygon', contains = 'list')
-setClass('ListOforiginator', contains = 'list')
-setClass('ListOfclassificationSystem', contains = 'list')
-setClass('ListOfidentificationReference', contains = 'list')
-setClass('ListOfidentifierName', contains = 'list')
-setClass('ListOfvouchers', contains = 'list')
-setClass('ListOftaxonomicClassification', contains = 'list')
-setClass('ListOfcommonName', contains = 'list')
-setClass('ListOftaxonomicClassification', contains = 'list')
+setClass('ListOfgeographicCoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'geographicCoverage')))
+                          'not all elements are geographicCoverage objects'
+                       else
+                         TRUE)
+setClass('ListOftemporalCoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'temporalCoverage')))
+                          'not all elements are temporalCoverage objects'
+                       else
+                         TRUE)
+setClass('ListOftaxonomicCoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'taxonomicCoverage')))
+                          'not all elements are taxonomicCoverage objects'
+                       else
+                         TRUE)
+setClass('ListOfsingleDateTime', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'singleDateTime')))
+                          'not all elements are singleDateTime objects'
+                       else
+                         TRUE)
+setClass('ListOftimeScaleCitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'timeScaleCitation')))
+                          'not all elements are timeScaleCitation objects'
+                       else
+                         TRUE)
+setClass('ListOfgRingPoint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'gRingPoint')))
+                          'not all elements are gRingPoint objects'
+                       else
+                         TRUE)
+setClass('ListOfgRingPoint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'gRingPoint')))
+                          'not all elements are gRingPoint objects'
+                       else
+                         TRUE)
+setClass('ListOfdatasetGPolygonExclusionGRing', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'datasetGPolygonExclusionGRing')))
+                          'not all elements are datasetGPolygonExclusionGRing objects'
+                       else
+                         TRUE)
+setClass('ListOfdatasetGPolygon', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'datasetGPolygon')))
+                          'not all elements are datasetGPolygon objects'
+                       else
+                         TRUE)
+setClass('ListOforiginator', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'originator')))
+                          'not all elements are originator objects'
+                       else
+                         TRUE)
+setClass('ListOfclassificationSystem', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'classificationSystem')))
+                          'not all elements are classificationSystem objects'
+                       else
+                         TRUE)
+setClass('ListOfidentificationReference', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'identificationReference')))
+                          'not all elements are identificationReference objects'
+                       else
+                         TRUE)
+setClass('ListOfidentifierName', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'identifierName')))
+                          'not all elements are identifierName objects'
+                       else
+                         TRUE)
+setClass('ListOfvouchers', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'vouchers')))
+                          'not all elements are vouchers objects'
+                       else
+                         TRUE)
+setClass('ListOftaxonomicClassification', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'taxonomicClassification')))
+                          'not all elements are taxonomicClassification objects'
+                       else
+                         TRUE)
+setClass('ListOfcommonName', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'commonName')))
+                          'not all elements are commonName objects'
+                       else
+                         TRUE)
+setClass('ListOftaxonomicClassification', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'taxonomicClassification')))
+                          'not all elements are taxonomicClassification objects'
+                       else
+                         TRUE)
 
 
 setClass('Coverage', slots = c('ReferencesGroup' = 'ReferencesGroup', 'geographicCoverage' = 'ListOfgeographicCoverage', 'temporalCoverage' = 'ListOftemporalCoverage', 'taxonomicCoverage' = 'ListOftaxonomicCoverage', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
@@ -567,19 +1072,84 @@ setClass('taxonomicClassification', contains = c('TaxonomicClassificationType', 
 #####  inst/xsd/eml-physical.xsd  ####
 
 
-setClass('ListOffieldDelimiter', contains = 'list')
-setClass('ListOfquoteCharacter', contains = 'list')
-setClass('ListOfliteralCharacter', contains = 'list')
-setClass('ListOfquoteCharacter', contains = 'list')
-setClass('ListOfliteralCharacter', contains = 'list')
-setClass('ListOftextFixed', contains = 'list')
-setClass('ListOftextDelimited', contains = 'list')
-setClass('ListOfrecordDelimiter', contains = 'list')
-setClass('ListOfphysicalLineDelimiter', contains = 'list')
-setClass('ListOfcompressionMethod', contains = 'list')
-setClass('ListOfencodingMethod', contains = 'list')
-setClass('ListOfauthentication', contains = 'list')
-setClass('ListOfdistribution', contains = 'list')
+setClass('ListOffieldDelimiter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'fieldDelimiter')))
+                          'not all elements are fieldDelimiter objects'
+                       else
+                         TRUE)
+setClass('ListOfquoteCharacter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'quoteCharacter')))
+                          'not all elements are quoteCharacter objects'
+                       else
+                         TRUE)
+setClass('ListOfliteralCharacter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'literalCharacter')))
+                          'not all elements are literalCharacter objects'
+                       else
+                         TRUE)
+setClass('ListOfquoteCharacter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'quoteCharacter')))
+                          'not all elements are quoteCharacter objects'
+                       else
+                         TRUE)
+setClass('ListOfliteralCharacter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'literalCharacter')))
+                          'not all elements are literalCharacter objects'
+                       else
+                         TRUE)
+setClass('ListOftextFixed', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'textFixed')))
+                          'not all elements are textFixed objects'
+                       else
+                         TRUE)
+setClass('ListOftextDelimited', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'textDelimited')))
+                          'not all elements are textDelimited objects'
+                       else
+                         TRUE)
+setClass('ListOfrecordDelimiter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'recordDelimiter')))
+                          'not all elements are recordDelimiter objects'
+                       else
+                         TRUE)
+setClass('ListOfphysicalLineDelimiter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'physicalLineDelimiter')))
+                          'not all elements are physicalLineDelimiter objects'
+                       else
+                         TRUE)
+setClass('ListOfcompressionMethod', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'compressionMethod')))
+                          'not all elements are compressionMethod objects'
+                       else
+                         TRUE)
+setClass('ListOfencodingMethod', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'encodingMethod')))
+                          'not all elements are encodingMethod objects'
+                       else
+                         TRUE)
+setClass('ListOfauthentication', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'authentication')))
+                          'not all elements are authentication objects'
+                       else
+                         TRUE)
+setClass('ListOfdistribution', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'distribution')))
+                          'not all elements are distribution objects'
+                       else
+                         TRUE)
 setClass('size', slots = c('unit' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('authentication', slots = c('method' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('simpleDelimited', slots = c('fieldDelimiter' = 'ListOffieldDelimiter', 'collapseDelimiters' = 'character', 'quoteCharacter' = 'ListOfquoteCharacter', 'literalCharacter' = 'ListOfliteralCharacter'), contains = c('eml-2.1.1')) ## A
@@ -643,17 +1213,72 @@ setClass('connection', contains = c('ConnectionType', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-project.xsd  ####
 
 
-setClass('ListOfrole', contains = 'list')
-setClass('ListOfdescriptorValue', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfdescriptor', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfcoverage', contains = 'list')
-setClass('ListOfdescription', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOftitle', contains = 'list')
-setClass('ListOfpersonnel', contains = 'list')
-setClass('ListOfrelatedProject', contains = 'list')
+setClass('ListOfrole', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'role')))
+                          'not all elements are role objects'
+                       else
+                         TRUE)
+setClass('ListOfdescriptorValue', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'descriptorValue')))
+                          'not all elements are descriptorValue objects'
+                       else
+                         TRUE)
+setClass('ListOfcitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citation')))
+                          'not all elements are citation objects'
+                       else
+                         TRUE)
+setClass('ListOfdescriptor', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'descriptor')))
+                          'not all elements are descriptor objects'
+                       else
+                         TRUE)
+setClass('ListOfcitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citation')))
+                          'not all elements are citation objects'
+                       else
+                         TRUE)
+setClass('ListOfcoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'coverage')))
+                          'not all elements are coverage objects'
+                       else
+                         TRUE)
+setClass('ListOfdescription', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'description')))
+                          'not all elements are description objects'
+                       else
+                         TRUE)
+setClass('ListOfcitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citation')))
+                          'not all elements are citation objects'
+                       else
+                         TRUE)
+setClass('ListOftitle', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'title')))
+                          'not all elements are title objects'
+                       else
+                         TRUE)
+setClass('ListOfpersonnel', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'personnel')))
+                          'not all elements are personnel objects'
+                       else
+                         TRUE)
+setClass('ListOfrelatedProject', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'relatedProject')))
+                          'not all elements are relatedProject objects'
+                       else
+                         TRUE)
 setClass('personnel', slots = c('role' = 'ListOfrole'), contains = c('eml-2.1.1', 'ResponsibleParty')) ## A
 setClass('descriptorValue', slots = c('name_or_id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('descriptor', slots = c('descriptorValue' = 'ListOfdescriptorValue', 'citation' = 'ListOfcitation', 'name' = 'xml_attribute', 'citableClassificationSystem' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
@@ -677,16 +1302,66 @@ setClass('relatedProject', contains = c('ResearchProjectType', 'eml-2.1.1')) ## 
 #####  inst/xsd/eml-software.xsd  ####
 
 
-setClass('ListOfdistribution', contains = 'list')
-setClass('ListOflanguage', contains = 'list')
-setClass('ListOfoperatingSystem', contains = 'list')
-setClass('ListOfmachineProcessor', contains = 'list')
-setClass('ListOfprogrammingLanguage', contains = 'list')
-setClass('ListOfdependency', contains = 'list')
-setClass('ListOflicenseURL', contains = 'list')
-setClass('ListOflicense', contains = 'list')
-setClass('ListOfimplementation', contains = 'list')
-setClass('ListOfdependency', contains = 'list')
+setClass('ListOfdistribution', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'distribution')))
+                          'not all elements are distribution objects'
+                       else
+                         TRUE)
+setClass('ListOflanguage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'language')))
+                          'not all elements are language objects'
+                       else
+                         TRUE)
+setClass('ListOfoperatingSystem', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'operatingSystem')))
+                          'not all elements are operatingSystem objects'
+                       else
+                         TRUE)
+setClass('ListOfmachineProcessor', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'machineProcessor')))
+                          'not all elements are machineProcessor objects'
+                       else
+                         TRUE)
+setClass('ListOfprogrammingLanguage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'programmingLanguage')))
+                          'not all elements are programmingLanguage objects'
+                       else
+                         TRUE)
+setClass('ListOfdependency', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'dependency')))
+                          'not all elements are dependency objects'
+                       else
+                         TRUE)
+setClass('ListOflicenseURL', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'licenseURL')))
+                          'not all elements are licenseURL objects'
+                       else
+                         TRUE)
+setClass('ListOflicense', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'license')))
+                          'not all elements are license objects'
+                       else
+                         TRUE)
+setClass('ListOfimplementation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'implementation')))
+                          'not all elements are implementation objects'
+                       else
+                         TRUE)
+setClass('ListOfdependency', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'dependency')))
+                          'not all elements are dependency objects'
+                       else
+                         TRUE)
 setClass('dependency', slots = c('action' = 'Action', 'software' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('implementation', slots = c('distribution' = 'ListOfdistribution', 'size' = 'character', 'language' = 'ListOflanguage', 'operatingSystem' = 'ListOfoperatingSystem', 'machineProcessor' = 'ListOfmachineProcessor', 'virtualMachine' = 'character', 'diskUsage' = 'character', 'runtimeMemoryUsage' = 'character', 'programmingLanguage' = 'ListOfprogrammingLanguage', 'checksum' = 'character', 'dependency' = 'ListOfdependency'), contains = c('eml-2.1.1')) ## A
@@ -714,7 +1389,12 @@ setClass('license', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-protocol.xsd  ####
 
 
-setClass('ListOfproceduralStep', contains = 'list')
+setClass('ListOfproceduralStep', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'proceduralStep')))
+                          'not all elements are proceduralStep objects'
+                       else
+                         TRUE)
 setClass('ProtocolType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'ResourceGroup' = 'ResourceGroup', 'proceduralStep' = 'ListOfproceduralStep', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 
 
@@ -723,20 +1403,90 @@ setClass('ProtocolType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'Resou
 #####  inst/xsd/eml-methods.xsd  ####
 
 
-setClass('ListOfdataSource', contains = 'list')
-setClass('ListOfcoverage', contains = 'list')
-setClass('ListOfdescription', contains = 'list')
-setClass('ListOfreferencedEntityId', contains = 'list')
-setClass('ListOfcoverage', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfmethodStep', contains = 'list')
-setClass('ListOfsampling', contains = 'list')
-setClass('ListOfqualityControl', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfprotocol', contains = 'list')
-setClass('ListOfinstrumentation', contains = 'list')
-setClass('ListOfsoftware', contains = 'list')
-setClass('ListOfsubStep', contains = 'list')
+setClass('ListOfdataSource', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'dataSource')))
+                          'not all elements are dataSource objects'
+                       else
+                         TRUE)
+setClass('ListOfcoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'coverage')))
+                          'not all elements are coverage objects'
+                       else
+                         TRUE)
+setClass('ListOfdescription', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'description')))
+                          'not all elements are description objects'
+                       else
+                         TRUE)
+setClass('ListOfreferencedEntityId', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'referencedEntityId')))
+                          'not all elements are referencedEntityId objects'
+                       else
+                         TRUE)
+setClass('ListOfcoverage', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'coverage')))
+                          'not all elements are coverage objects'
+                       else
+                         TRUE)
+setClass('ListOfcitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citation')))
+                          'not all elements are citation objects'
+                       else
+                         TRUE)
+setClass('ListOfmethodStep', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'methodStep')))
+                          'not all elements are methodStep objects'
+                       else
+                         TRUE)
+setClass('ListOfsampling', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'sampling')))
+                          'not all elements are sampling objects'
+                       else
+                         TRUE)
+setClass('ListOfqualityControl', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'qualityControl')))
+                          'not all elements are qualityControl objects'
+                       else
+                         TRUE)
+setClass('ListOfcitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citation')))
+                          'not all elements are citation objects'
+                       else
+                         TRUE)
+setClass('ListOfprotocol', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'protocol')))
+                          'not all elements are protocol objects'
+                       else
+                         TRUE)
+setClass('ListOfinstrumentation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'instrumentation')))
+                          'not all elements are instrumentation objects'
+                       else
+                         TRUE)
+setClass('ListOfsoftware', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'software')))
+                          'not all elements are software objects'
+                       else
+                         TRUE)
+setClass('ListOfsubStep', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'subStep')))
+                          'not all elements are subStep objects'
+                       else
+                         TRUE)
 
 setClass('studyExtent', slots = c('coverage' = 'ListOfcoverage', 'description' = 'ListOfdescription'), contains = c('eml-2.1.1')) ## A
 setClass('spatialSamplingUnits', slots = c('referencedEntityId' = 'ListOfreferencedEntityId', 'coverage' = 'ListOfcoverage'), contains = c('eml-2.1.1')) ## A
@@ -763,19 +1513,84 @@ setClass('citation', contains = c('CitationType', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-attribute.xsd  ####
 
 
-setClass('ListOfbounds', contains = 'list')
-setClass('ListOfbounds', contains = 'list')
-setClass('ListOfattribute', contains = 'list')
-setClass('ListOfattributeLabel', contains = 'list')
-setClass('ListOfstorageType', contains = 'list')
-setClass('ListOfmissingValueCode', contains = 'list')
-setClass('ListOfquantitativeAttributeAccuracyAssessment', contains = 'list')
-setClass('ListOfcitation', contains = 'list')
-setClass('ListOfcodesetURL', contains = 'list')
-setClass('ListOfcodeDefinition', contains = 'list')
-setClass('ListOfpattern', contains = 'list')
-setClass('ListOfenumeratedDomain', contains = 'list')
-setClass('ListOftextDomain', contains = 'list')
+setClass('ListOfbounds', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'bounds')))
+                          'not all elements are bounds objects'
+                       else
+                         TRUE)
+setClass('ListOfbounds', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'bounds')))
+                          'not all elements are bounds objects'
+                       else
+                         TRUE)
+setClass('ListOfattribute', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attribute')))
+                          'not all elements are attribute objects'
+                       else
+                         TRUE)
+setClass('ListOfattributeLabel', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'attributeLabel')))
+                          'not all elements are attributeLabel objects'
+                       else
+                         TRUE)
+setClass('ListOfstorageType', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'storageType')))
+                          'not all elements are storageType objects'
+                       else
+                         TRUE)
+setClass('ListOfmissingValueCode', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'missingValueCode')))
+                          'not all elements are missingValueCode objects'
+                       else
+                         TRUE)
+setClass('ListOfquantitativeAttributeAccuracyAssessment', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'quantitativeAttributeAccuracyAssessment')))
+                          'not all elements are quantitativeAttributeAccuracyAssessment objects'
+                       else
+                         TRUE)
+setClass('ListOfcitation', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'citation')))
+                          'not all elements are citation objects'
+                       else
+                         TRUE)
+setClass('ListOfcodesetURL', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'codesetURL')))
+                          'not all elements are codesetURL objects'
+                       else
+                         TRUE)
+setClass('ListOfcodeDefinition', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'codeDefinition')))
+                          'not all elements are codeDefinition objects'
+                       else
+                         TRUE)
+setClass('ListOfpattern', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'pattern')))
+                          'not all elements are pattern objects'
+                       else
+                         TRUE)
+setClass('ListOfenumeratedDomain', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'enumeratedDomain')))
+                          'not all elements are enumeratedDomain objects'
+                       else
+                         TRUE)
+setClass('ListOftextDomain', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'textDomain')))
+                          'not all elements are textDomain objects'
+                       else
+                         TRUE)
 setClass('minimum', slots = c('exclusive' = 'xml_attribute'), contains = c('eml-2.1.1', 'xs:float')) ## A
 setClass('maximum', slots = c('exclusive' = 'xml_attribute'), contains = c('eml-2.1.1', 'xs:float')) ## A
 setClass('bounds', slots = c('minimum' = 'character', 'maximum' = 'character'), contains = c('eml-2.1.1')) ## A
@@ -853,10 +1668,30 @@ setClass('numberType', contains = c('NumberType', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-entity.xsd  ####
 
 
-setClass('ListOfalternateIdentifier', contains = 'list')
-setClass('ListOfphysical', contains = 'list')
-setClass('ListOfadditionalInfo', contains = 'list')
-setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfalternateIdentifier', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'alternateIdentifier')))
+                          'not all elements are alternateIdentifier objects'
+                       else
+                         TRUE)
+setClass('ListOfphysical', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'physical')))
+                          'not all elements are physical objects'
+                       else
+                         TRUE)
+setClass('ListOfadditionalInfo', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'additionalInfo')))
+                          'not all elements are additionalInfo objects'
+                       else
+                         TRUE)
+setClass('ListOfconstraint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'constraint')))
+                          'not all elements are constraint objects'
+                       else
+                         TRUE)
 setClass('alternateIdentifier', slots = c('system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('EntityGroup', slots = c('alternateIdentifier' = 'ListOfalternateIdentifier', 'entityName' = 'character', 'entityDescription' = 'character', 'physical' = 'ListOfphysical', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'additionalInfo' = 'ListOfadditionalInfo'), contains = c('eml-2.1.1')) ## A
 setClass('OtherEntityType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'entityType' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
@@ -875,7 +1710,12 @@ setClass('entityType', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-dataTable.xsd  ####
 
 
-setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfconstraint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'constraint')))
+                          'not all elements are constraint objects'
+                       else
+                         TRUE)
 setClass('DataTableType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'caseSensitive' = 'character', 'numberOfRecords' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('dataTable', contains = c('DataTableType', 'eml-2.1.1')) ## B
 setClass('attributeList', contains = c('AttributeListType', 'eml-2.1.1')) ## B
@@ -887,7 +1727,12 @@ setClass('numberOfRecords', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-view.xsd  ####
 
 
-setClass('ListOfconstraint', contains = 'list')
+setClass('ListOfconstraint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'constraint')))
+                          'not all elements are constraint objects'
+                       else
+                         TRUE)
 setClass('ViewType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'queryStatement' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('view', contains = c('ViewType', 'eml-2.1.1')) ## B
 setClass('attributeList', contains = c('AttributeListType', 'eml-2.1.1')) ## B
@@ -898,8 +1743,18 @@ setClass('queryStatement', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-storedProcedure.xsd  ####
 
 
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfparameter', contains = 'list')
+setClass('ListOfconstraint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'constraint')))
+                          'not all elements are constraint objects'
+                       else
+                         TRUE)
+setClass('ListOfparameter', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'parameter')))
+                          'not all elements are parameter objects'
+                       else
+                         TRUE)
 setClass('StoredProcedureType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'parameter' = 'ListOfparameter', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('ParameterType', slots = c('name' = 'character', 'domainDescription' = 'character', 'required' = 'xs:boolean', 'repeats' = 'xs:boolean'), contains = c('eml-2.1.1')) ## A
 setClass('storedProcedure', contains = c('StoredProcedureType', 'eml-2.1.1')) ## B
@@ -915,9 +1770,24 @@ setClass('repeats', contains = c('xs:boolean', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml-spatialVector.xsd  ####
 
 
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfgeometry', contains = 'list')
-setClass('ListOfquantitativeAccuracyReport', contains = 'list')
+setClass('ListOfconstraint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'constraint')))
+                          'not all elements are constraint objects'
+                       else
+                         TRUE)
+setClass('ListOfgeometry', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'geometry')))
+                          'not all elements are geometry objects'
+                       else
+                         TRUE)
+setClass('ListOfquantitativeAccuracyReport', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'quantitativeAccuracyReport')))
+                          'not all elements are quantitativeAccuracyReport objects'
+                       else
+                         TRUE)
 setClass('SpatialVectorType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'geometry' = 'ListOfgeometry', 'geometricObjectCount' = 'character', 'topologyLevel' = 'TopologyLevel', 'spatialReference' = 'SpatialReferenceType', 'horizontalAccuracy' = 'DataQuality', 'verticalAccuracy' = 'DataQuality', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('quantitativeAccuracyReport', slots = c('quantitativeAccuracyValue' = 'character', 'quantitativeAccuracyMethod' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('DataQuality', slots = c('accuracyReport' = 'character', 'quantitativeAccuracyReport' = 'ListOfquantitativeAccuracyReport'), contains = c('eml-2.1.1')) ## A
@@ -940,11 +1810,36 @@ setClass('quantitativeAccuracyMethod', contains = c('character', 'eml-2.1.1')) #
 #####  inst/xsd/eml-spatialRaster.xsd  ####
 
 
-setClass('ListOfcornerPoint', contains = 'list')
-setClass('ListOfcontrolPoint', contains = 'list')
-setClass('ListOfbandDescription', contains = 'list')
-setClass('ListOfconstraint', contains = 'list')
-setClass('ListOfquantitativeAccuracyReport', contains = 'list')
+setClass('ListOfcornerPoint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'cornerPoint')))
+                          'not all elements are cornerPoint objects'
+                       else
+                         TRUE)
+setClass('ListOfcontrolPoint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'controlPoint')))
+                          'not all elements are controlPoint objects'
+                       else
+                         TRUE)
+setClass('ListOfbandDescription', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'bandDescription')))
+                          'not all elements are bandDescription objects'
+                       else
+                         TRUE)
+setClass('ListOfconstraint', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'constraint')))
+                          'not all elements are constraint objects'
+                       else
+                         TRUE)
+setClass('ListOfquantitativeAccuracyReport', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'quantitativeAccuracyReport')))
+                          'not all elements are quantitativeAccuracyReport objects'
+                       else
+                         TRUE)
 setClass('cornerPoint', slots = c('xCoordinate' = 'xs:float', 'yCoordinate' = 'xs:float', 'pointInPixel' = 'character', 'corner' = 'rasterOriginType'), contains = c('eml-2.1.1')) ## A
 setClass('controlPoint', slots = c('column' = 'xs:int', 'row' = 'xs:int', 'xCoordinate' = 'xs:float', 'yCoordinate' = 'xs:float', 'pointInPixel' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('bilinearFit', slots = c('xIntercept' = 'xs:float', 'xSlope' = 'xs:float', 'yIntercept' = 'xs:float', 'ySlope' = 'xs:float'), contains = c('eml-2.1.1')) ## A
@@ -1015,14 +1910,54 @@ setClass('quantitativeAccuracyMethod', contains = c('character', 'eml-2.1.1')) #
 #####  inst/xsd/eml-dataset.xsd  ####
 
 
-setClass('ListOfdataTable', contains = 'list')
-setClass('ListOfspatialRaster', contains = 'list')
-setClass('ListOfspatialVector', contains = 'list')
-setClass('ListOfstoredProcedure', contains = 'list')
-setClass('ListOfview', contains = 'list')
-setClass('ListOfotherEntity', contains = 'list')
-setClass('ListOfcontact', contains = 'list')
-setClass('ListOfchangeHistory', contains = 'list')
+setClass('ListOfdataTable', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'dataTable')))
+                          'not all elements are dataTable objects'
+                       else
+                         TRUE)
+setClass('ListOfspatialRaster', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'spatialRaster')))
+                          'not all elements are spatialRaster objects'
+                       else
+                         TRUE)
+setClass('ListOfspatialVector', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'spatialVector')))
+                          'not all elements are spatialVector objects'
+                       else
+                         TRUE)
+setClass('ListOfstoredProcedure', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'storedProcedure')))
+                          'not all elements are storedProcedure objects'
+                       else
+                         TRUE)
+setClass('ListOfview', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'view')))
+                          'not all elements are view objects'
+                       else
+                         TRUE)
+setClass('ListOfotherEntity', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'otherEntity')))
+                          'not all elements are otherEntity objects'
+                       else
+                         TRUE)
+setClass('ListOfcontact', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'contact')))
+                          'not all elements are contact objects'
+                       else
+                         TRUE)
+setClass('ListOfchangeHistory', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'changeHistory')))
+                          'not all elements are changeHistory objects'
+                       else
+                         TRUE)
 setClass('DatasetType', slots = c('ReferencesGroup' = 'ReferencesGroup', 'ResourceGroup' = 'ResourceGroup', 'purpose' = 'TextType', 'maintenance' = 'MaintenanceType', 'contact' = 'ListOfcontact', 'publisher' = 'ResponsibleParty', 'pubPlace' = 'character', 'methods' = 'MethodsType', 'project' = 'ResearchProjectType', 'dataTable' = 'ListOfdataTable', 'spatialRaster' = 'ListOfspatialRaster', 'spatialVector' = 'ListOfspatialVector', 'storedProcedure' = 'ListOfstoredProcedure', 'view' = 'ListOfview', 'otherEntity' = 'ListOfotherEntity', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('changeHistory', slots = c('changeScope' = 'character', 'oldValue' = 'character', 'changeDate' = 'character', 'comment' = 'character'), contains = c('eml-2.1.1')) ## A
 setClass('MaintenanceType', slots = c('description' = 'TextType', 'maintenanceUpdateFrequency' = 'MaintUpFreqType', 'changeHistory' = 'ListOfchangeHistory'), contains = c('eml-2.1.1')) ## A
@@ -1052,8 +1987,18 @@ setClass('comment', contains = c('character', 'eml-2.1.1')) ## B
 #####  inst/xsd/eml.xsd  ####
 
 
-setClass('ListOfdescribes', contains = 'list')
-setClass('ListOfadditionalMetadata', contains = 'list')
+setClass('ListOfdescribes', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'describes')))
+                          'not all elements are describes objects'
+                       else
+                         TRUE)
+setClass('ListOfadditionalMetadata', contains = 'list',
+validity = function(object)
+                       if(!all(sapply(object, is, 'additionalMetadata')))
+                          'not all elements are additionalMetadata objects'
+                       else
+                         TRUE)
 setClass('additionalMetadata', slots = c('describes' = 'ListOfdescribes', 'metadata' = 'character', 'id' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('eml', slots = c('access' = 'AccessType', 'additionalMetadata' = 'ListOfadditionalMetadata', 'dataset' = 'DatasetType', 'citation' = 'CitationType', 'software' = 'SoftwareType', 'protocol' = 'ProtocolType', 'packageId' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1')) ## A
 setClass('access', contains = c('AccessType', 'eml-2.1.1')) ## B

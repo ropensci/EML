@@ -521,6 +521,8 @@ setAs('online', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'online',  function(from) emlToS4(from))
 setAs('offline', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'offline',  function(from) emlToS4(from))
+
+
 setAs('DistributionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'DistributionType',  function(from) emlToS4(from))
 setAs('schemeName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -548,6 +550,8 @@ function(.Object, parameterDefinition = character(), ReferencesGroup = new('Refe
 })
 setAs('ConnectionDefinitionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ConnectionDefinitionType',  function(from) emlToS4(from))
+
+
 setAs('mediumName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'mediumName',  function(from) emlToS4(from))
 setAs('mediumDensity', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1451,6 +1455,8 @@ setAs('online', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'online',  function(from) emlToS4(from))
 setAs('offline', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'offline',  function(from) emlToS4(from))
+
+
 setAs('PhysicalDistributionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'PhysicalDistributionType',  function(from) emlToS4(from))
 setAs('onlineDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
