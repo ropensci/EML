@@ -15,7 +15,7 @@ source("inst/create-package/create_methods.R")
 
 has_extension <- function(element, ns){
     xml_find_all(element, "./*/xs:simpleContent/xs:extension | ./*/xs:complexContent/xs:extension", ns = ns) %>%
-      xml_attr("base") -> out
+      xml_attr("base") %>% replace_character_type() -> out
     if(length(out) == 0) out <- NA
     out
 }
@@ -27,7 +27,9 @@ has_children <- function(element, ns){
 ## vectorize. Note: xmlValue returns characters. if .Data not character but instead float or Date etc, would need coercion.
 is_character_type <- function(types){
   purrr::map_lgl(types, function(type)
-    type %in% c("xs:string", "xs:date", "i18nString", "i18nNonEmptyStringType", "NonEmptyStringType", "character")
+    type %in% c("xs:string", "xs:date", "i18nString", "i18nNonEmptyStringType", "NonEmptyStringType", "character",
+                "xs:float", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong",
+                "xs:long", "xs:integer", "xs:boolean", "xs:date", "xs:positiveInteger")
   )
 }
 
@@ -44,7 +46,7 @@ replace_character_type <- function(type){
 set_class_list <- function(class, cf = "classes.R"){
   base <- gsub("^ListOf", "", class)
   write(sprintf("setClass('%s', contains = 'list', validity = function(object){ if(!all(sapply(object, is, '%s'))){ 'not all elements are %s objects'; } else { TRUE }})",
-                class, base, base), cf, append = TRUE)
+                class, base, base), "list-classes.R", append = TRUE)
 }
 
 
@@ -64,7 +66,7 @@ parse_element <- function(node, ns, cf = "class.R", mf = "methods.R", maxOccurs 
   ## If no type, use extension
   if(is.na(type))
     type <- has_extension(node, ns)
-  ## if still no type, use "character"
+  ## if still no type, use character
   if(is.na(type))
     type <- "character"
   ## we'll use mostly un-namedspaced types
@@ -134,9 +136,9 @@ parse_extend_restrict <- function(node, ns, cf = "classes.R", mf = "methods.R"){
 }
 
 
-create_class <- function(node, ns = character(), cf = "classes.R", mf = "methods.R"){
+create_class <- function(node, ns = character(), cf = "classes.R", mf = "methods.R", maxOccurs = NA){
 
-  s4_bits <- xml_children(node) %>% purrr::map(recurse, ns = ns, cf = cf, mf = mf)
+  s4_bits <- xml_children(node) %>% purrr::map(recurse, ns = ns, cf = cf, mf = mf, maxOccurs = maxOccurs)
 
   list(slots = purrr::flatten(purrr::map(s4_bits, `[[`, "slots")),
        contains = unique(as.character(purrr::flatten(purrr::map(s4_bits, `[[`, "contains")))))
@@ -151,20 +153,33 @@ create_class <- function(node, ns = character(), cf = "classes.R", mf = "methods
 
 recurse <- function(node, ns = character(), cf = "classes.R", mf = "methods.R", maxOccurs = NA){
   node_name <- xml_name(node, ns = ns)
-
+  if(is.na(maxOccurs))
+    maxOccurs = xml_attr(node, "maxOccurs", ns)
 
   bits <-
-  if(node_name == "xs:element"){
-    bits <- create_class(node, ns, cf = cf, mf = mf)
+  if(node_name %in% c("xs:element", "xs:complexType", "xs:simpleType")){
+    if(!is.na(xml_attr(node, "name", ns)))
+      bits <- create_class(node, ns, cf = cf, mf = mf)
+    else
+      bits <- list(slots = list(), contains = character())
+
     parse_element(node, ns, cf = cf, mf = mf, maxOccurs = maxOccurs, bits = bits)
+
   } else if(node_name == "xs:group"){
-    parse_group(node, ns, cf = cf, mf = mf)
+
+    if(!is.na(xml_attr(node, "name", ns))){
+      bits <- create_class(node, ns, cf = cf, mf = mf)
+      parse_element(node, ns, cf = cf, mf = mf, maxOccurs = maxOccurs, bits = bits)
+    } else {
+      parse_group(node, ns, cf = cf, mf = mf)
+    }
+
   } else if(node_name == "xs:attribute"){
     parse_attribute(node, ns, cf = cf, mf = mf)
   } else if(node_name %in% c("xs:extension", "xs:restriction")){
     parse_extend_restrict(node, ns, cf = cf, mf = mf)
   } else {
-    create_class(node, ns, cf = cf, mf = mf)
+    create_class(node, ns, cf = cf, mf = mf, maxOccurs = maxOccurs)
   }
 
   mixed <- xml_attr(node, "mixed")
@@ -172,7 +187,7 @@ recurse <- function(node, ns = character(), cf = "classes.R", mf = "methods.R", 
     bits$contains <- c("character", bits$contains)
   }
   bits$contains <- c(bits$contains, "eml-2.1.1")
-  bits$contains <- unique(bits$contains)
+  bits$contains <- unique(replace_character_type(bits$contains))
 
   bits
 }
@@ -182,24 +197,28 @@ recurse <- function(node, ns = character(), cf = "classes.R", mf = "methods.R", 
 declare_class <- function(class, slots, contains, cf = "classes.R", mf = "methods.R"){
     if(length(slots) > 0){
       #add_roxygen(slots, slot_descriptions, "A-classes.R")
-      write(sprintf("setClass('%s', slots = c(%s), contains = c(%s)) ## A", class,
-                    print_cmd(slots), print_cmd(contains)), cf, append=TRUE)
+      write(sprintf("setClass('%s', slots = c(%s), contains = c(%s)) ## A", class,  ## FIXME drop contains = character unless mixed?
+                    print_cmd(slots), print_cmd(contains)), "A-classes.R", append=TRUE)
       create_initialize_method(slots, class, mf)
     } else {
+
       if(identical(contains, "eml-2.1.1"))  # hack to avoid no .Data error??
         contains = c("character", contains)
-      write(sprintf("setClass('%s', contains = c(%s)) ## B", class, print_cmd(contains)), cf, append=TRUE)
+
+      ## Hack the order class definitions appear in
+      mark <- "D"
+      if(all(contains %in% c("eml-2.1.1", "character"))){
+        mark <- "B"
+      }
+      if(any(grepl("^[A-Z]", class))){
+        mark <- "C"
+      }
+
+      write(sprintf("setClass('%s', contains = c(%s)) ## %s", class, print_cmd(contains), mark), paste0(mark, "-classes.R"), append=TRUE)
+
     }
     set_coerces(class, mf)
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -245,6 +264,6 @@ create_classes <- function(xsd_file,
 
   create_class(xsd, ns = ns, cf = cf, mf = mf)
 
- # write(c(readclass("list-classes.R"), readclass("A-classes.R"), readclass("B-classes.R"), readclass("D-classes.R")), cf, append = append)
- # unlink(c("list-classes.R", "D-classes.R", "A-classes.R", "B-classes.R"))
+  write(c(readclass("list-classes.R"), readclass("B-classes.R"), readclass("A-classes.R"), readclass("C-classes.R"), readclass("D-classes.R")), cf, append = append)
+  unlink(c("list-classes.R", "A-classes.R", "B-classes.R", "C-classes.R", "D-classes.R"))
 }
