@@ -45,6 +45,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
       y = lapply(metaclasses, function(x) match(child, names(x)))
       s = names(y)[!is.na(y)]
       cls <- metaclasses[[s]][[ y[[s]] ]]
+      slot(s4, s) <- new(s)
       if(grepl("^ListOf", cls))
         slot(slot(s4, s), child) <- listof(children, child)
       else if(cls == "character")

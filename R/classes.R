@@ -20,9 +20,10 @@ setClass('xs:positiveInteger', contains = 'integer')
 #####  inst/xsd/stmml.xsd  ####
 
 
-setClass('eml:array', contains = c('eml-2.1.1', 'character')) ## B
-setClass('scalar', contains = c('eml-2.1.1', 'character')) ## B
-setClass('eml:matrix', contains = c('eml-2.1.1', 'character')) ## B
+setClass('ListOfbounds', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'bounds'))){ 'not all elements are bounds objects'; } else { TRUE }})
+setClass('ListOfbounds', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'bounds'))){ 'not all elements are bounds objects'; } else { TRUE }})
+setClass('bounds', contains = c('character')) ## B
+setClass('bounds', contains = c('character')) ## B
 setClass('coordinate2Type', contains = c('eml-2.1.1', 'character')) ## B
 setClass('coordinate3Type', contains = c('eml-2.1.1', 'character')) ## B
 setClass('dataTypeType', contains = c('eml-2.1.1', 'character')) ## B
@@ -37,14 +38,15 @@ setClass('minType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('namespaceRefType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('stmml', contains = c('eml-2.1.1', 'character')) ## B
 setClass('definition', contains = c('eml-2.1.1', 'character')) ## B
-setClass('alternative', contains = c('eml-2.1.1', 'character')) ## B
 setClass('documentation', contains = c('eml-2.1.1', 'character')) ## B
-setClass('metadata', contains = c('eml-2.1.1', 'character')) ## B
 setClass('metadataList', contains = c('eml-2.1.1', 'character')) ## B
 setClass('metadataType', contains = c('character', 'eml-2.1.1')) ## B
 setClass('dimensionType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('unitsType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('dataGroup', contains = c('eml-2.1.1', 'character')) ## B
+setClass('eml:array', slots = c('dataType' = 'xml_attribute', 'errorValues' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValues' = 'xml_attribute', 'maxValues' = 'xml_attribute', 'units' = 'xml_attribute', 'delimiter' = 'xml_attribute', 'size' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('scalar', slots = c('dataType' = 'xml_attribute', 'errorValue' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValue' = 'xml_attribute', 'maxValue' = 'xml_attribute', 'units' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('eml:matrix', slots = c('dataType' = 'xml_attribute', 'delimiter' = 'xml_attribute', 'rows' = 'xml_attribute', 'columns' = 'xml_attribute', 'units' = 'xml_attribute', 'matrixType' = 'xml_attribute', 'errorValues' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValues' = 'xml_attribute', 'maxValues' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('eml:table', slots = c('rows' = 'xml_attribute', 'columns' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('eml:list', slots = c('type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('link', slots = c('from' = 'xml_attribute', 'to' = 'xml_attribute', 'ref' = 'xml_attribute', 'role' = 'xml_attribute', 'href' = 'xml_attribute', 'type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
@@ -56,9 +58,11 @@ setClass('dictionary', slots = c('href' = 'xml_attribute'), contains = c('eml-2.
 setClass('entry', slots = c('dataType' = 'xml_attribute', 'rows' = 'xml_attribute', 'columns' = 'xml_attribute', 'recommendedUnits' = 'xml_attribute', 'unitType' = 'xml_attribute', 'minExclusive' = 'xml_attribute', 'minInclusive' = 'xml_attribute', 'maxExclusive' = 'xml_attribute', 'maxInclusive' = 'xml_attribute', 'totalDigits' = 'xml_attribute', 'fractionDigits' = 'xml_attribute', 'length' = 'xml_attribute', 'minLength' = 'xml_attribute', 'maxLength' = 'xml_attribute', 'units' = 'xml_attribute', 'whiteSpace' = 'xml_attribute', 'pattern' = 'xml_attribute', 'term' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('description', slots = c('eml:class' ='xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('enumeration', slots = c('value' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('alternative', slots = c('type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('relatedEntry', slots = c('type' = 'xml_attribute', 'href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('annotation', slots = c('source' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('appinfo', slots = c('source' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('metadata', slots = c('name' = 'xml_attribute', 'content' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('dimension', slots = c('name' = 'xml_attribute', 'power' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('unitList', slots = c('href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('unitType', slots = c('id' = 'xml_attribute', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
@@ -98,7 +102,6 @@ setClass('value', contains = c('character')) ## B
 setClass('citetitle', contains = c('eml-2.1.1', 'character')) ## B
 setClass('title', contains = c('eml-2.1.1', 'character')) ## B
 setClass('value', contains = c('eml-2.1.1', 'character')) ## B
-setClass('i18nString', contains = c('eml-2.1.1', 'character')) ## B
 setClass('TextType', slots = c('section' = 'ListOfsection', 'para' = 'ListOfpara', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('emphasis', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('literalLayout', slots = c('value' = 'ListOfvalue'), contains = c('eml-2.1.1', 'character')) ## A
@@ -108,6 +111,7 @@ setClass('SectionType', slots = c('title' = 'character', 'para' = 'ListOfpara', 
 setClass('listitem', slots = c('para' = 'ListOfpara', 'itemizedlist' = 'ListOfitemizedlist', 'orderedlist' = 'ListOforderedlist'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ListType', slots = c('listitem' = 'ListOflistitem'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('SubSuperScriptType', slots = c('value' = 'ListOfvalue', 'subscript' = 'ListOfsubscript', 'superscript' = 'ListOfsuperscript', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('i18nString', slots = c('lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('text', contains = c('eml-2.1.1', 'TextType')) ## D
 setClass('section', contains = c('eml-2.1.1', 'SectionType')) ## D
 setClass('para', contains = c('eml-2.1.1', 'ParagraphType')) ## D
@@ -166,10 +170,8 @@ setClass('ListOfgivenName', contains = 'list', validity = function(object){ if(!
 setClass('ListOfdeliveryPoint', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'deliveryPoint'))){ 'not all elements are deliveryPoint objects'; } else { TRUE }})
 setClass('organizationName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('positionName', contains = c('eml-2.1.1', 'character')) ## B
-setClass('phone', contains = c('eml-2.1.1', 'character')) ## B
 setClass('electronicMailAddress', contains = c('eml-2.1.1', 'character')) ## B
 setClass('onlineUrl', contains = c('eml-2.1.1', 'character')) ## B
-setClass('userId', contains = c('eml-2.1.1', 'character')) ## B
 setClass('salutation', contains = c('eml-2.1.1', 'character')) ## B
 setClass('givenName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('surName', contains = c('eml-2.1.1', 'character')) ## B
@@ -178,6 +180,8 @@ setClass('city', contains = c('eml-2.1.1', 'character')) ## B
 setClass('administrativeArea', contains = c('eml-2.1.1', 'character')) ## B
 setClass('postalCode', contains = c('eml-2.1.1', 'character')) ## B
 setClass('country', contains = c('eml-2.1.1', 'character')) ## B
+setClass('phone', slots = c('phonetype' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('userId', slots = c('directory' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ResponsibleParty', slots = c('individualName' = 'ListOfindividualName', 'organizationName' = 'ListOforganizationName', 'positionName' = 'ListOfpositionName', 'address' = 'ListOfaddress', 'phone' = 'ListOfphone', 'electronicMailAddress' = 'ListOfelectronicMailAddress', 'onlineUrl' = 'ListOfonlineUrl', 'userId' = 'ListOfuserId', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('Person', slots = c('salutation' = 'ListOfsalutation', 'givenName' = 'ListOfgivenName', 'surName' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('Address', slots = c('deliveryPoint' = 'ListOfdeliveryPoint', 'city' = 'character', 'administrativeArea' = 'character', 'postalCode' = 'character', 'country' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
@@ -203,16 +207,12 @@ setClass('ListOfparameterDefinition', contains = 'list', validity = function(obj
 setClass('ListOfmediumFormat', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'mediumFormat'))){ 'not all elements are mediumFormat objects'; } else { TRUE }})
 setClass('ListOfparameter', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'parameter'))){ 'not all elements are parameter objects'; } else { TRUE }})
 setClass('ListOfvalue', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'value'))){ 'not all elements are value objects'; } else { TRUE }})
-setClass('alternateIdentifier', contains = c('eml-2.1.1', 'character')) ## B
 setClass('shortName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('title', contains = c('eml-2.1.1', 'character')) ## B
 setClass('eml:language', contains = c('eml-2.1.1', 'character')) ## B
 setClass('series', contains = c('eml-2.1.1', 'character')) ## B
-setClass('keyword', contains = c('eml-2.1.1', 'character')) ## B
 setClass('keywordThesaurus', contains = c('eml-2.1.1', 'character')) ## B
-setClass('references', contains = c('eml-2.1.1', 'character')) ## B
 setClass('yearDate', contains = c('eml-2.1.1', 'character')) ## B
-setClass('schemeName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('eml:name', contains = c('eml-2.1.1', 'character')) ## B
 setClass('definition', contains = c('eml-2.1.1', 'character')) ## B
 setClass('defaultValue', contains = c('eml-2.1.1', 'character')) ## B
@@ -225,17 +225,22 @@ setClass('mediumNote', contains = c('eml-2.1.1', 'character')) ## B
 setClass('onlineDescription', contains = c('eml-2.1.1', 'character')) ## B
 setClass('eml:name', contains = c('eml-2.1.1', 'character')) ## B
 setClass('value', contains = c('eml-2.1.1', 'character')) ## B
-setClass('value', contains = c('eml-2.1.1', 'character')) ## B
+setClass('alternateIdentifier', slots = c('system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('keyword', slots = c('keywordType' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('keywordSet', slots = c('keyword' = 'ListOfkeyword', 'keywordThesaurus' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ResourceGroup', slots = c('alternateIdentifier' = 'ListOfalternateIdentifier', 'shortName' = 'character', 'title' = 'ListOftitle', 'creator' = 'ListOfcreator', 'metadataProvider' = 'ListOfmetadataProvider', 'associatedParty' = 'ListOfassociatedParty', 'pubDate' = 'yearDate', 'language' = 'character', 'series' = 'character', 'abstract' = 'TextType', 'keywordSet' = 'ListOfkeywordSet', 'additionalInfo' = 'ListOfadditionalInfo', 'intellectualRights' = 'TextType', 'distribution' = 'ListOfdistribution', 'coverage' = 'Coverage'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ReferencesGroup', slots = c('references' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('references', slots = c('system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ReferencesGroup', slots = c('references' = 'references'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('DistributionType', slots = c('online' = 'OnlineType', 'offline' = 'OfflineType', 'inline' = 'InlineType', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('schemeName', slots = c('system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('parameterDefinition', slots = c('name' = 'character', 'definition' = 'character', 'defaultValue' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ConnectionDefinitionType', slots = c('schemeName' = 'character', 'description' = 'TextType', 'parameterDefinition' = 'ListOfparameterDefinition', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ConnectionDefinitionType', slots = c('schemeName' = 'schemeName', 'description' = 'TextType', 'parameterDefinition' = 'ListOfparameterDefinition', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('OfflineType', slots = c('mediumName' = 'character', 'mediumDensity' = 'character', 'mediumDensityUnits' = 'character', 'mediumVolume' = 'character', 'mediumFormat' = 'ListOfmediumFormat', 'mediumNote' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('OnlineType', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('UrlType', slots = c('function' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('parameter', slots = c('name' = 'character', 'value' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ConnectionType', slots = c('connectionDefinition' = 'ConnectionDefinitionType', 'parameter' = 'ListOfparameter', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('value', slots = c('lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('KeyTypeCode', contains = c('eml-2.1.1', 'character')) ## C
 setClass('IDType', contains = c('eml-2.1.1', 'character')) ## C
@@ -243,7 +248,6 @@ setClass('SystemType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('ScopeType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('FunctionType', contains = c('character', 'eml-2.1.1')) ## C
 setClass('InlineType', contains='XMLInternalElementNode')
-setClass('UrlType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('NonEmptyStringType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('creator', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D
 setClass('metadataProvider', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D
@@ -284,18 +288,18 @@ setClass('lengthUnits', contains = c('character', 'eml-2.1.1')) ## B
 setClass('angleUnits', contains = c('character', 'eml-2.1.1')) ## B
 setClass('altitudeSysDef', slots = c('altitudeDatumName' = 'character', 'altitudeResolution' = 'ListOfaltitudeResolution', 'altitudeDistanceUnits' = 'character', 'altitudeEncodingMethod' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('depthSysDef', slots = c('depthDatumName' = 'character', 'depthResolution' = 'ListOfdepthResolution', 'depthDistanceUnits' = 'character', 'depthEncodingMethod' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('vertCoordSys', slots = c('altitudeSysDef' = 'character', 'depthSysDef' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('SpatialReferenceType', slots = c('horizCoordSysName' = 'character', 'horizCoordSysDef' = 'horizCoordSysType', 'vertCoordSys' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('vertCoordSys', slots = c('altitudeSysDef' = 'altitudeSysDef', 'depthSysDef' = 'depthSysDef'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('SpatialReferenceType', slots = c('horizCoordSysName' = 'horizCoordSysName', 'horizCoordSysDef' = 'horizCoordSysType', 'vertCoordSys' = 'vertCoordSys', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('datum', slots = c('name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('spheroid', slots = c('name' = 'xml_attribute', 'semiAxisMajor' = 'xml_attribute', 'denomFlatRatio' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('primeMeridian', slots = c('name' = 'xml_attribute', 'longitude' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('unit', slots = c('name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('geogCoordSysType', slots = c('datum' = 'character', 'spheroid' = 'character', 'primeMeridian' = 'character', 'unit' = 'character', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('geogCoordSysType', slots = c('datum' = 'datum', 'spheroid' = 'spheroid', 'primeMeridian' = 'primeMeridian', 'unit' = 'unit', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('parameter', slots = c('name' = 'xml_attribute', 'description' = 'xml_attribute', 'value' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('unit', slots = c('name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('projection', slots = c('parameter' = 'ListOfparameter', 'unit' = 'character', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('projCoordSys', slots = c('geogCoordSys' = 'geogCoordSysType', 'projection' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('horizCoordSysType', slots = c('geogCoordSys' = 'geogCoordSysType', 'projCoordSys' = 'character', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('projection', slots = c('parameter' = 'ListOfparameter', 'unit' = 'unit', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('projCoordSys', slots = c('geogCoordSys' = 'geogCoordSysType', 'projection' = 'projection'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('horizCoordSysType', slots = c('geogCoordSys' = 'geogCoordSysType', 'projCoordSys' = 'projCoordSys', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('projectionList', slots = c('horizCoordSysDef' = 'ListOfhorizCoordSysDef'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('horizCoordSysDef', contains = c('eml-2.1.1', 'horizCoordSysType')) ## D
 setClass('geogCoordSys', contains = c('eml-2.1.1', 'geogCoordSysType')) ## D
@@ -340,20 +344,20 @@ setClass('entityReference', contains = c('eml-2.1.1', 'character')) ## B
 setClass('relationshipType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('parentOccurences', contains = c('eml-2.1.1', 'character')) ## B
 setClass('key', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('primaryKey', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('primaryKey', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'key'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('key', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('uniqueKey', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('uniqueKey', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'key'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('checkConstraint', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'checkCondition' = 'character', 'language' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('foreignKey', slots = c('ForeignKeyGroup' = 'ForeignKeyGroup'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('referencedKey', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('joinCondition', slots = c('ForeignKeyGroup' = 'ForeignKeyGroup', 'referencedKey' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('joinCondition', slots = c('ForeignKeyGroup' = 'ForeignKeyGroup', 'referencedKey' = 'referencedKey'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('key', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('notNullConstraint', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ConstraintType', slots = c('primaryKey' = 'character', 'uniqueKey' = 'character', 'checkConstraint' = 'character', 'foreignKey' = 'character', 'joinCondition' = 'character', 'notNullConstraint' = 'character', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('notNullConstraint', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'key'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ConstraintType', slots = c('primaryKey' = 'primaryKey', 'uniqueKey' = 'uniqueKey', 'checkConstraint' = 'checkConstraint', 'foreignKey' = 'foreignKey', 'joinCondition' = 'joinCondition', 'notNullConstraint' = 'notNullConstraint', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ConstraintBaseGroup', slots = c('constraintName' = 'character', 'constraintDescription' = 'constraintDescription'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('key', slots = c('attributeReference' = 'ListOfattributeReference'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('cardinality', slots = c('parentOccurences' = 'character', 'childOccurences' = 'CardinalityChildOccurancesType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ForeignKeyGroup', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'character', 'entityReference' = 'character', 'relationshipType' = 'character', 'cardinality' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('cardinality', slots = c('parentOccurences' = 'parentOccurences', 'childOccurences' = 'CardinalityChildOccurancesType'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ForeignKeyGroup', slots = c('ConstraintBaseGroup' = 'ConstraintBaseGroup', 'key' = 'key', 'entityReference' = 'character', 'relationshipType' = 'relationshipType', 'cardinality' = 'cardinality'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('CardinalityChildOccurancesType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('childOccurences', contains = c('eml-2.1.1', 'CardinalityChildOccurancesType')) ## D
 
@@ -411,7 +415,7 @@ setClass('Report', slots = c('reportNumber' = 'character', 'publisher' = 'Respon
 setClass('PersonalCommunication', slots = c('publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'communicationType' = 'character', 'recipient' = 'ListOfrecipient'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('Map', slots = c('publisher' = 'ResponsibleParty', 'edition' = 'character', 'geographicCoverage' = 'ListOfgeographicCoverage', 'scale' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('AudioVisual', slots = c('publisher' = 'ResponsibleParty', 'publicationPlace' = 'ListOfpublicationPlace', 'performer' = 'ListOfperformer', 'ISBN' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('Generic', slots = c('publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'referenceType' = 'character', 'volume' = 'character', 'numberOfVolumes' = 'character', 'totalPages' = 'character', 'totalFigures' = 'character', 'totalTables' = 'character', 'edition' = 'character', 'originalPublication' = 'character', 'reprintEdition' = 'character', 'reviewedItem' = 'character', 'ISBN' = 'character', 'ISSN' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('Generic', slots = c('publisher' = 'ResponsibleParty', 'publicationPlace' = 'character', 'referenceType' = 'referenceType', 'volume' = 'character', 'numberOfVolumes' = 'character', 'totalPages' = 'character', 'totalFigures' = 'character', 'totalTables' = 'character', 'edition' = 'character', 'originalPublication' = 'character', 'reprintEdition' = 'character', 'reviewedItem' = 'character', 'ISBN' = 'character', 'ISSN' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('Thesis', slots = c('degree' = 'character', 'institution' = 'ResponsibleParty', 'totalPages' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('Presentation', slots = c('conferenceName' = 'character', 'conferenceDate' = 'character', 'conferenceLocation' = 'Address'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ISSN', contains = c('eml-2.1.1', 'character')) ## C
@@ -493,27 +497,27 @@ setClass('generalTaxonomicCoverage', contains = c('eml-2.1.1', 'character')) ## 
 setClass('taxonRankName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('taxonRankValue', contains = c('eml-2.1.1', 'character')) ## B
 setClass('commonName', contains = c('eml-2.1.1', 'character')) ## B
+
+
 setClass('Coverage', slots = c('geographicCoverage' = 'ListOfgeographicCoverage', 'temporalCoverage' = 'ListOftemporalCoverage', 'taxonomicCoverage' = 'ListOftaxonomicCoverage', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('rangeOfDates', slots = c('beginDate' = 'SingleDateTimeType', 'endDate' = 'SingleDateTimeType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('TemporalCoverage', slots = c('singleDateTime' = 'ListOfsingleDateTime', 'rangeOfDates' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('TemporalCoverage', slots = c('singleDateTime' = 'ListOfsingleDateTime', 'rangeOfDates' = 'rangeOfDates', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('alternativeTimeScale', slots = c('timeScaleName' = 'character', 'timeScaleAgeEstimate' = 'character', 'timeScaleAgeUncertainty' = 'character', 'timeScaleAgeExplanation' = 'character', 'timeScaleCitation' = 'ListOftimeScaleCitation'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('SingleDateTimeType', slots = c('calendarDate' = 'yearDate', 'time' = 'character', 'alternativeTimeScale' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('SingleDateTimeType', slots = c('calendarDate' = 'yearDate', 'time' = 'character', 'alternativeTimeScale' = 'alternativeTimeScale'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('boundingAltitudes', slots = c('altitudeMinimum' = 'character', 'altitudeMaximum' = 'character', 'altitudeUnits' = 'LengthUnitType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('boundingCoordinates', slots = c('westBoundingCoordinate' = 'character', 'eastBoundingCoordinate' = 'character', 'northBoundingCoordinate' = 'character', 'southBoundingCoordinate' = 'character', 'boundingAltitudes' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('boundingCoordinates', slots = c('westBoundingCoordinate' = 'westBoundingCoordinate', 'eastBoundingCoordinate' = 'eastBoundingCoordinate', 'northBoundingCoordinate' = 'northBoundingCoordinate', 'southBoundingCoordinate' = 'southBoundingCoordinate', 'boundingAltitudes' = 'boundingAltitudes'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('datasetGPolygonOuterGRing', slots = c('gRingPoint' = 'ListOfgRingPoint', 'gRing' = 'GRingType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('datasetGPolygonExclusionGRing', slots = c('gRingPoint' = 'ListOfgRingPoint', 'gRing' = 'GRingType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('datasetGPolygon', slots = c('datasetGPolygonOuterGRing' = 'character', 'datasetGPolygonExclusionGRing' = 'ListOfdatasetGPolygonExclusionGRing'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('GeographicCoverage', slots = c('geographicDescription' = 'character', 'boundingCoordinates' = 'character', 'datasetGPolygon' = 'ListOfdatasetGPolygon', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('GRingPointType', slots = c('gRingLatitude' = 'character', 'gRingLongitude' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('datasetGPolygon', slots = c('datasetGPolygonOuterGRing' = 'datasetGPolygonOuterGRing', 'datasetGPolygonExclusionGRing' = 'ListOfdatasetGPolygonExclusionGRing'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('GeographicCoverage', slots = c('geographicDescription' = 'character', 'boundingCoordinates' = 'boundingCoordinates', 'datasetGPolygon' = 'ListOfdatasetGPolygon', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('GRingPointType', slots = c('gRingLatitude' = 'gRingLatitude', 'gRingLongitude' = 'gRingLongitude'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('classificationSystem', slots = c('classificationSystemCitation' = 'CitationType', 'classificationSystemModifications' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('repository', slots = c('originator' = 'ListOforiginator'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('vouchers', slots = c('specimen' = 'character', 'repository' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('vouchers', slots = c('specimen' = 'character', 'repository' = 'repository'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('taxonomicSystem', slots = c('classificationSystem' = 'ListOfclassificationSystem', 'identificationReference' = 'ListOfidentificationReference', 'identifierName' = 'ListOfidentifierName', 'taxonomicProcedures' = 'character', 'taxonomicCompleteness' = 'character', 'vouchers' = 'ListOfvouchers'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('TaxonomicCoverage', slots = c('taxonomicSystem' = 'character', 'generalTaxonomicCoverage' = 'character', 'taxonomicClassification' = 'ListOftaxonomicClassification', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('TaxonomicCoverage', slots = c('taxonomicSystem' = 'taxonomicSystem', 'generalTaxonomicCoverage' = 'character', 'taxonomicClassification' = 'ListOftaxonomicClassification', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('TaxonomicClassificationType', slots = c('taxonRankName' = 'character', 'taxonRankValue' = 'character', 'commonName' = 'ListOfcommonName', 'taxonomicClassification' = 'ListOftaxonomicClassification'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('GRingType', contains = c('eml-2.1.1', 'character')) ## C
-
-
 
 setClass('singleDateTime', contains = c('eml-2.1.1', 'SingleDateTimeType')) ## D
 setClass('beginDate', contains = c('eml-2.1.1', 'SingleDateTimeType')) ## D
@@ -550,8 +554,6 @@ setClass('ListOfliteralCharacter', contains = 'list', validity = function(object
 setClass('ListOftextDelimited', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'textDelimited'))){ 'not all elements are textDelimited objects'; } else { TRUE }})
 setClass('ListOfdistribution', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'distribution'))){ 'not all elements are distribution objects'; } else { TRUE }})
 setClass('objectName', contains = c('eml-2.1.1', 'character')) ## B
-setClass('size', contains = c('eml-2.1.1', 'character')) ## B
-setClass('authentication', contains = c('eml-2.1.1', 'character')) ## B
 setClass('compressionMethod', contains = c('eml-2.1.1', 'character')) ## B
 setClass('encodingMethod', contains = c('eml-2.1.1', 'character')) ## B
 setClass('characterEncoding', contains = c('eml-2.1.1', 'character')) ## B
@@ -586,16 +588,18 @@ setClass('bandrowbytes', contains = c('eml-2.1.1', 'character')) ## B
 setClass('totalrowbytes', contains = c('eml-2.1.1', 'character')) ## B
 setClass('bandgapbytes', contains = c('eml-2.1.1', 'character')) ## B
 setClass('onlineDescription', contains = c('eml-2.1.1', 'character')) ## B
-setClass('simpleDelimited', slots = c('fieldDelimiter' = 'ListOffieldDelimiter', 'collapseDelimiters' = 'character', 'quoteCharacter' = 'ListOfquoteCharacter', 'literalCharacter' = 'ListOfliteralCharacter'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('size', slots = c('unit' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('authentication', slots = c('method' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('simpleDelimited', slots = c('fieldDelimiter' = 'ListOffieldDelimiter', 'collapseDelimiters' = 'collapseDelimiters', 'quoteCharacter' = 'ListOfquoteCharacter', 'literalCharacter' = 'ListOfliteralCharacter'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('textFixed', slots = c('fieldWidth' = 'character', 'lineNumber' = 'character', 'fieldStartColumn' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('textDelimited', slots = c('fieldDelimiter' = 'character', 'collapseDelimiters' = 'character', 'lineNumber' = 'character', 'quoteCharacter' = 'ListOfquoteCharacter', 'literalCharacter' = 'ListOfliteralCharacter'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('textDelimited', slots = c('fieldDelimiter' = 'character', 'collapseDelimiters' = 'collapseDelimiters', 'lineNumber' = 'character', 'quoteCharacter' = 'ListOfquoteCharacter', 'literalCharacter' = 'ListOfliteralCharacter'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('eml:complex', slots = c('textFixed' = 'ListOftextFixed', 'textDelimited' = 'ListOftextDelimited'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('textFormat', slots = c('numHeaderLines' = 'character', 'numFooterLines' = 'character', 'recordDelimiter' = 'ListOfrecordDelimiter', 'physicalLineDelimiter' = 'ListOfphysicalLineDelimiter', 'numPhysicalLinesPerRecord' = 'character', 'maxRecordLength' = 'character', 'attributeOrientation' = 'character', 'simpleDelimited' = 'character', 'complex' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('textFormat', slots = c('numHeaderLines' = 'character', 'numFooterLines' = 'character', 'recordDelimiter' = 'ListOfrecordDelimiter', 'physicalLineDelimiter' = 'ListOfphysicalLineDelimiter', 'numPhysicalLinesPerRecord' = 'character', 'maxRecordLength' = 'character', 'attributeOrientation' = 'attributeOrientation', 'simpleDelimited' = 'simpleDelimited', 'complex' = 'complex'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('externallyDefinedFormat', slots = c('formatName' = 'character', 'formatVersion' = 'character', 'citation' = 'CitationType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('multiBand', slots = c('nbands' = 'character', 'layout' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('binaryRasterFormat', slots = c('rowColumnOrientation' = 'character', 'multiBand' = 'character', 'nbits' = 'character', 'byteorder' = 'character', 'skipbytes' = 'character', 'bandrowbytes' = 'character', 'totalrowbytes' = 'character', 'bandgapbytes' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('dataFormat', slots = c('textFormat' = 'character', 'externallyDefinedFormat' = 'character', 'binaryRasterFormat' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('PhysicalType', slots = c('objectName' = 'character', 'size' = 'character', 'authentication' = 'ListOfauthentication', 'compressionMethod' = 'ListOfcompressionMethod', 'encodingMethod' = 'ListOfencodingMethod', 'characterEncoding' = 'character', 'dataFormat' = 'character', 'distribution' = 'ListOfdistribution', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('binaryRasterFormat', slots = c('rowColumnOrientation' = 'rowColumnOrientation', 'multiBand' = 'multiBand', 'nbits' = 'character', 'byteorder' = 'character', 'skipbytes' = 'character', 'bandrowbytes' = 'character', 'totalrowbytes' = 'character', 'bandgapbytes' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('dataFormat', slots = c('textFormat' = 'textFormat', 'externallyDefinedFormat' = 'externallyDefinedFormat', 'binaryRasterFormat' = 'binaryRasterFormat'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('PhysicalType', slots = c('objectName' = 'character', 'size' = 'size', 'authentication' = 'ListOfauthentication', 'compressionMethod' = 'ListOfcompressionMethod', 'encodingMethod' = 'ListOfencodingMethod', 'characterEncoding' = 'character', 'dataFormat' = 'dataFormat', 'distribution' = 'ListOfdistribution', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('PhysicalDistributionType', slots = c('online' = 'PhysicalOnlineType', 'offline' = 'OfflineType', 'inline' = 'InlineType', 'access' = 'AccessType', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('PhysicalOnlineType', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('physical', contains = c('eml-2.1.1', 'PhysicalType')) ## D
@@ -623,11 +627,11 @@ setClass('ListOfdescription', contains = 'list', validity = function(object){ if
 setClass('ListOfcitation', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'citation'))){ 'not all elements are citation objects'; } else { TRUE }})
 setClass('ListOfrelatedProject', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'relatedProject'))){ 'not all elements are relatedProject objects'; } else { TRUE }})
 setClass('title', contains = c('eml-2.1.1', 'character')) ## B
-setClass('descriptorValue', contains = c('eml-2.1.1', 'character')) ## B
+setClass('descriptorValue', slots = c('name_or_id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('descriptor', slots = c('descriptorValue' = 'ListOfdescriptorValue', 'citation' = 'ListOfcitation', 'name' = 'xml_attribute', 'citableClassificationSystem' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('studyAreaDescription', slots = c('descriptor' = 'ListOfdescriptor', 'citation' = 'ListOfcitation', 'coverage' = 'ListOfcoverage'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('designDescription', slots = c('description' = 'ListOfdescription', 'citation' = 'ListOfcitation'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ResearchProjectType', slots = c('title' = 'ListOftitle', 'personnel' = 'ListOfpersonnel', 'abstract' = 'TextType', 'funding' = 'TextType', 'studyAreaDescription' = 'character', 'designDescription' = 'character', 'relatedProject' = 'ListOfrelatedProject', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ResearchProjectType', slots = c('title' = 'ListOftitle', 'personnel' = 'ListOfpersonnel', 'abstract' = 'TextType', 'funding' = 'TextType', 'studyAreaDescription' = 'studyAreaDescription', 'designDescription' = 'designDescription', 'relatedProject' = 'ListOfrelatedProject', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('DescriptorType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('researchProject', contains = c('eml-2.1.1', 'ResearchProjectType')) ## D
 setClass('personnel', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D
@@ -704,7 +708,7 @@ setClass('referencedEntityId', contains = c('eml-2.1.1', 'character')) ## B
 setClass('instrumentation', contains = c('eml-2.1.1', 'character')) ## B
 setClass('studyExtent', slots = c('coverage' = 'ListOfcoverage', 'description' = 'ListOfdescription'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('spatialSamplingUnits', slots = c('referencedEntityId' = 'ListOfreferencedEntityId', 'coverage' = 'ListOfcoverage'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('sampling', slots = c('studyExtent' = 'character', 'samplingDescription' = 'TextType', 'spatialSamplingUnits' = 'character', 'citation' = 'ListOfcitation'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('sampling', slots = c('studyExtent' = 'studyExtent', 'samplingDescription' = 'TextType', 'spatialSamplingUnits' = 'spatialSamplingUnits', 'citation' = 'ListOfcitation'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('MethodsType', slots = c('methodStep' = 'ListOfmethodStep', 'sampling' = 'ListOfsampling', 'qualityControl' = 'ListOfqualityControl'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ProcedureStepType', slots = c('description' = 'TextType', 'citation' = 'ListOfcitation', 'protocol' = 'ListOfprotocol', 'instrumentation' = 'ListOfinstrumentation', 'software' = 'ListOfsoftware', 'subStep' = 'ListOfsubStep'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('methods', contains = c('eml-2.1.1', 'MethodsType')) ## D
@@ -741,7 +745,6 @@ setClass('ListOfbounds', contains = 'list', validity = function(object){ if(!all
 setClass('attributeName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('attributeLabel', contains = c('eml-2.1.1', 'character')) ## B
 setClass('attributeDefinition', contains = c('eml-2.1.1', 'character')) ## B
-setClass('storageType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('formatString', contains = c('eml-2.1.1', 'character')) ## B
 setClass('dateTimePrecision', contains = c('eml-2.1.1', 'character')) ## B
 setClass('code', contains = c('eml-2.1.1', 'character')) ## B
@@ -762,33 +765,34 @@ setClass('orderAttributeReference', contains = c('eml-2.1.1', 'character')) ## B
 setClass('definition', contains = c('eml-2.1.1', 'character')) ## B
 setClass('pattern', contains = c('eml-2.1.1', 'character')) ## B
 setClass('source', contains = c('eml-2.1.1', 'character')) ## B
-setClass('minimum', contains = c('eml-2.1.1', 'character')) ## B
-setClass('maximum', contains = c('eml-2.1.1', 'character')) ## B
-setClass('minimum', contains = c('eml-2.1.1', 'character')) ## B
-setClass('maximum', contains = c('eml-2.1.1', 'character')) ## B
 setClass('AttributeListType', slots = c('attribute' = 'ListOfattribute', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('storageType', slots = c('typeSystem' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('nominal', slots = c('nonNumericDomain' = 'NonNumericDomainType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ordinal', slots = c('nonNumericDomain' = 'NonNumericDomainType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('interval', slots = c('unit' = 'UnitType', 'precision' = 'PrecisionType', 'numericDomain' = 'NumericDomainType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ratio', slots = c('unit' = 'UnitType', 'precision' = 'PrecisionType', 'numericDomain' = 'NumericDomainType'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('dateTime', slots = c('formatString' = 'character', 'dateTimePrecision' = 'character', 'dateTimeDomain' = 'DateTimeDomainType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('measurementScale', slots = c('nominal' = 'character', 'ordinal' = 'character', 'interval' = 'character', 'ratio' = 'character', 'dateTime' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('measurementScale', slots = c('nominal' = 'nominal', 'ordinal' = 'ordinal', 'interval' = 'interval', 'ratio' = 'ratio', 'dateTime' = 'dateTime'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('missingValueCode', slots = c('code' = 'character', 'codeExplanation' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('AttributeType', slots = c('attributeName' = 'character', 'attributeLabel' = 'ListOfattributeLabel', 'attributeDefinition' = 'character', 'storageType' = 'ListOfstorageType', 'measurementScale' = 'character', 'missingValueCode' = 'ListOfmissingValueCode', 'accuracy' = 'Accuracy', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('AttributeType', slots = c('attributeName' = 'character', 'attributeLabel' = 'ListOfattributeLabel', 'attributeDefinition' = 'character', 'storageType' = 'ListOfstorageType', 'measurementScale' = 'measurementScale', 'missingValueCode' = 'ListOfmissingValueCode', 'accuracy' = 'Accuracy', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('quantitativeAttributeAccuracyAssessment', slots = c('attributeAccuracyValue' = 'character', 'attributeAccuracyExplanation' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('Accuracy', slots = c('attributeAccuracyReport' = 'character', 'quantitativeAttributeAccuracyAssessment' = 'ListOfquantitativeAttributeAccuracyAssessment'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('UnitType', slots = c('standardUnit' = 'StandardUnitDictionary', 'customUnit' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('codeDefinition', slots = c('code' = 'character', 'definition' = 'character', 'source' = 'character', 'order' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('externalCodeSet', slots = c('codesetName' = 'character', 'citation' = 'ListOfcitation', 'codesetURL' = 'ListOfcodesetURL'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('entityCodeList', slots = c('entityReference' = 'character', 'valueAttributeReference' = 'character', 'definitionAttributeReference' = 'character', 'orderAttributeReference' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('enumeratedDomain', slots = c('codeDefinition' = 'ListOfcodeDefinition', 'externalCodeSet' = 'character', 'entityCodeList' = 'character', 'enforced' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('enumeratedDomain', slots = c('codeDefinition' = 'ListOfcodeDefinition', 'externalCodeSet' = 'externalCodeSet', 'entityCodeList' = 'entityCodeList', 'enforced' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('textDomain', slots = c('definition' = 'character', 'pattern' = 'ListOfpattern', 'source' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('NonNumericDomainType', slots = c('enumeratedDomain' = 'ListOfenumeratedDomain', 'textDomain' = 'ListOftextDomain', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('NumericDomainType', slots = c('numberType' = 'NumberType', 'BoundsGroup' = 'BoundsGroup', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('DateTimeDomainType', slots = c('BoundsDateGroup' = 'BoundsDateGroup', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('bounds', slots = c('minimum' = 'character', 'maximum' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('minimum', slots = c('exclusive' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('maximum', slots = c('exclusive' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('bounds', slots = c('minimum' = 'minimum', 'maximum' = 'maximum'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('BoundsGroup', slots = c('bounds' = 'ListOfbounds'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('bounds', slots = c('minimum' = 'character', 'maximum' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('minimum', slots = c('exclusive' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('maximum', slots = c('exclusive' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('bounds', slots = c('minimum' = 'minimum', 'maximum' = 'maximum'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('BoundsDateGroup', slots = c('bounds' = 'ListOfbounds'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('PrecisionType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('NumberType', contains = c('eml-2.1.1', 'character')) ## C
@@ -820,10 +824,10 @@ setClass('ListOfalternateIdentifier', contains = 'list', validity = function(obj
 setClass('ListOfphysical', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'physical'))){ 'not all elements are physical objects'; } else { TRUE }})
 setClass('ListOfadditionalInfo', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'additionalInfo'))){ 'not all elements are additionalInfo objects'; } else { TRUE }})
 setClass('entityType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('alternateIdentifier', contains = c('eml-2.1.1', 'character')) ## B
 setClass('entityName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('entityDescription', contains = c('eml-2.1.1', 'character')) ## B
 setClass('OtherEntityType', slots = c('EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'entityType' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('alternateIdentifier', slots = c('system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('EntityGroup', slots = c('alternateIdentifier' = 'ListOfalternateIdentifier', 'entityName' = 'character', 'entityDescription' = 'character', 'physical' = 'ListOfphysical', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'additionalInfo' = 'ListOfadditionalInfo'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('otherEntity', contains = c('eml-2.1.1', 'OtherEntityType')) ## D
 setClass('attributeList', contains = c('eml-2.1.1', 'AttributeListType')) ## D
@@ -840,7 +844,7 @@ setClass('additionalInfo', contains = c('eml-2.1.1', 'TextType')) ## D
 setClass('ListOfconstraint', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'constraint'))){ 'not all elements are constraint objects'; } else { TRUE }})
 setClass('caseSensitive', contains = c('eml-2.1.1', 'character')) ## B
 setClass('numberOfRecords', contains = c('eml-2.1.1', 'character')) ## B
-setClass('DataTableType', slots = c('EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'caseSensitive' = 'character', 'numberOfRecords' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('DataTableType', slots = c('EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'caseSensitive' = 'caseSensitive', 'numberOfRecords' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('dataTable', contains = c('eml-2.1.1', 'DataTableType')) ## D
 setClass('attributeList', contains = c('eml-2.1.1', 'AttributeListType')) ## D
 setClass('constraint', contains = c('eml-2.1.1', 'ConstraintType')) ## D
@@ -948,13 +952,13 @@ setClass('rasterOriginType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('accuracyReport', contains = c('eml-2.1.1', 'character')) ## B
 setClass('quantitativeAccuracyValue', contains = c('eml-2.1.1', 'character')) ## B
 setClass('quantitativeAccuracyMethod', contains = c('eml-2.1.1', 'character')) ## B
-setClass('cornerPoint', slots = c('xCoordinate' = 'character', 'yCoordinate' = 'character', 'pointInPixel' = 'character', 'corner' = 'rasterOriginType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('controlPoint', slots = c('column' = 'character', 'row' = 'character', 'xCoordinate' = 'character', 'yCoordinate' = 'character', 'pointInPixel' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('cornerPoint', slots = c('xCoordinate' = 'character', 'yCoordinate' = 'character', 'pointInPixel' = 'pointInPixel', 'corner' = 'rasterOriginType'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('controlPoint', slots = c('column' = 'character', 'row' = 'character', 'xCoordinate' = 'character', 'yCoordinate' = 'character', 'pointInPixel' = 'pointInPixel'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('bilinearFit', slots = c('xIntercept' = 'character', 'xSlope' = 'character', 'yIntercept' = 'character', 'ySlope' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('georeferenceInfo', slots = c('cornerPoint' = 'ListOfcornerPoint', 'controlPoint' = 'ListOfcontrolPoint', 'bilinearFit' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('georeferenceInfo', slots = c('cornerPoint' = 'ListOfcornerPoint', 'controlPoint' = 'ListOfcontrolPoint', 'bilinearFit' = 'bilinearFit'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('imageDescription', slots = c('illuminationElevationAngle' = 'character', 'illuminationAzimuthAngle' = 'character', 'imageOrientationAngle' = 'character', 'imagingCondition' = 'ImagingConditionCode', 'imageQualityCode' = 'character', 'cloudCoverPercentage' = 'character', 'preProcessingTypeCode' = 'character', 'compressionGenerationQuality' = 'character', 'triangulationIndicator' = 'character', 'radiometricDataAvailability' = 'character', 'cameraCalibrationInformationAvailability' = 'character', 'filmDistortionInformationAvailability' = 'character', 'lensDistortionInformationAvailability' = 'character', 'bandDescription' = 'ListOfbandDescription'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('SpatialRasterType', slots = c('EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'spatialReference' = 'SpatialReferenceType', 'georeferenceInfo' = 'character', 'horizontalAccuracy' = 'DataQuality', 'verticalAccuracy' = 'DataQuality', 'cellSizeXDirection' = 'character', 'cellSizeYDirection' = 'character', 'numberOfBands' = 'character', 'rasterOrigin' = 'rasterOriginType', 'rows' = 'character', 'columns' = 'character', 'verticals' = 'character', 'cellGeometry' = 'CellGeometryType', 'toneGradation' = 'character', 'scaleFactor' = 'character', 'offset' = 'character', 'imageDescription' = 'character', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('BandType', slots = c('sequenceIdentifier' = 'character', 'highWavelength' = 'character', 'lowWaveLength' = 'character', 'waveLengthUnits' = 'lengthUnits', 'peakResponse' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('SpatialRasterType', slots = c('EntityGroup' = 'EntityGroup', 'attributeList' = 'AttributeListType', 'constraint' = 'ListOfconstraint', 'spatialReference' = 'SpatialReferenceType', 'georeferenceInfo' = 'georeferenceInfo', 'horizontalAccuracy' = 'DataQuality', 'verticalAccuracy' = 'DataQuality', 'cellSizeXDirection' = 'cellSizeXDirection', 'cellSizeYDirection' = 'cellSizeYDirection', 'numberOfBands' = 'numberOfBands', 'rasterOrigin' = 'rasterOriginType', 'rows' = 'character', 'columns' = 'character', 'verticals' = 'verticals', 'cellGeometry' = 'CellGeometryType', 'toneGradation' = 'character', 'scaleFactor' = 'character', 'offset' = 'character', 'imageDescription' = 'imageDescription', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('BandType', slots = c('sequenceIdentifier' = 'character', 'highWavelength' = 'character', 'lowWaveLength' = 'character', 'waveLengthUnits' = 'lengthUnits', 'peakResponse' = 'peakResponse'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('quantitativeAccuracyReport', slots = c('quantitativeAccuracyValue' = 'character', 'quantitativeAccuracyMethod' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('DataQuality', slots = c('accuracyReport' = 'character', 'quantitativeAccuracyReport' = 'ListOfquantitativeAccuracyReport'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('CellValueType', contains = c('eml-2.1.1', 'character')) ## C
@@ -1018,7 +1022,7 @@ setClass('ListOfdescribes', contains = 'list', validity = function(object){ if(!
 setClass('ListOfadditionalMetadata', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'additionalMetadata'))){ 'not all elements are additionalMetadata objects'; } else { TRUE }})
 setClass('describes', contains = c('eml-2.1.1', 'character')) ## B
 setClass('metadata', contains = c('eml-2.1.1', 'character')) ## B
-setClass('additionalMetadata', slots = c('describes' = 'ListOfdescribes', 'metadata' = 'character', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('additionalMetadata', slots = c('describes' = 'ListOfdescribes', 'metadata' = 'metadata', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('eml', slots = c('access' = 'AccessType', 'dataset' = 'DatasetType', 'citation' = 'CitationType', 'software' = 'SoftwareType', 'protocol' = 'ProtocolType', 'additionalMetadata' = 'ListOfadditionalMetadata', 'packageId' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('access', contains = c('eml-2.1.1', 'AccessType')) ## D
 setClass('dataset', contains = c('eml-2.1.1', 'DatasetType')) ## D

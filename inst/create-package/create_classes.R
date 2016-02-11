@@ -53,38 +53,39 @@ set_class_list <- function(class, cf = "classes.R"){
 
 
 
-parse_element <- function(node, ns, cf = "class.R", mf = "methods.R", maxOccurs = NA,
+parse_element <- function(node, ns, cf = "classes.R", mf = "methods.R", maxOccurs = NA,
                           bits = list(slots = list(), contains = character())){
 
   name <- xml_attr(node, "name", ns)
-  type <- xml_attr(node, "type", ns)
   if(is.na(maxOccurs))
     maxOccurs <- xml_attr(node, "maxOccurs")
 
   ### Compute type (for declaration)
-
-  ## If no type, use extension
-  if(is.na(type))
-    type <- has_extension(node, ns)
-  ## if still no type, use character
-  if(is.na(type))
-    type <- "character"
-  ## we'll use mostly un-namedspaced types
-  type <- strip_namespace(type) %>% replace_character_type()
+  type <- xml_attr(node, "type", ns)
 
   ## Side-effect: declare class
   if(!is.na(name)){
-    declare_class(name, bits$slots, unique(c(bits$contains, type)), cf = cf, mf = mf)
+    ctype <- type
+    if(is.na(ctype))
+      ctype <- has_extension(node, ns)
+      ctype <- strip_namespace(ctype) %>% replace_character_type()
+
+    if(is.na(ctype))
+      ctype <- "character"
+    declare_class(name, bits$slots, unique(c(bits$contains, ctype)), cf = cf, mf = mf)
   }
-
-  ## And now for the slots:
-
 
   ## No name, just recurse
   if(is.na(name) )
     create_class(node, ns, cf = cf, mf = mf)
 
   else {
+    if(is.na(type))
+      type <- name
+    if(is.na(type))
+      type <- "character"
+
+    type <- strip_namespace(type) %>% replace_character_type()
     ## Repeat if element maxOccurs
     if(!is.na(maxOccurs)){
       if(maxOccurs == "unbounded" || maxOccurs > 1){
@@ -126,9 +127,10 @@ parse_attribute <- function(node, ns, cf = "classes.R", mf = "methods.R"){
 
 parse_extend_restrict <- function(node, ns, cf = "classes.R", mf = "methods.R"){
   base <- xml_attr(node, "base")
-  if(is.na(base))
+  attrib <- xml_find_all(node, "./xs:attribute", ns)
+  if((length(attrib) > 0) || is.na(base)){
     create_class(node, ns, cf = cf, mf = mf)
-  else {
+  } else {
     contains <- base %>% replace_character_type() %>% strip_namespace()
     list(slots = list(),
          contains = contains)

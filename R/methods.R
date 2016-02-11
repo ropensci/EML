@@ -451,7 +451,7 @@ setAs('XMLInternalElementNode', 'defaultValue',  function(from) emlToS4(from))
 setAs('parameterDefinition', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'parameterDefinition',  function(from) emlToS4(from))
 setMethod(initialize, 'ConnectionDefinitionType',
-function(.Object, parameterDefinition = character(), schemeName = new('character'), description = new('TextType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, parameterDefinition = character(), schemeName = new('schemeName'), description = new('TextType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@parameterDefinition <- new('ListOfparameterDefinition', lapply(parameterDefinition, function(x) new('parameterDefinition', x)))
 .Object@schemeName <- schemeName
 .Object@description <- description
@@ -601,7 +601,7 @@ setAs('XMLInternalElementNode', 'parameter',  function(from) emlToS4(from))
 setAs('unit', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'unit',  function(from) emlToS4(from))
 setMethod(initialize, 'projection',
-function(.Object, parameter = character(), unit = new('character'), name = new('xml_attribute')){
+function(.Object, parameter = character(), unit = new('unit'), name = new('xml_attribute')){
 .Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x)))
 .Object@unit <- unit
 .Object@name <- name
@@ -1006,7 +1006,7 @@ setAs('XMLInternalElementNode', 'endDate',  function(from) emlToS4(from))
 setAs('rangeOfDates', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'rangeOfDates',  function(from) emlToS4(from))
 setMethod(initialize, 'TemporalCoverage',
-function(.Object, singleDateTime = character(), rangeOfDates = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
+function(.Object, singleDateTime = character(), rangeOfDates = new('rangeOfDates'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
 .Object@singleDateTime <- new('ListOfsingleDateTime', lapply(singleDateTime, function(x) new('singleDateTime', x)))
 .Object@rangeOfDates <- rangeOfDates
 .Object@ReferencesGroup <- ReferencesGroup
@@ -1087,7 +1087,7 @@ function(.Object, gRingPoint = character(), gRing = new('GRingType')){
 setAs('datasetGPolygonExclusionGRing', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'datasetGPolygonExclusionGRing',  function(from) emlToS4(from))
 setMethod(initialize, 'datasetGPolygon',
-function(.Object, datasetGPolygonExclusionGRing = character(), datasetGPolygonOuterGRing = new('character')){
+function(.Object, datasetGPolygonExclusionGRing = character(), datasetGPolygonOuterGRing = new('datasetGPolygonOuterGRing')){
 .Object@datasetGPolygonExclusionGRing <- new('ListOfdatasetGPolygonExclusionGRing', lapply(datasetGPolygonExclusionGRing, function(x) new('datasetGPolygonExclusionGRing', x)))
 .Object@datasetGPolygonOuterGRing <- datasetGPolygonOuterGRing
 .Object
@@ -1095,7 +1095,7 @@ function(.Object, datasetGPolygonExclusionGRing = character(), datasetGPolygonOu
 setAs('datasetGPolygon', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'datasetGPolygon',  function(from) emlToS4(from))
 setMethod(initialize, 'GeographicCoverage',
-function(.Object, datasetGPolygon = character(), geographicDescription = new('character'), boundingCoordinates = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, datasetGPolygon = character(), geographicDescription = new('character'), boundingCoordinates = new('boundingCoordinates'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@datasetGPolygon <- new('ListOfdatasetGPolygon', lapply(datasetGPolygon, function(x) new('datasetGPolygon', x)))
 .Object@geographicDescription <- geographicDescription
 .Object@boundingCoordinates <- boundingCoordinates
@@ -1159,7 +1159,7 @@ setAs('XMLInternalElementNode', 'generalTaxonomicCoverage',  function(from) emlT
 setAs('taxonomicClassification', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'taxonomicClassification',  function(from) emlToS4(from))
 setMethod(initialize, 'TaxonomicCoverage',
-function(.Object, taxonomicClassification = character(), taxonomicSystem = new('character'), generalTaxonomicCoverage = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
+function(.Object, taxonomicClassification = character(), taxonomicSystem = new('taxonomicSystem'), generalTaxonomicCoverage = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
 .Object@taxonomicClassification <- new('ListOftaxonomicClassification', lapply(taxonomicClassification, function(x) new('taxonomicClassification', x)))
 .Object@taxonomicSystem <- taxonomicSystem
 .Object@generalTaxonomicCoverage <- generalTaxonomicCoverage
@@ -1229,7 +1229,7 @@ setAs('XMLInternalElementNode', 'quoteCharacter',  function(from) emlToS4(from))
 setAs('literalCharacter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'literalCharacter',  function(from) emlToS4(from))
 setMethod(initialize, 'simpleDelimited',
-function(.Object, fieldDelimiter = character(), quoteCharacter = character(), literalCharacter = character(), collapseDelimiters = new('character')){
+function(.Object, fieldDelimiter = character(), quoteCharacter = character(), literalCharacter = character(), collapseDelimiters = new('collapseDelimiters')){
 .Object@fieldDelimiter <- new('ListOffieldDelimiter', lapply(fieldDelimiter, function(x) new('fieldDelimiter', x)))
 .Object@quoteCharacter <- new('ListOfquoteCharacter', lapply(quoteCharacter, function(x) new('quoteCharacter', x)))
 .Object@literalCharacter <- new('ListOfliteralCharacter', lapply(literalCharacter, function(x) new('literalCharacter', x)))
@@ -1257,7 +1257,7 @@ setAs('XMLInternalElementNode', 'quoteCharacter',  function(from) emlToS4(from))
 setAs('literalCharacter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'literalCharacter',  function(from) emlToS4(from))
 setMethod(initialize, 'textDelimited',
-function(.Object, quoteCharacter = character(), literalCharacter = character(), fieldDelimiter = new('character'), collapseDelimiters = new('character'), lineNumber = new('character')){
+function(.Object, quoteCharacter = character(), literalCharacter = character(), fieldDelimiter = new('character'), collapseDelimiters = new('collapseDelimiters'), lineNumber = new('character')){
 .Object@quoteCharacter <- new('ListOfquoteCharacter', lapply(quoteCharacter, function(x) new('quoteCharacter', x)))
 .Object@literalCharacter <- new('ListOfliteralCharacter', lapply(literalCharacter, function(x) new('literalCharacter', x)))
 .Object@fieldDelimiter <- fieldDelimiter
@@ -1276,7 +1276,7 @@ function(.Object, textFixed = character(), textDelimited = character()){
 setAs('complex', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'complex',  function(from) emlToS4(from))
 setMethod(initialize, 'textFormat',
-function(.Object, recordDelimiter = character(), physicalLineDelimiter = character(), numHeaderLines = new('character'), numFooterLines = new('character'), numPhysicalLinesPerRecord = new('character'), maxRecordLength = new('character'), attributeOrientation = new('character'), simpleDelimited = new('character'), complex = new('character')){
+function(.Object, recordDelimiter = character(), physicalLineDelimiter = character(), numHeaderLines = new('character'), numFooterLines = new('character'), numPhysicalLinesPerRecord = new('character'), maxRecordLength = new('character'), attributeOrientation = new('attributeOrientation'), simpleDelimited = new('simpleDelimited'), complex = new('complex')){
 .Object@recordDelimiter <- new('ListOfrecordDelimiter', lapply(recordDelimiter, function(x) new('recordDelimiter', x)))
 .Object@physicalLineDelimiter <- new('ListOfphysicalLineDelimiter', lapply(physicalLineDelimiter, function(x) new('physicalLineDelimiter', x)))
 .Object@numHeaderLines <- numHeaderLines
@@ -1325,7 +1325,7 @@ setAs('XMLInternalElementNode', 'dataFormat',  function(from) emlToS4(from))
 setAs('distribution', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'distribution',  function(from) emlToS4(from))
 setMethod(initialize, 'PhysicalType',
-function(.Object, authentication = character(), compressionMethod = character(), encodingMethod = character(), distribution = character(), objectName = new('character'), size = new('character'), characterEncoding = new('character'), dataFormat = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, authentication = character(), compressionMethod = character(), encodingMethod = character(), distribution = character(), objectName = new('character'), size = new('size'), characterEncoding = new('character'), dataFormat = new('dataFormat'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@authentication <- new('ListOfauthentication', lapply(authentication, function(x) new('authentication', x)))
 .Object@compressionMethod <- new('ListOfcompressionMethod', lapply(compressionMethod, function(x) new('compressionMethod', x)))
 .Object@encodingMethod <- new('ListOfencodingMethod', lapply(encodingMethod, function(x) new('encodingMethod', x)))
@@ -1417,7 +1417,7 @@ setAs('XMLInternalElementNode', 'designDescription',  function(from) emlToS4(fro
 setAs('relatedProject', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'relatedProject',  function(from) emlToS4(from))
 setMethod(initialize, 'ResearchProjectType',
-function(.Object, title = character(), personnel = character(), relatedProject = character(), abstract = new('TextType'), funding = new('TextType'), studyAreaDescription = new('character'), designDescription = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, title = character(), personnel = character(), relatedProject = character(), abstract = new('TextType'), funding = new('TextType'), studyAreaDescription = new('studyAreaDescription'), designDescription = new('designDescription'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@title <- new('ListOftitle', lapply(title, function(x) new('title', x)))
 .Object@personnel <- new('ListOfpersonnel', lapply(personnel, function(x) new('personnel', x)))
 .Object@relatedProject <- new('ListOfrelatedProject', lapply(relatedProject, function(x) new('relatedProject', x)))
@@ -1571,7 +1571,7 @@ setAs('XMLInternalElementNode', 'spatialSamplingUnits',  function(from) emlToS4(
 setAs('citation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citation',  function(from) emlToS4(from))
 setMethod(initialize, 'sampling',
-function(.Object, citation = character(), studyExtent = new('character'), samplingDescription = new('TextType'), spatialSamplingUnits = new('character')){
+function(.Object, citation = character(), studyExtent = new('studyExtent'), samplingDescription = new('TextType'), spatialSamplingUnits = new('spatialSamplingUnits')){
 .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
 .Object@studyExtent <- studyExtent
 .Object@samplingDescription <- samplingDescription
@@ -1688,7 +1688,7 @@ setAs('XMLInternalElementNode', 'coverage',  function(from) emlToS4(from))
 setAs('methods', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methods',  function(from) emlToS4(from))
 setMethod(initialize, 'AttributeType',
-function(.Object, attributeLabel = character(), storageType = character(), missingValueCode = character(), attributeName = new('character'), attributeDefinition = new('character'), measurementScale = new('character'), accuracy = new('Accuracy'), coverage = new('Coverage'), methods = new('MethodsType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, attributeLabel = character(), storageType = character(), missingValueCode = character(), attributeName = new('character'), attributeDefinition = new('character'), measurementScale = new('measurementScale'), accuracy = new('Accuracy'), coverage = new('Coverage'), methods = new('MethodsType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@attributeLabel <- new('ListOfattributeLabel', lapply(attributeLabel, function(x) new('attributeLabel', x)))
 .Object@storageType <- new('ListOfstorageType', lapply(storageType, function(x) new('storageType', x)))
 .Object@missingValueCode <- new('ListOfmissingValueCode', lapply(missingValueCode, function(x) new('missingValueCode', x)))
@@ -1766,7 +1766,7 @@ setAs('XMLInternalElementNode', 'orderAttributeReference',  function(from) emlTo
 setAs('entityCodeList', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'entityCodeList',  function(from) emlToS4(from))
 setMethod(initialize, 'enumeratedDomain',
-function(.Object, codeDefinition = character(), externalCodeSet = new('character'), entityCodeList = new('character'), enforced = new('xml_attribute')){
+function(.Object, codeDefinition = character(), externalCodeSet = new('externalCodeSet'), entityCodeList = new('entityCodeList'), enforced = new('xml_attribute')){
 .Object@codeDefinition <- new('ListOfcodeDefinition', lapply(codeDefinition, function(x) new('codeDefinition', x)))
 .Object@externalCodeSet <- externalCodeSet
 .Object@entityCodeList <- entityCodeList
@@ -1904,7 +1904,7 @@ setAs('XMLInternalElementNode', 'caseSensitive',  function(from) emlToS4(from))
 setAs('numberOfRecords', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'numberOfRecords',  function(from) emlToS4(from))
 setMethod(initialize, 'DataTableType',
-function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), caseSensitive = new('character'), numberOfRecords = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), caseSensitive = new('caseSensitive'), numberOfRecords = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
 .Object@EntityGroup <- EntityGroup
 .Object@attributeList <- attributeList
@@ -2090,7 +2090,7 @@ setAs('XMLInternalElementNode', 'ySlope',  function(from) emlToS4(from))
 setAs('bilinearFit', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'bilinearFit',  function(from) emlToS4(from))
 setMethod(initialize, 'georeferenceInfo',
-function(.Object, cornerPoint = character(), controlPoint = character(), bilinearFit = new('character')){
+function(.Object, cornerPoint = character(), controlPoint = character(), bilinearFit = new('bilinearFit')){
 .Object@cornerPoint <- new('ListOfcornerPoint', lapply(cornerPoint, function(x) new('cornerPoint', x)))
 .Object@controlPoint <- new('ListOfcontrolPoint', lapply(controlPoint, function(x) new('controlPoint', x)))
 .Object@bilinearFit <- bilinearFit
@@ -2173,7 +2173,7 @@ function(.Object, bandDescription = character(), illuminationElevationAngle = ne
 setAs('imageDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'imageDescription',  function(from) emlToS4(from))
 setMethod(initialize, 'SpatialRasterType',
-function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), spatialReference = new('SpatialReferenceType'), georeferenceInfo = new('character'), horizontalAccuracy = new('DataQuality'), verticalAccuracy = new('DataQuality'), cellSizeXDirection = new('character'), cellSizeYDirection = new('character'), numberOfBands = new('character'), rasterOrigin = new('rasterOriginType'), rows = new('character'), columns = new('character'), verticals = new('character'), cellGeometry = new('CellGeometryType'), toneGradation = new('character'), scaleFactor = new('character'), offset = new('character'), imageDescription = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
+function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), spatialReference = new('SpatialReferenceType'), georeferenceInfo = new('georeferenceInfo'), horizontalAccuracy = new('DataQuality'), verticalAccuracy = new('DataQuality'), cellSizeXDirection = new('cellSizeXDirection'), cellSizeYDirection = new('cellSizeYDirection'), numberOfBands = new('numberOfBands'), rasterOrigin = new('rasterOriginType'), rows = new('character'), columns = new('character'), verticals = new('verticals'), cellGeometry = new('CellGeometryType'), toneGradation = new('character'), scaleFactor = new('character'), offset = new('character'), imageDescription = new('imageDescription'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
 .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
 .Object@EntityGroup <- EntityGroup
 .Object@attributeList <- attributeList
@@ -2339,7 +2339,7 @@ setAs('XMLInternalElementNode', 'describes',  function(from) emlToS4(from))
 setAs('metadata', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'metadata',  function(from) emlToS4(from))
 setMethod(initialize, 'additionalMetadata',
-function(.Object, describes = character(), metadata = new('character'), id = new('xml_attribute')){
+function(.Object, describes = character(), metadata = new('metadata'), id = new('xml_attribute')){
 .Object@describes <- new('ListOfdescribes', lapply(describes, function(x) new('describes', x)))
 .Object@metadata <- metadata
 .Object@id <- id
