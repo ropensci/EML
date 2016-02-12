@@ -76,28 +76,6 @@ collate <- c(
 ## Okay, here we go! Create all the classes...
 paste0("inst/xsd/", collate) %>% map(create_classes, cf = classes_file, mf = methods_file)
 
-# create_classes("inst/xsd/stmml.xsd", ns = stmml_ns, append = FALSE)
-#  paste0("inst/xsd/", collate) %>% map(create_classes, append = FALSE)
-# fix_protected("R/stmml-classes.R")
-# fix_protected("R/eml-resource-classes.R")
-#
-# file <- "R/eml-resource-classes.R"
-# R <- readLines(file)
-# R <- gsub("^setClass\\('InlineType'.*", "setClass('InlineType', contains='XMLInternalElementNode')", R)
-# write(R, file)
-#
-# file <- "R/eml-literature-classes.R"
-# R <- readLines(file)
-# R <- gsub("^setClass\\('geographicCoverage'.*", "", R)
-# write(R, file)
-#
-# fix_protected("R/eml-physical-classes.R")
-# fix_protected("R/eml-software-classes.R")
-# combine <- c(readLines("R/eml-protocol-classes.R"), readLines("R/eml-methods-classes.R"))
-# write(combine, "R/eml-methods-classes.R")
-# move_to_end("proceduralStep", "R/eml-methods-classes.R")
-# fix_protected("R/eml-storedProcedure-classes.R")
-
 fix_protected(classes_file)
 move_to_end("proceduralStep", classes_file)
 
@@ -124,6 +102,8 @@ setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType
 
 ## Fix methods
 M <- readLines(methods_file)
+R <- gsub("'complex'", "'eml:complex'", R)
+
 M <- gsub("^setAs\\('inline',.*", "", M)
 M <- gsub("setAs\\('XMLInternalElementNode', 'inline',.*", "", M)
 M <- gsub("^setAs\\('InlineType',.*", "", M)

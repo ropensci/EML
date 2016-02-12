@@ -1267,16 +1267,16 @@ function(.Object, quoteCharacter = character(), literalCharacter = character(), 
 })
 setAs('textDelimited', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'textDelimited',  function(from) emlToS4(from))
-setMethod(initialize, 'complex',
+setMethod(initialize, 'eml:complex',
 function(.Object, textFixed = character(), textDelimited = character()){
 .Object@textFixed <- new('ListOftextFixed', lapply(textFixed, function(x) new('textFixed', x)))
 .Object@textDelimited <- new('ListOftextDelimited', lapply(textDelimited, function(x) new('textDelimited', x)))
 .Object
 })
-setAs('complex', 'XMLInternalElementNode',   function(from) S4Toeml(from))
-setAs('XMLInternalElementNode', 'complex',  function(from) emlToS4(from))
+setAs('eml:complex', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'eml:complex',  function(from) emlToS4(from))
 setMethod(initialize, 'textFormat',
-function(.Object, recordDelimiter = character(), physicalLineDelimiter = character(), numHeaderLines = new('character'), numFooterLines = new('character'), numPhysicalLinesPerRecord = new('character'), maxRecordLength = new('character'), attributeOrientation = new('attributeOrientation'), simpleDelimited = new('simpleDelimited'), complex = new('complex')){
+function(.Object, recordDelimiter = character(), physicalLineDelimiter = character(), numHeaderLines = new('character'), numFooterLines = new('character'), numPhysicalLinesPerRecord = new('character'), maxRecordLength = new('character'), attributeOrientation = new('attributeOrientation'), simpleDelimited = new('simpleDelimited'), complex = new('eml:complex')){
 .Object@recordDelimiter <- new('ListOfrecordDelimiter', lapply(recordDelimiter, function(x) new('recordDelimiter', x)))
 .Object@physicalLineDelimiter <- new('ListOfphysicalLineDelimiter', lapply(physicalLineDelimiter, function(x) new('physicalLineDelimiter', x)))
 .Object@numHeaderLines <- numHeaderLines

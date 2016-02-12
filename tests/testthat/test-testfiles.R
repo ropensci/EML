@@ -1,9 +1,9 @@
 testthat::context("We can parse & serialize test files")
 
 library(XML)
-testthat::test_that("eml-access.xml", {
+testthat::test_that("eml-attribute.xml", {
 
-  f <- system.file(paste0("xsd/test/", "eml-access.xml"), package = "eml2")
+  f <- system.file(paste0("xsd/test/", "eml-attribute.xml"), package = "eml2")
   node <- xmlRoot(xmlParse(f))
   ## This can cause trouble if not namespaced, and is not required
   XML::removeAttributes(node, .attrs = "xsi:schemaLocation")
