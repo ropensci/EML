@@ -9,7 +9,11 @@
 
 emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 
+  protected <- c("complex")
+
   node_name <- xmlName(node)
+    if(node_name %in% protected)
+      node_name <- paste0("eml_", node_name)
   attrs <- xmlAttrs(node)
   children <- drop_comment_nodes(xmlChildren(node))
   xml_names <- names(children)

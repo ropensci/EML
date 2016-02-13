@@ -78,14 +78,18 @@ paste0("inst/xsd/", collate) %>% map(create_classes, cf = classes_file, mf = met
 
 fix_protected(classes_file)
 move_to_end("proceduralStep", classes_file)
+move_to_end("methodStep", classes_file)
+move_to_end("dataSource", classes_file)
 
 
-## These need to be defined later than they appear.  Manually move to end.
+## These need to be defined later than they appear (and may have multiple defs that need purging).  Manually move to end.
 R <- readLines(classes_file)
 R <- gsub("^setClass\\('coverage'.*", "", R)
 R <- gsub("^setClass\\('temporalCoverage'.*", "", R)
 R <- gsub("^setClass\\('taxonomicCoverage'.*", "", R)
 R <- gsub("setClass\\('geographicCoverage.*", "", R)
+R <- gsub("setClass\\('size', contains = c\\('eml-2.1.1', 'character'\\)\\)", "", R) ## B
+
 R <- gsub("^setClass\\('inline'.*", "", R)
 R <- gsub("^setClass\\('InlineType'.*", "setClass('InlineType', contains='XMLInternalElementNode')", R)
 write(R, classes_file, append = FALSE)
@@ -102,7 +106,8 @@ setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType
 
 ## Fix methods
 M <- readLines(methods_file)
-R <- gsub("'complex'", "'eml:complex'", R)
+M <- gsub("'complex'", "'eml:complex'", M)
+M <- gsub(".Object@complex", "slot(.Object, 'eml:complex')", M)
 
 M <- gsub("^setAs\\('inline',.*", "", M)
 M <- gsub("setAs\\('XMLInternalElementNode', 'inline',.*", "", M)

@@ -43,4 +43,12 @@ out <- lapply(xml_tests, purrr::safely(function(xml){
     })
 }))
 
+# Parse failures
+# ‘unit’ is not a slot in class “size” in :
+#   -  eml-datasetWithAttributelevelMethods.xml'
+#   - 'eml-datasetWithCitation.xml'
+#   - ...
+#
+#
+# Not expected: attempt to select less than one element in: 'eml-i18n.xml', 'eml-project.xml'
 

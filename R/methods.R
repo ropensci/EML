@@ -363,6 +363,8 @@ setAs('creator', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'creator',  function(from) emlToS4(from))
 setAs('metadataProvider', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'metadataProvider',  function(from) emlToS4(from))
+setAs('role', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'role',  function(from) emlToS4(from))
 setAs('associatedParty', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'associatedParty',  function(from) emlToS4(from))
 setAs('pubDate', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -847,8 +849,30 @@ setAs('ISBN', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ISBN',  function(from) emlToS4(from))
 setAs('Book', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Book',  function(from) emlToS4(from))
+setAs('chapterNumber', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'chapterNumber',  function(from) emlToS4(from))
+setAs('editor', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'editor',  function(from) emlToS4(from))
+setAs('bookTitle', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'bookTitle',  function(from) emlToS4(from))
+setAs('pageRange', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'pageRange',  function(from) emlToS4(from))
+setMethod(initialize, 'Chapter',
+function(.Object, editor = character(), chapterNumber = new('character'), bookTitle = new('character'), pageRange = new('character')){
+.Object@editor <- new('ListOfeditor', lapply(editor, function(x) new('editor', x)))
+.Object@chapterNumber <- chapterNumber
+.Object@bookTitle <- bookTitle
+.Object@pageRange <- pageRange
+.Object
+})
 setAs('Chapter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Chapter',  function(from) emlToS4(from))
+setAs('conferenceName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'conferenceName',  function(from) emlToS4(from))
+setAs('conferenceDate', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'conferenceDate',  function(from) emlToS4(from))
+setAs('conferenceLocation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'conferenceLocation',  function(from) emlToS4(from))
 setAs('ConferenceProceedings', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ConferenceProceedings',  function(from) emlToS4(from))
 setAs('institution', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1285,7 +1309,7 @@ function(.Object, recordDelimiter = character(), physicalLineDelimiter = charact
 .Object@maxRecordLength <- maxRecordLength
 .Object@attributeOrientation <- attributeOrientation
 .Object@simpleDelimited <- simpleDelimited
-.Object@complex <- complex
+slot(.Object, 'eml:complex') <- complex
 .Object
 })
 setAs('textFormat', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1369,6 +1393,13 @@ setAs('researchProject', 'XMLInternalElementNode',   function(from) S4Toeml(from
 setAs('XMLInternalElementNode', 'researchProject',  function(from) emlToS4(from))
 setAs('title', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'title',  function(from) emlToS4(from))
+setAs('role', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'role',  function(from) emlToS4(from))
+setMethod(initialize, 'personnel',
+function(.Object, role = character()){
+.Object@role <- new('ListOfrole', lapply(role, function(x) new('role', x)))
+.Object
+})
 setAs('personnel', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'personnel',  function(from) emlToS4(from))
 setAs('abstract', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1540,6 +1571,13 @@ setAs('XMLInternalElementNode', 'protocol',  function(from) emlToS4(from))
 
 setAs('methods', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methods',  function(from) emlToS4(from))
+setAs('dataSource', 'XMLInternalElementNode',   function(from) S4Toeml(from))
+setAs('XMLInternalElementNode', 'dataSource',  function(from) emlToS4(from))
+setMethod(initialize, 'methodStep',
+function(.Object, dataSource = character()){
+.Object@dataSource <- new('ListOfdataSource', lapply(dataSource, function(x) new('dataSource', x)))
+.Object
+})
 setAs('methodStep', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methodStep',  function(from) emlToS4(from))
 setAs('coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))

@@ -20,9 +20,6 @@ has_extension <- function(element, ns){
     out
 }
 
-has_children <- function(element, ns){
-    length(xml_find_all(element, ".//xs:element", ns = ns)) > 0
-}
 
 ## vectorize. Note: xmlValue returns characters. if .Data not character but instead float or Date etc, would need coercion.
 is_character_type <- function(types){
@@ -128,7 +125,8 @@ parse_attribute <- function(node, ns, cf = "classes.R", mf = "methods.R"){
 parse_extend_restrict <- function(node, ns, cf = "classes.R", mf = "methods.R"){
   base <- xml_attr(node, "base")
   attrib <- xml_find_all(node, "./xs:attribute", ns)
-  if((length(attrib) > 0) || is.na(base)){
+  elements  <- xml_find_all(node, ".//xs:element", ns) #
+  if((length(attrib) > 0) || length(elements) > 0 ||  is.na(base) ){
     create_class(node, ns, cf = cf, mf = mf)
   } else {
     contains <- base %>% replace_character_type() %>% strip_namespace()
