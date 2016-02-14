@@ -40,7 +40,7 @@ S4Toeml <- function(obj,
     if(is.null(node))
       node <- newXMLNode(node_name, namespaceDefinitions = ns)
 
-
+    base_attributes = c("lang", "schemaLocation")
 
 
     who <- who[!(who %in% excluded_slots)] # drop excluded slots
@@ -49,6 +49,8 @@ S4Toeml <- function(obj,
       if(s %in% attribute_elements){
         if(length(slot(obj,s)) > 0){
           attrs <- as.character(slot(obj,s))
+          if(s %in% base_attributes)
+            s <- paste0("xml:", s)
           names(attrs) <- s
           addAttributes(node, .attrs = attrs)
         }

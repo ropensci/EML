@@ -17,7 +17,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
   attrs <- xmlAttrs(node)
   children <- drop_comment_nodes(xmlChildren(node))
   xml_names <- names(children)
-
+  xml_attr_names <- names(attrs)
 
   s4 <- new(node_name)
 
@@ -26,13 +26,17 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
   subclasses <- xml_names[!xml_names %in% s4_names]
   not_sub <- xml_names[xml_names %in% s4_names]
 
+  subattrs <- xml_attr_names[!xml_attr_names %in% s4_names]
+  not_subattrs <- xml_attr_names[xml_attr_names %in% s4_names]
+
+  subclasses <- c(subclasses, subattrs)
+
   metanames <- s4_names[grepl("^[A-Z]", s4_names)]
   metaclasses <- lapply(metanames, get_slots)
   names(metaclasses) <- metanames
 
 
-
-  for(child in names(attrs)){
+  for(child in not_subattrs){
     slot(s4, child) <- new("xml_attribute",attrs[[child]])
   }
 
@@ -55,6 +59,8 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
         slot(slot(s4, s), child) <- listof(children, child)
       else if(cls == "character")
         slot(slot(s4, s), child) <- xmlValue(children[[child]])
+      else if(cls == "xml_attribute")
+        slot(slot(s4, s), child) <- new("xml_attribute" ,attrs[[child]])
       else
         slot(slot(s4, s), child) <- as(children[[child]], child)
     }

@@ -56,17 +56,19 @@ parse_element <- function(node, ns, cf = "classes.R", mf = "methods.R", maxOccur
   name <- xml_attr(node, "name", ns)
   if(is.na(maxOccurs))
     maxOccurs <- xml_attr(node, "maxOccurs")
-
-  ### Compute type (for declaration)
   type <- xml_attr(node, "type", ns)
 
   ## Side-effect: declare class
   if(!is.na(name)){
-    ctype <- type
-    if(is.na(ctype))
-      ctype <- has_extension(node, ns)
-      ctype <- strip_namespace(ctype) %>% replace_character_type()
-
+    ctype <- type %>% strip_namespace() %>% replace_character_type()
+    extends <- has_extension(node, ns) %>% strip_namespace() %>% replace_character_type()
+    if(!is.na(extends) && is.na(ctype)){
+      if(length(bits$slots) > 0){
+      bits$slots <- c(setNames(list(extends), extends), bits$slots)
+      } else {
+        extends <- ctype
+      }
+    }
     if(is.na(ctype))
       ctype <- "character"
     declare_class(name, bits$slots, unique(c(bits$contains, ctype)), cf = cf, mf = mf)

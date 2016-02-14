@@ -1396,8 +1396,9 @@ setAs('XMLInternalElementNode', 'title',  function(from) emlToS4(from))
 setAs('role', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'role',  function(from) emlToS4(from))
 setMethod(initialize, 'personnel',
-function(.Object, role = character()){
+function(.Object, role = character(), ResponsibleParty = new('ResponsibleParty')){
 .Object@role <- new('ListOfrole', lapply(role, function(x) new('role', x)))
+.Object@ResponsibleParty <- ResponsibleParty
 .Object
 })
 setAs('personnel', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1574,8 +1575,9 @@ setAs('XMLInternalElementNode', 'methods',  function(from) emlToS4(from))
 setAs('dataSource', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'dataSource',  function(from) emlToS4(from))
 setMethod(initialize, 'methodStep',
-function(.Object, dataSource = character()){
+function(.Object, dataSource = character(), ProcedureStepType = new('ProcedureStepType')){
 .Object@dataSource <- new('ListOfdataSource', lapply(dataSource, function(x) new('dataSource', x)))
+.Object@ProcedureStepType <- ProcedureStepType
 .Object
 })
 setAs('methodStep', 'XMLInternalElementNode',   function(from) S4Toeml(from))
