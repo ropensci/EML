@@ -52,6 +52,6 @@ out <- lapply(xml_tests, purrr::safely(function(xml){
 }))
 
 # Validation fails for:
-# 'eml-i18n.xml', 'eml-physical.xml', 'eml-project.xml', 'eml-unitDictionary.xml'
+#  'eml-physical.xml',  'eml-unitDictionary.xml'
 #
 

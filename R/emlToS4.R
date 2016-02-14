@@ -9,28 +9,20 @@
 
 emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 
-  protected <- c("complex")
-
-  node_name <- xmlName(node)
-    if(node_name %in% protected)
-      node_name <- paste0("eml_", node_name)
+  node_name <- fix_protected_names( xmlName(node) )
   attrs <- xmlAttrs(node)
   children <- drop_comment_nodes(xmlChildren(node))
   xml_names <- names(children)
   xml_attr_names <- names(attrs)
 
   s4 <- new(node_name)
-
   slot_classes <- get_slots(node_name)
   s4_names <- names(slot_classes)
   subclasses <- xml_names[!xml_names %in% s4_names]
   not_sub <- xml_names[xml_names %in% s4_names]
-
   subattrs <- xml_attr_names[!xml_attr_names %in% s4_names]
   not_subattrs <- xml_attr_names[xml_attr_names %in% s4_names]
-
   subclasses <- c(subclasses, subattrs)
-
   metanames <- s4_names[grepl("^[A-Z]", s4_names)]
   metaclasses <- lapply(metanames, get_slots)
   names(metaclasses) <- metanames
@@ -91,7 +83,16 @@ listof <- function(kids, element, listclass = paste0("ListOf", element))
 ##  HTML-style comments create: XMLInternalCommentNode as xmlChildren, which we don't want
 drop_comment_nodes <- function(nodes){
   drop <- sapply(nodes, function(x) is(x, "XMLInternalCommentNode"))
-  nodes[!drop]
+  out <- nodes[!drop]
+  names(out) <- fix_protected_names(names(out))
+  out
   }
 
-
+fix_protected_names <- function(x){
+  sapply(x, function(node_name){
+  protected <- c("complex")
+  if(node_name %in% protected)
+    node_name <- paste0("eml:", node_name)
+  node_name
+  })
+}
