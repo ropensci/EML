@@ -58,7 +58,7 @@ setClass('alternative', slots = c('type' = 'xml_attribute'), contains = c('eml-2
 setClass('relatedEntry', slots = c('type' = 'xml_attribute', 'href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('annotation', slots = c('source' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('appinfo', slots = c('source' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('metadata', slots = c('name' = 'xml_attribute', 'content' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+
 setClass('dimension', slots = c('name' = 'xml_attribute', 'power' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('unitList', slots = c('href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('unitType', slots = c('id' = 'xml_attribute', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
@@ -1028,7 +1028,7 @@ setClass('maintenanceUpdateFrequency', contains = c('eml-2.1.1', 'MaintUpFreqTyp
 setClass('ListOfdescribes', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'describes'))){ 'not all elements are describes objects'; } else { TRUE }})
 setClass('ListOfadditionalMetadata', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'additionalMetadata'))){ 'not all elements are additionalMetadata objects'; } else { TRUE }})
 setClass('describes', contains = c('eml-2.1.1', 'character')) ## B
-setClass('metadata', contains = c('eml-2.1.1', 'character')) ## B
+
 setClass('additionalMetadata', slots = c('describes' = 'ListOfdescribes', 'metadata' = 'metadata', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('eml', slots = c('access' = 'AccessType', 'dataset' = 'DatasetType', 'citation' = 'CitationType', 'software' = 'SoftwareType', 'protocol' = 'ProtocolType', 'additionalMetadata' = 'ListOfadditionalMetadata', 'packageId' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('access', contains = c('eml-2.1.1', 'AccessType')) ## D
@@ -1045,5 +1045,6 @@ setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'x
 setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))
 setClass('coverage', contains=c('Coverage'))
 setClass('inline', contains='InlineType')
+setClass('metadata', contains='InlineType')
 setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))
 setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1'))

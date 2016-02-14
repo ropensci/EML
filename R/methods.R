@@ -73,8 +73,8 @@ setAs('documentation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'documentation',  function(from) emlToS4(from))
 setAs('appinfo', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'appinfo',  function(from) emlToS4(from))
-setAs('metadata', 'XMLInternalElementNode',   function(from) S4Toeml(from))
-setAs('XMLInternalElementNode', 'metadata',  function(from) emlToS4(from))
+
+
 setAs('metadataList', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'metadataList',  function(from) emlToS4(from))
 setAs('metadataType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2374,8 +2374,8 @@ setAs('protocol', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'protocol',  function(from) emlToS4(from))
 setAs('describes', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'describes',  function(from) emlToS4(from))
-setAs('metadata', 'XMLInternalElementNode',   function(from) S4Toeml(from))
-setAs('XMLInternalElementNode', 'metadata',  function(from) emlToS4(from))
+
+
 setMethod(initialize, 'additionalMetadata',
 function(.Object, describes = character(), metadata = new('metadata'), id = new('xml_attribute')){
 .Object@describes <- new('ListOfdescribes', lapply(describes, function(x) new('describes', x)))

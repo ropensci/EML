@@ -90,6 +90,7 @@ R <- gsub("^setClass\\('taxonomicCoverage'.*", "", R)
 R <- gsub("setClass\\('geographicCoverage.*", "", R)
 R <- gsub("setClass\\('size', contains = c\\('eml-2.1.1', 'character'\\)\\)", "", R) ## B
 
+R <- gsub("^setClass\\('metadata'.*", "", R)
 R <- gsub("^setClass\\('inline'.*", "", R)
 R <- gsub("^setClass\\('InlineType'.*", "setClass('InlineType', contains='XMLInternalElementNode')", R)
 write(R, classes_file, append = FALSE)
@@ -100,6 +101,7 @@ setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'x
 setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))
 setClass('coverage', contains=c('Coverage'))
 setClass('inline', contains='InlineType')
+setClass('metadata', contains='InlineType')
 setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))
 setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1'))",
       classes_file, append = TRUE)
@@ -108,7 +110,8 @@ setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType
 M <- readLines(methods_file)
 M <- gsub("'complex'", "'eml:complex'", M)
 M <- gsub(".Object@complex", "slot(.Object, 'eml:complex')", M)
-
+M <- gsub("^setAs\\('metadata',.*", "", M)
+M <- gsub("setAs\\('XMLInternalElementNode', 'metadata',.*", "", M)
 M <- gsub("^setAs\\('inline',.*", "", M)
 M <- gsub("setAs\\('XMLInternalElementNode', 'inline',.*", "", M)
 M <- gsub("^setAs\\('InlineType',.*", "", M)

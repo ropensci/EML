@@ -36,19 +36,22 @@ out <- lapply(xml_tests, purrr::safely(function(xml){
     ## Test: is our XML still schema-valid?
     ns <- xmlNamespaces(node)
     xmlNamespaces(element) <- ns
-    setXMLNamespace(element, ns[[1]]$id)
+
+    ids <- sapply(ns, `[[`, "id")
+    tmp <- which(ids  == "eml")
+    if(length(tmp) > 0){
+      ns_1 <- ids[[tmp]]
+    } else {
+      ns_1 <- ns[[1]]$id
+    }
+    setXMLNamespace(element, ns_1)
     saveXML(xmlDoc(element), "test.xml")
     v <- eml_validate("test.xml")
     testthat::expect_equal(v$status, 0)
     })
 }))
 
-# Parse failures
-# ‘unit’ is not a slot in class “size” in :
-#   -  eml-datasetWithAttributelevelMethods.xml'
-#   - 'eml-datasetWithCitation.xml'
-#   - ...
+# Validation fails for:
+# 'eml-i18n.xml', 'eml-physical.xml', 'eml-project.xml', 'eml-unitDictionary.xml'
 #
-#
-# Not expected: attempt to select less than one element in: 'eml-i18n.xml', 'eml-project.xml'
 
