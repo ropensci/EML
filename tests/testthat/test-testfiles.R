@@ -20,9 +20,16 @@ testthat::test_that("eml-attribute.xml", {
   unlink("test.xml")
   testthat::expect_equal(v$status, 0)
 
+  all_elements <- xpathSApply(xmlParse(f), "//*", xmlName)
+  all_elements2 <- xpathSApply(xmlDoc(element), "//*", xmlName)
+  testthat::expect_identical(all_elements, all_elements2)
 })
 
 xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
+## eml-unitDictionary is not EML but STMML; won't validate against EML schema.  (could add it into additionalMetadata though)
+xml_tests <- xml_tests[- which(xml_tests == "eml-unitDictionary.xml")]
+
+
 out <- lapply(xml_tests, purrr::safely(function(xml){
   testthat::test_that(xml, {
     f <- system.file(paste0("xsd/test/", xml), package = "eml2")
@@ -48,6 +55,17 @@ out <- lapply(xml_tests, purrr::safely(function(xml){
     saveXML(xmlDoc(element), "test.xml")
     v <- eml_validate("test.xml")
     testthat::expect_equal(v$status, 0)
+
+
+
+    all_elements <- xpathSApply(xmlParse(f), "//*", xmlName)
+    all_elements2 <- xpathSApply(xmlDoc(element), "//*", xmlName)
+    ## identical number of elements
+    testthat::expect_identical(length(all_elements), length(all_elements2))
+    ## identical modulo order
+    testthat::expect_identical(sort(all_elements), sort(all_elements2))
+    ## strictly identical
+    testthat::expect_identical(all_elements, all_elements2)
     })
 }))
 
