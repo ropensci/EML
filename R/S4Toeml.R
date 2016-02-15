@@ -32,7 +32,8 @@ S4Toeml <- function(obj,
     } else {
       node_name <- class(obj)[1]
     }
-
+    ## clear namespace
+    node_name <- gsub("^[a-z]*:", "", node_name)
 
     if(length(ns) > 0)
       node_name <- paste0("eml:", node_name)
@@ -40,7 +41,7 @@ S4Toeml <- function(obj,
     if(is.null(node))
       node <- newXMLNode(node_name, namespaceDefinitions = ns)
 
-
+    base_attributes = c("lang", "schemaLocation")
 
 
     who <- who[!(who %in% excluded_slots)] # drop excluded slots
@@ -49,6 +50,8 @@ S4Toeml <- function(obj,
       if(s %in% attribute_elements){
         if(length(slot(obj,s)) > 0){
           attrs <- as.character(slot(obj,s))
+          if(s %in% base_attributes)
+            s <- paste0("xml:", s)
           names(attrs) <- s
           addAttributes(node, .attrs = attrs)
         }
