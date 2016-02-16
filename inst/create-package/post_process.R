@@ -1,8 +1,24 @@
 
+replace_class <- function(class, new, file){
+  R <- readLines(file)
+  R <- gsub(sprintf("^setClass\\('%s'.*", class), new, R)
+  write(R, file)
+}
+
+
 move_to_end <- function(class, file){
   R <- readLines(file)
   i <- grep(sprintf("^setClass\\('%s'.*", class), R)
   write(c(R[-i], R[i]), file)
+}
+
+
+drop_method <- function(class, file){
+  M <- readLines(file)
+  M <- gsub(sprintf("^setAs\\('%s',.*", class), "", M)
+  M <- gsub(sprintf("setAs\\('XMLInternalElementNode', '%s',.*", class), "", M)
+  M <- gsub(sprintf("setMethod\\(initialize, '%s'.*", class), "", M)
+  write(M, file)
 }
 
 # make sure that " = 'complex'" etc also gets fixed. not a problem if class isn't used as a type.

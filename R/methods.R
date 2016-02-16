@@ -104,13 +104,7 @@ setAs('section', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'section',  function(from) emlToS4(from))
 setAs('para', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'para',  function(from) emlToS4(from))
-setMethod(initialize, 'TextType',
-function(.Object, section = character(), para = character(), lang = new('xml_attribute')){
-.Object@section <- new('ListOfsection', lapply(section, function(x) new('section', x)))
-.Object@para <- new('ListOfpara', lapply(para, function(x) new('para', x)))
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'TextType', function(.Object, section = character(), para = character(), lang = new('xml_attribute')){; .Object@section <- new('ListOfsection', lapply(section, function(x) new('section', x))); .Object@para <- new('ListOfpara', lapply(para, function(x) new('para', x))); .Object@lang <- lang; .Object })
 setAs('TextType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'TextType',  function(from) emlToS4(from))
 setAs('value', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -121,12 +115,7 @@ setAs('orderedlist', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'orderedlist',  function(from) emlToS4(from))
 setAs('value', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'value',  function(from) emlToS4(from))
-setMethod(initialize, 'emphasis',
-function(.Object, value = character(), lang = new('xml_attribute')){
-.Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x)))
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'emphasis', function(.Object, value = character(), lang = new('xml_attribute')){; .Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x))); .Object@lang <- lang; .Object })
 setAs('emphasis', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'emphasis',  function(from) emlToS4(from))
 setAs('subscript', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -135,36 +124,15 @@ setAs('superscript', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'superscript',  function(from) emlToS4(from))
 setAs('value', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'value',  function(from) emlToS4(from))
-setMethod(initialize, 'literalLayout',
-function(.Object, value = character()){
-.Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x)))
-.Object
-})
+setMethod(initialize, 'literalLayout', function(.Object, value = character()){; .Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x))); .Object })
 setAs('literalLayout', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'literalLayout',  function(from) emlToS4(from))
 setAs('citetitle', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citetitle',  function(from) emlToS4(from))
-setMethod(initialize, 'ulink',
-function(.Object, citetitle = character(), url = new('xml_attribute')){
-.Object@citetitle <- new('ListOfcitetitle', lapply(citetitle, function(x) new('citetitle', x)))
-.Object@url <- url
-.Object
-})
+setMethod(initialize, 'ulink', function(.Object, citetitle = character(), url = new('xml_attribute')){; .Object@citetitle <- new('ListOfcitetitle', lapply(citetitle, function(x) new('citetitle', x))); .Object@url <- url; .Object })
 setAs('ulink', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ulink',  function(from) emlToS4(from))
-setMethod(initialize, 'ParagraphType',
-function(.Object, value = character(), itemizedlist = character(), orderedlist = character(), emphasis = character(), subscript = character(), superscript = character(), literalLayout = character(), ulink = character(), lang = new('xml_attribute')){
-.Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x)))
-.Object@itemizedlist <- new('ListOfitemizedlist', lapply(itemizedlist, function(x) new('itemizedlist', x)))
-.Object@orderedlist <- new('ListOforderedlist', lapply(orderedlist, function(x) new('orderedlist', x)))
-.Object@emphasis <- new('ListOfemphasis', lapply(emphasis, function(x) new('emphasis', x)))
-.Object@subscript <- new('ListOfsubscript', lapply(subscript, function(x) new('subscript', x)))
-.Object@superscript <- new('ListOfsuperscript', lapply(superscript, function(x) new('superscript', x)))
-.Object@literalLayout <- new('ListOfliteralLayout', lapply(literalLayout, function(x) new('literalLayout', x)))
-.Object@ulink <- new('ListOfulink', lapply(ulink, function(x) new('ulink', x)))
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'ParagraphType', function(.Object, value = character(), itemizedlist = character(), orderedlist = character(), emphasis = character(), subscript = character(), superscript = character(), literalLayout = character(), ulink = character(), lang = new('xml_attribute')){; .Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x))); .Object@itemizedlist <- new('ListOfitemizedlist', lapply(itemizedlist, function(x) new('itemizedlist', x))); .Object@orderedlist <- new('ListOforderedlist', lapply(orderedlist, function(x) new('orderedlist', x))); .Object@emphasis <- new('ListOfemphasis', lapply(emphasis, function(x) new('emphasis', x))); .Object@subscript <- new('ListOfsubscript', lapply(subscript, function(x) new('subscript', x))); .Object@superscript <- new('ListOfsuperscript', lapply(superscript, function(x) new('superscript', x))); .Object@literalLayout <- new('ListOfliteralLayout', lapply(literalLayout, function(x) new('literalLayout', x))); .Object@ulink <- new('ListOfulink', lapply(ulink, function(x) new('ulink', x))); .Object@lang <- lang; .Object })
 setAs('ParagraphType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ParagraphType',  function(from) emlToS4(from))
 setAs('title', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -173,14 +141,7 @@ setAs('para', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'para',  function(from) emlToS4(from))
 setAs('section', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'section',  function(from) emlToS4(from))
-setMethod(initialize, 'SectionType',
-function(.Object, para = character(), section = character(), title = new('character'), lang = new('xml_attribute')){
-.Object@para <- new('ListOfpara', lapply(para, function(x) new('para', x)))
-.Object@section <- new('ListOfsection', lapply(section, function(x) new('section', x)))
-.Object@title <- title
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'SectionType', function(.Object, para = character(), section = character(), title = new('character'), lang = new('xml_attribute')){; .Object@para <- new('ListOfpara', lapply(para, function(x) new('para', x))); .Object@section <- new('ListOfsection', lapply(section, function(x) new('section', x))); .Object@title <- title; .Object@lang <- lang; .Object })
 setAs('SectionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'SectionType',  function(from) emlToS4(from))
 setAs('para', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -189,20 +150,10 @@ setAs('itemizedlist', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'itemizedlist',  function(from) emlToS4(from))
 setAs('orderedlist', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'orderedlist',  function(from) emlToS4(from))
-setMethod(initialize, 'listitem',
-function(.Object, para = character(), itemizedlist = character(), orderedlist = character()){
-.Object@para <- new('ListOfpara', lapply(para, function(x) new('para', x)))
-.Object@itemizedlist <- new('ListOfitemizedlist', lapply(itemizedlist, function(x) new('itemizedlist', x)))
-.Object@orderedlist <- new('ListOforderedlist', lapply(orderedlist, function(x) new('orderedlist', x)))
-.Object
-})
+setMethod(initialize, 'listitem', function(.Object, para = character(), itemizedlist = character(), orderedlist = character()){; .Object@para <- new('ListOfpara', lapply(para, function(x) new('para', x))); .Object@itemizedlist <- new('ListOfitemizedlist', lapply(itemizedlist, function(x) new('itemizedlist', x))); .Object@orderedlist <- new('ListOforderedlist', lapply(orderedlist, function(x) new('orderedlist', x))); .Object })
 setAs('listitem', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'listitem',  function(from) emlToS4(from))
-setMethod(initialize, 'ListType',
-function(.Object, listitem = character()){
-.Object@listitem <- new('ListOflistitem', lapply(listitem, function(x) new('listitem', x)))
-.Object
-})
+setMethod(initialize, 'ListType', function(.Object, listitem = character()){; .Object@listitem <- new('ListOflistitem', lapply(listitem, function(x) new('listitem', x))); .Object })
 setAs('ListType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ListType',  function(from) emlToS4(from))
 setAs('value', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -211,14 +162,7 @@ setAs('subscript', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'subscript',  function(from) emlToS4(from))
 setAs('superscript', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'superscript',  function(from) emlToS4(from))
-setMethod(initialize, 'SubSuperScriptType',
-function(.Object, value = character(), subscript = character(), superscript = character(), lang = new('xml_attribute')){
-.Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x)))
-.Object@subscript <- new('ListOfsubscript', lapply(subscript, function(x) new('subscript', x)))
-.Object@superscript <- new('ListOfsuperscript', lapply(superscript, function(x) new('superscript', x)))
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'SubSuperScriptType', function(.Object, value = character(), subscript = character(), superscript = character(), lang = new('xml_attribute')){; .Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x))); .Object@subscript <- new('ListOfsubscript', lapply(subscript, function(x) new('subscript', x))); .Object@superscript <- new('ListOfsuperscript', lapply(superscript, function(x) new('superscript', x))); .Object@lang <- lang; .Object })
 setAs('SubSuperScriptType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'SubSuperScriptType',  function(from) emlToS4(from))
 setAs('i18nString', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -286,22 +230,7 @@ setAs('onlineUrl', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'onlineUrl',  function(from) emlToS4(from))
 setAs('userId', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'userId',  function(from) emlToS4(from))
-setMethod(initialize, 'ResponsibleParty',
-function(.Object, individualName = character(), organizationName = character(), positionName = character(), address = character(), phone = character(), electronicMailAddress = character(), onlineUrl = character(), userId = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@individualName <- new('ListOfindividualName', lapply(individualName, function(x) new('individualName', x)))
-.Object@organizationName <- new('ListOforganizationName', lapply(organizationName, function(x) new('organizationName', x)))
-.Object@positionName <- new('ListOfpositionName', lapply(positionName, function(x) new('positionName', x)))
-.Object@address <- new('ListOfaddress', lapply(address, function(x) new('address', x)))
-.Object@phone <- new('ListOfphone', lapply(phone, function(x) new('phone', x)))
-.Object@electronicMailAddress <- new('ListOfelectronicMailAddress', lapply(electronicMailAddress, function(x) new('electronicMailAddress', x)))
-.Object@onlineUrl <- new('ListOfonlineUrl', lapply(onlineUrl, function(x) new('onlineUrl', x)))
-.Object@userId <- new('ListOfuserId', lapply(userId, function(x) new('userId', x)))
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'ResponsibleParty', function(.Object, individualName = character(), organizationName = character(), positionName = character(), address = character(), phone = character(), electronicMailAddress = character(), onlineUrl = character(), userId = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@individualName <- new('ListOfindividualName', lapply(individualName, function(x) new('individualName', x))); .Object@organizationName <- new('ListOforganizationName', lapply(organizationName, function(x) new('organizationName', x))); .Object@positionName <- new('ListOfpositionName', lapply(positionName, function(x) new('positionName', x))); .Object@address <- new('ListOfaddress', lapply(address, function(x) new('address', x))); .Object@phone <- new('ListOfphone', lapply(phone, function(x) new('phone', x))); .Object@electronicMailAddress <- new('ListOfelectronicMailAddress', lapply(electronicMailAddress, function(x) new('electronicMailAddress', x))); .Object@onlineUrl <- new('ListOfonlineUrl', lapply(onlineUrl, function(x) new('onlineUrl', x))); .Object@userId <- new('ListOfuserId', lapply(userId, function(x) new('userId', x))); .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('ResponsibleParty', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ResponsibleParty',  function(from) emlToS4(from))
 setAs('salutation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -310,13 +239,7 @@ setAs('givenName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'givenName',  function(from) emlToS4(from))
 setAs('surName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'surName',  function(from) emlToS4(from))
-setMethod(initialize, 'Person',
-function(.Object, salutation = character(), givenName = character(), surName = new('character')){
-.Object@salutation <- new('ListOfsalutation', lapply(salutation, function(x) new('salutation', x)))
-.Object@givenName <- new('ListOfgivenName', lapply(givenName, function(x) new('givenName', x)))
-.Object@surName <- surName
-.Object
-})
+setMethod(initialize, 'Person', function(.Object, salutation = character(), givenName = character(), surName = new('character')){; .Object@salutation <- new('ListOfsalutation', lapply(salutation, function(x) new('salutation', x))); .Object@givenName <- new('ListOfgivenName', lapply(givenName, function(x) new('givenName', x))); .Object@surName <- surName; .Object })
 setAs('Person', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Person',  function(from) emlToS4(from))
 setAs('deliveryPoint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -329,19 +252,7 @@ setAs('postalCode', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'postalCode',  function(from) emlToS4(from))
 setAs('country', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'country',  function(from) emlToS4(from))
-setMethod(initialize, 'Address',
-function(.Object, deliveryPoint = character(), city = new('character'), administrativeArea = new('character'), postalCode = new('character'), country = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@deliveryPoint <- new('ListOfdeliveryPoint', lapply(deliveryPoint, function(x) new('deliveryPoint', x)))
-.Object@city <- city
-.Object@administrativeArea <- administrativeArea
-.Object@postalCode <- postalCode
-.Object@country <- country
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'Address', function(.Object, deliveryPoint = character(), city = new('character'), administrativeArea = new('character'), postalCode = new('character'), country = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@deliveryPoint <- new('ListOfdeliveryPoint', lapply(deliveryPoint, function(x) new('deliveryPoint', x))); .Object@city <- city; .Object@administrativeArea <- administrativeArea; .Object@postalCode <- postalCode; .Object@country <- country; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('Address', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Address',  function(from) emlToS4(from))
 setAs('party', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -379,12 +290,7 @@ setAs('keyword', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'keyword',  function(from) emlToS4(from))
 setAs('keywordThesaurus', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'keywordThesaurus',  function(from) emlToS4(from))
-setMethod(initialize, 'keywordSet',
-function(.Object, keyword = character(), keywordThesaurus = new('character')){
-.Object@keyword <- new('ListOfkeyword', lapply(keyword, function(x) new('keyword', x)))
-.Object@keywordThesaurus <- keywordThesaurus
-.Object
-})
+setMethod(initialize, 'keywordSet', function(.Object, keyword = character(), keywordThesaurus = new('character')){; .Object@keyword <- new('ListOfkeyword', lapply(keyword, function(x) new('keyword', x))); .Object@keywordThesaurus <- keywordThesaurus; .Object })
 setAs('keywordSet', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'keywordSet',  function(from) emlToS4(from))
 setAs('additionalInfo', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -395,25 +301,7 @@ setAs('distribution', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'distribution',  function(from) emlToS4(from))
 setAs('coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'coverage',  function(from) emlToS4(from))
-setMethod(initialize, 'ResourceGroup',
-function(.Object, alternateIdentifier = character(), title = character(), creator = character(), metadataProvider = character(), associatedParty = character(), keywordSet = character(), additionalInfo = character(), distribution = character(), shortName = new('character'), pubDate = new('yearDate'), language = new('character'), series = new('character'), abstract = new('TextType'), intellectualRights = new('TextType'), coverage = new('Coverage')){
-.Object@alternateIdentifier <- new('ListOfalternateIdentifier', lapply(alternateIdentifier, function(x) new('alternateIdentifier', x)))
-.Object@title <- new('ListOftitle', lapply(title, function(x) new('title', x)))
-.Object@creator <- new('ListOfcreator', lapply(creator, function(x) new('creator', x)))
-.Object@metadataProvider <- new('ListOfmetadataProvider', lapply(metadataProvider, function(x) new('metadataProvider', x)))
-.Object@associatedParty <- new('ListOfassociatedParty', lapply(associatedParty, function(x) new('associatedParty', x)))
-.Object@keywordSet <- new('ListOfkeywordSet', lapply(keywordSet, function(x) new('keywordSet', x)))
-.Object@additionalInfo <- new('ListOfadditionalInfo', lapply(additionalInfo, function(x) new('additionalInfo', x)))
-.Object@distribution <- new('ListOfdistribution', lapply(distribution, function(x) new('distribution', x)))
-.Object@shortName <- shortName
-.Object@pubDate <- pubDate
-.Object@language <- language
-.Object@series <- series
-.Object@abstract <- abstract
-.Object@intellectualRights <- intellectualRights
-.Object@coverage <- coverage
-.Object
-})
+setMethod(initialize, 'ResourceGroup', function(.Object, alternateIdentifier = character(), title = character(), creator = character(), metadataProvider = character(), associatedParty = character(), keywordSet = character(), additionalInfo = character(), distribution = character(), shortName = new('character'), pubDate = new('yearDate'), language = new('character'), series = new('character'), abstract = new('TextType'), intellectualRights = new('TextType'), coverage = new('Coverage')){; .Object@alternateIdentifier <- new('ListOfalternateIdentifier', lapply(alternateIdentifier, function(x) new('alternateIdentifier', x))); .Object@title <- new('ListOftitle', lapply(title, function(x) new('title', x))); .Object@creator <- new('ListOfcreator', lapply(creator, function(x) new('creator', x))); .Object@metadataProvider <- new('ListOfmetadataProvider', lapply(metadataProvider, function(x) new('metadataProvider', x))); .Object@associatedParty <- new('ListOfassociatedParty', lapply(associatedParty, function(x) new('associatedParty', x))); .Object@keywordSet <- new('ListOfkeywordSet', lapply(keywordSet, function(x) new('keywordSet', x))); .Object@additionalInfo <- new('ListOfadditionalInfo', lapply(additionalInfo, function(x) new('additionalInfo', x))); .Object@distribution <- new('ListOfdistribution', lapply(distribution, function(x) new('distribution', x))); .Object@shortName <- shortName; .Object@pubDate <- pubDate; .Object@language <- language; .Object@series <- series; .Object@abstract <- abstract; .Object@intellectualRights <- intellectualRights; .Object@coverage <- coverage; .Object })
 setAs('ResourceGroup', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ResourceGroup',  function(from) emlToS4(from))
 setAs('references', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -452,17 +340,7 @@ setAs('defaultValue', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'defaultValue',  function(from) emlToS4(from))
 setAs('parameterDefinition', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'parameterDefinition',  function(from) emlToS4(from))
-setMethod(initialize, 'ConnectionDefinitionType',
-function(.Object, parameterDefinition = character(), schemeName = new('schemeName'), description = new('TextType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@parameterDefinition <- new('ListOfparameterDefinition', lapply(parameterDefinition, function(x) new('parameterDefinition', x)))
-.Object@schemeName <- schemeName
-.Object@description <- description
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'ConnectionDefinitionType', function(.Object, parameterDefinition = character(), schemeName = new('schemeName'), description = new('TextType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@parameterDefinition <- new('ListOfparameterDefinition', lapply(parameterDefinition, function(x) new('parameterDefinition', x))); .Object@schemeName <- schemeName; .Object@description <- description; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('ConnectionDefinitionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ConnectionDefinitionType',  function(from) emlToS4(from))
 
@@ -479,16 +357,7 @@ setAs('mediumFormat', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'mediumFormat',  function(from) emlToS4(from))
 setAs('mediumNote', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'mediumNote',  function(from) emlToS4(from))
-setMethod(initialize, 'OfflineType',
-function(.Object, mediumFormat = character(), mediumName = new('character'), mediumDensity = new('character'), mediumDensityUnits = new('character'), mediumVolume = new('character'), mediumNote = new('character')){
-.Object@mediumFormat <- new('ListOfmediumFormat', lapply(mediumFormat, function(x) new('mediumFormat', x)))
-.Object@mediumName <- mediumName
-.Object@mediumDensity <- mediumDensity
-.Object@mediumDensityUnits <- mediumDensityUnits
-.Object@mediumVolume <- mediumVolume
-.Object@mediumNote <- mediumNote
-.Object
-})
+setMethod(initialize, 'OfflineType', function(.Object, mediumFormat = character(), mediumName = new('character'), mediumDensity = new('character'), mediumDensityUnits = new('character'), mediumVolume = new('character'), mediumNote = new('character')){; .Object@mediumFormat <- new('ListOfmediumFormat', lapply(mediumFormat, function(x) new('mediumFormat', x))); .Object@mediumName <- mediumName; .Object@mediumDensity <- mediumDensity; .Object@mediumDensityUnits <- mediumDensityUnits; .Object@mediumVolume <- mediumVolume; .Object@mediumNote <- mediumNote; .Object })
 setAs('OfflineType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'OfflineType',  function(from) emlToS4(from))
 setAs('onlineDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -511,28 +380,14 @@ setAs('value', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'value',  function(from) emlToS4(from))
 setAs('parameter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'parameter',  function(from) emlToS4(from))
-setMethod(initialize, 'ConnectionType',
-function(.Object, parameter = character(), connectionDefinition = new('ConnectionDefinitionType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x)))
-.Object@connectionDefinition <- connectionDefinition
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'ConnectionType', function(.Object, parameter = character(), connectionDefinition = new('ConnectionDefinitionType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x))); .Object@connectionDefinition <- connectionDefinition; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('ConnectionType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ConnectionType',  function(from) emlToS4(from))
 setAs('NonEmptyStringType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'NonEmptyStringType',  function(from) emlToS4(from))
 setAs('value', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'value',  function(from) emlToS4(from))
-setMethod(initialize, 'i18nNonEmptyStringType',
-function(.Object, value = character(), lang = new('xml_attribute')){
-.Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x)))
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'i18nNonEmptyStringType', function(.Object, value = character(), lang = new('xml_attribute')){; .Object@value <- new('ListOfvalue', lapply(value, function(x) new('value', x))); .Object@lang <- lang; .Object })
 setAs('i18nNonEmptyStringType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'i18nNonEmptyStringType',  function(from) emlToS4(from))
 
@@ -552,14 +407,7 @@ setAs('altitudeDistanceUnits', 'XMLInternalElementNode',   function(from) S4Toem
 setAs('XMLInternalElementNode', 'altitudeDistanceUnits',  function(from) emlToS4(from))
 setAs('altitudeEncodingMethod', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'altitudeEncodingMethod',  function(from) emlToS4(from))
-setMethod(initialize, 'altitudeSysDef',
-function(.Object, altitudeResolution = character(), altitudeDatumName = new('character'), altitudeDistanceUnits = new('character'), altitudeEncodingMethod = new('character')){
-.Object@altitudeResolution <- new('ListOfaltitudeResolution', lapply(altitudeResolution, function(x) new('altitudeResolution', x)))
-.Object@altitudeDatumName <- altitudeDatumName
-.Object@altitudeDistanceUnits <- altitudeDistanceUnits
-.Object@altitudeEncodingMethod <- altitudeEncodingMethod
-.Object
-})
+setMethod(initialize, 'altitudeSysDef', function(.Object, altitudeResolution = character(), altitudeDatumName = new('character'), altitudeDistanceUnits = new('character'), altitudeEncodingMethod = new('character')){; .Object@altitudeResolution <- new('ListOfaltitudeResolution', lapply(altitudeResolution, function(x) new('altitudeResolution', x))); .Object@altitudeDatumName <- altitudeDatumName; .Object@altitudeDistanceUnits <- altitudeDistanceUnits; .Object@altitudeEncodingMethod <- altitudeEncodingMethod; .Object })
 setAs('altitudeSysDef', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'altitudeSysDef',  function(from) emlToS4(from))
 setAs('depthDatumName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -570,14 +418,7 @@ setAs('depthDistanceUnits', 'XMLInternalElementNode',   function(from) S4Toeml(f
 setAs('XMLInternalElementNode', 'depthDistanceUnits',  function(from) emlToS4(from))
 setAs('depthEncodingMethod', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'depthEncodingMethod',  function(from) emlToS4(from))
-setMethod(initialize, 'depthSysDef',
-function(.Object, depthResolution = character(), depthDatumName = new('character'), depthDistanceUnits = new('character'), depthEncodingMethod = new('character')){
-.Object@depthResolution <- new('ListOfdepthResolution', lapply(depthResolution, function(x) new('depthResolution', x)))
-.Object@depthDatumName <- depthDatumName
-.Object@depthDistanceUnits <- depthDistanceUnits
-.Object@depthEncodingMethod <- depthEncodingMethod
-.Object
-})
+setMethod(initialize, 'depthSysDef', function(.Object, depthResolution = character(), depthDatumName = new('character'), depthDistanceUnits = new('character'), depthEncodingMethod = new('character')){; .Object@depthResolution <- new('ListOfdepthResolution', lapply(depthResolution, function(x) new('depthResolution', x))); .Object@depthDatumName <- depthDatumName; .Object@depthDistanceUnits <- depthDistanceUnits; .Object@depthEncodingMethod <- depthEncodingMethod; .Object })
 setAs('depthSysDef', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'depthSysDef',  function(from) emlToS4(from))
 setAs('vertCoordSys', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -602,13 +443,7 @@ setAs('parameter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'parameter',  function(from) emlToS4(from))
 setAs('unit', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'unit',  function(from) emlToS4(from))
-setMethod(initialize, 'projection',
-function(.Object, parameter = character(), unit = new('unit'), name = new('xml_attribute')){
-.Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x)))
-.Object@unit <- unit
-.Object@name <- name
-.Object
-})
+setMethod(initialize, 'projection', function(.Object, parameter = character(), unit = new('unit'), name = new('xml_attribute')){; .Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x))); .Object@unit <- unit; .Object@name <- name; .Object })
 setAs('projection', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'projection',  function(from) emlToS4(from))
 setAs('projCoordSys', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -617,11 +452,7 @@ setAs('horizCoordSysType', 'XMLInternalElementNode',   function(from) S4Toeml(fr
 setAs('XMLInternalElementNode', 'horizCoordSysType',  function(from) emlToS4(from))
 setAs('horizCoordSysDef', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'horizCoordSysDef',  function(from) emlToS4(from))
-setMethod(initialize, 'projectionList',
-function(.Object, horizCoordSysDef = character()){
-.Object@horizCoordSysDef <- new('ListOfhorizCoordSysDef', lapply(horizCoordSysDef, function(x) new('horizCoordSysDef', x)))
-.Object
-})
+setMethod(initialize, 'projectionList', function(.Object, horizCoordSysDef = character()){; .Object@horizCoordSysDef <- new('ListOfhorizCoordSysDef', lapply(horizCoordSysDef, function(x) new('horizCoordSysDef', x))); .Object })
 setAs('projectionList', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'projectionList',  function(from) emlToS4(from))
 setAs('spatialReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -641,30 +472,14 @@ setAs('allow', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'allow',  function(from) emlToS4(from))
 setAs('deny', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'deny',  function(from) emlToS4(from))
-setMethod(initialize, 'AccessType',
-function(.Object, allow = character(), deny = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute'), order = new('xml_attribute'), authSystem = new('xml_attribute')){
-.Object@allow <- new('ListOfallow', lapply(allow, function(x) new('allow', x)))
-.Object@deny <- new('ListOfdeny', lapply(deny, function(x) new('deny', x)))
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object@order <- order
-.Object@authSystem <- authSystem
-.Object
-})
+setMethod(initialize, 'AccessType', function(.Object, allow = character(), deny = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute'), order = new('xml_attribute'), authSystem = new('xml_attribute')){; .Object@allow <- new('ListOfallow', lapply(allow, function(x) new('allow', x))); .Object@deny <- new('ListOfdeny', lapply(deny, function(x) new('deny', x))); .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object@order <- order; .Object@authSystem <- authSystem; .Object })
 setAs('AccessType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'AccessType',  function(from) emlToS4(from))
 setAs('principal', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'principal',  function(from) emlToS4(from))
 setAs('permission', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'permission',  function(from) emlToS4(from))
-setMethod(initialize, 'AccessRule',
-function(.Object, principal = character(), permission = character()){
-.Object@principal <- new('ListOfprincipal', lapply(principal, function(x) new('principal', x)))
-.Object@permission <- new('ListOfpermission', lapply(permission, function(x) new('permission', x)))
-.Object
-})
+setMethod(initialize, 'AccessRule', function(.Object, principal = character(), permission = character()){; .Object@principal <- new('ListOfprincipal', lapply(principal, function(x) new('principal', x))); .Object@permission <- new('ListOfpermission', lapply(permission, function(x) new('permission', x))); .Object })
 setAs('AccessRule', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'AccessRule',  function(from) emlToS4(from))
 
@@ -674,22 +489,14 @@ setAs('XMLInternalElementNode', 'AccessRule',  function(from) emlToS4(from))
 
 setAs('attributeReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attributeReference',  function(from) emlToS4(from))
-setMethod(initialize, 'key',
-function(.Object, attributeReference = character()){
-.Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x)))
-.Object
-})
+setMethod(initialize, 'key', function(.Object, attributeReference = character()){; .Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x))); .Object })
 setAs('key', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'key',  function(from) emlToS4(from))
 setAs('primaryKey', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'primaryKey',  function(from) emlToS4(from))
 setAs('attributeReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attributeReference',  function(from) emlToS4(from))
-setMethod(initialize, 'key',
-function(.Object, attributeReference = character()){
-.Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x)))
-.Object
-})
+setMethod(initialize, 'key', function(.Object, attributeReference = character()){; .Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x))); .Object })
 setAs('key', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'key',  function(from) emlToS4(from))
 setAs('uniqueKey', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -702,22 +509,14 @@ setAs('foreignKey', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'foreignKey',  function(from) emlToS4(from))
 setAs('attributeReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attributeReference',  function(from) emlToS4(from))
-setMethod(initialize, 'referencedKey',
-function(.Object, attributeReference = character()){
-.Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x)))
-.Object
-})
+setMethod(initialize, 'referencedKey', function(.Object, attributeReference = character()){; .Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x))); .Object })
 setAs('referencedKey', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'referencedKey',  function(from) emlToS4(from))
 setAs('joinCondition', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'joinCondition',  function(from) emlToS4(from))
 setAs('attributeReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attributeReference',  function(from) emlToS4(from))
-setMethod(initialize, 'key',
-function(.Object, attributeReference = character()){
-.Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x)))
-.Object
-})
+setMethod(initialize, 'key', function(.Object, attributeReference = character()){; .Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x))); .Object })
 setAs('key', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'key',  function(from) emlToS4(from))
 setAs('notNullConstraint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -734,11 +533,7 @@ setAs('ConstraintBaseGroup', 'XMLInternalElementNode',   function(from) S4Toeml(
 setAs('XMLInternalElementNode', 'ConstraintBaseGroup',  function(from) emlToS4(from))
 setAs('attributeReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attributeReference',  function(from) emlToS4(from))
-setMethod(initialize, 'key',
-function(.Object, attributeReference = character()){
-.Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x)))
-.Object
-})
+setMethod(initialize, 'key', function(.Object, attributeReference = character()){; .Object@attributeReference <- new('ListOfattributeReference', lapply(attributeReference, function(x) new('attributeReference', x))); .Object })
 setAs('key', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'key',  function(from) emlToS4(from))
 setAs('entityReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -788,29 +583,7 @@ setAs('audioVisual', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'audioVisual',  function(from) emlToS4(from))
 setAs('presentation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'presentation',  function(from) emlToS4(from))
-setMethod(initialize, 'CitationType',
-function(.Object, contact = character(), ResourceGroup = new('ResourceGroup'), article = new('Article'), book = new('Book'), chapter = new('Chapter'), editedBook = new('Book'), manuscript = new('Manuscript'), report = new('Report'), thesis = new('Thesis'), conferenceProceedings = new('ConferenceProceedings'), personalCommunication = new('PersonalCommunication'), map = new('Map'), generic = new('Generic'), audioVisual = new('AudioVisual'), presentation = new('Presentation'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@contact <- new('ListOfcontact', lapply(contact, function(x) new('contact', x)))
-.Object@ResourceGroup <- ResourceGroup
-.Object@article <- article
-.Object@book <- book
-.Object@chapter <- chapter
-.Object@editedBook <- editedBook
-.Object@manuscript <- manuscript
-.Object@report <- report
-.Object@thesis <- thesis
-.Object@conferenceProceedings <- conferenceProceedings
-.Object@personalCommunication <- personalCommunication
-.Object@map <- map
-.Object@generic <- generic
-.Object@audioVisual <- audioVisual
-.Object@presentation <- presentation
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'CitationType', function(.Object, contact = character(), ResourceGroup = new('ResourceGroup'), article = new('Article'), book = new('Book'), chapter = new('Chapter'), editedBook = new('Book'), manuscript = new('Manuscript'), report = new('Report'), thesis = new('Thesis'), conferenceProceedings = new('ConferenceProceedings'), personalCommunication = new('PersonalCommunication'), map = new('Map'), generic = new('Generic'), audioVisual = new('AudioVisual'), presentation = new('Presentation'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@contact <- new('ListOfcontact', lapply(contact, function(x) new('contact', x))); .Object@ResourceGroup <- ResourceGroup; .Object@article <- article; .Object@book <- book; .Object@chapter <- chapter; .Object@editedBook <- editedBook; .Object@manuscript <- manuscript; .Object@report <- report; .Object@thesis <- thesis; .Object@conferenceProceedings <- conferenceProceedings; .Object@personalCommunication <- personalCommunication; .Object@map <- map; .Object@generic <- generic; .Object@audioVisual <- audioVisual; .Object@presentation <- presentation; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('CitationType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'CitationType',  function(from) emlToS4(from))
 setAs('journal', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -857,14 +630,7 @@ setAs('bookTitle', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'bookTitle',  function(from) emlToS4(from))
 setAs('pageRange', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'pageRange',  function(from) emlToS4(from))
-setMethod(initialize, 'Chapter',
-function(.Object, editor = character(), chapterNumber = new('character'), bookTitle = new('character'), pageRange = new('character')){
-.Object@editor <- new('ListOfeditor', lapply(editor, function(x) new('editor', x)))
-.Object@chapterNumber <- chapterNumber
-.Object@bookTitle <- bookTitle
-.Object@pageRange <- pageRange
-.Object
-})
+setMethod(initialize, 'Chapter', function(.Object, editor = character(), chapterNumber = new('character'), bookTitle = new('character'), pageRange = new('character')){; .Object@editor <- new('ListOfeditor', lapply(editor, function(x) new('editor', x))); .Object@chapterNumber <- chapterNumber; .Object@bookTitle <- bookTitle; .Object@pageRange <- pageRange; .Object })
 setAs('Chapter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Chapter',  function(from) emlToS4(from))
 setAs('conferenceName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -879,12 +645,7 @@ setAs('institution', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'institution',  function(from) emlToS4(from))
 setAs('totalPages', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'totalPages',  function(from) emlToS4(from))
-setMethod(initialize, 'Manuscript',
-function(.Object, institution = character(), totalPages = new('character')){
-.Object@institution <- new('ListOfinstitution', lapply(institution, function(x) new('institution', x)))
-.Object@totalPages <- totalPages
-.Object
-})
+setMethod(initialize, 'Manuscript', function(.Object, institution = character(), totalPages = new('character')){; .Object@institution <- new('ListOfinstitution', lapply(institution, function(x) new('institution', x))); .Object@totalPages <- totalPages; .Object })
 setAs('Manuscript', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Manuscript',  function(from) emlToS4(from))
 setAs('reportNumber', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -905,14 +666,7 @@ setAs('communicationType', 'XMLInternalElementNode',   function(from) S4Toeml(fr
 setAs('XMLInternalElementNode', 'communicationType',  function(from) emlToS4(from))
 setAs('recipient', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'recipient',  function(from) emlToS4(from))
-setMethod(initialize, 'PersonalCommunication',
-function(.Object, recipient = character(), publisher = new('ResponsibleParty'), publicationPlace = new('character'), communicationType = new('character')){
-.Object@recipient <- new('ListOfrecipient', lapply(recipient, function(x) new('recipient', x)))
-.Object@publisher <- publisher
-.Object@publicationPlace <- publicationPlace
-.Object@communicationType <- communicationType
-.Object
-})
+setMethod(initialize, 'PersonalCommunication', function(.Object, recipient = character(), publisher = new('ResponsibleParty'), publicationPlace = new('character'), communicationType = new('character')){; .Object@recipient <- new('ListOfrecipient', lapply(recipient, function(x) new('recipient', x))); .Object@publisher <- publisher; .Object@publicationPlace <- publicationPlace; .Object@communicationType <- communicationType; .Object })
 setAs('PersonalCommunication', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'PersonalCommunication',  function(from) emlToS4(from))
 setAs('publisher', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -923,14 +677,7 @@ setAs('geographicCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(f
 setAs('XMLInternalElementNode', 'geographicCoverage',  function(from) emlToS4(from))
 setAs('scale', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'scale',  function(from) emlToS4(from))
-setMethod(initialize, 'Map',
-function(.Object, geographicCoverage = character(), publisher = new('ResponsibleParty'), edition = new('character'), scale = new('character')){
-.Object@geographicCoverage <- new('ListOfgeographicCoverage', lapply(geographicCoverage, function(x) new('geographicCoverage', x)))
-.Object@publisher <- publisher
-.Object@edition <- edition
-.Object@scale <- scale
-.Object
-})
+setMethod(initialize, 'Map', function(.Object, geographicCoverage = character(), publisher = new('ResponsibleParty'), edition = new('character'), scale = new('character')){; .Object@geographicCoverage <- new('ListOfgeographicCoverage', lapply(geographicCoverage, function(x) new('geographicCoverage', x))); .Object@publisher <- publisher; .Object@edition <- edition; .Object@scale <- scale; .Object })
 setAs('Map', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Map',  function(from) emlToS4(from))
 setAs('publisher', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -941,14 +688,7 @@ setAs('performer', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'performer',  function(from) emlToS4(from))
 setAs('ISBN', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ISBN',  function(from) emlToS4(from))
-setMethod(initialize, 'AudioVisual',
-function(.Object, publicationPlace = character(), performer = character(), publisher = new('ResponsibleParty'), ISBN = new('character')){
-.Object@publicationPlace <- new('ListOfpublicationPlace', lapply(publicationPlace, function(x) new('publicationPlace', x)))
-.Object@performer <- new('ListOfperformer', lapply(performer, function(x) new('performer', x)))
-.Object@publisher <- publisher
-.Object@ISBN <- ISBN
-.Object
-})
+setMethod(initialize, 'AudioVisual', function(.Object, publicationPlace = character(), performer = character(), publisher = new('ResponsibleParty'), ISBN = new('character')){; .Object@publicationPlace <- new('ListOfpublicationPlace', lapply(publicationPlace, function(x) new('publicationPlace', x))); .Object@performer <- new('ListOfperformer', lapply(performer, function(x) new('performer', x))); .Object@publisher <- publisher; .Object@ISBN <- ISBN; .Object })
 setAs('AudioVisual', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'AudioVisual',  function(from) emlToS4(from))
 setAs('publisher', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1008,17 +748,7 @@ setAs('temporalCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(fro
 setAs('XMLInternalElementNode', 'temporalCoverage',  function(from) emlToS4(from))
 setAs('taxonomicCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'taxonomicCoverage',  function(from) emlToS4(from))
-setMethod(initialize, 'Coverage',
-function(.Object, geographicCoverage = character(), temporalCoverage = character(), taxonomicCoverage = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@geographicCoverage <- new('ListOfgeographicCoverage', lapply(geographicCoverage, function(x) new('geographicCoverage', x)))
-.Object@temporalCoverage <- new('ListOftemporalCoverage', lapply(temporalCoverage, function(x) new('temporalCoverage', x)))
-.Object@taxonomicCoverage <- new('ListOftaxonomicCoverage', lapply(taxonomicCoverage, function(x) new('taxonomicCoverage', x)))
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'Coverage', function(.Object, geographicCoverage = character(), temporalCoverage = character(), taxonomicCoverage = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@geographicCoverage <- new('ListOfgeographicCoverage', lapply(geographicCoverage, function(x) new('geographicCoverage', x))); .Object@temporalCoverage <- new('ListOftemporalCoverage', lapply(temporalCoverage, function(x) new('temporalCoverage', x))); .Object@taxonomicCoverage <- new('ListOftaxonomicCoverage', lapply(taxonomicCoverage, function(x) new('taxonomicCoverage', x))); .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('Coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Coverage',  function(from) emlToS4(from))
 setAs('singleDateTime', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1029,14 +759,7 @@ setAs('endDate', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'endDate',  function(from) emlToS4(from))
 setAs('rangeOfDates', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'rangeOfDates',  function(from) emlToS4(from))
-setMethod(initialize, 'TemporalCoverage',
-function(.Object, singleDateTime = character(), rangeOfDates = new('rangeOfDates'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
-.Object@singleDateTime <- new('ListOfsingleDateTime', lapply(singleDateTime, function(x) new('singleDateTime', x)))
-.Object@rangeOfDates <- rangeOfDates
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object
-})
+setMethod(initialize, 'TemporalCoverage', function(.Object, singleDateTime = character(), rangeOfDates = new('rangeOfDates'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){; .Object@singleDateTime <- new('ListOfsingleDateTime', lapply(singleDateTime, function(x) new('singleDateTime', x))); .Object@rangeOfDates <- rangeOfDates; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object })
 setAs('TemporalCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'TemporalCoverage',  function(from) emlToS4(from))
 setAs('calendarDate', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1053,15 +776,7 @@ setAs('timeScaleAgeExplanation', 'XMLInternalElementNode',   function(from) S4To
 setAs('XMLInternalElementNode', 'timeScaleAgeExplanation',  function(from) emlToS4(from))
 setAs('timeScaleCitation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'timeScaleCitation',  function(from) emlToS4(from))
-setMethod(initialize, 'alternativeTimeScale',
-function(.Object, timeScaleCitation = character(), timeScaleName = new('character'), timeScaleAgeEstimate = new('character'), timeScaleAgeUncertainty = new('character'), timeScaleAgeExplanation = new('character')){
-.Object@timeScaleCitation <- new('ListOftimeScaleCitation', lapply(timeScaleCitation, function(x) new('timeScaleCitation', x)))
-.Object@timeScaleName <- timeScaleName
-.Object@timeScaleAgeEstimate <- timeScaleAgeEstimate
-.Object@timeScaleAgeUncertainty <- timeScaleAgeUncertainty
-.Object@timeScaleAgeExplanation <- timeScaleAgeExplanation
-.Object
-})
+setMethod(initialize, 'alternativeTimeScale', function(.Object, timeScaleCitation = character(), timeScaleName = new('character'), timeScaleAgeEstimate = new('character'), timeScaleAgeUncertainty = new('character'), timeScaleAgeExplanation = new('character')){; .Object@timeScaleCitation <- new('ListOftimeScaleCitation', lapply(timeScaleCitation, function(x) new('timeScaleCitation', x))); .Object@timeScaleName <- timeScaleName; .Object@timeScaleAgeEstimate <- timeScaleAgeEstimate; .Object@timeScaleAgeUncertainty <- timeScaleAgeUncertainty; .Object@timeScaleAgeExplanation <- timeScaleAgeExplanation; .Object })
 setAs('alternativeTimeScale', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'alternativeTimeScale',  function(from) emlToS4(from))
 setAs('SingleDateTimeType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1090,45 +805,20 @@ setAs('gRingPoint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'gRingPoint',  function(from) emlToS4(from))
 setAs('gRing', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'gRing',  function(from) emlToS4(from))
-setMethod(initialize, 'datasetGPolygonOuterGRing',
-function(.Object, gRingPoint = character(), gRing = new('GRingType')){
-.Object@gRingPoint <- new('ListOfgRingPoint', lapply(gRingPoint, function(x) new('gRingPoint', x)))
-.Object@gRing <- gRing
-.Object
-})
+setMethod(initialize, 'datasetGPolygonOuterGRing', function(.Object, gRingPoint = character(), gRing = new('GRingType')){; .Object@gRingPoint <- new('ListOfgRingPoint', lapply(gRingPoint, function(x) new('gRingPoint', x))); .Object@gRing <- gRing; .Object })
 setAs('datasetGPolygonOuterGRing', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'datasetGPolygonOuterGRing',  function(from) emlToS4(from))
 setAs('gRingPoint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'gRingPoint',  function(from) emlToS4(from))
 setAs('gRing', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'gRing',  function(from) emlToS4(from))
-setMethod(initialize, 'datasetGPolygonExclusionGRing',
-function(.Object, gRingPoint = character(), gRing = new('GRingType')){
-.Object@gRingPoint <- new('ListOfgRingPoint', lapply(gRingPoint, function(x) new('gRingPoint', x)))
-.Object@gRing <- gRing
-.Object
-})
+setMethod(initialize, 'datasetGPolygonExclusionGRing', function(.Object, gRingPoint = character(), gRing = new('GRingType')){; .Object@gRingPoint <- new('ListOfgRingPoint', lapply(gRingPoint, function(x) new('gRingPoint', x))); .Object@gRing <- gRing; .Object })
 setAs('datasetGPolygonExclusionGRing', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'datasetGPolygonExclusionGRing',  function(from) emlToS4(from))
-setMethod(initialize, 'datasetGPolygon',
-function(.Object, datasetGPolygonExclusionGRing = character(), datasetGPolygonOuterGRing = new('datasetGPolygonOuterGRing')){
-.Object@datasetGPolygonExclusionGRing <- new('ListOfdatasetGPolygonExclusionGRing', lapply(datasetGPolygonExclusionGRing, function(x) new('datasetGPolygonExclusionGRing', x)))
-.Object@datasetGPolygonOuterGRing <- datasetGPolygonOuterGRing
-.Object
-})
+setMethod(initialize, 'datasetGPolygon', function(.Object, datasetGPolygonExclusionGRing = character(), datasetGPolygonOuterGRing = new('datasetGPolygonOuterGRing')){; .Object@datasetGPolygonExclusionGRing <- new('ListOfdatasetGPolygonExclusionGRing', lapply(datasetGPolygonExclusionGRing, function(x) new('datasetGPolygonExclusionGRing', x))); .Object@datasetGPolygonOuterGRing <- datasetGPolygonOuterGRing; .Object })
 setAs('datasetGPolygon', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'datasetGPolygon',  function(from) emlToS4(from))
-setMethod(initialize, 'GeographicCoverage',
-function(.Object, datasetGPolygon = character(), geographicDescription = new('character'), boundingCoordinates = new('boundingCoordinates'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@datasetGPolygon <- new('ListOfdatasetGPolygon', lapply(datasetGPolygon, function(x) new('datasetGPolygon', x)))
-.Object@geographicDescription <- geographicDescription
-.Object@boundingCoordinates <- boundingCoordinates
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'GeographicCoverage', function(.Object, datasetGPolygon = character(), geographicDescription = new('character'), boundingCoordinates = new('boundingCoordinates'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@datasetGPolygon <- new('ListOfdatasetGPolygon', lapply(datasetGPolygon, function(x) new('datasetGPolygon', x))); .Object@geographicDescription <- geographicDescription; .Object@boundingCoordinates <- boundingCoordinates; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('GeographicCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'GeographicCoverage',  function(from) emlToS4(from))
 setAs('gRingLatitude', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1157,40 +847,19 @@ setAs('specimen', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'specimen',  function(from) emlToS4(from))
 setAs('originator', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'originator',  function(from) emlToS4(from))
-setMethod(initialize, 'repository',
-function(.Object, originator = character()){
-.Object@originator <- new('ListOforiginator', lapply(originator, function(x) new('originator', x)))
-.Object
-})
+setMethod(initialize, 'repository', function(.Object, originator = character()){; .Object@originator <- new('ListOforiginator', lapply(originator, function(x) new('originator', x))); .Object })
 setAs('repository', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'repository',  function(from) emlToS4(from))
 setAs('vouchers', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'vouchers',  function(from) emlToS4(from))
-setMethod(initialize, 'taxonomicSystem',
-function(.Object, classificationSystem = character(), identificationReference = character(), identifierName = character(), vouchers = character(), taxonomicProcedures = new('character'), taxonomicCompleteness = new('character')){
-.Object@classificationSystem <- new('ListOfclassificationSystem', lapply(classificationSystem, function(x) new('classificationSystem', x)))
-.Object@identificationReference <- new('ListOfidentificationReference', lapply(identificationReference, function(x) new('identificationReference', x)))
-.Object@identifierName <- new('ListOfidentifierName', lapply(identifierName, function(x) new('identifierName', x)))
-.Object@vouchers <- new('ListOfvouchers', lapply(vouchers, function(x) new('vouchers', x)))
-.Object@taxonomicProcedures <- taxonomicProcedures
-.Object@taxonomicCompleteness <- taxonomicCompleteness
-.Object
-})
+setMethod(initialize, 'taxonomicSystem', function(.Object, classificationSystem = character(), identificationReference = character(), identifierName = character(), vouchers = character(), taxonomicProcedures = new('character'), taxonomicCompleteness = new('character')){; .Object@classificationSystem <- new('ListOfclassificationSystem', lapply(classificationSystem, function(x) new('classificationSystem', x))); .Object@identificationReference <- new('ListOfidentificationReference', lapply(identificationReference, function(x) new('identificationReference', x))); .Object@identifierName <- new('ListOfidentifierName', lapply(identifierName, function(x) new('identifierName', x))); .Object@vouchers <- new('ListOfvouchers', lapply(vouchers, function(x) new('vouchers', x))); .Object@taxonomicProcedures <- taxonomicProcedures; .Object@taxonomicCompleteness <- taxonomicCompleteness; .Object })
 setAs('taxonomicSystem', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'taxonomicSystem',  function(from) emlToS4(from))
 setAs('generalTaxonomicCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'generalTaxonomicCoverage',  function(from) emlToS4(from))
 setAs('taxonomicClassification', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'taxonomicClassification',  function(from) emlToS4(from))
-setMethod(initialize, 'TaxonomicCoverage',
-function(.Object, taxonomicClassification = character(), taxonomicSystem = new('taxonomicSystem'), generalTaxonomicCoverage = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
-.Object@taxonomicClassification <- new('ListOftaxonomicClassification', lapply(taxonomicClassification, function(x) new('taxonomicClassification', x)))
-.Object@taxonomicSystem <- taxonomicSystem
-.Object@generalTaxonomicCoverage <- generalTaxonomicCoverage
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object
-})
+setMethod(initialize, 'TaxonomicCoverage', function(.Object, taxonomicClassification = character(), taxonomicSystem = new('taxonomicSystem'), generalTaxonomicCoverage = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){; .Object@taxonomicClassification <- new('ListOftaxonomicClassification', lapply(taxonomicClassification, function(x) new('taxonomicClassification', x))); .Object@taxonomicSystem <- taxonomicSystem; .Object@generalTaxonomicCoverage <- generalTaxonomicCoverage; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object })
 setAs('TaxonomicCoverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'TaxonomicCoverage',  function(from) emlToS4(from))
 setAs('taxonRankName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1201,14 +870,7 @@ setAs('commonName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'commonName',  function(from) emlToS4(from))
 setAs('taxonomicClassification', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'taxonomicClassification',  function(from) emlToS4(from))
-setMethod(initialize, 'TaxonomicClassificationType',
-function(.Object, commonName = character(), taxonomicClassification = character(), taxonRankName = new('character'), taxonRankValue = new('character')){
-.Object@commonName <- new('ListOfcommonName', lapply(commonName, function(x) new('commonName', x)))
-.Object@taxonomicClassification <- new('ListOftaxonomicClassification', lapply(taxonomicClassification, function(x) new('taxonomicClassification', x)))
-.Object@taxonRankName <- taxonRankName
-.Object@taxonRankValue <- taxonRankValue
-.Object
-})
+setMethod(initialize, 'TaxonomicClassificationType', function(.Object, commonName = character(), taxonomicClassification = character(), taxonRankName = new('character'), taxonRankValue = new('character')){; .Object@commonName <- new('ListOfcommonName', lapply(commonName, function(x) new('commonName', x))); .Object@taxonomicClassification <- new('ListOftaxonomicClassification', lapply(taxonomicClassification, function(x) new('taxonomicClassification', x))); .Object@taxonRankName <- taxonRankName; .Object@taxonRankValue <- taxonRankValue; .Object })
 setAs('TaxonomicClassificationType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'TaxonomicClassificationType',  function(from) emlToS4(from))
 
@@ -1252,14 +914,7 @@ setAs('quoteCharacter', 'XMLInternalElementNode',   function(from) S4Toeml(from)
 setAs('XMLInternalElementNode', 'quoteCharacter',  function(from) emlToS4(from))
 setAs('literalCharacter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'literalCharacter',  function(from) emlToS4(from))
-setMethod(initialize, 'simpleDelimited',
-function(.Object, fieldDelimiter = character(), quoteCharacter = character(), literalCharacter = character(), collapseDelimiters = new('collapseDelimiters')){
-.Object@fieldDelimiter <- new('ListOffieldDelimiter', lapply(fieldDelimiter, function(x) new('fieldDelimiter', x)))
-.Object@quoteCharacter <- new('ListOfquoteCharacter', lapply(quoteCharacter, function(x) new('quoteCharacter', x)))
-.Object@literalCharacter <- new('ListOfliteralCharacter', lapply(literalCharacter, function(x) new('literalCharacter', x)))
-.Object@collapseDelimiters <- collapseDelimiters
-.Object
-})
+setMethod(initialize, 'simpleDelimited', function(.Object, fieldDelimiter = character(), quoteCharacter = character(), literalCharacter = character(), collapseDelimiters = new('collapseDelimiters')){; .Object@fieldDelimiter <- new('ListOffieldDelimiter', lapply(fieldDelimiter, function(x) new('fieldDelimiter', x))); .Object@quoteCharacter <- new('ListOfquoteCharacter', lapply(quoteCharacter, function(x) new('quoteCharacter', x))); .Object@literalCharacter <- new('ListOfliteralCharacter', lapply(literalCharacter, function(x) new('literalCharacter', x))); .Object@collapseDelimiters <- collapseDelimiters; .Object })
 setAs('simpleDelimited', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'simpleDelimited',  function(from) emlToS4(from))
 setAs('fieldWidth', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1280,38 +935,13 @@ setAs('quoteCharacter', 'XMLInternalElementNode',   function(from) S4Toeml(from)
 setAs('XMLInternalElementNode', 'quoteCharacter',  function(from) emlToS4(from))
 setAs('literalCharacter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'literalCharacter',  function(from) emlToS4(from))
-setMethod(initialize, 'textDelimited',
-function(.Object, quoteCharacter = character(), literalCharacter = character(), fieldDelimiter = new('character'), collapseDelimiters = new('collapseDelimiters'), lineNumber = new('character')){
-.Object@quoteCharacter <- new('ListOfquoteCharacter', lapply(quoteCharacter, function(x) new('quoteCharacter', x)))
-.Object@literalCharacter <- new('ListOfliteralCharacter', lapply(literalCharacter, function(x) new('literalCharacter', x)))
-.Object@fieldDelimiter <- fieldDelimiter
-.Object@collapseDelimiters <- collapseDelimiters
-.Object@lineNumber <- lineNumber
-.Object
-})
+setMethod(initialize, 'textDelimited', function(.Object, quoteCharacter = character(), literalCharacter = character(), fieldDelimiter = new('character'), collapseDelimiters = new('collapseDelimiters'), lineNumber = new('character')){; .Object@quoteCharacter <- new('ListOfquoteCharacter', lapply(quoteCharacter, function(x) new('quoteCharacter', x))); .Object@literalCharacter <- new('ListOfliteralCharacter', lapply(literalCharacter, function(x) new('literalCharacter', x))); .Object@fieldDelimiter <- fieldDelimiter; .Object@collapseDelimiters <- collapseDelimiters; .Object@lineNumber <- lineNumber; .Object })
 setAs('textDelimited', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'textDelimited',  function(from) emlToS4(from))
-setMethod(initialize, 'eml:complex',
-function(.Object, textFixed = character(), textDelimited = character()){
-.Object@textFixed <- new('ListOftextFixed', lapply(textFixed, function(x) new('textFixed', x)))
-.Object@textDelimited <- new('ListOftextDelimited', lapply(textDelimited, function(x) new('textDelimited', x)))
-.Object
-})
+setMethod(initialize, 'eml:complex', function(.Object, textFixed = character(), textDelimited = character()){; .Object@textFixed <- new('ListOftextFixed', lapply(textFixed, function(x) new('textFixed', x))); .Object@textDelimited <- new('ListOftextDelimited', lapply(textDelimited, function(x) new('textDelimited', x))); .Object })
 setAs('eml:complex', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'eml:complex',  function(from) emlToS4(from))
-setMethod(initialize, 'textFormat',
-function(.Object, recordDelimiter = character(), physicalLineDelimiter = character(), numHeaderLines = new('character'), numFooterLines = new('character'), numPhysicalLinesPerRecord = new('character'), maxRecordLength = new('character'), attributeOrientation = new('attributeOrientation'), simpleDelimited = new('simpleDelimited'), complex = new('eml:complex')){
-.Object@recordDelimiter <- new('ListOfrecordDelimiter', lapply(recordDelimiter, function(x) new('recordDelimiter', x)))
-.Object@physicalLineDelimiter <- new('ListOfphysicalLineDelimiter', lapply(physicalLineDelimiter, function(x) new('physicalLineDelimiter', x)))
-.Object@numHeaderLines <- numHeaderLines
-.Object@numFooterLines <- numFooterLines
-.Object@numPhysicalLinesPerRecord <- numPhysicalLinesPerRecord
-.Object@maxRecordLength <- maxRecordLength
-.Object@attributeOrientation <- attributeOrientation
-.Object@simpleDelimited <- simpleDelimited
-slot(.Object, 'eml:complex') <- complex
-.Object
-})
+setMethod(initialize, 'textFormat', function(.Object, recordDelimiter = character(), physicalLineDelimiter = character(), numHeaderLines = new('character'), numFooterLines = new('character'), numPhysicalLinesPerRecord = new('character'), maxRecordLength = new('character'), attributeOrientation = new('attributeOrientation'), simpleDelimited = new('simpleDelimited'), complex = new('eml:complex')){; .Object@recordDelimiter <- new('ListOfrecordDelimiter', lapply(recordDelimiter, function(x) new('recordDelimiter', x))); .Object@physicalLineDelimiter <- new('ListOfphysicalLineDelimiter', lapply(physicalLineDelimiter, function(x) new('physicalLineDelimiter', x))); .Object@numHeaderLines <- numHeaderLines; .Object@numFooterLines <- numFooterLines; .Object@numPhysicalLinesPerRecord <- numPhysicalLinesPerRecord; .Object@maxRecordLength <- maxRecordLength; .Object@attributeOrientation <- attributeOrientation; .Object@simpleDelimited <- simpleDelimited; slot(.Object, 'eml:complex') <- complex; .Object })
 setAs('textFormat', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'textFormat',  function(from) emlToS4(from))
 setAs('formatName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1348,22 +978,7 @@ setAs('dataFormat', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'dataFormat',  function(from) emlToS4(from))
 setAs('distribution', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'distribution',  function(from) emlToS4(from))
-setMethod(initialize, 'PhysicalType',
-function(.Object, authentication = character(), compressionMethod = character(), encodingMethod = character(), distribution = character(), objectName = new('character'), size = new('size'), characterEncoding = new('character'), dataFormat = new('dataFormat'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@authentication <- new('ListOfauthentication', lapply(authentication, function(x) new('authentication', x)))
-.Object@compressionMethod <- new('ListOfcompressionMethod', lapply(compressionMethod, function(x) new('compressionMethod', x)))
-.Object@encodingMethod <- new('ListOfencodingMethod', lapply(encodingMethod, function(x) new('encodingMethod', x)))
-.Object@distribution <- new('ListOfdistribution', lapply(distribution, function(x) new('distribution', x)))
-.Object@objectName <- objectName
-.Object@size <- size
-.Object@characterEncoding <- characterEncoding
-.Object@dataFormat <- dataFormat
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'PhysicalType', function(.Object, authentication = character(), compressionMethod = character(), encodingMethod = character(), distribution = character(), objectName = new('character'), size = new('size'), characterEncoding = new('character'), dataFormat = new('dataFormat'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@authentication <- new('ListOfauthentication', lapply(authentication, function(x) new('authentication', x))); .Object@compressionMethod <- new('ListOfcompressionMethod', lapply(compressionMethod, function(x) new('compressionMethod', x))); .Object@encodingMethod <- new('ListOfencodingMethod', lapply(encodingMethod, function(x) new('encodingMethod', x))); .Object@distribution <- new('ListOfdistribution', lapply(distribution, function(x) new('distribution', x))); .Object@objectName <- objectName; .Object@size <- size; .Object@characterEncoding <- characterEncoding; .Object@dataFormat <- dataFormat; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('PhysicalType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'PhysicalType',  function(from) emlToS4(from))
 setAs('online', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1395,12 +1010,7 @@ setAs('title', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'title',  function(from) emlToS4(from))
 setAs('role', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'role',  function(from) emlToS4(from))
-setMethod(initialize, 'personnel',
-function(.Object, role = character(), ResponsibleParty = new('ResponsibleParty')){
-.Object@role <- new('ListOfrole', lapply(role, function(x) new('role', x)))
-.Object@ResponsibleParty <- ResponsibleParty
-.Object
-})
+setMethod(initialize, 'personnel', function(.Object, role = character(), ResponsibleParty = new('ResponsibleParty')){; .Object@role <- new('ListOfrole', lapply(role, function(x) new('role', x))); .Object@ResponsibleParty <- ResponsibleParty; .Object })
 setAs('personnel', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'personnel',  function(from) emlToS4(from))
 setAs('abstract', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1411,58 +1021,26 @@ setAs('descriptorValue', 'XMLInternalElementNode',   function(from) S4Toeml(from
 setAs('XMLInternalElementNode', 'descriptorValue',  function(from) emlToS4(from))
 setAs('citation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citation',  function(from) emlToS4(from))
-setMethod(initialize, 'descriptor',
-function(.Object, descriptorValue = character(), citation = character(), name = new('xml_attribute'), citableClassificationSystem = new('xml_attribute')){
-.Object@descriptorValue <- new('ListOfdescriptorValue', lapply(descriptorValue, function(x) new('descriptorValue', x)))
-.Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
-.Object@name <- name
-.Object@citableClassificationSystem <- citableClassificationSystem
-.Object
-})
+setMethod(initialize, 'descriptor', function(.Object, descriptorValue = character(), citation = character(), name = new('xml_attribute'), citableClassificationSystem = new('xml_attribute')){; .Object@descriptorValue <- new('ListOfdescriptorValue', lapply(descriptorValue, function(x) new('descriptorValue', x))); .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x))); .Object@name <- name; .Object@citableClassificationSystem <- citableClassificationSystem; .Object })
 setAs('descriptor', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'descriptor',  function(from) emlToS4(from))
 setAs('citation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citation',  function(from) emlToS4(from))
 setAs('coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'coverage',  function(from) emlToS4(from))
-setMethod(initialize, 'studyAreaDescription',
-function(.Object, descriptor = character(), citation = character(), coverage = character()){
-.Object@descriptor <- new('ListOfdescriptor', lapply(descriptor, function(x) new('descriptor', x)))
-.Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
-.Object@coverage <- new('ListOfcoverage', lapply(coverage, function(x) new('coverage', x)))
-.Object
-})
+setMethod(initialize, 'studyAreaDescription', function(.Object, descriptor = character(), citation = character(), coverage = character()){; .Object@descriptor <- new('ListOfdescriptor', lapply(descriptor, function(x) new('descriptor', x))); .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x))); .Object@coverage <- new('ListOfcoverage', lapply(coverage, function(x) new('coverage', x))); .Object })
 setAs('studyAreaDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'studyAreaDescription',  function(from) emlToS4(from))
 setAs('description', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'description',  function(from) emlToS4(from))
 setAs('citation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citation',  function(from) emlToS4(from))
-setMethod(initialize, 'designDescription',
-function(.Object, description = character(), citation = character()){
-.Object@description <- new('ListOfdescription', lapply(description, function(x) new('description', x)))
-.Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
-.Object
-})
+setMethod(initialize, 'designDescription', function(.Object, description = character(), citation = character()){; .Object@description <- new('ListOfdescription', lapply(description, function(x) new('description', x))); .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x))); .Object })
 setAs('designDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'designDescription',  function(from) emlToS4(from))
 setAs('relatedProject', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'relatedProject',  function(from) emlToS4(from))
-setMethod(initialize, 'ResearchProjectType',
-function(.Object, title = character(), personnel = character(), relatedProject = character(), abstract = new('TextType'), funding = new('TextType'), studyAreaDescription = new('studyAreaDescription'), designDescription = new('designDescription'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@title <- new('ListOftitle', lapply(title, function(x) new('title', x)))
-.Object@personnel <- new('ListOfpersonnel', lapply(personnel, function(x) new('personnel', x)))
-.Object@relatedProject <- new('ListOfrelatedProject', lapply(relatedProject, function(x) new('relatedProject', x)))
-.Object@abstract <- abstract
-.Object@funding <- funding
-.Object@studyAreaDescription <- studyAreaDescription
-.Object@designDescription <- designDescription
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'ResearchProjectType', function(.Object, title = character(), personnel = character(), relatedProject = character(), abstract = new('TextType'), funding = new('TextType'), studyAreaDescription = new('studyAreaDescription'), designDescription = new('designDescription'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@title <- new('ListOftitle', lapply(title, function(x) new('title', x))); .Object@personnel <- new('ListOfpersonnel', lapply(personnel, function(x) new('personnel', x))); .Object@relatedProject <- new('ListOfrelatedProject', lapply(relatedProject, function(x) new('relatedProject', x))); .Object@abstract <- abstract; .Object@funding <- funding; .Object@studyAreaDescription <- studyAreaDescription; .Object@designDescription <- designDescription; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('ResearchProjectType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ResearchProjectType',  function(from) emlToS4(from))
 setAs('DescriptorType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1498,20 +1076,7 @@ setAs('programmingLanguage', 'XMLInternalElementNode',   function(from) S4Toeml(
 setAs('XMLInternalElementNode', 'programmingLanguage',  function(from) emlToS4(from))
 setAs('checksum', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'checksum',  function(from) emlToS4(from))
-setMethod(initialize, 'implementation',
-function(.Object, distribution = character(), language = character(), operatingSystem = character(), machineProcessor = character(), programmingLanguage = character(), size = new('character'), virtualMachine = new('character'), diskUsage = new('character'), runtimeMemoryUsage = new('character'), checksum = new('character')){
-.Object@distribution <- new('ListOfdistribution', lapply(distribution, function(x) new('distribution', x)))
-.Object@language <- new('ListOflanguage', lapply(language, function(x) new('language', x)))
-.Object@operatingSystem <- new('ListOfoperatingSystem', lapply(operatingSystem, function(x) new('operatingSystem', x)))
-.Object@machineProcessor <- new('ListOfmachineProcessor', lapply(machineProcessor, function(x) new('machineProcessor', x)))
-.Object@programmingLanguage <- new('ListOfprogrammingLanguage', lapply(programmingLanguage, function(x) new('programmingLanguage', x)))
-.Object@size <- size
-.Object@virtualMachine <- virtualMachine
-.Object@diskUsage <- diskUsage
-.Object@runtimeMemoryUsage <- runtimeMemoryUsage
-.Object@checksum <- checksum
-.Object
-})
+setMethod(initialize, 'implementation', function(.Object, distribution = character(), language = character(), operatingSystem = character(), machineProcessor = character(), programmingLanguage = character(), size = new('character'), virtualMachine = new('character'), diskUsage = new('character'), runtimeMemoryUsage = new('character'), checksum = new('character')){; .Object@distribution <- new('ListOfdistribution', lapply(distribution, function(x) new('distribution', x))); .Object@language <- new('ListOflanguage', lapply(language, function(x) new('language', x))); .Object@operatingSystem <- new('ListOfoperatingSystem', lapply(operatingSystem, function(x) new('operatingSystem', x))); .Object@machineProcessor <- new('ListOfmachineProcessor', lapply(machineProcessor, function(x) new('machineProcessor', x))); .Object@programmingLanguage <- new('ListOfprogrammingLanguage', lapply(programmingLanguage, function(x) new('programmingLanguage', x))); .Object@size <- size; .Object@virtualMachine <- virtualMachine; .Object@diskUsage <- diskUsage; .Object@runtimeMemoryUsage <- runtimeMemoryUsage; .Object@checksum <- checksum; .Object })
 setAs('implementation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'implementation',  function(from) emlToS4(from))
 setAs('licenseURL', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1522,20 +1087,7 @@ setAs('version', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'version',  function(from) emlToS4(from))
 setAs('project', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'project',  function(from) emlToS4(from))
-setMethod(initialize, 'SoftwareType',
-function(.Object, implementation = character(), licenseURL = character(), license = character(), ResourceGroup = new('ResourceGroup'), version = new('character'), project = new('ResearchProjectType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@implementation <- new('ListOfimplementation', lapply(implementation, function(x) new('implementation', x)))
-.Object@licenseURL <- new('ListOflicenseURL', lapply(licenseURL, function(x) new('licenseURL', x)))
-.Object@license <- new('ListOflicense', lapply(license, function(x) new('license', x)))
-.Object@ResourceGroup <- ResourceGroup
-.Object@version <- version
-.Object@project <- project
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'SoftwareType', function(.Object, implementation = character(), licenseURL = character(), license = character(), ResourceGroup = new('ResourceGroup'), version = new('character'), project = new('ResearchProjectType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@implementation <- new('ListOfimplementation', lapply(implementation, function(x) new('implementation', x))); .Object@licenseURL <- new('ListOflicenseURL', lapply(licenseURL, function(x) new('licenseURL', x))); .Object@license <- new('ListOflicense', lapply(license, function(x) new('license', x))); .Object@ResourceGroup <- ResourceGroup; .Object@version <- version; .Object@project <- project; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('SoftwareType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'SoftwareType',  function(from) emlToS4(from))
 setAs('Action', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1551,16 +1103,7 @@ setAs('XMLInternalElementNode', 'dependency',  function(from) emlToS4(from))
 
 setAs('proceduralStep', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'proceduralStep',  function(from) emlToS4(from))
-setMethod(initialize, 'ProtocolType',
-function(.Object, proceduralStep = character(), ResourceGroup = new('ResourceGroup'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@proceduralStep <- new('ListOfproceduralStep', lapply(proceduralStep, function(x) new('proceduralStep', x)))
-.Object@ResourceGroup <- ResourceGroup
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'ProtocolType', function(.Object, proceduralStep = character(), ResourceGroup = new('ResourceGroup'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@proceduralStep <- new('ListOfproceduralStep', lapply(proceduralStep, function(x) new('proceduralStep', x))); .Object@ResourceGroup <- ResourceGroup; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('ProtocolType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ProtocolType',  function(from) emlToS4(from))
 setAs('protocol', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1574,24 +1117,14 @@ setAs('methods', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methods',  function(from) emlToS4(from))
 setAs('dataSource', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'dataSource',  function(from) emlToS4(from))
-setMethod(initialize, 'methodStep',
-function(.Object, dataSource = character(), ProcedureStepType = new('ProcedureStepType')){
-.Object@dataSource <- new('ListOfdataSource', lapply(dataSource, function(x) new('dataSource', x)))
-.Object@ProcedureStepType <- ProcedureStepType
-.Object
-})
+setMethod(initialize, 'methodStep', function(.Object, dataSource = character(), ProcedureStepType = new('ProcedureStepType')){; .Object@dataSource <- new('ListOfdataSource', lapply(dataSource, function(x) new('dataSource', x))); .Object@ProcedureStepType <- ProcedureStepType; .Object })
 setAs('methodStep', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methodStep',  function(from) emlToS4(from))
 setAs('coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'coverage',  function(from) emlToS4(from))
 setAs('description', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'description',  function(from) emlToS4(from))
-setMethod(initialize, 'studyExtent',
-function(.Object, coverage = character(), description = character()){
-.Object@coverage <- new('ListOfcoverage', lapply(coverage, function(x) new('coverage', x)))
-.Object@description <- new('ListOfdescription', lapply(description, function(x) new('description', x)))
-.Object
-})
+setMethod(initialize, 'studyExtent', function(.Object, coverage = character(), description = character()){; .Object@coverage <- new('ListOfcoverage', lapply(coverage, function(x) new('coverage', x))); .Object@description <- new('ListOfdescription', lapply(description, function(x) new('description', x))); .Object })
 setAs('studyExtent', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'studyExtent',  function(from) emlToS4(from))
 setAs('samplingDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1600,35 +1133,17 @@ setAs('referencedEntityId', 'XMLInternalElementNode',   function(from) S4Toeml(f
 setAs('XMLInternalElementNode', 'referencedEntityId',  function(from) emlToS4(from))
 setAs('coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'coverage',  function(from) emlToS4(from))
-setMethod(initialize, 'spatialSamplingUnits',
-function(.Object, referencedEntityId = character(), coverage = character()){
-.Object@referencedEntityId <- new('ListOfreferencedEntityId', lapply(referencedEntityId, function(x) new('referencedEntityId', x)))
-.Object@coverage <- new('ListOfcoverage', lapply(coverage, function(x) new('coverage', x)))
-.Object
-})
+setMethod(initialize, 'spatialSamplingUnits', function(.Object, referencedEntityId = character(), coverage = character()){; .Object@referencedEntityId <- new('ListOfreferencedEntityId', lapply(referencedEntityId, function(x) new('referencedEntityId', x))); .Object@coverage <- new('ListOfcoverage', lapply(coverage, function(x) new('coverage', x))); .Object })
 setAs('spatialSamplingUnits', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'spatialSamplingUnits',  function(from) emlToS4(from))
 setAs('citation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citation',  function(from) emlToS4(from))
-setMethod(initialize, 'sampling',
-function(.Object, citation = character(), studyExtent = new('studyExtent'), samplingDescription = new('TextType'), spatialSamplingUnits = new('spatialSamplingUnits')){
-.Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
-.Object@studyExtent <- studyExtent
-.Object@samplingDescription <- samplingDescription
-.Object@spatialSamplingUnits <- spatialSamplingUnits
-.Object
-})
+setMethod(initialize, 'sampling', function(.Object, citation = character(), studyExtent = new('studyExtent'), samplingDescription = new('TextType'), spatialSamplingUnits = new('spatialSamplingUnits')){; .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x))); .Object@studyExtent <- studyExtent; .Object@samplingDescription <- samplingDescription; .Object@spatialSamplingUnits <- spatialSamplingUnits; .Object })
 setAs('sampling', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'sampling',  function(from) emlToS4(from))
 setAs('qualityControl', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'qualityControl',  function(from) emlToS4(from))
-setMethod(initialize, 'MethodsType',
-function(.Object, methodStep = character(), sampling = character(), qualityControl = character()){
-.Object@methodStep <- new('ListOfmethodStep', lapply(methodStep, function(x) new('methodStep', x)))
-.Object@sampling <- new('ListOfsampling', lapply(sampling, function(x) new('sampling', x)))
-.Object@qualityControl <- new('ListOfqualityControl', lapply(qualityControl, function(x) new('qualityControl', x)))
-.Object
-})
+setMethod(initialize, 'MethodsType', function(.Object, methodStep = character(), sampling = character(), qualityControl = character()){; .Object@methodStep <- new('ListOfmethodStep', lapply(methodStep, function(x) new('methodStep', x))); .Object@sampling <- new('ListOfsampling', lapply(sampling, function(x) new('sampling', x))); .Object@qualityControl <- new('ListOfqualityControl', lapply(qualityControl, function(x) new('qualityControl', x))); .Object })
 setAs('MethodsType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'MethodsType',  function(from) emlToS4(from))
 setAs('description', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1643,16 +1158,7 @@ setAs('software', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'software',  function(from) emlToS4(from))
 setAs('subStep', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'subStep',  function(from) emlToS4(from))
-setMethod(initialize, 'ProcedureStepType',
-function(.Object, citation = character(), protocol = character(), instrumentation = character(), software = character(), subStep = character(), description = new('TextType')){
-.Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
-.Object@protocol <- new('ListOfprotocol', lapply(protocol, function(x) new('protocol', x)))
-.Object@instrumentation <- new('ListOfinstrumentation', lapply(instrumentation, function(x) new('instrumentation', x)))
-.Object@software <- new('ListOfsoftware', lapply(software, function(x) new('software', x)))
-.Object@subStep <- new('ListOfsubStep', lapply(subStep, function(x) new('subStep', x)))
-.Object@description <- description
-.Object
-})
+setMethod(initialize, 'ProcedureStepType', function(.Object, citation = character(), protocol = character(), instrumentation = character(), software = character(), subStep = character(), description = new('TextType')){; .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x))); .Object@protocol <- new('ListOfprotocol', lapply(protocol, function(x) new('protocol', x))); .Object@instrumentation <- new('ListOfinstrumentation', lapply(instrumentation, function(x) new('instrumentation', x))); .Object@software <- new('ListOfsoftware', lapply(software, function(x) new('software', x))); .Object@subStep <- new('ListOfsubStep', lapply(subStep, function(x) new('subStep', x))); .Object@description <- description; .Object })
 setAs('ProcedureStepType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ProcedureStepType',  function(from) emlToS4(from))
 
@@ -1664,13 +1170,7 @@ setAs('attribute', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attribute',  function(from) emlToS4(from))
 setAs('attribute', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'attribute',  function(from) emlToS4(from))
-setMethod(initialize, 'AttributeListType',
-function(.Object, attribute = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
-.Object@attribute <- new('ListOfattribute', lapply(attribute, function(x) new('attribute', x)))
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object
-})
+setMethod(initialize, 'AttributeListType', function(.Object, attribute = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){; .Object@attribute <- new('ListOfattribute', lapply(attribute, function(x) new('attribute', x))); .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object })
 setAs('AttributeListType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'AttributeListType',  function(from) emlToS4(from))
 setAs('attributeName', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1727,23 +1227,7 @@ setAs('coverage', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'coverage',  function(from) emlToS4(from))
 setAs('methods', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methods',  function(from) emlToS4(from))
-setMethod(initialize, 'AttributeType',
-function(.Object, attributeLabel = character(), storageType = character(), missingValueCode = character(), attributeName = new('character'), attributeDefinition = new('character'), measurementScale = new('measurementScale'), accuracy = new('Accuracy'), coverage = new('Coverage'), methods = new('MethodsType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@attributeLabel <- new('ListOfattributeLabel', lapply(attributeLabel, function(x) new('attributeLabel', x)))
-.Object@storageType <- new('ListOfstorageType', lapply(storageType, function(x) new('storageType', x)))
-.Object@missingValueCode <- new('ListOfmissingValueCode', lapply(missingValueCode, function(x) new('missingValueCode', x)))
-.Object@attributeName <- attributeName
-.Object@attributeDefinition <- attributeDefinition
-.Object@measurementScale <- measurementScale
-.Object@accuracy <- accuracy
-.Object@coverage <- coverage
-.Object@methods <- methods
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'AttributeType', function(.Object, attributeLabel = character(), storageType = character(), missingValueCode = character(), attributeName = new('character'), attributeDefinition = new('character'), measurementScale = new('measurementScale'), accuracy = new('Accuracy'), coverage = new('Coverage'), methods = new('MethodsType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@attributeLabel <- new('ListOfattributeLabel', lapply(attributeLabel, function(x) new('attributeLabel', x))); .Object@storageType <- new('ListOfstorageType', lapply(storageType, function(x) new('storageType', x))); .Object@missingValueCode <- new('ListOfmissingValueCode', lapply(missingValueCode, function(x) new('missingValueCode', x))); .Object@attributeName <- attributeName; .Object@attributeDefinition <- attributeDefinition; .Object@measurementScale <- measurementScale; .Object@accuracy <- accuracy; .Object@coverage <- coverage; .Object@methods <- methods; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('AttributeType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'AttributeType',  function(from) emlToS4(from))
 setAs('attributeAccuracyReport', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1754,12 +1238,7 @@ setAs('attributeAccuracyExplanation', 'XMLInternalElementNode',   function(from)
 setAs('XMLInternalElementNode', 'attributeAccuracyExplanation',  function(from) emlToS4(from))
 setAs('quantitativeAttributeAccuracyAssessment', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'quantitativeAttributeAccuracyAssessment',  function(from) emlToS4(from))
-setMethod(initialize, 'Accuracy',
-function(.Object, quantitativeAttributeAccuracyAssessment = character(), attributeAccuracyReport = new('character')){
-.Object@quantitativeAttributeAccuracyAssessment <- new('ListOfquantitativeAttributeAccuracyAssessment', lapply(quantitativeAttributeAccuracyAssessment, function(x) new('quantitativeAttributeAccuracyAssessment', x)))
-.Object@attributeAccuracyReport <- attributeAccuracyReport
-.Object
-})
+setMethod(initialize, 'Accuracy', function(.Object, quantitativeAttributeAccuracyAssessment = character(), attributeAccuracyReport = new('character')){; .Object@quantitativeAttributeAccuracyAssessment <- new('ListOfquantitativeAttributeAccuracyAssessment', lapply(quantitativeAttributeAccuracyAssessment, function(x) new('quantitativeAttributeAccuracyAssessment', x))); .Object@attributeAccuracyReport <- attributeAccuracyReport; .Object })
 setAs('Accuracy', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'Accuracy',  function(from) emlToS4(from))
 setAs('attributeList', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1786,13 +1265,7 @@ setAs('citation', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'citation',  function(from) emlToS4(from))
 setAs('codesetURL', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'codesetURL',  function(from) emlToS4(from))
-setMethod(initialize, 'externalCodeSet',
-function(.Object, citation = character(), codesetURL = character(), codesetName = new('character')){
-.Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x)))
-.Object@codesetURL <- new('ListOfcodesetURL', lapply(codesetURL, function(x) new('codesetURL', x)))
-.Object@codesetName <- codesetName
-.Object
-})
+setMethod(initialize, 'externalCodeSet', function(.Object, citation = character(), codesetURL = character(), codesetName = new('character')){; .Object@citation <- new('ListOfcitation', lapply(citation, function(x) new('citation', x))); .Object@codesetURL <- new('ListOfcodesetURL', lapply(codesetURL, function(x) new('codesetURL', x))); .Object@codesetName <- codesetName; .Object })
 setAs('externalCodeSet', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'externalCodeSet',  function(from) emlToS4(from))
 setAs('entityReference', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1805,14 +1278,7 @@ setAs('orderAttributeReference', 'XMLInternalElementNode',   function(from) S4To
 setAs('XMLInternalElementNode', 'orderAttributeReference',  function(from) emlToS4(from))
 setAs('entityCodeList', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'entityCodeList',  function(from) emlToS4(from))
-setMethod(initialize, 'enumeratedDomain',
-function(.Object, codeDefinition = character(), externalCodeSet = new('externalCodeSet'), entityCodeList = new('entityCodeList'), enforced = new('xml_attribute')){
-.Object@codeDefinition <- new('ListOfcodeDefinition', lapply(codeDefinition, function(x) new('codeDefinition', x)))
-.Object@externalCodeSet <- externalCodeSet
-.Object@entityCodeList <- entityCodeList
-.Object@enforced <- enforced
-.Object
-})
+setMethod(initialize, 'enumeratedDomain', function(.Object, codeDefinition = character(), externalCodeSet = new('externalCodeSet'), entityCodeList = new('entityCodeList'), enforced = new('xml_attribute')){; .Object@codeDefinition <- new('ListOfcodeDefinition', lapply(codeDefinition, function(x) new('codeDefinition', x))); .Object@externalCodeSet <- externalCodeSet; .Object@entityCodeList <- entityCodeList; .Object@enforced <- enforced; .Object })
 setAs('enumeratedDomain', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'enumeratedDomain',  function(from) emlToS4(from))
 setAs('definition', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1821,23 +1287,10 @@ setAs('pattern', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'pattern',  function(from) emlToS4(from))
 setAs('source', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'source',  function(from) emlToS4(from))
-setMethod(initialize, 'textDomain',
-function(.Object, pattern = character(), definition = new('character'), source = new('character')){
-.Object@pattern <- new('ListOfpattern', lapply(pattern, function(x) new('pattern', x)))
-.Object@definition <- definition
-.Object@source <- source
-.Object
-})
+setMethod(initialize, 'textDomain', function(.Object, pattern = character(), definition = new('character'), source = new('character')){; .Object@pattern <- new('ListOfpattern', lapply(pattern, function(x) new('pattern', x))); .Object@definition <- definition; .Object@source <- source; .Object })
 setAs('textDomain', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'textDomain',  function(from) emlToS4(from))
-setMethod(initialize, 'NonNumericDomainType',
-function(.Object, enumeratedDomain = character(), textDomain = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){
-.Object@enumeratedDomain <- new('ListOfenumeratedDomain', lapply(enumeratedDomain, function(x) new('enumeratedDomain', x)))
-.Object@textDomain <- new('ListOftextDomain', lapply(textDomain, function(x) new('textDomain', x)))
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object
-})
+setMethod(initialize, 'NonNumericDomainType', function(.Object, enumeratedDomain = character(), textDomain = character(), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute')){; .Object@enumeratedDomain <- new('ListOfenumeratedDomain', lapply(enumeratedDomain, function(x) new('enumeratedDomain', x))); .Object@textDomain <- new('ListOftextDomain', lapply(textDomain, function(x) new('textDomain', x))); .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object })
 setAs('NonNumericDomainType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'NonNumericDomainType',  function(from) emlToS4(from))
 setAs('numberType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1852,11 +1305,7 @@ setAs('maximum', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'maximum',  function(from) emlToS4(from))
 setAs('bounds', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'bounds',  function(from) emlToS4(from))
-setMethod(initialize, 'BoundsGroup',
-function(.Object, bounds = character()){
-.Object@bounds <- new('ListOfbounds', lapply(bounds, function(x) new('bounds', x)))
-.Object
-})
+setMethod(initialize, 'BoundsGroup', function(.Object, bounds = character()){; .Object@bounds <- new('ListOfbounds', lapply(bounds, function(x) new('bounds', x))); .Object })
 setAs('BoundsGroup', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'BoundsGroup',  function(from) emlToS4(from))
 setAs('minimum', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1865,11 +1314,7 @@ setAs('maximum', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'maximum',  function(from) emlToS4(from))
 setAs('bounds', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'bounds',  function(from) emlToS4(from))
-setMethod(initialize, 'BoundsDateGroup',
-function(.Object, bounds = character()){
-.Object@bounds <- new('ListOfbounds', lapply(bounds, function(x) new('bounds', x)))
-.Object
-})
+setMethod(initialize, 'BoundsDateGroup', function(.Object, bounds = character()){; .Object@bounds <- new('ListOfbounds', lapply(bounds, function(x) new('bounds', x))); .Object })
 setAs('BoundsDateGroup', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'BoundsDateGroup',  function(from) emlToS4(from))
 setAs('NumberType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1887,18 +1332,7 @@ setAs('constraint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'constraint',  function(from) emlToS4(from))
 setAs('entityType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'entityType',  function(from) emlToS4(from))
-setMethod(initialize, 'OtherEntityType',
-function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), entityType = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
-.Object@EntityGroup <- EntityGroup
-.Object@attributeList <- attributeList
-.Object@entityType <- entityType
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'OtherEntityType', function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), entityType = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x))); .Object@EntityGroup <- EntityGroup; .Object@attributeList <- attributeList; .Object@entityType <- entityType; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('OtherEntityType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'OtherEntityType',  function(from) emlToS4(from))
 setAs('alternateIdentifier', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -1915,17 +1349,7 @@ setAs('methods', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'methods',  function(from) emlToS4(from))
 setAs('additionalInfo', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'additionalInfo',  function(from) emlToS4(from))
-setMethod(initialize, 'EntityGroup',
-function(.Object, alternateIdentifier = character(), physical = character(), additionalInfo = character(), entityName = new('character'), entityDescription = new('character'), coverage = new('Coverage'), methods = new('MethodsType')){
-.Object@alternateIdentifier <- new('ListOfalternateIdentifier', lapply(alternateIdentifier, function(x) new('alternateIdentifier', x)))
-.Object@physical <- new('ListOfphysical', lapply(physical, function(x) new('physical', x)))
-.Object@additionalInfo <- new('ListOfadditionalInfo', lapply(additionalInfo, function(x) new('additionalInfo', x)))
-.Object@entityName <- entityName
-.Object@entityDescription <- entityDescription
-.Object@coverage <- coverage
-.Object@methods <- methods
-.Object
-})
+setMethod(initialize, 'EntityGroup', function(.Object, alternateIdentifier = character(), physical = character(), additionalInfo = character(), entityName = new('character'), entityDescription = new('character'), coverage = new('Coverage'), methods = new('MethodsType')){; .Object@alternateIdentifier <- new('ListOfalternateIdentifier', lapply(alternateIdentifier, function(x) new('alternateIdentifier', x))); .Object@physical <- new('ListOfphysical', lapply(physical, function(x) new('physical', x))); .Object@additionalInfo <- new('ListOfadditionalInfo', lapply(additionalInfo, function(x) new('additionalInfo', x))); .Object@entityName <- entityName; .Object@entityDescription <- entityDescription; .Object@coverage <- coverage; .Object@methods <- methods; .Object })
 setAs('EntityGroup', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'EntityGroup',  function(from) emlToS4(from))
 
@@ -1943,19 +1367,7 @@ setAs('caseSensitive', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'caseSensitive',  function(from) emlToS4(from))
 setAs('numberOfRecords', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'numberOfRecords',  function(from) emlToS4(from))
-setMethod(initialize, 'DataTableType',
-function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), caseSensitive = new('caseSensitive'), numberOfRecords = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
-.Object@EntityGroup <- EntityGroup
-.Object@attributeList <- attributeList
-.Object@caseSensitive <- caseSensitive
-.Object@numberOfRecords <- numberOfRecords
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'DataTableType', function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), caseSensitive = new('caseSensitive'), numberOfRecords = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x))); .Object@EntityGroup <- EntityGroup; .Object@attributeList <- attributeList; .Object@caseSensitive <- caseSensitive; .Object@numberOfRecords <- numberOfRecords; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('DataTableType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'DataTableType',  function(from) emlToS4(from))
 
@@ -1971,18 +1383,7 @@ setAs('constraint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'constraint',  function(from) emlToS4(from))
 setAs('queryStatement', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'queryStatement',  function(from) emlToS4(from))
-setMethod(initialize, 'ViewType',
-function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), queryStatement = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
-.Object@EntityGroup <- EntityGroup
-.Object@attributeList <- attributeList
-.Object@queryStatement <- queryStatement
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'ViewType', function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), queryStatement = new('character'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x))); .Object@EntityGroup <- EntityGroup; .Object@attributeList <- attributeList; .Object@queryStatement <- queryStatement; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('ViewType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ViewType',  function(from) emlToS4(from))
 
@@ -1998,18 +1399,7 @@ setAs('constraint', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'constraint',  function(from) emlToS4(from))
 setAs('parameter', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'parameter',  function(from) emlToS4(from))
-setMethod(initialize, 'StoredProcedureType',
-function(.Object, constraint = character(), parameter = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
-.Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x)))
-.Object@EntityGroup <- EntityGroup
-.Object@attributeList <- attributeList
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'StoredProcedureType', function(.Object, constraint = character(), parameter = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x))); .Object@parameter <- new('ListOfparameter', lapply(parameter, function(x) new('parameter', x))); .Object@EntityGroup <- EntityGroup; .Object@attributeList <- attributeList; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('StoredProcedureType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'StoredProcedureType',  function(from) emlToS4(from))
 setAs('name', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2045,23 +1435,7 @@ setAs('horizontalAccuracy', 'XMLInternalElementNode',   function(from) S4Toeml(f
 setAs('XMLInternalElementNode', 'horizontalAccuracy',  function(from) emlToS4(from))
 setAs('verticalAccuracy', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'verticalAccuracy',  function(from) emlToS4(from))
-setMethod(initialize, 'SpatialVectorType',
-function(.Object, constraint = character(), geometry = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), geometricObjectCount = new('character'), topologyLevel = new('TopologyLevel'), spatialReference = new('SpatialReferenceType'), horizontalAccuracy = new('DataQuality'), verticalAccuracy = new('DataQuality'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
-.Object@geometry <- new('ListOfgeometry', lapply(geometry, function(x) new('geometry', x)))
-.Object@EntityGroup <- EntityGroup
-.Object@attributeList <- attributeList
-.Object@geometricObjectCount <- geometricObjectCount
-.Object@topologyLevel <- topologyLevel
-.Object@spatialReference <- spatialReference
-.Object@horizontalAccuracy <- horizontalAccuracy
-.Object@verticalAccuracy <- verticalAccuracy
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'SpatialVectorType', function(.Object, constraint = character(), geometry = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), geometricObjectCount = new('character'), topologyLevel = new('TopologyLevel'), spatialReference = new('SpatialReferenceType'), horizontalAccuracy = new('DataQuality'), verticalAccuracy = new('DataQuality'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x))); .Object@geometry <- new('ListOfgeometry', lapply(geometry, function(x) new('geometry', x))); .Object@EntityGroup <- EntityGroup; .Object@attributeList <- attributeList; .Object@geometricObjectCount <- geometricObjectCount; .Object@topologyLevel <- topologyLevel; .Object@spatialReference <- spatialReference; .Object@horizontalAccuracy <- horizontalAccuracy; .Object@verticalAccuracy <- verticalAccuracy; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('SpatialVectorType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'SpatialVectorType',  function(from) emlToS4(from))
 setAs('GeometryType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2076,12 +1450,7 @@ setAs('quantitativeAccuracyMethod', 'XMLInternalElementNode',   function(from) S
 setAs('XMLInternalElementNode', 'quantitativeAccuracyMethod',  function(from) emlToS4(from))
 setAs('quantitativeAccuracyReport', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'quantitativeAccuracyReport',  function(from) emlToS4(from))
-setMethod(initialize, 'DataQuality',
-function(.Object, quantitativeAccuracyReport = character(), accuracyReport = new('character')){
-.Object@quantitativeAccuracyReport <- new('ListOfquantitativeAccuracyReport', lapply(quantitativeAccuracyReport, function(x) new('quantitativeAccuracyReport', x)))
-.Object@accuracyReport <- accuracyReport
-.Object
-})
+setMethod(initialize, 'DataQuality', function(.Object, quantitativeAccuracyReport = character(), accuracyReport = new('character')){; .Object@quantitativeAccuracyReport <- new('ListOfquantitativeAccuracyReport', lapply(quantitativeAccuracyReport, function(x) new('quantitativeAccuracyReport', x))); .Object@accuracyReport <- accuracyReport; .Object })
 setAs('DataQuality', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'DataQuality',  function(from) emlToS4(from))
 
@@ -2129,13 +1498,7 @@ setAs('ySlope', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'ySlope',  function(from) emlToS4(from))
 setAs('bilinearFit', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'bilinearFit',  function(from) emlToS4(from))
-setMethod(initialize, 'georeferenceInfo',
-function(.Object, cornerPoint = character(), controlPoint = character(), bilinearFit = new('bilinearFit')){
-.Object@cornerPoint <- new('ListOfcornerPoint', lapply(cornerPoint, function(x) new('cornerPoint', x)))
-.Object@controlPoint <- new('ListOfcontrolPoint', lapply(controlPoint, function(x) new('controlPoint', x)))
-.Object@bilinearFit <- bilinearFit
-.Object
-})
+setMethod(initialize, 'georeferenceInfo', function(.Object, cornerPoint = character(), controlPoint = character(), bilinearFit = new('bilinearFit')){; .Object@cornerPoint <- new('ListOfcornerPoint', lapply(cornerPoint, function(x) new('cornerPoint', x))); .Object@controlPoint <- new('ListOfcontrolPoint', lapply(controlPoint, function(x) new('controlPoint', x))); .Object@bilinearFit <- bilinearFit; .Object })
 setAs('georeferenceInfo', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'georeferenceInfo',  function(from) emlToS4(from))
 setAs('horizontalAccuracy', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2192,53 +1555,10 @@ setAs('lensDistortionInformationAvailability', 'XMLInternalElementNode',   funct
 setAs('XMLInternalElementNode', 'lensDistortionInformationAvailability',  function(from) emlToS4(from))
 setAs('bandDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'bandDescription',  function(from) emlToS4(from))
-setMethod(initialize, 'imageDescription',
-function(.Object, bandDescription = character(), illuminationElevationAngle = new('character'), illuminationAzimuthAngle = new('character'), imageOrientationAngle = new('character'), imagingCondition = new('ImagingConditionCode'), imageQualityCode = new('character'), cloudCoverPercentage = new('character'), preProcessingTypeCode = new('character'), compressionGenerationQuality = new('character'), triangulationIndicator = new('character'), radiometricDataAvailability = new('character'), cameraCalibrationInformationAvailability = new('character'), filmDistortionInformationAvailability = new('character'), lensDistortionInformationAvailability = new('character')){
-.Object@bandDescription <- new('ListOfbandDescription', lapply(bandDescription, function(x) new('bandDescription', x)))
-.Object@illuminationElevationAngle <- illuminationElevationAngle
-.Object@illuminationAzimuthAngle <- illuminationAzimuthAngle
-.Object@imageOrientationAngle <- imageOrientationAngle
-.Object@imagingCondition <- imagingCondition
-.Object@imageQualityCode <- imageQualityCode
-.Object@cloudCoverPercentage <- cloudCoverPercentage
-.Object@preProcessingTypeCode <- preProcessingTypeCode
-.Object@compressionGenerationQuality <- compressionGenerationQuality
-.Object@triangulationIndicator <- triangulationIndicator
-.Object@radiometricDataAvailability <- radiometricDataAvailability
-.Object@cameraCalibrationInformationAvailability <- cameraCalibrationInformationAvailability
-.Object@filmDistortionInformationAvailability <- filmDistortionInformationAvailability
-.Object@lensDistortionInformationAvailability <- lensDistortionInformationAvailability
-.Object
-})
+setMethod(initialize, 'imageDescription', function(.Object, bandDescription = character(), illuminationElevationAngle = new('character'), illuminationAzimuthAngle = new('character'), imageOrientationAngle = new('character'), imagingCondition = new('ImagingConditionCode'), imageQualityCode = new('character'), cloudCoverPercentage = new('character'), preProcessingTypeCode = new('character'), compressionGenerationQuality = new('character'), triangulationIndicator = new('character'), radiometricDataAvailability = new('character'), cameraCalibrationInformationAvailability = new('character'), filmDistortionInformationAvailability = new('character'), lensDistortionInformationAvailability = new('character')){; .Object@bandDescription <- new('ListOfbandDescription', lapply(bandDescription, function(x) new('bandDescription', x))); .Object@illuminationElevationAngle <- illuminationElevationAngle; .Object@illuminationAzimuthAngle <- illuminationAzimuthAngle; .Object@imageOrientationAngle <- imageOrientationAngle; .Object@imagingCondition <- imagingCondition; .Object@imageQualityCode <- imageQualityCode; .Object@cloudCoverPercentage <- cloudCoverPercentage; .Object@preProcessingTypeCode <- preProcessingTypeCode; .Object@compressionGenerationQuality <- compressionGenerationQuality; .Object@triangulationIndicator <- triangulationIndicator; .Object@radiometricDataAvailability <- radiometricDataAvailability; .Object@cameraCalibrationInformationAvailability <- cameraCalibrationInformationAvailability; .Object@filmDistortionInformationAvailability <- filmDistortionInformationAvailability; .Object@lensDistortionInformationAvailability <- lensDistortionInformationAvailability; .Object })
 setAs('imageDescription', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'imageDescription',  function(from) emlToS4(from))
-setMethod(initialize, 'SpatialRasterType',
-function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), spatialReference = new('SpatialReferenceType'), georeferenceInfo = new('georeferenceInfo'), horizontalAccuracy = new('DataQuality'), verticalAccuracy = new('DataQuality'), cellSizeXDirection = new('cellSizeXDirection'), cellSizeYDirection = new('cellSizeYDirection'), numberOfBands = new('numberOfBands'), rasterOrigin = new('rasterOriginType'), rows = new('character'), columns = new('character'), verticals = new('verticals'), cellGeometry = new('CellGeometryType'), toneGradation = new('character'), scaleFactor = new('character'), offset = new('character'), imageDescription = new('imageDescription'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x)))
-.Object@EntityGroup <- EntityGroup
-.Object@attributeList <- attributeList
-.Object@spatialReference <- spatialReference
-.Object@georeferenceInfo <- georeferenceInfo
-.Object@horizontalAccuracy <- horizontalAccuracy
-.Object@verticalAccuracy <- verticalAccuracy
-.Object@cellSizeXDirection <- cellSizeXDirection
-.Object@cellSizeYDirection <- cellSizeYDirection
-.Object@numberOfBands <- numberOfBands
-.Object@rasterOrigin <- rasterOrigin
-.Object@rows <- rows
-.Object@columns <- columns
-.Object@verticals <- verticals
-.Object@cellGeometry <- cellGeometry
-.Object@toneGradation <- toneGradation
-.Object@scaleFactor <- scaleFactor
-.Object@offset <- offset
-.Object@imageDescription <- imageDescription
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'SpatialRasterType', function(.Object, constraint = character(), EntityGroup = new('EntityGroup'), attributeList = new('AttributeListType'), spatialReference = new('SpatialReferenceType'), georeferenceInfo = new('georeferenceInfo'), horizontalAccuracy = new('DataQuality'), verticalAccuracy = new('DataQuality'), cellSizeXDirection = new('cellSizeXDirection'), cellSizeYDirection = new('cellSizeYDirection'), numberOfBands = new('numberOfBands'), rasterOrigin = new('rasterOriginType'), rows = new('character'), columns = new('character'), verticals = new('verticals'), cellGeometry = new('CellGeometryType'), toneGradation = new('character'), scaleFactor = new('character'), offset = new('character'), imageDescription = new('imageDescription'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@constraint <- new('ListOfconstraint', lapply(constraint, function(x) new('constraint', x))); .Object@EntityGroup <- EntityGroup; .Object@attributeList <- attributeList; .Object@spatialReference <- spatialReference; .Object@georeferenceInfo <- georeferenceInfo; .Object@horizontalAccuracy <- horizontalAccuracy; .Object@verticalAccuracy <- verticalAccuracy; .Object@cellSizeXDirection <- cellSizeXDirection; .Object@cellSizeYDirection <- cellSizeYDirection; .Object@numberOfBands <- numberOfBands; .Object@rasterOrigin <- rasterOrigin; .Object@rows <- rows; .Object@columns <- columns; .Object@verticals <- verticals; .Object@cellGeometry <- cellGeometry; .Object@toneGradation <- toneGradation; .Object@scaleFactor <- scaleFactor; .Object@offset <- offset; .Object@imageDescription <- imageDescription; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('SpatialRasterType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'SpatialRasterType',  function(from) emlToS4(from))
 setAs('sequenceIdentifier', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2269,12 +1589,7 @@ setAs('quantitativeAccuracyMethod', 'XMLInternalElementNode',   function(from) S
 setAs('XMLInternalElementNode', 'quantitativeAccuracyMethod',  function(from) emlToS4(from))
 setAs('quantitativeAccuracyReport', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'quantitativeAccuracyReport',  function(from) emlToS4(from))
-setMethod(initialize, 'DataQuality',
-function(.Object, quantitativeAccuracyReport = character(), accuracyReport = new('character')){
-.Object@quantitativeAccuracyReport <- new('ListOfquantitativeAccuracyReport', lapply(quantitativeAccuracyReport, function(x) new('quantitativeAccuracyReport', x)))
-.Object@accuracyReport <- accuracyReport
-.Object
-})
+setMethod(initialize, 'DataQuality', function(.Object, quantitativeAccuracyReport = character(), accuracyReport = new('character')){; .Object@quantitativeAccuracyReport <- new('ListOfquantitativeAccuracyReport', lapply(quantitativeAccuracyReport, function(x) new('quantitativeAccuracyReport', x))); .Object@accuracyReport <- accuracyReport; .Object })
 setAs('DataQuality', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'DataQuality',  function(from) emlToS4(from))
 
@@ -2310,28 +1625,7 @@ setAs('view', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'view',  function(from) emlToS4(from))
 setAs('otherEntity', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'otherEntity',  function(from) emlToS4(from))
-setMethod(initialize, 'DatasetType',
-function(.Object, contact = character(), dataTable = character(), spatialRaster = character(), spatialVector = character(), storedProcedure = character(), view = character(), otherEntity = character(), ResourceGroup = new('ResourceGroup'), purpose = new('TextType'), maintenance = new('MaintenanceType'), publisher = new('ResponsibleParty'), pubPlace = new('character'), methods = new('MethodsType'), project = new('ResearchProjectType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){
-.Object@contact <- new('ListOfcontact', lapply(contact, function(x) new('contact', x)))
-.Object@dataTable <- new('ListOfdataTable', lapply(dataTable, function(x) new('dataTable', x)))
-.Object@spatialRaster <- new('ListOfspatialRaster', lapply(spatialRaster, function(x) new('spatialRaster', x)))
-.Object@spatialVector <- new('ListOfspatialVector', lapply(spatialVector, function(x) new('spatialVector', x)))
-.Object@storedProcedure <- new('ListOfstoredProcedure', lapply(storedProcedure, function(x) new('storedProcedure', x)))
-.Object@view <- new('ListOfview', lapply(view, function(x) new('view', x)))
-.Object@otherEntity <- new('ListOfotherEntity', lapply(otherEntity, function(x) new('otherEntity', x)))
-.Object@ResourceGroup <- ResourceGroup
-.Object@purpose <- purpose
-.Object@maintenance <- maintenance
-.Object@publisher <- publisher
-.Object@pubPlace <- pubPlace
-.Object@methods <- methods
-.Object@project <- project
-.Object@ReferencesGroup <- ReferencesGroup
-.Object@id <- id
-.Object@system <- system
-.Object@scope <- scope
-.Object
-})
+setMethod(initialize, 'DatasetType', function(.Object, contact = character(), dataTable = character(), spatialRaster = character(), spatialVector = character(), storedProcedure = character(), view = character(), otherEntity = character(), ResourceGroup = new('ResourceGroup'), purpose = new('TextType'), maintenance = new('MaintenanceType'), publisher = new('ResponsibleParty'), pubPlace = new('character'), methods = new('MethodsType'), project = new('ResearchProjectType'), ReferencesGroup = new('ReferencesGroup'), id = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute')){; .Object@contact <- new('ListOfcontact', lapply(contact, function(x) new('contact', x))); .Object@dataTable <- new('ListOfdataTable', lapply(dataTable, function(x) new('dataTable', x))); .Object@spatialRaster <- new('ListOfspatialRaster', lapply(spatialRaster, function(x) new('spatialRaster', x))); .Object@spatialVector <- new('ListOfspatialVector', lapply(spatialVector, function(x) new('spatialVector', x))); .Object@storedProcedure <- new('ListOfstoredProcedure', lapply(storedProcedure, function(x) new('storedProcedure', x))); .Object@view <- new('ListOfview', lapply(view, function(x) new('view', x))); .Object@otherEntity <- new('ListOfotherEntity', lapply(otherEntity, function(x) new('otherEntity', x))); .Object@ResourceGroup <- ResourceGroup; .Object@purpose <- purpose; .Object@maintenance <- maintenance; .Object@publisher <- publisher; .Object@pubPlace <- pubPlace; .Object@methods <- methods; .Object@project <- project; .Object@ReferencesGroup <- ReferencesGroup; .Object@id <- id; .Object@system <- system; .Object@scope <- scope; .Object })
 setAs('DatasetType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'DatasetType',  function(from) emlToS4(from))
 setAs('description', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2348,13 +1642,7 @@ setAs('comment', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'comment',  function(from) emlToS4(from))
 setAs('changeHistory', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'changeHistory',  function(from) emlToS4(from))
-setMethod(initialize, 'MaintenanceType',
-function(.Object, changeHistory = character(), description = new('TextType'), maintenanceUpdateFrequency = new('MaintUpFreqType')){
-.Object@changeHistory <- new('ListOfchangeHistory', lapply(changeHistory, function(x) new('changeHistory', x)))
-.Object@description <- description
-.Object@maintenanceUpdateFrequency <- maintenanceUpdateFrequency
-.Object
-})
+setMethod(initialize, 'MaintenanceType', function(.Object, changeHistory = character(), description = new('TextType'), maintenanceUpdateFrequency = new('MaintUpFreqType')){; .Object@changeHistory <- new('ListOfchangeHistory', lapply(changeHistory, function(x) new('changeHistory', x))); .Object@description <- description; .Object@maintenanceUpdateFrequency <- maintenanceUpdateFrequency; .Object })
 setAs('MaintenanceType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'MaintenanceType',  function(from) emlToS4(from))
 setAs('MaintUpFreqType', 'XMLInternalElementNode',   function(from) S4Toeml(from))
@@ -2378,28 +1666,9 @@ setAs('describes', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'describes',  function(from) emlToS4(from))
 
 
-setMethod(initialize, 'additionalMetadata',
-function(.Object, describes = character(), metadata = new('metadata'), id = new('xml_attribute')){
-.Object@describes <- new('ListOfdescribes', lapply(describes, function(x) new('describes', x)))
-.Object@metadata <- metadata
-.Object@id <- id
-.Object
-})
+setMethod(initialize, 'additionalMetadata', function(.Object, describes = character(), metadata = new('metadata'), id = new('xml_attribute')){; .Object@describes <- new('ListOfdescribes', lapply(describes, function(x) new('describes', x))); .Object@metadata <- metadata; .Object@id <- id; .Object })
 setAs('additionalMetadata', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'additionalMetadata',  function(from) emlToS4(from))
-setMethod(initialize, 'eml',
-function(.Object, additionalMetadata = character(), access = new('AccessType'), dataset = new('DatasetType'), citation = new('CitationType'), software = new('SoftwareType'), protocol = new('ProtocolType'), packageId = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute'), lang = new('xml_attribute')){
-.Object@additionalMetadata <- new('ListOfadditionalMetadata', lapply(additionalMetadata, function(x) new('additionalMetadata', x)))
-.Object@access <- access
-.Object@dataset <- dataset
-.Object@citation <- citation
-.Object@software <- software
-.Object@protocol <- protocol
-.Object@packageId <- packageId
-.Object@system <- system
-.Object@scope <- scope
-.Object@lang <- lang
-.Object
-})
+setMethod(initialize, 'eml', function(.Object, additionalMetadata = character(), access = new('AccessType'), dataset = new('DatasetType'), citation = new('CitationType'), software = new('SoftwareType'), protocol = new('ProtocolType'), packageId = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute'), lang = new('xml_attribute')){; .Object@additionalMetadata <- new('ListOfadditionalMetadata', lapply(additionalMetadata, function(x) new('additionalMetadata', x))); .Object@access <- access; .Object@dataset <- dataset; .Object@citation <- citation; .Object@software <- software; .Object@protocol <- protocol; .Object@packageId <- packageId; .Object@system <- system; .Object@scope <- scope; .Object@lang <- lang; .Object })
 setAs('eml', 'XMLInternalElementNode',   function(from) S4Toeml(from))
 setAs('XMLInternalElementNode', 'eml',  function(from) emlToS4(from))

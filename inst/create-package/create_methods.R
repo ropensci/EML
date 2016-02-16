@@ -8,12 +8,14 @@ set_coerces <- function(class, class_file = "methods.R"){
 
 create_initialize_method <- function(slots, class, methods_file = "methods.R"){
 
-## Only define this for classes containing at least one ListOf child
+  out = ""
+
+  ## Only define this for classes containing at least one ListOf child
   is_listof <- grepl("ListOf", slots)
   if(any(is_listof)){
 
-    write(sprintf("setMethod(initialize, '%s',", class), methods_file, append = TRUE)
-    write(sprintf("function(.Object, %s){", print_init(slots)), methods_file, append = TRUE)
+    out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, %s){", class, print_init(slots)),
+                  sep = "; ")
 
     list_slots <- slots[is_listof]
 
@@ -21,19 +23,18 @@ create_initialize_method <- function(slots, class, methods_file = "methods.R"){
       for(s in 1:length(list_slots)){
         base <- sub("^ListOf", "", list_slots[[s]])
         name <- names(list_slots)[[s]]
-        write(sprintf(".Object@%s <- new('%s', lapply(%s, function(x) new('%s', x)))", name, list_slots[[s]], name, name), methods_file, append = TRUE)
+        out <- paste0(out, sprintf(".Object@%s <- new('%s', lapply(%s, function(x) new('%s', x)))", name, list_slots[[s]], name, name),
+                      sep = "; ")
       }
     }
     plain_slots <- names(slots[!is_listof])
 
     for(s in plain_slots){
-      write(sprintf(".Object@%s <- %s", s, s), methods_file, append = TRUE)
+      out <- paste0(out, sprintf(".Object@%s <- %s", s, s), sep = "; ")
     }
 
-    write(
-          ".Object
-})",
-          methods_file, append = TRUE)
+    out <- paste0(out, ".Object })")
+    write(paste0(out, collapse=";"), methods_file, append = TRUE)
   }
 
 }
