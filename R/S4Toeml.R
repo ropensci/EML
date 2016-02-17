@@ -64,9 +64,9 @@ S4Toeml <- function(obj,
           ## Complex child nodes
           X = slot(obj, s)
           if(!isEmpty(X)){
-#            if(is(X, "InlineType"))
-#              suppressWarnings(addChildren(node, X))
-            if(is(X, "list")){
+            if(is(X, "InlineType"))
+              addChildren(node, newXMLNode(s, .children = X))
+            else if(is(X, "list")){
               if(is(X[[1]], "InlineType"))
                 addChildren(node, newXMLNode(s, .children = X))
               else if(is.character(X[[1]]) && length(get_slots(class(X[[1]]))) <= 1)
