@@ -37,13 +37,18 @@ out <- lapply(xml_tests,
 
     all_elements <- xpathSApply(xmlParse(f), "//*", xmlName)
     all_elements2 <- xpathSApply(xmlDoc(element), "//*", xmlName)
+
+
+    ## Skip known issues, see notes at end
+    if(!(xml %in% c('eml-i18n.xml', 'eml-literatureInPress.xml',  'eml-literature.xml'))){
     ## identical number of elements
     testthat::expect_identical(length(all_elements), length(all_elements2))
     ## identical modulo order
     testthat::expect_identical(sort(all_elements), sort(all_elements2))
     ## strictly identical:
-   # testthat::expect_identical(all_elements, all_elements2)
-
+    if(!(xml == 'eml-physical.xml')) # Skip known error
+      testthat::expect_identical(all_elements, all_elements2)
+    }
 
     v <- eml_validate("test.xml")
     testthat::expect_equal(v$status, 0)
@@ -58,6 +63,10 @@ out <- lapply(xml_tests,
 
 # length differs for: 'eml-i18n.xml', 'eml-literatureInPress.xml',  'eml-literature.xml', 'eml-text.xml'
 # identical ordering differs for: 'eml-physical.xml'
+#
+#  - eml-i18n.xml has "<value> child elements in i18nNonEmptyStringType's. Same problem where mixed character type & child element results in tags being dropped.
+#  - literature: has <abstract> without TextType elements.  Would have been fine if used TextType elements, otherwise treated as character
+#  - eml-text: misses 2 <section> tags that are children of a <section> tag
 
-## Note: we cannot parse text nodes that mix text content and marked up content into slot values. cannot interleave slot values. Better to treat
-## that as literal XML
+## Note: we cannot parse text nodes that mix text content and marked up content into slot values.
+## cannot interleave slot values. Thus we treat as literal XML

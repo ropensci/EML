@@ -24,7 +24,7 @@ has_extension <- function(element, ns){
 ## vectorize. Note: xmlValue returns characters. if .Data not character but instead float or Date etc, would need coercion.
 is_character_type <- function(types){
   purrr::map_lgl(types, function(type)
-    type %in% c("xs:string", "xs:date", "i18nString", "i18nNonEmptyStringType", "NonEmptyStringType", "character",
+    type %in% c("xs:string", "xs:date", "i18nString", "NonEmptyStringType", "character",
                 "xs:float", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong",
                 "xs:long", "xs:integer", "xs:boolean", "xs:date", "xs:positiveInteger")
   )

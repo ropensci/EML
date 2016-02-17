@@ -50,7 +50,7 @@ S4Toeml <- function(obj,
             if(s %in% base_attributes)
               s <- paste0("xml:", s)
             names(attrs) <- s
-            addAttributes(node, .attrs = attrs)
+            suppressWarnings(addAttributes(node, .attrs = attrs))
           }
 
         ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
@@ -68,7 +68,7 @@ S4Toeml <- function(obj,
               addChildren(node, newXMLNode(s, .children = X))
             else if(is(X, "list")){
               if(is(X[[1]], "InlineType"))
-                addChildren(node, newXMLNode(s, .children = X))
+                addChildren(node, lapply(X, function(x) newXMLNode(s, .children = x)))
               else if(is.character(X[[1]]) && length(get_slots(class(X[[1]]))) <= 1)
                 addChildren(node, lapply(X, function(x) newXMLNode(class(x), x)))
               else

@@ -21,6 +21,7 @@ xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
   write("
 setClass('xml_attribute', contains = 'character')
 setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
+setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
 setClass('InlineType', contains=c('list'))",
         file, append = TRUE)
 
@@ -84,6 +85,7 @@ replace_class('metadata', "setClass('metadata', contains='InlineType')", classes
 replace_class('inline', "setClass('inline', contains='InlineType')", classes_file)
 replace_class('InlineType', "setClass('InlineType', contains=c('list'))", classes_file)
 replace_class('parameter', "setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))", classes_file)
+replace_class('PhysicalOnlineType', "setClass('PhysicalOnlineType',  slots = c('onlineDescription' = 'i18nNonEmptyStringType', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1', 'character'))", classes_file)
 replace_class('online', "setClass('online', contains = c('PhysicalOnlineType', 'OnlineType', 'eml-2.1.1'))", classes_file)
 move_to_end("coverage", classes_file)
 move_to_end("temporalCoverage", classes_file)
@@ -95,7 +97,10 @@ move_to_end("parameter", classes_file)
 move_to_end("online", classes_file)
 
 
-
+R <- readLines(classes_file)
+R <- gsub("'language' = 'i18nNonEmptyStringType'", "'language' = 'character'", R)
+R <- gsub("setClass\\('title', contains = c\\('eml-2.1.1', 'character'\\)\\).*", "", R)
+write(R, classes_file)
 ## Fix methods
 M <- readLines(methods_file)
 M <- gsub("'complex'", "'eml:complex'", M)

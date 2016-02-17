@@ -38,7 +38,12 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     class(kids) <- c("list", "XMLInternalNodeList")
     s4@.Data  <- kids
   } else if(length(metaclasses) == 0 && length(subclasses) > 0){
-      s4@.Data <- xmlValue(node)
+    if("value" %in% names(children) && "value" %in% s4_names){
+      s4@value <- listof(children, "value")
+      s4@.Data <-  paste(sapply(children[names(children)=="text"], xmlValue), collapse = "\n")
+    } else {
+    s4@.Data <- xmlValue(node)
+    }
   } else {
 
 
@@ -57,7 +62,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
       else if(cls == "xml_attribute")
         slot(slot(s4, s), child) <- new("xml_attribute" ,attrs[[child]])
       else
-        slot(slot(s4, s), child) <- as(children[[child]], child)
+        slot(slot(s4, s), child) <- emlToS4(children[[child]])
     }
 
     ## These are the normal s4@slot items
@@ -68,7 +73,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
       } else if(cls == "character"){
         slot(s4,child) <- xmlValue(children[[child]])
       } else {
-        slot(s4,child) <- as(children[[child]], child)
+        slot(s4,child) <- emlToS4(children[[child]])
       }
     }
 
