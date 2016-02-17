@@ -8,10 +8,7 @@ xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
 xml_tests <- xml_tests[- which(xml_tests == "eml-unitDictionary.xml")]
 
 
-out <- lapply(xml_tests,
-             purrr::safely(
-                function(xml){
-
+out <- lapply(xml_tests, function(xml){
   testthat::test_that(xml, {
     f <- system.file(paste0("xsd/test/", xml), package = "eml2")
     node <- xmlRoot(xmlParse(f))
@@ -38,9 +35,6 @@ out <- lapply(xml_tests,
     all_elements <- xpathSApply(xmlParse(f), "//*", xmlName)
     all_elements2 <- xpathSApply(xmlDoc(element), "//*", xmlName)
 
-
-    ## Skip known issues, see notes at end
-    if(!(xml %in% c('eml-i18n.xml', 'eml-literatureInPress.xml',  'eml-literature.xml'))){
     ## identical number of elements
     testthat::expect_identical(length(all_elements), length(all_elements2))
     ## identical modulo order
@@ -48,16 +42,17 @@ out <- lapply(xml_tests,
     ## strictly identical:
     if(!(xml == 'eml-physical.xml')) # Skip known error
       testthat::expect_identical(all_elements, all_elements2)
-    }
 
+    ## Validate
     v <- eml_validate("test.xml")
     testthat::expect_equal(v$status, 0)
 
+    ## Clean up
+    unlink("test.xml")
 
   })
-                    }
-)
-)
+})
+
 
 ## purrr::compact(lapply(out, `[[`, "error"))
 

@@ -75,7 +75,7 @@ fix_protected(classes_file)
 move_to_end("proceduralStep", classes_file)
 move_to_end("methodStep", classes_file)
 move_to_end("dataSource", classes_file)
-
+replace_class("keyword", "setClass('keyword', slots = c('keywordType' = 'xml_attribute'), contains = c('i18nNonEmptyStringType', 'eml-2.1.1'))", classes_file)
 replace_class("coverage", "setClass('coverage', contains=c('Coverage'))", classes_file)
 replace_class("temporalCoverage", "setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))", classes_file)
 replace_class("taxonomicCoverage", "setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))", classes_file)

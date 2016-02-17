@@ -28,6 +28,8 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
   metaclasses <- lapply(metanames, get_slots)
   names(metaclasses) <- metanames
 
+  text_classes <- "text" %in% subclasses
+  subclasses <- subclasses[subclasses != "text"]
 
   for(child in not_subattrs){
     slot(s4, child) <- new("xml_attribute",attrs[[child]])
@@ -37,15 +39,16 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     kids <- xmlChildren(node)
     class(kids) <- c("list", "XMLInternalNodeList")
     s4@.Data  <- kids
-  } else if(length(metaclasses) == 0 && length(subclasses) > 0){
-    if("value" %in% names(children) && "value" %in% s4_names){
-      s4@value <- listof(children, "value")
-      s4@.Data <-  paste(sapply(children[names(children)=="text"], xmlValue), collapse = "\n")
-    } else {
-    s4@.Data <- xmlValue(node)
-    }
   } else {
 
+    if(length(metaclasses) == 0 && text_classes ){
+    #if("value" %in% names(children) && "value" %in% s4_names){
+     # s4@value <- listof(children, "value")
+      s4@.Data <-  paste(sapply(children[names(children)=="text"], xmlValue), collapse = "\n")
+    #} else {
+    #s4@.Data <- xmlValue(node)
+    #}
+    }
 
     ## These elements, like "title", go to s4@ResourceGroup@title,
     ## rather than s4@title, where ResourceGroup is metaclass

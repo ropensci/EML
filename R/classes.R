@@ -220,7 +220,7 @@ setClass('eml:name', contains = c('eml-2.1.1', 'character')) ## B
 setClass('value', contains = c('eml-2.1.1', 'character')) ## B
 setClass('alternateIdentifier', slots = c('character' = 'character', 'system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('associatedParty', slots = c('ResponsibleParty' = 'ResponsibleParty', 'role' = 'RoleType'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('keyword', slots = c('i18nNonEmptyStringType' = 'i18nNonEmptyStringType', 'keywordType' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('keyword', slots = c('keywordType' = 'xml_attribute'), contains = c('i18nNonEmptyStringType', 'eml-2.1.1'))
 setClass('keywordSet', slots = c('keyword' = 'ListOfkeyword', 'keywordThesaurus' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ResourceGroup', slots = c('alternateIdentifier' = 'ListOfalternateIdentifier', 'shortName' = 'character', 'title' = 'ListOftitle', 'creator' = 'ListOfcreator', 'metadataProvider' = 'ListOfmetadataProvider', 'associatedParty' = 'ListOfassociatedParty', 'pubDate' = 'yearDate', 'language' = 'character', 'series' = 'character', 'abstract' = 'TextType', 'keywordSet' = 'ListOfkeywordSet', 'additionalInfo' = 'ListOfadditionalInfo', 'intellectualRights' = 'TextType', 'distribution' = 'ListOfdistribution', 'coverage' = 'Coverage'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('references', slots = c('character' = 'character', 'system' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
