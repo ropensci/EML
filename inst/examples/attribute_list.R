@@ -24,6 +24,13 @@ get_reference <- function(n, eml){
   eml2:::emlToS4(node)
 }
 
+## should identify all ReferencesGroup elements, and replace them with copy of the
+## node that they reference.
+resolve_references <- function(eml){
+
+}
+
+
 
 eml <- read_eml("inst/xsd/test/eml-datasetWithAttributelevelMethods.xml")
 A <- eml@dataset@dataTable[[1]]@attributeList@attribute
@@ -36,6 +43,7 @@ choice <- function(s4){
 }
 
 ## Attribute name/def
+att_df <-
 purrr::map_df(A, function(a)
   data.frame(name = a@attributeName,
              label = or_na(getone(a@attributeLabel)@.Data),      # optional, can repeat (though goodness knows why)
@@ -46,18 +54,18 @@ purrr::map_df(A, function(a)
              stringsAsFactors = FALSE))
 
 ## Ratio/Interval maps
+units_df <-
 purrr::map_df(A, function(a){
   name = a@attributeName
-  print(name)
   scale = choice(a@measurementScale)
   if(scale %in% c("ratio", "interval")){
     b <- slot(a@measurementScale, scale)
 
     ## Perform Reference lookup.  FIXME consider performing globally.
-    if(choice(b@numericDomain) == "ReferencesGroup")
+    if( "ReferencesGroup" %in% choice(b@numericDomain) )
       b@numericDomain <- get_reference(b@numericDomain, eml)
-    else {
-      bounds <- getone(b@numericDomain@BoundsGroup@bounds)
+
+    bounds <- getone(b@numericDomain@BoundsGroup@bounds)
 
     data.frame(name = name,
                unit = or_na(slot(b@unit, choice(b@unit))@.Data),
@@ -66,10 +74,21 @@ purrr::map_df(A, function(a){
                lower_bound = or_na(bounds@minimum@.Data),
                upper_bound = or_na(bounds@maximum@.Data),
       stringsAsFactors = FALSE)
-    }
+
   } else {
     NULL
   }
 })
 
+## Factors df
+purrr::map_df(A, function(a){
+  name = a@attributeName
+  scale = choice(a@measurementScale)
+  if(scale %in% c("nominal", "ordinal")){
+    b <- slot(a@measurementScale, scale)
+  } else{
+    NULL
+  }
+})
 
+## times df
