@@ -17,7 +17,69 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/cboettig/eml2.svg?branch=master)](https://travis-ci.org/cboettig/eml2)
 
 
-## eml2 
+# eml2 
+
+*Note*: `eml2` is work in progress. Please see the Issues tracker in this repository for details about current issues and development milestonds.
+
+## Installation
+
+`eml2` has not yet been released.  Please install from GitHub after installing the `devtools` package (from CRAN):
+
+
+```{r eval=FALSE}
+devtools::install_github("cboettig/eml2")
+```
+
+
+## Quickstart
+
+Load the package and read in an EML file:
+
+```{r}
+library("eml2")
+f <- system.file("xsd/test/eml.xml", package = "eml2")
+eml <- read_eml(f)
+```
+
+This creates a native R object called `eml`.  Although this is an "S4 object" type, it uses a "show"
+method which displays in an XML-like layout for convenience:
+
+```{r}
+eml
+```
+
+Validate EML against the official schema
+
+```{r}
+eml_validate(eml)
+```
+
+
+Write out as EML:
+
+
+```{r}
+write_eml(eml, "example.xml")
+```
+
+
+```{r include=FALSE, echo=FALSE}
+unlink("example.xml")
+```
+
+## Manipulating EML objects
+
+Eventually `eml2` will provide constructor and extract methods to create and extract common metadata sections from convenient R stuctures (e.g. `data.frames` with unit metadata, common R classes like `Person`, `bibtype`).  For now, the only method to access and modify EML is to use the standard S4 subsetting and constructor methods.
+
+Our current example does not have a publication date.  Let's add one:
+
+```{r}
+eml@dataset@ResourceGroup@pubDate <- new("pubDate", "2016")
+```
+
+Note that we use the constructor method `new()` to create an object.
+
+### Working with repeating elements
 
 
 ## Developer notes

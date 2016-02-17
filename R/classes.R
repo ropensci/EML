@@ -1,6 +1,56 @@
+setClass('ListOfvalue')
+setClass('ReferencesGroup')
+setClass('Coverage')
+setClass('OfflineType')
+setClass('OnlineType')
+setClass('UrlType')
+setClass('ConnectionType')
+setClass('horizCoordSysType')
+setClass('CardinalityChildOccurancesType')
+setClass('SingleDateTimeType')
+setClass('MethodsType')
+setClass('ConstraintBaseGroup')
+setClass('ForeignKeyGroup')
+setClass('GRingType')
+setClass('PhysicalOnlineType')
+setClass('Action')
+setClass('NonNumericDomainType')
+setClass('UnitType')
+setClass('PrecisionType')
+setClass('NumericDomainType')
+setClass('EntityGroup')
+setClass('DateTimeDomainType')
+setClass('Accuracy')
+setClass('NumberType')
+setClass('BoundsDateGroup')
+setClass('BoundsGroup')
+setClass('CitationType')
+setClass('PhysicalType')
+setClass('DatasetType')
+setClass('DataQuality')
+setClass('TopologyLevel')
+setClass('ImagingConditionCode')
+setClass('CellGeometryType')
+setClass('ImagingConditionCode')
+setClass('MaintenanceType')
+setClass('MaintUpFreqType')
+setClass('metadata')
+setClass('ConnectionDefinitionType')
+setClass('Article')
+setClass('Chapter')
+setClass('Book')
+setClass('Manuscript')
+setClass('Report')
+setClass('Thesis')
+setClass('ConferenceProceedings')
+setClass('PersonalCommunication')
+setClass('Map')
+setClass('Generic')
+setClass('AudioVisual')
+setClass('Presentation')
 
 setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
+setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute'))
 setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
 setClass('InlineType', contains=c('list'))
 setClass('xs:float', contains = 'numeric')
@@ -37,7 +87,7 @@ setClass('stmml', contains = c('eml-2.1.1', 'character')) ## B
 setClass('definition', contains = c('eml-2.1.1', 'character')) ## B
 setClass('documentation', contains = c('eml-2.1.1', 'character')) ## B
 setClass('metadataList', contains = c('eml-2.1.1', 'character')) ## B
-setClass('metadataType', contains = c('character', 'eml-2.1.1')) ## B
+setClass('metadataType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('dimensionType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('unitsType', contains = c('eml-2.1.1', 'character')) ## B
 setClass('dataGroup', contains = c('eml-2.1.1', 'character')) ## B
@@ -239,7 +289,7 @@ setClass('KeyTypeCode', contains = c('eml-2.1.1', 'character')) ## C
 setClass('IDType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('SystemType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('ScopeType', contains = c('eml-2.1.1', 'character')) ## C
-setClass('FunctionType', contains = c('character', 'eml-2.1.1')) ## C
+setClass('FunctionType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('InlineType', contains=c('list'))
 setClass('NonEmptyStringType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('title', contains = c('eml-2.1.1', 'i18nNonEmptyStringType')) ## D
@@ -277,8 +327,8 @@ setClass('depthDatumName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('depthResolution', contains = c('eml-2.1.1', 'character')) ## B
 setClass('depthDistanceUnits', contains = c('eml-2.1.1', 'character')) ## B
 setClass('depthEncodingMethod', contains = c('eml-2.1.1', 'character')) ## B
-setClass('lengthUnits', contains = c('character', 'eml-2.1.1')) ## B
-setClass('angleUnits', contains = c('character', 'eml-2.1.1')) ## B
+setClass('lengthUnits', contains = c('eml-2.1.1', 'character')) ## B
+setClass('angleUnits', contains = c('eml-2.1.1', 'character')) ## B
 setClass('altitudeSysDef', slots = c('altitudeDatumName' = 'character', 'altitudeResolution' = 'ListOfaltitudeResolution', 'altitudeDistanceUnits' = 'character', 'altitudeEncodingMethod' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('depthSysDef', slots = c('depthDatumName' = 'character', 'depthResolution' = 'ListOfdepthResolution', 'depthDistanceUnits' = 'character', 'depthEncodingMethod' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('vertCoordSys', slots = c('altitudeSysDef' = 'altitudeSysDef', 'depthSysDef' = 'depthSysDef'), contains = c('eml-2.1.1', 'character')) ## A
@@ -987,7 +1037,7 @@ setClass('comment', contains = c('eml-2.1.1', 'character')) ## B
 setClass('DatasetType', slots = c('ResourceGroup' = 'ResourceGroup', 'purpose' = 'TextType', 'maintenance' = 'MaintenanceType', 'contact' = 'ListOfcontact', 'publisher' = 'ResponsibleParty', 'pubPlace' = 'character', 'methods' = 'MethodsType', 'project' = 'ResearchProjectType', 'dataTable' = 'ListOfdataTable', 'spatialRaster' = 'ListOfspatialRaster', 'spatialVector' = 'ListOfspatialVector', 'storedProcedure' = 'ListOfstoredProcedure', 'view' = 'ListOfview', 'otherEntity' = 'ListOfotherEntity', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('changeHistory', slots = c('changeScope' = 'character', 'oldValue' = 'character', 'changeDate' = 'character', 'comment' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('MaintenanceType', slots = c('description' = 'TextType', 'maintenanceUpdateFrequency' = 'MaintUpFreqType', 'changeHistory' = 'ListOfchangeHistory'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('MaintUpFreqType', contains = c('character', 'eml-2.1.1')) ## C
+setClass('MaintUpFreqType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('dataset', contains = c('eml-2.1.1', 'DatasetType')) ## D
 setClass('purpose', contains = c('eml-2.1.1', 'TextType')) ## D
 setClass('maintenance', contains = c('eml-2.1.1', 'MaintenanceType')) ## D

@@ -15,12 +15,13 @@ file.remove(methods_file)
 
 
 
+
 ## Create some boilerplate classes:
 xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
 
   write("
 setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
+setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute'))
 setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
 setClass('InlineType', contains=c('list'))",
         file, append = TRUE)
@@ -33,7 +34,20 @@ setClass('InlineType', contains=c('list'))",
     )
 
 }
+
 xs_base_classes(classes_file)
+
+c("ListOfvalue","ReferencesGroup", "Coverage", "OfflineType","OnlineType","UrlType","ConnectionType",
+  "horizCoordSysType", "CardinalityChildOccurancesType", "SingleDateTimeType",
+  "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup","GRingType","PhysicalOnlineType",
+  "Action", "NonNumericDomainType","UnitType","PrecisionType", "NumericDomainType",
+  "EntityGroup", "DateTimeDomainType","Accuracy","NumberType","BoundsDateGroup", "BoundsGroup",
+  "CitationType", "PhysicalType", "DatasetType","DataQuality","TopologyLevel","ImagingConditionCode",
+  "CellGeometryType", "ImagingConditionCode", "MaintenanceType","MaintUpFreqType",
+  "metadata","ConnectionDefinitionType","Article","Chapter","Book","Manuscript","Report","Thesis",
+  "ConferenceProceedings","PersonalCommunication","Map","Generic","AudioVisual","Presentation") %>%
+  purrr::map(set_dummy_class, "header.R")
+
 
 
 
@@ -100,7 +114,10 @@ move_to_end("online", classes_file)
 R <- readLines(classes_file)
 R <- gsub("'language' = 'i18nNonEmptyStringType'", "'language' = 'character'", R)
 R <- gsub("setClass\\('title', contains = c\\('eml-2.1.1', 'character'\\)\\).*", "", R)
+## Consistent Ordering please
+R <- gsub("contains = c\\('character', 'eml-2.1.1'\\)", "contains = c('eml-2.1.1', 'character')", R)
 write(R, classes_file)
+
 ## Fix methods
 M <- readLines(methods_file)
 M <- gsub("'complex'", "'eml:complex'", M)
@@ -119,7 +136,10 @@ drop_method('ParagraphType', methods_file)
 drop_method('SectionType', methods_file)
 
 
-
+R <- readLines(classes_file)
+H <- readLines("header.R")
+unlink("header.R")
+write(c(H,R), classes_file)
 
 
 

@@ -32,7 +32,8 @@ S4Toeml <- function(obj,
     if(is.null(node))
       node <- newXMLNode(node_name, namespaceDefinitions = ns)
 
-    base_attributes = c("lang", "schemaLocation")
+    base_attributes = c("lang")
+    schema_attributes = c("schemaLocation")
 
 
 
@@ -49,6 +50,8 @@ S4Toeml <- function(obj,
             attrs <- as.character(slot(obj,s))
             if(s %in% base_attributes)
               s <- paste0("xml:", s)
+            if(s %in% schema_attributes)
+              s <- paste0("xsi:", s)
             names(attrs) <- s
             suppressWarnings(addAttributes(node, .attrs = attrs))
           }

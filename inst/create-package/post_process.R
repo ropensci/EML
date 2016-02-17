@@ -1,3 +1,7 @@
+set_dummy_class <- function(class, file){
+  write(sprintf("setClass('%s')", class), file, append = TRUE)
+}
+
 
 replace_class <- function(class, new, file){
   R <- readLines(file)
