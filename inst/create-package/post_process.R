@@ -15,8 +15,8 @@ move_to_end <- function(class, file){
 
 drop_method <- function(class, file){
   M <- readLines(file)
-  M <- gsub(sprintf("^setAs\\('%s',.*", class), "", M)
-  M <- gsub(sprintf("setAs\\('XMLInternalElementNode', '%s',.*", class), "", M)
+#  M <- gsub(sprintf("^setAs\\('%s',.*", class), "", M)
+#  M <- gsub(sprintf("setAs\\('XMLInternalNode', '%s',.*", class), "", M)
   M <- gsub(sprintf("setMethod\\(initialize, '%s'.*", class), "", M)
   write(M, file)
 }

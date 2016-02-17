@@ -9,7 +9,7 @@ xml_tests <- xml_tests[- which(xml_tests == "eml-unitDictionary.xml")]
 
 
 out <- lapply(xml_tests,
- #             purrr::safely(
+             purrr::safely(
                 function(xml){
 
   testthat::test_that(xml, {
@@ -20,11 +20,8 @@ out <- lapply(xml_tests,
     ## Test: can we parse into S4?
     s4 <- as(node, xmlName(node))
     ## Test: can we transform back into XML?
-    element <- as(s4, "XMLInternalElementNode")
-
-
+    element <- as(s4, "XMLInternalNode")
     ## Test: is our XML still schema-valid?
-
     ## preserve the namespace of the input
     ns <- xmlNamespaces(node)
     xmlNamespaces(element) <- ns
@@ -38,21 +35,26 @@ out <- lapply(xml_tests,
     setXMLNamespace(element, ns_1)
     saveXML(xmlDoc(element), "test.xml")
 
-    v <- eml_validate("test.xml")
-    testthat::expect_equal(v$status, 0)
-
     all_elements <- xpathSApply(xmlParse(f), "//*", xmlName)
     all_elements2 <- xpathSApply(xmlDoc(element), "//*", xmlName)
     ## identical number of elements
-#    testthat::expect_identical(length(all_elements), length(all_elements2))
+    testthat::expect_identical(length(all_elements), length(all_elements2))
     ## identical modulo order
-#    testthat::expect_identical(sort(all_elements), sort(all_elements2))
-    ## strictly identical
-#    testthat::expect_identical(all_elements, all_elements2)
+    testthat::expect_identical(sort(all_elements), sort(all_elements2))
+    ## strictly identical:
+    testthat::expect_identical(all_elements, all_elements2)
+
+
+    v <- eml_validate("test.xml")
+    testthat::expect_equal(v$status, 0)
+
+
   })
                     }
-#)
 )
+)
+
+## purrr::compact(lapply(out, `[[`, "error"))
 
 # length differs for: 'eml-i18n.xml', 'eml-literatureInPress.xml',  'eml-literature.xml', 'eml-text.xml'
 # identical ordering differs for: 'eml-physical.xml'

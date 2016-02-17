@@ -1,8 +1,8 @@
 
 
 set_coerces <- function(class, class_file = "methods.R"){
-  write(sprintf("setAs('%s', 'XMLInternalElementNode',   function(from) S4Toeml(from))", class), class_file, append = TRUE)
-  write(sprintf("setAs('XMLInternalElementNode', '%s',  function(from) emlToS4(from))", class), class_file, append = TRUE)
+  write(sprintf("setAs('%s', 'XMLInternalNode',   function(from) S4Toeml(from))", class), class_file, append = TRUE)
+  write(sprintf("setAs('XMLInternalNode', '%s',  function(from) emlToS4(from))", class), class_file, append = TRUE)
 }
 
 

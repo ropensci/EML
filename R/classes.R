@@ -1,8 +1,7 @@
 
 setClass('xml_attribute', contains = 'character')
 setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
-setClass('any_xml', contains = 'XMLInternalElementNode')
-setClass('InlineType', contains='XMLInternalElementNode')
+setClass('InlineType', contains=c('list'))
 setClass('xs:float', contains = 'numeric')
 setClass('xs:string', contains = 'character')
 setClass('xs:anyURI', contains = 'character')
@@ -102,8 +101,8 @@ setClass('TextType', slots = c('section' = 'ListOfsection', 'para' = 'ListOfpara
 setClass('emphasis', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('literalLayout', slots = c('value' = 'ListOfvalue'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ulink', slots = c('citetitle' = 'ListOfcitetitle', 'url' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('ParagraphType', slots = c('value' = 'ListOfvalue', 'itemizedlist' = 'ListOfitemizedlist', 'orderedlist' = 'ListOforderedlist', 'emphasis' = 'ListOfemphasis', 'subscript' = 'ListOfsubscript', 'superscript' = 'ListOfsuperscript', 'literalLayout' = 'ListOfliteralLayout', 'ulink' = 'ListOfulink', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('SectionType', slots = c('title' = 'character', 'para' = 'ListOfpara', 'section' = 'ListOfsection', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('ParagraphType', contains=c('InlineType'))
+setClass('SectionType', contains=c('InlineType'))
 setClass('listitem', slots = c('para' = 'ListOfpara', 'itemizedlist' = 'ListOfitemizedlist', 'orderedlist' = 'ListOforderedlist'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('ListType', slots = c('listitem' = 'ListOflistitem'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('SubSuperScriptType', slots = c('value' = 'ListOfvalue', 'subscript' = 'ListOfsubscript', 'superscript' = 'ListOfsuperscript', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
@@ -243,7 +242,7 @@ setClass('IDType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('SystemType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('ScopeType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('FunctionType', contains = c('character', 'eml-2.1.1')) ## C
-setClass('InlineType', contains='XMLInternalElementNode')
+setClass('InlineType', contains=c('list'))
 setClass('NonEmptyStringType', contains = c('eml-2.1.1', 'character')) ## C
 setClass('creator', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D
 setClass('metadataProvider', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D

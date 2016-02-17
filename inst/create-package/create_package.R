@@ -21,8 +21,7 @@ xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
   write("
 setClass('xml_attribute', contains = 'character')
 setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', lang = 'xml_attribute'))
-setClass('any_xml', contains = 'XMLInternalElementNode')
-setClass('InlineType', contains='XMLInternalElementNode')",
+setClass('InlineType', contains=c('list'))",
         file, append = TRUE)
 
   ## Define classes for the these XSD schema types to correspond to the appropriate R object class
@@ -76,9 +75,6 @@ move_to_end("proceduralStep", classes_file)
 move_to_end("methodStep", classes_file)
 move_to_end("dataSource", classes_file)
 
-#replace_class("ParagraphType", "setClass('ParagraphType', contains=c('character', 'InlineType'))", classes_file)
-#replace_class("SectionType", "setClass('SectionType', contains=c('character','InlineType'))", classes_file)
-
 replace_class("coverage", "setClass('coverage', contains=c('Coverage'))", classes_file)
 replace_class("temporalCoverage", "setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))", classes_file)
 replace_class("taxonomicCoverage", "setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))", classes_file)
@@ -86,9 +82,8 @@ replace_class("geographicCoverage", "setClass('geographicCoverage', slots = c('s
 replace_class('size', "setClass('size', slots = c('character' = 'character', 'unit' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))", classes_file)
 replace_class('metadata', "setClass('metadata', contains='InlineType')", classes_file)
 replace_class('inline', "setClass('inline', contains='InlineType')", classes_file)
-replace_class('InlineType', "setClass('InlineType', contains='XMLInternalElementNode')", classes_file)
+replace_class('InlineType', "setClass('InlineType', contains=c('list'))", classes_file)
 replace_class('parameter', "setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))", classes_file)
-#replace_class('online', "setClass('online', slots = c('onlineDescription' = 'character', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1'))", classes_file)
 replace_class('online', "setClass('online', contains = c('PhysicalOnlineType', 'OnlineType', 'eml-2.1.1'))", classes_file)
 move_to_end("coverage", classes_file)
 move_to_end("temporalCoverage", classes_file)
@@ -107,15 +102,16 @@ M <- gsub("'complex'", "'eml:complex'", M)
 M <- gsub(".Object@complex", "slot(.Object, 'eml:complex')", M)
 write(M, methods_file)
 
-#drop_method('ParagraphType', methods_file)
-#drop_method('SectionType', methods_file)
-drop_method('metadata', methods_file)
-drop_method('inline', methods_file)
-drop_method('InlineType', methods_file)
+#drop_method('metadata', methods_file)
+#drop_method('inline', methods_file)
+#drop_method('InlineType', methods_file)
 
 
+replace_class("ParagraphType", "setClass('ParagraphType', contains=c('InlineType'))", classes_file)
+replace_class("SectionType", "setClass('SectionType', contains=c('InlineType'))", classes_file)
 
-
+drop_method('ParagraphType', methods_file)
+drop_method('SectionType', methods_file)
 
 
 

@@ -1,13 +1,4 @@
 
-
-## Used as the basis of most (all) coercion methods from EML S4
-## to XML::XMLInternalElementNode class
-##
-## - Will convert only the id to an attribute, everything else is a child node
-## - Cannot be used in coercions to XML because returns null.  Therefore
-## `setAs("someS4class", "XMLInternalElementNode", function(from) S4Toeml(from))`
-## will fail!
-
 #' @import XML
 #' @import methods
 S4Toeml <- function(obj,
@@ -44,50 +35,60 @@ S4Toeml <- function(obj,
     base_attributes = c("lang", "schemaLocation")
 
 
-    who <- who[!(who %in% excluded_slots)] # drop excluded slots
-    for(s in who){
-      ## Attributes
-      if(s %in% attribute_elements){
-        if(length(slot(obj,s)) > 0){
-          attrs <- as.character(slot(obj,s))
-          if(s %in% base_attributes)
-            s <- paste0("xml:", s)
-          names(attrs) <- s
-          addAttributes(node, .attrs = attrs)
-        }
 
-      ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
-      ## pass their children directly to their parent node.
-      } else if(grepl("^[A-Z]", s)){
-        X = slot(obj, s)
-        if(!isEmpty(X)){
-          addChildren(node, S4Toeml(X, node = node))
-        }
-      } else {
-        ## Complex child nodes
-        X = slot(obj, s)
-        if(!isEmpty(X)){
-          if(is(X, "list")){
-            if(is.character(X[[1]]) & length(get_slots(class(X[[1]]))) <= 1)
-              addChildren(node, lapply(X, function(x) newXMLNode(class(x), x)))
-            else
-              addChildren(node, lapply(X, as, "XMLInternalElementNode"))
-          } else if(isS4(X)){
-            addChildren(node, as(slot(obj, s), "XMLInternalElementNode"))
-          ## Simple Child nodes
-          } else if(length(X) > 0){
-             if(s == class(obj)[1] || s == ".Data")              # special case
-              addChildren(node, X)   #
-             else
-              addChildren(node, newXMLNode(s, X))
-          ## No child node
+    if(is(obj, "InlineType")){
+      node <- newXMLNode(node_name, obj)
+    } else {
+
+
+      who <- who[!(who %in% excluded_slots)] # drop excluded slots
+      for(s in who){
+        ## Attributes
+        if(s %in% attribute_elements){
+          if(length(slot(obj,s)) > 0){
+            attrs <- as.character(slot(obj,s))
+            if(s %in% base_attributes)
+              s <- paste0("xml:", s)
+            names(attrs) <- s
+            addAttributes(node, .attrs = attrs)
+          }
+
+        ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
+        ## pass their children directly to their parent node.
+        } else if(grepl("^[A-Z]", s)){
+          X = slot(obj, s)
+          if(!isEmpty(X)){
+            addChildren(node, S4Toeml(X, node = node))
           }
         } else {
-          node
+          ## Complex child nodes
+          X = slot(obj, s)
+          if(!isEmpty(X)){
+#            if(is(X, "InlineType"))
+#              suppressWarnings(addChildren(node, X))
+            if(is(X, "list")){
+              if(is(X[[1]], "InlineType"))
+                addChildren(node, newXMLNode(s, .children = X))
+              else if(is.character(X[[1]]) && length(get_slots(class(X[[1]]))) <= 1)
+                addChildren(node, lapply(X, function(x) newXMLNode(class(x), x)))
+              else
+                addChildren(node, lapply(X, S4Toeml))
+            } else if(isS4(X)){
+              addChildren(node, S4Toeml(slot(obj, s)))
+            ## Simple Child nodes
+            } else if(length(X) > 0){
+               if(s == class(obj)[1] || s == ".Data")              # special case
+                addChildren(node, X)   #
+               else
+                addChildren(node, newXMLNode(s, X))
+            ## No child node
+            }
+          } else {
+            node
+          }
         }
       }
     }
-
 
     node
 }

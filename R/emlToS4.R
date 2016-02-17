@@ -1,4 +1,4 @@
-## Used as the basis for all coercion methods from XML::XMLInternalElementNode
+## Used as the basis for all coercion methods from XML::XMLInternalNode
 ## to EML's S4 objects.
 
 ## Assumes slot is named by the name of the repeated element
@@ -6,6 +6,7 @@
 ## the repeated elements.
 
 #' @import XML
+
 
 emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 
@@ -32,9 +33,11 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     slot(s4, child) <- new("xml_attribute",attrs[[child]])
   }
 
-  ## consider xmlValue assignment if no matches for class
-  if(length(metaclasses) == 0 && length(subclasses) > 0){
- #     s4 <- new(node_name)
+  if(inherits(s4, "InlineType")){
+    kids <- xmlChildren(node)
+    class(kids) <- c("list", "XMLInternalNodeList")
+    s4@.Data  <- kids
+  } else if(length(metaclasses) == 0 && length(subclasses) > 0){
       s4@.Data <- xmlValue(node)
   } else {
 
