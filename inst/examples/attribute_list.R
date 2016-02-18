@@ -24,11 +24,6 @@ get_reference <- function(n, eml){
   eml2:::emlToS4(node)
 }
 
-## should identify all ReferencesGroup elements, and replace them with copy of the
-## node that they reference.
-resolve_references <- function(eml){
-
-}
 
 
 
@@ -80,15 +75,44 @@ purrr::map_df(A, function(a){
   }
 })
 
-## Factors df
-purrr::map_df(A, function(a){
-  name = a@attributeName
-  scale = choice(a@measurementScale)
-  if(scale %in% c("nominal", "ordinal")){
-    b <- slot(a@measurementScale, scale)
-  } else{
-    NULL
-  }
-})
+# ## Factors df
+# purrr::map_df(A, function(a){
+#   name = a@attributeName
+#   scale = choice(a@measurementScale)
+#   if(scale %in% c("nominal", "ordinal")){
+#     b <- slot(a@measurementScale, scale)
+#   } else{
+#     NULL
+#   }
+# })
+#
+# ## times df
+#
 
-## times df
+
+
+
+
+
+
+
+
+
+
+
+
+## should identify all ReferencesGroup elements, and replace them with copy of the
+## node that they reference.
+resolve_references <- function(eml){
+  ## Ideally, just do this all in XML manipulation. Serialize to XML, substitute, and then re-parse.
+  doc = XML::xmlParse(write_eml(eml))
+  ## FIXME: Would need to do xmlRoot and then find all <references> recursively.  whoops.
+  ## This is just a copy of the nodes; changing these values doesn't change `doc`
+  refs <- XML::xpathApply(doc, "//references")
+
+  replace <- lapply(refs, function(ref){
+    id <- xmlValue(ref)
+    nodes <- XML::xpathApply(doc, sprintf("//*[@id = '%s']", id))
+  })
+
+}
