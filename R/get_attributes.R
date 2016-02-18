@@ -1,11 +1,10 @@
-
-
-##library(purrr)
 ## use old-school way to avoid purrr or dplyr dependency
 map_df <- function(x, f, ...){
   do.call(rbind, lapply(x, f, ...))
 }
 
+## cannot subset farther down the tree if no element exists, so this creates a blank element.
+## Consider rolling this into the prototype of all ListOf classes?
 getone <- function(x){
   if(is(x, "list")){
     if(length(x) == 0){
@@ -16,12 +15,14 @@ getone <- function(x){
   x[[1]]
 }
 
+## treat length-zero results like character() as NAs
 or_na <- function(x){
   if(length(x) == 0)
     x <- NA
   x
 }
 
+## Resolve reference nodes into copies of actual metadata nodes.  slow!
 get_reference <- function(n, eml){
   id <- n@ReferencesGroup@references[[1]]
   doc = XML::xmlParse(write_eml(eml))
@@ -30,7 +31,7 @@ get_reference <- function(n, eml){
 }
 
 
-
+## identify which slot(s) (xs:choice child eleemnts) are non-empty
 choice <- function(s4){
   who <- slotNames(class(s4))
   drop <- sapply(who, function(x) isEmpty(slot(s4,x)))
@@ -38,6 +39,8 @@ choice <- function(s4){
 }
 
 
+
+## Functions to extract metadata from EML and return tables
 
 
 attributes <- function(ListOfattribute){
@@ -79,7 +82,6 @@ numeric_attributes <- function(ListOfattribute, eml){
     }
   })
 }
-## Factors df
 
 ## characters
 char_attributes <- function(ListOfattribute, eml){
@@ -106,8 +108,8 @@ char_attributes <- function(ListOfattribute, eml){
     }
   })
 }
-## times df
 
+## datetimes df
 datetime_attributes <- function(ListOfattribute, eml){
 
   map_df(ListOfattribute, function(a){
@@ -135,7 +137,10 @@ datetime_attributes <- function(ListOfattribute, eml){
 
 }
 
+
+## FIXME implement this one
 factor_attributes <- function(A, eml) NULL
+
 
 #' get_attributes
 #'
@@ -175,6 +180,10 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE, com
     list(columns = columns, numerics = numerics, chars = chars, datetimes = datetimes)
   }
 }
+
+## FIXME  need factor_attributes method!
+## method needs more tests against more EML!
+## consider testing against any xsd/test files with attributeList elements?
 
 # eml <- read_eml(system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "eml2"))
 # A = eml@dataset@dataTable[[1]]@attributeList
