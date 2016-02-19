@@ -3,6 +3,29 @@ map_df <- function(x, f, ...){
   do.call(rbind, lapply(x, f, ...))
 }
 
+
+## like 'slot', but never NULL
+get_slot <- function(object, name){
+  out <- slot(object, name)
+  if(is.null(out)){
+    cls <- getSlots(class(object))[[name]]
+    out <- new(cls)
+  }
+  out
+}
+
+get_path <- function(node, path){
+  p <- strsplit(path, "@")[[1]]
+
+  newpath <- paste(p[-1], collapse = "@")
+  newnode <- get_slot(node, p[1])
+
+  if(length(p[-1]) > 0)
+    get_path(newnode, newpath)
+  else
+    newnode
+}
+
 ## cannot subset farther down the tree if no element exists, so this creates a blank element.
 ## Consider rolling this into the prototype of all ListOf classes?
 getone <- function(x){
@@ -45,12 +68,14 @@ choice <- function(s4){
 
 attributes <- function(ListOfattribute){
 map_df(ListOfattribute, function(a)
+  ## FIXME accuracy? coverage? methods?
   data.frame(name = a@attributeName,
              label = or_na(getone(a@attributeLabel)@.Data),      # optional, can repeat (though goodness knows why)
              type = or_na(getone(a@storageType)@.Data),          # optional, can repeat (though goodness knows why)
-             missing = or_na(getone(a@missingValueCode)@.Data),  # optional, can actually be multiple
+             missing = or_na(getone(a@missingValueCode)@code),  # optional, can actually be multiple
+             codeExplanation = or_na(getone(a@missingValueCode)@codeExplanation),  # optional, can actually be multiple
              scale = choice(a@measurementScale),
-             def = a@attributeDefinition,
+             definition = a@attributeDefinition,
              stringsAsFactors = FALSE))
 }
 
@@ -73,8 +98,8 @@ numeric_attributes <- function(ListOfattribute, eml){
                  unit = or_na(slot(b@unit, choice(b@unit))@.Data),
                  precision = as.numeric(or_na(b@precision@.Data)),
                  type = or_na(b@numericDomain@numberType@.Data),
-                 lower_bound = or_na(bounds@minimum@.Data), # leave as char for joining with datetime bounds
-                 upper_bound = or_na(bounds@maximum@.Data),
+                 minimum = or_na(bounds@minimum@.Data), # leave as char for joining with datetime bounds
+                 maximum = or_na(bounds@maximum@.Data),
         stringsAsFactors = FALSE)
 
     } else {
@@ -96,7 +121,7 @@ char_attributes <- function(ListOfattribute, eml){
       if("textDomain" %in% s){
         textDomain <- getone(b@nonNumericDomain@textDomain)  ## FIXME can this really be multiple?
         data.frame(name = name,
-                   definition = textDomain@definition,
+                   text_definition = textDomain@definition,
                    pattern = or_na(textDomain@pattern),
                    source = or_na(textDomain@source),
                    stringsAsFactors = FALSE)
@@ -114,6 +139,7 @@ datetime_attributes <- function(ListOfattribute, eml){
 
   map_df(ListOfattribute, function(a){
     name = a@attributeName
+    print(name)
     scale = choice(a@measurementScale)
     if(scale %in% c("dateTime")){
       b <- slot(a@measurementScale, scale)
@@ -121,13 +147,13 @@ datetime_attributes <- function(ListOfattribute, eml){
       if( "ReferencesGroup" %in% choice(b@dateTimeDomain) )
         b@dateTimeDomain <- get_reference(b@dateTimeDomain, eml)
 
-      bounds <- getone(b@dateTimeDomain@BoundsDateGroup@bounds)
+      bounds <- getone(get_path(b, "dateTimeDomain@BoundsDateGroup@bounds"))
 
       data.frame(name = name,
                  formatString = b@formatString,
-                 precision = as.numeric(b@dateTimePrecision),
-                 lower_bound = or_na(bounds@minimum@.Data), # time string, best left as character
-                 upper_bound = or_na(bounds@maximum@.Data),
+                 precision = as.numeric(or_na(b@dateTimePrecision)),
+                 minimum = or_na(bounds@minimum@.Data), # time string, best left as character
+                 maximum = or_na(bounds@maximum@.Data),
                  stringsAsFactors = FALSE)
 
     } else{
@@ -139,7 +165,42 @@ datetime_attributes <- function(ListOfattribute, eml){
 
 
 ## FIXME implement this one
-factor_attributes <- function(A, eml) NULL
+factor_attributes <- function(ListOfattribute, eml){
+  map_df(ListOfattribute, function(a){
+    name = a@attributeName
+    scale = choice(a@measurementScale)
+    if(scale %in% c("nominal", "ordinal")){
+      b <- slot(a@measurementScale, scale)
+
+      if( "ReferencesGroup" %in% choice(b@nonNumericDomain) )
+        b@nonNumericDomain <- get_reference(b@nonNumericDomain, eml)
+
+      s <- choice(b@nonNumericDomain)
+      if("enumeratedDomain" %in% s){
+        d <- slot(b@nonNumericDomain, s)
+        s <- choice(d[[1]]) # FIXME: what to do about multiple enumeratedDomain elements?
+        if("codeDefinition" %in% s){
+          data.frame(name = name, codedef_to_df(d[[1]]@codeDefinition))
+        } else if("externalCodeSet" %in% s){
+          NULL
+        } else if("entityCodeList" %in% s){
+          NULL
+        }
+      }
+      else {
+        NULL
+      }
+    } else {
+      NULL
+    }
+  })
+}
+
+codedef_to_df <- function(codeDefinition){
+  map_df(unname(codeDefinition), function(x)
+    data.frame(code = x@code, definition = x@definition, stringsAsFactors = FALSE)
+  )
+}
 
 
 #' get_attributes
@@ -167,6 +228,7 @@ factor_attributes <- function(A, eml) NULL
 #' }
 get_attributes <- function(attributeList, eml = attributeList, join = FALSE, compact = FALSE){
   A <- attributeList@attribute
+  A <- unname(A) # avoid row-names 'attribute','attribute1' etc
   columns <- attributes(A)
   numerics <- numeric_attributes(A, eml)
   chars <- char_attributes(A, eml)
@@ -177,7 +239,8 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE, com
   if(join){
     merge(merge(merge(columns, units, all = TRUE), chars, all = TRUE), datetimes, all = TRUE)
   } else {
-    list(columns = columns, numerics = numerics, chars = chars, datetimes = datetimes)
+    list(columns = columns, numerics = numerics,
+         chars = chars, datetimes = datetimes, factors = factors)
   }
 }
 
@@ -189,4 +252,4 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE, com
 # A = eml@dataset@dataTable[[1]]@attributeList
 # get_attributes(A)
 
-
+# eml <- read_eml(system.file("xsd/test/eml-i18n.xml", package = "eml2"))
