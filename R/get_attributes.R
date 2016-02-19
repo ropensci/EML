@@ -68,14 +68,15 @@ choice <- function(s4){
 
 attributes <- function(ListOfattribute){
 map_df(ListOfattribute, function(a)
-  ## FIXME accuracy? coverage? methods?
-  data.frame(name = a@attributeName,
-             label = or_na(getone(a@attributeLabel)@.Data),      # optional, can repeat (though goodness knows why)
-             type = or_na(getone(a@storageType)@.Data),          # optional, can repeat (though goodness knows why)
-             missing = or_na(getone(a@missingValueCode)@code),  # optional, can actually be multiple
+  ## FIXME what about accuracy? coverage? methods?  Hard to represent in table
+  ## FIXME would be nice to know whether nominal/ordinals are text or enumerated domain
+  data.frame(attributeName = a@attributeName,
+             attributeLabel = or_na(getone(a@attributeLabel)@.Data),      # optional, can repeat (though goodness knows why)
+             storageType = or_na(getone(a@storageType)@.Data),          # optional, can repeat (though goodness knows why)
+             missing_code = or_na(getone(a@missingValueCode)@code),  # optional, can actually be multiple
              codeExplanation = or_na(getone(a@missingValueCode)@codeExplanation),  # optional, can actually be multiple
-             scale = choice(a@measurementScale),
-             definition = a@attributeDefinition,
+             measurementScale = choice(a@measurementScale),
+             attributeDefinition = a@attributeDefinition,
              stringsAsFactors = FALSE))
 }
 
@@ -94,10 +95,10 @@ numeric_attributes <- function(ListOfattribute, eml){
       ## FIXME can really have multiple bounds?
       bounds <- getone(b@numericDomain@BoundsGroup@bounds)
 
-      data.frame(name = name,
+      data.frame(attributeName = name,
                  unit = or_na(slot(b@unit, choice(b@unit))@.Data),
                  precision = as.numeric(or_na(b@precision@.Data)),
-                 type = or_na(b@numericDomain@numberType@.Data),
+                 numberType = or_na(b@numericDomain@numberType@.Data),
                  minimum = or_na(bounds@minimum@.Data), # leave as char for joining with datetime bounds
                  maximum = or_na(bounds@maximum@.Data),
         stringsAsFactors = FALSE)
@@ -120,8 +121,8 @@ char_attributes <- function(ListOfattribute, eml){
       s <- choice(b@nonNumericDomain)
       if("textDomain" %in% s){
         textDomain <- getone(b@nonNumericDomain@textDomain)  ## FIXME can this really be multiple?
-        data.frame(name = name,
-                   text_definition = textDomain@definition,
+        data.frame(attributeName = name,
+                   definition = textDomain@definition,
                    pattern = or_na(textDomain@pattern),
                    source = or_na(textDomain@source),
                    stringsAsFactors = FALSE)
@@ -139,7 +140,6 @@ datetime_attributes <- function(ListOfattribute, eml){
 
   map_df(ListOfattribute, function(a){
     name = a@attributeName
-    print(name)
     scale = choice(a@measurementScale)
     if(scale %in% c("dateTime")){
       b <- slot(a@measurementScale, scale)
@@ -180,7 +180,7 @@ factor_attributes <- function(ListOfattribute, eml){
         d <- slot(b@nonNumericDomain, s)
         s <- choice(d[[1]]) # FIXME: what to do about multiple enumeratedDomain elements?
         if("codeDefinition" %in% s){
-          data.frame(name = name, codedef_to_df(d[[1]]@codeDefinition))
+          data.frame(attributeName = name, codedef_to_df(d[[1]]@codeDefinition))
         } else if("externalCodeSet" %in% s){
           NULL
         } else if("entityCodeList" %in% s){
@@ -211,7 +211,6 @@ codedef_to_df <- function(codeDefinition){
 #' @param join logical, default FALSE. Should the resulting data frames for each
 #' attribute type (~column class, numeric, charcters, datetimes, factors) be joined
 #' into a single data frame or returned in separate data frames?
-#' @param compact logical, default FALSE. Should any columns with only missing metadata be dropped?
 #' @return a data frame whose rows are the attributes (names of each column in the data file)
 #' and whose columns describe metadata about those attributes.  By default separate tables
 #' are given for each type
@@ -226,7 +225,7 @@ codedef_to_df <- function(codeDefinition){
 #' get_attributes( eml@@dataset@@dataTable[[1]]@@attributeList )
 #'
 #' }
-get_attributes <- function(attributeList, eml = attributeList, join = FALSE, compact = FALSE){
+get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
   A <- attributeList@attribute
   A <- unname(A) # avoid row-names 'attribute','attribute1' etc
   columns <- attributes(A)
@@ -235,9 +234,10 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE, com
   datetimes <- datetime_attributes(A, eml)
   factors <- factor_attributes(A, eml)
 
-  ## FIXME Consider compacting each data.frame to drop any columns of all NAs (optional)
-  if(join){
-    merge(merge(merge(columns, units, all = TRUE), chars, all = TRUE), datetimes, all = TRUE)
+
+  if(join){ # Provide factor table separately
+    list(attributes = merge(merge(merge(columns, units, all = TRUE), chars, all = TRUE), datetimes, all = TRUE),
+         factors = factors)
   } else {
     list(columns = columns, numerics = numerics,
          chars = chars, datetimes = datetimes, factors = factors)
@@ -253,3 +253,5 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE, com
 # get_attributes(A)
 
 # eml <- read_eml(system.file("xsd/test/eml-i18n.xml", package = "eml2"))
+# A = eml@dataset@dataTable[[1]]@attributeList
+# get_attributes(A)
