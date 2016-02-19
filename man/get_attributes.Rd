@@ -4,8 +4,7 @@
 \alias{get_attributes}
 \title{get_attributes}
 \usage{
-get_attributes(attributeList, eml = attributeList, join = FALSE,
-  compact = FALSE)
+get_attributes(attributeList, eml = attributeList, join = FALSE)
 }
 \arguments{
 \item{attributeList}{an "attributeList" element from EML}
@@ -15,8 +14,6 @@ get_attributes(attributeList, eml = attributeList, join = FALSE,
 \item{join}{logical, default FALSE. Should the resulting data frames for each
 attribute type (~column class, numeric, charcters, datetimes, factors) be joined
 into a single data frame or returned in separate data frames?}
-
-\item{compact}{logical, default FALSE. Should any columns with only missing metadata be dropped?}
 }
 \value{
 a data frame whose rows are the attributes (names of each column in the data file)

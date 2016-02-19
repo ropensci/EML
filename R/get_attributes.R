@@ -236,11 +236,12 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
 
 
   if(join){ # Provide factor table separately
-    list(attributes = merge(merge(merge(columns, units, all = TRUE), chars, all = TRUE), datetimes, all = TRUE),
+    list(attributes = merge(merge(merge(columns, numerics, all = TRUE), chars, all = TRUE), datetimes, all = TRUE),
          factors = factors)
   } else {
     list(columns = columns, numerics = numerics,
-         chars = chars, datetimes = datetimes, factors = factors)
+         chars = chars, datetimes = datetimes,
+         factors = factors)
   }
 }
 
