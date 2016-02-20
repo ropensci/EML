@@ -41,7 +41,7 @@ getone <- function(x){
 ## treat length-zero results like character() as NAs
 or_na <- function(x){
   if(length(x) == 0)
-    x <- NA
+    x <- as.character(NA) # avoid being a logical
   x
 }
 
@@ -66,15 +66,15 @@ choice <- function(s4){
 ## Functions to extract metadata from EML and return tables
 
 
-attributes <- function(ListOfattribute){
+column_attributes <- function(ListOfattribute){
 map_df(ListOfattribute, function(a)
   ## FIXME what about accuracy? coverage? methods?  Hard to represent in table
   ## FIXME would be nice to know whether nominal/ordinals are text or enumerated domain
   data.frame(attributeName = a@attributeName,
              attributeLabel = or_na(getone(a@attributeLabel)@.Data),      # optional, can repeat (though goodness knows why)
              storageType = or_na(getone(a@storageType)@.Data),          # optional, can repeat (though goodness knows why)
-             missing_code = or_na(getone(a@missingValueCode)@code),  # optional, can actually be multiple
-             codeExplanation = or_na(getone(a@missingValueCode)@codeExplanation),  # optional, can actually be multiple
+             missingValueCode = or_na(getone(a@missingValueCode)@code),  # optional, can actually be multiple
+             missingValueCodeExplanation = or_na(getone(a@missingValueCode)@codeExplanation),  # optional, can actually be multiple
              measurementScale = choice(a@measurementScale),
              attributeDefinition = a@attributeDefinition,
              stringsAsFactors = FALSE))
@@ -101,6 +101,7 @@ numeric_attributes <- function(ListOfattribute, eml){
                  numberType = or_na(b@numericDomain@numberType@.Data),
                  minimum = or_na(bounds@minimum@.Data), # leave as char for joining with datetime bounds
                  maximum = or_na(bounds@maximum@.Data),
+                 domain = "numericDomain",
         stringsAsFactors = FALSE)
 
     } else {
@@ -123,11 +124,16 @@ char_attributes <- function(ListOfattribute, eml){
         textDomain <- getone(b@nonNumericDomain@textDomain)  ## FIXME can this really be multiple?
         data.frame(attributeName = name,
                    definition = textDomain@definition,
-                   pattern = or_na(textDomain@pattern),
+                   pattern = or_na(getone(textDomain@pattern)@.Data),
                    source = or_na(textDomain@source),
+                   domain = "textDomain",
                    stringsAsFactors = FALSE)
       } else if("enumeratedDomain" %in% s) {
-        NULL
+ #       NULL
+        # Just note the domain, details found in foreign-keyed table
+        data.frame(attributeName = name, domain = "enumeratedDomain",
+                   definition = as.character(NA), pattern = as.character(NA),
+                   source = as.character(NA), stringsAsFactors = FALSE)
       }
     } else{
       NULL
@@ -149,11 +155,12 @@ datetime_attributes <- function(ListOfattribute, eml){
 
       bounds <- getone(get_path(b, "dateTimeDomain@BoundsDateGroup@bounds"))
 
-      data.frame(name = name,
+      data.frame(attributeName = name,
                  formatString = b@formatString,
                  precision = as.numeric(or_na(b@dateTimePrecision)),
                  minimum = or_na(bounds@minimum@.Data), # time string, best left as character
                  maximum = or_na(bounds@maximum@.Data),
+                 domain = "dateTimeDomain",
                  stringsAsFactors = FALSE)
 
     } else{
@@ -228,7 +235,7 @@ codedef_to_df <- function(codeDefinition){
 get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
   A <- attributeList@attribute
   A <- unname(A) # avoid row-names 'attribute','attribute1' etc
-  columns <- attributes(A)
+  columns <- column_attributes(A)
   numerics <- numeric_attributes(A, eml)
   chars <- char_attributes(A, eml)
   datetimes <- datetime_attributes(A, eml)
@@ -236,7 +243,7 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
 
 
   if(join){ # Provide factor table separately
-    list(attributes = merge(merge(merge(columns, numerics, all = TRUE), chars, all = TRUE), datetimes, all = TRUE),
+    list(attributes = merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), columns, all = TRUE),
          factors = factors)
   } else {
     list(columns = columns, numerics = numerics,
@@ -244,6 +251,8 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
          factors = factors)
   }
 }
+
+## columns %>% dplyr::full_join(numerics) %>% dplyr::full_join(chars) %>% dplyr::full_join(datetimes)
 
 ## FIXME  need factor_attributes method!
 ## method needs more tests against more EML!
