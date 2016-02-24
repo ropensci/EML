@@ -3,6 +3,7 @@
 export(eml_validate)
 export(get_attributes)
 export(read_eml)
+export(set_attributes)
 export(write_eml)
 import(XML)
 import(methods)

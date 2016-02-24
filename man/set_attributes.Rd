@@ -18,4 +18,26 @@ an eml "attributeList" object
 \description{
 set_attributes
 }
+\details{
+The attributes data frame must use only the recognized column
+headers shown here.  The attributes data frame must contain columns for required metadata.
+These are:
+
+For all data:
+- attributeName (required)
+- attributeDefinition (required)
+- measurementScale (requred)
+- domain (required)
+
+For numeric (ratio or interval) data:
+- unit (required)
+
+For character (textDomain) data:
+- definition (required)
+
+For dateTime data:
+- formatString (required)
+
+For factor data:
+}
 

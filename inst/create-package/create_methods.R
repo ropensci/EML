@@ -13,9 +13,18 @@ create_initialize_method <- function(slots, class, methods_file = "methods.R"){
   ## Only define this for classes containing at least one ListOf child
   is_listof <- grepl("ListOf", slots)
   if(any(is_listof)){
-
-    out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, %s){", class, print_init(slots)),
+    if(inherits(class, "character"))
+      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = character(), %s){", class, print_init(slots)),
                   sep = "; ")
+    else if(inherits(class, "list"))
+      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = list(), %s){", class, print_init(slots)),
+                    sep = "; ")
+    else if(inherits(class, "numeric"))
+      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = numeric(), %s){", class, print_init(slots)),
+                    sep = "; ")
+    else
+      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, %s){", class, print_init(slots)),
+                    sep = "; ")
 
     list_slots <- slots[is_listof]
 
@@ -32,8 +41,11 @@ create_initialize_method <- function(slots, class, methods_file = "methods.R"){
     for(s in plain_slots){
       out <- paste0(out, sprintf(".Object@%s <- %s", s, s), sep = "; ")
     }
+    if(any(sapply(c("list", "character", "numeric"), function(x) inherits("xml_attribute", x))))
+      out <- paste0(out, ".Object@.Data <- .Data; .Object })")
+    else
+      out <- paste0(out, ".Object })")
 
-    out <- paste0(out, ".Object })")
     write(paste0(out, collapse=";"), methods_file, append = TRUE)
   }
 

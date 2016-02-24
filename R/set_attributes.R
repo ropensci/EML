@@ -28,6 +28,7 @@
 #' For factor data:
 #'
 #' @return an eml "attributeList" object
+#' @export
 set_attributes <- function(attributes, factors){
 
   ##  check attributes data.frame.  must declare required columns: attributeName
@@ -50,7 +51,6 @@ na2empty <- function(x){
 
 set_attribute <- function(row, factors){
   s <- row[["measurementScale"]]
-  print(row)
 
 
   if(s %in% c("ratio", "interval")){
@@ -126,7 +126,7 @@ set_enumeratedDomain <- function(row, factors){
 
 set_BoundsGroup <- function(row, cls = "BoundsGroup"){
   new(cls,
-      list(new("bounds",
+      bounds = list(new("bounds",
                minimum = new("minimum", na2empty(row[["minimum"]]),
                              exclusive = new("xml_attribute", "false")),
                maximum = new("maximum", na2empty(row[["maximum"]]),

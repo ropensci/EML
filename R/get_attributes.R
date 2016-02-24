@@ -235,7 +235,7 @@ codedef_to_df <- function(codeDefinition){
 get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
   A <- attributeList@attribute
   A <- unname(A) # avoid row-names 'attribute','attribute1' etc
-  columns <- column_attributes(A)
+  column_meta <- column_attributes(A)
   numerics <- numeric_attributes(A, eml)
   chars <- char_attributes(A, eml)
   datetimes <- datetime_attributes(A, eml)
@@ -243,10 +243,10 @@ get_attributes <- function(attributeList, eml = attributeList, join = FALSE){
 
 
   if(join){ # Provide factor table separately
-    list(attributes = merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), columns, all = TRUE),
+    list(attributes = merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), column_meta, all = TRUE),
          factors = factors)
   } else {
-    list(columns = columns, numerics = numerics,
+    list(columns = column_meta, numerics = numerics,
          chars = chars, datetimes = datetimes,
          factors = factors)
   }
