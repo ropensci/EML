@@ -3,20 +3,28 @@
 
 setOldClass("person")
 setAs("person", "ResponsibleParty", function(from){
-  if(length(from) == 1){
     new("ResponsibleParty",
-        individualName = new("individualName",
+        individualName = c(new("individualName",
                              "givenName" = as.character(from$given),
-                             "surName" = as(from$family, "surName")),
+                             "surName" = as(from$family, "surName"))),
         electronicMailAddress = as.character(from$email))
-  } else if(length(from) > 1){
-    new("ListOfresponsibleParty", lapply(from, as, "responsibleParty"))
-  } else if(length(from) < 1){
-    new("responsibleParty")
-  }
+})
 
+setAs("person", "associatedParty", function(from){
+  new("associatedParty",
+      ResponsibleParty =  as(from, "ResponsibleParty"),
+      role = new("role", from$role))
 })
 
 
 from = as.person("Carl Boettiger <cboettig@gmail.com>")
 as(from, "ResponsibleParty")
+
+as(as(from, "ResponsibleParty"), "contact")
+
+x = as.person("Carl Boettiger <cboettig@gmail.com> [ctb]")
+as(x, "associatedParty")
+
+
+x = as.person("Carl David Boettiger <cboettig@gmail.com> [ctb]")
+as(x, "associatedParty")

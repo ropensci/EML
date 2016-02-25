@@ -1,3 +1,5 @@
+base_types <- c("xml_attribute")
+
 set_coerces <- function(class, class_file = "methods.R"){
   write(sprintf("setAs('%s', 'XMLInternalNode',   function(from) S4Toeml(from))", class), class_file, append = TRUE)
   write(sprintf("setAs('XMLInternalNode', '%s',  function(from) emlToS4(from))", class), class_file, append = TRUE)
@@ -43,7 +45,13 @@ create_initialize_method <- function(slots, class, methods_file = "methods.R"){
     plain_slots <- names(slots[!is_listof])
 
     for(s in plain_slots){
-      out <- paste0(out, sprintf(".Object@%s <- as(%s, '%s')", s, s, slots[s]), sep = "; ")
+      if(slots[s] %in% base_types)
+        to <- slots[s]
+      else if(s == "language")
+        to <- "eml:language"
+      else
+        to <- s
+      out <- paste0(out, sprintf(".Object@%s <- as(%s, '%s')", s, s, to), sep = "; ")
     }
     if(any(sapply(c("list", "character", "numeric"), function(x) inherits("xml_attribute", x))))
       out <- paste0(out, ".Object@.Data <- .Data; .Object })")

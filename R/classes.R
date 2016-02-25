@@ -262,7 +262,7 @@ setClass('creator', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D
 setClass('metadataProvider', contains = c('eml-2.1.1', 'ResponsibleParty')) ## D
 setClass('role', contains = c('eml-2.1.1', 'RoleType')) ## D
 setClass('pubDate', contains = c('eml-2.1.1', 'yearDate')) ## D
-setClass('eml:language', contains = c('eml-2.1.1', 'i18nNonEmptyStringType')) ## D
+setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1', 'character',  'i18nNonEmptyStringType'))
 setClass('abstract', contains = c('eml-2.1.1', 'TextType')) ## D
 setClass('additionalInfo', contains = c('eml-2.1.1', 'TextType')) ## D
 setClass('intellectualRights', contains = c('eml-2.1.1', 'TextType')) ## D
@@ -669,7 +669,7 @@ setClass('checksum', contains = c('eml-2.1.1', 'character')) ## B
 setClass('licenseURL', contains = c('eml-2.1.1', 'character')) ## B
 setClass('license', contains = c('eml-2.1.1', 'character')) ## B
 setClass('version', contains = c('eml-2.1.1', 'character')) ## B
-setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1', 'character',  'i18nNonEmptyStringType'))
 setClass('Action', contains = c('eml-2.1.1', 'character')) ## C
 setClass('implementation', slots = c('distribution' = 'ListOfdistribution', 'size' = 'character', 'language' = 'ListOflanguage', 'operatingSystem' = 'ListOfoperatingSystem', 'machineProcessor' = 'ListOfmachineProcessor', 'virtualMachine' = 'character', 'diskUsage' = 'character', 'runtimeMemoryUsage' = 'character', 'programmingLanguage' = 'ListOfprogrammingLanguage', 'checksum' = 'character'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('SoftwareType', slots = c('ResourceGroup' = 'ResourceGroup', 'implementation' = 'ListOfimplementation', 'licenseURL' = 'ListOflicenseURL', 'license' = 'ListOflicense', 'version' = 'character', 'project' = 'ResearchProjectType', 'ReferencesGroup' = 'ReferencesGroup', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A

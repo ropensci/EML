@@ -165,10 +165,10 @@ write(M, methods_file)
 
 replace_class("ParagraphType", "setClass('ParagraphType', contains=c('InlineType'))", classes_file)
 replace_class("SectionType", "setClass('SectionType', contains=c('InlineType'))", classes_file)
+replace_class("eml:language", "setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1', 'character',  'i18nNonEmptyStringType'))", classes_file)
 
 drop_method('ParagraphType', methods_file)
 drop_method('SectionType', methods_file)
-
 
 
 
