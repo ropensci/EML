@@ -1,16 +1,39 @@
-set_dummy_class <- function(class, file){
+set_dummy_class <- function(class, file = "R/classes.R"){
   write(sprintf("setClass('%s')", class), file, append = TRUE)
 }
 
 
-replace_class <- function(class, new, file){
+replace_class <- function(class, new, file = "R/classes.R"){
   R <- readLines(file)
   R <- gsub(sprintf("^setClass\\('%s'.*", class), new, R)
   write(R, file)
 }
 
 
-move_to_end <- function(class, file){
+move_up_n <- function(class, file = "R/classes.R", n = 2){
+  R <- readLines(file)
+  N <- length(R)
+  i <- grep(sprintf("^setClass\\('%s'.*", class), R)[[1]]
+  write(c(R[1:(i-n)], R[i], R[(i-n+1):(i-1)], R[(i+1):N]), file)
+}
+
+
+move_down_n <- function(class, file = "R/classes.R", n = 2){
+  R <- readLines(file)
+  N <- length(R)
+  i <- grep(sprintf("^setClass\\('%s'.*", class), R)[[1]]
+  write(c(R[1:(i-1)], R[(i+1):(i+n)], R[i], R[(i+n+1):N]), file)
+}
+
+
+move_to_top <- function(class, file = "R/classes.R"){
+  R <- readLines(file)
+  i <- grep(sprintf("^setClass\\('%s'.*", class), R)
+  write(c(R[i], R[-i]), file)
+}
+
+
+move_to_end <- function(class, file = "R/classes.R"){
   R <- readLines(file)
   i <- grep(sprintf("^setClass\\('%s'.*", class), R)
   write(c(R[-i], R[i]), file)

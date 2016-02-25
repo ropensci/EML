@@ -4,5 +4,6 @@
 ^README-.*\.png$
 inst/xsd/lib
 inst/xsd/docs
+inst/xsd/test/org
 inst/xsd/src
 ^\.travis\.yml$

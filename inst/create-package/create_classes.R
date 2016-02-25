@@ -40,10 +40,13 @@ replace_character_type <- function(type){
 
 #### Functions that write R code as output #############################
 
-set_class_list <- function(class, cf = "classes.R"){
+set_class_list <- function(class, cf = "classes.R", mf = "methods.R"){
   base <- gsub("^ListOf", "", class)
   write(sprintf("setClass('%s', contains = 'list', validity = function(object){ if(!all(sapply(object, is, '%s'))){ 'not all elements are %s objects'; } else { TRUE }})",
                 class, base, base), "list-classes.R", append = TRUE)
+
+  create_concat_method(base, mf)
+
 }
 
 
@@ -92,7 +95,7 @@ parse_element <- function(node, ns, cf = "classes.R", mf = "methods.R", maxOccur
         type <- paste0("ListOf", strip_namespace(name))
 
         ## Side effect: declare any ListOf type
-        set_class_list(type, cf = cf)
+        set_class_list(type, cf = cf, mf = mf)
       }
     }
     slots <- setNames(type, name)

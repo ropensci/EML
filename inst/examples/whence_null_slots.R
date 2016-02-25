@@ -5,6 +5,12 @@ x <- new("testclass")
 class(x@slotA)
 
 
+setClass("metaclass", contains = "testclass")
+x <- new("metaclass")
+class(x@slotA)
+
+
+
 setClass("testclassB", slots = c("slotA" = "slotA", "slotB" = "character"))
 x <- new("testclassB", slotB = "stuff")
 class(x@slotA)

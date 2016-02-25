@@ -17,7 +17,7 @@ file.remove(methods_file)
 
 
 ## Create some boilerplate classes:
-xs_base_classes <- function(file = "classes.R", methods_file = "R/methods.R"){
+xs_base_classes <- function(file = "R/classes.R", methods_file = "R/methods.R"){
 
   write("
 setClass('xml_attribute', contains = 'character')
@@ -36,19 +36,6 @@ setClass('InlineType', contains=c('list'))",
 }
 
 xs_base_classes(classes_file)
-
-c("ListOfvalue","ReferencesGroup", "Coverage", "OfflineType","OnlineType","UrlType","ConnectionType",
-  "horizCoordSysType", "CardinalityChildOccurancesType", "SingleDateTimeType",
-  "MethodsType", "ConstraintBaseGroup", "ForeignKeyGroup","GRingType","PhysicalOnlineType",
-  "Action", "NonNumericDomainType","UnitType","PrecisionType", "NumericDomainType",
-  "EntityGroup", "DateTimeDomainType","Accuracy","NumberType","BoundsDateGroup", "BoundsGroup",
-  "CitationType", "PhysicalType", "DatasetType","DataQuality","TopologyLevel","ImagingConditionCode",
-  "CellGeometryType", "ImagingConditionCode", "MaintenanceType","MaintUpFreqType",
-  "metadata","ConnectionDefinitionType","Article","Chapter","Book","Manuscript","Report","Thesis",
-  "ConferenceProceedings","PersonalCommunication","Map","Generic","AudioVisual","Presentation") %>%
-  purrr::map(set_dummy_class, "header.R")
-
-
 
 
 ## This call to create_classes needs to pass a custom namespace
@@ -86,6 +73,10 @@ collate <- c(
 paste0("inst/xsd/", collate) %>% map(create_classes, cf = classes_file, mf = methods_file)
 
 fix_protected(classes_file)
+
+
+## Goodness grief, fix ordering so that classes can load with no errors or warning (dependent classes must be defined first!)
+
 move_to_end("proceduralStep", classes_file)
 move_to_end("methodStep", classes_file)
 move_to_end("dataSource", classes_file)
@@ -105,10 +96,57 @@ move_to_end("coverage", classes_file)
 move_to_end("temporalCoverage", classes_file)
 move_to_end("taxonomicCoverage", classes_file)
 move_to_end("geographicCoverage", classes_file)
-move_to_end("metadata", classes_file)
 move_to_end("inline", classes_file)
 move_to_end("parameter", classes_file)
 move_to_end("online", classes_file)
+move_to_end("metadata", classes_file)
+move_to_end("additionalMetadata", classes_file)
+move_up_n("UrlType", classes_file, 8)
+move_up_n("schemeName", classes_file, 3)
+move_up_n("ConnectionDefinitionType", classes_file, 4)
+move_up_n("ConnectionType", classes_file, 5)
+move_up_n("OfflineType", classes_file, 3)
+move_up_n("OnlineType", classes_file, 3)
+move_down_n("SpatialReferenceType", classes_file, 14)
+move_down_n("foreignKey", classes_file, 10)
+move_down_n("joinCondition", classes_file, 8)
+move_down_n("ConstraintType", classes_file, 7)
+move_up_n("CardinalityChildOccurancesType", classes_file, 12)
+move_up_n("SingleDateTimeType", classes_file, 5)
+move_up_n("alternativeTimeScale", classes_file, 5)
+move_up_n("PhysicalOnlineType", classes_file, 2)
+move_up_n("Action", classes_file, 6)
+move_down_n("CitationType", classes_file, 14)
+move_up_n("NonNumericDomainType", classes_file, 18)
+move_up_n("NumericDomainType", classes_file, 18)
+move_up_n("DateTimeDomainType", classes_file, 18)
+move_up_n("UnitType", classes_file, 12)
+move_up_n("BoundsGroup", classes_file, 25)
+move_up_n("BoundsDateGroup", classes_file, 25)
+move_down_n("AttributeType", classes_file, 3)
+move_down_n("OtherEntityType", classes_file, 2)
+move_down_n("SpatialVectorType", classes_file, 2)
+move_down_n("DatasetType", classes_file, 2)
+move_to_top("MaintUpFreqType", classes_file)
+move_to_top("CellGeometryType", classes_file)
+move_to_top("ImagingConditionCode", classes_file)
+move_to_top("GeometryType", classes_file)
+move_to_top("TopologyLevel", classes_file)
+move_to_top("NumberType", classes_file)
+move_to_top("PrecisionType", classes_file)
+move_to_top("GRingType", classes_file)
+move_to_top("ConstraintBaseGroup", classes_file)
+move_to_top("constraintDescription", classes_file)
+move_to_top("Coverage", classes_file)
+move_to_top("ListOftaxonomicCoverage", classes_file)
+move_to_top("ListOfgeographicCoverage", classes_file)
+move_to_top("ListOftemporalCoverage", classes_file)
+move_to_top("ReferencesGroup", classes_file)
+move_to_top("references", classes_file)
+move_to_top("ListOfvalue", classes_file)
+move_to_top("eml-2.1.1", classes_file)
+move_to_top("xml_attribute", classes_file)
+
 
 
 R <- readLines(classes_file)
@@ -121,13 +159,9 @@ write(R, classes_file)
 ## Fix methods
 M <- readLines(methods_file)
 M <- gsub("'complex'", "'eml:complex'", M)
+M <- gsub("signature\\('language'", "signature('eml:language'", M)
 M <- gsub(".Object@complex", "slot(.Object, 'eml:complex')", M)
 write(M, methods_file)
-
-#drop_method('metadata', methods_file)
-#drop_method('inline', methods_file)
-#drop_method('InlineType', methods_file)
-
 
 replace_class("ParagraphType", "setClass('ParagraphType', contains=c('InlineType'))", classes_file)
 replace_class("SectionType", "setClass('SectionType', contains=c('InlineType'))", classes_file)
@@ -136,11 +170,19 @@ drop_method('ParagraphType', methods_file)
 drop_method('SectionType', methods_file)
 
 
-R <- readLines(classes_file)
-H <- readLines("header.R")
-unlink("header.R")
-write(c(H,R), classes_file)
 
 
+## a method for the methods definitions
+write("
+
+
+c_as <- function(x, cls){
+      if(length(x) > 0)
+      do.call(c, lapply(x, as, cls))
+      else
+      new(paste0('ListOf', cls))
+      }
+
+      ", methods_file, append = TRUE)
 
 

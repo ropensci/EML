@@ -126,11 +126,11 @@ set_enumeratedDomain <- function(row, factors){
 
 set_BoundsGroup <- function(row, cls = "BoundsGroup"){
   new(cls,
-      bounds = list(new("bounds",
+      bounds = as(list(new("bounds",
                minimum = new("minimum", na2empty(row[["minimum"]]),
                              exclusive = new("xml_attribute", "false")),
                maximum = new("maximum", na2empty(row[["maximum"]]),
-                             exclusive = new("xml_attribute", "false")))))
+                             exclusive = new("xml_attribute", "false")))), "ListOfbounds"))
 }
 
 is_customUnit <- function(x){
