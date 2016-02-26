@@ -1,4 +1,4 @@
-library("eml2")
+library("EML")
 
 # Define the metadata shown in "https://raw.githubusercontent.com/ropensci/EML/master/inst/examples/hf205.xml"
 
@@ -37,10 +37,10 @@ keys <-
 description <- "The Geographic region of the kelp bed data extends along the California coast, down through the coast of Baja, Mexico: Central California (Halfmoon Bay to Purisima Point), Southern California (Point Arguello to the United States/Mexico border including the Channel Islands) and Baja California (points south of the United States/Mexico border including several offshore islands)"
 box <- c(-122.44, -117.15, 37.38, 30.00)
 
-eml2:::set_geographicCoverage(box, description)
+EML:::set_geographicCoverage(box, description)
 
 
-eml2:::set_taxonomicCoverage("Sarracenia purpurea")
+EML:::set_taxonomicCoverage("Sarracenia purpurea")
 
 
 

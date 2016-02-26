@@ -21,7 +21,7 @@ If file is not specified, the result is a character string containing
 write_eml
 }
 \examples{
-f <- system.file("xsd/test", "eml.xml", package = "eml2")
+f <- system.file("xsd/test", "eml.xml", package = "EML")
 eml <- read_eml(f)
 write_eml(eml)
 }

@@ -10,7 +10,7 @@ xml_tests <- xml_tests[- which(xml_tests == "eml-unitDictionary.xml")]
 
 out <- lapply(xml_tests, function(xml){
   testthat::test_that(xml, {
-    f <- system.file(paste0("xsd/test/", xml), package = "eml2")
+    f <- system.file(paste0("xsd/test/", xml), package = "EML")
     node <- xmlRoot(xmlParse(f))
     ## This can cause trouble if not namespaced, and is not required
     XML::removeAttributes(node, .attrs = "xsi:schemaLocation")

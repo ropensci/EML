@@ -1,4 +1,4 @@
-Package: eml2
+Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
 Version: 0.1.0.0

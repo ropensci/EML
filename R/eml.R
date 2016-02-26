@@ -9,7 +9,7 @@
 # @importFrom XML xmlRoot xmlParse
 #' @import methods XML
 #' @examples
-#' f <- system.file("xsd/test", "eml.xml", package = "eml2")
+#' f <- system.file("xsd/test", "eml.xml", package = "EML")
 #' eml <- read_eml(f)
 read_eml <- function(file, ...){
   node <- XML::xmlRoot(XML::xmlParse(file, ...))
@@ -29,7 +29,7 @@ read_eml <- function(file, ...){
 #' @import methods XML
 # @importFrom XML saveXML
 #' @examples
-#' f <- system.file("xsd/test", "eml.xml", package = "eml2")
+#' f <- system.file("xsd/test", "eml.xml", package = "EML")
 #' eml <- read_eml(f)
 #' write_eml(eml)
 write_eml <- function(eml, file = NULL, ...){
@@ -46,7 +46,7 @@ write_eml <- function(eml, file = NULL, ...){
 #' @export
 eml_validate <- function(eml){
 
-  schema <- system.file("xsd/eml.xsd", package = "eml2") #"http://ropensci.github.io/EML/eml.xsd"
+  schema <- system.file("xsd/eml.xsd", package = "EML") #"http://ropensci.github.io/EML/eml.xsd"
 
   if(is(eml, "eml"))
     eml <- write_eml(eml)

@@ -18,7 +18,7 @@ an eml object (S4 object)
 read_eml
 }
 \examples{
-f <- system.file("xsd/test", "eml.xml", package = "eml2")
+f <- system.file("xsd/test", "eml.xml", package = "EML")
 eml <- read_eml(f)
 }
 

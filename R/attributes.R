@@ -16,7 +16,7 @@
 #' @examples
 #' \donttest{ # runs > 5s
 #'
-#' eml <- read_eml(system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "eml2"))
+#' eml <- read_eml(system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "EML"))
 #' get_attributes( eml@@dataset@@dataTable[[1]]@@attributeList )
 #'
 #' }
@@ -404,7 +404,7 @@ set_BoundsGroup <- function(row, cls = "BoundsGroup"){
 }
 
 is_customUnit <- function(x){
-  standard_unit_list <- read.csv(system.file("units/standard_unit_list.csv", package = "eml2"))
+  standard_unit_list <- read.csv(system.file("units/standard_unit_list.csv", package = "EML"))
   !(x %in% standard_unit_list[[1]])
 }
 
