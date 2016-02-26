@@ -283,14 +283,14 @@ choice <- function(s4){
 #'
 #' @return an eml "attributeList" object
 #' @export
-set_attributes <- function(attributes, factors, col_classses = NULL){
+set_attributes <- function(attributes, factors, col_classes = NULL){
 
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
   if(! "attributeName" %in% names(attributes))
     stop("attributes table must include an 'attributeName' column")
 
   ## infer "domain" & "measurementScale" given optional column classes
-  if(!is.null(col_classses))
+  if(!is.null(col_classes))
     attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE)
   ## Add NA columns if necessary FIXME some of these can be missing if their class isn't represented, but otherwise must be present
   for(x in c("precision", "minimum", "maximum", "unit", "numberType", "formatString", "definition",

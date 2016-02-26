@@ -42,18 +42,7 @@ eml2:::set_geographicCoverage(box, description)
 
 eml2:::set_taxonomicCoverage("Sarracenia purpurea")
 
-col.defs <- c("run.num" = "which run number (=block). Range: 1 - 6. (integer)",
-              "year" = "year, 2012",
-              "day" = "Julian day. Range: 170 - 209.",
-              "hour.min" = "hour and minute of observation. Range 1 - 2400 (integer)",
-              "i.flag" =  "is variable Real, Interpolated or Bad (character/factor)",
-              "variable" = "what variable being measured in what treatment (character/factor).",
-              "value.i" = "value of measured variable for run.num on year/day/hour.min.")
 
-unit.defs = list("which run number",
-                 "YYYY",
-                 "DDD",
-                 "hhmm")
 
 
 ## attributes table
@@ -119,6 +108,6 @@ data.frame(
 )
 
 
-
+set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "factor"))
 
 
