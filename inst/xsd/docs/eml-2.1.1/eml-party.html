@@ -1,0 +1,964 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-party Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-party</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">
+            The eml-party module - People and organization information
+          </div>
+            
+<p>
+            The eml-party module describes a responsible party 
+            and is typically used to name the creator of a
+            resource or metadata document. A responsible party may be 
+			an individual person, an organization or a named position within
+			an organization. The eml-party module contains detailed contact
+            information. It is used throughout the other EML modules where
+            detailed contact information is needed.
+          </p>
+            
+<p>
+            The eml-party module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This allows
+            a party to be described once, and then used as a reference in
+            other locations within the EML document via its ID.
+          </p>
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-party">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">all datasets</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">yes</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation, eml-resource</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"> View an image of the schema: </td><td class="tablepanel"><a href="eml-party.png" target="offline">eml-party image</a></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Element Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="individualName">individualName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#Person">Person</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                  
+                    
+<p>The individualName
+                field contains subfields so that  a person's name can be broken
+                down into               parts.</p>
+                    
+<p>Note that the the content model for the containing type 
+        allows a sequence of choices for the first
+        element(s): &lt;individualName&gt;, &lt;organizationName&gt; and/or &lt;positionName&gt;. 
+        This means that a parent element (e.g., creator) may use combinations of the 3 sub-elements 
+        to make up a single logical party. For example, a creator with only
+                the individualName of 'Joe Smith' is NOT the same as a
+                creator with the individualName of 'Joe Smith' and the
+                organizationName of 'NSF'. To include both a positionName and
+                 an organizationName as children of a &lt;contact&gt; implies that anyone 
+                currently occupying that positionName at that organizationName 
+                is an appropriate contact.
+                The positionName should not be
+                used in conjunction with individualName unless only that specific
+                individual at that position would be considered appropriate for that
+                designation.   </p>
+                  
+                
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Because this is an 'elementOnly' field, please
+                look at the examples for the subfields 'givenName' and
+                'surName'.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="organizationName">organizationName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                  
+                    
+<p>The responsible party field contains the full
+                name of the organization that is associated with the resource.
+                This field is intended to describe which institution or overall
+                organization is associated with the resource being described.
+               </p>
+                    
+<p>Note that the the content model for the containing type 
+        allows a sequence of choices for the first
+        element(s): &lt;individualName&gt;, &lt;organizationName&gt; and/or &lt;positionName&gt;. 
+        This means that a parent element (e.g., creator) may use combinations of the 3 sub-elements 
+        to make up a single logical party. For example, a creator with only
+                the individualName of 'Joe Smith' is NOT the same as a
+                creator with the individualName of 'Joe Smith' and the
+                organizationName of 'NSF'. To include both a positionName and
+                 an organizationName as children of a &lt;contact&gt; implies that anyone 
+                currently occupying that positionName at that organizationName 
+                is an appropriate contact.
+                The positionName should not be
+                used in conjunction with individualName unless only that specific
+                individual at that position would be considered appropriate for that
+                designation.   </p>
+                  
+                
+<br>
+<span class="boldtext">Example(s): </span>
+<br>National Center for Ecological Analysis and
+                Synthesis<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="positionName">positionName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+                  
+                    
+<p>This field is intended to be used instead of a
+                particular person or full organization name. If the associated
+                person who holds the role changes frequently, then Position
+                Name would be used for consistency. </p>
+                    
+<p>Note that the the content model for the containing type 
+        allows a sequence of choices for the first
+        element(s): &lt;individualName&gt;, &lt;organizationName&gt; and/or &lt;positionName&gt;. 
+        This means that a parent element (e.g., creator) may use combinations of the 3 sub-elements 
+        to make up a single logical party. For example, a creator with only
+                the individualName of 'Joe Smith' is NOT the same as a
+                creator with the individualName of 'Joe Smith' and the
+                organizationName of 'NSF'. To include both a positionName and
+                 an organizationName as children of a &lt;contact&gt; implies that anyone 
+                currently occupying that positionName at that organizationName 
+                is an appropriate contact.
+                The positionName should not be
+                used in conjunction with individualName unless only that specific
+                individual at that position would be considered appropriate for that
+                designation.   </p>
+                  
+                
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Niwot Ridge Data Manager<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="address">address&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#Address">Address</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The address field is a container for multiple
+              subfields that describe the physical or electronic address of the
+              responsible party for a resource.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the subfield examples.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="phone">phone&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#phonetype">phonetype</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">voice</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The phone field describes information about the
+              responsible party's telephone, be it a voice phone, fax, or
+              TTD/TTY type telephone. This field contains an attribute used to
+              identify the type.<br>
+<span class="boldtext">Example(s): </span>
+<br>805-555-2500<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="electronicMailAddress">electronicMailAddress&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The electronic mail address is the email address
+              for the party. It is intended to be an Internet SMTP email
+              address, which should consist of a username followed by the @
+              symbol, followed by the email server domain name address. Other
+              address types are allowable.<br>
+<span class="boldtext">Example(s): </span>
+<br>my-email@mydomain.edu<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="onlineUrl">onlineUrl&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><span class="boldtext">xs:anyURI</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>A link to associated online information, usually
+              a web site. When the party represents an organization, this is
+              the URL to a website or other online information about the
+              organization. If the party is an individual, it might be their
+              personal web site or other related online information about the
+              party.<br>
+<span class="boldtext">Example(s): </span>
+<br>http://www.yourdomain.edu/~doe<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="userId">userId&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#directory">directory</a></td><td class="tablepanel"><span class="plaintext">required</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>An identifier that links this party to a
+              directory of personnel.  Although specific contact information
+              for a party might change, the underlying correspondence to a
+              real individual does not.  This identifier provides a pointer
+              within a personnel directory that may contain further, and possibly
+              more current, information about the party.
+              <br>
+<span class="boldtext">Example(s): </span>
+<br>uid=jtown,o=NCEAS,dc=ecoinformatics,dc=org<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="salutation">salutation&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The salutation field is used in addressing an
+            individual with a particular title, such as Dr., Ms., Mrs., Mr.,
+            etc.<br>
+<span class="boldtext">Example(s): </span>
+<br>Dr.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="givenName">givenName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The given name field can be used for first name of
+            the individual associated with the resource, or for any other names
+            that are not intended to be alphabetized, (as appropriate). Note that 
+            while it is possible  to include all given names in one field (as in the
+            example below), it may be not be good practice to do so. For example, if an 
+            XSL transformation stylesheet were to abbreviate the content of a 
+            givenName to just the first initial, a givenName element that contained 
+            more than one name would not be transformed correctly. <br>
+<span class="boldtext">Example(s): </span>
+<br>Juan Luis<br>Jane<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="surName">surName&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The surname field is used for the last name of the
+            individual associated with the resource. This is typically the family name
+            of an individual, for example, the name by which s/he is referred to in citations.
+            <br>
+<span class="boldtext">Example(s): </span>
+<br>San Gil<br>Curtis-Ainsworth<br>Tao<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="deliveryPoint">deliveryPoint&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The delivery point field is used for the
+              physical address for postal communication. This field is used to
+              accommodate the many different international conventions that are
+              the equivalent to a U.S. 'street address'.<br>
+<span class="boldtext">Example(s): </span>
+<br>7209 Coast Drive, Building 44<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="city">city&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The city field is used for the city name of the
+              contact associated with a particular resource.<br>
+<span class="boldtext">Example(s): </span>
+<br>San Francisco<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="administrativeArea">administrativeArea&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The administrative area field is the equivalent
+              of a 'state' in the U.S., or Province in Canada. This field is
+              intended to accommodate the many types of international
+              administrative areas.<br>
+<span class="boldtext">Example(s): </span>
+<br>Colorado<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="postalCode">postalCode&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The postal code is equivalent to a U.S. zip
+              code, or the number used for routing to an international address.
+              The U.S. postal code should include the 5 digit code plus the 4
+              digit extension.<br>
+<span class="boldtext">Example(s): </span>
+<br>93106-2231<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="country">country&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="eml-resource.html#i18nNonEmptyStringType">res:i18nNonEmptyStringType</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The country field is used for the name of the
+              contact's country.<br>
+<span class="boldtext">Example(s): </span>
+<br>U.S.A.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="party">party&nbsp; </a></td><td class="tablehead" colspan="1">This element has no default value.</td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext">Type: </span><a class="sitelink" href="#ResponsibleParty">ResponsibleParty</a></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The responsible party contains multiple
+        subfields that are used to describe a person, organization, or
+        position within an organization.
+        It is intended to be used to fully document contact
+        information for many types of associations, such as owner, manager,
+        steward, curator, etc.</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Attribute Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="phonetype">phonetype</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">voice</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This attribute gives the type of phone
+                      to which this number applies. By default, this is assumed
+                      to be of type "voice", but other possibilities include
+                      "facsimile" and "tdd".</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="directory">directory</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><span class="boldtext">xs:string</span></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">required</span>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>This attribute names the directory system
+                      to which this userId applies. This will generally
+                      be a URL that shows how to look up information, for
+                      example an LDAP url. However, it could also be a
+                      non-parsable description of the directory system if
+                      that is all that is available.<br>
+<span class="boldtext">Example(s): </span>
+<br>
+                        ldap:///ldap.ecoinformatics.org/dc=ecoinformatics,dc=org
+                      <br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="id">id</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#IDType">res:IDType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="system">system</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#SystemType">res:SystemType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="tablehead"><a class="sitelink" name="scope">scope</a></td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Type: </span><span class="plaintext"><a class="sitelink" href="eml-resource.html#ScopeType">res:ScopeType</a></span>
+</p>
+<p>
+<span class="boldtext">Use: </span><span class="plaintext">optional</span>
+</p>
+<p>
+<span class="boldtext">Default value: </span><span class="plaintext">document</span>
+</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Complex Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="ResponsibleParty">ResponsibleParty&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#individualName">individualName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#organizationName">organizationName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#positionName">positionName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#address">address</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#phone">phone</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#electronicMailAddress">electronicMailAddress</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#onlineUrl">onlineUrl</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#userId">userId</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+            
+<p>The ResponsibleParty Type contains 
+        elements that are used to describe the person, organization or
+        position within an organization that is associated in some way with the
+        resource. It is intended to be used to fully document contact
+        information for many types of associations, such as owner, manager,
+        steward, curator, etc.</p>
+            
+<p>Note that the content model for a responsible party type 
+        allows a sequence of choices for the first
+        element(s): &lt;individualName&gt;, &lt;organizationName&gt; and/or &lt;positionName&gt;. 
+        This means that a parent element (e.g., creator) may use combinations of the 3 sub-elements 
+        to make up a single logical party. For example, a creator with only
+                the individualName of 'Joe Smith' is NOT the same as a
+                creator with the individualName of 'Joe Smith' and the
+                organizationName of 'NSF'. To include both a positionName and
+                 an organizationName as children of a &lt;contact&gt; implies that anyone 
+                currently occupying that positionName at that organizationName 
+                is an appropriate contact.
+                The positionName should not be
+                used in conjunction with individualName unless only that specific
+                individual at that position would be considered appropriate for that
+                designation.   </p>
+          
+        
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the examples for the particular
+        subfields.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="Person">Person&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#salutation">salutation</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#givenName">givenName</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#surName">surName</a></td><td class="tablepanel">required</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+            
+<p>The person Type is used to enter the salutation, and 
+        two types of name parts for an individual associated with the
+        resource. It uses these three subfields to help parse the person's
+        entire name.</p>
+            
+<p> The two elements, &lt;givenName&gt;  and  &lt;surName&gt;,
+             allow parsing of many types of names, even though distinct elements 
+             do not exist for concepts like "middle name" and "compound surname".
+        &lt;givenName&gt; should be used for parts of the name that are often
+        shortened to a first initial, or are not used for ordering, and typically includes
+        first and middle names.
+        The &lt;surName&gt; field is intended to be used for the part of the name that
+        is generally displayed in its entirety and/or is alphabetized or otherwise ordered
+        when appropriate. Note that only one
+        &lt;surName&gt; is allowed, and is required, while &lt;givenName&gt;s are 
+       optional and unbounded.    </p>
+            
+<p>The arrangement and content of the sub-elements is entirely 
+       up to the EML document's author, who presumably has first-hand knowledge of 
+       how the names are to be constructed. For example, if element position is important 
+       (e.g., the list of a book's        authors), then
+       EML authors should put the creators in that order. If it is appropriate for a
+       resource to have its creators sorted alphabetically, then the EML author
+       should construct the name parts so that the&lt;surName&gt; field may be used for
+       this purpose. At this time, EML is not able to express cultural 
+       conventions so that authors may indicate the correct order for 
+       &lt;givenName&gt;s and &lt;surName&gt; when the whole name is expressed. 
+       However support for international names
+       is under consideration for a future version of 
+       EML, along with other internationalization features.
+     </p>
+          
+        
+<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the examples within each
+        subfield.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="1"><a class="sitelink" name="Address">Address&nbsp; </a></td><td class="tablehead" colspan="1">
+              </td>
+</tr>
+<tr>
+<td width="40%" class="tablepanel"> Content of this field: </td><td class="tablepanel"> Description of this field: </td>
+</tr>
+<tr>
+<td class="tablepanel">
+<table class="tabledefault" border="0">
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Elements: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> How many: </span></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A choice of (</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> A sequence of (</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#deliveryPoint">deliveryPoint</a></td><td class="tablepanel">optional</td><td class="tablepanel">unbounded</td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#city">city</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#administrativeArea">administrativeArea</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#postalCode">postalCode</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#country">country</a></td><td class="tablepanel">optional</td><td class="tablepanel"></td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3"> OR </td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="eml-resource.html#ReferencesGroup">res:ReferencesGroup</a></td><td class="tablepanel">&nbsp;</td><td class="tablepanel">&nbsp;</td>
+</tr>
+<tr>
+<td class="tablepanel" colspan="3">)</td>
+</tr>
+<tr>
+<td class="tablepanel" valign="top"><span class="boldtext"> Attributes: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Use: </span></td><td class="tablepanel" valign="top"><span class="boldtext"> Default Value: </span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#id">id</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#system">system</a></td><td class="tablepanel"><span class="plaintext">optional</span></td>
+</tr>
+<tr>
+<td class="tablepanel"><a class="sitelink" href="#scope">scope</a></td><td class="tablepanel"><span class="plaintext">optional</span></td><td class="tablepanel"><span class="plaintext">document</span></td>
+</tr>
+</table>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The address field is provides detailed information for
+        communicating with a party contact via electronic mail or postal mail,
+        including the physical delivery location.<br>
+<span class="boldtext">Example(s): </span>
+<br>Please see the examples for each subfield<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="RoleType">RoleType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel"></td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>The role code field provides information on how a
+        person or organization is related to a resource. There may be many
+        people associated, including an 'originator' of a dataset, an 'author',
+        'editor', or 'publisher' of a literature resource, or an organization
+        that is a 'distributor'. the full list of choices is included in the
+        example.<br>
+<span class="boldtext">Example(s): </span>
+<br>author, contentProvider, custodianSteward, distributor,
+        editor, metadataProvider, originator, pointOfContact,
+        principalInvestigator, processor, publisher, or user.<br>
+</blockquote>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h2>Group Definitions:</h2>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

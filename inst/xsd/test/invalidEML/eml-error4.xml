@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd">
+
+  <dataset>
+    <title>Sample dataset Description</title>
+    <creator id="23445" scope="document">
+      <individualName>
+        <surName>Smith</surName>
+      </individualName>
+    </creator>
+    <creator id="23446" scope="document">
+      <individualName>
+        <surName>Meyer</surName>
+      </individualName>
+    </creator>
+    <additionalInfo><para>My comments go here.</para></additionalInfo>
+    <intellectualRights><section><para>Anyone can use it.</para></section>
+    </intellectualRights>
+
+    <distribution>
+      <online>
+      <connectionDefinition id="def.1" scope="document">
+        <schemeName system="CAP">sde</schemeName>
+        <description><para>The SDE scheme used at CAP LTER</para></description>
+        <parameterDefinition>
+          <name>hostname</name>
+          <definition>The host</definition>
+          <defaultValue>mohave.asu.edu</defaultValue>
+        </parameterDefinition>
+        <parameterDefinition>
+          <name>databaseName</name>
+          <definition>The name of the database or catalog</definition>
+        </parameterDefinition>
+        <parameterDefinition>
+          <name>owner</name>
+          <definition>The owner catalog</definition>
+        <defaultValue>dbo</defaultValue>
+        </parameterDefinition>
+      </connectionDefinition>
+      </online>
+    </distribution>
+    <distribution>
+      <online>
+        <connection>
+          <connectionDefinition id="def.2" scope="document">
+            <schemeName system="CAP">sde</schemeName>
+            <description><para>The SDE scheme used at CAP LTER</para></description>
+            <parameterDefinition>
+              <name>hostname</name>
+              <definition>The host</definition>
+              <defaultValue>mohave.asu.edu</defaultValue>
+            </parameterDefinition>
+            <parameterDefinition>
+              <name>databaseName</name>
+              <definition>The name of the database or catalog</definition>
+            </parameterDefinition>
+            <parameterDefinition>
+              <name>owner</name>
+              <definition>The owner catalog</definition>
+            <defaultValue>dbo</defaultValue>
+            </parameterDefinition>
+          </connectionDefinition>
+          <parameter>
+            <name>databaseName</name>
+            <value>landuse95</value>
+          </parameter>
+          <parameter>
+            <name>owner</name>
+            <value>sde</value>
+          </parameter>
+        </connection>
+      </online>
+    </distribution>
+    <purpose><para>Provide data to the whole world.</para></purpose>
+    <contact>
+      <individualName>
+        <surName>Johnson</surName>
+      </individualName>
+    </contact>
+    <!--this contact is invalid because it has an id and it uses references-->
+    <contact id="522">
+      <references>23445</references>
+    </contact>
+  </dataset>
+</eml:eml>
+

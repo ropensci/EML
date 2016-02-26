@@ -1,0 +1,867 @@
+<?xml version="1.0"?>
+<!--
+       '$RCSfile: build.xml,v $'
+       Copyright: 1997-2002 Regents of the University of California,
+                            University of New Mexico, and
+                            Arizona State University
+        Sponsors: National Center for Ecological Analysis and Synthesis and
+                  Partnership for Interdisciplinary Studies of Coastal Oceans,
+                     University of California Santa Barbara
+                  Long-Term Ecological Research Network Office,
+                     University of New Mexico
+                  Center for Environmental Studies, Arizona State University
+   Other funding: National Science Foundation (see README for details)
+                  The David and Lucile Packard Foundation
+     For Details: http://knb.ecoinformatics.org/
+
+        '$Author: obrien $'
+          '$Date: 2009-02-26 00:16:16 $'
+      '$Revision: 1.112 $'
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+<project name="eml" default="docs" basedir=".">
+
+	<target name="config">
+		<property file="build.properties"/>
+		<!-- User specified properties -->
+		<!-- These are properties you'll need to change to install the parser
+      servlet on your system. -->
+		<!-- where to install the servlet -->
+		<property name="servlet.install.dir"
+              value="/var/www/org.ecoinformatics.knb/emlparser"/>
+		<!-- the server the servlet will run on -->
+		<property name="server" value="http://knb.ecoinformatics.org"/>
+		<!--the servlet context directory-->
+		<property name="servletdir" value="emlparser"/>
+		<!-- the path to the servlet from the servletdir -->
+		<property name="servletpath" value="/emlparser"/>
+		<property name="version" value="2.1.1"/>
+		<!-- namespaces that the servlet should auto resolve -->
+		
+	<!-- LOCAL TEST VALUES -->	
+	<property name="namespaces"
+              value="eml://ecoinformatics.org/eml-2.0.0 ${server}/${servletdir}/schema/eml-2.0.0/eml.xsd
+				eml://ecoinformatics.org/eml-2.0.1  ${server}/${servletdir}/schema/eml-2.0.1/eml.xsd
+				eml://ecoinformatics.org/eml-2.1.0 ${server}/${servletdir}/schema/eml-2.1.0/eml.xsd
+				eml://ecoinformatics.org/literature-2.1.0 ${server}/${servletdir}/schema/eml-2.1.0/eml-literature.xsd
+				eml://ecoinformatics.org/project-2.1.0 ${server}/${servletdir}/schema/eml-2.1.0/eml-project.xsd
+				eml://ecoinformatics.org/eml-2.1.1 eml.xsd
+				eml://ecoinformatics.org/literature-2.1.1 eml-literature.xsd
+				eml://ecoinformatics.org/project-2.1.1 eml-project.xsd
+				http://www.xml-cml.org/schema/stmml-1.1 ${server}/${servletdir}/schema/eml-2.1.0/stmml.xsd
+				http://www.xml-cml.org/schema/stmml ${server}/${servletdir}/schema/eml-2.0.1/stmml.xsd" />
+		
+		<!-- PRODUCTION VALUES -->
+		<!--
+		<property name="namespaces"
+              value="eml://ecoinformatics.org/eml-2.0.0 ${server}/${servletdir}/schema/eml-2.0.0/eml.xsd
+				eml://ecoinformatics.org/eml-2.0.1  ${server}/${servletdir}/schema/eml-2.0.1/eml.xsd
+				eml://ecoinformatics.org/eml-2.1.0 ${server}/${servletdir}/schema/eml-2.1.0/eml.xsd
+				eml://ecoinformatics.org/literature-2.1.0 ${server}/${servletdir}/schema/eml-2.1.0/eml-literature.xsd
+				eml://ecoinformatics.org/project-2.1.0 ${server}/${servletdir}/schema/eml-2.1.0/eml-project.xsd
+				eml://ecoinformatics.org/eml-2.1.1 ${server}/${servletdir}/schema/eml-2.1.1/eml.xsd
+				eml://ecoinformatics.org/literature-2.1.1 ${server}/${servletdir}/schema/eml-2.1.1/eml-literature.xsd
+				eml://ecoinformatics.org/project-2.1.1 ${server}/${servletdir}/schema/eml-2.1.1/eml-project.xsd
+				http://www.xml-cml.org/schema/stmml-1.1 ${server}/${servletdir}/schema/eml-2.1.0/stmml.xsd
+				http://www.xml-cml.org/schema/stmml ${server}/${servletdir}/schema/eml-2.0.1/stmml.xsd" />
+		-->
+
+		<!-- the path from the tomcat/bin directory to the config.xml file -->
+		<property name="servletconfigfile" value="${servlet.install.dir}/lib/config.xml"/>
+		<property name="servlettempdir" value="/tmp/emlparser"/>
+		<filter token="tempdir" value="${servlettempdir}"/>
+		<property environment="env"/>
+		<property name="svnroot" value="https://code.ecoinformatics.org/code/eml/"/>
+		<echo>Using ${svnroot}"</echo>
+		<property name="eml-module" value="eml"/>
+		<property name="eml2_0_0-tag" value="RELEASE_EML_2_0_0_UPDATE_1"/>
+		<property name="eml2_0_1-tag" value="RELEASE_EML_2_0_1"/>
+		<property name="eml2_1_0-tag" value="RELEASE_EML_2_1_0"/>
+	</target>
+
+	<target name="init" depends="config">
+		<property name="name" value="eml"/>
+		<property name="eml-version" value="eml-${version}"/>
+		<property name="testdir" value="./test" />
+		<property name="srcdir" value="./src" />
+		<property name="invalid.dir" value="${testdir}/invalidEML"/>
+		<property name="sample.dir" value="lib/sample"/>
+		<property name="build.dir" value="build"/>
+		<property name="build.tests" value="${build.dir}/tests"/>
+		<property name="build.src" value="${build.dir}/src"/>
+		<property name="build.dest" value="${build.dir}/classes"/>
+		<property name="build.docs" value="docs"/>
+		<property name="build.javadocs" value="${build.dir}/javadocs"/>
+		<property name="build.stripped" value="stripped"/>
+		<property name="style.dir" value="./style"/>
+		<property name="config.file" value="lib/config.xml"/>
+		<property name="configfileinemljar" value="/config.xml"/>
+
+		<property name="xmlp"
+        value="lib/apache/xercesImpl.jar"/>
+		<property name="api"
+        value="lib/apache/xmlParserAPIs.jar"/>
+		<property name="xalan"
+        value="lib/apache/xalan.jar"/>
+		<property name="xml-apis"
+        value="lib/apache/xml-apis.jar"/>
+		<property name="jdom" value="lib/jdom.jar"/>
+		<property name="cos" value="lib/cos.jar"/>
+		<property name="servlet" value="lib/apache/servlet.jar"/>
+		<property name="configxml" value="lib/configxml.jar"/>
+		<property name="junit" value="lib/junit.jar"/>
+		<property name="htmldocbook-style"
+        value="style/docbook-xsl-1.50.0/html/docbook.xsl"/>
+		<filter token="server" value="http://knb.ecoinformatics.org"/>
+		<filter token="docrooturl" value=""/>
+		<filter token="version" value="${version}"/>
+		<filter token="eml-version" value="${eml-version}"/>
+		<filter token="testdir" value="${testdir}" />
+		<filter token="srcdir" value="${srcdir}" />
+		<filter token="invalid.dir" value="${invalid.dir}" />
+		<filter token="config.file" value="${config.file}" />
+		<filter token="namespaces" value="${namespaces}"/>
+		<filter token="servletconfigfile" value="${servletconfigfile}"/>
+		<filter token="server" value="${server}"/>
+		<filter token="servletdir" value="${servletdir}"/>
+		<filter token="servletpath" value="${servletpath}"/>
+		<filter token="configfileinemljar" value="${configfileinemljar}" />
+
+		<property name="dist.dir" value="./dist"/>
+		<property name="ver.dir" value="${dist.dir}/eml-${version}"/>
+		<property name="ver.lib" value="${ver.dir}/lib"/>
+		<property name="ver.docs" value="${ver.dir}/docs"/>
+		<property name="ver.src" value="${ver.dir}/src"/>
+		<property name="ver.tst" value="${ver.dir}/test"/>
+		<property name="package.home" value="org/ecoinformatics" />
+		<property name="cpath" value="${servlet}:${cos}:${xalan}:${xml-apis}:${xmlp}:${api}:${configxml}:${jdom}:${junit}:${build.dir}/${name}.jar"/>
+
+		<!-- These two Data Manager Library properties need to be declared here
+         so that the Data Manager Library can be excluded from the default eml
+         distribution. Other Data Manager properties are declared in
+         the init-datamanager-lib target below. -->
+		<property name="datamanager.dir" value="org/ecoinformatics/datamanager"/>
+		<property name="datamanager.name" value="datamanager"/>
+
+		<mkdir dir="${build.docs}/eml-${version}"/>
+		
+		<path id="svn.classpath">
+			<pathelement location="lib/svnjavahl.jar" />
+			<pathelement location="lib/svnant.jar" />
+			<pathelement location="lib/svnClientAdapter.jar" />
+		</path>
+		<taskdef resource="svntask.properties"
+			classpathref="svn.classpath" />
+	</target>
+
+
+	<!-- Generate HTML documentation using an XSLT transform -->
+	<!-- Note that you MUST have a Xalan 1.x XSLT processor on
+        your CLASSPATH in order for this to work -->
+	<target name="docs" depends="init,docbookhtml,faqhtml,tablehtml,eml210infohtml">
+		<style basedir="." destdir="${build.docs}/eml-${version}" style="eml-documentation.xsl"
+           includes="*.xsd" excludes="eml-documentation.xsd" classpath="${cpath}" processor="trax"/>
+		<style basedir="." destdir="${build.docs}" style="members.xsl" classpath="${cpath}" 
+           includes="members.xml" processor="trax"/>
+		<copy todir="${build.docs}" filtering="yes">
+			<fileset dir=".">
+				<include name="index.html"/>
+				<include name="default.css"/>
+			</fileset>
+		</copy>
+		<copy todir="${build.docs}/eml-${version}" filtering="no">
+			<fileset dir=".">
+				<include name="*.png"/>
+				<include name="eml-dublinCore.html"/>
+			</fileset>
+		</copy>
+	</target>
+	<!-- Generate versions of the XSD files with all annotation
+        tags stripped from the source -->
+	<!-- Note that you MUST have a Xalan 1.x XSLT processor on
+        your CLASSPATH in order for this to work -->
+	<target name="stripdocs" depends="init">
+		<mkdir dir="${build.stripped}"/>
+		<style basedir="." destdir="${build.stripped}" extension=".xsd"
+           style="removeAnnotation.xsl" includes="*.xsd" classpath="${cpath}" processor="trax"/>
+		<echo>
+
+           ******************************************
+                           Success!
+           Stripped versions of the XSD files can now
+           be found in the directory named "${build.stripped}"
+           ******************************************
+     </echo>
+	</target>
+
+	<target name="dist" depends="docs">
+		<mkdir dir="${dist.dir}"/>
+		<delete dir="${ver.dir}"/>
+		<mkdir dir="${ver.dir}"/>
+		<mkdir dir="${ver.lib}"/>
+		<mkdir dir="${ver.docs}"/>
+		<mkdir dir="${ver.src}"/>
+		<mkdir dir="${ver.tst}"/>
+<!--		<mkdir dir="${ver.dir}/style"/> -->
+		<copy file="./build.xml" todir="${ver.dir}"/>
+		<copy file="./LICENSE" todir="${ver.dir}"/>
+		<copy file="./README" todir="${ver.dir}"/>
+		<copy todir="${ver.dir}" filtering="no">
+			<fileset dir=".">
+				<include name="*.xsd"/>
+				<!--<include name="*.dtd"/>-->
+				<include name="eml-unitDictionary.xml"/>
+				<include name="eml-spatialReferenceDictionary.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${ver.lib}" filtering="no">
+			<fileset dir="./lib">
+				<exclude name="${datamanager.name}/**"/>
+			</fileset>
+		</copy>
+		<copy todir="${ver.docs}" filtering="no">
+			<fileset dir="./docs">
+				<exclude name="${datamanager.name}/**"/>
+			</fileset>
+		</copy>
+		<copy todir="${ver.src}" filtering="yes">
+			<fileset dir="./src">
+				<exclude name="emlconversions/**"/>
+				<exclude name="${datamanager.dir}/**"/>
+			</fileset>
+		</copy>
+		<copy todir="${ver.tst}" filtering="yes">
+			<fileset dir="./test">
+				<exclude name="${datamanager.dir}/**"/>
+			</fileset>
+		</copy>
+<!--		<copy todir="${ver.dir}/style">
+			<fileset dir="${style.dir}"/>
+		</copy> -->
+
+		<delete file="./eml-${version}.zip"/>
+		<zip zipfile="./eml-${version}.zip" basedir="${dist.dir}"/>
+		<delete file="./eml-${version}.tar.gz"/>
+		<tar tarfile="./eml-${version}.tar" basedir="${dist.dir}"/>
+		<gzip zipfile="./eml-${version}.tar.gz" src="./eml-${version}.tar"/>
+		<delete file="./eml-${version}.tar"/>
+	</target>
+
+	<target name="docbook" depends="init">
+		<style basedir="." style="buildDocBook.xsl"
+           in="eml.xsd" out="${build.dir}/eml-docbook-nosort.xml"
+           classpath="${cpath}" processor="trax"/>
+		<style basedir="." style="sortDocBook.xsl"
+           in="${build.dir}/eml-docbook-nosort.xml"
+           out="${build.dir}/eml-docbook.xml"
+           classpath="${cpath}" processor="trax"/>
+		<!-- the following copy is needed to do the ant replacement -->
+		<copy file="${build.dir}/eml-docbook.xml"
+          tofile="${build.docs}/eml-${version}/eml-docbook.xml"
+          filtering="yes"/>
+		<echo>
+      ***********************************************
+        DocBook Created.  The DocBook documentation
+        should now be in docs/eml-docbook.xml.
+      ***********************************************
+    </echo>
+	</target>
+
+	<target name="docbookhtml" depends="docbook">
+		<echo>
+      ************************************************
+        Note that if this does not work for you,
+        you need to check the newest version of
+        Xalan out from the Apache CVS server and
+        put the new xalan.jar file in your classpath.
+        This will not work with Xalan 2.3.1!
+      ************************************************
+    </echo>
+		<style basedir="." style="${htmldocbook-style}"
+           in="${build.docs}/eml-${version}/eml-docbook.xml"
+           out="${build.docs}/eml-${version}/index.html"
+           classpath="${cpath}" processor="trax"/>
+		<copy file="default.css" todir="${build.docs}"/>
+		<echo>
+      ************************************************
+        Docbook html created.  The html docbook file
+        is docs/eml-${version}/eml-docbook.html.
+      ************************************************
+    </echo>
+	</target>
+
+	<target name="faqhtml" depends="docbookhtml">
+		<echo>
+      ************************************************
+        Note that if this does not work for you,
+        you need to check the newest version of
+        Xalan out from the Apache CVS server and
+        put the new xalan.jar file in your classpath.
+        This will not work with Xalan 2.3.1!
+      ************************************************
+    </echo>
+		<style basedir="." style="${htmldocbook-style}"
+           in="eml-faq.xml"
+           out="${build.docs}/eml-${version}/eml-faq.html"
+           classpath="${cpath}" processor="trax"/>
+		<echo>
+      ************************************************
+        FAQ rendered to HTML.  The html file
+        is docs/eml-${version}/eml-faq.html.
+      ************************************************
+    </echo>
+	</target>
+	
+	<target name="eml210infohtml" depends="docbookhtml">
+		<echo>
+      ************************************************
+        Note that if this does not work for you,
+        you need to check the newest version of
+        Xalan out from the Apache CVS server and
+        put the new xalan.jar file in your classpath.
+        This will not work with Xalan 2.3.1!
+      ************************************************
+    </echo>
+		<style basedir="." style="${htmldocbook-style}"
+           in="eml-210info.xml"
+           out="${build.docs}/eml-${version}/eml-210info.html"
+           classpath="${cpath}" processor="trax"/>
+		<echo>
+      ************************************************
+        EML-210info has been rendered to HTML.  The html file
+        is docs/eml-${version}/eml-info210.html.
+      ************************************************
+    </echo>
+	</target>
+
+	<target name="tablehtml" depends="init">
+		<copy file="default.css" todir="${build.docs}"/>
+		<style basedir="." style="buildDependencyTable.xsl"
+           in="eml.xsd"
+           out="${build.docs}/eml-${version}/eml-dependencies.html"
+           classpath="${cpath}" processor="trax"/>
+		<echo>
+      ************************************************
+        Dependency Table rendered to HTML.
+        The html file is docs/eml-${version}/eml-dependencies.html.
+      ************************************************
+    </echo>
+	</target>
+
+	<target name="buildenumerations" depends="init">
+		<style basedir="." style="getunits.xsl"
+           in="eml-unitDictionary.xml"
+           out="${build.docs}/eml-${version}/enumerations.xml"
+           classpath="${cpath}" processor="trax"/>
+		<echo>
+      ************************************************
+                    enumerations created.
+                  see docs/eml-${version}/enumerations.xml
+      ************************************************
+    </echo>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="${build.tests}"/>
+		<mkdir dir="${build.dest}"/>
+		<copy todir="${build.tests}" filtering="yes">
+			<fileset dir="${testdir}">
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+				<exclude name="${datamanager.dir}/**"/>
+				<exclude name="emlconversions/**"/>
+			</fileset>
+		</copy>
+        <echo>
+      ************************************************
+                    copied some stuff to ${build.tests}
+      ************************************************
+    </echo>
+		<copy todir="${build.tests}" filtering="yes">
+			<fileset dir="${srcdir}">
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+				<exclude name="${datamanager.dir}/**"/>
+				<exclude name="emlconversions/**"/>
+			</fileset>
+		</copy>
+		<copy file ="${config.file}" todir="${build.dest}" filtering="yes"/>
+		<javac srcdir="${build.tests}"
+            destdir="${build.dest}"
+            classpath="${cpath}"
+            debug="on"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar jarfile="${build.dir}/${name}.jar" 
+         basedir="${build.dest}"
+         includes="${package.home}/** config.xml" 
+         excludes="${datamanager.dir}/**" />
+		<copy file="${build.dir}/${name}.jar" tofile="lib/${name}.jar"/>
+	</target>
+
+
+
+	<target name="compile-test" depends="jar">
+		<!-- copy and compile the tests into a jar file -->
+		<mkdir dir="${build.tests}"/>
+		<mkdir dir="${build.dest}"/>
+		<copy todir="${build.tests}" filtering="yes">
+			<fileset dir="${testdir}">
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+				<exclude name="${datamanager.dir}/**"/>
+				<exclude name="emlconversions/**"/>
+			</fileset>
+		</copy>
+		<javac srcdir="${build.tests}"
+            destdir="${build.dest}"
+            classpath="${cpath}"
+            debug="on"/>
+
+		<jar jarfile="${build.dir}/${name}-test.jar" basedir="${build.dest}"
+          includes="${package.home}/${name}test/**" />
+
+	</target>
+
+	<!-- use the ant "junit" task to run JUnit tests. -->
+	<target name="test" depends="compile-test">
+
+		<!--copy the sample docs into the test directory so they get validated-->
+		<copy todir="${testdir}">
+			<fileset dir="${sample.dir}">
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+			</fileset>
+		</copy>
+        <echo>
+         ************************************************
+            copied from ${sample.dir}
+      ************************************************
+    </echo>
+		<!--copy the unit dictionary so it will get validated-->
+		<copy file="eml-unitDictionary.xml" tofile="test/eml-unitDictionary.xml"/>
+    <echo>
+         ************************************************
+            copied the unitDictionary
+      ************************************************
+    </echo>
+    
+		<!-- use the ant "junit" task to run JUnit tests. -->
+		<junit printsummary="yes" haltonfailure="no" fork="no"
+            haltonerror="no">
+			<classpath>
+				<pathelement path="${cpath}:${build.dir}/${name}-test.jar:${build.dir}/${name}.jar" />
+			</classpath>
+
+			<formatter type="plain" />
+
+			<batchtest fork="yes" todir="${build.dir}">
+				<fileset dir="${build.tests}">
+					<include name="**/*Test.java" />
+					<exclude name="${datamanager.dir}/**" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="emlparsertest" depends="jar">
+		<junit printsummary="yes" haltonfailure="no" fork="no"
+            haltonerror="no">
+			<classpath>
+				<pathelement path="${cpath}:${build.dir}/${name}-test.jar:${build.dir}/${name}.jar" />
+			</classpath>
+
+			<formatter type="plain" />
+
+			<batchtest fork="yes" todir="${build.dir}">
+				<fileset dir="${build.tests}">
+					<include name="**/EMLParserTest.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="servletinstall" depends="jar">
+		<copy file="lib/emlparser.html" tofile="${servlet.install.dir}/index.html"/>
+		<copy file="lib/sample/eml-sample.xml"
+          tofile="${servlet.install.dir}/eml-sample.xml"/>
+		<copy file="lib/config.xml" tofile="${servlet.install.dir}/lib/config.xml" filtering="yes"/>
+		<copy file="lib/web.xml" tofile="${servlet.install.dir}/WEB-INF/web.xml"/>
+		<copy file="${configxml}"
+          tofile="${servlet.install.dir}/WEB-INF/lib/configxml.jar"/>
+		<copy file="${cos}" tofile="${servlet.install.dir}/WEB-INF/lib/cos.jar"/>
+		<copy file="lib/eml.jar"
+          tofile="${servlet.install.dir}/WEB-INF/lib/eml.jar"/>
+		<copy file="${xalan}"
+          tofile="${servlet.install.dir}/WEB-INF/lib/xalan.jar"/>
+		<copy file="${xml-apis}"
+          tofile="${servlet.install.dir}/WEB-INF/lib/xml-apis.jar"/>
+		<copy file="${xmlp}"
+          tofile="${servlet.install.dir}/WEB-INF/lib/xercesImpl.jar"/>
+		<copy file="${api}"
+          tofile="${servlet.install.dir}/WEB-INF/lib/xmlParserAPIs.jar"/>
+		<!--<copy todir="${servlet.install.dir}/schema/${eml-version}">
+			<fileset dir=".">
+				<include name="*.xsd"/>
+			</fileset>
+		</copy>-->
+
+		<!-- Copy eml-2.0.0 schema. Add code here for copying any other schemas. -->
+		<echo>Getting EML 2.0.0 from SVN: ${svnroot}/tags/${eml2_0_0-tag}</echo>
+		<svn>
+			<export srcUrl="${svnroot}/tags/${eml2_0_0-tag}" force="true"
+				destPath="${servlettempdir}/eml_${eml2_0_0-tag}" />
+		</svn>
+		<mkdir dir="${servlet.install.dir}/schema/eml-2.0.0" />
+		<copy todir="${servlet.install.dir}/schema/eml-2.0.0" filtering="yes">
+			<fileset dir="${servlettempdir}/eml_${eml2_0_0-tag}">
+				<include name="*.xsd"/>
+			</fileset>
+		</copy>
+		
+		<!-- Copy eml-2.0.1 schema. Add code here for copying any other schemas. -->
+		<echo>Getting EML 2.0.1 from SVN: ${svnroot}/tags/${eml2_0_1-tag}</echo>
+		<svn>
+			<export srcUrl="${svnroot}/tags/${eml2_0_1-tag}" force="true"
+				destPath="${servlettempdir}/eml_${eml2_0_1-tag}" />
+		</svn>
+		<mkdir dir="${servlet.install.dir}/schema/eml-2.0.1" />
+		<copy todir="${servlet.install.dir}/schema/eml-2.0.1" filtering="yes">
+			<fileset dir="${servlettempdir}/eml_${eml2_0_1-tag}">
+				<include name="*.xsd"/>
+			</fileset>
+		</copy>
+		
+		<!-- Copy eml-2.1.0 schema. Add code here for copying any other schemas. -->
+		<echo>Getting EML 2.1.0 from SVN: ${svnroot}/tags/${eml2_1_0-tag}</echo>
+		<svn>
+			<export srcUrl="${svnroot}/tags/${eml2_1_0-tag}" force="true"
+				destPath="${servlettempdir}/eml_${eml2_1_0-tag}" />
+		</svn>
+		<mkdir dir="${servlet.install.dir}/schema/eml-2.1.0" />
+		<copy todir="${servlet.install.dir}/schema/eml-2.1.0" filtering="yes">
+			<fileset dir="${servlettempdir}/eml_${eml2_1_0-tag}">
+				<include name="*.xsd"/>
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="./build"/>
+		<delete>
+			<fileset dir="${build.docs}">
+				<include name="**/*.*"/>
+				<exclude name="datamanager/**/*"/>
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+			</fileset>
+		</delete>
+		<delete dir="${build.docs}/eml-${version}"/>
+		<delete dir="./dist"/>
+		<delete file="${eml-version}.zip"/>
+		<delete file="${eml-version}.tar.gz"/>
+		<delete file="${datamanager.name}.zip"/>
+		<delete file="${datamanager.name}.tar.gz"/>
+		<delete file="${servlet.install.dir}/WEB-INF/lib/eml.jar"/>
+	</target>
+
+	<!--
+      The following set of targets support the Data Manager library:
+
+        init-datamanager-lib      
+        compile-datamanager-lib
+        dist-datamanager-lib
+        jar-datamanager-lib
+        test-datamanager-init (used internally only)
+        test-datamanager-all
+        test-datamanager-one
+        
+      Applications can use this library's API to manage EML data (as well as
+      other types of data). The library is currently housed under the 'eml'
+      module in CVS. At some point in the future, it may be broken out into its
+      own module.
+    -->
+
+	<target name="init-datamanager-lib" depends="init">
+		<property name="datamanager.lib" value="lib/datamanager"/>
+		<property name="version.datamanager" value="1.0.0"/>
+		<property name="datamanager-version" value="${datamanager.name}-${version.datamanager}"/>
+		<property name="ver.dir.datamanager" value="${dist.dir}/${datamanager-version}"/>
+		<property name="ver.docs.datamanager" value="${ver.dir.datamanager}/docs"/>
+		<property name="ver.lib.datamanager" value="${ver.dir.datamanager}/${datamanager.lib}"/>
+		<property name="ver.src.datamanager" value="${ver.dir.datamanager}/src"/>
+
+		<!-- Used by 'test-datamanager-one' target. User is prompted for the name
+             of the test to run. If user enters no value, runs this test by
+             default. -->
+		<property name="default-datamanager-test" value="DataManagerTest" />
+		<property name="default-datamanager-run" value="org.ecoinformatics.datamanager.util.TableGenerator" />
+		
+		<property name="axis" value="${datamanager.lib}/axis.jar"/>
+		<property name="discover" value="${datamanager.lib}/commons-discovery.jar"/>
+		<property name="hsql" value="${datamanager.lib}/hsqldb.jar"/>
+		<property name="log" value="${datamanager.lib}/commons-logging.jar"/>
+		<property name="log4j" value="${datamanager.lib}/log4j-1.2.8.jar"/>
+		<property name="queryservice" value="${datamanager.lib}/org.ecoinformatics.ecogrid.QueryService-stub.jar"/>
+		<property name="authenticatedqueryservice" value="${datamanager.lib}/org.ecoinformatics.ecogrid.AuthenticatedQueryService-stub.jar"/>
+		<property name="authenticationservice" value="${datamanager.lib}/org.ecoinformatics.ecogrid.AuthenticationService-stub.jar"/>
+		<property name="putservice" value="${datamanager.lib}/org.ecoinformatics.ecogrid.PutService-stub.jar"/>
+		<property name="postgresql-driver" value="${datamanager.lib}/postgresql-8.0-312.jdbc3.jar"/>
+		<property name="rpc" value="${datamanager.lib}/jaxrpc.jar"/>
+		<property name="saaj" value="${datamanager.lib}/saaj.jar"/>
+		<property name="soap" value="${datamanager.lib}/soap.jar"/>
+		<property name="tar" value="${datamanager.lib}/tar.jar"/>
+		<property name="utilities" value="${datamanager.lib}/utilities.jar"/>
+		<property name="wsdl" value="${datamanager.lib}/wsdl4j.jar"/>
+
+		<property name="cpath.datamanager" 
+                  value="${junit}:${axis}:${discover}:${hsql}:${log}:${log4j}:${postgresql-driver}:${queryservice}:${authenticatedqueryservice}:${authenticationservice}:${putservice}:${rpc}:${saaj}:${soap}:${tar}:${utilities}:${wsdl}:${xalan}:${xml-apis}:${datamanager.name}.jar"/>
+	</target>
+
+	<target name="compile-datamanager-lib" depends="init-datamanager-lib">
+		<mkdir dir="${build.dest}"/>
+		<mkdir dir="${build.src}"/>
+		<copy todir="${build.src}" filtering="yes">
+			<fileset dir="${srcdir}">
+				<include name="${datamanager.dir}/**"/>
+				<exclude name="emlconversions/**"/>
+				<exclude name="org/ecoinformatics/eml/**"/>
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+			</fileset>
+		</copy>
+		<echo>"cpath.datamanager = ${cpath.datamanager}"</echo>
+		<javac srcdir="${build.src}"
+  	            destdir="${build.dest}"
+  	            classpath="${cpath.datamanager}"
+  	            debug="on"/>
+	</target>
+
+	<target name="jar-datamanager-lib" depends="clean,compile-datamanager-lib">
+		<!--
+		<unjar dest="${build.dest}">
+			<fileset dir="./${datamanager.lib}">
+				<include name="**/*.jar"/>
+				<exclude name="log4j*.jar"/>
+			</fileset>
+		</unjar>
+		<unjar dest="${build.dest}">
+			<fileset dir="./lib/apache">
+				<include name="**/xalan.jar"/>
+				<include name="**/xml-apis.jar"/>
+			</fileset>
+		</unjar>
+		-->
+		<!--
+		<copy file="./${datamanager.lib}/datamanager.properties" 
+    	      todir="${build.dest}"/>
+		-->
+		<jar jarfile="${build.dir}/${datamanager.name}.jar" 
+  	         basedir="${build.dest}"
+  	         excludes="org/ecoinformatics/datamanager/**/**Test.class"
+  	    />
+	</target>
+
+	<target name="dist-datamanager-lib" 
+		    depends="jar-datamanager-lib,javadoc-datamanager-lib">
+		<mkdir dir="${dist.dir}"/>
+		<delete dir="${ver.dir}"/>
+		<delete dir="${ver.dir.datamanager}"/>
+		<mkdir dir="${ver.dir.datamanager}"/>
+		<mkdir dir="${ver.dir.datamanager}/lib/apache"/>
+		<mkdir dir="${ver.dir.datamanager}/lib/sample"/>
+		<mkdir dir="${ver.lib.datamanager}"/>
+		<mkdir dir="${ver.docs.datamanager}"/>
+		<mkdir dir="${ver.src.datamanager}/${datamanager.dir}"/>
+		<copy file="./build.properties" todir="${ver.dir.datamanager}"/>
+		<copy file="./build.xml" todir="${ver.dir.datamanager}"/>
+		<!--
+        <copy file="./docs/datamanager/LICENSE" todir="${ver.dir.datamanager}"/>
+        <copy file="./docs/datamanager/README" todir="${ver.dir.datamanager}"/>
+        -->
+
+		<!-- Copy datamanager jar file to the top-level 
+             distribution directory -->
+		<copy file="${build.dir}/${datamanager.name}.jar"  filtering="no"
+  	          todir="${ver.dir.datamanager}"/>
+
+		<!-- Copy datamanager documents, excluding project management, to
+             the distribution documents directory -->
+		<copy todir="${ver.docs.datamanager}" filtering="no">
+			<fileset dir="docs/${datamanager.name}">
+				<exclude name="projectManagement/**"/>
+			</fileset>
+		</copy>
+		
+		<!-- Copy datamanager javadocs to the distribution documents directory -->
+		<mkdir dir="${ver.docs.datamanager}/javadocs" />
+		<copy todir="${ver.docs.datamanager}/javadocs" filtering="no">
+			<fileset dir="${build.javadocs}">
+			</fileset>
+		</copy>
+		
+		<!-- Copy datamanager jar files and properties file to 
+             the distribution lib directory -->
+		<copy todir="${ver.lib.datamanager}" filtering="no">
+			<fileset dir="${datamanager.lib}">
+				<exclude name="*.jar"/>
+				<include name="datamanager.properties"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${ver.dir.datamanager}/lib/sample" filtering="no">
+			<fileset dir="lib/sample">
+				<include name="eml-sample.xml"/>
+			</fileset>
+		</copy>
+
+		<!-- Copy datamanager source code to the distribution source directory -->
+		<copy todir="${ver.src.datamanager}/${datamanager.dir}" filtering="yes">
+			<fileset dir="${srcdir}/${datamanager.dir}"/>
+		</copy>
+
+		<!-- zip and tar/gzip the datamanager distribution -->
+		<delete file="./${datamanager-version}.zip"/>
+		<zip zipfile="./${datamanager-version}.zip" basedir="${ver.dir.datamanager}"/>
+		<delete file="./${datamanager-version}.tar.gz"/>
+		<tar tarfile="./${datamanager-version}.tar" basedir="${ver.dir.datamanager}"/>
+		<gzip zipfile="./${datamanager-version}.tar.gz" src="./${datamanager-version}.tar"/>
+		<delete file="./${datamanager-version}.tar"/>
+	</target>
+
+	<target name="run-datamanager-one" depends="jar-datamanager-lib">
+			<!-- Run one class in the data manager library. -->
+
+			<!-- Prompt user for the classname.
+	           If user enters a null value, use the default-datamanager-test -->
+			<input 
+	         message="Please enter name of class to run: "
+	         addproperty="class-to-run"
+	         defaultvalue="${default-datamanager-run}"
+	      />
+			<input 
+		         message="Please enter arguments for the class: "
+		         addproperty="class-to-run-args"
+		         defaultvalue="tao.1.1 http://knb.ecoinformatics.org/knb/metacat sessionid"
+		      />
+
+			<!-- run the class -->
+			<java classname="${class-to-run}">
+				<arg line="${class-to-run-args}"/>
+				<classpath>
+					<pathelement path="${cpath.datamanager}:${build.dest}:${srcdir}" />
+				</classpath>
+			
+			</java>
+		</target>
+
+	<target name="test-datamanager-init" depends="compile-datamanager-lib">
+		<!-- copy and compile the data manager tests prior to running "junit" -->
+		<copy todir="${build.src}" filtering="yes">
+			<fileset dir="${testdir}">
+				<include name="${datamanager.dir}/**"/>
+				<exclude name="emlconversions/**"/>
+				<exclude name="org/ecoinformatics/eml/**"/>
+				<exclude name="**/CVS*"/>
+				<exclude name="**/.#*"/>
+			</fileset>
+		</copy>
+		<javac srcdir="${build.src}"
+             destdir="${build.dest}"
+             classpath="${cpath.datamanager}"
+             debug="on"/>
+	</target>
+
+	<target name="test-datamanager-all" depends="test-datamanager-init">
+		<!-- use the ant "junit" task to run JUnit tests for data manager lib. -->
+		<junit printsummary="yes" haltonfailure="no" fork="no"
+             haltonerror="no">
+			<classpath>
+				<pathelement path="${cpath.datamanager}:${build.dest}" />
+			</classpath>
+			<formatter type="plain" />
+			<batchtest fork="no" todir="${build.dir}">
+				<fileset dir="${build.src}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="test-datamanager-one" depends="test-datamanager-init">
+		<!-- Run only one test in the data manager library. -->
+
+		<!-- Prompt user for the test name.
+           If user enters a null value, use the default-datamanager-test -->
+		<input 
+         message="Please enter name of test to run: [${default-datamanager-test}]"
+         addproperty="test-to-run"
+         defaultvalue="${default-datamanager-test}"
+      />
+
+		<!-- use the ant "junit" task to run a single test in data manager lib. -->
+		<junit printsummary="yes" haltonfailure="no" fork="no"
+             haltonerror="no" showoutput="true" >
+			<classpath>
+				<pathelement path="${cpath.datamanager}:${build.dest}" />
+			</classpath>
+			<formatter type="plain" />
+			<batchtest fork="no" todir="${build.dir}">
+				<fileset dir="${build.src}">
+					<include name="**/${test-to-run}.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="javadoc-datamanager-lib" depends="compile-datamanager-lib"
+	            description="Generates javadoc documentation">
+		<mkdir dir="${build.javadocs}"/>
+		<javadoc packagenames="org.ecoinformatics.datamanager.*"
+	           sourcepath="${build.src}"
+	           destdir="${build.javadocs}"
+	           author="true"
+	           version="true"
+	           use="true"
+	           windowtitle="DataManager API"
+	           doctitle="&lt;h1&gt;DataManager&lt;/h1&gt;"
+	           bottom="&lt;i&gt;Copyright &#169; 2007 Regents of the University of California. All Rights Reserved.&lt;/i&gt;">
+			<classpath path="${cpath.datamanager}"/>
+		</javadoc>
+	</target>
+
+	<!-- End of targets for Data Manager library -->
+	
+	<target name="kepler-style-jar" depends="init" description="Generates a kepler-styles.jar for Kepler">
+       <mkdir dir="${build.dir}/kepler/style/eml-2.1.0"/>
+       <mkdir dir="${build.dir}/kepler/style/kepler"/>
+       <copy todir="${build.dir}/kepler/style/eml-2.1.0" filtering="yes">
+		   <fileset dir="style/eml">
+                    <include name="*.xsl" />
+           </fileset>
+	   </copy>
+		<copy todir="${build.dir}/kepler/style/kepler" filtering="yes">
+           <fileset dir="../kepler/core/resources/style">
+                    <include name="kepler.css" />
+           </fileset>
+       </copy>
+       <jar jarfile="${build.dir}/kepler/kepler-styles.jar" 
+         basedir="${build.dir}/kepler"/>
+	</target>
+
+</project>

@@ -1,0 +1,1745 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Ecological Metadata Language (EML) Specification</title><link type="text/css" href="../default.css" rel="stylesheet"><meta content="DocBook XSL Stylesheets V1.50.0" name="generator"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book"><div class="titlepage"><div><h1 class="title"><a name="N10001"></a>Ecological Metadata Language (EML) Specification</h1></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1. <a href="#preface">Preface</a></dt><dd><dl><dt>1.1. <a href="#introduction">Introduction</a></dt><dt>1.2. <a href="#purpose">Purpose Statement</a></dt><dt>1.3. <a href="#features">Features</a></dt></dl></dd><dt>2. <a href="#moduleOverview">Overview of EML modules and their use</a></dt><dd><dl><dt>2.1. <a href="#N1003E">Module Overview Foreword</a></dt><dt>2.2. <a href="#N10043">
+        Root-level structure
+      </a></dt><dd><dl><dt>2.2.1. <a href="#N10046"> The eml module - A metadata container </a></dt><dt>2.2.2. <a href="#N1005E">
+              The eml-resource module - Base information for
+              all resources
+            </a></dt></dl></dd><dt>2.3. <a href="#N10068">
+          Top-level resources
+        </a></dt><dd><dl><dt>2.3.1. <a href="#N1006D">
+              The eml-dataset module - Dataset specific
+              information
+            </a></dt><dt>2.3.2. <a href="#N10080">
+              The eml-literature module - Citation specific
+              information
+            </a></dt><dt>2.3.3. <a href="#N10090">
+              The eml-software module - Software specific
+              information
+            </a></dt><dt>2.3.4. <a href="#N1009B">
+              The eml-protocol module - Research protocol specific information
+            </a></dt></dl></dd><dt>2.4. <a href="#N100A5">
+          Supporting Modules - Adding detail to top-level resources
+        </a></dt><dd><dl><dt>2.4.1. <a href="#N100AA">
+              The eml-access module - Access control rules for resources
+            </a></dt><dt>2.4.2. <a href="#N100CC">The eml-physical module - Physical file format</a></dt><dt>2.4.3. <a href="#N100D6">
+            The eml-party module - People and organization information
+          </a></dt><dt>2.4.4. <a href="#N100DE">
+            The eml-coverage module - Geographic, temporal, and taxonomic extents
+            of resources
+          </a></dt><dt>2.4.5. <a href="#N100ED">The eml-project module - Research context information for
+            resources</a></dt><dt>2.4.6. <a href="#N100FA">
+            The eml-methods module - Methodological information for resources
+          </a></dt></dl></dd><dt>2.5. <a href="#N10110">
+          Data organization - Modules describing dataset structures
+        </a></dt><dd><dl><dt>2.5.1. <a href="#N10115">
+              The eml-entity module - Entity level information within datasets
+            </a></dt><dt>2.5.2. <a href="#N10123">
+            The eml-attribute module - Attribute level information within
+            dataset entities
+          </a></dt><dt>2.5.3. <a href="#N10144">
+            The eml-constraint module - Relationships among and within
+            dataset entities
+          </a></dt></dl></dd><dt>2.6. <a href="#N1014A">
+          Entity types - Detailed information for discipline specific entities
+        </a></dt><dd><dl><dt>2.6.1. <a href="#N1014F">
+            The eml-dataTable module - Logical information
+            about data table entities
+          </a></dt><dt>2.6.2. <a href="#N10158">
+              The eml-spatialRaster module - Logical information about
+              regularly gridded geospatial image data
+            </a></dt><dt>2.6.3. <a href="#N10163">
+              The eml-spatialVector module - Logical information about
+              non-gridded geospatial image data
+            </a></dt><dt>2.6.4. <a href="#N1016D">
+              Schema for validating spatial referencing descriptions.
+            </a></dt><dt>2.6.5. <a href="#N10173">
+            The eml-storedProcedure module - Data tables
+            resulting from procedures stored in a database
+          </a></dt><dt>2.6.6. <a href="#N1017F">
+            The eml-view module - Data tables resulting from a
+            database query
+          </a></dt></dl></dd><dt>2.7. <a href="#N1018B">
+          Utility modules - Metadata documentation enhancements
+        </a></dt><dd><dl><dt>2.7.1. <a href="#N10190">The eml-text module - Text field formatting</a></dt><dt>2.7.2. <a href="#N1019A">Dependency Chart</a></dt></dl></dd><dt>2.8. <a href="#N101A3">
+          Internationalization - Metadata in multiple languages
+        </a></dt></dl></dd><dt>3. <a href="#technicalArch">Technical Architecture (Normative)</a></dt><dd><dl><dt>3.1. <a href="#N101D0">Introduction</a></dt><dt>3.2. <a href="#N101D5">Module Structure</a></dt><dt>3.3. <a href="#reusableContent">Reusable Content</a></dt><dd><dl><dt>3.3.1. <a href="#N10203">ID and Scope Examples</a></dt></dl></dd></dl></dd><dt>4. <a href="#moduleDescriptions">Module Descriptions (Normative)</a></dt><dd><dl><dt>4.1. <a href="#eml">eml</a></dt><dt>4.2. <a href="#eml-access">eml-access</a></dt><dt>4.3. <a href="#eml-attribute">eml-attribute</a></dt><dt>4.4. <a href="#eml-constraint">eml-constraint</a></dt><dt>4.5. <a href="#eml-coverage">eml-coverage</a></dt><dt>4.6. <a href="#eml-dataset">eml-dataset</a></dt><dt>4.7. <a href="#eml-dataTable">eml-dataTable</a></dt><dt>4.8. <a href="#eml-entity">eml-entity</a></dt><dt>4.9. <a href="#eml-literature">eml-literature</a></dt><dt>4.10. <a href="#eml-methods">eml-methods</a></dt><dt>4.11. <a href="#eml-party">eml-party</a></dt><dt>4.12. <a href="#eml-physical">eml-physical</a></dt><dt>4.13. <a href="#eml-project">eml-project</a></dt><dt>4.14. <a href="#eml-protocol">eml-protocol</a></dt><dt>4.15. <a href="#eml-resource">eml-resource</a></dt><dt>4.16. <a href="#eml-software">eml-software</a></dt><dt>4.17. <a href="#eml-spatialRaster">eml-spatialRaster</a></dt><dt>4.18. <a href="#eml-spatialReference">eml-spatialReference</a></dt><dt>4.19. <a href="#eml-spatialVector">eml-spatialVector</a></dt><dt>4.20. <a href="#eml-storedProcedure">eml-storedProcedure</a></dt><dt>4.21. <a href="#eml-text">eml-text</a></dt><dt>4.22. <a href="#eml-unitTypeDefinitions">eml-unitTypeDefinitions</a></dt><dt>4.23. <a href="#eml-view">eml-view</a></dt></dl></dd><dt><a href="#index">Index</a></dt></dl></div><div class="list-of-examples"><p><b>List of Examples</b></p><dl><dt>2.1. <a href="#N101C0">Internationalization techniques</a></dt><dt>3.1. <a href="#N10212">Invalid EML due to duplicate identifiers</a></dt><dt>3.2. <a href="#N1021A">Invalid EML due to a non-existent reference</a></dt><dt>3.3. <a href="#N10222">Invalid EML due to a conflicting id attribute and a
+            &lt;references&gt; element</a></dt><dt>3.4. <a href="#N1022A">A valid EML document</a></dt></dl></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="preface"></a>Chapter 1. Preface</h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1.1. <a href="#introduction">Introduction</a></dt><dt>1.2. <a href="#purpose">Purpose Statement</a></dt><dt>1.3. <a href="#features">Features</a></dt></dl></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="introduction"></a>1.1. Introduction</h2></div></div><p>
+       The Ecological Metadata Language (EML) is a metadata standard developed by
+       the ecology discipline and for the ecology discipline. It is based on
+       prior work done by the Ecological Society of America and associated
+       efforts (Michener et al., 1997, Ecological Applications). EML is
+       implemented as a series of XML document types that can by used in a
+       modular and extensible manner to document ecological data. Each EML
+       module is designed to describe one logical part of the total metadata
+       that should be included with any ecological dataset.
+      </p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="purpose"></a>1.2. Purpose Statement</h2></div></div><p>
+        To provide the ecological community with an extensible, flexible,
+        metadata standard for use in data analysis and archiving that will
+        allow automated machine processing, searching and retrieval.
+      </p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="features"></a>1.3. Features</h2></div></div><p>
+        The architecture of EML was designed to serve the needs of the
+        ecological community, and has benefitted from previous work in other
+        related metadata languages. EML has adopted the strengths of many of
+        these languages, but also addresses a number of short-comings that
+        have proved to inhibit the automated processing and integration of
+        dataset resources via their metadata.
+      </p><p>
+        The following list represents some of the features of EML:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+        Modularity: EML was designed as a collection of modules rather than
+        one large standard to facilitate future growth of the language in both
+        breadth and depth.  By implementing EML with an extensible
+        architecture, groups may choose which of the core modules are
+        pertinent to describing their data, literature, and software
+        resources.  Also, if EML falls short in a particular area, it may be
+        extended by creating a new module that describes the resource (e.g. a
+        detailed soils metadata profile that extends eml-dataset).  The intent
+        is to provide a common set of core modules for information exchange,
+        but to allow for future customizations of the language without the
+        need of going through a lengthy 'approval' process.
+        </p></li><li><p>
+        Detailed Structure: EML strives to balance the tradeoff of too much
+        detail with enough detail to enable advanced services in terms of
+        processing data through the parsing of accompanied metadata.
+        Therefore, a driving question throughout the design was: 'Will this
+        particular piece of information be machine-processed, just human
+        readable, or both?'  Information was then broken down into more highly
+        structured elements when the answer involved machine processing.
+        </p></li><li><p>
+        Compatibility: EML adopts much of it's syntax from the other metadata
+        standards that have evolved from the expertise of groups in other
+        disciplines.  Whenever possible, EML adopted entire trees of
+        information in order to facilitate conversion of EML documents into
+        other metadata languages.  EML was designed with the following
+        standards in mind: Dublin Core Metadata Initiative, the Content
+        Standard for Digital Geospatial Metadata (CSDGM from the US geological
+        Survey's Federal Geographic Data Committee (FGDC)), the Biological
+        Profile of the CSDGM (from the National Biological Information
+        Infrastructure), the International Standards Organization's Geographic
+        Information Standard (ISO 19115), the ISO 8601 Date and Time Standard,
+        the OpenGIS Consortiums's Geography Markup Language (GML), the
+        Scientific, Technical, and Medical Markup Language (STMML), and the
+        Extensible Scientific Interchange Language (XSIL).
+        </p></li><li><p>
+        Strong Typing: EML is implemented in an Extensible Markup Language
+        (XML) known as <a href="http://www.w3.org/XML/Schema" target="_top">XML
+        Schema</a>, which is a language that defines the rules
+        that govern the EML syntax.  XML Schema is an internet recommendation
+        from the <a href="http://www.w3.org" target="_top">World Wide Web Consortium</a>,
+        and so a
+        metadata document that is said to comply with the syntax of EML will
+        structurally meet the criteria defined in the XML Schema documents for
+        EML.  Over and above the structure (what elements can be nested within
+        others, cardinality, etc.), XML Schema provides the ability to use
+        strong
+        data typing within elements.  This allows for finer validation of the
+        contents of the element, not just it's structure.  For instance, an
+        element may be of type 'date', and so the value that is inserted in
+        the field will be checked against XML Schema's definition of a date.
+        Traditionally, XML documents (including previous versions of EML)
+        have been validated against Document Type
+        Definitions (DTDs), which do not provide a means to employ strong
+        validation on field values through typing.
+        </p></li><li><p>
+        There is a distinction between the content model (i.e. the concepts
+        behind the structure of a document - which fields go where, cardinality,
+        etc.) and the syntactic implementation of that model (the technology
+        used to express the concepts defined in the content model).
+        The normative sections below define the content model and the
+        XML Schema documents distributed with EML define the syntactic
+        implementation. For the foreseeable future, XML Schema will be the
+        syntactic specification, although it may change later.
+        </p></li></ul></div></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="moduleOverview"></a>Chapter 2. Overview of EML modules and their use</h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>2.1. <a href="#N1003E">Module Overview Foreword</a></dt><dt>2.2. <a href="#N10043">
+        Root-level structure
+      </a></dt><dd><dl><dt>2.2.1. <a href="#N10046"> The eml module - A metadata container </a></dt><dt>2.2.2. <a href="#N1005E">
+              The eml-resource module - Base information for
+              all resources
+            </a></dt></dl></dd><dt>2.3. <a href="#N10068">
+          Top-level resources
+        </a></dt><dd><dl><dt>2.3.1. <a href="#N1006D">
+              The eml-dataset module - Dataset specific
+              information
+            </a></dt><dt>2.3.2. <a href="#N10080">
+              The eml-literature module - Citation specific
+              information
+            </a></dt><dt>2.3.3. <a href="#N10090">
+              The eml-software module - Software specific
+              information
+            </a></dt><dt>2.3.4. <a href="#N1009B">
+              The eml-protocol module - Research protocol specific information
+            </a></dt></dl></dd><dt>2.4. <a href="#N100A5">
+          Supporting Modules - Adding detail to top-level resources
+        </a></dt><dd><dl><dt>2.4.1. <a href="#N100AA">
+              The eml-access module - Access control rules for resources
+            </a></dt><dt>2.4.2. <a href="#N100CC">The eml-physical module - Physical file format</a></dt><dt>2.4.3. <a href="#N100D6">
+            The eml-party module - People and organization information
+          </a></dt><dt>2.4.4. <a href="#N100DE">
+            The eml-coverage module - Geographic, temporal, and taxonomic extents
+            of resources
+          </a></dt><dt>2.4.5. <a href="#N100ED">The eml-project module - Research context information for
+            resources</a></dt><dt>2.4.6. <a href="#N100FA">
+            The eml-methods module - Methodological information for resources
+          </a></dt></dl></dd><dt>2.5. <a href="#N10110">
+          Data organization - Modules describing dataset structures
+        </a></dt><dd><dl><dt>2.5.1. <a href="#N10115">
+              The eml-entity module - Entity level information within datasets
+            </a></dt><dt>2.5.2. <a href="#N10123">
+            The eml-attribute module - Attribute level information within
+            dataset entities
+          </a></dt><dt>2.5.3. <a href="#N10144">
+            The eml-constraint module - Relationships among and within
+            dataset entities
+          </a></dt></dl></dd><dt>2.6. <a href="#N1014A">
+          Entity types - Detailed information for discipline specific entities
+        </a></dt><dd><dl><dt>2.6.1. <a href="#N1014F">
+            The eml-dataTable module - Logical information
+            about data table entities
+          </a></dt><dt>2.6.2. <a href="#N10158">
+              The eml-spatialRaster module - Logical information about
+              regularly gridded geospatial image data
+            </a></dt><dt>2.6.3. <a href="#N10163">
+              The eml-spatialVector module - Logical information about
+              non-gridded geospatial image data
+            </a></dt><dt>2.6.4. <a href="#N1016D">
+              Schema for validating spatial referencing descriptions.
+            </a></dt><dt>2.6.5. <a href="#N10173">
+            The eml-storedProcedure module - Data tables
+            resulting from procedures stored in a database
+          </a></dt><dt>2.6.6. <a href="#N1017F">
+            The eml-view module - Data tables resulting from a
+            database query
+          </a></dt></dl></dd><dt>2.7. <a href="#N1018B">
+          Utility modules - Metadata documentation enhancements
+        </a></dt><dd><dl><dt>2.7.1. <a href="#N10190">The eml-text module - Text field formatting</a></dt><dt>2.7.2. <a href="#N1019A">Dependency Chart</a></dt></dl></dd><dt>2.8. <a href="#N101A3">
+          Internationalization - Metadata in multiple languages
+        </a></dt></dl></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N1003E"></a>2.1. Module Overview Foreword</h2></div></div><p>
+        The following section briefly describes each EML module and how they
+        are logically designed in order to document ecological resources.
+        Some of the modules are dependent on others, while others may be used
+        as stand-alone descriptions.  This section describes the modules using
+        a "top down" approach, starting from the top-level eml wrapper
+        module, followed by modules of increasing detail.  However, there are
+        modules that may be used at many levels, such as eml-access.
+        These modules are described when it is appropriate.
+      </p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N10043"></a>2.2. 
+        Root-level structure
+      </h2></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10046"></a>2.2.1.  The eml module - A metadata container </h3></div></div><p> The eml module is a wrapper container that allows the inclusion of any metadata
+              content in a single EML document. The eml module is used as a container to hold
+              structured descriptions of ecological resources. In EML, the definition of a resource
+              comes from the <a href="http://dublincore.org/documents/usageguide/" target="_top">
+                <i> The Dublin Core Metadata Initiative </i>
+              </a>, which describes a general element set used to describe "networked digital
+              resources". The top-level structure of EML has been designed to be compatible with the
+              Dublin Core syntax. In general, dataset resources, literature resources, software
+              resources, and protocol resources comprise the list of information that may be
+              described in EML. EML is largely designed to describe digital resources, however, it
+              may also be used to describe non-digital resources such as paper maps and other
+              non-digital media. <span class="emphasis"><em> In EML, the definition of a "Data Package" is the
+                combination of both the data and metadata for a resource. </em></span> So, data
+              packages are built by using the &lt;eml&gt; wrapper, which will include all of
+              the metadata, and optionally the data (or references to them). All EML packages must
+              begin with the &lt;eml&gt; tag and end with the &lt;/eml&gt; tag. </p><p> The eml module may be extended to describe other resources by means of its
+              optional sub-field, &lt;additionalMetadata&gt;. This field is largely reserved
+              for the inclusion of metadata that may be highly discipline specific and not covered
+              in this version of EML, or it may be used to internally extend fields within the EML
+              standard. </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1005E"></a>2.2.2. 
+              The eml-resource module - Base information for
+              all resources
+            </h3></div></div><p>
+              The eml-resource module contains general information that
+              describes dataset resources, literature resources, protocol
+              resources, and software resources. Each of the above four types of
+              resources share a common set of information, but also have
+              information that is unique to that particular resource type.  Each
+              resource type uses the eml-resource module to document the
+              information common to all resources, but then extend
+              eml-resource with modules that are specific to that particular
+              resource type.  For instance, all resources have creators,
+              titles, and perhaps keywords, but only the dataset resource would
+              have a "data table" within it.  Likewise, a literature
+              resource may have an "ISBN" number associated with it,
+              whereas the other resource types would not.
+            </p><p>
+              The eml-resource module is exclusively used by other modules, and is
+              therefore not a stand-alone module.
+            </p></div></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N10068"></a>2.3. 
+          Top-level resources
+        </h2></div></div><p>
+        The following four modules are used to describe separate resources:
+        datasets, literature, software, and protocols.  However, note that
+        the dataset module makes use of the other top-level modules by
+        importing them at different levels.  For instance, a dataset may
+        have been produced using a particular protocol, and that protocol
+        may come from a protocol document in a library of protocols.
+        Likewise, citations are used throughout the top-level resource
+        modules by importing the literature module.
+        </p><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1006D"></a>2.3.1. 
+              The eml-dataset module - Dataset specific
+              information
+            </h3></div></div><p>
+              The eml-dataset module contains general information that describes
+              dataset resources. It is intended to provide overview information
+              about the dataset: broad information such as the title, abstract,
+              keywords, contacts, maintenance history, purpose, and distribution
+              of the data themselves. The eml-dataset module also imports many
+              other modules that are used to describe the dataset in fine
+              detail.  Specifically, it uses the eml-methods module to
+              describe methodology used in collecting or processing the
+              dataset, the eml-project module to describe the overarching
+              research context and experimental design, the eml-access module
+              to define access control rules for the data and metadata, and
+              the eml-entity module to provide detailed information about the
+              logical structure of the dataset. A dataset can be (and often is)
+              composed of a series of data entities (tables) that are linked
+              together by particular integrity constraints.
+            </p><p>
+              The eml-dataset module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a dataset to be described once, and then used as a
+              reference in other locations within the EML document via its ID.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10080"></a>2.3.2. 
+              The eml-literature module - Citation specific
+              information
+            </h3></div></div><p>
+              The eml-literature module contains information that describes
+              literature resources. It is intended to provide overview
+              information about the literature citation, including title,
+              abstract, keywords, and contacts. Citation types follow the
+              conventions laid out by
+              <a href="http://www.endnote.com" target="_top">EndNote</a>,
+              and there is an attempt to
+              represent a compatible subset of the EndNote citation types.
+              These citation types include: article, book, chapter, edited
+              book, manuscript, report, thesis, conference proceedings,
+              personal communication, map, generic, audio visual, and
+              presentation.  The "generic" citation type would be
+              used when one of the other types will not work.
+            </p><p>
+              The eml-literature module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a citation to be described once, and then used as a
+              reference in other locations within the EML document via its ID.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10090"></a>2.3.3. 
+              The eml-software module - Software specific
+              information
+            </h3></div></div><p>
+              The eml-software module contains general information that
+              describes software resources.  This module is intended to fully
+              document software that is needed in order to view a resource
+              (such as a dataset) or to process a dataset.  The software
+              module is also imported into the eml-methods module in order to
+              document what software was used to process or perform quality
+              control procedures on a dataset.
+            </p><p>
+              The eml-software module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows a software resource to be described once, and then used
+              as a reference in other locations within the EML document via
+              its ID.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1009B"></a>2.3.4. 
+              The eml-protocol module - Research protocol specific information
+            </h3></div></div><p>
+              The EML Protocol Module is used to define
+              abstract, prescriptive procedures for generating or processing
+              data.  Conceptually, a protocol is a standardized method.
+            </p><p>
+              Eml-protocol resembles eml-methods; however, eml-methods is
+              descriptive (often
+              written in the declarative mood:  "I took five subsamples...")
+              whereas eml-protocol is prescriptive (often written in the
+              imperative mood:  "Take five subsamples...").  A protocol
+              may have versions, whereas methods (as used in eml-methods)
+              should not.
+            </p></div></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N100A5"></a>2.4. 
+          Supporting Modules - Adding detail to top-level resources
+        </h2></div></div><p>
+            The following six modules are used to qualify the resources being
+            described in more detail.  They are used to describe access control
+            rules, distribution of the metadata and data themselves, parties
+            associated with the resource, the geographic, temporal, and
+            taxonomic extents of the resource, the overall research context of
+            the resource, and detailed methodology used for creating the
+            resource.  Some of these modules are imported directly into the
+            top-level resource modules, often in many locations in order to
+            limit the scope of the description.  For instance, the eml-coverage
+            module may be used for a particular column of a dataset, rather
+            than the entire dataset as a whole.
+          </p><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N100AA"></a>2.4.1. 
+              The eml-access module - Access control rules for resources
+            </h3></div></div><p>
+              The eml-access module describes the level of access that is
+              to be allowed or denied to a resource for a particular user or 
+              group of users, and can be described independently for metadata 
+              and data.  The eml-access
+              module uses a reference to a particular authentication system
+              to determine the set of principals (users or groups) that can be
+              specified in the access rules.
+              The special principal 'public' can be used to indicate that any
+              user or group has access permission, thereby making
+              it easier to specify that anonymous access is allowed. 
+             </p><p>        
+              There are two mechanisms for including access control 
+              via the eml-access module: 
+              <div class="orderedlist"><ol type="1"><li><p>
+                    The top-level "eml" element may have an optional 
+                    &lt;access&gt; element that is used to establish the 
+                    default access control for the entire EML package. If 
+                    this access element is omitted from the document, then 
+                    the package submitter should be given full access to the 
+                    package but all other users should be denied all access. 
+                    To allow the package to be publicly viewable, the EML 
+                    author must explicitly include a rule stating so.  Barring 
+                    the existence of a distribution-level &lt;access&gt; element 
+                    (see below), access to data entities will be controlled by 
+                    the package-level &lt;access&gt; element in the 
+                    &lt;eml&gt; element.
+                  </p></li><li><p>
+                    Exceptions for particular entity-level components of the 
+                    package can be controlled at a finer grain by using an 
+                    access description in that entity's physical/distribution 
+                    tree. When access control rules are specified at this 
+                    level, they apply only to the data in the parent 
+                    distribution element, and not to the metadata. Thus, it 
+                    will control access to the content of the &lt;inline&gt; 
+                    element, as well as resources that are referenced by the 
+                    &lt;online/url&gt; and &lt;online/connection&gt; paths. 
+                    These exceptions to access for particular data resources 
+                    are applied after the default access rules at the 
+                    package-level have been applied, so they effectively 
+                    override the default rules when they overlap.
+                  </p></li></ol></div>
+            </p><p>
+              In previous versions of EML access rules for entity-level 
+              distribution were contained in &lt;additionalMetadata&gt; 
+              sections and referenced via the &lt;describes&gt; tag. 
+              Although in theory these could have referenced any node, in 
+              application such node-level access control is problematic. 
+              Since the most common uses of access control rules were to 
+              limit access to specific data entities, the access tree has 
+              been placed there explicitly in EML 2.1.0.
+            </p><p>
+              Access is specified with a choice of child elements, either 
+              &lt;allow&gt; or &lt;deny&gt;. Within these rules, values can 
+              be assigned for each &lt;principal&gt; using the 
+              &lt;permission&gt; element. Users given "read" permission can 
+              view the resource; "write" allows changes to the resource 
+              excluding changes to the access rules; "changePermission" 
+              includes "write" plus the changing of access rules. Users 
+              allowed "all" permissions; may do all of the above.  Access to 
+              data and metadata is affected by the order attribute of the 
+              &lt;access&gt; element. It is possible for a deny rule to 
+              override an allow rule, and vice versa.  In the case where the 
+              order attribute is set to "allowFirst", and there are rules 
+              similar to the following (with non-critical sections deleted):
+<pre>
+  &lt;deny&gt;
+    &lt;principal&gt;public&lt;/principal&gt;
+    &lt;permission&gt;read&lt;/permission&gt;
+  &lt;/deny&gt;
+  &lt;allow&gt;
+    &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+    &lt;permission&gt;read&lt;/permission&gt;
+  &lt;/allow&gt;
+</pre>
+              the principal "uid=alice ..." will be denied access, 
+              because it is a member of the special "public" 
+              principal, and the deny rule is processed second. For this 
+              allow rule to truly allow access to that principal, the order 
+              attribute should be set to "denyFirst", and the 
+              allow rule will override the deny rule when it is processed 
+              second.              
+            </p><p>
+              An example is given below, with non-critical sections deleted:
+<pre>
+  &lt;eml&gt;
+      &lt;access 
+          authSystem="ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org" 
+          order="allowFirst"&gt;
+        &lt;allow&gt;
+          &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+          &lt;permission&gt;read&lt;/permission&gt;
+          &lt;permission&gt;write&lt;/permission&gt;
+        &lt;allow&gt;
+      &lt;/access&gt;
+      &lt;dataset&gt;
+      ...
+      ...
+      &lt;dataTable id="entity123"&gt;
+      ...
+        &lt;physical&gt;
+        ...
+          &lt;distribution&gt;
+          ...
+            &lt;access id="access123"
+            authSystem="ldap://ldap.ecoinformatics.org:389/dc=ecoinformatics,dc=org" 
+            order="allowFirst"&gt;
+              &lt;deny&gt;
+                &lt;principal&gt;uid=alice,o=NASA,dc=ecoinformatics,dc=org&lt;/principal&gt;
+                &lt;permission&gt;write&lt;/permission&gt;
+            &lt;/deny&gt;
+          &lt;/access&gt;
+         &lt;/distribution&gt;
+       &lt;/physical&gt;
+      &lt;/dataTable&gt;
+      &lt;dataTable id="entity234"&gt;
+        ...
+        &lt;physical&gt;
+        ...
+          &lt;distribution&gt;
+            ...
+            &lt;access&gt;
+              &lt;references&gt;access123&lt;/references&gt;
+            &lt;/access&gt;
+          &lt;/distribution&gt;
+        &lt;/physical&gt;
+      &lt;/dataTable&gt;
+      ...    
+    &lt;/dataset&gt;
+  &lt;eml&gt;
+</pre>
+              In this example, the overall default access is to allow the 
+              user=alice (but no one else) to read and write all metadata 
+              and data. However, under "entity123" and 
+              "entity234", there is an additional rule saying 
+              that user=alice does not have write permission. The net 
+              effect is that Alice can read and make changes to the 
+              metadata, but cannot make changes to the two data entities. 
+              In addition, Alice cannot change these access rules; although 
+              the submitter can.
+            </p><p>
+              This example also shows how the eml-access module, like other modules,
+              may be "referenced" via the &lt;references&gt; tag.  This
+              allows an access control document to be described once, and then
+              used as a reference in other locations within the EML document
+              via its ID.
+            </p><p>
+            In summary, access rules can be applied in two places in an
+            eml document. Default access rules are established
+            in the top &lt;access&gt; element for the main eml document (e.g.,
+            "/eml/access").  These default rules can be overridden
+            for particular data entities by adding additional &lt;access&gt;
+            elements in the physical/distribution trees of those entities.
+           </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N100CC"></a>2.4.2. The eml-physical module - Physical file format</h3></div></div><p>
+        The eml-physical module describes the external
+        and internal physical characteristics of a data object as well as the
+        information required for its distribution. Examples of the external
+        physical characteristics of a data object would be the filename,
+        size, compression, encoding methods, and authentication of a file
+        or byte stream.  Internal physical characteristics describe the
+        format of the data object being described.  Both named binary or
+        otherwise proprietary formats can be cited (e.g., Microsoft Access
+        2000), or text formats can be precisely described (e.g., ASCII text
+        delimited with commas).  For these text formats, it also includes the
+        information needed to parse the data object to extract the entity
+        and its attributes from the data object.  Distribution information
+        describes how to retrieve the data object.  The retrieval information
+        can be either online (e.g., a URL or other connection information)
+        or offline (e.g., a data object residing on an archival tape).
+        </p><p>
+          The eml-physical module, like other modules, may be
+          "referenced" via the &lt;references&gt; tag.  This
+          allows a physical document to be described once, and then
+          used as a reference in other locations within the EML document
+          via its ID.
+        </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N100D6"></a>2.4.3. 
+            The eml-party module - People and organization information
+          </h3></div></div><p>
+            The eml-party module describes a responsible party 
+            and is typically used to name the creator of a
+            resource or metadata document. A responsible party may be 
+			an individual person, an organization or a named position within
+			an organization. The eml-party module contains detailed contact
+            information. It is used throughout the other EML modules where
+            detailed contact information is needed.
+          </p><p>
+            The eml-party module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This allows
+            a party to be described once, and then used as a reference in
+            other locations within the EML document via its ID.
+          </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N100DE"></a>2.4.4. 
+            The eml-coverage module - Geographic, temporal, and taxonomic extents
+            of resources
+          </h3></div></div><p>
+            The eml-coverage module contains fields for describing the coverage
+            of a resource in terms of time, space, and taxonomy. These
+            coverages (temporal, spatial, and taxonomic) represent the extent
+            of applicability of the resource in those domains.
+            The Geographic coverage section allows for 2 means of expressing
+            coverage
+            on the surface of the earth: 1) via a set of bounding coordinates
+            that define the North, South, East and West points in a rectangular
+            area, optionally including a bounding altitude,
+            and 2) using a G-Ring polygon definition, where an irregularly
+            shaped area may be defined using a ordered list of
+            latitude/longitude coordinates.  A G-Ring may also include an
+            "inner G-Ring" that defines one or more
+            "cut-outs" in the area, i.e. the donut hole concept.
+          </p><p>
+            The temporal coverage section allows for the definition of either a
+            single date or time, or a range of dates or times. These may be
+            expressed as a calendar date according to the ISO 8601 Date and Time
+            Specification, or by using an alternate time scale, such as the
+            geologic time scale. Currently, EML does not have specific fields to indicate
+            that a data resource may be "ongoing." Two examples are data tables 
+			that are planned to be appended in the future, or resources 
+            with complex connection definitions (such as to a database) which may return 
+			data in real time. It is important that EML be 
+            able to  handle data from both the "producer" and "consumer" points of view,
+            although currently the temporal coverage modules are designed for the latter.
+            There is no universally acceptable recommendation for describing "ongoing" data
+            within EML. Some groups have chosen to use the &lt;alternateTimeScale&gt; 
+            node for the end date, with a value of "ongoing," although this practice
+            is not endorsed by the EML authors. A better solution could be to use very
+			general content for the endDate (such as only the current year) so that the 
+			data are accurately described, and searches return datasets as expected.
+			A future version of EML will 
+            accommodate such data types with coverage elements specific to their needs.
+          </p><p>
+            The taxonomic coverage section allows for detailed description of
+            the taxonomic extent of the dataset or resource.  The taxonomic
+            classification consists of a recursive set of taxon rank names,
+            their values, and their common names.  This construct allows for a
+            taxonomic hierarchy to be built to show the level of identification
+            (e.g. Rank Name = Kingdom, Rank Value = Animalia, Common Name =
+            Animals, and so on down the hierarchy.) The taxonomic coverage
+            module also allows for the definition of the classification system
+            in cases where alternative systems are used.
+          </p><p>
+            The eml-coverage module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This allows
+            the coverage extent to be described once, and then used as a
+            reference in other locations within the EML document via its ID.
+          </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N100ED"></a>2.4.5. The eml-project module - Research context information for
+            resources</h3></div></div><p>The eml-project module describes the research context in
+            which the dataset was created, including descriptions of over-all
+            motivations and goals, funding, personnel, description of the study
+            area etc. This is also the module to describe the design of the
+            project: the scientific questions being asked, the architecture of
+            the design, etc. This module is used to place the dataset that is
+            being documented into its larger research context.</p><p>The eml-project module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag. This allows a research
+            project to be described once, and then used as a reference in other
+            locations within the EML document via its ID.</p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N100FA"></a>2.4.6. 
+            The eml-methods module - Methodological information for resources
+          </h3></div></div><p>
+            The eml-methods module describes the methods
+            followed in the creation of the dataset, including description of
+            field, laboratory and processing steps, sampling methods and units,
+            quality control procedures.  The eml-methods module is used
+            to describe the <span class="emphasis"><em>actual</em></span>
+            procedures that are used in the creation or the subsequent
+            processing of a dataset. Likewise, eml-methods is used to describe
+            processes that have been used to define / improve the quality of a
+            data file, or to identify potential problems with the data file.
+            Note that the eml-protocol module is intended to be used to document
+            a <span class="emphasis"><em>prescribed</em></span> procedure, whereas the eml-method
+            module is used to describe procedures that <span class="emphasis"><em>were actually
+            performed</em></span>.  The distinction is that the use of the term
+            "protocol" is used in the "prescriptive" sense,
+            and the term "method" is used in the
+            "descriptive" sense.  This distinction allows managers to
+            build a protocol library of well-known, established protocols
+            (procedures), but also document what procedure was truly performed
+            in relation to the established protocol.  The method may have
+            diverged from the protocol purposefully, or perhaps incidentally,
+            but the procedural lineage is still preserved and understandable.
+          </p></div></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N10110"></a>2.5. 
+          Data organization - Modules describing dataset structures
+        </h2></div></div><p>
+            The following three modules are used to document the logical layout
+            of a dataset.  Many datasets are comprised of multiple entities
+            (e.g. a series of tabular data files, or a set of GIS features, or a
+            number of tables in a relational database).  Each entity within a
+            dataset may contain one or more attributes (e.g. multiple columns in
+            a data file, multiple attributes of a GIS feature, or multiple
+            columns of a database table).  Lastly, there may be both simple or
+            complex  relationships among the entities within a dataset.  The
+            relationships, or the constraints that are to be enforced in the
+            dataset, are described using the eml-constraint module.  All
+            entities share a common set of information (described using
+            eml-entity), but some discipline specific entities have
+            characteristics that are unique to that entity type.  Therefore, the
+            eml-entity module is extended for each of these types (dataTable,
+            spatialRaster, spatialVector, etc...) which are described
+            in the next section.
+          </p><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10115"></a>2.5.1. 
+              The eml-entity module - Entity level information within datasets
+            </h3></div></div><p>
+              The eml-entity module defines the logical characteristics of
+              each entity in the dataset. Entities are usually tables of
+              data (eml-dataTable). Data tables may be ascii text files,
+              relational database tables, spreadsheets or other type of
+              tabular data with a fixed logical structure. Related to data
+              tables are views (eml-view) and stored
+              procedures (eml-storedProcedure). Views and stored procedures
+              are produced by an RDBMS or related system. Other types of data
+              such as: raster (eml-spatialRaster), vector (eml-spatialVector) or
+              spatialReference image data are also data entities. An
+              otherEntity element would be used to describe types of entities
+              that are not described by any other entity type.
+            </p><p>
+              The eml-entity module, like other modules, may be
+              "referenced" via the &lt;references&gt; tag.  This
+              allows an entity document to be described once, and then
+              used as a reference in other locations within the EML document
+              via its ID.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10123"></a>2.5.2. 
+            The eml-attribute module - Attribute level information within
+            dataset entities
+          </h3></div></div><p>
+            The eml-attribute module describes all attributes (variables)
+            in a data entity: dataTable, spatialRaster, spatialVector,
+            storedProcedure, view or otherEntity. The description includes the
+            name and definition of each attribute, its domain, definitions of
+            coded values, and other pertinent information. Two structures exist
+            in this module: 1.  attribute is used to define a single attribute;
+            2. attributeList is used to define a list of attributes that go
+            together in some logical way.
+          </p><p>
+            The eml-attribute module, like other modules, may be
+            "referenced" via the &lt;references&gt; tag.  This
+            allows an attribute document to be described once, and then
+            used as a reference in other locations within the EML document
+            via its ID.
+            </p><div class="section"><div class="titlepage"><div><h4 class="title"><a name="N1012F"></a>2.5.2.1. Philosophy of Attribute Units</h4></div></div><p>The concept of "unit" represents one of the most fundamental
+            categories of metadata. The classic example of data entropy is the
+            case in which a reported numeric value loses meaning due to lack of
+            associated units. Much of Ecology is driven by measurement, and
+            most measurements are inherently comparative. Good data description
+            requires a representation of the basis for comparison, i.e., the
+            unit. In modeling the attribute element, the authors of EML drew
+            inspiration from the
+            <a href="http://physics.nist.gov/cuu/Units/introduction.html" target="_top">
+            NIST Reference on Constants, Units, and Uncertainty</a>.
+            This document defines a unit as "a particular physical quantity,
+            defined and adopted by convention, with which other particular
+            quantities of the same kind are compared to express their value."
+            The authors of the EML 2.0 specification (hereafter "the authors")
+            decided to make the unit element required, wherever
+            possible.</p><p>Units may also be one of the most problematic categories of
+            metadata. For instance, there are many candidate attributes that
+            clearly have no units, such as named places and letter grades.
+            There are other candidate attributes for which units are difficult
+            to identify, despite some suspicion that they should exist (e.g.
+            pH, dates, times). In still other cases, units may be meaningful,
+            but apparently absent due to dimensional analysis (e.g. grams of
+            carbon per gram of soil). The relationship between units and
+            dimensions likewise is not completely clear.</p><p>The authors decided to sharpen the model of attribute by
+            nesting unit under measurementScale. Measurement Scale is a data
+            typology, borrowed from Statistics, that was introduced in the
+            1940's. Under the adopted model, attributes are classified as
+            nominal, ordinal, interval, and ratio. Though widely criticized,
+            this classification is well-known and provides at least first-order
+            utility in EML. For example, nesting unit under measurementScale
+            allows EML to prevent its meaningless inclusion for categorical
+            data -- an approach judged superior to making unit universally
+            required or universally optional.</p><p>The sharpening of the attribute model allowed the elimination
+            of the unit type "undefined" from the standard unit dictionary (see
+            eml-unitDictionary.xml). It seemed self-defeating to require the
+            unit element exactly where appropriate, yet still allow its content
+            to be undefined. An attribute that requires a unit definition is
+            malformed until one is provided. The unit type "dimensionless" is
+            preserved, however. In EML 2.0, it is synonymous with "unitless"
+            and represents the case in which units cannot be associated with an
+            attribute for some reason, despite the proper classification of
+            that attribute as interval or ratio. Dimensionless may itself be an
+            anomaly arising from the limitations of the adopted measurement
+            scale typology.</p><p>Closely related to the concept of unit is the concept of
+            attribute domain. The authors decided that a well-formed
+            description of an attribute must include some indication of the set
+            of possible values for that attribute. The set of possible values
+            is useful, perhaps necessary, for interpreting any particular
+            observed value. While universally required, attribute domain has
+            different forms, depending on the associated measurement
+            scale.</p><p>The element storageType has an obvious relationship to
+            domain. It gives some indication of the range of possible values of
+            an attribute, and also gives some (potentially critical)
+            operability information about the way the attribute is represented
+            or construed in the local storage system. The storageType element
+            seems to fall in a gray area between the logical and physical
+            aspects of stored data. Neither comfortable with eliminating it nor
+            with making it required, the authors left it available but optional
+            under attribute. In addition, it is repeatable so that different 
+            storage types can be provided for various systems (e.g., different
+            databases might use different types for columns, even though the
+            domain of the attribute is the same regardless of which database
+            is used).</p><p>Attributes representing dates, times, or combinations thereof
+            (hereafter "dateTime") were the most difficult to model in EML. Is
+            dateTime of type interval or ordinal? Does it have units or not?
+            Strong cases can be made on each side of the issue. The confusion
+            may reflect the limitations of the measurement scale typology. The
+            final resolution of the dateTime model is probably somewhat
+            arbitrary. There was clearly a need, however, to allow for the
+            interoperability of dateTime formats. EML 2.0 tries to provide an
+            unambiguous mechanism for describing the format of dateTime
+            values by providing a separate category for date and  time values. This
+            "dateTime" measurement scale allows users to explicitly label 
+            attributes that contain Gregorian date and time values, and allows
+            them to provide the information needed to parse these values into
+            their appropriate components (e.g., days, months, years)./</p></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10144"></a>2.5.3. 
+            The eml-constraint module - Relationships among and within
+            dataset entities
+          </h3></div></div><p>
+            The eml-constraint schema defines the integrity constraints
+            between entities (e.g., data tables) as they would be maintained in
+            a relational management system.  These constraints include primary
+            key constraints, foreign key constraints, unique key constraints,
+            check constraints, and not null constraints, among potential others.
+          </p></div></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N1014A"></a>2.6. 
+          Entity types - Detailed information for discipline specific entities
+        </h2></div></div><p>
+             The following six modules are used to describe a number of common
+             types of entities found in datasets.  Each entity type uses the
+             eml-entity module elements as it's base set of elements, but then
+             extends the base with entity-specific elements.  Note that the
+             eml-spatialReference module is not an entity type, but is rather a
+             common set of elements used to describe spatial reference systems
+             in both eml-spatialRaster and eml-spatialVector.  It is described
+             here in relation to those two modules.
+          </p><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1014F"></a>2.6.1. 
+            The eml-dataTable module - Logical information
+            about data table entities
+          </h3></div></div><p>
+            The eml-dataTable module is used to describe the logical
+            characteristics of each tabular set of information in a dataset. A
+            series of comma-separated text files may be considered a dataset,
+            and each file would subsequently be considered a dataTable entity
+            within the dataset.  Since the eml-dataTable module extends the
+            eml-entity module, it uses all of the common entity elements to
+            describe the table, along with a few elements specific to just data
+            table entities.  The eml-dataTable module allows for the
+            description of each attribute (column/field/variable) within the
+            data table through the use of the eml-attribute module.  Likewise,
+            there are fields used to describe the physical distribution of the
+            data table, its overall coverage, the methodology used in creating
+            the data, and other logical structure information such as its
+            orientation, case sensitivity, etc.
+          </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10158"></a>2.6.2. 
+              The eml-spatialRaster module - Logical information about
+              regularly gridded geospatial image data
+            </h3></div></div><p>
+              The eml-spatialRaster module allows for the description of
+              entities composed of rectangular grids of data values that are
+              usually georeferenced to a portion of the earth's surface.
+              Specific attributes of a spatial raster can be documented
+              here including the spatial organization of the raster cells,
+              the cell data values, and if derived via imaging sensors,
+              characteristics about the image and its individual bands.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10163"></a>2.6.3. 
+              The eml-spatialVector module - Logical information about
+              non-gridded geospatial image data
+            </h3></div></div><p>
+              The eml-spatialVector module allows for the description of
+              spatial objects in a GIS system that are not defined in a
+              regularly gridded pattern.  These geometries include points and
+              vectors and the relationships among them.  Specific attributes of
+              a spatial vector can be documented here including the vector's
+              geometry type, count and topology level.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1016D"></a>2.6.4. 
+              Schema for validating spatial referencing descriptions.
+            </h3></div></div><p>
+             This module defines both projected and unprojected coordinate systems for
+             referencing the spatial coordinates of a dataset to the earth. The schema is based on
+             that used by Environmental Systems Research Inc (ESRI) for its .prj file format. EML provides a library of
+             pre-defined coordinate systems that may be referred to by name in the horizCoordSysName element. A
+             custom projection may be defined using this schema for any projection that does not appear in this
+             dictionary.
+            </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10173"></a>2.6.5. 
+            The eml-storedProcedure module - Data tables
+            resulting from procedures stored in a database
+          </h3></div></div><p>
+            The storedProcedure module is meant to capture information on
+            procedures that produce data output in the form of a data table.
+            In an RDBMS one can code complex queries and transactions into
+            stored procedures and then invoke them directly from front-end
+            applications. It allows the optional description of any parameters
+            that are expected to be passed to the procedure when it is called.
+          </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1017F"></a>2.6.6. 
+            The eml-view module - Data tables resulting from a
+            database query
+          </h3></div></div><p>
+            The eml-view module describes a view from a database management system.
+            A view is a query statement that is stored as a database object and
+            executed each time the view is called.
+          </p></div></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N1018B"></a>2.7. 
+          Utility modules - Metadata documentation enhancements
+        </h2></div></div><p>
+            The following modules are used to highlight the information being
+            documented in each of the above modules where prose may be needed to
+            convey the critical metadata.  The eml-text module provides a number
+            of text-based constructs to enhance a document (including sections,
+            paragraphs, lists, subscript, superscript, emphasis, etc.)
+          </p><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10190"></a>2.7.1. The eml-text module - Text field formatting</h3></div></div><p>
+          The eml-text module is a wrapper container that allows general
+            text descriptions to be used within the various modules of eml.
+            It can include either structured or unstructured text blocks.
+            It isn't really appropriate to use this module outside of the
+            context of a parent module, because the parent module determines
+            the appropriate context to which this text description applies.
+            The eml-text module allows one to provide structure to a text
+            description in order to convey concepts such as sections
+            (paragraphs), hierarchy (ordered and unordered lists), emphasis
+            (bold, superscript, subscript) etc.  The structured elements
+            are a subset of <a href="http://www.docbook.org" target="_top">DocBook</a>
+            so the predefined DocBook stylesheets can be used to style
+            EML fields that implement this module.
+          </p></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N1019A"></a>2.7.2. Dependency Chart</h3></div></div><p>
+            The multiple modules in EML all depend on each other in complex
+            ways.  To easily see these dependencies see the
+            <a href="eml-dependencies.html" target="_top">EML Dependency Chart.</a>
+</p></div></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N101A3"></a>2.8. 
+          Internationalization - Metadata in multiple languages
+        </h2></div></div><p>
+            EML supports internationalization using the i18nNonEmptyStringType. 
+            Fields defined as this type include:
+            <div class="itemizedlist"><ul type="disc"><li><p>Title</p></li><li><p>Keyword</p></li><li><p>Contact information (e.g. names, organizations, addresses)</p></li></ul></div>
+</p><p>
+            TextType fields also support language translations. These fields include:
+            <div class="itemizedlist"><ul type="disc"><li><p>Abstract</p></li><li><p>Methods</p></li><li><p>Protocol</p></li></ul></div>
+</p><div class="example"><p class="title"><b>Example 2.1. Internationalization techniques</b></p><p>
+	            Core metadata should be provided in English. 
+	            The core elements can be augmented with translations in a native language. 
+	            Detailed metadata can be provided in the native language as declared using the xml:lang attribute. 
+	            Authors can opt to include English translations of this detailed metadata as they see fit.
+	          </p><p>
+	          	The following example metadata document is provided primarily in Portuguese but includes English translations
+	          	of core metadata fields. 
+	          	The xml:lang="pt_BR" attribute at the root of the EML document indicates that, unless otherwise specified, 
+	          	the content of the document is supplied in Portuguese (Brazil).
+	          	The xml:lang="en_US" attributes on child elements denote that the content of that element is provided in English.
+
+	          	Core metadata (i.e. title) is provided in English, supplemented with a Portuguese translation using the 
+	          	value tag with an xml:lang attribute. Note that child elements can override the 
+	          	root language declaration of the document as well as the language declaration of their containing elements.
+	          	
+	          	The abstract element is primarily given in Portuguese (as inherited from the root language declaration), 
+	          	with an English translation.
+	          </p><p>
+	          	Many EML fields are repeatable (i.e. keyword) so that multiple values can be provided for the same concept. 
+	          	Translations for these fields should be included as nested value tags to indicate that they are equivalent concepts 
+	          	expressed in different languages rather than entirely different concepts.
+	          </p><pre>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb" 
+    xml:lang="pt_BR"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+  
+    &lt;!-- English title with Portuguese translation --&gt;    
+    &lt;title xml:lang=""en_US"&gt;
+    	Sample Dataset Description
+    	&lt;value xml:lang="pt_BR"&gt;Exemplo Descri&ccedil;&atilde;o Dataset&lt;/value&gt;
+    &lt;/title&gt;
+    ...
+    &lt;!-- Portuguese abstract with English translation --&gt;    
+    &lt;abstract&gt;
+    	&lt;para&gt;
+	    	Neste exemplo, a tradu&ccedil;&atilde;o em Ingl&ecirc;s &eacute; secund&aacute;rio
+	    	&lt;value xml:lang="en_US"&gt;In this example, the English translation is secondary&lt;/value&gt;
+    	&lt;para&gt;
+    &lt;/abstract&gt;
+    ...
+    &lt;!-- two keywords, each with an equivalent translation --&gt;    
+    &lt;keywordSet&gt;
+    	&lt;keyword keywordType="theme"&gt;
+	    	&aacute;rvore
+	    	&lt;value xml:lang="en_US"&gt;tree&lt;/value&gt;
+    	&lt;keyword&gt;
+    	&lt;keyword keywordType="theme"&gt;
+	    	&aacute;gua
+	    	&lt;value xml:lang="en_US"&gt;water&lt;/value&gt;
+    	&lt;keyword&gt;
+    &lt;/keywordSet&gt;
+    ...
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+				</pre></div></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="technicalArch"></a>Chapter 3. Technical Architecture (Normative)</h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>3.1. <a href="#N101D0">Introduction</a></dt><dt>3.2. <a href="#N101D5">Module Structure</a></dt><dt>3.3. <a href="#reusableContent">Reusable Content</a></dt><dd><dl><dt>3.3.1. <a href="#N10203">ID and Scope Examples</a></dt></dl></dd></dl></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N101D0"></a>3.1. Introduction</h2></div></div><p>
+        This section explains the rules of EML.  There are some rules that cannot
+        be written directly into the XML Schemas nor enforced by an XML parser.
+        These are guidelines that every EML package must follow in order for
+        it to be considered EML compliant.
+      </p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="N101D5"></a>3.2. Module Structure</h2></div></div><p>
+        Each EML module, with the exception of "eml" itself, has a top level
+        choice between the structured content of that modules or a
+        "references" field.  This enables the reuse of content
+        previously defined elsewhere in the document.  Methods for defining
+        and referencing content are described in the
+        <a href="#reusableContent" title="3.3. Reusable Content">next</a> section
+      </p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="reusableContent"></a>3.3. Reusable Content</h2></div></div><p>
+        EML allows the reuse of previously defined structured content (DOM
+        sub-trees) through the use of key/keyRef type references.  In order
+        for an EML package to remain cohesive and to allow for the cross
+        platform compatibility of packages, the following rules with respect
+        to packaging must be followed.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+          An ID is required on the eml root element.
+          </p></li><li><p>
+          IDs are optional on all other elements.
+          </p></li><li><p>
+          If an ID is not provided, that content must be interpreted as
+          representing a distinct object.
+          </p></li><li><p>
+          If an ID is provided for content then that content is distinct from
+          all other content except for that content that references its ID.
+          </p></li><li><p>
+          If a user wants to reuse content to indicate the repetition of an
+          object, a reference must be used. Two identical ids with the same system 
+	  attribute cannot exist in a single document.
+          </p></li><li><p>
+          "Document" scope is defined as identifiers unique only to a
+          single instance document (if a document does not have a system
+          attribute or if scope is set to 'document' then all IDs are defined
+          as distinct content).
+          </p></li><li><p>
+          "System" scope is defined as identifiers unique to an entire data
+          management system (if two documents share a system string, then
+          any IDs in those two documents that are identical refer to the
+          same object).
+          </p></li><li><p>
+          If an element references another element, it must not have an
+          ID itself. The system attribute must have the same value in both the
+	  target and referencing elements or it must be absent in both.
+          </p></li><li><p>
+          All EML packages must have the 'eml' module as the root.
+          </p></li><li><p>
+          The system and scope attribute are always optional except for at the
+          'eml' module where the scope attribute is fixed as 'system'.  The scope
+          attribute defaults to 'document' for all other modules.
+          </p></li></ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="N10203"></a>3.3.1. ID and Scope Examples</h3></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="N10204"></a>3.3.1.1. EML Parser</h4></div></div><p>
+        Because some of these rules cannot be enforced in XML-Schema, we have
+        written a parser which checks the validity of the references and IDs
+        used in your document.  This parser is included with the 2.1.0 release
+        of EML.  To run the parser, you must have Java 1.3.1 or higher.  To
+        execute it change into the lib directory of the release and run
+        the 'runEMLParser' script passing your EML instance file as a
+        parameter.  There is also an <a href="http://knb.ecoinformatics.org/emlparser" target="_top">online
+        version</a> of this parser which is publicly accessible.  The online
+        parser will both validate your XML document against the schema as
+        well as check the integrity of your references.
+        </p></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="N1020F"></a>3.3.1.2. Example Documents</h4></div></div><div class="example"><p class="title"><b>Example 3.1. Invalid EML due to duplicate identifiers</b></p><pre>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;!-- the two creators have the same id.  this should be an error--&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Myer&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </pre><div class="section"><div class="titlepage"></div><p>This instance document is invalid because both creator
+              elements have the same id.  No two elements can have the
+              same string as an id.</p></div></div><div class="example"><p class="title"><b>Example 3.2. Invalid EML due to a non-existent reference</b></p><pre>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23446" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Myer&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+    &lt;contact&gt;
+      &lt;references&gt;23447&lt;/references&gt;
+    &lt;/contact&gt;
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </pre><div class="section"><div class="titlepage"></div><p>This instance document is invalid because the contact
+              element references an id that does not exist. Any referenced
+              id must exist.</p></div></div><div class="example"><p class="title"><b>Example 3.3. Invalid EML due to a conflicting id attribute and a
+            &lt;references&gt; element</b></p><pre>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23446" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Meyer&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+    &lt;contact id="522"&gt;
+      &lt;references&gt;23445&lt;/references&gt;
+    &lt;/contact&gt;
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </pre><div class="section"><div class="titlepage"></div><p>This instance document is invalid because the contact
+              element both references another element and has an id itself.
+              If an element references another element, it may not have
+              an id.  This prevents circular references.</p></div></div><div class="example"><p class="title"><b>Example 3.4. A valid EML document</b></p><pre>
+&lt;?xml version="1.0"?&gt;
+&lt;eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"&gt;
+
+  &lt;dataset id="ds.1"&gt;
+    &lt;title&gt;Sample Dataset Description&lt;/title&gt;
+    &lt;creator id="23445" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    &lt;creator id="23446" scope="document"&gt;
+      &lt;individualName&gt;
+        &lt;surName&gt;Smith&lt;/surName&gt;
+      &lt;/individualName&gt;
+    &lt;/creator&gt;
+    ...
+    &lt;contact&gt;
+      &lt;references&gt;23446&lt;/references&gt;
+    &lt;/contact&gt;
+    &lt;contact&gt;
+      &lt;references&gt;23445&lt;/references&gt;
+    &lt;/contact&gt;
+  &lt;/dataset&gt;
+&lt;/eml:eml&gt;
+            </pre><div class="section"><div class="titlepage"></div><p>This instance document is valid.  Each contact is
+              referencing one of the creators above and all the ids are
+              unique.</p></div></div></div></div></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="moduleDescriptions"></a>Chapter 4. Module Descriptions (Normative)</h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>4.1. <a href="#eml">eml</a></dt><dt>4.2. <a href="#eml-access">eml-access</a></dt><dt>4.3. <a href="#eml-attribute">eml-attribute</a></dt><dt>4.4. <a href="#eml-constraint">eml-constraint</a></dt><dt>4.5. <a href="#eml-coverage">eml-coverage</a></dt><dt>4.6. <a href="#eml-dataset">eml-dataset</a></dt><dt>4.7. <a href="#eml-dataTable">eml-dataTable</a></dt><dt>4.8. <a href="#eml-entity">eml-entity</a></dt><dt>4.9. <a href="#eml-literature">eml-literature</a></dt><dt>4.10. <a href="#eml-methods">eml-methods</a></dt><dt>4.11. <a href="#eml-party">eml-party</a></dt><dt>4.12. <a href="#eml-physical">eml-physical</a></dt><dt>4.13. <a href="#eml-project">eml-project</a></dt><dt>4.14. <a href="#eml-protocol">eml-protocol</a></dt><dt>4.15. <a href="#eml-resource">eml-resource</a></dt><dt>4.16. <a href="#eml-software">eml-software</a></dt><dt>4.17. <a href="#eml-spatialRaster">eml-spatialRaster</a></dt><dt>4.18. <a href="#eml-spatialReference">eml-spatialReference</a></dt><dt>4.19. <a href="#eml-spatialVector">eml-spatialVector</a></dt><dt>4.20. <a href="#eml-storedProcedure">eml-storedProcedure</a></dt><dt>4.21. <a href="#eml-text">eml-text</a></dt><dt>4.22. <a href="#eml-unitTypeDefinitions">eml-unitTypeDefinitions</a></dt><dt>4.23. <a href="#eml-view">eml-view</a></dt></dl></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml"></a>4.1. eml</h2></div></div><p>Normative technical docs for
+  <a href="./eml.html" target="_top">eml</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-access"></a>4.2. eml-access</h2></div></div><p>Normative technical docs for
+  <a href="./eml-access.html" target="_top">eml-access</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-attribute"></a>4.3. eml-attribute</h2></div></div><p>Normative technical docs for
+  <a href="./eml-attribute.html" target="_top">eml-attribute</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-constraint"></a>4.4. eml-constraint</h2></div></div><p>Normative technical docs for
+  <a href="./eml-constraint.html" target="_top">eml-constraint</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-coverage"></a>4.5. eml-coverage</h2></div></div><p>Normative technical docs for
+  <a href="./eml-coverage.html" target="_top">eml-coverage</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-dataset"></a>4.6. eml-dataset</h2></div></div><p>Normative technical docs for
+  <a href="./eml-dataset.html" target="_top">eml-dataset</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-dataTable"></a>4.7. eml-dataTable</h2></div></div><p>Normative technical docs for
+  <a href="./eml-dataTable.html" target="_top">eml-dataTable</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-entity"></a>4.8. eml-entity</h2></div></div><p>Normative technical docs for
+  <a href="./eml-entity.html" target="_top">eml-entity</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-literature"></a>4.9. eml-literature</h2></div></div><p>Normative technical docs for
+  <a href="./eml-literature.html" target="_top">eml-literature</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-methods"></a>4.10. eml-methods</h2></div></div><p>Normative technical docs for
+  <a href="./eml-methods.html" target="_top">eml-methods</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-party"></a>4.11. eml-party</h2></div></div><p>Normative technical docs for
+  <a href="./eml-party.html" target="_top">eml-party</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-physical"></a>4.12. eml-physical</h2></div></div><p>Normative technical docs for
+  <a href="./eml-physical.html" target="_top">eml-physical</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-project"></a>4.13. eml-project</h2></div></div><p>Normative technical docs for
+  <a href="./eml-project.html" target="_top">eml-project</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-protocol"></a>4.14. eml-protocol</h2></div></div><p>Normative technical docs for
+  <a href="./eml-protocol.html" target="_top">eml-protocol</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-resource"></a>4.15. eml-resource</h2></div></div><p>Normative technical docs for
+  <a href="./eml-resource.html" target="_top">eml-resource</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-software"></a>4.16. eml-software</h2></div></div><p>Normative technical docs for
+  <a href="./eml-software.html" target="_top">eml-software</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-spatialRaster"></a>4.17. eml-spatialRaster</h2></div></div><p>Normative technical docs for
+  <a href="./eml-spatialRaster.html" target="_top">eml-spatialRaster</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-spatialReference"></a>4.18. eml-spatialReference</h2></div></div><p>Normative technical docs for
+  <a href="./eml-spatialReference.html" target="_top">eml-spatialReference</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-spatialVector"></a>4.19. eml-spatialVector</h2></div></div><p>Normative technical docs for
+  <a href="./eml-spatialVector.html" target="_top">eml-spatialVector</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-storedProcedure"></a>4.20. eml-storedProcedure</h2></div></div><p>Normative technical docs for
+  <a href="./eml-storedProcedure.html" target="_top">eml-storedProcedure</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-text"></a>4.21. eml-text</h2></div></div><p>Normative technical docs for
+  <a href="./eml-text.html" target="_top">eml-text</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-unitTypeDefinitions"></a>4.22. eml-unitTypeDefinitions</h2></div></div><p>Normative technical docs for
+  <a href="./eml-unitTypeDefinitions.html" target="_top">eml-unitTypeDefinitions</a>
+</p></div><div class="section"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="eml-view"></a>4.23. eml-view</h2></div></div><p>Normative technical docs for
+  <a href="./eml-view.html" target="_top">eml-view</a>
+</p></div></div><div class="index"><a name="index"></a><div class="titlepage"><div><h2 class="title"><a name="index"></a>Index</h2></div></div><div class="indexdiv">A<dl><dt>
+<a href="./eml-project.html#abstract" target="_top">abstract</a>-eml-project</dt><dt>
+<a href="./eml-resource.html#abstract" target="_top">abstract</a>-eml-resource</dt><dt>
+<a href="./eml.html#access" target="_top">access</a>-eml</dt><dt>
+<a href="./eml-access.html#access" target="_top">access</a>-eml-access</dt><dt>
+<a href="./eml-physical.html#access" target="_top">access</a>-eml-physical</dt><dt>
+<a href="./eml-attribute.html#accuracy" target="_top">accuracy</a>-eml-attribute</dt><dt>
+<a href="./eml-spatialRaster.html#accuracyReport" target="_top">accuracyReport</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#accuracyReport" target="_top">accuracyReport</a>-eml-spatialVector</dt><dt>
+<a href="./eml-software.html#action" target="_top">action</a>-eml-software</dt><dt>
+<a href="./eml-entity.html#additionalInfo" target="_top">additionalInfo</a>-eml-entity</dt><dt>
+<a href="./eml-resource.html#additionalInfo" target="_top">additionalInfo</a>-eml-resource</dt><dt>
+<a href="./eml.html#additionalMetadata" target="_top">additionalMetadata</a>-eml</dt><dt>
+<a href="./eml-party.html#address" target="_top">address</a>-eml-party</dt><dt>
+<a href="./eml-party.html#administrativeArea" target="_top">administrativeArea</a>-eml-party</dt><dt>
+<a href="./eml-access.html#allow" target="_top">allow</a>-eml-access</dt><dt>
+<a href="./eml-entity.html#alternateIdentifier" target="_top">alternateIdentifier</a>-eml-entity</dt><dt>
+<a href="./eml-resource.html#alternateIdentifier" target="_top">alternateIdentifier</a>-eml-resource</dt><dt>
+<a href="./eml-coverage.html#alternativeTimeScale" target="_top">alternativeTimeScale</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialReference.html#altitudeDatumName" target="_top">altitudeDatumName</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#altitudeDistanceUnits" target="_top">altitudeDistanceUnits</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#altitudeEncodingMethod" target="_top">altitudeEncodingMethod</a>-eml-spatialReference</dt><dt>
+<a href="./eml-coverage.html#altitudeMaximum" target="_top">altitudeMaximum</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#altitudeMinimum" target="_top">altitudeMinimum</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialReference.html#altitudeResolution" target="_top">altitudeResolution</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#altitudeSysDef" target="_top">altitudeSysDef</a>-eml-spatialReference</dt><dt>
+<a href="./eml-coverage.html#altitudeUnits" target="_top">altitudeUnits</a>-eml-coverage</dt><dt>
+<a href="./eml-literature.html#article" target="_top">article</a>-eml-literature</dt><dt>
+<a href="./eml-resource.html#associatedParty" target="_top">associatedParty</a>-eml-resource</dt><dt>
+<a href="./eml-attribute.html#attribute" target="_top">attribute</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attribute" target="_top">attribute</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attributeAccuracyExplanation" target="_top">attributeAccuracyExplanation</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attributeAccuracyReport" target="_top">attributeAccuracyReport</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attributeAccuracyValue" target="_top">attributeAccuracyValue</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attributeDefinition" target="_top">attributeDefinition</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attributeLabel" target="_top">attributeLabel</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#attributeList" target="_top">attributeList</a>-eml-attribute</dt><dt>
+<a href="./eml-dataTable.html#attributeList" target="_top">attributeList</a>-eml-dataTable</dt><dt>
+<a href="./eml-entity.html#attributeList" target="_top">attributeList</a>-eml-entity</dt><dt>
+<a href="./eml-spatialRaster.html#attributeList" target="_top">attributeList</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#attributeList" target="_top">attributeList</a>-eml-spatialVector</dt><dt>
+<a href="./eml-storedProcedure.html#attributeList" target="_top">attributeList</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-view.html#attributeList" target="_top">attributeList</a>-eml-view</dt><dt>
+<a href="./eml-attribute.html#attributeName" target="_top">attributeName</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#attributeOrientation" target="_top">attributeOrientation</a>-eml-physical</dt><dt>
+<a href="./eml-constraint.html#attributeReference" target="_top">attributeReference</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#attributeReference" target="_top">attributeReference</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#attributeReference" target="_top">attributeReference</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#attributeReference" target="_top">attributeReference</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#attributeReference" target="_top">attributeReference</a>-eml-constraint</dt><dt>
+<a href="./eml-literature.html#audioVisual" target="_top">audioVisual</a>-eml-literature</dt><dt>
+<a href="./eml-physical.html#authentication" target="_top">authentication</a>-eml-physical</dt></dl></div><div class="indexdiv">B<dl><dt>
+<a href="./eml-spatialRaster.html#bandDescription" target="_top">bandDescription</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-physical.html#bandgapbytes" target="_top">bandgapbytes</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#bandrowbytes" target="_top">bandrowbytes</a>-eml-physical</dt><dt>
+<a href="./eml-coverage.html#beginDate" target="_top">beginDate</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialRaster.html#bilinearFit" target="_top">bilinearFit</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-physical.html#binaryRasterFormat" target="_top">binaryRasterFormat</a>-eml-physical</dt><dt>
+<a href="./eml-literature.html#book" target="_top">book</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#bookTitle" target="_top">bookTitle</a>-eml-literature</dt><dt>
+<a href="./eml-coverage.html#boundingAltitudes" target="_top">boundingAltitudes</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#boundingCoordinates" target="_top">boundingCoordinates</a>-eml-coverage</dt><dt>
+<a href="./eml-attribute.html#bounds" target="_top">bounds</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#bounds" target="_top">bounds</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#byteorder" target="_top">byteorder</a>-eml-physical</dt></dl></div><div class="indexdiv">C<dl><dt>
+<a href="./eml-coverage.html#calendarDate" target="_top">calendarDate</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialRaster.html#cameraCalibrationInformationAvailability" target="_top">cameraCalibrationInformationAvailability</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-constraint.html#cardinality" target="_top">cardinality</a>-eml-constraint</dt><dt>
+<a href="./eml-dataTable.html#caseSensitive" target="_top">caseSensitive</a>-eml-dataTable</dt><dt>
+<a href="./eml-spatialRaster.html#cellGeometry" target="_top">cellGeometry</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#cellSizeXDirection" target="_top">cellSizeXDirection</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#cellSizeYDirection" target="_top">cellSizeYDirection</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-dataset.html#changeDate" target="_top">changeDate</a>-eml-dataset</dt><dt>
+<a href="./eml-dataset.html#changeHistory" target="_top">changeHistory</a>-eml-dataset</dt><dt>
+<a href="./eml-dataset.html#changeScope" target="_top">changeScope</a>-eml-dataset</dt><dt>
+<a href="./eml-literature.html#chapter" target="_top">chapter</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#chapterNumber" target="_top">chapterNumber</a>-eml-literature</dt><dt>
+<a href="./eml-physical.html#characterEncoding" target="_top">characterEncoding</a>-eml-physical</dt><dt>
+<a href="./eml-constraint.html#checkCondition" target="_top">checkCondition</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#checkConstraint" target="_top">checkConstraint</a>-eml-constraint</dt><dt>
+<a href="./eml-software.html#checksum" target="_top">checksum</a>-eml-software</dt><dt>
+<a href="./eml-constraint.html#childOccurences" target="_top">childOccurences</a>-eml-constraint</dt><dt>
+<a href="./eml.html#citation" target="_top">citation</a>-eml</dt><dt>
+<a href="./eml-attribute.html#citation" target="_top">citation</a>-eml-attribute</dt><dt>
+<a href="./eml-literature.html#citation" target="_top">citation</a>-eml-literature</dt><dt>
+<a href="./eml-methods.html#citation" target="_top">citation</a>-eml-methods</dt><dt>
+<a href="./eml-methods.html#citation" target="_top">citation</a>-eml-methods</dt><dt>
+<a href="./eml-physical.html#citation" target="_top">citation</a>-eml-physical</dt><dt>
+<a href="./eml-project.html#citation" target="_top">citation</a>-eml-project</dt><dt>
+<a href="./eml-project.html#citation" target="_top">citation</a>-eml-project</dt><dt>
+<a href="./eml-project.html#citation" target="_top">citation</a>-eml-project</dt><dt>
+<a href="./eml-text.html#citetitle" target="_top">citetitle</a>-eml-text</dt><dt>
+<a href="./eml-party.html#city" target="_top">city</a>-eml-party</dt><dt>
+<a href="./eml-coverage.html#classificationSystem" target="_top">classificationSystem</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#classificationSystemCitation" target="_top">classificationSystemCitation</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#classificationSystemModifications" target="_top">classificationSystemModifications</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialRaster.html#cloudCoverPercentage" target="_top">cloudCoverPercentage</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-attribute.html#code" target="_top">code</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#code" target="_top">code</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#codeDefinition" target="_top">codeDefinition</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#codeExplanation" target="_top">codeExplanation</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#codesetName" target="_top">codesetName</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#codesetURL" target="_top">codesetURL</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#collapseDelimiters" target="_top">collapseDelimiters</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#collapseDelimiters" target="_top">collapseDelimiters</a>-eml-physical</dt><dt>
+<a href="./eml-spatialRaster.html#column" target="_top">column</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#columns" target="_top">columns</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-dataset.html#comment" target="_top">comment</a>-eml-dataset</dt><dt>
+<a href="./eml-coverage.html#commonName" target="_top">commonName</a>-eml-coverage</dt><dt>
+<a href="./eml-literature.html#communicationType" target="_top">communicationType</a>-eml-literature</dt><dt>
+<a href="./eml-physical.html#complex" target="_top">complex</a>-eml-physical</dt><dt>
+<a href="./eml-spatialRaster.html#compressionGenerationQuality" target="_top">compressionGenerationQuality</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-physical.html#compressionMethod" target="_top">compressionMethod</a>-eml-physical</dt><dt>
+<a href="./eml-literature.html#conferenceDate" target="_top">conferenceDate</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#conferenceDate" target="_top">conferenceDate</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#conferenceLocation" target="_top">conferenceLocation</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#conferenceLocation" target="_top">conferenceLocation</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#conferenceName" target="_top">conferenceName</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#conferenceName" target="_top">conferenceName</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#conferenceProceedings" target="_top">conferenceProceedings</a>-eml-literature</dt><dt>
+<a href="./eml-physical.html#connection" target="_top">connection</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#connection" target="_top">connection</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#connectionDefinition" target="_top">connectionDefinition</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#connectionDefinition" target="_top">connectionDefinition</a>-eml-resource</dt><dt>
+<a href="./eml-dataTable.html#constraint" target="_top">constraint</a>-eml-dataTable</dt><dt>
+<a href="./eml-entity.html#constraint" target="_top">constraint</a>-eml-entity</dt><dt>
+<a href="./eml-spatialRaster.html#constraint" target="_top">constraint</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#constraint" target="_top">constraint</a>-eml-spatialVector</dt><dt>
+<a href="./eml-storedProcedure.html#constraint" target="_top">constraint</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-view.html#constraint" target="_top">constraint</a>-eml-view</dt><dt>
+<a href="./eml-constraint.html#constraintDescription" target="_top">constraintDescription</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#constraintName" target="_top">constraintName</a>-eml-constraint</dt><dt>
+<a href="./eml-dataset.html#contact" target="_top">contact</a>-eml-dataset</dt><dt>
+<a href="./eml-literature.html#contact" target="_top">contact</a>-eml-literature</dt><dt>
+<a href="./eml-spatialRaster.html#controlPoint" target="_top">controlPoint</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#corner" target="_top">corner</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#cornerPoint" target="_top">cornerPoint</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-party.html#country" target="_top">country</a>-eml-party</dt><dt>
+<a href="./eml-attribute.html#coverage" target="_top">coverage</a>-eml-attribute</dt><dt>
+<a href="./eml-entity.html#coverage" target="_top">coverage</a>-eml-entity</dt><dt>
+<a href="./eml-methods.html#coverage" target="_top">coverage</a>-eml-methods</dt><dt>
+<a href="./eml-methods.html#coverage" target="_top">coverage</a>-eml-methods</dt><dt>
+<a href="./eml-project.html#coverage" target="_top">coverage</a>-eml-project</dt><dt>
+<a href="./eml-resource.html#coverage" target="_top">coverage</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#creator" target="_top">creator</a>-eml-resource</dt><dt>
+<a href="./eml-attribute.html#customUnit" target="_top">customUnit</a>-eml-attribute</dt></dl></div><div class="indexdiv">D<dl><dt>
+<a href="./eml-physical.html#dataFormat" target="_top">dataFormat</a>-eml-physical</dt><dt>
+<a href="./eml.html#dataset" target="_top">dataset</a>-eml</dt><dt>
+<a href="./eml-dataset.html#dataset" target="_top">dataset</a>-eml-dataset</dt><dt>
+<a href="./eml-coverage.html#datasetGPolygon" target="_top">datasetGPolygon</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#datasetGPolygonExclusionGRing" target="_top">datasetGPolygonExclusionGRing</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#datasetGPolygonOuterGRing" target="_top">datasetGPolygonOuterGRing</a>-eml-coverage</dt><dt>
+<a href="./eml-methods.html#dataSource" target="_top">dataSource</a>-eml-methods</dt><dt>
+<a href="./eml-dataset.html#dataTable" target="_top">dataTable</a>-eml-dataset</dt><dt>
+<a href="./eml-dataTable.html#dataTable" target="_top">dataTable</a>-eml-dataTable</dt><dt>
+<a href="./eml-attribute.html#dateTime" target="_top">dateTime</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#dateTimeDomain" target="_top">dateTimeDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#dateTimePrecision" target="_top">dateTimePrecision</a>-eml-attribute</dt><dt>
+<a href="./eml-spatialReference.html#datum" target="_top">datum</a>-eml-spatialReference</dt><dt>
+<a href="./eml-resource.html#defaultValue" target="_top">defaultValue</a>-eml-resource</dt><dt>
+<a href="./eml-attribute.html#definition" target="_top">definition</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#definition" target="_top">definition</a>-eml-attribute</dt><dt>
+<a href="./eml-resource.html#definition" target="_top">definition</a>-eml-resource</dt><dt>
+<a href="./eml-attribute.html#definitionAttributeReference" target="_top">definitionAttributeReference</a>-eml-attribute</dt><dt>
+<a href="./eml-literature.html#degree" target="_top">degree</a>-eml-literature</dt><dt>
+<a href="./eml-party.html#deliveryPoint" target="_top">deliveryPoint</a>-eml-party</dt><dt>
+<a href="./eml-access.html#deny" target="_top">deny</a>-eml-access</dt><dt>
+<a href="./eml-software.html#dependency" target="_top">dependency</a>-eml-software</dt><dt>
+<a href="./eml-spatialReference.html#depthDatumName" target="_top">depthDatumName</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#depthDistanceUnits" target="_top">depthDistanceUnits</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#depthEncodingMethod" target="_top">depthEncodingMethod</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#depthResolution" target="_top">depthResolution</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#depthSysDef" target="_top">depthSysDef</a>-eml-spatialReference</dt><dt>
+<a href="./eml.html#describes" target="_top">describes</a>-eml</dt><dt>
+<a href="./eml-dataset.html#description" target="_top">description</a>-eml-dataset</dt><dt>
+<a href="./eml-methods.html#description" target="_top">description</a>-eml-methods</dt><dt>
+<a href="./eml-methods.html#description" target="_top">description</a>-eml-methods</dt><dt>
+<a href="./eml-project.html#description" target="_top">description</a>-eml-project</dt><dt>
+<a href="./eml-resource.html#description" target="_top">description</a>-eml-resource</dt><dt>
+<a href="./eml-project.html#descriptor" target="_top">descriptor</a>-eml-project</dt><dt>
+<a href="./eml-project.html#descriptorValue" target="_top">descriptorValue</a>-eml-project</dt><dt>
+<a href="./eml-project.html#designDescription" target="_top">designDescription</a>-eml-project</dt><dt>
+<a href="./eml-software.html#diskUsage" target="_top">diskUsage</a>-eml-software</dt><dt>
+<a href="./eml-physical.html#distribution" target="_top">distribution</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#distribution" target="_top">distribution</a>-eml-resource</dt><dt>
+<a href="./eml-software.html#distribution" target="_top">distribution</a>-eml-software</dt><dt>
+<a href="./eml-storedProcedure.html#domainDescription" target="_top">domainDescription</a>-eml-storedProcedure</dt></dl></div><div class="indexdiv">E<dl><dt>
+<a href="./eml-coverage.html#eastBoundingCoordinate" target="_top">eastBoundingCoordinate</a>-eml-coverage</dt><dt>
+<a href="./eml-literature.html#editedBook" target="_top">editedBook</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#edition" target="_top">edition</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#edition" target="_top">edition</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#edition" target="_top">edition</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#editor" target="_top">editor</a>-eml-literature</dt><dt>
+<a href="./eml-party.html#electronicMailAddress" target="_top">electronicMailAddress</a>-eml-party</dt><dt>
+<a href="./eml.html#eml" target="_top">eml</a>-eml</dt><dt>
+<a href="./eml-text.html#emphasis" target="_top">emphasis</a>-eml-text</dt><dt>
+<a href="./eml-physical.html#encodingMethod" target="_top">encodingMethod</a>-eml-physical</dt><dt>
+<a href="./eml-coverage.html#endDate" target="_top">endDate</a>-eml-coverage</dt><dt>
+<a href="./eml-attribute.html#entityCodeList" target="_top">entityCodeList</a>-eml-attribute</dt><dt>
+<a href="./eml-entity.html#entityDescription" target="_top">entityDescription</a>-eml-entity</dt><dt>
+<a href="./eml-entity.html#entityName" target="_top">entityName</a>-eml-entity</dt><dt>
+<a href="./eml-attribute.html#entityReference" target="_top">entityReference</a>-eml-attribute</dt><dt>
+<a href="./eml-constraint.html#entityReference" target="_top">entityReference</a>-eml-constraint</dt><dt>
+<a href="./eml-entity.html#entityType" target="_top">entityType</a>-eml-entity</dt><dt>
+<a href="./eml-attribute.html#enumeratedDomain" target="_top">enumeratedDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#externalCodeSet" target="_top">externalCodeSet</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#externallyDefinedFormat" target="_top">externallyDefinedFormat</a>-eml-physical</dt></dl></div><div class="indexdiv">F<dl><dt>
+<a href="./eml-physical.html#fieldDelimiter" target="_top">fieldDelimiter</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#fieldDelimiter" target="_top">fieldDelimiter</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#fieldStartColumn" target="_top">fieldStartColumn</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#fieldWidth" target="_top">fieldWidth</a>-eml-physical</dt><dt>
+<a href="./eml-spatialRaster.html#filmDistortionInformationAvailability" target="_top">filmDistortionInformationAvailability</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-constraint.html#foreignKey" target="_top">foreignKey</a>-eml-constraint</dt><dt>
+<a href="./eml-physical.html#formatName" target="_top">formatName</a>-eml-physical</dt><dt>
+<a href="./eml-attribute.html#formatString" target="_top">formatString</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#formatVersion" target="_top">formatVersion</a>-eml-physical</dt><dt>
+<a href="./eml-project.html#funding" target="_top">funding</a>-eml-project</dt></dl></div><div class="indexdiv">G<dl><dt>
+<a href="./eml-coverage.html#generalTaxonomicCoverage" target="_top">generalTaxonomicCoverage</a>-eml-coverage</dt><dt>
+<a href="./eml-literature.html#generic" target="_top">generic</a>-eml-literature</dt><dt>
+<a href="./eml-spatialReference.html#geogCoordSys" target="_top">geogCoordSys</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#geogCoordSys" target="_top">geogCoordSys</a>-eml-spatialReference</dt><dt>
+<a href="./eml-coverage.html#geographicCoverage" target="_top">geographicCoverage</a>-eml-coverage</dt><dt>
+<a href="./eml-literature.html#geographicCoverage" target="_top">geographicCoverage</a>-eml-literature</dt><dt>
+<a href="./eml-coverage.html#geographicDescription" target="_top">geographicDescription</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialVector.html#geometricObjectCount" target="_top">geometricObjectCount</a>-eml-spatialVector</dt><dt>
+<a href="./eml-spatialVector.html#geometry" target="_top">geometry</a>-eml-spatialVector</dt><dt>
+<a href="./eml-spatialRaster.html#georeferenceInfo" target="_top">georeferenceInfo</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-party.html#givenName" target="_top">givenName</a>-eml-party</dt><dt>
+<a href="./eml-coverage.html#gRing" target="_top">gRing</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#gRing" target="_top">gRing</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#gRingLatitude" target="_top">gRingLatitude</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#gRingLongitude" target="_top">gRingLongitude</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#gRingPoint" target="_top">gRingPoint</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#gRingPoint" target="_top">gRingPoint</a>-eml-coverage</dt></dl></div><div class="indexdiv">H<dl><dt>
+<a href="./eml-spatialRaster.html#highWavelength" target="_top">highWavelength</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialReference.html#horizCoordSysDef" target="_top">horizCoordSysDef</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#horizCoordSysDef" target="_top">horizCoordSysDef</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#horizCoordSysName" target="_top">horizCoordSysName</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialRaster.html#horizontalAccuracy" target="_top">horizontalAccuracy</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#horizontalAccuracy" target="_top">horizontalAccuracy</a>-eml-spatialVector</dt></dl></div><div class="indexdiv">I<dl><dt>
+<a href="./eml-coverage.html#identificationReference" target="_top">identificationReference</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#identifierName" target="_top">identifierName</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialRaster.html#illuminationAzimuthAngle" target="_top">illuminationAzimuthAngle</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#illuminationElevationAngle" target="_top">illuminationElevationAngle</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#imageDescription" target="_top">imageDescription</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#imageOrientationAngle" target="_top">imageOrientationAngle</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#imageQualityCode" target="_top">imageQualityCode</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#imagingCondition" target="_top">imagingCondition</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-software.html#implementation" target="_top">implementation</a>-eml-software</dt><dt>
+<a href="./eml-party.html#individualName" target="_top">individualName</a>-eml-party</dt><dt>
+<a href="./eml-physical.html#inline" target="_top">inline</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#inline" target="_top">inline</a>-eml-resource</dt><dt>
+<a href="./eml-literature.html#institution" target="_top">institution</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#institution" target="_top">institution</a>-eml-literature</dt><dt>
+<a href="./eml-methods.html#instrumentation" target="_top">instrumentation</a>-eml-methods</dt><dt>
+<a href="./eml-resource.html#intellectualRights" target="_top">intellectualRights</a>-eml-resource</dt><dt>
+<a href="./eml-attribute.html#interval" target="_top">interval</a>-eml-attribute</dt><dt>
+<a href="./eml-literature.html#issue" target="_top">issue</a>-eml-literature</dt><dt>
+<a href="./eml-text.html#itemizedlist" target="_top">itemizedlist</a>-eml-text</dt><dt>
+<a href="./eml-text.html#itemizedlist" target="_top">itemizedlist</a>-eml-text</dt></dl></div><div class="indexdiv">J<dl><dt>
+<a href="./eml-constraint.html#joinCondition" target="_top">joinCondition</a>-eml-constraint</dt><dt>
+<a href="./eml-literature.html#journal" target="_top">journal</a>-eml-literature</dt></dl></div><div class="indexdiv">k<dl><dt>
+<a href="./eml-constraint.html#key" target="_top">key</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#key" target="_top">key</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#key" target="_top">key</a>-eml-constraint</dt><dt>
+<a href="./eml-constraint.html#key" target="_top">key</a>-eml-constraint</dt><dt>
+<a href="./eml-resource.html#keyword" target="_top">keyword</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#keywordSet" target="_top">keywordSet</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#keywordThesaurus" target="_top">keywordThesaurus</a>-eml-resource</dt></dl></div><div class="indexdiv">L<dl><dt>
+<a href="./eml-resource.html#language" target="_top">language</a>-eml-resource</dt><dt>
+<a href="./eml-software.html#language" target="_top">language</a>-eml-software</dt><dt>
+<a href="./eml-physical.html#layout" target="_top">layout</a>-eml-physical</dt><dt>
+<a href="./eml-spatialRaster.html#lensDistortionInformationAvailability" target="_top">lensDistortionInformationAvailability</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-software.html#license" target="_top">license</a>-eml-software</dt><dt>
+<a href="./eml-software.html#licenseURL" target="_top">licenseURL</a>-eml-software</dt><dt>
+<a href="./eml-physical.html#lineNumber" target="_top">lineNumber</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#lineNumber" target="_top">lineNumber</a>-eml-physical</dt><dt>
+<a href="./eml-text.html#listitem" target="_top">listitem</a>-eml-text</dt><dt>
+<a href="./eml-physical.html#literalCharacter" target="_top">literalCharacter</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#literalCharacter" target="_top">literalCharacter</a>-eml-physical</dt><dt>
+<a href="./eml-text.html#literalLayout" target="_top">literalLayout</a>-eml-text</dt><dt>
+<a href="./eml-spatialRaster.html#lowWaveLength" target="_top">lowWaveLength</a>-eml-spatialRaster</dt></dl></div><div class="indexdiv">M<dl><dt>
+<a href="./eml-software.html#machineProcessor" target="_top">machineProcessor</a>-eml-software</dt><dt>
+<a href="./eml-dataset.html#maintenance" target="_top">maintenance</a>-eml-dataset</dt><dt>
+<a href="./eml-dataset.html#maintenanceUpdateFrequency" target="_top">maintenanceUpdateFrequency</a>-eml-dataset</dt><dt>
+<a href="./eml-literature.html#manuscript" target="_top">manuscript</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#map" target="_top">map</a>-eml-literature</dt><dt>
+<a href="./eml-attribute.html#maximum" target="_top">maximum</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#maximum" target="_top">maximum</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#maxRecordLength" target="_top">maxRecordLength</a>-eml-physical</dt><dt>
+<a href="./eml-attribute.html#measurementScale" target="_top">measurementScale</a>-eml-attribute</dt><dt>
+<a href="./eml-resource.html#mediumDensity" target="_top">mediumDensity</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#mediumDensityUnits" target="_top">mediumDensityUnits</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#mediumFormat" target="_top">mediumFormat</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#mediumName" target="_top">mediumName</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#mediumNote" target="_top">mediumNote</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#mediumVolume" target="_top">mediumVolume</a>-eml-resource</dt><dt>
+<a href="./eml.html#metadata" target="_top">metadata</a>-eml</dt><dt>
+<a href="./eml-resource.html#metadataProvider" target="_top">metadataProvider</a>-eml-resource</dt><dt>
+<a href="./eml-attribute.html#methods" target="_top">methods</a>-eml-attribute</dt><dt>
+<a href="./eml-dataset.html#methods" target="_top">methods</a>-eml-dataset</dt><dt>
+<a href="./eml-entity.html#methods" target="_top">methods</a>-eml-entity</dt><dt>
+<a href="./eml-methods.html#methods" target="_top">methods</a>-eml-methods</dt><dt>
+<a href="./eml-methods.html#methodStep" target="_top">methodStep</a>-eml-methods</dt><dt>
+<a href="./eml-attribute.html#minimum" target="_top">minimum</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#minimum" target="_top">minimum</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#missingValueCode" target="_top">missingValueCode</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#multiBand" target="_top">multiBand</a>-eml-physical</dt></dl></div><div class="indexdiv">N<dl><dt>
+<a href="./eml-resource.html#name" target="_top">name</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#name" target="_top">name</a>-eml-resource</dt><dt>
+<a href="./eml-storedProcedure.html#name" target="_top">name</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-physical.html#nbands" target="_top">nbands</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#nbits" target="_top">nbits</a>-eml-physical</dt><dt>
+<a href="./eml-attribute.html#nominal" target="_top">nominal</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#nonNumericDomain" target="_top">nonNumericDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#nonNumericDomain" target="_top">nonNumericDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-coverage.html#northBoundingCoordinate" target="_top">northBoundingCoordinate</a>-eml-coverage</dt><dt>
+<a href="./eml-constraint.html#notNullConstraint" target="_top">notNullConstraint</a>-eml-constraint</dt><dt>
+<a href="./eml-spatialRaster.html#numberOfBands" target="_top">numberOfBands</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-dataTable.html#numberOfRecords" target="_top">numberOfRecords</a>-eml-dataTable</dt><dt>
+<a href="./eml-literature.html#numberOfVolumes" target="_top">numberOfVolumes</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#numberOfVolumes" target="_top">numberOfVolumes</a>-eml-literature</dt><dt>
+<a href="./eml-attribute.html#numberType" target="_top">numberType</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#numericDomain" target="_top">numericDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#numericDomain" target="_top">numericDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#numFooterLines" target="_top">numFooterLines</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#numHeaderLines" target="_top">numHeaderLines</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#numPhysicalLinesPerRecord" target="_top">numPhysicalLinesPerRecord</a>-eml-physical</dt></dl></div><div class="indexdiv">O<dl><dt>
+<a href="./eml-physical.html#objectName" target="_top">objectName</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#offline" target="_top">offline</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#offline" target="_top">offline</a>-eml-resource</dt><dt>
+<a href="./eml-spatialRaster.html#offset" target="_top">offset</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-dataset.html#oldValue" target="_top">oldValue</a>-eml-dataset</dt><dt>
+<a href="./eml-physical.html#online" target="_top">online</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#online" target="_top">online</a>-eml-resource</dt><dt>
+<a href="./eml-physical.html#onlineDescription" target="_top">onlineDescription</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#onlineDescription" target="_top">onlineDescription</a>-eml-resource</dt><dt>
+<a href="./eml-party.html#onlineUrl" target="_top">onlineUrl</a>-eml-party</dt><dt>
+<a href="./eml-software.html#operatingSystem" target="_top">operatingSystem</a>-eml-software</dt><dt>
+<a href="./eml-attribute.html#orderAttributeReference" target="_top">orderAttributeReference</a>-eml-attribute</dt><dt>
+<a href="./eml-text.html#orderedlist" target="_top">orderedlist</a>-eml-text</dt><dt>
+<a href="./eml-text.html#orderedlist" target="_top">orderedlist</a>-eml-text</dt><dt>
+<a href="./eml-attribute.html#ordinal" target="_top">ordinal</a>-eml-attribute</dt><dt>
+<a href="./eml-party.html#organizationName" target="_top">organizationName</a>-eml-party</dt><dt>
+<a href="./eml-literature.html#originalPublication" target="_top">originalPublication</a>-eml-literature</dt><dt>
+<a href="./eml-coverage.html#originator" target="_top">originator</a>-eml-coverage</dt><dt>
+<a href="./eml-dataset.html#otherEntity" target="_top">otherEntity</a>-eml-dataset</dt><dt>
+<a href="./eml-entity.html#otherEntity" target="_top">otherEntity</a>-eml-entity</dt></dl></div><div class="indexdiv">P<dl><dt>
+<a href="./eml-literature.html#pageRange" target="_top">pageRange</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#pageRange" target="_top">pageRange</a>-eml-literature</dt><dt>
+<a href="./eml-text.html#para" target="_top">para</a>-eml-text</dt><dt>
+<a href="./eml-text.html#para" target="_top">para</a>-eml-text</dt><dt>
+<a href="./eml-text.html#para" target="_top">para</a>-eml-text</dt><dt>
+<a href="./eml-resource.html#parameter" target="_top">parameter</a>-eml-resource</dt><dt>
+<a href="./eml-spatialReference.html#parameter" target="_top">parameter</a>-eml-spatialReference</dt><dt>
+<a href="./eml-storedProcedure.html#parameter" target="_top">parameter</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-resource.html#parameterDefinition" target="_top">parameterDefinition</a>-eml-resource</dt><dt>
+<a href="./eml-constraint.html#parentOccurences" target="_top">parentOccurences</a>-eml-constraint</dt><dt>
+<a href="./eml-party.html#party" target="_top">party</a>-eml-party</dt><dt>
+<a href="./eml-attribute.html#pattern" target="_top">pattern</a>-eml-attribute</dt><dt>
+<a href="./eml-spatialRaster.html#peakResponse" target="_top">peakResponse</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-literature.html#performer" target="_top">performer</a>-eml-literature</dt><dt>
+<a href="./eml-access.html#permission" target="_top">permission</a>-eml-access</dt><dt>
+<a href="./eml-literature.html#personalCommunication" target="_top">personalCommunication</a>-eml-literature</dt><dt>
+<a href="./eml-project.html#personnel" target="_top">personnel</a>-eml-project</dt><dt>
+<a href="./eml-party.html#phone" target="_top">phone</a>-eml-party</dt><dt>
+<a href="./eml-entity.html#physical" target="_top">physical</a>-eml-entity</dt><dt>
+<a href="./eml-physical.html#physical" target="_top">physical</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#physicalLineDelimiter" target="_top">physicalLineDelimiter</a>-eml-physical</dt><dt>
+<a href="./eml-spatialRaster.html#pointInPixel" target="_top">pointInPixel</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#pointInPixel" target="_top">pointInPixel</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-party.html#positionName" target="_top">positionName</a>-eml-party</dt><dt>
+<a href="./eml-party.html#postalCode" target="_top">postalCode</a>-eml-party</dt><dt>
+<a href="./eml-attribute.html#precision" target="_top">precision</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#precision" target="_top">precision</a>-eml-attribute</dt><dt>
+<a href="./eml-spatialRaster.html#preProcessingTypeCode" target="_top">preProcessingTypeCode</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-literature.html#presentation" target="_top">presentation</a>-eml-literature</dt><dt>
+<a href="./eml-constraint.html#primaryKey" target="_top">primaryKey</a>-eml-constraint</dt><dt>
+<a href="./eml-spatialReference.html#primeMeridian" target="_top">primeMeridian</a>-eml-spatialReference</dt><dt>
+<a href="./eml-access.html#principal" target="_top">principal</a>-eml-access</dt><dt>
+<a href="./eml-protocol.html#proceduralStep" target="_top">proceduralStep</a>-eml-protocol</dt><dt>
+<a href="./eml-software.html#programmingLanguage" target="_top">programmingLanguage</a>-eml-software</dt><dt>
+<a href="./eml-spatialReference.html#projCoordSys" target="_top">projCoordSys</a>-eml-spatialReference</dt><dt>
+<a href="./eml-dataset.html#project" target="_top">project</a>-eml-dataset</dt><dt>
+<a href="./eml-software.html#project" target="_top">project</a>-eml-software</dt><dt>
+<a href="./eml-spatialReference.html#projection" target="_top">projection</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#projectionList" target="_top">projectionList</a>-eml-spatialReference</dt><dt>
+<a href="./eml.html#protocol" target="_top">protocol</a>-eml</dt><dt>
+<a href="./eml-methods.html#protocol" target="_top">protocol</a>-eml-methods</dt><dt>
+<a href="./eml-protocol.html#protocol" target="_top">protocol</a>-eml-protocol</dt><dt>
+<a href="./eml-resource.html#pubDate" target="_top">pubDate</a>-eml-resource</dt><dt>
+<a href="./eml-literature.html#publicationPlace" target="_top">publicationPlace</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publicationPlace" target="_top">publicationPlace</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publicationPlace" target="_top">publicationPlace</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publicationPlace" target="_top">publicationPlace</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publicationPlace" target="_top">publicationPlace</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publicationPlace" target="_top">publicationPlace</a>-eml-literature</dt><dt>
+<a href="./eml-dataset.html#publisher" target="_top">publisher</a>-eml-dataset</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#publisher" target="_top">publisher</a>-eml-literature</dt><dt>
+<a href="./eml-dataset.html#pubPlace" target="_top">pubPlace</a>-eml-dataset</dt><dt>
+<a href="./eml-dataset.html#purpose" target="_top">purpose</a>-eml-dataset</dt></dl></div><div class="indexdiv">Q<dl><dt>
+<a href="./eml-methods.html#qualityControl" target="_top">qualityControl</a>-eml-methods</dt><dt>
+<a href="./eml-spatialRaster.html#quantitativeAccuracyMethod" target="_top">quantitativeAccuracyMethod</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#quantitativeAccuracyMethod" target="_top">quantitativeAccuracyMethod</a>-eml-spatialVector</dt><dt>
+<a href="./eml-spatialRaster.html#quantitativeAccuracyReport" target="_top">quantitativeAccuracyReport</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#quantitativeAccuracyReport" target="_top">quantitativeAccuracyReport</a>-eml-spatialVector</dt><dt>
+<a href="./eml-spatialRaster.html#quantitativeAccuracyValue" target="_top">quantitativeAccuracyValue</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#quantitativeAccuracyValue" target="_top">quantitativeAccuracyValue</a>-eml-spatialVector</dt><dt>
+<a href="./eml-attribute.html#quantitativeAttributeAccuracyAssessment" target="_top">quantitativeAttributeAccuracyAssessment</a>-eml-attribute</dt><dt>
+<a href="./eml-view.html#queryStatement" target="_top">queryStatement</a>-eml-view</dt><dt>
+<a href="./eml-physical.html#quoteCharacter" target="_top">quoteCharacter</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#quoteCharacter" target="_top">quoteCharacter</a>-eml-physical</dt></dl></div><div class="indexdiv"><dl><dt>
+<a href="./eml-spatialRaster.html#radiometricDataAvailability" target="_top">radiometricDataAvailability</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-coverage.html#rangeOfDates" target="_top">rangeOfDates</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialRaster.html#rasterOrigin" target="_top">rasterOrigin</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-attribute.html#ratio" target="_top">ratio</a>-eml-attribute</dt><dt>
+<a href="./eml-literature.html#recipient" target="_top">recipient</a>-eml-literature</dt><dt>
+<a href="./eml-physical.html#recordDelimiter" target="_top">recordDelimiter</a>-eml-physical</dt><dt>
+<a href="./eml-methods.html#referencedEntityId" target="_top">referencedEntityId</a>-eml-methods</dt><dt>
+<a href="./eml-constraint.html#referencedKey" target="_top">referencedKey</a>-eml-constraint</dt><dt>
+<a href="./eml-resource.html#references" target="_top">references</a>-eml-resource</dt><dt>
+<a href="./eml-literature.html#referenceType" target="_top">referenceType</a>-eml-literature</dt><dt>
+<a href="./eml-project.html#relatedProject" target="_top">relatedProject</a>-eml-project</dt><dt>
+<a href="./eml-constraint.html#relationshipType" target="_top">relationshipType</a>-eml-constraint</dt><dt>
+<a href="./eml-storedProcedure.html#repeats" target="_top">repeats</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-literature.html#report" target="_top">report</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#reportNumber" target="_top">reportNumber</a>-eml-literature</dt><dt>
+<a href="./eml-coverage.html#repository" target="_top">repository</a>-eml-coverage</dt><dt>
+<a href="./eml-literature.html#reprintEdition" target="_top">reprintEdition</a>-eml-literature</dt><dt>
+<a href="./eml-storedProcedure.html#required" target="_top">required</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-project.html#researchProject" target="_top">researchProject</a>-eml-project</dt><dt>
+<a href="./eml-literature.html#reviewedItem" target="_top">reviewedItem</a>-eml-literature</dt><dt>
+<a href="./eml-project.html#role" target="_top">role</a>-eml-project</dt><dt>
+<a href="./eml-resource.html#role" target="_top">role</a>-eml-resource</dt><dt>
+<a href="./eml-spatialRaster.html#row" target="_top">row</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-physical.html#rowColumnOrientation" target="_top">rowColumnOrientation</a>-eml-physical</dt><dt>
+<a href="./eml-spatialRaster.html#rows" target="_top">rows</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-software.html#runtimeMemoryUsage" target="_top">runtimeMemoryUsage</a>-eml-software</dt></dl></div><div class="indexdiv">S<dl><dt>
+<a href="./eml-party.html#salutation" target="_top">salutation</a>-eml-party</dt><dt>
+<a href="./eml-methods.html#sampling" target="_top">sampling</a>-eml-methods</dt><dt>
+<a href="./eml-methods.html#samplingDescription" target="_top">samplingDescription</a>-eml-methods</dt><dt>
+<a href="./eml-literature.html#scale" target="_top">scale</a>-eml-literature</dt><dt>
+<a href="./eml-spatialRaster.html#scaleFactor" target="_top">scaleFactor</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-resource.html#schemeName" target="_top">schemeName</a>-eml-resource</dt><dt>
+<a href="./eml-text.html#section" target="_top">section</a>-eml-text</dt><dt>
+<a href="./eml-text.html#section" target="_top">section</a>-eml-text</dt><dt>
+<a href="./eml-spatialRaster.html#sequenceIdentifier" target="_top">sequenceIdentifier</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-resource.html#series" target="_top">series</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#shortName" target="_top">shortName</a>-eml-resource</dt><dt>
+<a href="./eml-physical.html#simpleDelimited" target="_top">simpleDelimited</a>-eml-physical</dt><dt>
+<a href="./eml-coverage.html#singleDateTime" target="_top">singleDateTime</a>-eml-coverage</dt><dt>
+<a href="./eml-physical.html#size" target="_top">size</a>-eml-physical</dt><dt>
+<a href="./eml-software.html#size" target="_top">size</a>-eml-software</dt><dt>
+<a href="./eml-physical.html#skipbytes" target="_top">skipbytes</a>-eml-physical</dt><dt>
+<a href="./eml.html#software" target="_top">software</a>-eml</dt><dt>
+<a href="./eml-methods.html#software" target="_top">software</a>-eml-methods</dt><dt>
+<a href="./eml-software.html#software" target="_top">software</a>-eml-software</dt><dt>
+<a href="./eml-attribute.html#source" target="_top">source</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#source" target="_top">source</a>-eml-attribute</dt><dt>
+<a href="./eml-coverage.html#southBoundingCoordinate" target="_top">southBoundingCoordinate</a>-eml-coverage</dt><dt>
+<a href="./eml-dataset.html#spatialRaster" target="_top">spatialRaster</a>-eml-dataset</dt><dt>
+<a href="./eml-spatialRaster.html#spatialRaster" target="_top">spatialRaster</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#spatialReference" target="_top">spatialReference</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialReference.html#spatialReference" target="_top">spatialReference</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialVector.html#spatialReference" target="_top">spatialReference</a>-eml-spatialVector</dt><dt>
+<a href="./eml-methods.html#spatialSamplingUnits" target="_top">spatialSamplingUnits</a>-eml-methods</dt><dt>
+<a href="./eml-dataset.html#spatialVector" target="_top">spatialVector</a>-eml-dataset</dt><dt>
+<a href="./eml-spatialVector.html#spatialVector" target="_top">spatialVector</a>-eml-spatialVector</dt><dt>
+<a href="./eml-coverage.html#specimen" target="_top">specimen</a>-eml-coverage</dt><dt>
+<a href="./eml-spatialReference.html#spheroid" target="_top">spheroid</a>-eml-spatialReference</dt><dt>
+<a href="./eml-attribute.html#standardUnit" target="_top">standardUnit</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#storageType" target="_top">storageType</a>-eml-attribute</dt><dt>
+<a href="./eml-dataset.html#storedProcedure" target="_top">storedProcedure</a>-eml-dataset</dt><dt>
+<a href="./eml-storedProcedure.html#storedProcedure" target="_top">storedProcedure</a>-eml-storedProcedure</dt><dt>
+<a href="./eml-project.html#studyAreaDescription" target="_top">studyAreaDescription</a>-eml-project</dt><dt>
+<a href="./eml-methods.html#studyExtent" target="_top">studyExtent</a>-eml-methods</dt><dt>
+<a href="./eml-text.html#subscript" target="_top">subscript</a>-eml-text</dt><dt>
+<a href="./eml-text.html#subscript" target="_top">subscript</a>-eml-text</dt><dt>
+<a href="./eml-methods.html#subStep" target="_top">subStep</a>-eml-methods</dt><dt>
+<a href="./eml-text.html#superscript" target="_top">superscript</a>-eml-text</dt><dt>
+<a href="./eml-text.html#superscript" target="_top">superscript</a>-eml-text</dt><dt>
+<a href="./eml-party.html#surName" target="_top">surName</a>-eml-party</dt></dl></div><div class="indexdiv">T<dl><dt>
+<a href="./eml-coverage.html#taxonomicClassification" target="_top">taxonomicClassification</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonomicClassification" target="_top">taxonomicClassification</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonomicCompleteness" target="_top">taxonomicCompleteness</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonomicCoverage" target="_top">taxonomicCoverage</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonomicProcedures" target="_top">taxonomicProcedures</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonomicSystem" target="_top">taxonomicSystem</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonRankName" target="_top">taxonRankName</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#taxonRankValue" target="_top">taxonRankValue</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#temporalCoverage" target="_top">temporalCoverage</a>-eml-coverage</dt><dt>
+<a href="./eml-text.html#text" target="_top">text</a>-eml-text</dt><dt>
+<a href="./eml-physical.html#textDelimited" target="_top">textDelimited</a>-eml-physical</dt><dt>
+<a href="./eml-attribute.html#textDomain" target="_top">textDomain</a>-eml-attribute</dt><dt>
+<a href="./eml-physical.html#textFixed" target="_top">textFixed</a>-eml-physical</dt><dt>
+<a href="./eml-physical.html#textFormat" target="_top">textFormat</a>-eml-physical</dt><dt>
+<a href="./eml-literature.html#thesis" target="_top">thesis</a>-eml-literature</dt><dt>
+<a href="./eml-coverage.html#time" target="_top">time</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#timeScaleAgeEstimate" target="_top">timeScaleAgeEstimate</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#timeScaleAgeExplanation" target="_top">timeScaleAgeExplanation</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#timeScaleAgeUncertainty" target="_top">timeScaleAgeUncertainty</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#timeScaleCitation" target="_top">timeScaleCitation</a>-eml-coverage</dt><dt>
+<a href="./eml-coverage.html#timeScaleName" target="_top">timeScaleName</a>-eml-coverage</dt><dt>
+<a href="./eml-project.html#title" target="_top">title</a>-eml-project</dt><dt>
+<a href="./eml-resource.html#title" target="_top">title</a>-eml-resource</dt><dt>
+<a href="./eml-text.html#title" target="_top">title</a>-eml-text</dt><dt>
+<a href="./eml-spatialRaster.html#toneGradation" target="_top">toneGradation</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#topologyLevel" target="_top">topologyLevel</a>-eml-spatialVector</dt><dt>
+<a href="./eml-literature.html#totalFigures" target="_top">totalFigures</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalFigures" target="_top">totalFigures</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalPages" target="_top">totalPages</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalPages" target="_top">totalPages</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalPages" target="_top">totalPages</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalPages" target="_top">totalPages</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalPages" target="_top">totalPages</a>-eml-literature</dt><dt>
+<a href="./eml-physical.html#totalrowbytes" target="_top">totalrowbytes</a>-eml-physical</dt><dt>
+<a href="./eml-literature.html#totalTables" target="_top">totalTables</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#totalTables" target="_top">totalTables</a>-eml-literature</dt><dt>
+<a href="./eml-spatialRaster.html#triangulationIndicator" target="_top">triangulationIndicator</a>-eml-spatialRaster</dt></dl></div><div class="indexdiv">U<dl><dt>
+<a href="./eml-text.html#ulink" target="_top">ulink</a>-eml-text</dt><dt>
+<a href="./eml-constraint.html#uniqueKey" target="_top">uniqueKey</a>-eml-constraint</dt><dt>
+<a href="./eml-attribute.html#unit" target="_top">unit</a>-eml-attribute</dt><dt>
+<a href="./eml-attribute.html#unit" target="_top">unit</a>-eml-attribute</dt><dt>
+<a href="./eml-spatialReference.html#unit" target="_top">unit</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialReference.html#unit" target="_top">unit</a>-eml-spatialReference</dt><dt>
+<a href="./eml-physical.html#url" target="_top">url</a>-eml-physical</dt><dt>
+<a href="./eml-resource.html#url" target="_top">url</a>-eml-resource</dt><dt>
+<a href="./eml-party.html#userId" target="_top">userId</a>-eml-party</dt></dl></div><div class="indexdiv">V<dl><dt>
+<a href="./eml-resource.html#value" target="_top">value</a>-eml-resource</dt><dt>
+<a href="./eml-resource.html#value" target="_top">value</a>-eml-resource</dt><dt>
+<a href="./eml-text.html#value" target="_top">value</a>-eml-text</dt><dt>
+<a href="./eml-text.html#value" target="_top">value</a>-eml-text</dt><dt>
+<a href="./eml-text.html#value" target="_top">value</a>-eml-text</dt><dt>
+<a href="./eml-text.html#value" target="_top">value</a>-eml-text</dt><dt>
+<a href="./eml-attribute.html#valueAttributeReference" target="_top">valueAttributeReference</a>-eml-attribute</dt><dt>
+<a href="./eml-software.html#version" target="_top">version</a>-eml-software</dt><dt>
+<a href="./eml-spatialReference.html#vertCoordSys" target="_top">vertCoordSys</a>-eml-spatialReference</dt><dt>
+<a href="./eml-spatialRaster.html#verticalAccuracy" target="_top">verticalAccuracy</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialVector.html#verticalAccuracy" target="_top">verticalAccuracy</a>-eml-spatialVector</dt><dt>
+<a href="./eml-spatialRaster.html#verticals" target="_top">verticals</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-dataset.html#view" target="_top">view</a>-eml-dataset</dt><dt>
+<a href="./eml-view.html#view" target="_top">view</a>-eml-view</dt><dt>
+<a href="./eml-software.html#virtualMachine" target="_top">virtualMachine</a>-eml-software</dt><dt>
+<a href="./eml-literature.html#volume" target="_top">volume</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#volume" target="_top">volume</a>-eml-literature</dt><dt>
+<a href="./eml-literature.html#volume" target="_top">volume</a>-eml-literature</dt><dt>
+<a href="./eml-coverage.html#vouchers" target="_top">vouchers</a>-eml-coverage</dt></dl></div><div class="indexdiv">W<dl><dt>
+<a href="./eml-spatialRaster.html#waveLengthUnits" target="_top">waveLengthUnits</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-coverage.html#westBoundingCoordinate" target="_top">westBoundingCoordinate</a>-eml-coverage</dt></dl></div><div class="indexdiv">X<dl><dt>
+<a href="./eml-spatialRaster.html#xCoordinate" target="_top">xCoordinate</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#xCoordinate" target="_top">xCoordinate</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#xIntercept" target="_top">xIntercept</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#xSlope" target="_top">xSlope</a>-eml-spatialRaster</dt></dl></div><div class="indexdiv">Y<dl><dt>
+<a href="./eml-spatialRaster.html#yCoordinate" target="_top">yCoordinate</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#yCoordinate" target="_top">yCoordinate</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#yIntercept" target="_top">yIntercept</a>-eml-spatialRaster</dt><dt>
+<a href="./eml-spatialRaster.html#ySlope" target="_top">ySlope</a>-eml-spatialRaster</dt></dl></div><div class="indexdiv">Z<dl><dt></dt></dl></div></div></div></body></html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+         xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
+         packageId="sbclter-bibliography.296.1"
+         system="knb"
+         scope="system">
+   <citation id="sbclter-bibliography.296">
+      <alternateIdentifier system="sbclter-bibliography">296</alternateIdentifier>
+      <title>A metapopulation perspective on the patch dynamics of giant kelp in Southern California</title>
+      <creator scope="document">
+         <individualName>
+            <givenName>D</givenName>
+            <givenName>C</givenName>
+            <surName>Reed</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>B</givenName>
+            <givenName>P</givenName>
+            <surName>Kinlan</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>P</givenName>
+            <surName>Raimondi</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>L</givenName>
+            <surName>Washburn</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>B</givenName>
+            <givenName>P</givenName>
+            <surName>Gaylord</surName>
+         </individualName>
+      </creator>
+      <creator scope="document">
+         <individualName>
+            <givenName>P</givenName>
+            <surName>Drake</surName>
+         </individualName>
+      </creator>
+      <pubDate>2006</pubDate>
+      <chapter>
+         <publisher>
+            <organizationName>Academic Press</organizationName>
+         </publisher>
+         <ISBN>0120887819</ISBN>
+         <editor>
+            <individualName>
+               <givenName>J</givenName>
+               <givenName>P</givenName>
+               <surName>Kritzner</surName>
+            </individualName>
+         </editor>
+         <editor>
+            <individualName>
+               <givenName>P</givenName>
+               <givenName>F</givenName>
+               <surName>Sale</surName>
+            </individualName>
+         </editor>
+         <bookTitle>Marine Metapopulations</bookTitle>
+         <pageRange>352-386</pageRange>
+      </chapter>
+   </citation>
+   <additionalMetadata>
+      <metadata>
+         <agencyReport agency="nsf" agencyAcknowledged="yes" publishedAtRptDate="no" reported="yes"
+                       rptYear="2005"
+                       lterAcknowledged="no"/>
+      </metadata>
+   </additionalMetadata>
+</eml:eml>

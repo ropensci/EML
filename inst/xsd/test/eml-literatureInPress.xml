@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cit:citation id="345" scope="document"
+          xmlns:cit="eml://ecoinformatics.org/literature-2.1.1" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:schemaLocation="eml://ecoinformatics.org/literature-2.1.1 
+          eml-literature.xsd">
+    <title>Measuring the effectiveness of EML in the field.</title>
+    <creator>
+        <individualName>
+            <givenName>Matthew</givenName>
+            <givenName>B.</givenName>
+            <surName>Jones</surName>
+        </individualName>
+    </creator>
+    <pubDate>2002</pubDate>
+    <abstract>this is the abstract without TextType elements.
+      <para>This is the abstract's first paragraph.</para>
+      <para>This is the abstract's second paragraph. With
+      <emphasis>emphasis</emphasis>.</para>
+	</abstract>
+    <article>
+        <journal>Journal of Irreproducible Results</journal>
+        <!-- this pub is in press, and has no vol or pagerange yet -->
+    </article>
+</cit:citation>

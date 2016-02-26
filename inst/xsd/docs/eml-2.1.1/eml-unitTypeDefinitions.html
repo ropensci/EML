@@ -1,0 +1,423 @@
+<html xmlns:doc="eml://ecoinformatics.org/documentation-2.1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>eml-unitTypeDefinitions Documentation </title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<table width="100%" border="0">
+<tr valign="top">
+<td>
+<div class="title"> Module Documentation: eml-unitTypeDefinitions</div>
+</td><td><a class="navlink" href="index.html">Back to EML Contents</a></td>
+</tr>
+</table>
+          
+            
+<div class="sectiontitle">EML Unit Type Definitions</div>
+            
+              
+<div class="sectiontitle">Philosophy of Units</div>
+              
+<p>The concept of "unit" represents one of the most fundamental
+            categories of metadata. The classic example of data entropy is the
+            case in which a reported numeric value loses meaning due to lack of
+            associated units. Much of Ecology is driven by measurement, and
+            most measurements are inherently comparative. Good data description
+            requires a representation of the basis for comparison, i.e., the
+            unit. In modeling units, the authors of EML drew
+            inspiration from the
+            <a href="http://physics.nist.gov/cuu/Units/introduction.html">
+            NIST Reference on Constants, Units, and Uncertainty</a>.
+            This document defines a unit as "a particular physical quantity,
+            defined and adopted by convention, with which other particular
+            quantities of the same kind are compared to express their value."
+            The authors of the EML 2 specification (hereafter "the authors")
+            decided to make the unit element required, wherever
+            possible.</p>
+              
+<p>The units are defined in the 
+        <a href="http://www.ch.ic.ac.uk/rzepa/codata2/">STMML language</a> 
+        in a document that is shipped with each release of
+        EML. See the accompanying STMML file, eml-unitDictionary.xml, for
+        precise, quantitative definitions of each of these units and their
+        relationships to base SI units</p>
+              
+<p>which modules use these types (and which could but dont yet?)</p>
+              
+<p>anything else?</p>
+            
+          
+        
+<div class="title">Module details</div>
+<table border="0" class="tabledefault" id="eml-unitTypeDefinitions">
+<tr>
+<td class="tablepanel"> Recommended Usage: </td><td class="tablepanel">any module that needs units</td>
+</tr>
+<tr>
+<td class="tablepanel"> Stand-alone: </td><td class="tablepanel">no</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imports: </td><td class="tablepanel">eml-documentation</td>
+</tr>
+<tr>
+<td class="tablepanel"> Imported By: </td><td class="tablepanel"></td>
+</tr>
+</table>
+<table class="tabledefault" border="0">
+<tr>
+<td colspan="2">
+<h2>Simple Type Definitions:</h2>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="StandardUnitDictionary">StandardUnitDictionary</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel"></td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+<p>The unitDictionary is the standard set
+        of units included with the EML distribution, mainly from the
+        SI standard. These unit names should  be used in the standardUnit field to
+        describe an attribute. See the accompanying STMML file, eml-unitDictionary.xml, for
+        precise, quantitative definitions of each of these units and their
+        relationships to base SI units.</p>
+          
+<p>The standard Unit Dictionary is built from a union of simpleTypes. 
+          This construct allows unit types to be used individually as appropriate 
+          in EML content (e.g., LengthUnitType for distances )</p>
+        
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="LengthUnitType">LengthUnitType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>meter</li>
+<li>nanometer</li>
+<li>micrometer</li>
+<li>micron</li>
+<li>millimeter</li>
+<li>centimeter</li>
+<li>decimeter</li>
+<li>dekameter</li>
+<li>hectometer</li>
+<li>kilometer</li>
+<li>megameter</li>
+<li>angstrom</li>
+<li>inch</li>
+<li>Foot_US</li>
+<li>foot</li>
+<li>Foot_Gold_Coast</li>
+<li>fathom</li>
+<li>nauticalMile</li>
+<li>yard</li>
+<li>Yard_Indian</li>
+<li>Link_Clarke</li>
+<li>Yard_Sears</li>
+<li>mile</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+<p>The LengthUnitType is the enumerated list of units which are of length type, or have a parentSI of meter. 
+        These unit names can be used where ever content should be restricted to a length, such as a distance or 
+        altitude. The units are defined in the STMML
+        language in a document that is shipped with each release of
+        EML called  eml-unitDictionary.xml. See this file for
+        precise, quantitative definitions of each of these units and their
+        relationships to base SI units.</p>
+        
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="MassUnitType">MassUnitType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>kilogram</li>
+<li>nanogram</li>
+<li>microgram</li>
+<li>milligram</li>
+<li>centigram</li>
+<li>decigram</li>
+<li>gram</li>
+<li>dekagram</li>
+<li>hectogram</li>
+<li>megagram</li>
+<li>tonne</li>
+<li>pound</li>
+<li>ton</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+<p>The MassUnitType is the enumerated list of units which are of mass type, or have a parentSI of kilogram. 
+        These unit names can be used where ever content should be restricted to a mass, such as an amount. 
+        The units are defined in the STMML
+        language in a document that is shipped with each release of
+        EML called  eml-unitDictionary.xml. See this file for
+        precise, quantitative definitions of each of these units and their
+        relationships to base SI units.</p>
+        
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="otherUnitType">otherUnitType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>dimensionless</li>
+<li>second</li>
+<li>kelvin</li>
+<li>coulomb</li>
+<li>ampere</li>
+<li>mole</li>
+<li>candela</li>
+<li>number</li>
+<li>radian</li>
+<li>degree</li>
+<li>grad</li>
+<li>cubicMeter</li>
+<li>nominalMinute</li>
+<li>nominalHour</li>
+<li>nominalDay</li>
+<li>nominalWeek</li>
+<li>nominalYear</li>
+<li>nominalLeapYear</li>
+<li>celsius</li>
+<li>fahrenheit</li>
+<li>nanosecond</li>
+<li>microsecond</li>
+<li>millisecond</li>
+<li>centisecond</li>
+<li>decisecond</li>
+<li>dekasecond</li>
+<li>hectosecond</li>
+<li>kilosecond</li>
+<li>megasecond</li>
+<li>minute</li>
+<li>hour</li>
+<li>kiloliter</li>
+<li>microliter</li>
+<li>milliliter</li>
+<li>liter</li>
+<li>gallon</li>
+<li>quart</li>
+<li>bushel</li>
+<li>cubicInch</li>
+<li>pint</li>
+<li>megahertz</li>
+<li>kilohertz</li>
+<li>hertz</li>
+<li>millihertz</li>
+<li>newton</li>
+<li>joule</li>
+<li>calorie</li>
+<li>britishThermalUnit</li>
+<li>footPound</li>
+<li>lumen</li>
+<li>lux</li>
+<li>becquerel</li>
+<li>gray</li>
+<li>sievert</li>
+<li>katal</li>
+<li>henry</li>
+<li>megawatt</li>
+<li>kilowatt</li>
+<li>watt</li>
+<li>milliwatt</li>
+<li>megavolt</li>
+<li>kilovolt</li>
+<li>volt</li>
+<li>millivolt</li>
+<li>farad</li>
+<li>ohm</li>
+<li>ohmMeter</li>
+<li>siemen</li>
+<li>weber</li>
+<li>tesla</li>
+<li>pascal</li>
+<li>megapascal</li>
+<li>kilopascal</li>
+<li>atmosphere</li>
+<li>bar</li>
+<li>millibar</li>
+<li>kilogramsPerSquareMeter</li>
+<li>gramsPerSquareMeter</li>
+<li>milligramsPerSquareMeter</li>
+<li>kilogramsPerHectare</li>
+<li>tonnePerHectare</li>
+<li>poundsPerSquareInch</li>
+<li>kilogramPerCubicMeter</li>
+<li>milliGramsPerMilliLiter</li>
+<li>gramsPerLiter</li>
+<li>milligramsPerCubicMeter</li>
+<li>microgramsPerLiter</li>
+<li>milligramsPerLiter</li>
+<li>gramsPerCubicCentimeter</li>
+<li>gramsPerMilliliter</li>
+<li>gramsPerLiterPerDay</li>
+<li>litersPerSecond</li>
+<li>cubicMetersPerSecond</li>
+<li>cubicFeetPerSecond</li>
+<li>squareMeter</li>
+<li>are</li>
+<li>hectare</li>
+<li>squareKilometers</li>
+<li>squareMillimeters</li>
+<li>squareCentimeters</li>
+<li>acre</li>
+<li>squareFoot</li>
+<li>squareYard</li>
+<li>squareMile</li>
+<li>litersPerSquareMeter</li>
+<li>bushelsPerAcre</li>
+<li>litersPerHectare</li>
+<li>squareMeterPerKilogram</li>
+<li>metersPerSecond</li>
+<li>metersPerDay</li>
+<li>feetPerDay</li>
+<li>feetPerSecond</li>
+<li>feetPerHour</li>
+<li>yardsPerSecond</li>
+<li>milesPerHour</li>
+<li>milesPerSecond</li>
+<li>milesPerMinute</li>
+<li>centimetersPerSecond</li>
+<li>millimetersPerSecond</li>
+<li>centimeterPerYear</li>
+<li>knots</li>
+<li>kilometersPerHour</li>
+<li>metersPerSecondSquared</li>
+<li>waveNumber</li>
+<li>cubicMeterPerKilogram</li>
+<li>cubicMicrometersPerGram</li>
+<li>amperePerSquareMeter</li>
+<li>amperePerMeter</li>
+<li>molePerCubicMeter</li>
+<li>molarity</li>
+<li>molality</li>
+<li>candelaPerSquareMeter</li>
+<li>metersSquaredPerSecond</li>
+<li>metersSquaredPerDay</li>
+<li>feetSquaredPerDay</li>
+<li>kilogramsPerMeterSquaredPerSecond</li>
+<li>gramsPerCentimeterSquaredPerSecond</li>
+<li>gramsPerMeterSquaredPerYear</li>
+<li>gramsPerHectarePerDay</li>
+<li>kilogramsPerHectarePerYear</li>
+<li>kilogramsPerMeterSquaredPerYear</li>
+<li>molesPerKilogram</li>
+<li>molesPerGram</li>
+<li>millimolesPerGram</li>
+<li>molesPerKilogramPerSecond</li>
+<li>nanomolesPerGramPerSecond</li>
+<li>kilogramsPerSecond</li>
+<li>tonnesPerYear</li>
+<li>gramsPerYear</li>
+<li>numberPerMeterSquared</li>
+<li>numberPerKilometerSquared</li>
+<li>numberPerMeterCubed</li>
+<li>numberPerLiter</li>
+<li>numberPerMilliliter</li>
+<li>metersPerGram</li>
+<li>numberPerGram</li>
+<li>gramsPerGram</li>
+<li>microgramsPerGram</li>
+<li>cubicCentimetersPerCubicCentimeters</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+<p>The unitDictionary is the standard set
+        of units included with the EML distribution, mainly from the
+        SI standard. These unit names can be used in the standardUnit field to
+        describe an attribute. The units are defined in the STMML
+        language in a document that is shipped with each release of
+        EML. See the accompanying STMML file eml-unitDictionary.xml for
+        precise, quantitative definitions of each of these units and their
+        relationships to base SI units.</p>
+          
+<p>The standard Unit Dictionary is built from a union of simpleTypes. This Type 
+enumerates the units which are not in other Type definitions, but are to be 
+included as standard.</p>
+        
+</blockquote>
+</td>
+</tr>
+<tr>
+<td class="tablehead" colspan="2">
+<h3>
+<a class="sitelink" name="angleUnitType">angleUnitType</a>
+</h3>
+</td>
+</tr>
+<tr>
+<td class="tablepanel">
+<p>
+<span class="boldtext">Derived from: </span><span class="boldtext">xs:string</span> (by xs:restriction) </p>
+<p>
+<span class="boldtext">Allowed values: </span>
+<ul>
+<li>radian</li>
+<li>degree</li>
+<li>grad</li>
+</ul>
+</p>
+</td><td valign="top" class="tablepanel" colspan="1">
+<blockquote>
+          
+<p>The AngleUnitType is the enumerated list of angle units. For example,
+            plane angle (radian, rad) and solid angle (steradian, sr) are actually 
+            dimensionless, and their symbols used as appropriate 
+       (e.g, sr in photometry). These unit names could be used where 
+       ever content should be restricted.</p>
+        
+</blockquote>
+</td>
+</tr>
+</table>
+<p class="contact"> Web Contact: <a href="mailto:jones@nceas.ucsb.edu">jones@nceas.ucsb.edu</a>
+</p>
+</body>
+</html>

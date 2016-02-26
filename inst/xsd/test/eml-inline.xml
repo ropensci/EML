@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<phys:physical
+    xmlns:phys="eml://ecoinformatics.org/physical-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/physical-2.1.1 eml-physical.xsd">
+
+  <objectName>inline_xml_data</objectName>
+
+  <dataFormat>
+    <externallyDefinedFormat>
+      <formatName>XML</formatName>
+    </externallyDefinedFormat>
+  </dataFormat>
+
+  <distribution>
+    <inline>
+     <desc>
+      <admin>
+  	<sampleName>Some Peptide</sampleName>
+    	<contact>
+      	  <name>Operator</name>
+      	  <institution>PSI</institution>
+          <contactInfo>EBI-EMBL</contactInfo>
+    	</contact>
+    	<sourceFile>
+    	  <name>somepeptide.raw</name>
+    	  <type>xcalibur 1.3</type>
+      	</sourceFile>
+      </admin>
+      <instrument>
+        <instName>LCQ</instName>
+        <source type="ESI"/>
+        <analyzer type="PaulTrap" resolution="2000" accuracy="0.2"/>
+        <detector type="EM"/>
+      </instrument>
+      <test>
+        <dataProcessing>
+          <software completionTime="2001-12-17T09:30:47-05:00">
+            <name>PSI-MS</name>
+            <version>1.1</version>
+            <description>PSI-MS Converter</description>
+          </software>
+        </dataProcessing>
+        <processingMethod deisotoped="false" chargeDeconvolved="false">
+          <peakProcessing>centroid</peakProcessing>
+        </processingMethod>
+      </test>
+    </desc>
+   </inline>
+  </distribution>
+</phys:physical>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<att:attributeList id="knb.345.1"
+    xmlns:att="eml://ecoinformatics.org/attribute-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="eml://ecoinformatics.org/attribute-2.1.1
+    eml-attribute.xsd">
+    <attribute>
+      <attributeName>rain</attributeName>
+      <attributeLabel>Surface Rainfall</attributeLabel>
+      <attributeDefinition>The amount of rainfall on the sampling unit.
+      </attributeDefinition>
+      <storageType>float</storageType>
+      <storageType typeSystem="http://java.sun.com/docs/books/jls/second_edition/html">double</storageType>
+      <measurementScale>
+        <interval>
+          <unit><standardUnit>millimeter</standardUnit></unit>
+          <precision>0.5</precision>
+          <numericDomain id="nd.1">
+            <numberType>real</numberType>
+            <bounds>
+              <minimum exclusive="false">0</minimum>
+            </bounds>
+          </numericDomain>
+        </interval>
+      </measurementScale>
+    </attribute>
+    <attribute>
+      <attributeName>dirt</attributeName>
+      <attributeLabel>dirt</attributeLabel>
+      <attributeDefinition>The amount of top soil on the sampling unit.
+      </attributeDefinition>
+      <storageType>float</storageType>
+      <storageType typeSystem="http://java.sun.com/docs/books/jls/second_edition/html">double</storageType>
+      <measurementScale>
+        <interval>
+          <unit><standardUnit>millimeter</standardUnit></unit>
+          <precision>0.5</precision>
+          <numericDomain>
+            <references>nd.1</references>
+          </numericDomain>
+        </interval>
+      </measurementScale>
+    </attribute>
+    <attribute>
+      <attributeName>stuff</attributeName>
+      <attributeLabel>stuff</attributeLabel>
+      <attributeDefinition>stuff</attributeDefinition>
+      <storageType>float</storageType>
+      <storageType typeSystem="http://java.sun.com/docs/books/jls/second_edition/html">double</storageType>
+      <measurementScale>
+        <ordinal>
+          <nonNumericDomain id="nnd.1">
+            <enumeratedDomain>
+              <codeDefinition>
+                <code>s1</code>
+                <definition>stuff 1</definition>
+              </codeDefinition>
+              <codeDefinition>
+                <code>s2</code>
+                <definition>stuff 2</definition>
+              </codeDefinition>
+              <codeDefinition>
+                <code>s3</code>
+                <definition>stuff 3</definition>
+              </codeDefinition>
+            </enumeratedDomain>
+          </nonNumericDomain>
+        </ordinal>
+      </measurementScale>
+    </attribute>
+    <attribute>
+      <attributeName>stuff</attributeName>
+      <attributeLabel>stuff</attributeLabel>
+      <attributeDefinition>stuff</attributeDefinition>
+      <storageType>float</storageType>
+      <storageType typeSystem="http://java.sun.com/docs/books/jls/second_edition/html">double</storageType>
+      <measurementScale>
+        <ordinal>
+          <nonNumericDomain>
+            <references>nnd.1</references>
+          </nonNumericDomain>
+        </ordinal>
+      </measurementScale>
+    </attribute>
+</att:attributeList>

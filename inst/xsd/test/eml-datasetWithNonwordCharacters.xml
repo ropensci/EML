@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packageId="eml.1.1" system="knb" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 ../eml.xsd" scope="system">
+  <dataset scope="document">
+    <title>Testing insert</title>
+    <creator scope="document">
+      <individualName>
+        <surName>Smith</surName>
+      </individualName>
+    </creator>
+    <contact scope="document">
+      <individualName>
+        <surName>Jackson</surName>
+      </individualName>
+    </contact>
+    <dataTable>
+      <entityName>Test Data</entityName>
+      <physical>
+        <objectName>2.1.0 test physical</objectName>
+        <size unit="bytes">1</size>
+        <characterEncoding>ASCII</characterEncoding>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>\t</fieldDelimiter>
+              <quoteCharacter>"</quoteCharacter>
+              <quoteCharacter>\n</quoteCharacter>
+              <quoteCharacter>&apos;</quoteCharacter>
+              <quoteCharacter>"</quoteCharacter>
+              <quoteCharacter>'</quoteCharacter>
+              <quoteCharacter>@</quoteCharacter>
+              <literalCharacter>\</literalCharacter>
+              <literalCharacter>/</literalCharacter>
+              <literalCharacter>&amp;</literalCharacter>
+              <literalCharacter>*</literalCharacter>
+              <literalCharacter>(</literalCharacter>
+              <literalCharacter>)</literalCharacter>
+              <literalCharacter>-</literalCharacter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+        <distribution>
+          <inline>
+            <admin>
+              <contact>
+                <name>Operator</name>
+                <institution>PSI</institution>
+              </contact>
+            </admin>
+          </inline>
+        </distribution>
+      </physical>
+      <attributeList>
+        <attribute>
+          <attributeName>rain</attributeName>
+          <attributeLabel>Surface Rainfall</attributeLabel>
+          <attributeDefinition>
+                       The amount of rainfall on the sampling unit.
+                   </attributeDefinition>
+          <storageType>float</storageType>
+          <storageType typeSystem="http://java.sun.com/docs/books/jls/second_edition/html">
+                       double
+                   </storageType>
+          <measurementScale>
+            <interval>
+              <unit>
+                <standardUnit>millimeter</standardUnit>
+              </unit>
+              <precision>0.5</precision>
+              <numericDomain id="nd.1">
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">
+                                       0
+                                   </minimum>
+                </bounds>
+              </numericDomain>
+            </interval>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+    </dataTable>
+  </dataset>
+</eml:eml>
