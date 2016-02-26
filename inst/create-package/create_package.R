@@ -169,6 +169,9 @@ replace_class("eml:language", "setClass('eml:language', slots = c('LanguageValue
 
 drop_method('ParagraphType', methods_file)
 drop_method('SectionType', methods_file)
+drop_method('UrlType', methods_file)
+sapply(c("array", "table", "matrix", "list", "description", "keyword", "unit", "eml:complex", "language", "parameter", "parameterDefinition"), drop_method, methods_file)
+
 
 
 

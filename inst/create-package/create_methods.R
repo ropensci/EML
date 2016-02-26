@@ -14,20 +14,21 @@ setMethod(c, signature('%s'), function(x, ..., recursive = FALSE) new('ListOf%s'
 
 create_initialize_method <- function(slots, class, methods_file = "methods.R"){
   out = ""
+  ## use eml2 finalized class definitions instead of built-in ones
+  slots = getSlots(class)
 
-  ## Only define this for classes containing at least one ListOf child
   is_listof <- grepl("ListOf", slots)
-  if(any(is_listof)){
-    if(inherits(class, "character"))
-      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = character(), %s){", class, print_init(slots)),
-                  sep = "; ")
-    else if(inherits(class, "list"))
-      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = list(), %s){", class, print_init(slots)),
-                    sep = "; ")
-    else if(inherits(class, "numeric"))
-      out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = numeric(), %s){", class, print_init(slots)),
-                    sep = "; ")
-    else
+#  if(any(is_listof)){## Only define this for classes containing at least one ListOf child
+  #  if(inherits(class, "character"))
+  #    out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = character(), %s){", class, print_init(slots)),
+  #                sep = "; ")
+   # else if(inherits(class, "list"))
+  #    out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = list(), %s){", class, print_init(slots)),
+  #                  sep = "; ")
+  #  else if(inherits(class, "numeric"))
+  #    out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, .Data = numeric(), %s){", class, print_init(slots)),
+  #                  sep = "; ")
+  #  else
       out <- paste0(out, sprintf("setMethod(initialize, '%s', function(.Object, %s){", class, print_init(slots)),
                     sep = "; ")
 
@@ -38,28 +39,32 @@ create_initialize_method <- function(slots, class, methods_file = "methods.R"){
         base <- sub("^ListOf", "", list_slots[[s]])
         name <- names(list_slots)[[s]]
 
-        out <- paste0(out, sprintf(".Object@%s <- c_as(%s, '%s')", base, base, base),
+        out <- paste0(out, sprintf("slot(.Object, '%s') <- c_as(%s, '%s')", base, base, base),
                       sep = "; ")
       }
     }
     plain_slots <- names(slots[!is_listof])
 
     for(s in plain_slots){
-      if(slots[s] %in% base_types)
-        to <- slots[s]
-      else if(s == "language")
-        to <- "eml:language"
-      else
-        to <- s
-      out <- paste0(out, sprintf(".Object@%s <- as(%s, '%s')", s, s, to), sep = "; ")
+      if(s == ".Data")
+        out <- paste0(out, sprintf(".Object@%s <- .Data", s), sep = "; ")
+      else {
+        if(slots[s] %in% base_types)
+          to <- slots[s]
+        else
+          to <- s
+        if(s == "language")
+          to <- "eml:language"
+        out <- paste0(out, sprintf("slot(.Object, '%s') <- as(%s, '%s')", s, strip_namespace(s), to), sep = "; ")
+      }
     }
     if(any(sapply(c("list", "character", "numeric"), function(x) inherits("xml_attribute", x))))
-      out <- paste0(out, ".Object@.Data <- .Data; .Object })")
+      out <- paste0(out, ".Object })")
     else
       out <- paste0(out, ".Object })")
 
     write(paste0(out, collapse=";"), methods_file, append = TRUE)
-  }
+#  }
 
 }
 
@@ -73,14 +78,18 @@ empty_to_zero <- function(char){
 
 print_init <- function(l){
   x <- names(l)
+  tmp = "i18nNonEmptyStringType" == l
+  l[tmp] = x[tmp]
+
   listof <- grepl("ListOf", as.character(l))
   list_set <- character()
   plain_set <- character()
+
   if(any(listof)){
-    list_set <- empty_to_zero(paste(x[listof], '= character()', collapse = ", "))
+    list_set <- empty_to_zero(paste(strip_namespace(x[listof]), '= character()', collapse = ", "))
   }
   if(any(!listof)){
-    plain_set <- empty_to_zero(paste0(x[!listof], " = new('", l[!listof], "')", collapse = ", "))
+    plain_set <- empty_to_zero(paste0(strip_namespace(x[!listof]), " = new('", l[!listof], "')", collapse = ", "))
   }
   paste(c(list_set, plain_set), collapse = ", ")
 

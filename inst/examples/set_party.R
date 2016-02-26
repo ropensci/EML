@@ -1,6 +1,6 @@
 
 
-
+## Coercions from "person" type
 setOldClass("person")
 setAs("person", "ResponsibleParty", function(from){
     new("ResponsibleParty",
@@ -16,7 +16,7 @@ setAs("person", "associatedParty", function(from){
       role = new("role", from$role))
 })
 
-
+## Tests
 from = as.person("Carl Boettiger <cboettig@gmail.com>")
 as(from, "ResponsibleParty")
 
