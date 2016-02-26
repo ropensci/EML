@@ -173,19 +173,3 @@ drop_method('UrlType', methods_file)
 sapply(c("array", "table", "matrix", "list", "description", "keyword", "unit", "eml:complex", "language", "parameter", "parameterDefinition"), drop_method, methods_file)
 
 
-
-
-## a method for the methods definitions
-write("
-
-
-c_as <- function(x, cls){
-      if(length(x) > 0)
-      do.call(c, lapply(x, as, cls))
-      else
-      new(paste0('ListOf', cls))
-      }
-
-      ", methods_file, append = TRUE)
-
-

@@ -107,12 +107,3 @@ print_init <- function(l){
 #             .Object
 #           })
 
-
-## avoid nulls -- here just for reference, must be written to methods file by create_package.R
-
-c_as <- function(x, cls){
-  if(length(x) > 0)
-    do.call(c, lapply(x, as, cls))
-  else
-    new(paste0("ListOf", cls))
-}

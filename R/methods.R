@@ -2130,11 +2130,3 @@ setAs('XMLInternalNode', 'eml',  function(from) emlToS4(from))
 
 
 
-c_as <- function(x, cls){
-      if(length(x) > 0)
-      do.call(c, lapply(x, as, cls))
-      else
-      new(paste0('ListOf', cls))
-      }
-
-
