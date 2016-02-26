@@ -1,9 +1,0 @@
-sudo: required
-
-services:
-  - docker
-
-script:
-  - docker run -ti --rm rocker/ropensci R --version
-  - docker run -ti --rm -v $(pwd):/home/rstudio/package -w /home/rstudio/package rocker/ropensci R -e "devtools::check()"
-
