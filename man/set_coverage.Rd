@@ -6,10 +6,9 @@
 \usage{
 set_coverage(beginDate = character(), endDate = character(),
   date = character(), sci_names = character(),
-  geographicDescription = character(), westBoundingCoordinate = character(),
-  eastBoundingCoordinate = character(),
-  northBoundingCoordinate = character(),
-  southBoundingCoordinate = character(), altitudeMinimum = numeric(),
+  geographicDescription = character(), westBoundingCoordinate = numeric(),
+  eastBoundingCoordinate = numeric(), northBoundingCoordinate = numeric(),
+  southBoundingCoordinate = numeric(), altitudeMinimum = numeric(),
   altitudeMaximum = numeric(), altitudeUnits = character())
 }
 \arguments{
@@ -55,7 +54,7 @@ of calendar dates, or to specify taxonomic coverage in terms of other ranks or i
 coverage <- 
  set_coverage(begin = '2012-06-01', end = '2013-12-31',
               sci_names = "Sarracenia purpurea",
-              geographicDescription = "the kelp bed data extends along the California coast, down through the coast of Baja, Mexico",
+              geographicDescription = "California coast, down through Baja, Mexico",
               west = -122.44, east = -117.15, 
               north = 37.38, south = 30.00)
 

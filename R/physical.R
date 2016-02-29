@@ -4,7 +4,7 @@
 #' @param name name for the entity, usually a filename like "hf205-1.csv"
 #' @param description A description of the entity
 #' @param id optional, an id value for the <physical> element in EML, for use in referencing
-#' @param numHeaderLinesNumber of header lines preceding data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of header lines that should be skipped before starting to parse the data. 
+#' @param numHeaderLines Number of header lines preceding data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of header lines that should be skipped before starting to parse the data. 
 #' @param numFooterLines Number of footer lines following data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of footer lines that should be skipped after parsing the data. If this value is omitted, parsers should assume the data continues to the end of the data stream.
 #' @param recordDelimiter This element specifies the record delimiter character when the format is text. The record delimiter is usually a linefeed (\\n) on UNIX, a carriage return (\\r) on MacOS, or both (\\r\\n) on Windows/DOS. Multiline records are usually delimited with two line ending characters, for example on UNIX it would be two linefeed characters (\\n\\n). As record delimiters are often non-printing characters, one can use either the special value "\\n" to represent a linefeed (ASCII 0x0a) and "\\r" to represent a carriage return (ASCII 0x0d). Alternatively, one can use the hex value to represent character values (e.g., 0x0a). 
 #' @param fieldDelimiter "," character by default (for csv files). This element specifies a character to be used in the object for indicating the ending column for an attribute. The delimiter character itself is not part of the attribute value, but rather is present in the column following the last character of the value. Typical delimiter characters include commas, tabs, spaces, and semicolons. The only time the fieldDelimiter character is not interpreted as a delimiter is if it is contained in a quoted string (see quoteCharacter) or is immediately preceded by a literalCharacter. Non-printable quote characters can be provided as their hex values, and for tab characters by its ASCII string "\\t". Processors should assume that the field starts in the column following the previous field if the previous field was fixed, or in the column following the delimiter from the previous field if the previous field was delimited. 
@@ -65,7 +65,7 @@ set_EntityGroup <- function(name,
     new(
       "physical",
       objectName = name,
-      size = new("size", units = "bytes"),
+      size = new("size", unit = "bytes"),
       authentication = new("authentication", authentication, method = authMethod),
       compressionMethod = compressionMethod,
       encodingMethod = encodingMethod,

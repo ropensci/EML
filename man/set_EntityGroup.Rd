@@ -20,6 +20,8 @@ set_EntityGroup(name, description, id = character(),
 
 \item{id}{optional, an id value for the <physical> element in EML, for use in referencing}
 
+\item{numHeaderLines}{Number of header lines preceding data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of header lines that should be skipped before starting to parse the data.}
+
 \item{numFooterLines}{Number of footer lines following data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of footer lines that should be skipped after parsing the data. If this value is omitted, parsers should assume the data continues to the end of the data stream.}
 
 \item{recordDelimiter}{This element specifies the record delimiter character when the format is text. The record delimiter is usually a linefeed (\\n) on UNIX, a carriage return (\\r) on MacOS, or both (\\r\\n) on Windows/DOS. Multiline records are usually delimited with two line ending characters, for example on UNIX it would be two linefeed characters (\\n\\n). As record delimiters are often non-printing characters, one can use either the special value "\\n" to represent a linefeed (ASCII 0x0a) and "\\r" to represent a carriage return (ASCII 0x0d). Alternatively, one can use the hex value to represent character values (e.g., 0x0a).}
@@ -47,8 +49,6 @@ set_EntityGroup(name, description, id = character(),
 \item{encodingMethod}{This element lists a encoding method used to encode the object, such as base64, BinHex.}
 
 \item{compressionMethod}{This element lists a compression method used to compress the object, such as zip, compress, etc. Compression and encoding methods must be listed in the order in which they were applied, so that decompression and decoding should occur in the reverse order of the listing. For example, if a file is compressed using zip and then encoded using MIME base64, the compression method would be listed first and the encoding method second.}
-
-\item{numHeaderLinesNumber}{of header lines preceding data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of header lines that should be skipped before starting to parse the data.}
 }
 \value{
 an EML EntityGroup object, such as used in a dataTable element to define the format of the data file.

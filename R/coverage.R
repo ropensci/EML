@@ -26,15 +26,15 @@
 #'coverage <- 
 #'  set_coverage(begin = '2012-06-01', end = '2013-12-31',
 #'               sci_names = "Sarracenia purpurea",
-#'               geographicDescription = "the kelp bed data extends along the California coast, down through the coast of Baja, Mexico",
+#'               geographicDescription = "California coast, down through Baja, Mexico",
 #'               west = -122.44, east = -117.15, 
 #'               north = 37.38, south = 30.00)
 #' 
 set_coverage <- function(beginDate = character(), endDate = character(),
                          date = character(), sci_names = character(),
-                         geographicDescription = character(), westBoundingCoordinate = character(), 
-                         eastBoundingCoordinate = character(), northBoundingCoordinate = character(), 
-                         southBoundingCoordinate = character(), altitudeMinimum = numeric(), 
+                         geographicDescription = character(), westBoundingCoordinate = numeric(), 
+                         eastBoundingCoordinate = numeric(), northBoundingCoordinate = numeric(), 
+                         southBoundingCoordinate = numeric(), altitudeMinimum = numeric(), 
                          altitudeMaximum = numeric(), altitudeUnits = character()
                          ){
   new("coverage", 
@@ -52,9 +52,9 @@ set_coverage <- function(beginDate = character(), endDate = character(),
 
 ######## Geographic Coverage ####################
 ## Fixme just rewrite constructor?
-set_geographicCoverage <- function(geographicDescription = character(), westBoundingCoordinate = character(), 
-                                   eastBoundingCoordinate = character(), northBoundingCoordinate = character(), 
-                                   southBoundingCoordinate = character(), altitudeMinimum = numeric(), 
+set_geographicCoverage <- function(geographicDescription = character(), westBoundingCoordinate = numeric(), 
+                                   eastBoundingCoordinate = numeric(), northBoundingCoordinate = numeric(), 
+                                   southBoundingCoordinate = numeric(), altitudeMinimum = numeric(), 
                                    altitudeMaximum = numeric(), altitudeUnits = character()){
   ## Should permit G-Polygon definitions
   new(
@@ -62,10 +62,10 @@ set_geographicCoverage <- function(geographicDescription = character(), westBoun
     geographicDescription = geographicDescription,
     boundingCoordinates = new(
       "boundingCoordinates",
-      westBoundingCoordinate = westBoundingCoordinate,
-      eastBoundingCoordinate = eastBoundingCoordinate,
-      northBoundingCoordinate = northBoundingCoordinate,
-      southBoundingCoordinate = southBoundingCoordinate,
+      westBoundingCoordinate = as.character(westBoundingCoordinate),
+      eastBoundingCoordinate = as.character(eastBoundingCoordinate),
+      northBoundingCoordinate = as.character(northBoundingCoordinate),
+      southBoundingCoordinate = as.character(southBoundingCoordinate),
       boundingAltitudes = new("boundingAltitudes", 
                               altitudeMinimum = as.character(altitudeMinimum),
                               altitudeMaximum = as.character(altitudeMaximum),
@@ -91,9 +91,9 @@ set_temporalCoverage <- function(beginDate = character(), endDate  = character()
                         endDate = 
                           new("endDate", 
                               calendarDate = endDate)))
-    } else if(!is.null(dates)){
+    } else if(length(date) > 0){
       node <- new("temporalCoverage", 
-          singleDateTime = lapply(dates, function(x) 
+          singleDateTime = lapply(date, function(x) 
             new("singleDateTime", calendarDate = x)))
     }
     node
