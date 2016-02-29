@@ -1,0 +1,277 @@
+---
+title: "Creating EML"
+author: "Carl Boettiger"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating EML}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```r
+library("EML")
+```
+
+In this vignette we construct an example EML file based on an example from the Harvard Forest LTER site, `knb-lter-hf205-01.xml`.  This illustrates how many of the commonly utilized EML fields are constructed using the R package.
+
+
+Here we construct richer EML files, including:
+
+- Constructing more complete lists of authors, publishers and contact.
+- Summarizing the geographic, temporal, and taxonomic coverage of the dataset
+- Reading in pages of methods descriptions from a Word document
+- Adding arbitrary additional metadata
+- Indicating the canonical citation to the paper that should be acknowledged when the data is re-used.  
+- Conversion between EML and other metadata formats, such as NCBII and ISO standards.
+
+In so doing we will take a more modular approach that will allow us to build up our metadata from reusable components, while also providing a more fine-grained control over the resulting output fields and files.  
+
+### Overview of the EML heirarchy
+
+A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the official schema documentation, here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
+
+This schematic shows each of the metadata elements we will generate.  Most these elements have sub-components (e.g. a 'publisher' may have a name, address, and so forth) which are not shown for simplicity.  Other optional fields we will not be generating in this example are also not shown.   
+
+```yaml
+- eml
+  - dataset
+    - creator
+    - contact
+    - publisher
+    - title
+    - pubDate
+    - keywords
+    - abstract 
+    - intellectualRights
+    - methods
+    - coverage
+    - dataTable
+      - physical
+      - attributeList
+```
+
+The EML R package allows us to assemble these pieces bit by bit, allowing us to work either from the top down or bottom up.  
+
+
+### Creating hf205.xml
+
+In this example, we will use R to re-generate the EML metadata originally published by [Ellison _et al_ (2012)](http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf205) through the Harvard Forest Long Term Ecological Research Center, accompanying the PNAS paper [Sirota _et al_ (2013)](http://dx.doi.org/10.1073/pnas.122103711).  <!-- The original metadata file was created in association with the publication in PNAS based on a Microsoft Word document template that Harvard Forest provides to the academic researchers.  Metadata from this template is then read off by hand and an EML file is generated using a combination of a commercial XML editing platform (Oxygen) for commonly used higher-level elements, and the Java platform `Morpho` provided by the EML development team for lower level attribute metadata. -->
+
+
+
+```{r}
+library("EML")
+```
+
+## Coverage metadata
+
+One of the most common and useful types of metadata is coverage information, specifying the temporal, taxonomic, and geographic coverage of the data.
+This kind of metadata is frequently indexed by data repositories, allowing users to search for all data about a specific region, time, or species.  In
+EML, these descriptions can take many forms, allowing for detailed descriptions as well as more general terms when such precision is not possible (such
+as geological epoch instead of date range, or higher taxonomic rank information in place of species definitions.)  Coverage elements that take full advantage
+of this flexibility and precision should use the `new()` constructor functions for each element, as we will illustrate later.  Meanwhile, most common 
+specifications can be made using the more convenient but less flexible `set_coverage()` function in EML.  This function takes a date range or list of 
+specific dates, a list of scientific names, a geographic description and bounding boxes, as shown here:
+
+
+```{r}
+geographicDescription <- "The Geographic region of the kelp bed data extends along the California coast, down through the coast of Baja, Mexico: Central California (Halfmoon Bay to Purisima Point), Southern California (Point Arguello to the United States/Mexico border including the Channel Islands) and Baja California (points south of the United States/Mexico border including several offshore islands)"
+
+
+coverage <- 
+  set_coverage(begin = '2012-06-01', end = '2013-12-31',
+               sci_names = "Sarracenia purpurea",
+               geographicDescription = geographicDescription,
+               west = -122.44, east = -117.15, 
+               north = 37.38, south = 30.00,
+               altitudeMin = 160, altitudeMaximum = 330,
+               altitudeUnits = "meter")
+```
+
+
+
+Note that R's fuzzy matching permits shorter arguments like `west` instead of the full argument name, `westBoundingCoordinate`, in the above example.  
+This results in the following `coverage` element:
+
+```{r}
+coverage
+```
+
+
+
+## Attribute Metadata
+
+A fundamental part of EML metadata is a description of the attributes (usually columns) of a text file (usually a csv file) containing the data being described. 
+
+```{r}
+## Works only with dev version dplyr due to bug
+attributes <-
+  dplyr::frame_data(
+    ~attributeName,  ~formatString, ~definition,         ~attributeDefinition,
+    "run.num",        NA,           "which run number", "which run number (=block). Range: 1 - 6. (integer)",
+    "year",          "YYYY",        NA,                 "year, 2012",
+    "day",           "DDD",         NA,                 "Julian day. Range: 170 - 209.",
+    "hour.min",      "hhmm",        NA,                 "hour and minute of observation. Range 1 - 2400 (integer)",
+    "i.flag",        NA,            NA,                 "is variable Real, Interpolated or Bad (character/factor)",
+    "variable",      NA,            NA,                 "what variable being measured in what treatment (character/factor).",
+    "value.i",       NA,            NA,                 "value of measured variable for run.num on year/day/hour.min."
+    )
+
+
+## Factors table:
+
+## Named char vectors are a natural way to define code/definition pairs in Code.
+i.flag <- c(R = "real",
+            I = "interpolated",
+            B = "bad")
+variable <- c(
+  control  = "no prey added",
+  low      = "0.125 mg prey added ml-1 d-1",
+  med.low  = "0,25 mg prey added ml-1 d-1",
+  med.high = "0.5 mg prey added ml-1 d-1",
+  high     = "1.0 mg prey added ml-1 d-1",
+  air.temp = "air temperature measured just above all plants (1 thermocouple)",
+  water.temp = "water temperature measured within each pitcher",
+  par       = "photosynthetic active radiation (PAR) measured just above all plants (1 sensor)"
+)
+
+value.i <- c(
+  control  = "% dissolved oxygen",
+  low      = "% dissolved oxygen",
+  med.low  = "% dissolved oxygen",
+  med.high = "% dissolved oxygen",
+  high     = "% dissolved oxygen",
+  air.temp = "degrees C",
+  water.temp = "degrees C",
+  par      = "micromoles m-1 s-1"
+)
+
+## Write these into a data.frame, because that's a more natural R type
+factors <- rbind(
+data.frame(
+  attributeName = "i.flag",
+  code = names(i.flag),
+  definition = unname(i.flag)
+),
+data.frame(
+  attributeName = "variable",
+  code = names(variable),
+  definition = unname(variable)
+),
+data.frame(
+  attributeName = "value.i",
+  code = names(value.i),
+  definition = unname(value.i)
+)
+)
+
+
+attributeList <- set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "factor"))
+```
+
+```{r}
+EntityGroup <- set_EntityGroup(name = "hf205-01-TPexp1.csv", 
+                               description = "tipping point experiment 1")
+```
+
+```{r}
+dataTable <- new("dataTable",
+                 attributeList = attributeList,
+                 EntityGroup = EntityGroup)
+```
+
+
+
+
+```{r}
+HF_address <- new("address",
+                  deliveryPoint = "324 North Main Street",
+                  city = "Petersham",
+                  administrativeArea = "MA",
+                  postalCode = "01366",
+                  country = "USA")
+publisher <- new("publisher",
+                 organizationName = "Harvard Forest",
+                 address = c(HF_address))
+
+aaron <- as.person("Aaron Ellison <fakeaddress@email.com>")
+aaron <-as(aaron, "ResponsibleParty")
+              
+new("contact",
+    individualName = aaron@individualName,
+    electronicMail = "fakeaddress@email.com",
+    address = HF_address,
+    organizationName = "Harvard Forest",
+    phone = "000-000-0000")
+```
+
+```{r}
+keywords <-
+  c(new("keywordSet",
+        keywordThesaurus = "LTER controlled vocabulary",
+        keyword = c("bacteria",
+                    "carnivorous plants",
+                    "genetics",
+                    "thresholds")),
+    new("keywordSet",
+        keywordThesaurus = "LTER core area",
+        keyword =  c("populations", "inorganic nutrients", "disturbance")),
+    new("keywordSet",
+        keywordThesaurus = "HFR default",
+        keyword = c("Harvard Forest", "HFR", "LTER", "USA")))
+```
+
+
+```{r}
+pubDate <- "2012" 
+
+title <- "Thresholds and Tipping Points in a Sarracenia 
+Microecosystem at Harvard Forest since 2012"
+
+abstract <- "The primary goal of this project is to determine
+  experimentally the amount of lead time required to prevent a state
+change. To achieve this goal, we will (1) experimentally induce state
+changes in a natural aquatic ecosystem - the Sarracenia microecosystem;
+(2) use proteomic analysis to identify potential indicators of states
+and state changes; and (3) test whether we can forestall state changes
+by experimentally intervening in the system. This work uses state-of-the
+art molecular tools to identify early warning indicators in the field
+of aerobic to anaerobic state changes driven by nutrient enrichment
+in an aquatic ecosystem. The study tests two general hypotheses: (1)
+proteomic biomarkers can function as reliable indicators of impending
+state changes and may give early warning before increasing variances
+and statistical flickering of monitored variables; and (2) well-timed
+intervention based on proteomic biomarkers can avert future state changes
+in ecological systems."  
+
+rights <- "This dataset is released to the public and may be freely
+  downloaded. Please keep the designated Contact person informed of any
+plans to use the dataset. Consultation or collaboration with the original
+investigators is strongly encouraged. Publications and data products
+that make use of the dataset must include proper acknowledgement. For
+more information on LTER Network data access and use policies, please
+see: http://www.lternet.edu/data/netpolicy.html."
+```
+
+dataset <- new("dataset",
+               ResourceGroup = new(
+                 "ResourceGroup",
+                 title = title,
+                 creator = creator,
+                 contact = contact,
+                 pubDate = pubDate,
+                 intellectualRights = rights,
+                 abstract = abstract,
+                 associatedParty = other_researchers,
+                 keywordSet = keys,
+                 coverage = coverage),
+               methods = methods,
+               dataTable = dataTable)
+
+eml <- new("eml",
+           packageId = uuid::UUIDgenerate(),
+           system = "uuid", # type of identifier
+           dataset = dataset)
+
+```

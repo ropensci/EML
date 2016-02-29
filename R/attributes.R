@@ -289,6 +289,9 @@ set_attributes <- function(attributes, factors, col_classes = NULL){
   if(! "attributeName" %in% names(attributes))
     stop("attributes table must include an 'attributeName' column")
 
+  ## Factors table must be all of type character!  
+  factors <- data.frame(lapply(factors, as.character), stringsAsFactors = FALSE)
+  
   ## infer "domain" & "measurementScale" given optional column classes
   if(!is.null(col_classes))
     attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE)
@@ -307,7 +310,7 @@ set_attributes <- function(attributes, factors, col_classes = NULL){
 
 add_na_column <- function(column, df){
   if(! column %in% names(df))
-    df$column <- NA
+    df[[column]] <- as.character(NA)
   df
 }
 
@@ -411,8 +414,9 @@ is_customUnit <- function(x){
 
 
 infer_domain_scale <- function(col_classes, attributeName = names(col_classes)){
-  domain = col_classes
-  measurementScale = col_classes
+  domain <- col_classes
+  measurementScale <- col_classes
+  storageType <- col_classes
   domain[col_classes == "numeric"] <- "numericDomain"
   domain[col_classes == "character"] <- "textDomain"
   domain[col_classes %in% c("factor", "ordered")] <- "enumeratedDomain"
@@ -431,6 +435,6 @@ infer_domain_scale <- function(col_classes, attributeName = names(col_classes)){
   storageType[col_classes %in% c("Date")] <- "date"
 
 
-  data.frame(attributeName = attributeName, domain = domain, measurementScale = measurementScale, storageType = storageType)
+  data.frame(attributeName = attributeName, domain = domain, measurementScale = measurementScale, storageType = storageType, stringsAsFactors = FALSE)
 }
 
