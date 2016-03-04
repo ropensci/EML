@@ -217,6 +217,13 @@ dataTable <- new("dataTable",
 ```
 
 
+## Creating methods
+
+```{r}
+methods_file <- system.file("examples/hf205-methods.md")
+methods <- set_methods(methods_file)
+```
+
 
 
 ```{r}
@@ -292,10 +299,6 @@ investigators is strongly encouraged. Publications and data products
 that make use of the dataset must include proper acknowledgement. For
 more information on LTER Network data access and use policies, please
 see: http://www.lternet.edu/data/netpolicy.html."
-```
-
-```{r}
-methods <- "text"
 ```
 
 ```{r}
