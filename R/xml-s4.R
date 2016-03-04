@@ -91,7 +91,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
 #' @import methods
 S4Toeml <- function(obj,
                     node = NULL,
-                    excluded_slots = c("namespaces", "dirname", "xmlNodeName"),
+                    excluded_slots = c("namespaces", "dirname", "slot_order", "xmlNodeName"),
                     ns = character()){
 
   who <- slotNames(obj)
@@ -131,6 +131,13 @@ S4Toeml <- function(obj,
 
 
     who <- who[!(who %in% excluded_slots)] # drop excluded slots
+    names(who) <- who
+    
+    ## Re-order 'who' to obey 'slot_order' slot.
+    ordering <- get_slot(obj, "slot_order")
+    if(length(ordering) >= length(who))
+      who <- as.character(na.omit(who[ordering]))
+    
     for(s in who){
       ## Attributes
       if(s %in% attribute_elements){

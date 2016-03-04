@@ -221,7 +221,8 @@ dataTable <- new("dataTable",
 
 ```{r}
 methods_file <- system.file("examples/hf205-methods.md")
-methods <- set_methods(methods_file)
+#methods <- set_methods(methods_file)
+methods <- "text"
 ```
 
 

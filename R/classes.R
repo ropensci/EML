@@ -1,5 +1,5 @@
 setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute'))
+setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute', slot_order = 'character'))
 setClass('ListOfvalue', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'value'))){ 'not all elements are value objects'; } else { TRUE }})
 setClass('ListOfvalue', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'value'))){ 'not all elements are value objects'; } else { TRUE }})
 setClass('ListOfvalue', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'value'))){ 'not all elements are value objects'; } else { TRUE }})

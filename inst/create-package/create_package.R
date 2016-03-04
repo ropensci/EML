@@ -1,3 +1,5 @@
+library("EML") ## ick, create_methods actually uses true slots to get slots and contains slots
+
 library("XML")
 library("xml2")
 library("purrr")
@@ -21,7 +23,7 @@ xs_base_classes <- function(file = "R/classes.R", methods_file = "R/methods.R"){
 
   write("
 setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute'))
+setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute', slot_order = 'character'))
 setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
 setClass('InlineType', contains=c('list'))",
         file, append = TRUE)

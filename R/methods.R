@@ -98,7 +98,7 @@ setAs('metadataList', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'metadataList',  function(from) emlToS4(from))
 setAs('metadataType', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'metadataType',  function(from) emlToS4(from))
-#setMethod(initialize, 'dimension', function(.Object, .Data = new('character'), name = new('xml_attribute'), power = new('xml_attribute'), schemaLocation = new('xml_attribute'), lang = new('xml_attribute')){; .Object@.Data <- .Data; slot(.Object, 'name') <- as(name, 'xml_attribute'); slot(.Object, 'power') <- as(power, 'xml_attribute'); slot(.Object, 'schemaLocation') <- as(schemaLocation, 'xml_attribute'); slot(.Object, 'lang') <- as(lang, 'xml_attribute'); .Object })
+setMethod(initialize, 'dimension', function(.Object, .Data = new('character'), name = new('xml_attribute'), power = new('xml_attribute'), schemaLocation = new('xml_attribute'), lang = new('xml_attribute')){; .Object@.Data <- .Data; slot(.Object, 'name') <- as(name, 'xml_attribute'); slot(.Object, 'power') <- as(power, 'xml_attribute'); slot(.Object, 'schemaLocation') <- as(schemaLocation, 'xml_attribute'); slot(.Object, 'lang') <- as(lang, 'xml_attribute'); .Object })
 setAs('dimension', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'dimension',  function(from) emlToS4(from))
 setAs('dimensionType', 'XMLInternalNode',   function(from) S4Toeml(from))
@@ -456,7 +456,7 @@ setAs('definition', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'definition',  function(from) emlToS4(from))
 setAs('defaultValue', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'defaultValue',  function(from) emlToS4(from))
-#setMethod(initialize, 'parameterDefinition', function(.Object, .Data = new('character'), name = new('character'), definition = new('character'), defaultValue = new('character'), schemaLocation = new('xml_attribute'), lang = new('xml_attribute')){; .Object@.Data <- .Data; slot(.Object, 'name') <- as(name, 'name'); slot(.Object, 'definition') <- as(definition, 'definition'); slot(.Object, 'defaultValue') <- as(defaultValue, 'defaultValue'); slot(.Object, 'schemaLocation') <- as(schemaLocation, 'xml_attribute'); slot(.Object, 'lang') <- as(lang, 'xml_attribute'); .Object })
+
 setAs('parameterDefinition', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'parameterDefinition',  function(from) emlToS4(from))
 
@@ -503,7 +503,7 @@ setAs('name', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'name',  function(from) emlToS4(from))
 setAs('value', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'value',  function(from) emlToS4(from))
-#setMethod(initialize, 'parameter', function(.Object, name = new('character'), value = new('character'), domainDescription = new('character'), required = new('character'), repeats = new('character')){; slot(.Object, 'name') <- as(name, 'name'); slot(.Object, 'value') <- as(value, 'value'); slot(.Object, 'domainDescription') <- as(domainDescription, 'domainDescription'); slot(.Object, 'required') <- as(required, 'required'); slot(.Object, 'repeats') <- as(repeats, 'repeats'); .Object })
+
 setAs('parameter', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'parameter',  function(from) emlToS4(from))
 
@@ -581,7 +581,7 @@ setAs('geogCoordSys', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'geogCoordSys',  function(from) emlToS4(from))
 setAs('geogCoordSys', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'geogCoordSys',  function(from) emlToS4(from))
-setMethod(initialize, 'parameter', function(.Object, name = new('character'), value = new('character'), domainDescription = new('character'), required = new('character'), repeats = new('character')){; slot(.Object, 'name') <- as(name, 'name'); slot(.Object, 'value') <- as(value, 'value'); slot(.Object, 'domainDescription') <- as(domainDescription, 'domainDescription'); slot(.Object, 'required') <- as(required, 'required'); slot(.Object, 'repeats') <- as(repeats, 'repeats'); .Object })
+
 setAs('parameter', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'parameter',  function(from) emlToS4(from))
 
@@ -2127,6 +2127,3 @@ setMethod(c, signature('additionalMetadata'), function(x, ..., recursive = FALSE
 setMethod(initialize, 'eml', function(.Object, additionalMetadata = character(), .Data = new('character'), access = new('AccessType'), dataset = new('DatasetType'), citation = new('CitationType'), software = new('SoftwareType'), protocol = new('ProtocolType'), packageId = new('xml_attribute'), system = new('xml_attribute'), scope = new('xml_attribute'), lang = new('xml_attribute'), schemaLocation = new('xml_attribute')){; slot(.Object, 'additionalMetadata') <- c_as(additionalMetadata, 'additionalMetadata'); .Object@.Data <- .Data; slot(.Object, 'access') <- as(access, 'access'); slot(.Object, 'dataset') <- as(dataset, 'dataset'); slot(.Object, 'citation') <- as(citation, 'citation'); slot(.Object, 'software') <- as(software, 'software'); slot(.Object, 'protocol') <- as(protocol, 'protocol'); slot(.Object, 'packageId') <- as(packageId, 'xml_attribute'); slot(.Object, 'system') <- as(system, 'xml_attribute'); slot(.Object, 'scope') <- as(scope, 'xml_attribute'); slot(.Object, 'lang') <- as(lang, 'xml_attribute'); slot(.Object, 'schemaLocation') <- as(schemaLocation, 'xml_attribute'); .Object })
 setAs('eml', 'XMLInternalNode',   function(from) S4Toeml(from))
 setAs('XMLInternalNode', 'eml',  function(from) emlToS4(from))
-
-
-
