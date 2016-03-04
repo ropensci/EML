@@ -206,14 +206,15 @@ attributeList <- set_attributes(attributes, factors, col_classes = c("character"
 The default entity is a CSV file, so we do not need to specify delimiters, simply provide the name of the file and description.  (See examples for set_EntityGroup on reading other common variations, analgous to the options covered in R's `read.table()` function.)
 
 ```{r}
-EntityGroup <- set_EntityGroup(name = "hf205-01-TPexp1.csv", 
-                               description = "tipping point experiment 1")
+physical <- set_physical("hf205-01-TPexp1.csv")
 ```
 
 ```{r}
 dataTable <- new("dataTable",
                  attributeList = attributeList,
-                 EntityGroup = EntityGroup)
+                 entityName = as.character(physical@objectName),
+                 entityDescription = "tipping point experiment 1",
+                 physical = physical)
 ```
 
 
@@ -302,22 +303,18 @@ more information on LTER Network data access and use policies, please
 see: http://www.lternet.edu/data/netpolicy.html."
 ```
 
-```{r}
-ResourceGroup = new("ResourceGroup",
-                 title = title,
-                 creator = as(aaron, "creator"),
-                 pubDate = pubDate,
-                 intellectualRights = rights,
-                 abstract = abstract,
-      #           associatedParty = other_researchers,
-                 keywordSet = keywords,
-                 coverage = coverage)
-```
 
 ```{r}
 dataset <- new("dataset",
+               title = title,
+               creator = as(aaron, "creator"),
+               pubDate = pubDate,
+               intellectualRights = rights,
+               abstract = abstract,
+   #           associatedParty = other_researchers,
+               keywordSet = keywords,
+               coverage = coverage,
                contact = contact,
-               ResourceGroup = ResourceGroup,
                methods = methods,
                dataTable = dataTable)
 ```

@@ -4,7 +4,7 @@
 \alias{set_attributes}
 \title{set_attributes}
 \usage{
-set_attributes(attributes, factors, col_classes = NULL)
+set_attributes(attributes, factors = NULL, col_classes = NULL)
 }
 \arguments{
 \item{attributes}{a joined table of all attribute metdata

@@ -134,10 +134,11 @@ S4Toeml <- function(obj,
     names(who) <- who
     
     ## Re-order 'who' to obey 'slot_order' slot.
-    ordering <- get_slot(obj, "slot_order")
-    if(length(ordering) >= length(who))
-      who <- as.character(na.omit(who[ordering]))
+    ordering <- slot(obj, "slot_order")
     
+    who <- c(ordering, who[!who %in% ordering ])
+    
+
     for(s in who){
       ## Attributes
       if(s %in% attribute_elements){

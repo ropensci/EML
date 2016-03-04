@@ -22,6 +22,7 @@ file.remove(methods_file)
 xs_base_classes <- function(file = "R/classes.R", methods_file = "R/methods.R"){
 
   write("
+setClass('slot_order', contains = 'character')
 setClass('xml_attribute', contains = 'character')
 setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute', slot_order = 'character'))
 setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
@@ -156,6 +157,17 @@ R <- gsub("'language' = 'i18nNonEmptyStringType'", "'language' = 'character'", R
 R <- gsub("setClass\\('title', contains = c\\('eml-2.1.1', 'character'\\)\\).*", "", R)
 ## Consistent Ordering please
 R <- gsub("contains = c\\('character', 'eml-2.1.1'\\)", "contains = c('eml-2.1.1', 'character')", R)
+
+## avoid ReferencesGroup as separate class.
+R <- gsub("'ReferencesGroup' = 'ReferencesGroup'", "'references' = 'references'", R)
+
+resource_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'shortName' = 'character', 'title' = 'ListOftitle', 'creator' = 'ListOfcreator', 'metadataProvider' = 'ListOfmetadataProvider', 'associatedParty' = 'ListOfassociatedParty', 'pubDate' = 'yearDate', 'language' = 'character', 'series' = 'character', 'abstract' = 'TextType', 'keywordSet' = 'ListOfkeywordSet', 'additionalInfo' = 'ListOfadditionalInfo', 'intellectualRights' = 'TextType', 'distribution' = 'ListOfdistribution', 'coverage' = 'Coverage'"
+R <- gsub("'ResourceGroup' = 'ResourceGroup'", resource_group_slots, R)
+
+entity_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'entityName' = 'character', 'entityDescription' = 'character', 'physical' = 'ListOfphysical', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'additionalInfo' = 'ListOfadditionalInfo'"
+R <- gsub("'EntityGroup' = 'EntityGroup'", entity_group_slots, R)
+
+R <- unique(R)
 write(R, classes_file)
 
 ## Fix methods
@@ -173,5 +185,4 @@ drop_method('ParagraphType', methods_file)
 drop_method('SectionType', methods_file)
 drop_method('UrlType', methods_file)
 sapply(c("array", "table", "matrix", "list", "description", "keyword", "unit", "eml:complex", "language", "parameter", "parameterDefinition"), drop_method, methods_file)
-
 
