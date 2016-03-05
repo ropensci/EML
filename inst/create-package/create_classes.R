@@ -54,7 +54,7 @@ set_class_list <- function(class, cf = "classes.R", mf = "methods.R"){
 
 
 parse_element <- function(node, ns, cf = "classes.R", mf = "methods.R", maxOccurs = NA,
-                          bits = list(slots = list(), contains = character())){
+                          bits = list(slots = list(), contains = character(), slot_order = character())){
 
   name <- xml_attr(node, "name", ns)
   if(is.na(maxOccurs))
@@ -67,7 +67,10 @@ parse_element <- function(node, ns, cf = "classes.R", mf = "methods.R", maxOccur
     extends <- has_extension(node, ns) %>% strip_namespace() %>% replace_character_type()
     if(!is.na(extends) && is.na(ctype)){
       if(length(bits$slots) > 0){
+## FIXME this makes 'extends' into slots instead of contains!  Use this for ordering only!
       bits$slots <- c(setNames(list(extends), extends), bits$slots)
+      bits$slot_order <- c(extends, names(bits$slots))
+
       } else {
         extends <- ctype
       }
@@ -99,7 +102,7 @@ parse_element <- function(node, ns, cf = "classes.R", mf = "methods.R", maxOccur
       }
     }
     slots <- setNames(type, name)
-    list(slots = slots, contains = character())
+    list(slots = slots, contains = character(), slot_order = names(slots))
   }
 }
 
@@ -109,7 +112,7 @@ parse_group <- function(node, ns, cf = "classes.R", mf = "methods.R"){
     create_class(node, ns, cf = cf, mf = mf)
   else {
     slots <- ref %>% replace_character_type() %>% strip_namespace() %>% setNames(., .)
-    list(slots = slots, contains = character())
+    list(slots = slots, contains = character(), slot_order = names(slots))
   }
 }
 
@@ -122,7 +125,8 @@ parse_attribute <- function(node, ns, cf = "classes.R", mf = "methods.R"){
     create_class(node, ns, cf = cf, mf = mf)
   else {
     list(slots = setNames("xml_attribute", strip_namespace(name)),
-         contains = character())
+         contains = character(),
+         slot_order = character())
   }
 }
 
@@ -136,7 +140,8 @@ parse_extend_restrict <- function(node, ns, cf = "classes.R", mf = "methods.R"){
   } else {
     contains <- base %>% replace_character_type() %>% strip_namespace()
     list(slots = list(),
-         contains = contains)
+         contains = contains,
+         slot_order = character())
   }
 }
 
@@ -166,7 +171,7 @@ recurse <- function(node, ns = character(), cf = "classes.R", mf = "methods.R", 
     if(!is.na(xml_attr(node, "name", ns)))
       bits <- create_class(node, ns, cf = cf, mf = mf)
     else
-      bits <- list(slots = list(), contains = character())
+      bits <- list(slots = list(), contains = character(), slot_order = character())
 
     parse_element(node, ns, cf = cf, mf = mf, maxOccurs = maxOccurs, bits = bits)
 
