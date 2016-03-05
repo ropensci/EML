@@ -469,14 +469,14 @@ setAs("bibentry", "generic", function(from){
 setAs("citation", "bibentry", function(from) citationToBibentry(from))
 citationToBibentry <- function(from){
   eml_types <- slotNames(from)
-  eml_types <- eml_types[!(eml_types %in% c(".Data","ReferencesGroup", "ResourceGroup", "lang", "id", "system", "scope", "schemaLocation"))]
+  eml_types <- eml_types[!(eml_types %in% c(".Data","references", names(getSlots("ResourceGroup"))))]
   type <- eml_types[sapply(eml_types,
                            function(x) !isEmpty(slot(from, x)))]
   out <- as(slot(from, type[[1]]), "bibentry")
 
-  out$author = as(from@ResourceGroup@creator, "person")
-  out$title = from@ResourceGroup@title
-  out$year = from@ResourceGroup@pubDate
+  out$author = as(from@creator, "person")
+  out$title = from@title
+  out$year = from@pubDate
   do.call(bibentry, out)
 
 }
@@ -522,12 +522,9 @@ bibentryToCitation <-
 
            type <- class(object)
            out <- new("citation",
-                      ResourceGroup =
-                        new("ResourceGroup",
-                            title = from$title,
-                            pubDate = from$year,
-                            creator = new("ListOfcreator", lapply(from$author, function(x) as(as(x, "ResponsibleParty"), "creator")))
-                            )
+                      title = from$title,
+                      pubDate = from$year,
+                      creator = new("ListOfcreator", lapply(from$author, function(x) as(as(x, "ResponsibleParty"), "creator")))
                       )
            slot(out, type) <- object
 

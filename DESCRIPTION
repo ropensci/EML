@@ -11,8 +11,8 @@ License: FreeBSD
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: XML,
-    methods
-Suggests: testthat,
-    knitr,
+    methods,
     rmarkdown
+Suggests: testthat,
+    knitr
 VignetteBuilder: knitr

@@ -66,7 +66,7 @@ numeric_attributes <- function(ListOfattribute, eml){
       b <- slot(a@measurementScale, scale)
 
       ## Perform Reference lookup.  FIXME consider performing globally.
-      if( "ReferencesGroup" %in% choice(b@numericDomain) )
+      if( "references" %in% choice(b@numericDomain) )
         b@numericDomain <- get_reference(b@numericDomain, eml)
 
       ## FIXME can really have multiple bounds?
@@ -94,7 +94,7 @@ char_attributes <- function(ListOfattribute, eml){
     scale = choice(a@measurementScale)
     if(scale %in% c("nominal", "ordinal")){
       b <- slot(a@measurementScale, scale)
-      if( "ReferencesGroup" %in% choice(b@nonNumericDomain) )
+      if( "references" %in% choice(b@nonNumericDomain) )
         b@nonNumericDomain <- get_reference(b@nonNumericDomain, eml)
       s <- choice(b@nonNumericDomain)
       if("textDomain" %in% s){
@@ -127,7 +127,7 @@ datetime_attributes <- function(ListOfattribute, eml){
     if(scale %in% c("dateTime")){
       b <- slot(a@measurementScale, scale)
 
-      if( "ReferencesGroup" %in% choice(b@dateTimeDomain) )
+      if( "references" %in% choice(b@dateTimeDomain) )
         b@dateTimeDomain <- get_reference(b@dateTimeDomain, eml)
 
       bounds <- getone(get_path(b, "dateTimeDomain@BoundsDateGroup@bounds"))
@@ -155,7 +155,7 @@ factor_attributes <- function(ListOfattribute, eml){
     if(scale %in% c("nominal", "ordinal")){
       b <- slot(a@measurementScale, scale)
 
-      if( "ReferencesGroup" %in% choice(b@nonNumericDomain) )
+      if( "references" %in% choice(b@nonNumericDomain) )
         b@nonNumericDomain <- get_reference(b@nonNumericDomain, eml)
 
       s <- choice(b@nonNumericDomain)
@@ -234,7 +234,7 @@ or_na <- function(x){
 
 ## Resolve reference nodes into copies of actual metadata nodes.  slow!
 get_reference <- function(n, eml){
-  id <- n@ReferencesGroup@references[[1]]
+  id <- n@references[[1]]
   doc = XML::xmlParse(write_eml(eml))
   node <- XML::xpathApply(doc, sprintf("//*[@id = '%s']", id))[[1]]
   emlToS4(node)
@@ -283,14 +283,15 @@ choice <- function(s4){
 #'
 #' @return an eml "attributeList" object
 #' @export
-set_attributes <- function(attributes, factors, col_classes = NULL){
+set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
 
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
   if(! "attributeName" %in% names(attributes))
     stop("attributes table must include an 'attributeName' column")
 
   ## Factors table must be all of type character!  
-  factors <- data.frame(lapply(factors, as.character), stringsAsFactors = FALSE)
+  if(!is.null(factors))
+    factors <- data.frame(lapply(factors, as.character), stringsAsFactors = FALSE)
   
   ## infer "domain" & "measurementScale" given optional column classes
   if(!is.null(col_classes))
@@ -322,7 +323,7 @@ na2empty <- function(x){
   x
 }
 
-set_attribute <- function(row, factors){
+set_attribute <- function(row, factors = NULL){
   s <- row[["measurementScale"]]
 
 

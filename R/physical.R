@@ -1,8 +1,7 @@
 
-#' set_EntityGroup
+#' set_physical
 #'
-#' @param name name for the entity, usually a filename like "hf205-1.csv"
-#' @param description A description of the entity
+#' @param objectName name for the object, usually a filename like "hf205-1.csv"
 #' @param id optional, an id value for the <physical> element in EML, for use in referencing
 #' @param numHeaderLines Number of header lines preceding data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of header lines that should be skipped before starting to parse the data. 
 #' @param numFooterLines Number of footer lines following data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of footer lines that should be skipped after parsing the data. If this value is omitted, parsers should assume the data continues to the end of the data stream.
@@ -20,15 +19,14 @@
 #' @param encodingMethod This element lists a encoding method used to encode the object, such as base64, BinHex.
 #' @param compressionMethod This element lists a compression method used to compress the object, such as zip, compress, etc. Compression and encoding methods must be listed in the order in which they were applied, so that decompression and decoding should occur in the reverse order of the listing. For example, if a file is compressed using zip and then encoded using MIME base64, the compression method would be listed first and the encoding method second.
 #'
-#' @return an EML EntityGroup object, such as used in a dataTable element to define the format of the data file. 
+#' @return an EML physical object, such as used in a dataTable element to define the format of the data file. 
 #' @export
 #'
 #' @examples
-#' set_EntityGroup(name = "hf205-01-TPexp1.csv", description = "tipping point experiment 1")
+#' set_physical("hf205-01-TPexp1.csv")
 # FIXME set recordDelimiter based on user's system?
-set_EntityGroup <- function(name,
-                            description,
-                            id = character(),
+set_physical <- function(objectName,
+                          id = character(),
                             numHeaderLines = character(),
                             numFooterLines = character(),
                             recordDelimiter = "\\n\\r",
@@ -58,13 +56,8 @@ set_EntityGroup <- function(name,
   
   out <- 
     new(
-    "EntityGroup",
-    entityName = name,
-    entityDescription = description,
-    physical = 
-    new(
       "physical",
-      objectName = name,
+      objectName = objectName,
       size = new("size", unit = "bytes"),
       authentication = new("authentication", authentication, method = authMethod),
       compressionMethod = compressionMethod,
@@ -73,7 +66,7 @@ set_EntityGroup <- function(name,
       dataFormat = dataFormat,
       id = id
     )
-  )
+  
   
   out
   
