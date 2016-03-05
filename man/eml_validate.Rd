@@ -4,12 +4,23 @@
 \alias{eml_validate}
 \title{validate_eml}
 \usage{
-eml_validate(eml)
+eml_validate(eml, ...)
 }
 \arguments{
 \item{eml}{an eml class object, file, or xml document}
+
+\item{...}{additional arguments to eml_write, such as namespaces}
 }
 \description{
 validate_eml
+}
+\examples{
+\donttest{
+## Can validate fragments as well:
+dataset <- new("dataset", title = "incomplete, invalid EML")
+v <- eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
+v$errors[[1]]$msg 
+}
+
 }
 

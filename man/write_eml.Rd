@@ -4,12 +4,16 @@
 \alias{write_eml}
 \title{write_eml}
 \usage{
-write_eml(eml, file = NULL, ...)
+write_eml(eml, file = NULL, namespaces = NULL, ns = "eml", ...)
 }
 \arguments{
 \item{eml}{an eml class object}
 
 \item{file}{file name to write XML. If NULL, will return XML as character string.}
+
+\item{namespaces}{named character vector of additional XML namespaces to use.}
+
+\item{ns}{root namespace abbreviation}
 
 \item{...}{additional arguments to \code{\link{saveXML}}}
 }
