@@ -22,6 +22,8 @@ read_eml <- function(file, ...){
 #' write_eml
 #' @param eml an eml class object
 #' @param file file name to write XML. If NULL, will return XML as character string.
+#' @param namespaces named character vector of additional XML namespaces to use.
+#' @param ns root namespace abbreviation
 #' @param ... additional arguments to \code{\link{saveXML}}
 #' @return If file is not specified, the result is a character string containing
 #'    the resulting XML content. Otherwise return silently.
@@ -32,10 +34,10 @@ read_eml <- function(file, ...){
 #' f <- system.file("xsd/test", "eml.xml", package = "EML")
 #' eml <- read_eml(f)
 #' write_eml(eml)
-write_eml <- function(eml, file = NULL, ...){
+write_eml <- function(eml, file = NULL, namespaces = NULL, ns = "eml", ...){
   node <- S4Toeml(eml)
-  xmlNamespaces(node) <- eml_namespaces
-  setXMLNamespace(node, "eml")
+  xmlNamespaces(node) <- c(namespaces, eml_namespaces)
+  setXMLNamespace(node, ns)
   XML::saveXML(node, file = file, ...)
 }
 
@@ -43,13 +45,22 @@ write_eml <- function(eml, file = NULL, ...){
 #'
 #' validate_eml
 #' @param eml an eml class object, file, or xml document
+#' @param ... additional arguments to eml_write, such as namespaces
+#' 
+#' @examples \donttest{
+#' ## Can validate fragments as well:
+#' dataset <- new("dataset", title = "incomplete, invalid EML")
+#' v <- eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
+#' v$errors[[1]]$msg 
+#' }
+#' 
 #' @export
-eml_validate <- function(eml){
+eml_validate <- function(eml, ...){
 
   schema <- system.file("xsd/eml.xsd", package = "EML") #"http://ropensci.github.io/EML/eml.xsd"
 
-  if(is(eml, "eml"))
-    eml <- write_eml(eml)
+  if(isS4(eml))
+    eml <- write_eml(eml, ...)
 
   xmlSchemaValidate(schema, eml)
 }
@@ -65,16 +76,3 @@ eml_namespaces = c(eml = "eml://ecoinformatics.org/eml-2.1.1",
 ## Creates a 'show' method so that eml S4 elements display in XML format instead of the
 ## impossible-to-read S4 format
 setMethod("show", signature("eml-2.1.1"), function(object) show(S4Toeml(object)))
-
-
-
-
-
-# ## extend the auto-created eml class to include namespaces & schemaLocation by default
-# setClass("eml:eml",
-#          slots = c(namespaces = "character", xmlNodeName = "character"),
-#          contains = "eml",
-#          prototype = list(namespaces = eml_namespaces,
-#                           xmlNodeName = "eml",
-#                           schemaLocation = # should be xsi:schemaLocation... inherited from eml-2.1.1
-#                             new("xml_attribute", "eml://ecoinformatics.org/eml-2.1.1 eml.xsd")))
