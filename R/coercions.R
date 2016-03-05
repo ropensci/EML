@@ -20,7 +20,7 @@ setAs("person", "ResponsibleParty", function(from){
   new("ResponsibleParty",
       individualName = c(new("individualName",
                              "givenName" = as.character(from$given),
-                             "surName" = as(from$family, "surName"))),
+                             "surName" = as(as.character(from$family), "surName"))),
       electronicMailAddress = as.character(from$email))
 })
 
