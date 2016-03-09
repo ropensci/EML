@@ -11,7 +11,7 @@ set_physical(objectName, id = character(), numHeaderLines = character(),
   attributeOrientation = "column", size = character(), sizeUnit = "bytes",
   authentication = character(), authMethod = character(),
   characterEncoding = character(), encodingMethod = character(),
-  compressionMethod = character())
+  compressionMethod = character(), url = character())
 }
 \arguments{
 \item{objectName}{name for the object, usually a filename like "hf205-1.csv"}
@@ -47,6 +47,8 @@ set_physical(objectName, id = character(), numHeaderLines = character(),
 \item{encodingMethod}{This element lists a encoding method used to encode the object, such as base64, BinHex.}
 
 \item{compressionMethod}{This element lists a compression method used to compress the object, such as zip, compress, etc. Compression and encoding methods must be listed in the order in which they were applied, so that decompression and decoding should occur in the reverse order of the listing. For example, if a file is compressed using zip and then encoded using MIME base64, the compression method would be listed first and the encoding method second.}
+
+\item{url}{optional. The complete url from which the data file can be downloaded, if possible.}
 }
 \value{
 an EML physical object, such as used in a dataTable element to define the format of the data file.

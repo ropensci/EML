@@ -166,6 +166,7 @@ entity_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'ent
 R <- gsub("'EntityGroup' = 'EntityGroup'", entity_group_slots, R)
 responsible_party_slots = "'individualName' = 'ListOfindividualName', 'organizationName' = 'ListOforganizationName', 'positionName' = 'ListOfpositionName', 'address' = 'ListOfaddress', 'phone' = 'ListOfphone', 'electronicMailAddress' = 'ListOfelectronicMailAddress', 'onlineUrl' = 'ListOfonlineUrl', 'userId' = 'ListOfuserId', 'references' = 'references', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'"
 R <- gsub("'ResponsibleParty' = 'ResponsibleParty'", responsible_party_slots, R)
+R <- gsub("'ProcedureStepType' = 'ProcedureStepType'", "'description' = 'TextType', 'citation' = 'ListOfcitation', 'protocol' = 'ListOfprotocol', 'instrumentation' = 'ListOfinstrumentation', 'software' = 'ListOfsoftware', 'subStep' = 'ListOfsubStep'", R)
 
 R <- unique(R)
 write(R, classes_file)

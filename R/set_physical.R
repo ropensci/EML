@@ -18,13 +18,14 @@
 #' @param characterEncoding This element contains the name of the character encoding. This is typically ASCII or UTF-8, or one of the other common encodings.
 #' @param encodingMethod This element lists a encoding method used to encode the object, such as base64, BinHex.
 #' @param compressionMethod This element lists a compression method used to compress the object, such as zip, compress, etc. Compression and encoding methods must be listed in the order in which they were applied, so that decompression and decoding should occur in the reverse order of the listing. For example, if a file is compressed using zip and then encoded using MIME base64, the compression method would be listed first and the encoding method second.
-#'
+#' @param url optional. The complete url from which the data file can be downloaded, if possible.  
 #' @return an EML physical object, such as used in a dataTable element to define the format of the data file. 
 #' @export
 #'
 #' @examples
 #' set_physical("hf205-01-TPexp1.csv")
 # FIXME set recordDelimiter based on user's system?
+# FIXME richer distribution options? use set_distribution at top level?
 set_physical <- function(objectName,
                           id = character(),
                             numHeaderLines = character(),
@@ -41,7 +42,8 @@ set_physical <- function(objectName,
                             authMethod = character(),
                             characterEncoding = character(),
                             encodingMethod = character(),
-                            compressionMethod = character()){
+                            compressionMethod = character(),
+                            url = character()){
   dataFormat <- new("dataFormat",
                     textFormat = new("textFormat",
                                      numHeaderLines = numHeaderLines,
@@ -64,10 +66,27 @@ set_physical <- function(objectName,
       encodingMethod = encodingMethod,
       characterEncoding = characterEncoding,
       dataFormat = dataFormat,
-      id = id
+      id = id,
+      distribution = set_distribution(url)
     )
   
   
   out
   
+}
+
+
+
+set_distribution <- function(url = character()) {
+  if(length(url) > 0 )
+  new("distribution", 
+      online = new("online",
+                   url = new("url", 
+                             url,
+                            "function" = new("xml_attribute", "download")
+                            )
+                  )
+      )
+  else
+    new("distribution")
 }

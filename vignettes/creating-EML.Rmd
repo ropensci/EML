@@ -16,7 +16,11 @@ library("EML")
 In this vignette we construct an example EML file based on an example from the Harvard Forest LTER site, `knb-lter-hf205-01.xml`.  This illustrates how many of the commonly utilized EML fields are constructed using the R package.
 
 
-Here we construct richer EML files, including:
+```{r}
+library("EML")
+```
+
+Here we construct a common EML file, including: 
 
 - Constructing more complete lists of authors, publishers and contact.
 - Summarizing the geographic, temporal, and taxonomic coverage of the dataset
@@ -25,9 +29,9 @@ Here we construct richer EML files, including:
 - Indicating the canonical citation to the paper that should be acknowledged when the data is re-used.  
 - Conversion between EML and other metadata formats, such as NCBII and ISO standards.
 
-In so doing we will take a more modular approach that will allow us to build up our metadata from reusable components, while also providing a more fine-grained control over the resulting output fields and files.  
+In so doing we will take a modular approach that will allow us to build up our metadata from reusable components, while also providing a more fine-grained control over the resulting output fields and files.  
 
-### Overview of the EML heirarchy
+### Overview of the EML hierarchy
 
 A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the official schema documentation, here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
 
@@ -37,72 +41,62 @@ This schematic shows each of the metadata elements we will generate.  Most these
 - eml
   - dataset
     - creator
-    - contact
-    - publisher
     - title
+    - publisher
     - pubDate
     - keywords
     - abstract 
     - intellectualRights
+    - contact
     - methods
     - coverage
+      - geographicCoverage
+      - temporalCoverage
+      - taxonomicCoverage
     - dataTable
+      - entityName
+      - entityDescription
       - physical
       - attributeList
-```
 
-The EML R package allows us to assemble these pieces bit by bit, allowing us to work either from the top down or bottom up.  
-
-
-### Creating hf205.xml
-
-In this example, we will use R to re-generate the EML metadata originally published by [Ellison _et al_ (2012)](http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf205) through the Harvard Forest Long Term Ecological Research Center, accompanying the PNAS paper [Sirota _et al_ (2013)](http://dx.doi.org/10.1073/pnas.122103711).  <!-- The original metadata file was created in association with the publication in PNAS based on a Microsoft Word document template that Harvard Forest provides to the academic researchers.  Metadata from this template is then read off by hand and an EML file is generated using a combination of a commercial XML editing platform (Oxygen) for commonly used higher-level elements, and the Java platform `Morpho` provided by the EML development team for lower level attribute metadata. -->
-
-
-
-```{r}
-library("EML")
-```
-
-## Coverage metadata
-
-One of the most common and useful types of metadata is coverage information, specifying the temporal, taxonomic, and geographic coverage of the data.
-This kind of metadata is frequently indexed by data repositories, allowing users to search for all data about a specific region, time, or species.  In
-EML, these descriptions can take many forms, allowing for detailed descriptions as well as more general terms when such precision is not possible (such
-as geological epoch instead of date range, or higher taxonomic rank information in place of species definitions.)  Coverage elements that take full advantage
-of this flexibility and precision should use the `new()` constructor functions for each element, as we will illustrate later.  Meanwhile, most common 
-specifications can be made using the more convenient but less flexible `set_coverage()` function in EML.  This function takes a date range or list of 
-specific dates, a list of scientific names, a geographic description and bounding boxes, as shown here:
-
-
-```{r}
-geographicDescription <- "The Geographic region of the kelp bed data extends along the California coast, down through the coast of Baja, Mexico: Central California (Halfmoon Bay to Purisima Point), Southern California (Point Arguello to the United States/Mexico border including the Channel Islands) and Baja California (points south of the United States/Mexico border including several offshore islands)"
-
-
-coverage <- 
-  set_coverage(begin = '2012-06-01', end = '2013-12-31',
-               sci_names = "Sarracenia purpurea",
-               geographicDescription = geographicDescription,
-               west = -122.44, east = -117.15, 
-               north = 37.38, south = 30.00,
-               altitudeMin = 160, altitudeMaximum = 330,
-               altitudeUnits = "meter")
 ```
 
 
 
-Note that R's fuzzy matching permits shorter arguments like `west` instead of the full argument name, `westBoundingCoordinate`, in the above example.  
-This results in the following `coverage` element:
+### Our example: (re)-creating hf205.xml
 
-```{r}
-coverage
-```
+In this example, we will use R to re-generate
+the EML metadata originally published by [Ellison _et al_
+(2012)](http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf205)
+through the Harvard Forest Long Term Ecological Research
+Center, accompanying the PNAS paper [Sirota _et al_
+(2013)](http://dx.doi.org/10.1073/pnas.122103711). We have made only
+a few modifications to simplify the presentation of this tutorial, 
+so our resulting EML will not be perfectly identical to the original.
 
+
+### Our strategy
+
+We will build this EML file from the bottom up, starting with the two main components
+of a `dataTable` indicated above: the `attributeList` and the `physical` file type.
+We will then slip these two pieces into place inside a `dataTable` element, and slip
+that into our `eml` element along with the rest of the generic metadata, much like
+building a puzzle or nesting a set of Russian dolls.  
+
+The original metadata file was created in association with the publication in PNAS
+based on a Microsoft Word document template that Harvard Forest provides
+to the academic researchers.  Metadata from this template is then read off
+by hand and an EML file is generated using a combination of a commercial
+XML editing platform (Oxygen) for commonly used higher-level elements,
+and the Java platform `Morpho` provided by the EML development team for
+lower level attribute metadata.
 
 
 ## Attribute Metadata
 
-A fundamental part of EML metadata is a description of the attributes (usually columns) of a text file (usually a csv file) containing the data being described. 
+A fundamental part of EML metadata is a description of the attributes
+(usually columns) of a text file (usually a csv file) containing the
+data being described.  This is the heart of many EML files.
 
 ```{r}
 attributes <-
@@ -142,13 +136,11 @@ data.frame(
   stringsAsFactors = FALSE
 )
 
-## Take a look at the table
-attributes
 ```
 
-Factors table:
+Factors (enumerated domains) need to specify definitions for each of the code terms appearing in the data columns.  This does not fit so nicely in the above table, where each attribute is a single row, so if data uses factors (instead of non-enumerated strings), these definitions must be provided in a separate table.  The format expected of this table has three columns: `attributeName` (as before), `code`, and `definition`.  Note that `attributeName` is simply repeated for all codes belonging to a common attribute.  
 
-Named char vectors are a natural way to define code/definition pairs in Code.
+In this case we have three attributes that are factors,  To make the code below more readable (aligning code and definitions side by side), we define these first as named character vectors, and convert that to a `data.frame`. (The `dplyr::frame_data` function also permits this more readable way to define data.frames inline).
 
 ```{r}
 i.flag <- c(R = "real",
@@ -176,7 +168,7 @@ value.i <- c(
   par      = "micromoles m-1 s-1"
 )
 
-## Write these into a data.frame, because that's a more natural R type
+## Write these into the data.frame format
 factors <- rbind(
 data.frame(
   attributeName = "i.flag",
@@ -203,25 +195,99 @@ attributeList <- set_attributes(attributes, factors, col_classes = c("character"
 ```
 
 
-The default entity is a CSV file, so we do not need to specify delimiters, simply provide the name of the file and description.  (See examples for set_EntityGroup on reading other common variations, analgous to the options covered in R's `read.table()` function.)
+## Data file format 
+
+The documentation of a `dataTable` also requires a description of the file format itself.  From where can the data file be downloaded?  Is it in CSV format, or TSV (tab-separated), or some other format? Are there header lines that should be skipped? This information documents the physical file itself, and is provided using the `physical` child element to the `dataTable`.  To assist in documenting common file types such as CSV files, the `EML` R package provides the function `set_physical`, which takes as arguments many of these common options.  By default these options are already set to document a standard `csv` formatted object, so we do not need to specify delimiters and so forth if our file conforms to that.  We simply provide the name of the file, which is used as the `objectName`.  (See examples for `set_physical()` for reading other common variations, analogous to the options covered in R's `read.table()` function.)
 
 ```{r}
 physical <- set_physical("hf205-01-TPexp1.csv")
 ```
 
+## Assembling the `dataTable`
+
+Once we have defined the `attributeList` and `physical` file, we can now assemble the `dataTable` element itself. Unlike the `physical` and `attributeList` elements, there is no dedicated `set_` function for the `dataTable` element. `set_` functions are only provided for those elements that are both commonly used and have complex, nested structures in EML.  In contrast, once the `attributeList` and `physical` elements have been defined, a `dataTable` element is really quite simple.  Thus, we will use the default initialize method for the object, `new("dataTable", ...)` rather than a dedicated function, like so:
+
 ```{r}
 dataTable <- new("dataTable",
-                 attributeList = attributeList,
-                 entityName = as.character(physical@objectName),
+                 entityName = "hf205-01-TPexp1.csv",
                  entityDescription = "tipping point experiment 1",
-                 physical = physical)
+                 physical = physical,
+                 attributeList = attributeList)
 ```
+
+## Sidebar: Understanding the `new()` method
+
+All elements in EML have associated `new()` initialize methods.  We could have constructed the `attributeList` or `physical` in the same way, but their nested structure would mean a lot of `new()` calls inside other `new()` calls (just take a look at the `set_physical` function for an example).  
+
+The `new()` methods are standard part of S4 objects in R, (though the EML package defines custom `initialize()` methods that make the `new()` methods more powerful).  The `new()` method always takes as as the first argument the name of the object to be created, e.g. `new("dataTable")`.  If we include nothing else, we get an empty `dataTable` element.  We may also specify values for any of the "slots" in the `dataTable`.  You can see a list of all possible slots of a given class using the (standard R function) `getSlots()`, giving the name of the object class, e.g.:
+
+```{r}
+getSlots("dataTable")
+```
+
+Each slot has not only a name but a class of object it expects to get.  If we provide an object of a different class, the method will automatically attempt to coerce it to the appropriate type.  For instance, we provide an object of class `physical` even though a `dataTable` expects the `physical` slot to be of class `ListOfphysical`, indicating that we could have multiple `physical` elements (e.g. when a single dataTable is split over multiple external files).  The `new()` method automatically coerces the single `physical` class object for us.  This makes the `new()` methods somewhat more convenient than creating a node first and then modifying the slots with the `@` subsetting; e.g.:
+
+```{r}
+example <- new("dataTable")
+#example@physical <- physical # Error -- wrong type.
+example@physical <- c(physical) # concat method promotes 1 or more arguments to a ListOf 
+```
+
+
+
+
+## Coverage metadata
+
+One of the most common and useful types of metadata is coverage
+information, specifying the temporal, taxonomic, and geographic coverage
+of the data.  This kind of metadata is frequently indexed by data
+repositories, allowing users to search for all data about a specific
+region, time, or species.  In EML, these descriptions can take many forms,
+allowing for detailed descriptions as well as more general terms when such
+precision is not possible (such as geological epoch instead of date range,
+or higher taxonomic rank information in place of species definitions.)
+Coverage elements that take full advantage of this flexibility and
+precision should use the `new()` constructor functions for each element,
+as we will illustrate later.  Meanwhile, most common specifications can
+be made using the more convenient but less flexible `set_coverage()`
+function in EML.  This function takes a date range or list of specific
+dates, a list of scientific names, a geographic description and bounding
+boxes, as shown here:
+
+
+```{r}
+geographicDescription <- "The Geographic region of the kelp bed data extends along the California coast, down through the coast of Baja, Mexico: Central California (Halfmoon Bay to Purisima Point), Southern California (Point Arguello to the United States/Mexico border including the Channel Islands) and Baja California (points south of the United States/Mexico border including several offshore islands)"
+
+
+coverage <- 
+  set_coverage(begin = '2012-06-01', end = '2013-12-31',
+               sci_names = "Sarracenia purpurea",
+               geographicDescription = geographicDescription,
+               west = -122.44, east = -117.15, 
+               north = 37.38, south = 30.00,
+               altitudeMin = 160, altitudeMaximum = 330,
+               altitudeUnits = "meter")
+```
+
+
+
+Note that R's fuzzy matching permits shorter arguments like `west` instead
+of the full argument name, `westBoundingCoordinate`, in the above example.
+This results in the following `coverage` element:
+
+```{r}
+coverage
+```
+
 
 
 ## Creating methods
 
+Careful documentation of the methods involved in the experimental design, measurement and collection of data are a key part
+of metadata.  Though frequently documented in scientific papers, such method sections may be too brief or incomplete, and may become more readily disconnected from the data file itself.  Such documentation is usually written using word-processing software such as MS Word, LaTeX or markdown.  Users with `pandoc` installed (which ships as part of RStudio) can install the `rmarkdown` package to take advantage of its automatic conversion into the DocBook XML format used by EML.  Here we open a MS Word file with the methods and read this into our methods element using the helper function `set_methods()`.  While not used in this example, note that the `set_methods()` function also includes many optional arguments for documenting additional information about sampling, or relevant citations.
+
 ```{r}
-methods_file <- system.file("examples/hf205-methods.md", package = "EML")
+methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
 methods <- set_methods(methods_file)
 ```
 
@@ -235,14 +301,16 @@ R_person <- as.person("Aaron Ellison <fakeaddress@email.com>")
 aaron <-as(R_person, "creator")
 ```
 
-Likewise this method cna be applied to a list of `person` objects.  Note that 
+Likewise this method can be applied to a list of `person` objects:   
 
 ```{r}
 others <- c(as.person("Benjamin Baiser [ctb]"), as.person("Jennifer Sirota [ctb]"))
 associatedParty <- as(others, "associatedParty")
 ```
 
-Of course, we can use the default constructor method (`new()`) to create any of these elements, instead of the 
+Note that R only permits certain codes such as `ctb` be be given in square brackets or as the `role` slot in a `person` object.  
+
+We can instead always use the default constructor method (`new()`) to create any of these elements, instead of the 
 shorthand coercion methods shown above.  This permits a bit more flexibility, particularly for constructing elements
 where we want to include more metadata than R's `person` object knows about.  Here we define an `address` element
 first, since we can then re-use that element in defining both the contact person and publisher of the dataset:
@@ -276,10 +344,12 @@ contact <-
 ```
 
 
+## Creating a `keywordSet`
 
+Constructing the `keywordSet` for EML illustrates the use of the `new()` constructor methods and how they can be combined with basic R types such as character vectors, maximizing both flexibility and reuse of standard lists.
 
 ```{r}
-keywords <-
+keywordSet <-
   c(new("keywordSet",
         keywordThesaurus = "LTER controlled vocabulary",
         keyword = c("bacteria",
@@ -294,6 +364,8 @@ keywords <-
         keyword = c("Harvard Forest", "HFR", "LTER", "USA")))
 ```
 
+
+Lastly, some of the elements needed for `eml` object can simply be given as text strings.
 
 ```{r}
 pubDate <- "2012" 
@@ -317,7 +389,7 @@ and statistical flickering of monitored variables; and (2) well-timed
 intervention based on proteomic biomarkers can avert future state changes
 in ecological systems."  
 
-rights <- "This dataset is released to the public and may be freely
+intellectualRights <- "This dataset is released to the public and may be freely
   downloaded. Please keep the designated Contact person informed of any
 plans to use the dataset. Consultation or collaboration with the original
 investigators is strongly encouraged. Publications and data products
@@ -327,20 +399,35 @@ see: http://www.lternet.edu/data/netpolicy.html."
 ```
 
 
+Many of these text fields can instead be read in from an external file that has richer formatting, such as we did with
+the `set_methods()` step.  Any text field containing a slot named `section` can import text data from a MS Word `.docx` file, markdown file, or other file format recognized by [Pandoc](http://pandoc.org) into that element.  For instance, here we import the same paragraph of text shown above for `abstract` from an external file (this time, a markdown-formatted file) instead:
+
+```{r}
+abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")
+abstract <- new("abstract", section = set_section(abstract_file))
+```
+ 
+
+We are now ready to add each of these elements we have created so far into our `dataset` element, like so:
+
+
 ```{r}
 dataset <- new("dataset",
                title = title,
                creator = aaron,
                pubDate = pubDate,
-               intellectualRights = rights,
+               intellectualRights = intellectualRights,
                abstract = abstract,
                associatedParty = associatedParty,
-               keywordSet = keywords,
+               keywordSet = keywordSet,
                coverage = coverage,
                contact = contact,
                methods = methods,
                dataTable = dataTable)
 ```
+
+
+With the `dataset` in place, we are ready to declare our root `eml` element.  In addition to our `dataset` element we have already built, all we need is a packageId code and the system on which it is based.  Here we have generated a unique id using the standard `uuid` algorithm, which is available in the R package `uuid`.  
 
 ```{r}
 eml <- new("eml",
@@ -350,6 +437,20 @@ eml <- new("eml",
 
 ```
 
+With our `eml` object fully constructed in R, we can now check that it is valid, conforming to all criteria set forth in the EML Schema.  This will ensure that other researchers and other software can readily parse and understand the contents of our metadata file:
+
+
 ```{r}
 eml_validate(eml)
 ```
+
+
+The validator returns a status `0` to indicate success.  Otherwise, the first error message encountered will be displayed. The most common reason for an error is probably the omission of a required metadata field. 
+
+We can also write this `eml` metadata out as an XML file that can be published alongside our data files:
+
+```{r eval=FALSE}
+write_eml(eml, "example.xml")
+```
+
+To take the greatest advantage of EML, we should consider depositing our file in a [Metacat](https://knb.ecoinformatics.org/knb/docs/intro.html)-enabled repository, which we discuss in the next vignette on Publishing EML.
