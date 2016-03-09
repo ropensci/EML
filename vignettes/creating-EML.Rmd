@@ -351,5 +351,5 @@ eml <- new("eml",
 ```
 
 ```{r}
-#eml_validate(eml)
+eml_validate(eml)
 ```
