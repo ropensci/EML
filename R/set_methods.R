@@ -39,11 +39,9 @@ set_methods <- function(methods_file,
   
   if (!is.null(qualityControl_file)) {
     qualityControl <- new("qualityControl",
-                          ProcedureStepType = new(
-                            "ProcedureStepType",
-                            description = new("description",
-                                              section = set_section(qualityControl_file))
-                          ))
+                          description = new("description",
+                                            section = set_section(qualityControl_file))
+                          )
   } else {
     qualityControl <- new("qualityControl")
   }
@@ -53,14 +51,11 @@ set_methods <- function(methods_file,
     sampling = sampling,
     methodStep = new(
       "methodStep",
-      ProcedureStepType = new(
-        "ProcedureStepType",
-        instrumentation = instrumentation,
-        software = software,
-        description = new("description",
+      instrumentation = instrumentation,
+      software = software,
+      description = new("description",
                           section = set_section(methods_file))
       )
-    )
   )
   methods
 }

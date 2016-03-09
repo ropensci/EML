@@ -736,7 +736,7 @@ setClass('ListOfadditionalMetadata', contains = 'list', validity = function(obje
 setClass('describes', contains = c('eml-2.1.1', 'character')) ## B
 setClass('eml', slots = c('access' = 'AccessType', 'dataset' = 'DatasetType', 'citation' = 'CitationType', 'software' = 'SoftwareType', 'protocol' = 'ProtocolType', 'additionalMetadata' = 'ListOfadditionalMetadata', 'packageId' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('proceduralStep', contains = c('ProcedureStepType')) ## D
-setClass('methodStep', slots = c('ProcedureStepType' = 'ProcedureStepType', 'dataSource' = 'ListOfdataSource'), contains = c('eml-2.1.1', 'character')) ## A
+setClass('methodStep', slots = c('description' = 'TextType', 'citation' = 'ListOfcitation', 'protocol' = 'ListOfprotocol', 'instrumentation' = 'ListOfinstrumentation', 'software' = 'ListOfsoftware', 'subStep' = 'ListOfsubStep', 'dataSource' = 'ListOfdataSource'), contains = c('eml-2.1.1', 'character')) ## A
 setClass('dataSource', contains = c('eml-2.1.1', 'DatasetType')) ## D
 setClass('coverage', contains=c('Coverage'))
 setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))
