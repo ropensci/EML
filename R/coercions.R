@@ -16,34 +16,64 @@ c_as <- function(x, cls){
 
 ## Coercions from "person" type
 setOldClass("person")
-setAs("person", "ResponsibleParty", function(from){
-  new("ResponsibleParty",
-      individualName = c(new("individualName",
-                             "givenName" = as.character(from$given),
-                             "surName" = as(as.character(from$family), "surName"))),
-      electronicMailAddress = as.character(from$email))
-})
 
-setAs("person", "associatedParty", function(from){
-  new("associatedParty",
-      ResponsibleParty =  as(from, "ResponsibleParty"),
-      role = new("role", from$role))
-})
+from_a_person <- function(to){
+  
+  if(to %in% c("associatedParty", "personnel"))
+  
+  function(from){
+  new(to,
+      individualName = new("individualName",
+                           "givenName" = as.character(from$given),
+                           "surName" = as(as.character(from$family), "surName")),
+      electronicMailAddress = as.character(from$email), 
+      role = as.character(from$role))
+  }
+  
+  else
+    
+    function(from){
+      new(to,
+          individualName = new("individualName",
+                               "givenName" = as.character(from$given),
+                               "surName" = as(as.character(from$family), "surName")),
+          electronicMailAddress = as.character(from$email))
+    }
+  
+  
+  }
 
-setAs("person", "creator", function(from){
-  as(as(from, "ResponsibleParty"), "creator")
-})
+from_person <- function(to){
+  function(from){
+  if(length(from) > 1){
+    do.call(c, lapply(from, from_a_person(to)))
+  } else {
+    from_a_person(to)(from)
+  }
+}}
+
+setAs("person", "ResponsibleParty", from_person("ResponsibleParty"))
+setAs("person", "associatedParty", from_person("associatedParty"))
+setAs("person", "personnel", from_person("personnel"))
+setAs("person", "creator", from_person("creator"))
+setAs("person", "contact", from_a_person("contact"))
+setAs("person", "ListOfcreator", from_person("creator"))
 
 ## Coercions to "person" type
 
-setAs("ListOfcreator", "person", function(from){
-  do.call(c, lapply(from, function(x) as(as(x, "ResponsibleParty"), "person")))
+
+
+setAs("creator", "person", function(from){
+  do.call(c, unname(lapply(from@individualName, function(x)
+  person(given = unlist(x@givenName),
+         family = x@surName))))
 })
 
-setAs("ResponsibleParty", "person", function(from){
-  do.call(c, lapply(from@individualName, function(x)
-  person(given = unlist(x@givenName),
-         family = x@surName)))
+
+setAs("ListOfcreator", "person", function(from){
+  do.call(c, 
+          unname(lapply(from, function(x) as(x, "person")))
+          )
 })
 
 ## Coercions between R's bibtype & eml

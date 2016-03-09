@@ -160,12 +160,12 @@ R <- gsub("contains = c\\('character', 'eml-2.1.1'\\)", "contains = c('eml-2.1.1
 
 ## avoid ReferencesGroup as separate class.
 R <- gsub("'ReferencesGroup' = 'ReferencesGroup'", "'references' = 'references'", R)
-
 resource_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'shortName' = 'character', 'title' = 'ListOftitle', 'creator' = 'ListOfcreator', 'metadataProvider' = 'ListOfmetadataProvider', 'associatedParty' = 'ListOfassociatedParty', 'pubDate' = 'yearDate', 'language' = 'character', 'series' = 'character', 'abstract' = 'TextType', 'keywordSet' = 'ListOfkeywordSet', 'additionalInfo' = 'ListOfadditionalInfo', 'intellectualRights' = 'TextType', 'distribution' = 'ListOfdistribution', 'coverage' = 'Coverage'"
 R <- gsub("'ResourceGroup' = 'ResourceGroup'", resource_group_slots, R)
-
 entity_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'entityName' = 'character', 'entityDescription' = 'character', 'physical' = 'ListOfphysical', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'additionalInfo' = 'ListOfadditionalInfo'"
 R <- gsub("'EntityGroup' = 'EntityGroup'", entity_group_slots, R)
+responsible_party_slots = "'individualName' = 'ListOfindividualName', 'organizationName' = 'ListOforganizationName', 'positionName' = 'ListOfpositionName', 'address' = 'ListOfaddress', 'phone' = 'ListOfphone', 'electronicMailAddress' = 'ListOfelectronicMailAddress', 'onlineUrl' = 'ListOfonlineUrl', 'userId' = 'ListOfuserId', 'references' = 'references', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'"
+R <- gsub("'ResponsibleParty' = 'ResponsibleParty'", responsible_party_slots, R)
 
 R <- unique(R)
 write(R, classes_file)

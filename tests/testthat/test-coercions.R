@@ -1,11 +1,8 @@
-context("coercions")
+testthat::context("coercions")
 
 
 from <- as.person("Carl Boettiger <cboettig@gmail.com>")
-to <- as(from, "ResponsibleParty")
-testthat::expect_is(to, "ResponsibleParty")
-
-to <- as(as(from, "ResponsibleParty"), "contact")
+to <- as(from, "contact")
 testthat::expect_is(to, "contact")
 
 x = as.person("Carl Boettiger <cboettig@gmail.com> [ctb]")

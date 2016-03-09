@@ -221,12 +221,31 @@ dataTable <- new("dataTable",
 ## Creating methods
 
 ```{r}
-methods_file <- system.file("examples/hf205-methods.md")
-#methods <- set_methods(methods_file)
-methods <- "text"
+methods_file <- system.file("examples/hf205-methods.md", package = "EML")
+methods <- set_methods(methods_file)
 ```
 
 
+## Creating parties
+
+Individuals and organizations appear in many capacities in an EML document.  Meanwhile, R already has a native object class, `person` for describing individuals, which it uses in citations and package descriptions, among other things. We can use native R function `person()` to create an R `person` object.  Often it is more convenient to use R's coercion function, `as.person()`, to turn a string with standardized notation into a `person` class (Though this is not always reliable, for instance, in surnames containing whitespace).  However it is constructed, a `person` class can then be coerced into the appropriate EML object like so:
+
+```{r}
+R_person <- as.person("Aaron Ellison <fakeaddress@email.com>")
+aaron <-as(R_person, "creator")
+```
+
+Likewise this method cna be applied to a list of `person` objects.  Note that 
+
+```{r}
+others <- c(as.person("Benjamin Baiser [ctb]"), as.person("Jennifer Sirota [ctb]"))
+associatedParty <- as(others, "associatedParty")
+```
+
+Of course, we can use the default constructor method (`new()`) to create any of these elements, instead of the 
+shorthand coercion methods shown above.  This permits a bit more flexibility, particularly for constructing elements
+where we want to include more metadata than R's `person` object knows about.  Here we define an `address` element
+first, since we can then re-use that element in defining both the contact person and publisher of the dataset:
 
 ```{r}
 HF_address <- new("address",
@@ -235,25 +254,29 @@ HF_address <- new("address",
                   administrativeArea = "MA",
                   postalCode = "01366",
                   country = "USA")
+```
+
+
+```{r}
 publisher <- new("publisher",
                  organizationName = "Harvard Forest",
                  address = HF_address)
 ```
 
 
-```{r}
-aaron <- as.person("Aaron Ellison <fakeaddress@email.com>")
-aaron <-as(aaron, "ResponsibleParty")
-              
+```{r}              
 contact <- 
   new("contact",
     individualName = aaron@individualName,
-    electronicMail = "fakeaddress@email.com",
+    electronicMail = aaron@electronicMailAddress,
     address = HF_address,
     organizationName = "Harvard Forest",
     phone = "000-000-0000")
 
 ```
+
+
+
 
 ```{r}
 keywords <-
@@ -307,11 +330,11 @@ see: http://www.lternet.edu/data/netpolicy.html."
 ```{r}
 dataset <- new("dataset",
                title = title,
-               creator = as(aaron, "creator"),
+               creator = aaron,
                pubDate = pubDate,
                intellectualRights = rights,
                abstract = abstract,
-   #           associatedParty = other_researchers,
+               associatedParty = associatedParty,
                keywordSet = keywords,
                coverage = coverage,
                contact = contact,
