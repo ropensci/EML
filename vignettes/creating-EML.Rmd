@@ -9,11 +9,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```r
-library("EML")
-```
-
-In this vignette we construct an example EML file based on an example from the Harvard Forest LTER site, `knb-lter-hf205-01.xml`.  This illustrates how many of the commonly utilized EML fields are constructed using the R package.
 
 
 ```{r}
