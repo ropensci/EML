@@ -7,7 +7,7 @@
 set_section(file = NULL)
 }
 \arguments{
-\item{file}{path to any document recognized by pandoc, such as Word .docx file or markdown file.}
+\item{file}{path to a file providing formatted input text, see details.}
 }
 \value{
 a ListOfsection object that can be used in constructing any element with section slots, see examples
@@ -16,8 +16,12 @@ a ListOfsection object that can be used in constructing any element with section
 For any EML element that takes a "section" argument, this function can be used to generate the appropriate EML from a markdown-formatted file.
 }
 \details{
-See http://rmarkdown.rstudio.com and http://pandoc.org for more details about coversions with pandoc & rmarkdown.  
-Pandoc comes pre-installed in RStudio
+If the `rmarkdown` package is installed, then the input file can 
+be a Microsoft Word (.docx) file, a markdown file, or other file
+recognized by Pandoc (see http://pandoc.org), which will automate the conversion
+to a docbook. Otherwise, the input file should already be in docbook format (with 
+.xml or .dbk extension).  Note that pandoc comes pre-installed in RStudio and is 
+required for the rmarkdown package.
 }
 \examples{
 f <- system.file("examples/hf205-methods.md", package = "EML")
