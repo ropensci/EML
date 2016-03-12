@@ -111,8 +111,10 @@ S4Toeml <- function(obj,
   } else {
     node_name <- class(obj)[1]
   }
-  ## clear namespace
-  node_name <- gsub("^[a-z]*:", "", node_name)
+  
+  ## clear namespace. except for stmml
+  if(!grepl("^stmml:", node_name))
+    node_name <- gsub("^[a-z]*:", "", node_name)
 
   if(length(ns) > 0)
     node_name <- paste0("eml:", node_name)
@@ -167,9 +169,9 @@ S4Toeml <- function(obj,
             addChildren(node, newXMLNode(s, .children = X))
           else if(is(X, "list")){
             if(is(X[[1]], "InlineType"))
-              addChildren(node, lapply(X, function(x) newXMLNode(s, .children = x)))
+              addChildren(node, kids = lapply(X, function(x) newXMLNode(s, .children = x)))
             else if(is.character(X[[1]]) && length(get_slots(class(X[[1]]))) <= 1)
-              addChildren(node, lapply(X, function(x) newXMLNode(class(x), x)))
+              addChildren(node, kids = lapply(X, function(x) newXMLNode(class(x), x)))
             else
               addChildren(node, lapply(X, S4Toeml))
           } else if(isS4(X)){
