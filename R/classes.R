@@ -34,51 +34,6 @@ setClass('xs:integer', contains = 'integer')
 setClass('xs:boolean', contains = 'logical')
 setClass('xs:date', contains = 'Date')
 setClass('xs:positiveInteger', contains = 'integer')
-#####  inst/xsd/stmml.xsd  ####
-setClass('coordinate2Type', contains = c('eml-2.1.1', 'character')) ## B
-setClass('coordinate3Type', contains = c('eml-2.1.1', 'character')) ## B
-setClass('dataTypeType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('sizeType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('delimiterType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('floatArrayType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('countType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('idType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('errorBasisType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('maxType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('minType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('namespaceRefType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('stmml', contains = c('eml-2.1.1', 'character')) ## B
-setClass('definition', contains = c('eml-2.1.1', 'character')) ## B
-setClass('documentation', contains = c('eml-2.1.1', 'character')) ## B
-setClass('metadataList', contains = c('eml-2.1.1', 'character')) ## B
-setClass('metadataType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('dimensionType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('unitsType', contains = c('eml-2.1.1', 'character')) ## B
-setClass('dataGroup', contains = c('eml-2.1.1', 'character')) ## B
-setClass('eml:array', slots = c('character' = 'character', 'dataType' = 'xml_attribute', 'errorValues' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValues' = 'xml_attribute', 'maxValues' = 'xml_attribute', 'units' = 'xml_attribute', 'delimiter' = 'xml_attribute', 'size' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('scalar', slots = c('character' = 'character', 'dataType' = 'xml_attribute', 'errorValue' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValue' = 'xml_attribute', 'maxValue' = 'xml_attribute', 'units' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('eml:matrix', slots = c('character' = 'character', 'dataType' = 'xml_attribute', 'delimiter' = 'xml_attribute', 'rows' = 'xml_attribute', 'columns' = 'xml_attribute', 'units' = 'xml_attribute', 'matrixType' = 'xml_attribute', 'errorValues' = 'xml_attribute', 'errorBasis' = 'xml_attribute', 'minValues' = 'xml_attribute', 'maxValues' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('eml:table', slots = c('rows' = 'xml_attribute', 'columns' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('eml:list', slots = c('type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('link', slots = c('from' = 'xml_attribute', 'to' = 'xml_attribute', 'ref' = 'xml_attribute', 'role' = 'xml_attribute', 'href' = 'xml_attribute', 'type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('action', slots = c('type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('actionList', slots = c('type' = 'xml_attribute', 'order' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('object', slots = c('type' = 'xml_attribute', 'count' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('observation', slots = c('type' = 'xml_attribute', 'count' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('dictionary', slots = c('href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('entry', slots = c('dataType' = 'xml_attribute', 'rows' = 'xml_attribute', 'columns' = 'xml_attribute', 'recommendedUnits' = 'xml_attribute', 'unitType' = 'xml_attribute', 'minExclusive' = 'xml_attribute', 'minInclusive' = 'xml_attribute', 'maxExclusive' = 'xml_attribute', 'maxInclusive' = 'xml_attribute', 'totalDigits' = 'xml_attribute', 'fractionDigits' = 'xml_attribute', 'length' = 'xml_attribute', 'minLength' = 'xml_attribute', 'maxLength' = 'xml_attribute', 'units' = 'xml_attribute', 'whiteSpace' = 'xml_attribute', 'pattern' = 'xml_attribute', 'term' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('description', slots = c('eml:class' ='xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('enumeration', slots = c('value' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('alternative', slots = c('character' = 'character', 'type' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('relatedEntry', slots = c('type' = 'xml_attribute', 'href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('annotation', slots = c('source' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('appinfo', slots = c('source' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('dimension', slots = c('name' = 'xml_attribute', 'power' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('unitList', slots = c('href' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('unitType', slots = c('id' = 'xml_attribute', 'name' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('unit', slots = c('id' = 'xml_attribute', 'abbreviation' = 'xml_attribute', 'name' = 'xml_attribute', 'parentSI' = 'xml_attribute', 'unitType' = 'xml_attribute', 'multiplierToSI' = 'xml_attribute', 'constantToSI' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
-setClass('matrixType', contains = c('eml-2.1.1', 'character', 'namespaceRefType')) ## D
-setClass('refType', contains = c('eml-2.1.1', 'idType', 'character')) ## D
 #####  inst/xsd/eml-text.xsd  ####
 setClass('ListOfsection', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'section'))){ 'not all elements are section objects'; } else { TRUE }})
 setClass('ListOfpara', contains = 'list', validity = function(object){ if(!all(sapply(object, is, 'para'))){ 'not all elements are para objects'; } else { TRUE }})
@@ -180,6 +135,7 @@ setClass('series', contains = c('eml-2.1.1', 'character')) ## B
 setClass('keywordThesaurus', contains = c('eml-2.1.1', 'character')) ## B
 setClass('yearDate', contains = c('eml-2.1.1', 'character')) ## B
 setClass('eml:name', contains = c('eml-2.1.1', 'character')) ## B
+setClass('definition', contains = c('eml-2.1.1', 'character')) ## B
 setClass('defaultValue', contains = c('eml-2.1.1', 'character')) ## B
 setClass('mediumName', contains = c('eml-2.1.1', 'character')) ## B
 setClass('mediumDensity', contains = c('eml-2.1.1', 'character')) ## B

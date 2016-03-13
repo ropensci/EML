@@ -127,6 +127,10 @@
 \alias{c,value-method}
 \alias{c,view-method}
 \alias{c,vouchers-method}
+\alias{c,dimension-method}
+\alias{c,unit-method}
+\alias{c,unitType-method}
+
 \usage{
 \S4method{c}{section}(x, ..., recursive = FALSE)
 
@@ -256,6 +260,10 @@
 \S4method{c}{changeHistory}(x, ..., recursive = FALSE)
 \S4method{c}{describes}(x, ..., recursive = FALSE)
 \S4method{c}{additionalMetadata}(x, ..., recursive = FALSE)
+\S4method{c}{dimension}(x, ..., recursive = FALSE)
+\S4method{c}{unit}(x, ..., recursive = FALSE)
+\S4method{c}{unitType}(x, ..., recursive = FALSE)
+
 }
 \arguments{
 \item{x, ...}{otherEntities to concatenate}
