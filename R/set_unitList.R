@@ -3,7 +3,7 @@
 #' 
 #' @param units a data.frame describing the custom units, see details.
 #' @param unitTypes optional, a data.frame defining any additional unitTypes not already defined
-#' @return a stmml:unitList element that can be included in additionalMetadata
+#' @return a unitList element that can be included in additionalMetadata
 #' @export
 
 #' @details The units data.frame must have the following columns:
@@ -35,9 +35,9 @@
 #'  frequency,    time,      "-1",
 set_unitList <- function(units, unitTypes = NULL) {
   
-  if(is.null(unitTypes))
-    ListOfunitType <- new("ListOfstmml:unitType")
-  else{
+  if(is.null(unitTypes)){
+    ListOfunitType <- new("ListOfunitType")
+  } else {
     
     if(is.null(unitTypes$id))
       unitTypes$id <- unitTypes$name
@@ -50,16 +50,16 @@ set_unitList <- function(units, unitTypes = NULL) {
       
       ListOfdimension <- as(lapply(1:dim(dimensions)[1], function(i){
         row <- dimensions[i,]
-        new("stmml:dimension", name = row[["dimension"]], power = na2empty(row[["power"]]))
-      }), "ListOfstmml:dimension")
+        new("dimension", name = row[["dimension"]], power = na2empty(row[["power"]]))
+      }), "ListOfdimension")
       
       new(
-        "stmml:unitType",
+        "unitType",
          name = row[["name"]],
          id = row[["id"]],
          dimension = ListOfdimension
       )
-    }), "ListOfstmml:unitType")
+    }), "ListOfunitType")
     
     
   }
@@ -76,7 +76,7 @@ set_unitList <- function(units, unitTypes = NULL) {
     ListOfunit <- as(lapply(1:dim(units)[1], function(i){
     row <- units[i,]
     new(
-      "stmml:unit",
+      "unit",
       id = row[["id"]],
       name = row[["name"]],
       abbreviation = na2empty(row[["abbreviation"]]),
@@ -84,13 +84,13 @@ set_unitList <- function(units, unitTypes = NULL) {
       parentSI = row[["parentSI"]],
       multiplierToSI = row[["multiplierToSI"]],
       constantToSI = row[["constantToSI"]],
-      description = new("stmml:description", row[["description"]])
+      description = new("description", row[["description"]])
     )
-  }), "ListOfstmml:unit")
+  }), "ListOfunit")
   
     
   
-  out <- new("stmml:unitList")
+  out <- new("unitList")
   out@unitType <- ListOfunitType
   out@unit <- ListOfunit
   out

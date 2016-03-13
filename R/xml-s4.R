@@ -173,7 +173,7 @@ S4Toeml <- function(obj,
             else if(is.character(X[[1]]) && length(get_slots(class(X[[1]]))) <= 1)
               addChildren(node, kids = lapply(X, function(x) newXMLNode(class(x), x)))
             else
-              addChildren(node, lapply(X, S4Toeml))
+              addChildren(node, kids = lapply(X, S4Toeml))
           } else if(isS4(X)){
             addChildren(node, S4Toeml(slot(obj, s)))
             ## Simple Child nodes

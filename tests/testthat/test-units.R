@@ -14,8 +14,5 @@ description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
 units = data.frame(name = name, unitType = unitType, parentSI = parentSI, multiplierToSI = multiplierToSI, description = description, stringsAsFactors = FALSE)
 
 x = set_unitList(units, unitTypes)
-testthat::expect_is(x, "stmml:unitList")
+testthat::expect_is(x, "unitList")
 
-
-y = set_unitList(units)
-testthat::expect_is(y, "stmml:unitList")
