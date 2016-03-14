@@ -4,18 +4,25 @@
 \alias{set_unitList}
 \title{set_unitList}
 \usage{
-set_unitList(units, unitTypes = NULL)
+set_unitList(units, unitTypes = NULL, as_metadata = FALSE)
 }
 \arguments{
 \item{units}{a data.frame describing the custom units, see details.}
 
 \item{unitTypes}{optional, a data.frame defining any additional unitTypes not already defined}
+
+\item{as_metadata}{logical, default FALSE. If true, returns a `metadata` element suitable for `additionalMetadata`, see below.}
 }
 \value{
-a stmml:unitList element that can be included in additionalMetadata
+By default the function returns an S4 unitList object, like other set_ methods. If as_metadata is set to TRUE,
+function returns a `metadata` element.  EML permits a metadata element to contain arbitrary XML, including but
+not limited to unitList XML for custom units (which is really part of the stmml unit vocabulary used by EML, but
+part of a more general standard.) This means that once converted to a metadata element, the unit list is coerced
+into stmml XML and can no longer be subset or modified in the same way.
 }
 \description{
-set_unitList
+Define custom units, including new unitTypes.  Note that it is not necessary to define
+most common units, see get_unitList to display standard units or parse other custom unitList files.
 }
 \details{
 The units data.frame must have the following columns:
@@ -29,20 +36,34 @@ The units data.frame must have the following columns:
  - abbreviation: common abbreviation, e.g. s
  - constantToSI: an additive constant to convert to the equivalent SI unit. If not given, default is "0"
 
+In practice, researchers may save these tables of custom units they frequently use in an external .csv 
+or other format and read them in to R for ready re-use.  
+
 The unitType table must have the following columns:
  - name:
  - id: optional, default is same as the name
  - dimension: name of a base dimension of the unit
  - power: the power to which the dimension is raised (NA implies power of 1)
+}
+\examples{
+
+ ## create the "unitType" table for custom unit
+ name = c("speed", "speed", "acceleration", "acceleration", "frequency")
+ dimension = c("length", "time", "length", "time", "time")
+ power = c(NA, "-1", NA, "-2", "-1")
+ unitTypes <- data.frame(name = name, dimension = dimension, power = power, stringsAsFactors = FALSE)
  
- For instance, the following table defines three base unitTypes: 
- speed (i.e. m/s), acceleration (m/s^2), and frequency (1/s)
+ ## Create the units table
+ name = c("minute", "centimeter")
+ unitType = c("time", "length")
+ parentSI = c("second", "meter")
+ multiplierToSI = c("0.0166", "1")
+ description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
+ units = data.frame(name = name, unitType = unitType, parentSI = parentSI, 
+                    multiplierToSI = multiplierToSI, description = description, 
+                    stringsAsFactors = FALSE)
  
- name,         dimension, power,
- speed,        length,    NA,
- speed,        time,      "-1",
- acceleration, length,    NA,
- acceleration, time,      "-2",
- frequency,    time,      "-1",
+ set_unitList(units, unitTypes)
+
 }
 

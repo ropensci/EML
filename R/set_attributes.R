@@ -187,7 +187,7 @@ codedef_to_df <- function(codeDefinition){
 
 ## use old-school way to avoid purrr or dplyr dependency
 map_df <- function(x, f, ...){
-  do.call(rbind, lapply(x, f, ...))
+  do.call(rbind, unname(lapply(x, f, ...)))
 }
 
 

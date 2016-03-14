@@ -17,10 +17,11 @@ setMethod(c, signature('unit'), function(x, ..., recursive = FALSE) new('ListOfu
 setMethod(c, signature('dimension'), function(x, ..., recursive = FALSE) new('ListOfdimension', list(x, ...)))
 
 
-setMethod(initialize, 'unitList', function(.Object, href = character(), unitType = character(), unit = character()){
+setMethod(initialize, 'unitList', function(.Object, href = character(), unitType = character(), unit = character(), slot_order = c("unitType", "unit")){
   slot(.Object, 'href') <- as(href, 'xml_attribute')
   slot(.Object, 'unit') <- c_as(unit, 'unit')
   slot(.Object, 'unitType') <- c_as(unitType, 'unitType')
+  slot(.Object, 'slot_order') <- slot_order
   .Object
 })
 setMethod(initialize, 'dimension', function(.Object, name = character(), power = character()){

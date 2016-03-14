@@ -15,4 +15,18 @@ units = data.frame(name = name, unitType = unitType, parentSI = parentSI, multip
 
 x = set_unitList(units, unitTypes)
 testthat::expect_is(x, "unitList")
+testthat::expect_equal(length(x@unit), 2)
+testthat::expect_equal(length(x@unitType), 3)
 
+x = set_unitList(units, unitTypes, as_metadata = TRUE)
+testthat::expect_is(x, "metadata")
+
+
+testthat::context("Reading unit definitions")
+
+f <- system.file("xsd/eml-unitDictionary.xml", package = "EML")
+eml <- read_eml(f)
+unitList <- get_unitList(eml)
+
+testthat::expect_equal(dim(unitList$units), c(195,8))
+testthat::expect_equal(dim(unitList$unitTypes), c(118,4))
