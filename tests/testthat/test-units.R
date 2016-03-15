@@ -22,7 +22,7 @@ x = set_unitList(units, unitTypes, as_metadata = TRUE)
 testthat::expect_is(x, "metadata")
 
 
-testthat::context("Reading unit definitions")
+testthat::context("Reading default unit definitions")
 
 f <- system.file("xsd/eml-unitDictionary.xml", package = "EML")
 eml <- read_eml(f)
@@ -30,3 +30,10 @@ unitList <- get_unitList(eml)
 
 testthat::expect_equal(dim(unitList$units), c(195,8))
 testthat::expect_equal(dim(unitList$unitTypes), c(118,4))
+
+
+testthat::context("Reading custom unit definitions from EML")
+
+f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
+eml <- read_eml(f)
+unitList <- get_unitList(eml@additionalMetadata[[1]]@metadata[[1]])

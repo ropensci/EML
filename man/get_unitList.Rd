@@ -4,10 +4,11 @@
 \alias{get_unitList}
 \title{get_unitList}
 \usage{
-get_unitList(unitList)
+get_unitList(unitList = read_eml(system.file("xsd/eml-unitDictionary.xml",
+  package = "EML")))
 }
 \arguments{
-\item{unitList}{a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata}
+\item{unitList}{a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata, see details}
 }
 \value{
 a list with two data.frames: "units", a table defining unit names, types, and conversions to SI,
@@ -17,13 +18,21 @@ of unitType frequency, and the unitType define frequency as a type whose dimensi
 \description{
 get_unitList
 }
+\details{
+If no unitList is provided, the function reads in the eml-unitDictionary defining all standard
+units and unitTypes.  This provides a convenient way to look up standard units and their EML-recognized names
+when defining metadata, e.g. in the table passed to `set_attributes()`.
+}
 \examples{
-## Read in the definitions of standard units:
-f <- system.file("xsd/eml-unitDictionary.xml", package = "EML")
+
+# Read in additional units defined in a EML file
+f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
 eml <- read_eml(f)
-get_unitList(eml)
+unitList <- get_unitList(eml@additionalMetadata[[1]]@metadata[[1]])
+
+## Read in the definitions of standard units:
+get_unitList()
 
 
-## note the eml-unitDictionary.xml just defines 
 }
 

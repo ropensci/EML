@@ -50,8 +50,7 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...){
     #}
     }
 
-    ## These elements, like "title", go to s4@ResourceGroup@title,
-    ## rather than s4@title, where ResourceGroup is metaclass
+    
     for(child in unique(subclasses)){
       y = lapply(metaclasses, function(x) match(child, names(x)))
       s = names(y)[!is.na(y)]

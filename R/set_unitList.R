@@ -130,24 +130,35 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
 # data.frame(name, id, dimension_name, dimension_power)
 
 #' get_unitList
-#' @param unitList a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata
+#' @param unitList a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata, see details
 #' @return a list with two data.frames: "units", a table defining unit names, types, and conversions to SI,
 #' and "unitTypes", defining the type of unit. For instance, the unit table could define "Hertz" as a unit
 #' of unitType frequency, and the unitType define frequency as a type whose dimension is 1/time.  
+#'
+#' @details If no unitList is provided, the function reads in the eml-unitDictionary defining all standard
+#' units and unitTypes.  This provides a convenient way to look up standard units and their EML-recognized names
+#' when defining metadata, e.g. in the table passed to `set_attributes()`.  
 #' @export
+#' 
 #' @examples 
-#' ## Read in the definitions of standard units:
-#' f <- system.file("xsd/eml-unitDictionary.xml", package = "EML")
+#' 
+#' # Read in additional units defined in a EML file
+#' f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
 #' eml <- read_eml(f)
-#' get_unitList(eml)
+#' unitList <- get_unitList(eml@@additionalMetadata[[1]]@@metadata[[1]])
+#' 
+#' ## Read in the definitions of standard units:
+#' get_unitList()
 #' 
 #' 
-#' ## note the eml-unitDictionary.xml just defines 
-get_unitList <- function(unitList){
+get_unitList <- function(unitList = read_eml(system.file("xsd/eml-unitDictionary.xml", package = "EML"))){
   
-  if(is(unitList, "XMLNode"))
+  if(is(unitList, "XMLInternalNode")){
     unitList <- emlToS4(unitList)
-  
+  } else if(is(unitList, "metadata")){
+    unitList <- emlToS4(unitList[[1]])
+  }
+    
   list(units = get_unit(unitList@unit), unitTypes = get_unitType(unitList@unitType))
 }
 
