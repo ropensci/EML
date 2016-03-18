@@ -448,4 +448,4 @@ We can also write this `eml` metadata out as an XML file that can be published a
 write_eml(eml, "example.xml")
 ```
 
-To take the greatest advantage of EML, we should consider depositing our file in a [Metacat](https://knb.ecoinformatics.org/knb/docs/intro.html)-enabled repository, which we discuss in the next vignette on Publishing EML.
+To take the greatest advantage of EML, we should consider depositing our file in a [Metacat](https://knb.ecoinformatics.org/knb/docs/intro.html)-enabled repository, which we discuss in the next vignette on using EML with data repositories.

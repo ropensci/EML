@@ -51,7 +51,8 @@ The unitType table must have the following columns:
  name = c("speed", "speed", "acceleration", "acceleration", "frequency")
  dimension = c("length", "time", "length", "time", "time")
  power = c(NA, "-1", NA, "-2", "-1")
- unitTypes <- data.frame(name = name, dimension = dimension, power = power, stringsAsFactors = FALSE)
+ unitTypes <- data.frame(name = name, dimension = dimension, 
+                         power = power, stringsAsFactors = FALSE)
  
  ## Create the units table
  name = c("minute", "centimeter")

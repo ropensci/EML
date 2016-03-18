@@ -1,0 +1,30 @@
+---
+title: "Working with Units"
+author: "Carl Boettiger"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+One essential role of EML metadata is in precisely defining the units in which data is measured. To make sure these units can be understood by (and thus potentially converted to other units by) a computer, it's necessary to be rather precise about our choice of units.  
+
+For tabular data (e.g. csv files), this information is provided in the `attributeList` element, such as we created using the `set_attributes()` function in the vignette, "creating EML". When working with any numeric data, this function takes a `data.frame` with a column for `unit` that provides the name of the unit listed.  
+
+These units cannot be any free-form text, but should instead be one of the standard units recognized by EML.  
+
+```{r}
+
+```
+
+
+`udunits2` package
+
+```{r}
+library("udunits2")
+```
+
+

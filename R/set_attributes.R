@@ -330,6 +330,9 @@ set_attribute <- function(row, factors = NULL){
   if(s %in% c("ratio", "interval")){
     if(is_customUnit(row[["unit"]])){
       type <- "customUnit"
+      warning(paste0("unit '", row[["unit"]], "' is not recognized, using custom unit. 
+                     Please define a custom unit or replace with a 
+                     recognized standard unit (see set_unitList() for details)"))
     } else {
       type <- "standardUnit"
     }
