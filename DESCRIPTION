@@ -3,17 +3,42 @@ Type: Package
 Title: Read and Write Ecological Metadata Language Files
 Version: 0.1.0.0
 Date: 2016-02-04
-Author: c(person("Carl", "Boettiger", role = c("aut", "cre"), email = "cboettig@gmail.com"),
-          person("Matt", "Jones", role="aut"))
+Author: c(person("Carl", "Boettiger", role = c("aut", "cre"), email =
+    "cboettig@gmail.com"), person("Matt", "Jones", role="aut"))
 Maintainer: Carl Boettiger <cboettig@gmail.com>
-Description: Parse and serialize Ecological Metadata Language ('EML') files into S4 objects.
+Description: Parse and serialize Ecological Metadata Language ('EML') files into
+    S4 objects.
 License: FreeBSD
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Imports: XML,
+Imports:
+    XML,
     methods,
     tools
-Suggests: testthat,
+Suggests:
+    testthat,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Collate:
+    'classes.R'
+    'classes-stmml.R'
+    'coercions.R'
+    'eml_find.R'
+    'get_unitList.R'
+    'get_attributes.R'
+    'eml_get.R'
+    'eml_validate.R'
+    'is_standardUnit.R'
+    'literature_coercions.R'
+    'methods.R'
+    'read_eml.R'
+    'set_attributes.R'
+    'set_coverage.R'
+    'set_methods.R'
+    'set_physical.R'
+    'set_section.R'
+    'set_unitList.R'
+    'write_eml.R'
+    'xml-s4.R'
+    'zzz.R'

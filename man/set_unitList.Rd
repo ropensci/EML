@@ -26,13 +26,13 @@ most common units, see get_unitList to display standard units or parse other cus
 }
 \details{
 The units data.frame must have the following columns:
- - name: the name of unit (singular). e.g. 'meter', 'second'
+ - id: the referenced name of unit (singular). e.g. 'meter', 'second'
  - unitType: the base type of unit, e.g. 'length'.  If not from a standard type, a new unitType must be provided
  - multiplierToSI: the multiplicative constant to convert to the SI unit. 
  - parentSI: the name of the parent SI unit, e.g. second.  
  - description: a text string describing the unit of measure.
  The following columns are optional:
- - id: usually the same as the name of the unit, e.g. second
+ - name: usually the same as the id of the unit, e.g. second
  - abbreviation: common abbreviation, e.g. s
  - constantToSI: an additive constant to convert to the equivalent SI unit. If not given, default is "0"
 
@@ -40,27 +40,27 @@ In practice, researchers may save these tables of custom units they frequently u
 or other format and read them in to R for ready re-use.  
 
 The unitType table must have the following columns:
- - name:
- - id: optional, default is same as the name
+ - id: the name by which the unitType is referred to.
+ - name: optional, default is same as the id
  - dimension: name of a base dimension of the unit
  - power: the power to which the dimension is raised (NA implies power of 1)
 }
 \examples{
 
  ## create the "unitType" table for custom unit
- name = c("speed", "speed", "acceleration", "acceleration", "frequency")
+ id = c("speed", "speed", "acceleration", "acceleration", "frequency")
  dimension = c("length", "time", "length", "time", "time")
  power = c(NA, "-1", NA, "-2", "-1")
- unitTypes <- data.frame(name = name, dimension = dimension, 
+ unitTypes <- data.frame(id = id, dimension = dimension, 
                          power = power, stringsAsFactors = FALSE)
  
  ## Create the units table
- name = c("minute", "centimeter")
+ id = c("minute", "centimeter")
  unitType = c("time", "length")
  parentSI = c("second", "meter")
  multiplierToSI = c("0.0166", "1")
  description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
- units = data.frame(name = name, unitType = unitType, parentSI = parentSI, 
+ units = data.frame(id = id, unitType = unitType, parentSI = parentSI, 
                     multiplierToSI = multiplierToSI, description = description, 
                     stringsAsFactors = FALSE)
  

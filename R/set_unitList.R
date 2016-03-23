@@ -19,14 +19,14 @@
 #' @details 
 #' 
 #' The units data.frame must have the following columns:
-#'  - name: the name of unit (singular). e.g. 'meter', 'second'
+#'  - id: the referenced name of unit (singular). e.g. 'meter', 'second'
 #'  - unitType: the base type of unit, e.g. 'length'.  If not from a standard type, a new unitType must be provided
 #'  - multiplierToSI: the multiplicative constant to convert to the SI unit. 
 #'  - parentSI: the name of the parent SI unit, e.g. second.  
 #'  - description: a text string describing the unit of measure.
 
 #'  The following columns are optional:
-#'  - id: usually the same as the name of the unit, e.g. second
+#'  - name: usually the same as the id of the unit, e.g. second
 #'  - abbreviation: common abbreviation, e.g. s
 #'  - constantToSI: an additive constant to convert to the equivalent SI unit. If not given, default is "0"
 #'
@@ -34,27 +34,27 @@
 #' or other format and read them in to R for ready re-use.  
 #'
 #' The unitType table must have the following columns:
-#'  - name:
-#'  - id: optional, default is same as the name
+#'  - id: the name by which the unitType is referred to.
+#'  - name: optional, default is same as the id
 #'  - dimension: name of a base dimension of the unit
 #'  - power: the power to which the dimension is raised (NA implies power of 1)
 #'  
 #' @examples 
 #' 
 #'  ## create the "unitType" table for custom unit
-#'  name = c("speed", "speed", "acceleration", "acceleration", "frequency")
+#'  id = c("speed", "speed", "acceleration", "acceleration", "frequency")
 #'  dimension = c("length", "time", "length", "time", "time")
 #'  power = c(NA, "-1", NA, "-2", "-1")
-#'  unitTypes <- data.frame(name = name, dimension = dimension, 
+#'  unitTypes <- data.frame(id = id, dimension = dimension, 
 #'                          power = power, stringsAsFactors = FALSE)
 #'  
 #'  ## Create the units table
-#'  name = c("minute", "centimeter")
+#'  id = c("minute", "centimeter")
 #'  unitType = c("time", "length")
 #'  parentSI = c("second", "meter")
 #'  multiplierToSI = c("0.0166", "1")
 #'  description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
-#'  units = data.frame(name = name, unitType = unitType, parentSI = parentSI, 
+#'  units = data.frame(id = id, unitType = unitType, parentSI = parentSI, 
 #'                     multiplierToSI = multiplierToSI, description = description, 
 #'                     stringsAsFactors = FALSE)
 #'  
@@ -66,10 +66,13 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
     ListOfunitType <- new("ListOfunitType")
   } else {
     
+    if(is.null(unitTypes$name))
+      unitTypes$name <- unitTypes$id
     if(is.null(unitTypes$id))
       unitTypes$id <- unitTypes$name
-  
-    types <- unique(unitTypes$name)
+    
+    
+    types <- unique(unitTypes$id)
     ListOfunitType <- as(lapply(types, function(type){
       dimensions <- unitTypes[(unitTypes$name == type), ]
       ListOfdimension <- as(lapply(1:dim(dimensions)[1], function(i){
@@ -88,6 +91,8 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
     
   }
   
+  if(is.null(units$name))
+    units$name <- units$id
   if(is.null(units$id))
     units$id <- units$name
   if(is.null(units$abbreviation))
@@ -127,65 +132,4 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
   }
 }
 
-# custom unitType:
-# data.frame(name, id, dimension_name, dimension_power)
 
-#' get_unitList
-#' @param unitList a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata, see details
-#' @return a list with two data.frames: "units", a table defining unit names, types, and conversions to SI,
-#' and "unitTypes", defining the type of unit. For instance, the unit table could define "Hertz" as a unit
-#' of unitType frequency, and the unitType define frequency as a type whose dimension is 1/time.  
-#'
-#' @details If no unitList is provided, the function reads in the eml-unitDictionary defining all standard
-#' units and unitTypes.  This provides a convenient way to look up standard units and their EML-recognized names
-#' when defining metadata, e.g. in the table passed to `set_attributes()`.  
-#' @export
-#' 
-#' @examples 
-#' 
-#' # Read in additional units defined in a EML file
-#' f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
-#' eml <- read_eml(f)
-#' unitList <- get_unitList(eml@@additionalMetadata[[1]]@@metadata[[1]])
-#' 
-#' ## Read in the definitions of standard units:
-#' get_unitList()
-#' 
-#' 
-get_unitList <- function(unitList = read_eml(system.file("xsd/eml-unitDictionary.xml", package = "EML"))){
-  
-  if(is(unitList, "XMLInternalNode")){
-    unitList <- emlToS4(unitList)
-  } else if(is(unitList, "metadata")){
-    unitList <- emlToS4(unitList[[1]])
-  }
-    
-  list(units = get_unit(unitList@unit), unitTypes = get_unitType(unitList@unitType))
-}
-
-get_unit <- function(unit){
-  map_df(unit, function(u){
-    data.frame(id = or_na(as.character(u@id)), 
-               name = or_na(as.character(u@name)),
-               unitType = or_na(as.character(u@unitType)),
-               parentSI = or_na(as.character(u@parentSI)),
-               multiplierToSI = or_na(as.character(u@multiplierToSI)),
-               constantToSI = or_na(as.character(u@constantToSI)),
-               abbreviation = or_na(as.character(u@abbreviation)),
-               description = or_na(as.character(u@description)),
-               stringsAsFactors = FALSE)
-  })
-}
-
-get_unitType <- function(unitType){
-  map_df(unitType, function(ut){
-    map_df(ut@dimension, function(d){
-      data.frame(
-      id = or_na(as.character(ut@id)),
-      name = or_na(as.character(ut@name)),
-      dimension = or_na(as.character(d@name)),
-      power =  or_na(as.character(d@power)),
-      stringsAsFactors = FALSE)
-    })
-  })
-}

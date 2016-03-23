@@ -92,7 +92,7 @@ replace_class('size', "setClass('size', slots = c('character' = 'character', 'un
 replace_class('metadata', "setClass('metadata', contains='InlineType')", classes_file)
 replace_class('inline', "setClass('inline', contains='InlineType')", classes_file)
 replace_class('InlineType', "setClass('InlineType', contains=c('list'))", classes_file)
-replace_class('parameter', "setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))", classes_file)
+replace_class('parameter', "setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'), contains = 'eml-2.1.1')", classes_file)
 replace_class('PhysicalOnlineType', "setClass('PhysicalOnlineType',  slots = c('onlineDescription' = 'i18nNonEmptyStringType', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1', 'character'))", classes_file)
 replace_class('online', "setClass('online', contains = c('PhysicalOnlineType', 'OnlineType', 'eml-2.1.1'))", classes_file)
 move_to_end("coverage", classes_file)

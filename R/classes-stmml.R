@@ -1,3 +1,5 @@
+#' @include classes.R
+
 
 setClass('ListOfunitType', contains = 'list')
 setClass('ListOfunit', contains = 'list')

@@ -12,18 +12,55 @@ vignette: >
 
 One essential role of EML metadata is in precisely defining the units in which data is measured. To make sure these units can be understood by (and thus potentially converted to other units by) a computer, it's necessary to be rather precise about our choice of units.  
 
-For tabular data (e.g. csv files), this information is provided in the `attributeList` element, such as we created using the `set_attributes()` function in the vignette, "creating EML". When working with any numeric data, this function takes a `data.frame` with a column for `unit` that provides the name of the unit listed.  
+Let us start by examining the numeric attributes in an example EML file.  First we read in the file:
 
-These units cannot be any free-form text, but should instead be one of the standard units recognized by EML.  
 
 ```{r}
+f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
+eml <- read_eml(f)
+```
 
+We extract the `attributeList` into separate `data.frame`s for each type of data (`join=FALSE`), allowing us to focus on numeric data (character and factors don't have units)
+
+```{r}
+attribute_tables <- get_attributes(eml@dataset@dataTable[[1]]@attributeList, join=FALSE)
+attribute_tables$numerics
+```
+
+We see this data contains eleven columns containing numeric data, with metadata for the unit, precision, range, and number type (integer, real complex) given in the resulting table.  EML knows about many standard units, but a metadata file may occassionally need to define a unit that is not in the StandardUnit dictionary.  We can use the function `is_standardUnit()` to quickly check if the units here are in EML's dictionary:
+
+
+```{r}
+units <- attribute_tables$numerics$unit
+
+units[ !is_standardUnit(units) ]
+```
+
+This shows us that the unit `speciesPerSquareMeter` is the only unit not in the Standard Unit Dictionary.  We can have a look at the definitions for all units that *are* in the Standard Unit dictionary using the function `get_unitList()` with no arguments:
+
+```{r}
+standardUnits <- get_unitList()
+standardUnits$units
+```
+
+This function returns two tables, `units` and `unitType`.  We will see the importance of the latter in a moment.  This table can be useful in identifying the appropriate unit `id` to use when creating an EML file using `set_attributes()`.  For now, we would like to learn more about the custom unit that *isn't* in the standard dictionary.  A valid EML file must provide the definitions for any custom unit in the `addtionalMetadata` section.  We can use `get_unitList()` to extract this information from the EML document:
+
+
+```{r}
+customUnits <- get_unitList(eml@additionalMetadata[[1]]@metadata)
+customUnits
 ```
 
 
+For tabular data (e.g. csv files), this information is provided in the `attributeList` element, such as we created using the `set_attributes()` function in the vignette, "creating EML". When working with any numeric data, this function takes a `data.frame` with a column for `unit` that provides the name of the unit listed.  
+
+These units cannot be any free-form text, but should instead be one of the standard units recognized by EML.
+
+------------
+
 `udunits2` package
 
-```{r}
+```{r eval=FALSE}
 library("udunits2")
 ```
 

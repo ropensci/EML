@@ -699,7 +699,7 @@ setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xm
 setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))
 setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))
 setClass('inline', contains='InlineType')
-setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'))
+setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'), contains = "eml-2.1.1")
 setClass('online', contains = c('PhysicalOnlineType', 'OnlineType', 'eml-2.1.1'))
 setClass('metadata', contains='InlineType')
 setClass('additionalMetadata', slots = c('describes' = 'ListOfdescribes', 'metadata' = 'metadata', 'id' = 'xml_attribute'), contains = c('eml-2.1.1', 'character')) ## A
