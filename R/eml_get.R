@@ -27,7 +27,7 @@
 #' @export
 setGeneric("eml_get", function(x, element = NULL, ...){
   if(is.null(element)){
-    x
+    out <- x
     
   } else {
     all <- eml_find(x, element)
@@ -37,13 +37,12 @@ setGeneric("eml_get", function(x, element = NULL, ...){
     } else{ 
       out <- eml_get(all, ...)
     }
-    if(is.list(out[[1]]) && length(out) == 1){
+    if(!isS4(out[[1]]) && length(out) == 1){ # deal with the length-1 list of lists
       out <- out[[1]]
       out <- out[!sapply(out, eml_empty)] # drop the empty S4 elements
     }
-    out
   }
-  
+  out
 })
 
 
