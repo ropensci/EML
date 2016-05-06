@@ -50,8 +50,14 @@ eml
 
 Validate EML against the official schema
 
-```{r}
+```{r, message=TRUE}
+# An EML document with no validation errors
 eml_validate(eml)
+
+# An EML document with validation errors
+invalid_eml <- system.file("tests/testthat/", "example-eml-invalid.xml", package = "EML")
+
+eml_validate(invalid_eml)
 ```
 
 
