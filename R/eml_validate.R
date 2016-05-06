@@ -5,6 +5,8 @@
 #' @param eml an eml class object, file, or xml document
 #' @param ... additional arguments to eml_write, such as namespaces
 #' 
+#' @return Whether the document is valid (logical)
+#' 
 #' @examples \donttest{
 #'  
 #'  f <- system.file("xsd/test", "eml.xml", package = "EML")
@@ -18,10 +20,7 @@
 #'  
 #' ## Can validate fragments as well, though may need the relevant namespace
 #' dataset <- new("dataset", title = "incomplete, invalid EML")
-#' v <- eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
-#' 
-#' 
-#' v$errors[[1]]$msg 
+#' eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
 #' 
 #' }
 #' 
@@ -33,5 +32,25 @@ eml_validate <- function(eml, ...){
   if(isS4(eml))
     eml <- write_eml(eml, ...)
 
-  xmlSchemaValidate(schema, eml)
+  result <- xmlSchemaValidate(schema, eml)
+  
+  if (result$status != 0) {
+    lapply(result$errors, message_validation_error)
+    
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
+}
+
+
+#' message_validation_error
+#' 
+#' Create a useful message() for an XML validation error.
+#'
+#' @param error The validation error (XML::XMLError)
+#'
+#' @return Nothing.
+message_validation_error <- function(error) {
+  message(paste0(error$line, ".", error$col, ": ", error$msg))
 }
