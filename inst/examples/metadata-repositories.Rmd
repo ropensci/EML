@@ -15,12 +15,15 @@ One of the principle advantages in creating EML is to make it easier to find the
 To do this, we will use the `dataone` package to upload a private copy of our data file to the central data repository.
 
 ```{r eval = FALSE}
-install.packages("dataone", repos= c("https://cran.rstudio.com", "http://nceas.github.io/drat"))
+#install.packages("dataone", repos= c("https://cran.rstudio.com", "http://nceas.github.io/drat"))
+
+## or
+devtools::install_github(c("ropensci/datapack", "DataONEorg/rdataone"))
 ```
 
 ```{r}
 library("dataone")
-library("datapackage")
+library("datapack")
 ```
 
 Imagine we have the file paths to our `.csv` data file and an `.xml` EML file providing metadata for it:
@@ -51,7 +54,7 @@ We now want to bundle these two objects (data and metadata) into a single "data 
 
 ```{r}
 dp <- new("DataPackage")
-addData(dp, dataObj, metadataObj)
+dp <- addData(dp, dataObj, metadataObj)
 ```
 
 This both adds the files and registers that the metadata object describes the data object.  
