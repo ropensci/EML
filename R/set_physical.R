@@ -60,7 +60,7 @@ set_physical <- function(objectName,
     new(
       "physical",
       objectName = objectName,
-      size = new("size", unit = "bytes"),
+      size = new("size", size, unit = sizeUnit),
       authentication = new("authentication", authentication, method = authMethod),
       compressionMethod = compressionMethod,
       encodingMethod = encodingMethod,
