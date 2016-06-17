@@ -103,7 +103,8 @@ data.frame(
   "hour.min",
   "i.flag",
   "variable",
-  "value.i"), 
+  "value.i",
+  "length"), 
   formatString = c(
     NA,        
     "YYYY",     
@@ -111,6 +112,7 @@ data.frame(
     "hhmm",     
     NA,         
     NA,         
+    NA,
     NA),
    definition = c(        
     "which run number",
@@ -119,7 +121,17 @@ data.frame(
     NA,
     NA,
     NA, 
+    NA,
     NA),
+  unit = c(
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    "meter"),
   attributeDefinition = c(
     "which run number (=block). Range: 1 - 6. (integer)",
     "year, 2012",
@@ -127,7 +139,8 @@ data.frame(
     "hour and minute of observation. Range 1 - 2400 (integer)",
     "is variable Real, Interpolated or Bad (character/factor)",
     "what variable being measured in what treatment (character/factor).",
-    "value of measured variable for run.num on year/day/hour.min."),
+    "value of measured variable for run.num on year/day/hour.min.",
+    "length of the species in meters (dummy example of numeric data)"),
   stringsAsFactors = FALSE
 )
 
@@ -186,7 +199,7 @@ data.frame(
 With these two data frames in place, we are ready to create our `attributeList` element:
 
 ```{r}
-attributeList <- set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "factor"))
+attributeList <- set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "factor", "numeric"))
 ```
 
 
