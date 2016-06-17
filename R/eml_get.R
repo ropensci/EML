@@ -34,10 +34,12 @@ setGeneric("eml_get", function(x, element = NULL, ...){
     if(length(all) > 1){
       out <- lapply(all, eml_get, ...)
       out <- out[!sapply(out, eml_empty)] # drop the empty S4 elements
-    } else{ 
+    } else { 
       out <- eml_get(all, ...)
     }
-    if(!isS4(out[[1]]) && length(out) == 1){ # deal with the length-1 list of lists
+    if(isS4(out) && length(out) < 1) # Already a simple S4 element, ready to return
+      out <- out
+    else if(!isS4(out[[1]]) && length(out) == 1){ # deal with the length-1 list of lists
       out <- out[[1]]
       out <- out[!sapply(out, eml_empty)] # drop the empty S4 elements
     }
