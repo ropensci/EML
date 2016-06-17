@@ -1,18 +1,24 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/cboettig/EML.svg?branch=master)](https://travis-ci.org/cboettig/EML)
+[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
 
 EML
-====
+===
 
 *Note*: `EML` is work in progress. Please see the Issues tracker in this repository for details about current issues and development milestonds.
 
 Installation
 ------------
 
-`EML` has not yet been released. Please install from GitHub after installing the `devtools` package (from CRAN):
+`EML` has not yet been released. You can install the current development version from rOpenSci using:
 
 ``` r
-devtools::install_github("ropensci/EML")
+install.packages("EML", repos = c("http://packages.ropensci.org", "https://cran.rstudio.com"))
+```
+
+or install directly from GitHub (after installing the `devtools` package from CRAN):
+
+``` r
+devtools::install_github("cboettig/EML")
 ```
 
 Quickstart
@@ -93,17 +99,16 @@ eml
 Validate EML against the official schema
 
 ``` r
+# An EML document with no validation errors
 eml_validate(eml)
-#> $status
-#> [1] 0
-#> 
-#> $errors
-#> list()
-#> attr(,"class")
-#> [1] "XMLStructuredErrorList"
-#> 
-#> attr(,"class")
-#> [1] "XMLSchemaValidationResults"
+#> [1] TRUE
+
+# An EML document with validation errors
+invalid_eml <- system.file("tests/testthat/", "example-eml-invalid.xml", package = "EML")
+
+eml_validate(invalid_eml)
+#> 10.0: Element 'creator': This element is not expected. Expected is one of ( references, alternateIdentifier, shortName, title ).
+#> [1] FALSE
 ```
 
 Write out as EML:
@@ -121,7 +126,7 @@ Eventually `EML` will provide constructor and extract methods to create and extr
 Our current example does not have a publication date. Let's add one:
 
 ``` r
-eml@dataset@ResourceGroup@pubDate <- new("pubDate", "2016")
+eml@dataset@pubDate <- new("pubDate", "2016")
 ```
 
 Note that we use the constructor method `new()` to create an object.

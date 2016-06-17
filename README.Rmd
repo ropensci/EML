@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Travis-CI Build Status](https://travis-ci.org/cboettig/EML.svg?branch=master)](https://travis-ci.org/cboettig/EML)
+[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
 
 
 # EML 
@@ -23,12 +23,19 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-`EML` has not yet been released.  Please install from GitHub after installing the `devtools` package (from CRAN):
+`EML` has not yet been released.  You can install the current development version from rOpenSci using:
+
+```{r eval=FALSE}
+install.packages("EML", repos = c("http://packages.ropensci.org", "https://cran.rstudio.com"))
+```
+
+or install directly from GitHub (after installing the `devtools` package from CRAN):
 
 
 ```{r eval=FALSE}
 devtools::install_github("cboettig/EML")
 ```
+
 
 
 ## Quickstart
@@ -80,7 +87,7 @@ Eventually `EML` will provide constructor and extract methods to create and extr
 Our current example does not have a publication date.  Let's add one:
 
 ```{r}
-eml@dataset@ResourceGroup@pubDate <- new("pubDate", "2016")
+eml@dataset@pubDate <- new("pubDate", "2016")
 ```
 
 Note that we use the constructor method `new()` to create an object.
