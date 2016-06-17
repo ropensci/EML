@@ -11,6 +11,9 @@ eml_validate(eml, ...)
 
 \item{...}{additional arguments to eml_write, such as namespaces}
 }
+\value{
+Whether the document is valid (logical)
+}
 \description{
 validate_eml
 }
@@ -28,10 +31,7 @@ eml_validate(eml)
  
 ## Can validate fragments as well, though may need the relevant namespace
 dataset <- new("dataset", title = "incomplete, invalid EML")
-v <- eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
-
-
-v$errors[[1]]$msg 
+eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
 
 }
 

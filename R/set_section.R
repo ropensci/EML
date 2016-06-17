@@ -1,20 +1,11 @@
 
-#' set_section
+#' set_TextType
 #' 
-#' For any EML element that takes a "section" argument, this function can be used to generate the appropriate EML from a markdown-formatted file.
+#' For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
+#' @param text a plain text character string which will be used directly as the content of the node if no file is given
 #' @param file path to a file providing formatted input text, see details.
 #' @import XML
-#' @return a ListOfsection object that can be used in constructing any element with section slots, see examples
-#' @examples 
-#' f <- system.file("examples/hf205-methods.md", package = "EML")
-#' set_section(f)
-#' new("description", section = set_section(f))
-#' 
-#' ## Can also import from methods written in a .docx MS Word file. 
-#' f <- system.file("examples/hf205-methods.docx", package = "EML")
-#' set_section(f)
-#' new("description", section = set_section(f))
-#' 
+#' @return a TextType object that can be coerced into any element inheriting from TextType, see examples
 #' @importFrom tools file_ext
 #' @details If the `rmarkdown` package is installed, then the input file can 
 #' be a Microsoft Word (.docx) file, a markdown file, or other file
@@ -23,15 +14,65 @@
 #' .xml or .dbk extension).  Note that pandoc comes pre-installed in RStudio and is 
 #' required for the rmarkdown package.  
 #' @export
-set_section <- function(file = NULL){
-  
-  if(!tools::file_ext(file) %in% c("xml", "dbk")){
+#' @examples
+#' \dontrun{
+#' ## using a simple character string
+#' a <- set_TextType(text = "This is the abstract")
+#' as(a, "abstract")
+#'
+#' ## Using an external markdown file
+#' f <- system.file("examples/hf205-abstract.md", package = "EML")
+#' a <- set_TextType(f)
+#' as(a, "abstract")
+#' 
+#' ## Can also import from methods written in a .docx MS Word file. 
+#' f <- system.file("examples/hf205-abstract.docx", package = "EML")
+#' a <- set_TextType(f)
+#' as(a, "abstract")
+#' 
+#' ## Documents with title headings use `section` instead of `para` notation 
+#' f <- system.file("examples/hf205-methods.docx", package = "EML")
+#' d <- set_TextType(f)
+#' as(d, "description")
+#' 
+#' }
+#'
+#'
+set_TextType <- function(file = NULL, text = NULL){
+  if(!is.null(text)){
+    TextType <- new("TextType", .Data = text)
+  } else if(!is.null(file)){
+    docbook <- to_docbook(file)
+    TextType <- new("TextType", section = set_section(docbook), para = set_para(docbook))
+  }
+  TextType
+}
+
+
+
+set_section <- function(docbook){
+  sections <- XML::xpathApply(docbook, "/article/sect1", XML::xmlChildren)
+  s <- lapply(sections, function(x) new("section", as(x, "list")))
+  as(s, "ListOfsection")
+}
+
+
+
+set_para <-  function(docbook){
+  para <- XML::xpathApply(docbook, "/article/para", XML::xmlChildren)
+  s <- lapply(para, function(x) new("para", as(x, "list")))
+  as(s, "ListOfpara")
+}
+
+
+to_docbook <- function(file = NULL){
+  if(!tools::file_ext(file) %in% c("xml", "dbk")){ ## Not xml yet, so use pandoc to generate docbook
     
     if (!requireNamespace("rmarkdown", quietly = TRUE)){
       stop("rmarkdown package required to convert to Docbook format", call. = FALSE)
     }
     pandoc_convert <- getExportedValue("rmarkdown", "pandoc_convert")
-
+    
     wd <- getwd()
     dir <- tempdir()
     file.copy(file, paste(dir, basename(file), sep="/"))
@@ -40,14 +81,10 @@ set_section <- function(file = NULL){
     pandoc_convert(basename(file), to = "docbook", output = docbook_file, options = "-s")
     docbook <- XML::xmlParse(docbook_file)
     setwd(wd)
-  
-  } else { 
+    
+  } else { ## File is already xml/docbook, so no need for pandoc
     docbook  <- XML::xmlParse(file)
   }
-  ##
-  
-  sections <- XML::xpathApply(docbook, "/article/sect1", XML::xmlChildren)
-  s <- lapply(sections, function(x) new("section", as(x, "list")))
-  as(s, "ListOfsection")
+  docbook
   
 }

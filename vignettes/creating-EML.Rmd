@@ -399,7 +399,7 @@ the `set_methods()` step.  Any text field containing a slot named `section` can 
 
 ```{r}
 abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")
-abstract <- new("abstract", section = set_section(abstract_file))
+abstract <- as(set_TextType(abstract_file), "abstract")
 ```
  
 

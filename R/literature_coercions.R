@@ -1,3 +1,5 @@
+#' @importFrom utils bibentry person
+
 # The literature module
 #
 # The eml-literature module contains information that describes literature
