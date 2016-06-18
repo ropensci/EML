@@ -183,8 +183,12 @@ add_na_column <- function(column, df){
 
 
 na2empty <- function(x){
-  if(!is.null(x))
-    if(is.na(x))
+  if(!is.null(x)){ 
+    if(is.na(x)){
       x <- character()
-    x
+    } else if(is.numeric(x)){
+      x <- as.character(x)
+    }
+  }
+  x
 }

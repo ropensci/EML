@@ -3,9 +3,6 @@
 #' get_attributes
 #' @param x an "attributeList" element from EML
 #' @param eml The full eml document, needed only if <references> outside of attributes must be resolved.
-#' @param join logical, default TRUE. Should the resulting data frames for each
-#' attribute type (~column class, numeric, charcters, datetimes, factors) be joined
-#' into a single data frame or returned in separate data frames?
 #' @return a data frame whose rows are the attributes (names of each column in the data file)
 #' and whose columns describe metadata about those attributes.  By default separate tables
 #' are given for each type
@@ -20,25 +17,29 @@
 #' get_attributes( eml@@dataset@@dataTable[[1]]@@attributeList )
 #'
 #' }
-get_attributes <- function(x, eml = x, join = TRUE){
+get_attributes <- function(x, eml = x){
   attributeList <- x
   A <- attributeList@attribute
   A <- unname(A) # avoid row-names 'attribute','attribute1' etc
+  
+  attr_order <- vapply(A, function(a) a@attributeName, character(1))
+  
+  
   column_meta <- column_attributes(A)
   numerics <- numeric_attributes(A, eml)
   chars <- char_attributes(A, eml)
   datetimes <- datetime_attributes(A, eml)
   factors <- factor_attributes(A, eml)
   
+  attr_table <- merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), column_meta, all = TRUE)
   
-  if(join){ # Provide factor table separately
-    list(attributes = merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), column_meta, all = TRUE),
-         factors = factors)
-  } else {
-    list(columns = column_meta, numerics = numerics,
-         chars = chars, datetimes = datetimes,
-         factors = factors)
-  }
+  # restore original order of attributes
+  row.names(attr_table) <- attr_table$attributeName
+  attr_table <- attr_table[attr_order,]
+  row.names(attr_table) <- NULL
+  
+  list(attributes = attr_table, factors = factors)
+  
 }
 
 
