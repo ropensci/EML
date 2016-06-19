@@ -33,6 +33,7 @@ Collate:
     'get_attributes.R'
     'eml_get.R'
     'eml_validate.R'
+    'get_TextType.R'
     'is_standardUnit.R'
     'literature_coercions.R'
     'methods.R'

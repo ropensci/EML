@@ -1,3 +1,21 @@
+
+
+#' get_TextType
+#' 
+#' Render a TextType node int HTML or some other format
+#'
+#' @param node any TextType node
+#' @param to desired format, default is html, but can be any type supported by pandoc (Word, markdown, etc)
+#' @param view if HTML, do we want to open result in browser?
+#'
+#' @export
+#'
+#' @examples
+#' f <- system.file("examples/hf205-abstract.docx", package = "EML")
+#' a <- as(set_TextType(f), "abstract")
+#' get_TextType(a)
+#' 
+#' 
 get_TextType <- function(node, to = "html", view = TRUE){
   
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
@@ -22,10 +40,12 @@ get_TextType <- function(node, to = "html", view = TRUE){
  
     file.copy(output_file, paste(wd, basename(output_file), sep="/"), overwrite = TRUE)
     
+    
     setwd(wd)
     
-    if(view)
-      View(basename(output_file))
+    if(view && to == "html")
+      utils::browseURL(basename(output_file))
 
+    
     
     }
