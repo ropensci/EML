@@ -15,5 +15,6 @@ as(a, "abstract")
 ## Documents can have richer formatting.  Documents with title headings use `section` instead of `para` notation
 f <- system.file("examples/hf205-methods.docx", package = "EML")
 d <- set_TextType(f)
-as(d, "description")
+node <- as(d, "description")
  
+get_TextType(node, view = FALSE)
