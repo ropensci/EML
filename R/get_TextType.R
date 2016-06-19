@@ -5,9 +5,11 @@
 #' Render a TextType node int HTML or some other format
 #'
 #' @param node any TextType node
-#' @param to desired format, default is html, but can be any type supported by pandoc (Word, markdown, etc)
+#' @param to desired format, default is html, but can be any type supported by pandoc (docx, md, etc)
+#' @param output name of the desired output file
 #' @param view if HTML, do we want to open result in browser?
-#'
+#' @importFrom utils browseURL
+#' @return creates a file requested.
 #' @export
 #'
 #' @examples
@@ -16,7 +18,7 @@
 #' get_TextType(a)
 #' 
 #' 
-get_TextType <- function(node, to = "html", view = TRUE){
+get_TextType <- function(node, to = "html", output = tempfile(class(node), fileext = paste0(".", to)), view = TRUE){
   
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
     x <- S4Toeml(node)
@@ -28,15 +30,11 @@ get_TextType <- function(node, to = "html", view = TRUE){
     
     wd <- getwd()
     dir <- tempdir()
+    file.copy(output, paste(dir, basename(output), sep="/"), overwrite = TRUE)
     setwd(dir)
     docbook_file <- tempfile(tmpdir = ".", fileext = ".xml")
-    
     XML::saveXML(x, docbook_file)
-    
-    
-    output_file <- tempfile(class(node), tmpdir = ".", fileext = paste0(".", to))
-    
-    pandoc_convert(basename(docbook_file), to = to, output = output_file, options = "-s")
+    pandoc_convert(basename(docbook_file), to = to, output = output, options = "-s")
  
     file.copy(output_file, paste(wd, basename(output_file), sep="/"), overwrite = TRUE)
     

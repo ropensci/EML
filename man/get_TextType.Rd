@@ -4,14 +4,20 @@
 \alias{get_TextType}
 \title{get_TextType}
 \usage{
-get_TextType(node, to = "html", view = TRUE)
+get_TextType(node, to = "html", output = tempfile(class(node), fileext =
+  paste0(".", to)), view = TRUE)
 }
 \arguments{
 \item{node}{any TextType node}
 
-\item{to}{desired format, default is html, but can be any type supported by pandoc (Word, markdown, etc)}
+\item{to}{desired format, default is html, but can be any type supported by pandoc (docx, md, etc)}
+
+\item{output}{name of the desired output file}
 
 \item{view}{if HTML, do we want to open result in browser?}
+}
+\value{
+creates a file requested.
 }
 \description{
 Render a TextType node int HTML or some other format
