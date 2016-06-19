@@ -17,12 +17,15 @@
 #' f <- system.file("xsd/test", "eml-datasetWithUnits.xml", package = "EML")
 #' eml <- read_eml(f)
 #' eml_get(eml, "physical")
+#' 
+#' ## slower examples
+#' \donttest{ 
 #' eml_get(eml, "attributeList")
 #' eml_get(eml, "attributeList", join = FALSE)  ## use additional arguments to get_attributeList
 #' 
 #' ## The first argument need not be an "eml" class, it could be a child element; e.g.
 #' eml_get(eml@dataset@dataTable, "physical")
-#' 
+#' }
 #' @rdname eml_get
 #' @export
 setGeneric("eml_get", function(x, element = NULL, ...){
@@ -34,12 +37,14 @@ setGeneric("eml_get", function(x, element = NULL, ...){
     if(length(all) > 1){
       out <- lapply(all, eml_get, ...)
       out <- out[!sapply(out, eml_empty)] # drop the empty S4 elements
-    } else{ 
+    } else { 
       out <- eml_get(all, ...)
     }
-    if(!isS4(out[[1]]) && length(out) == 1){ # deal with the length-1 list of lists
-      out <- out[[1]]
-      out <- out[!sapply(out, eml_empty)] # drop the empty S4 elements
+    if(isS4(out) && length(out) < 1) # Already a simple S4 element, ready to return
+      out <- out
+    else if(!isS4(out[[1]]) && length(out) == 1){ # deal with the length-1 list of lists
+        out <- out[[1]]
+        out <- out[!sapply(out, eml_empty)] # drop the empty S4 elements
     }
   }
   out

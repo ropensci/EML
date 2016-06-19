@@ -29,7 +29,7 @@ set_methods <- function(methods_file,
   if (!is.null(sampling_file) && !isEmpty(sampling_coverage)) {
     sampling <- new(
       "sampling",
-      samplingDescription = new("samplingDescription", section = set_section(sampling_file)),
+      samplingDescription = as(set_TextType(sampling_file), "samplingDescription"),
       studyExtent = new("studyExtent", coverage = sampling_coverage),
       citation = sampling_citation
     )
@@ -39,8 +39,7 @@ set_methods <- function(methods_file,
   
   if (!is.null(qualityControl_file)) {
     qualityControl <- new("qualityControl",
-                          description = new("description",
-                                            section = set_section(qualityControl_file))
+                          description = as(set_TextType(qualityControl_file), "description")
                           )
   } else {
     qualityControl <- new("qualityControl")
@@ -53,8 +52,7 @@ set_methods <- function(methods_file,
       "methodStep",
       instrumentation = instrumentation,
       software = software,
-      description = new("description",
-                          section = set_section(methods_file))
+      description = as(set_TextType(methods_file), "description")
       )
   )
   methods

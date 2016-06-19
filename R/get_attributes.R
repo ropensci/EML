@@ -153,7 +153,7 @@ datetime_attributes <- function(ListOfattribute, eml){
 
 factor_attributes <- function(ListOfattribute, eml){
   map_df(ListOfattribute, function(a){
-    name = a@attributeName
+    name = eml_get(a, "attributeName")
     scale = choice(a@measurementScale)
     if(scale %in% c("nominal", "ordinal")){
       b <- slot(a@measurementScale, scale)
@@ -166,7 +166,8 @@ factor_attributes <- function(ListOfattribute, eml){
         d <- slot(b@nonNumericDomain, s)
         s <- choice(d[[1]]) # FIXME: what to do about multiple enumeratedDomain elements?
         if("codeDefinition" %in% s){
-          data.frame(attributeName = name, codedef_to_df(d[[1]]@codeDefinition))
+          code_df <-  codedef_to_df(d[[1]]@codeDefinition)
+          data.frame(attributeName = rep(name, dim(code_df)[1]), code_df)
         } else if("externalCodeSet" %in% s){
           NULL
         } else if("entityCodeList" %in% s){
