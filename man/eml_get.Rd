@@ -9,7 +9,7 @@
 \usage{
 eml_get(x, element = NULL, ...)
 
-\S4method{eml_get}{attributeList}(x, eml = x, join = TRUE)
+\S4method{eml_get}{attributeList}(x, eml = x)
 
 
   \S4method{eml_get}{unitList}(x = read_eml(system.file("xsd/eml-unitDictionary.xml",

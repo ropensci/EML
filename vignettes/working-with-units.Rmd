@@ -9,6 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r}
+library("EML")
+```
 
 One essential role of EML metadata is in precisely defining the units in which data is measured. To make sure these units can be understood by (and thus potentially converted to other units by) a computer, it's necessary to be rather precise about our choice of units.  
 
@@ -20,18 +23,19 @@ f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
 eml <- read_eml(f)
 ```
 
-We extract the `attributeList` into separate `data.frame`s for each type of data (`join=FALSE`), allowing us to focus on numeric data (character and factors don't have units)
+We extract the `attributeList` 
 
 ```{r}
-attribute_tables <- get_attributes(eml@dataset@dataTable[[1]]@attributeList, join=FALSE)
-attribute_tables$numerics
+attribute_tables <- get_attributes(eml@dataset@dataTable[[1]]@attributeList)
+a <- attribute_tables$attributes
+numerics <- a[a$domain == "numericDomain",]
 ```
 
 We see this data contains eleven columns containing numeric data, with metadata for the unit, precision, range, and number type (integer, real complex) given in the resulting table.  EML knows about many standard units, but a metadata file may occassionally need to define a unit that is not in the StandardUnit dictionary.  We can use the function `is_standardUnit()` to quickly check if the units here are in EML's dictionary:
 
 
 ```{r}
-units <- attribute_tables$numerics$unit
+units <- numerics$unit
 
 units[ !is_standardUnit(units) ]
 ```
