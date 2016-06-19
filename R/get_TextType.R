@@ -36,13 +36,13 @@ get_TextType <- function(node, to = "html", output = tempfile(class(node), filee
     XML::saveXML(x, docbook_file)
     pandoc_convert(basename(docbook_file), to = to, output = output, options = "-s")
  
-    file.copy(output_file, paste(wd, basename(output_file), sep="/"), overwrite = TRUE)
+    file.copy(output, paste(wd, basename(output), sep="/"), overwrite = TRUE)
     
     
     setwd(wd)
     
     if(view && to == "html")
-      utils::browseURL(basename(output_file))
+      utils::browseURL(basename(output))
 
     
     
