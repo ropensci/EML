@@ -4,10 +4,13 @@
 \alias{eml_validate}
 \title{validate_eml}
 \usage{
-eml_validate(eml, ...)
+eml_validate(eml, encoding = NULL, ...)
 }
 \arguments{
 \item{eml}{an eml class object, file, or xml document}
+
+\item{encoding}{optional, if eml is a file path / an eml and has special characters, one can 
+gives the encoding used by xmlParse.}
 
 \item{...}{additional arguments to eml_write, such as namespaces}
 }

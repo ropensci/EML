@@ -3,6 +3,8 @@
 #'
 #' validate_eml
 #' @param eml an eml class object, file, or xml document
+#' @param encoding optional, if eml is a file path / an eml and has special characters, one can 
+#' gives the encoding used by xmlParse.
 #' @param ... additional arguments to eml_write, such as namespaces
 #' 
 #' @return Whether the document is valid (logical)
@@ -25,13 +27,16 @@
 #' }
 #' 
 #' @export
-eml_validate <- function(eml, ...){
-
+eml_validate <- function(eml, encoding = NULL, ...){
+  
   schema <- system.file("xsd/eml.xsd", package = "EML") #"http://ropensci.github.io/EML/eml.xsd"
-
+  
   if(isS4(eml))
     eml <- write_eml(eml, ...)
-
+  
+  
+  eml <- xmlParse(eml, encoding = encoding)
+  
   result <- xmlSchemaValidate(schema, eml)
   
   if (result$status != 0) {
