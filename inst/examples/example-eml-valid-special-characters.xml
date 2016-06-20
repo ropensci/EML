@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<eml:eml
+    packageId="eml.1.1" system="knb"
+    xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1"
+    xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd">
+
+<dataset>
+  <title>Data from Cedar Creek LTER on productivity and species richness
+  for use in a workshop titled "An Analysis of the Relationship between
+  Productivity and Diversity using Experimental Results from the Long-Term
+  Ecological Research Network" held at NCEAS in September 1996.</title>
+  <creator id="clarence.lehman">
+    <individualName>
+      <salutation>Mr.</salutation>
+      <givenName>Maël</givenName>
+      <surName>Lehman</surName>
+    </individualName>
+  </creator>
+  <contact>
+    <references>clarence.lehman</references>
+  </contact>
+</dataset>
+</eml:eml>

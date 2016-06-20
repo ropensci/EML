@@ -7,6 +7,12 @@ testthat::test_that("We return TRUE when validating valid documents", {
 
   testthat::expect_true(eml_validate(f))
   testthat::expect_message(eml_validate(f), NA)
+  
+  
+  f2 <- system.file("examples", "example-eml-valid-special-characters.xml", package = "EML")
+  
+  testthat::expect_true(eml_validate(f2, encoding = "latin1"))
+  testthat::expect_message(eml_validate(f2, encoding = "latin1"), NA)
 })
 
 testthat::test_that("We return FALSE and messages when validating invalid documents", {
