@@ -139,12 +139,25 @@ set_enumeratedDomain <- function(row, factors){
 }
 
 set_BoundsGroup <- function(row, cls = "BoundsGroup"){
+  
+  if(!is.na(row[["minimum"]]))
+    minimum = new("minimum", na2empty(row[["minimum"]]),
+                exclusive = new("xml_attribute", "false"))
+  else 
+    minimum <- new("minimum")
+  
+  if(!is.na(row[["maximum"]]))
+    maximum = new("maximum", na2empty(row[["maximum"]]),
+                  exclusive = new("xml_attribute", "false"))
+  else 
+    maximum <- new("maximum")
+  
+  
   new(cls,
-      bounds = as(list(new("bounds",
-               minimum = new("minimum", na2empty(row[["minimum"]]),
-                             exclusive = new("xml_attribute", "false")),
-               maximum = new("maximum", na2empty(row[["maximum"]]),
-                             exclusive = new("xml_attribute", "false")))), "ListOfbounds"))
+      bounds = as(list(new("bounds", 
+                           minimum = minimum, 
+                           maximum = maximum)), 
+                  "ListOfbounds"))
 }
 
 
