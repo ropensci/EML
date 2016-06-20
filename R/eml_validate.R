@@ -4,7 +4,7 @@
 #' validate_eml
 #' @param eml an eml class object, file, or xml document
 #' @param encoding optional, if eml is a file path / an eml and has special characters, one can 
-#' give the encoding used by xmlParse.
+#' gives the encoding used by xmlParse.
 #' @param ... additional arguments to eml_write, such as namespaces
 #' 
 #' @return Whether the document is valid (logical)
