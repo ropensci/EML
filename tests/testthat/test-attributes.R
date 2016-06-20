@@ -15,7 +15,8 @@ testthat::test_that("we can have numeric data with bounds where some bounds are 
                    unit = "meter", 
                    numberType = "real", 
                    minimum = "0", 
-                   maximum = NA)
+                   maximum = NA,
+                   stringsAsFactors = FALSE)
   attributeList <- set_attributes(df, col_classes = "numeric")
   
   dataTable <- new("dataTable", 
@@ -29,7 +30,7 @@ testthat::test_that("we can have numeric data with bounds where some bounds are 
   eml <- new("eml", packageId = "123", system = "uuid", dataset = dataset)
   
   v <- eml_validate(eml)
-  expect_true(v)
+  testthat::expect_true(v)
 
 
 })
