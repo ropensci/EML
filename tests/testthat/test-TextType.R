@@ -29,7 +29,7 @@ testthat::test_that("Documents can have richer formatting.  Documents with title
 f <- system.file("examples/hf205-methods.docx", package = "EML")
 d <- set_TextType(f)
 node <- as(d, "description")
-testthat::expect_is("description")
+testthat::expect_is(node, "description")
 
 
 get_TextType(node, view = FALSE, output = tempfile())
