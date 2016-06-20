@@ -6,7 +6,6 @@
 #' @param x an EML object or child/descendant object
 #' @param element name of the element to be extracted. If multiple occurances are found, will extract all
 #' @param eml the eml file from which to look up references (optional)
-#' @param join when returning attributeList tables, should we join the tables into one table? (logical, default TRUE)
 #' @param ... additional arguments for specific get_* methods, see details
 #' @details Some elements have custom get_<class> functions which return the requested metadata in a more natural format, such
 #' as get_attributeList, which returns data.frames containing the desired metadata.  If such a function exists for the element
@@ -21,7 +20,6 @@
 #' ## slower examples
 #' \donttest{ 
 #' eml_get(eml, "attributeList")
-#' eml_get(eml, "attributeList", join = FALSE)  ## use additional arguments to get_attributeList
 #' 
 #' ## The first argument need not be an "eml" class, it could be a child element; e.g.
 #' eml_get(eml@dataset@dataTable, "physical")
@@ -65,6 +63,8 @@ eml_empty <- function(x){
   else 
     FALSE
 }
+
+## Class-specific methods
 
 #' @describeIn eml_get get method for attributeList
 setMethod("eml_get", signature = "attributeList", get_attributes)

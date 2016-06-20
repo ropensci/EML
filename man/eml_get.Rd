@@ -23,8 +23,6 @@ eml_get(x, element = NULL, ...)
 \item{...}{additional arguments for specific get_* methods, see details}
 
 \item{eml}{the eml file from which to look up references (optional)}
-
-\item{join}{when returning attributeList tables, should we join the tables into one table? (logical, default TRUE)}
 }
 \description{
 eml_get
@@ -49,7 +47,6 @@ eml_get(eml, "physical")
 ## slower examples
 \donttest{ 
 eml_get(eml, "attributeList")
-eml_get(eml, "attributeList", join = FALSE)  ## use additional arguments to get_attributeList
 
 ## The first argument need not be an "eml" class, it could be a child element; e.g.
 eml_get(eml@dataset@dataTable, "physical")
