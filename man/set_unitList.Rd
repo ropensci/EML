@@ -11,11 +11,14 @@ set_unitList(units, unitTypes = NULL, as_metadata = FALSE)
 
 \item{unitTypes}{optional, a data.frame defining any additional unitTypes not already defined}
 
-\item{as_metadata}{logical, default FALSE. If true, returns a `metadata` element suitable for `additionalMetadata`, see below.}
+\item{as_metadata}{logical, default FALSE. If true, returns an `additionalMetadata` element, see below.}
 }
 \value{
 By default the function returns an S4 unitList object, like other set_ methods. If as_metadata is set to TRUE,
-function returns a `metadata` element.  EML permits a metadata element to contain arbitrary XML, including but
+function returns an `additionalMetadata` element, which can be added directly to an eml object (see examples),
+which is the usual location for declaring additional units. 
+
+Note that EML permits a metadata element to contain arbitrary XML, including but
 not limited to unitList XML for custom units (which is really part of the stmml unit vocabulary used by EML, but
 part of a more general standard.) This means that once converted to a metadata element, the unit list is coerced
 into stmml XML and can no longer be subset or modified in the same way.
@@ -66,5 +69,8 @@ The unitType table must have the following columns:
  
  set_unitList(units, unitTypes)
 
+ additionalMetadata <- set_unitList(units, unitTypes, as_metadata = TRUE)
+ new("eml", additionalMetadata = additionalMetadata)
+ 
 }
 

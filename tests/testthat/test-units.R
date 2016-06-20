@@ -20,7 +20,7 @@ testthat::expect_equal(length(x@unit), 2)
 testthat::expect_equal(length(x@unitType), 3)
 
 x = set_unitList(units, unitTypes, as_metadata = TRUE)
-testthat::expect_is(x, "metadata")
+testthat::expect_is(x, "additionalMetadata")
 
 
 testthat::context("Reading default unit definitions")
