@@ -1,10 +1,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
 
-EML
-===
+EML: The Ecological Metadata Language Standard
+==============================================
 
-*Note*: `EML` is work in progress. Please see the Issues tracker in this repository for details about current issues and development milestonds.
+EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the [EML Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) for an introduction and thorough documentation of the standard. Additionally, the scientific article []() provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the `EML` R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.
+
+*Note*: The `EML` R package is work in progress. Please see the Issues tracker in this repository for details about current issues and development milestonds.
 
 Installation
 ------------
@@ -118,20 +120,25 @@ write_eml(eml, "example.xml")
 #> [1] "example.xml"
 ```
 
-Manipulating EML objects
-------------------------
+Reading EML files
+-----------------
 
-Eventually `EML` will provide constructor and extract methods to create and extract common metadata sections from convenient R stuctures (e.g. `data.frames` with unit metadata, common R classes like `Person`, `bibtype`). For now, the only method to access and modify EML is to use the standard S4 subsetting and constructor methods.
+Please see the vignette, [Parsing EML](https://github.com/ropensci/EML/blob/master/vignettes/parsing-EML.Rmd) for a more thorough introduction to reading EML files and extracting relevant metadata.
 
-Our current example does not have a publication date. Let's add one:
+Creating EML files
+------------------
 
-``` r
-eml@dataset@pubDate <- new("pubDate", "2016")
-```
+Please see the vignette, [Creating EML](https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd) for a proper introduction to creating your own EML files.
 
-Note that we use the constructor method `new()` to create an object.
+Working with custom units
+-------------------------
 
-### Working with repeating elements
+Users may occassionally need to define custom unit types that EML does not know about. Please see the vignette, [Working with units](https://github.com/ropensci/EML/blob/master/vignettes/working-with-units.Rmd) for an overview of how units work in EML, how to view the standard unit library, and how to access and define custom units and custom unit types.
+
+Archiving, Sharing, and Publishing EML
+--------------------------------------
+
+One of the chief advantages of using EML to manage your own data is the improved ability to search all of your data files, e.g. for the ones that have the particular measurements you need on the particular location or species of interest, and be able to share this data either publicly or securely with select collaborators. To do so, you will need to upload your EML file and data to a scientific metadata repository that understands EML. The vignette, [metadata repositories](https://github.com/ropensci/EML/blob/master/vignettes/metadata-repositories.Rmd) describes how to do this.
 
 Developer notes
 ---------------

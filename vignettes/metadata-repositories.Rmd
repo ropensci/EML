@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+
+```{r include=FALSE}
+knitr::opts_chunk(eval=FALSE)  ## We cannot authenticate automatically, so we cannot run code
+```
+
 One of the principle advantages in creating EML is to make it easier to find the data you need, without having to standardize all your data files themselves into one giant database.  Instead, the data files can be whatever you want, provided the relevant information you might search on to discover data of interest is listed in the metadata.  
 
 

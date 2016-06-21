@@ -28,7 +28,7 @@ In so doing we will take a modular approach that will allow us to build up our m
 
 ### Overview of the EML hierarchy
 
-A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the official schema documentation, here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
+A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the [official schema documentation](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html), here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
 
 This schematic shows each of the metadata elements we will generate.  Most these elements have sub-components (e.g. a 'publisher' may have a name, address, and so forth) which are not shown for simplicity.  Other optional fields we will not be generating in this example are also not shown.   
 
