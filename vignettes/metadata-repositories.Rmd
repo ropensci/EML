@@ -11,7 +11,7 @@ vignette: >
 
 
 ```{r include=FALSE}
-knitr::opts_chunk(eval=FALSE)  ## We cannot authenticate automatically, so we cannot run code
+knitr::opts_chunk$set(eval=FALSE)  ## We cannot authenticate automatically, so we cannot run code
 ```
 
 One of the principle advantages in creating EML is to make it easier to find the data you need, without having to standardize all your data files themselves into one giant database.  Instead, the data files can be whatever you want, provided the relevant information you might search on to discover data of interest is listed in the metadata.  
@@ -84,7 +84,7 @@ query(CNode("STAGING"), searchTerms = list(id = packageId))
 
 Gimme DOI! Note that the example would fail if run here since only the Production (`PROD`) environment can provide DOIs (the `STAGING` environment is only for tests and training examples), and only then on member nodes that offer DOIs, such as the KNB (`urn:node:KNB`).  
 
-```{r eval=FLASE}
+```{r eval=FALSE}
 cn <- CNode("STAGING")
 mn <- getMNode(cn, "urn:node:mnStageUCSB2")
 newid <- generateIdentifier(mn, "DOI")

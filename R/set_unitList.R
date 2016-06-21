@@ -68,6 +68,11 @@
 #'  
 set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
   
+  ## no factors please
+  units[] <- lapply(units, as.character)
+  unitTypes[] <- lapply(unitTypes, as.character)
+  
+  
   if(is.null(unitTypes)){
     ListOfunitType <- new("ListOfunitType")
   } else {
@@ -104,11 +109,17 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
   if(is.null(units$abbreviation))
       units$abbreviation <- rep(NA, length(units$name))
   if(is.null(units$constantToSI))
-    units$constantToSI <- rep("0", length(units$name))
+    units$constantToSI <- rep(NA, length(units$name))
+  if(is.null(units$description))
+    units$description <- rep(NA, length(units$name))
+  if(is.null(units$multiplierToSI))
+    units$multiplierToSI <- rep(NA, length(units$name))
+  if(is.null(units$parentSI))
+    units$parentSI <- rep(NA, length(units$name))
   
   ## Coerce all columns to characters
           
-    ListOfunit <- as(lapply(1:dim(units)[1], function(i){
+  ListOfunit <- as(lapply(1:dim(units)[1], function(i){
     row <- units[i,]
     new(
       "unit",
@@ -116,11 +127,10 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
       name = row[["name"]],
       abbreviation = na2empty(row[["abbreviation"]]),
       unitType = row[["unitType"]],
-      parentSI = row[["parentSI"]],
-      multiplierToSI = row[["multiplierToSI"]],
-      constantToSI = row[["constantToSI"]],
-      description = new("description", row[["description"]])
-    )
+      parentSI = na2empty(row[["parentSI"]]),
+      multiplierToSI = na2empty(as.character(row[["multiplierToSI"]])),
+      constantToSI = na2empty(as.character(row[["constantToSI"]])),
+      description = na2empty(row[["description"]]))
   }), "ListOfunit")
   
     
@@ -138,4 +148,11 @@ set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
   }
 }
 
+
+
+setAs("unitList", "additionalMetadata", function(from){
+  xml_meta <- S4Toeml(from)
+  setXMLNamespace(xml_meta, c(stmml =  "http://www.xml-cml.org/schema/stmml_1.1"))
+  new("additionalMetadata", metadata = new("metadata", list(xml_meta)))
+})
 

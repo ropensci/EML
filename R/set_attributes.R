@@ -32,6 +32,10 @@
 #' @export
 set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
 
+  ## all as characters please (no stringsAsFactors!)
+  attributes[] <- lapply(attributes, as.character)
+  factors[]  <- lapply(factors, as.character)
+  
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
   if(! "attributeName" %in% names(attributes))
     stop("attributes table must include an 'attributeName' column")
