@@ -141,6 +141,15 @@ data.frame(
     "what variable being measured in what treatment (character/factor).",
     "value of measured variable for run.num on year/day/hour.min.",
     "length of the species in meters (dummy example of numeric data)"),
+  numberType = c(
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    NA,
+    "real"),
   stringsAsFactors = FALSE
 )
 

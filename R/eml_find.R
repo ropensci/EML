@@ -7,7 +7,7 @@
 
 #' eml_find
 #' 
-#' find all occurrances of an EML element in at a given node at any depth
+#' find all occurrences of an EML element in at a given node at any depth
 #' @param node an EML S4 object; e.g. `eml` or any of it's child/descendant slots.
 #' @param element the name of an EML element to find
 #' @return the requested element as an EML S4 object
