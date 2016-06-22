@@ -1,5 +1,5 @@
 
-#' is_standardmUnit
+#' is_standardUnit
 #'
 #' @param x name of unit to check
 #'
