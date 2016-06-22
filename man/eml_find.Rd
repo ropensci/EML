@@ -15,6 +15,6 @@ eml_find(node, element)
 the requested element as an EML S4 object
 }
 \description{
-find all occurrances of an EML element in at a given node at any depth
+find all occurrences of an EML element in at a given node at any depth
 }
 

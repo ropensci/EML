@@ -38,3 +38,20 @@ testthat::context("Reading custom unit definitions from EML")
 f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
 eml <- read_eml(f)
 unitList <- get_unitList(eml@additionalMetadata[[1]]@metadata[[1]])
+
+
+
+
+unitList <- set_unitList(units, unitTypes)
+
+## reverse operation also works:
+get_unitList(unitList)
+
+ ## To add this to an EML document:
+eml <- new("eml", additionalMetadata = as(unitList, "additionalMetadata"))
+
+ ## Equivalently:
+additionalMetadata <- set_unitList(units, unitTypes, as_metadata = TRUE)
+eml <- new("eml", additionalMetadata = additionalMetadata)
+
+
