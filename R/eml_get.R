@@ -4,7 +4,7 @@
 #' eml_get 
 #' @include classes.R classes-stmml.R get_attributes.R get_unitList.R
 #' @param x an EML object or child/descendant object
-#' @param element name of the element to be extracted. If multiple occurances are found, will extract all
+#' @param element name of the element to be extracted. If multiple occurrences are found, will extract all
 #' @param eml the eml file from which to look up references (optional)
 #' @param ... additional arguments for specific get_* methods, see details
 #' @details Some elements have custom get_<class> functions which return the requested metadata in a more natural format, such

@@ -3,7 +3,7 @@
 #' @param beginDate Starting date for temporal coverage range. 
 #' @param endDate End date for temporal coverage range
 #' @param date give a single date, or vector of single dates covered (instead of beginDate and endDate)
-#' @param sci_names string of (space-separated) scientif names for species covered.  See details
+#' @param sci_names string of (space-separated) scientific names for species covered.  See details
 #' @param geographicDescription text string describing the geographic location
 #' @param westBoundingCoordinate Decimal longitude for west edge bounding box
 #' @param eastBoundingCoordinate Decimal longitude for east edge bounding box
@@ -12,7 +12,7 @@
 #' @param altitudeMinimum minimum altitude covered by the data (optional)
 #' @param altitudeMaximum maximum altitude covered by the data (optional)
 #' @param altitudeUnits name of the units used to measure altitude, if given
-#' @details set_coverage provides a simple and consise way to specify most common temporal,
+#' @details set_coverage provides a simple and concise way to specify most common temporal,
 #' taxonomic, and geographic coverage metadata. For certain studies this will not be
 #' well suited, and users will need the more flexible but more verbose construction using
 #' "new()" methods; for instance, to specify temporal coverage in geological epoch instead

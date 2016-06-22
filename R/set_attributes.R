@@ -1,7 +1,7 @@
 #' set_attributes
 #'
 #' set_attributes
-#' @param attributes a joined table of all attribute metdata
+#' @param attributes a joined table of all attribute metadata
 #' (such as returned by \code{\link{get_attributes}}, see details)
 #' @param factors a table with factor code-definition pairs; see details
 #' @param col_classes optional, list of R column classes (numeric, factor, date, character)
@@ -14,7 +14,7 @@
 #' For all data:
 #' - attributeName (required)
 #' - attributeDefinition (required)
-#' - measurementScale (requred)
+#' - measurementScale (required)
 #' - domain (required)
 #'
 #' For numeric (ratio or interval) data:
