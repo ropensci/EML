@@ -7,7 +7,8 @@ Authors@R: c(
     person("Carl", "Boettiger", role = c("aut", "cre"), 
            email = "cboettig@gmail.com"), 
     person("Matt", "Jones", role="aut"), 
-    person("Bryce", "Mecum", role = "ctb", email = "brycemecum@gmail.com")
+    person("Bryce", "Mecum", role = "ctb", email = "brycemecum@gmail.com"),
+    person("Maëlle", "Salmon", role = "ctb", email = "maelle.salmon@yahoo.se")
     )
 Maintainer: Carl Boettiger <cboettig@gmail.com>
 Description: Parse and serialize Ecological Metadata Language ('EML') files into
@@ -24,6 +25,7 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Encoding: UTF-8
 Collate:
     'classes.R'
     'classes-stmml.R'
