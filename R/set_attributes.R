@@ -31,7 +31,7 @@
 #' @return an eml "attributeList" object
 #' @export
 set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
-
+  
   ## all as characters please (no stringsAsFactors!)
   attributes[] <- lapply(attributes, as.character)
   factors[]  <- lapply(factors, as.character)
@@ -39,7 +39,7 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
   if(! "attributeName" %in% names(attributes))
     stop("attributes table must include an 'attributeName' column")
-
+  
   ## Factors table must be all of type character!  
   if(!is.null(factors))
     factors <- data.frame(lapply(factors, as.character), stringsAsFactors = FALSE)
@@ -49,11 +49,11 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
     attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE)
   ## Add NA columns if necessary FIXME some of these can be missing if their class isn't represented, but otherwise must be present
   for(x in c("precision", "minimum", "maximum", "unit", "numberType", "formatString", "definition",
-                         "pattern", "source", "attributeLabel", "storageType", "missingValueCode",
-                         "missingValueCodeExplanation")){
+             "pattern", "source", "attributeLabel", "storageType", "missingValueCode",
+             "missingValueCodeExplanation")){
     attributes <- add_na_column(x, attributes)
   }
-
+  
   out <- new("attributeList")
   out@attribute <- as(lapply(1:dim(attributes)[1], function(i)
     set_attribute(attributes[i,], factors = factors)), "ListOfattribute")
@@ -66,8 +66,8 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
 
 set_attribute <- function(row, factors = NULL){
   s <- row[["measurementScale"]]
-
-
+  
+  
   if(s %in% c("ratio", "interval")){
     if(!is_standardUnit(row[["unit"]])){
       type <- "customUnit"
@@ -85,9 +85,9 @@ set_attribute <- function(row, factors = NULL){
                 numericDomain = new("numericDomain",
                                     numberType = new("numberType", row[["numberType"]]),
                                     BoundsGroup = set_BoundsGroup(row))
-                )
+    )
   }
-
+  
   if(s %in% c("ordinal", "nominal")){
     node <- new(s, nonNumericDomain = new("nonNumericDomain"))
     if(row[["domain"]] == "textDomain"){
@@ -99,11 +99,11 @@ set_attribute <- function(row, factors = NULL){
       node@nonNumericDomain@textDomain <- n
     } else if(row[["domain"]] == "enumeratedDomain"){
       node@nonNumericDomain@enumeratedDomain <- set_enumeratedDomain(row, factors)
-
+      
     }
   }
-
-
+  
+  
   if(s %in% c("dateTime")){
     node <- new("dateTime",
                 formatString = na2empty(row[["formatString"]]),
@@ -111,42 +111,42 @@ set_attribute <- function(row, factors = NULL){
                 dateTimeDomain = new("dateTimeDomain",
                                      BoundsDateGroup = set_BoundsGroup(row, "BoundsDateGroup")))
   }
-
+  
   measurementScale = new("measurementScale")
   slot(measurementScale, s) <- node
-
+  
   new("attribute",
       attributeName = row[["attributeName"]],
       attributeDefinition = row[["attributeDefinition"]],
       attributeLabel = na2empty(row[["attributeLabel"]]),
       storageType = na2empty(row[["storageType"]]),
       missingValueCode = list(new("missingValueCode",
-                             code = na2empty(row[["missingValueCode"]]),
-                             codeExplanation = na2empty(row[["missingValueCodeExplanation"]]))),
+                                  code = na2empty(row[["missingValueCode"]]),
+                                  codeExplanation = na2empty(row[["missingValueCodeExplanation"]]))),
       measurementScale = measurementScale
   )
-}
+  }
 
 set_enumeratedDomain <- function(row, factors){
-
+  
   name <- row[["attributeName"]]
   df <- factors[factors$attributeName == name, ]
-
+  
   ListOfcodeDefinition <- as(lapply(1:dim(df)[1], function(i){
     new("codeDefinition", code = df[i,"code"], definition = df[i, "definition"])
   }), "ListOfcodeDefinition")
-
+  
   new("ListOfenumeratedDomain",
-       list(new("enumeratedDomain",
-                codeDefinition = ListOfcodeDefinition)))
-
+      list(new("enumeratedDomain",
+               codeDefinition = ListOfcodeDefinition)))
+  
 }
 
 set_BoundsGroup <- function(row, cls = "BoundsGroup"){
   
   if(!is.na(row[["minimum"]]))
     minimum = new("minimum", na2empty(row[["minimum"]]),
-                exclusive = new("xml_attribute", "false"))
+                  exclusive = new("xml_attribute", "false"))
   else 
     minimum <- new("minimum")
   
@@ -174,20 +174,20 @@ infer_domain_scale <- function(col_classes, attributeName = names(col_classes)){
   domain[col_classes == "character"] <- "textDomain"
   domain[col_classes %in% c("factor", "ordered")] <- "enumeratedDomain"
   domain[col_classes %in% c("Date")] <- "dateTimeDomain"
-
+  
   measurementScale[col_classes == "numeric"] <- "ratio" # !
   measurementScale[col_classes == "character"] <- "nominal"
   measurementScale[col_classes == "ordered"] <- "ordinal"
   measurementScale[col_classes == "factor"] <- "nominal"
   measurementScale[col_classes %in% c("Date")] <- "dateTime"
-
+  
   ## storage type is optional, maybe better not to set this?
   storageType[col_classes == "numeric"] <- "float"
   storageType[col_classes == "character"] <- "string"
   storageType[col_classes %in% c("factor", "ordered")] <- "string"
   storageType[col_classes %in% c("Date")] <- "date"
-
-
+  
+  
   data.frame(attributeName = attributeName, domain = domain, measurementScale = measurementScale, storageType = storageType, stringsAsFactors = FALSE)
 }
 
