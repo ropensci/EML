@@ -33,7 +33,7 @@ eml_validate <- function(eml, encoding = NULL, ...){
   
   # validation is based on the xml format not the S4 object
   if(isS4(eml)){
-    eml <- write_eml(eml, ...)
+    eml <- write_eml(eml, encoding = encoding, ...)
   }
 
   # the encoding argument can only be passed to xmlParse directly

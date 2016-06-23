@@ -25,7 +25,7 @@ testthat::test_that("We return TRUE when validating valid eml objects", {
   
   
   f2 <- system.file("examples", "example-eml-valid-special-characters.xml", package = "EML")
-  eml2 <- read_eml(f2)
+  eml2 <- read_eml(f2, encoding = "latin1")
   testthat::expect_true(eml_validate(eml2, encoding = "latin1"))
   testthat::expect_message(eml_validate(eml2, encoding = "latin1"), NA)
 })
