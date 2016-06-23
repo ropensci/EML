@@ -18,10 +18,16 @@ c_as <- function(x, cls){
 setOldClass("person")
 
 from_a_person <- function(to){
+
   
   if(to %in% c("associatedParty", "personnel"))
   
+    
   function(from){
+    if(is.null(from$role)){
+      warning(paste0("Person ", as.character(from), " was not given any role."),
+              call. = FALSE)
+    }  
   new(to,
       individualName = new("individualName",
                            "givenName" = as.character(from$given),
@@ -33,7 +39,11 @@ from_a_person <- function(to){
   else
     
     function(from){
-      new(to,
+      if(is.null(from$role)){
+        warning(paste0("Person ", as.character(from), " was not given any role."),
+                call. = FALSE)
+      }  
+     new(to,
           individualName = new("individualName",
                                "givenName" = as.character(from$given),
                                "surName" = as(as.character(from$family), "surName")),
