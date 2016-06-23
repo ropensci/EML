@@ -31,17 +31,18 @@ eml_validate <- function(eml, encoding = NULL, ...){
   
   schema <- system.file("xsd/eml.xsd", package = "EML") #"http://ropensci.github.io/EML/eml.xsd"
   
-  if(isS4(eml))
+  # validation is based on the xml format not the S4 object
+  if(isS4(eml)){
     eml <- write_eml(eml, ...)
-  
-  
+  }
+
+  # the encoding argument can only be passed to xmlParse directly
   eml <- xmlParse(eml, encoding = encoding)
   
   result <- xmlSchemaValidate(schema, eml)
   
   if (result$status != 0) {
     lapply(result$errors, message_validation_error)
-    
     return(FALSE)
   } else {
     return(TRUE)
