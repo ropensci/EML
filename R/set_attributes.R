@@ -40,13 +40,10 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
   if(! "attributeName" %in% names(attributes))
     stop("attributes table must include an 'attributeName' column")
 
-  ## Factors table must be all of type character!  
-  if(!is.null(factors))
-    factors <- data.frame(lapply(factors, as.character), stringsAsFactors = FALSE)
-  
   ## infer "domain" & "measurementScale" given optional column classes
   if(!is.null(col_classes))
-    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE)
+    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE, sort = FALSE)
+  
   ## Add NA columns if necessary FIXME some of these can be missing if their class isn't represented, but otherwise must be present
   for(x in c("precision", "minimum", "maximum", "unit", "numberType", "formatString", "definition",
                          "pattern", "source", "attributeLabel", "storageType", "missingValueCode",
