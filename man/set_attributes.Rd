@@ -28,10 +28,12 @@ headers shown here.  The attributes data frame must contain columns for required
 These are:
 
 For all data:
-- attributeName (required)
-- attributeDefinition (required)
-- measurementScale (required)
-- domain (required)
+- attributeName (required, free text field)
+- attributeDefinition (required, free text field)
+- measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
+ case sensitive) but it can be inferred from col_classes.
+- domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
+ case sensitive) but it can be inferred from col_classes.
 
 For numeric (ratio or interval) data:
 - unit (required)
