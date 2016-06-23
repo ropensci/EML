@@ -106,7 +106,7 @@ eml_validate(eml)
 #> [1] TRUE
 
 # An EML document with validation errors
-invalid_eml <- system.file("tests/testthat/", "example-eml-invalid.xml", package = "EML")
+invalid_eml <- system.file("xsd/test/example-eml-invalid.xml", package = "EML")
 
 eml_validate(invalid_eml)
 #> 10.0: Element 'creator': This element is not expected. Expected is one of ( references, alternateIdentifier, shortName, title ).
@@ -117,7 +117,6 @@ Write out as EML:
 
 ``` r
 write_eml(eml, "example.xml")
-#> [1] "example.xml"
 ```
 
 Reading EML files
@@ -146,3 +145,7 @@ Developer notes
 ### Creating EML class definitions
 
 Class definitions (`classes.R`) and methods (`methods.R`) are created programmatically. From the root of the package, run: `source("inst/create-package/create_package.R")`.
+
+### Meta
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

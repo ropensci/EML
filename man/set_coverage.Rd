@@ -50,7 +50,6 @@ well suited, and users will need the more flexible but more verbose construction
 of calendar dates, or to specify taxonomic coverage in terms of other ranks or identifiers.
 }
 \examples{
-
 coverage <- 
  set_coverage(begin = '2012-06-01', end = '2013-12-31',
               sci_names = "Sarracenia purpurea",

@@ -65,7 +65,7 @@ Validate EML against the official schema
 eml_validate(eml)
 
 # An EML document with validation errors
-invalid_eml <- system.file("tests/testthat/", "example-eml-invalid.xml", package = "EML")
+invalid_eml <- system.file("xsd/test/example-eml-invalid.xml", package = "EML")
 
 eml_validate(invalid_eml)
 ```
@@ -74,7 +74,7 @@ eml_validate(invalid_eml)
 Write out as EML:
 
 
-```{r}
+```{r, eval=FALSE}
 write_eml(eml, "example.xml")
 ```
 
@@ -105,3 +105,6 @@ One of the chief advantages of using EML to manage your own data is the improved
 ### Creating EML class definitions 
 
 Class definitions (`classes.R`) and methods (`methods.R`) are created programmatically.  From the root of the package, run: `source("inst/create-package/create_package.R")`.  
+
+### Meta
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

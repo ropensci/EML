@@ -22,7 +22,6 @@
 #' @export
 #'
 #' @examples
-#' 
 #'coverage <- 
 #'  set_coverage(begin = '2012-06-01', end = '2013-12-31',
 #'               sci_names = "Sarracenia purpurea",
