@@ -12,10 +12,12 @@
 #' These are:
 #'
 #' For all data:
-#' - attributeName (required)
-#' - attributeDefinition (required)
-#' - measurementScale (required)
-#' - domain (required)
+#' - attributeName (required, free text field)
+#' - attributeDefinition (required, free text field)
+#' - measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
+#'  case sensitive) but it can be inferred from col_classes.
+#' - domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
+#'  case sensitive) but it can be inferred from col_classes.
 #'
 #' For numeric (ratio or interval) data:
 #' - unit (required)
@@ -35,14 +37,11 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
   ## all as characters please (no stringsAsFactors!)
   attributes[] <- lapply(attributes, as.character)
   factors[]  <- lapply(factors, as.character)
-  
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
-  if(! "attributeName" %in% names(attributes))
-    stop("attributes table must include an 'attributeName' column")
-
   ## infer "domain" & "measurementScale" given optional column classes
-  if(!is.null(col_classes))
-    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE, sort = FALSE)
+  attributes <- check_and_complete_attributes(attributes, col_classes)
+  
+ 
   
   ## Add NA columns if necessary FIXME some of these can be missing if their class isn't represented, but otherwise must be present
   for(x in c("precision", "minimum", "maximum", "unit", "numberType", "formatString", "definition",
@@ -102,6 +101,10 @@ set_attribute <- function(row, factors = NULL){
 
 
   if(s %in% c("dateTime")){
+    if(is.na(row[["formatString"]])){
+      warning(paste0("The required formatString is missing for attribute ",
+                     row[["attributeName"]]))
+    }
     node <- new("dateTime",
                 formatString = na2empty(row[["formatString"]]),
                 dateTimePrecision = na2empty(row[["precision"]]),
@@ -205,4 +208,55 @@ na2empty <- function(x){
     }
   }
   x
+}
+
+check_and_complete_attributes <- function(attributes, col_classes){
+  if(! "attributeName" %in% names(attributes)){
+    stop(call. = FALSE, "attributes table must include an 'attributeName' column")
+  }else{
+    if(any(is.na(attributes$attributeName))){
+      stop(call. = FALSE, "The attributeName column must be filled for each attribute.")
+    }
+  }
+  
+  ## infer "domain" & "measurementScale" given optional column classes
+  if(!is.null(col_classes))
+    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE, sort = FALSE)
+  
+  if(! "attributeDefinition" %in% names(attributes)){
+    stop(call. = FALSE, "attributes table must include an 'attributeDefinition' column")
+  }else{
+    if(any(is.na(attributes$attributeDefinition))){
+      stop(call. = FALSE, "The attributeDefinition column must be filled for each attribute.")
+    }
+  }
+  
+  
+  if(! "measurementScale" %in% names(attributes)){
+    stop(call. = FALSE, "attributes table must include an 'measurementScale' column")
+  }else{
+    if(any(is.na(attributes$measurementScale))){
+      stop(call. = FALSE, "The measurementScale column must be filled for each attribute.")
+    }else{
+      if(!(all(attributes$measurementScale %in% c("nominal", "ordinal", "ratio",
+                                                  "interval", "dateTime")))){
+        stop(call. = FALSE, "measurementScale permitted values are nominal, ordinal, ratio, interval, dateTime.")
+      }
+    }
+  }
+  
+  
+  if(! "domain" %in% names(attributes)){
+    stop(call. = FALSE, "attributes table must include an 'domain' column")
+  }else{
+    if(any(is.na(attributes$domain))){
+      stop(call. = FALSE, "The domain column must be filled for each attribute.")
+    }else{
+      if(!(all(attributes$domain %in% c("numericDomain", "textDomain", "enumeratedDomain", "dateTimeDomain")))){
+        stop(call. = FALSE, "domain permitted values are numericDomain, textDomain, enumeratedDomain, dateTimeDomain.")
+      }
+    }
+  }
+  return(attributes)
+  
 }
