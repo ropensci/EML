@@ -20,7 +20,7 @@ install.packages("EML", repos = c("http://packages.ropensci.org", "https://cran.
 or install directly from GitHub (after installing the `devtools` package from CRAN):
 
 ``` r
-devtools::install_github("cboettig/EML")
+devtools::install_github("ropensci/EML")
 ```
 
 Quickstart

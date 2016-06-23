@@ -36,7 +36,7 @@ or install directly from GitHub (after installing the `devtools` package from CR
 
 
 ```{r eval=FALSE}
-devtools::install_github("cboettig/EML")
+devtools::install_github("ropensci/EML")
 ```
 
 

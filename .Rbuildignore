@@ -8,3 +8,4 @@ inst/xsd/test/org
 inst/xsd/src
 ^\.travis\.yml$
 vignettes/*.html
+^CONDUCT\.md$

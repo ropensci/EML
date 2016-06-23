@@ -7,7 +7,7 @@
 set_attributes(attributes, factors = NULL, col_classes = NULL)
 }
 \arguments{
-\item{attributes}{a joined table of all attribute metdata
+\item{attributes}{a joined table of all attribute metadata
 (such as returned by \code{\link{get_attributes}}, see details)}
 
 \item{factors}{a table with factor code-definition pairs; see details}
@@ -30,7 +30,7 @@ These are:
 For all data:
 - attributeName (required)
 - attributeDefinition (required)
-- measurementScale (requred)
+- measurementScale (required)
 - domain (required)
 
 For numeric (ratio or interval) data:

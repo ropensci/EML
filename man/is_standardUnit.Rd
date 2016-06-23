@@ -2,7 +2,7 @@
 % Please edit documentation in R/is_standardUnit.R
 \name{is_standardUnit}
 \alias{is_standardUnit}
-\title{is_standardmUnit}
+\title{is_standardUnit}
 \usage{
 is_standardUnit(x)
 }
@@ -13,7 +13,7 @@ is_standardUnit(x)
 TRUE if unit is exact match to the id of a unit in the Standard Units Table, FALSE otherwise.
 }
 \description{
-is_standardmUnit
+is_standardUnit
 }
 \examples{
 is_standardUnit("amperePerMeter") # TRUE

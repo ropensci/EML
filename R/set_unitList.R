@@ -61,11 +61,18 @@
 #'                     multiplierToSI = multiplierToSI, description = description, 
 #'                     stringsAsFactors = FALSE)
 #'  
-#'  set_unitList(units, unitTypes)
+#'  unitList <- set_unitList(units, unitTypes)
 #' 
+#'  ## reverse operation also works:
+#'  get_unitList(unitList)
+#' 
+#'  ## To add this to an EML document:
+#'  new("eml", additionalMetadata = as(unitList, "additionalMetadata"))
+#'  
+#'  ## Equivalently:
 #'  additionalMetadata <- set_unitList(units, unitTypes, as_metadata = TRUE)
 #'  new("eml", additionalMetadata = additionalMetadata)
-#'  
+  
 set_unitList <- function(units, unitTypes = NULL, as_metadata = FALSE) {
   
   ## no factors please

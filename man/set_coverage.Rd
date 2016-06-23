@@ -18,7 +18,7 @@ set_coverage(beginDate = character(), endDate = character(),
 
 \item{date}{give a single date, or vector of single dates covered (instead of beginDate and endDate)}
 
-\item{sci_names}{string of (space-separated) scientif names for species covered.  See details}
+\item{sci_names}{string of (space-separated) scientific names for species covered.  See details}
 
 \item{geographicDescription}{text string describing the geographic location}
 
@@ -43,7 +43,7 @@ a coverage object for EML
 set_coverage
 }
 \details{
-set_coverage provides a simple and consise way to specify most common temporal,
+set_coverage provides a simple and concise way to specify most common temporal,
 taxonomic, and geographic coverage metadata. For certain studies this will not be
 well suited, and users will need the more flexible but more verbose construction using
 "new()" methods; for instance, to specify temporal coverage in geological epoch instead
