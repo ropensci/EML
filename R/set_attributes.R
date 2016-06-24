@@ -4,9 +4,10 @@
 #' @param attributes a joined table of all attribute metadata
 #' (such as returned by \code{\link{get_attributes}}, see details)
 #' @param factors a table with factor code-definition pairs; see details
-#' @param col_classes optional, list of R column classes (numeric, factor, date, character)
+#' @param col_classes optional, list of R column classes ('ordered', 'numeric', 'factor', 'Date', or 'character', case sensitive)
 #' will let the function infer missing 'domain' and 'measurementScale' values for attributes column.
-#' Should be in same order as attributeNames in the attribute table, or be a named list.
+#' Should be in same order as attributeNames in the attributes table, or be a named list with names corresponding to attributeNames
+#' in the attributes table.
 #' @details The attributes data frame must use only the recognized column
 #' headers shown here.  The attributes data frame must contain columns for required metadata.
 #' These are:
@@ -39,6 +40,7 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
   factors[]  <- lapply(factors, as.character)
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
   ## infer "domain" & "measurementScale" given optional column classes
+  
   attributes <- check_and_complete_attributes(attributes, col_classes)
   
  
@@ -166,7 +168,25 @@ set_BoundsGroup <- function(row, cls = "BoundsGroup"){
 
 
 
-infer_domain_scale <- function(col_classes, attributeName = names(col_classes)){
+infer_domain_scale <- function(col_classes, attributeName = names(col_classes), attributes){
+  
+  if(length(col_classes) != nrow(attributes)){
+    if(is.null(names(col_classes))){
+      stop(call. = FALSE,
+           "If col_classes is not NULL, it must have as many elements as there are rows in attributes unless they are named.")
+      
+    }
+  }
+  if(!is.null(names(col_classes))){
+    if(!(all(names(col_classes) %in% attributeName))){
+      stop(call. = FALSE,
+           "If col_classes is a named list, it should have names corresponding to attributeName.")
+    }
+  }
+  
+  if(!(all(col_classes[!is.na(col_classes)] %in% c("numeric", "character", "factor", "Date", "ordered")))){
+    stop(call. = FALSE, "All non missing col_classes values have to be 'ordered', 'numeric', 'character', 'factor' or 'Date'.")
+  }
   domain <- col_classes
   measurementScale <- col_classes
   storageType <- col_classes
@@ -211,6 +231,8 @@ na2empty <- function(x){
 }
 
 check_and_complete_attributes <- function(attributes, col_classes){
+ 
+  
   if(! "attributeName" %in% names(attributes)){
     stop(call. = FALSE, "attributes table must include an 'attributeName' column")
   }else{
@@ -221,7 +243,8 @@ check_and_complete_attributes <- function(attributes, col_classes){
   
   ## infer "domain" & "measurementScale" given optional column classes
   if(!is.null(col_classes))
-    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE, sort = FALSE)
+    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName,
+                                                       attributes), all = TRUE, sort = FALSE)
   
   if(! "attributeDefinition" %in% names(attributes)){
     stop(call. = FALSE, "attributes table must include an 'attributeDefinition' column")
@@ -233,27 +256,27 @@ check_and_complete_attributes <- function(attributes, col_classes){
   
   
   if(! "measurementScale" %in% names(attributes)){
-    stop(call. = FALSE, "attributes table must include an 'measurementScale' column")
+    stop(call. = FALSE, "attributes table must include an 'measurementScale' column, or you need to input 'col_classes'.")
   }else{
     if(any(is.na(attributes$measurementScale))){
       stop(call. = FALSE, "The measurementScale column must be filled for each attribute.")
     }else{
       if(!(all(attributes$measurementScale %in% c("nominal", "ordinal", "ratio",
                                                   "interval", "dateTime")))){
-        stop(call. = FALSE, "measurementScale permitted values are nominal, ordinal, ratio, interval, dateTime.")
+        stop(call. = FALSE, "measurementScale permitted values are 'nominal', 'ordinal', 'ratio', 'interval', 'dateTime'.")
       }
     }
   }
   
   
   if(! "domain" %in% names(attributes)){
-    stop(call. = FALSE, "attributes table must include an 'domain' column")
+    stop(call. = FALSE, "attributes table must include an 'domain' column, or you need to input 'col_classes'.")
   }else{
     if(any(is.na(attributes$domain))){
       stop(call. = FALSE, "The domain column must be filled for each attribute.")
     }else{
       if(!(all(attributes$domain %in% c("numericDomain", "textDomain", "enumeratedDomain", "dateTimeDomain")))){
-        stop(call. = FALSE, "domain permitted values are numericDomain, textDomain, enumeratedDomain, dateTimeDomain.")
+        stop(call. = FALSE, "domain permitted values are 'numericDomain', 'textDomain', 'enumeratedDomain', 'dateTimeDomain'.")
       }
     }
   }
