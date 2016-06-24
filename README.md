@@ -4,7 +4,7 @@
 EML: The Ecological Metadata Language Standard
 ==============================================
 
-EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the [EML Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) for an introduction and thorough documentation of the standard. Additionally, the scientific article []() provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the `EML` R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.
+EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the [EML Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) for an introduction and thorough documentation of the standard. Additionally, the scientific article *[The New Bioinformatics: Integrating Ecological Data from the Gene to the Biosphere (Jones et al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)* provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the `EML` R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.
 
 *Note*: The `EML` R package is work in progress. Please see the Issues tracker in this repository for details about current issues and development milestonds.
 
@@ -103,6 +103,8 @@ Validate EML against the official schema
 ``` r
 # An EML document with no validation errors
 eml_validate(eml)
+#> Warning in is.na(encoding): is.na() applied to non-(list or vector) of type
+#> 'NULL'
 #> [1] TRUE
 
 # An EML document with validation errors
