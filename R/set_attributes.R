@@ -6,7 +6,8 @@
 #' @param factors a table with factor code-definition pairs; see details
 #' @param col_classes optional, list of R column classes ('ordered', 'numeric', 'factor', 'Date', or 'character', case sensitive)
 #' will let the function infer missing 'domain' and 'measurementScale' values for attributes column.
-#' Should be in same order as attributeNames in the attribute table, or be a named list.
+#' Should be in same order as attributeNames in the attributes table, or be a named list with names corresponding to attributeNames
+#' in the attributes table.
 #' @details The attributes data frame must use only the recognized column
 #' headers shown here.  The attributes data frame must contain columns for required metadata.
 #' These are:
