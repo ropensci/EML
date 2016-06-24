@@ -224,7 +224,7 @@ testthat::test_that("The set_attributes function stops if missing required field
   testthat::expect_error(set_attributes(attributes))
 })
 
-testthat::test_that("The set_attributes function stops if non permitted values in col_classes", {
+testthat::test_that("The set_attributes function stops if non permitted values in col_classes or wrong length of col_classes", {
   attributes <-
     data.frame(
       attributeName = c(
@@ -326,6 +326,7 @@ testthat::test_that("The set_attributes function stops if non permitted values i
       definition = unname(value.i)
     )
   )
+  testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "numeric")))
   testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "lalala", "numeric")))
 })
 

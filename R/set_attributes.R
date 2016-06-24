@@ -214,6 +214,11 @@ na2empty <- function(x){
 }
 
 check_and_complete_attributes <- function(attributes, col_classes){
+  if(length(col_classes) != nrow(attributes)){
+    stop(call. = FALSE,
+         "If col_classes is not NULL, it must have as many elements as there are rows in attributes.")
+  }
+  
   if(! "attributeName" %in% names(attributes)){
     stop(call. = FALSE, "attributes table must include an 'attributeName' column")
   }else{
