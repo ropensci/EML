@@ -224,6 +224,111 @@ testthat::test_that("The set_attributes function stops if missing required field
   testthat::expect_error(set_attributes(attributes))
 })
 
+testthat::test_that("The set_attributes function stops if non permitted values in col_classes", {
+  attributes <-
+    data.frame(
+      attributeName = c(
+        "run.num",
+        "year",
+        "day",
+        "hour.min",
+        "i.flag",
+        "variable",
+        "value.i",
+        "length"), 
+      formatString = c(
+        NA,        
+        "YYYY",     
+        "DDD",      
+        "hhmm",     
+        NA,         
+        NA,         
+        NA,
+        NA),
+      definition = c(        
+        "which run number",
+        NA,
+        NA,
+        NA,
+        NA,
+        NA, 
+        NA,
+        NA),
+      unit = c(
+        NA,
+        NA,
+        NA,
+        NA,
+        NA,
+        NA,
+        NA,
+        "meter"),
+      attributeDefinition = c(
+        "which run number (=block). Range: 1 - 6. (integer)",
+        "year, 2012",
+        "Julian day. Range: 170 - 209.",
+        "hour and minute of observation. Range 1 - 2400 (integer)",
+        "is variable Real, Interpolated or Bad (character/factor)",
+        "what variable being measured in what treatment (character/factor).",
+        "value of measured variable for run.num on year/day/hour.min.",
+        "length of the species in meters (dummy example of numeric data)"),
+      numberType = c(
+        NA,
+        NA,
+        NA,
+        NA,
+        NA,
+        NA,
+        NA,
+        "real"),
+      stringsAsFactors = FALSE
+    )
+  i.flag <- c(R = "real",
+              I = "interpolated",
+              B = "bad")
+  variable <- c(
+    control  = "no prey added",
+    low      = "0.125 mg prey added ml-1 d-1",
+    med.low  = "0,25 mg prey added ml-1 d-1",
+    med.high = "0.5 mg prey added ml-1 d-1",
+    high     = "1.0 mg prey added ml-1 d-1",
+    air.temp = "air temperature measured just above all plants (1 thermocouple)",
+    water.temp = "water temperature measured within each pitcher",
+    par       = "photosynthetic active radiation (PAR) measured just above all plants (1 sensor)"
+  )
+  
+  value.i <- c(
+    control  = "% dissolved oxygen",
+    low      = "% dissolved oxygen",
+    med.low  = "% dissolved oxygen",
+    med.high = "% dissolved oxygen",
+    high     = "% dissolved oxygen",
+    air.temp = "degrees C",
+    water.temp = "degrees C",
+    par      = "micromoles m-1 s-1"
+  )
+  
+  ## Write these into the data.frame format
+  factors <- rbind(
+    data.frame(
+      attributeName = "i.flag",
+      code = names(i.flag),
+      definition = unname(i.flag)
+    ),
+    data.frame(
+      attributeName = "variable",
+      code = names(variable),
+      definition = unname(variable)
+    ),
+    data.frame(
+      attributeName = "value.i",
+      code = names(value.i),
+      definition = unname(value.i)
+    )
+  )
+  testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "lalala", "numeric")))
+})
+
 testthat::test_that("The set_attributes function returns useful warnings",{
   attributes <- data.frame(attributeName = "date",
                            attributeDefinition = "date",
