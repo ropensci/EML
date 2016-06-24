@@ -326,6 +326,8 @@ testthat::test_that("The set_attributes function stops if non permitted values i
       definition = unname(value.i)
     )
   )
+  testthat::expect_error(set_attributes(attributes, factors, col_classes = list(run_numero = "character", year = "Date")))
+  
   testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "numeric")))
   testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "lalala", "numeric")))
 })

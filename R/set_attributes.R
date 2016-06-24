@@ -39,6 +39,7 @@ set_attributes <- function(attributes, factors = NULL, col_classes = NULL){
   factors[]  <- lapply(factors, as.character)
   ##  check attributes data.frame.  must declare required columns: attributeName, (attributeDescription, ....)
   ## infer "domain" & "measurementScale" given optional column classes
+  
   attributes <- check_and_complete_attributes(attributes, col_classes)
   
  
@@ -166,7 +167,22 @@ set_BoundsGroup <- function(row, cls = "BoundsGroup"){
 
 
 
-infer_domain_scale <- function(col_classes, attributeName = names(col_classes)){
+infer_domain_scale <- function(col_classes, attributeName = names(col_classes), attributes){
+  
+  if(length(col_classes) != nrow(attributes)){
+    if(is.null(names(col_classes))){
+      stop(call. = FALSE,
+           "If col_classes is not NULL, it must have as many elements as there are rows in attributes unless they are named.")
+      
+    }
+  }
+  if(!is.null(names(col_classes))){
+    if(!(all(names(col_classes) %in% attributeName))){
+      stop(call. = FALSE,
+           "If col_classes is a named list, it should have names corresponding to attributeName.")
+    }
+  }
+  
   if(!(all(col_classes[!is.na(col_classes)] %in% c("numeric", "character", "factor", "Date", "ordered")))){
     stop(call. = FALSE, "All non missing col_classes values have to be 'ordered', 'numeric', 'character', 'factor' or 'Date'.")
   }
@@ -214,10 +230,7 @@ na2empty <- function(x){
 }
 
 check_and_complete_attributes <- function(attributes, col_classes){
-  if(length(col_classes) != nrow(attributes)){
-    stop(call. = FALSE,
-         "If col_classes is not NULL, it must have as many elements as there are rows in attributes.")
-  }
+ 
   
   if(! "attributeName" %in% names(attributes)){
     stop(call. = FALSE, "attributes table must include an 'attributeName' column")
@@ -229,7 +242,8 @@ check_and_complete_attributes <- function(attributes, col_classes){
   
   ## infer "domain" & "measurementScale" given optional column classes
   if(!is.null(col_classes))
-    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName), all = TRUE, sort = FALSE)
+    attributes <- merge(attributes, infer_domain_scale(col_classes, attributes$attributeName,
+                                                       attributes), all = TRUE, sort = FALSE)
   
   if(! "attributeDefinition" %in% names(attributes)){
     stop(call. = FALSE, "attributes table must include an 'attributeDefinition' column")
