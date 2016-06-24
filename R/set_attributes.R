@@ -4,7 +4,7 @@
 #' @param attributes a joined table of all attribute metadata
 #' (such as returned by \code{\link{get_attributes}}, see details)
 #' @param factors a table with factor code-definition pairs; see details
-#' @param col_classes optional, list of R column classes ('numeric', 'factor', 'Date', or 'character', case sensitive)
+#' @param col_classes optional, list of R column classes ('ordered', 'numeric', 'factor', 'Date', or 'character', case sensitive)
 #' will let the function infer missing 'domain' and 'measurementScale' values for attributes column.
 #' Should be in same order as attributeNames in the attribute table, or be a named list.
 #' @details The attributes data frame must use only the recognized column
@@ -167,8 +167,8 @@ set_BoundsGroup <- function(row, cls = "BoundsGroup"){
 
 
 infer_domain_scale <- function(col_classes, attributeName = names(col_classes)){
-  if(!(all(col_classes %in% c("numeric", "character", "factor", "Date")))){
-    stop(call. = FALSE, "All col_classes values have to be 'numeric', 'character', 'factor' or 'Date'.")
+  if(!(all(col_classes[!is.na(col_classes)] %in% c("numeric", "character", "factor", "Date", "ordered")))){
+    stop(call. = FALSE, "All non missing col_classes values have to be 'ordered', 'numeric', 'character', 'factor' or 'Date'.")
   }
   domain <- col_classes
   measurementScale <- col_classes

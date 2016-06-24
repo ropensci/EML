@@ -12,7 +12,7 @@ set_attributes(attributes, factors = NULL, col_classes = NULL)
 
 \item{factors}{a table with factor code-definition pairs; see details}
 
-\item{col_classes}{optional, list of R column classes ('numeric', 'factor', 'Date', or 'character', case sensitive)
+\item{col_classes}{optional, list of R column classes ('ordered', 'numeric', 'factor', 'Date', or 'character', case sensitive)
 will let the function infer missing 'domain' and 'measurementScale' values for attributes column.
 Should be in same order as attributeNames in the attribute table, or be a named list.}
 }
