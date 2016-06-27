@@ -12,4 +12,16 @@ testthat::test_that("set_coverage creates a coverage object",{
                  altitudeUnits = "meter")
   
   testthat::expect_is(coverage, "coverage")
+  
+  
+  coverage <- 
+    set_coverage(date = as.character(seq(from = as.Date("1970-01-01"), length = 56, by = "1 week")),
+                 sci_names = "Sarracenia purpurea",
+                 geographicDescription = geographicDescription,
+                 west = -122.44, east = -117.15, 
+                 north = 37.38, south = 30.00,
+                 altitudeMin = 160, altitudeMaximum = 330,
+                 altitudeUnits = "meter")
+  
+  testthat::expect_is(coverage, "coverage")
   })
