@@ -25,7 +25,7 @@ testthat::test_that("we can have numeric data with bounds where some bounds are 
                    entityDescription = "csv file containing the data", 
                    physical = set_physical("file.csv"))
   
-  me <- as.person("Carl Boettiger <cboettig@gmail.com>")
+  me <- as.person("Carl Boettiger <cboettig@gmail.com> [ctb]")
   dataset <- new("dataset", title = "Example EML", creator = me, contact = me, dataTable = dataTable)
   eml <- new("eml", packageId = "123", system = "uuid", dataset = dataset)
   
@@ -326,11 +326,66 @@ testthat::test_that("The set_attributes function stops if non permitted values i
       definition = unname(value.i)
     )
   )
-  testthat::expect_error(set_attributes(attributes, factors, col_classes = list(run_numero = "character", year = "Date")))
-  
   testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "numeric")))
   testthat::expect_error(set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "lalala", "numeric")))
-})
+  
+  attributes <-
+    data.frame(
+      attributeName = c( "run.num", "year", "day"), 
+      formatString = c( NA, "YYYY", "DDD"),
+      definition = c( "which run number", NA, NA),
+      unit = c( NA, NA, NA),
+      attributeDefinition = c(
+        "which run number (=block). Range: 1 - 6. (integer)",
+        "year, 2012",
+        "Julian day. Range: 170 - 209."),
+      numberType = c( NA, NA, NA),
+      domain = c("numericDomain", "numericDomain", "numericDomain"),
+      measurementScale = c("ratio", "nominal", "interval"),
+      stringsAsFactors = FALSE
+    )
+  testthat::expect_error(set_attributes(attributes, col_classes = list(run_numero = "character", year = "Date")))
+  testthat::expect_error(set_attributes(attributes, col_classes = list(run.num = "Date", year = "Date", day = "Date")))
+  testthat::expect_error(set_attributes(attributes, col_classes = list("Date", "Date", "Date")))
+  
+  attributes <-
+    data.frame(
+      attributeName = c( "run.num", "year", "day"), 
+      formatString = c( NA, "YYYY", "DDD"),
+      definition = c( "which run number", NA, NA),
+      unit = c( NA, NA, NA),
+      attributeDefinition = c(
+        "which run number (=block). Range: 1 - 6. (integer)",
+        "year, 2012",
+        "Julian day. Range: 170 - 209."),
+      numberType = c( NA, NA, NA),
+      measurementScale = c("ratio", "nominal", "interval"),
+      stringsAsFactors = FALSE
+    )
+  testthat::expect_error(set_attributes(attributes, col_classes = list(run.num = "numeric", year = "Date", day = "Date")))
+  
+  testthat::expect_error(set_attributes(attributes, col_classes = list("Date", "Date", "Date")))
+  
+  attributes <-
+    data.frame(
+      attributeName = c( "run.num", "year", "day"), 
+      formatString = c( NA, "YYYY", "DDD"),
+      definition = c( "which run number", NA, NA),
+      unit = c( NA, NA, NA),
+      attributeDefinition = c(
+        "which run number (=block). Range: 1 - 6. (integer)",
+        "year, 2012",
+        "Julian day. Range: 170 - 209."),
+      numberType = c( NA, NA, NA),
+      storageType = c("float", "float", "float"),
+      stringsAsFactors = FALSE
+    )
+  testthat::expect_error(set_attributes(attributes, col_classes = list(run.num = "numeric", year = "Date", day = "Date")))
+  
+  testthat::expect_error(set_attributes(attributes, col_classes = list("Date", "Date", "Date")))
+  
+  
+  })
 
 testthat::test_that("The set_attributes function returns useful warnings",{
   attributes <- data.frame(attributeName = "date",

@@ -194,18 +194,72 @@ infer_domain_scale <- function(col_classes, attributeName = names(col_classes), 
   domain[col_classes == "character"] <- "textDomain"
   domain[col_classes %in% c("factor", "ordered")] <- "enumeratedDomain"
   domain[col_classes %in% c("Date")] <- "dateTimeDomain"
+  # compare domain with domain given in attributes if there is one
+  if("domain" %in% names(attributes)){
+    if(!is.null(names(col_classes))){
+      if(any(domain != attributes$domain[attributes$attributeName == names(col_classes)])){
+        whichNot <- names(col_classes)[which(domain != attributes$domain[attributes$attributeName == names(col_classes)])]
+        stop(call. = FALSE,
+             paste0( "For the attribute ", whichNot," the domain value inferred from col_classes does not agree with the domain value existing in attributes. Check col_classes and the domain column you provided.\n"))
+      }
+    }else{
+      if(any(domain != attributes$domain)){
+        whichNot <- attributes$attributeName[which(domain != attributes$domain)]
+        stop(call. = FALSE,
+             paste0( "For the attribute ", whichNot," the domain value inferred from col_classes does not agree with the domain value existing in attributes. Check col_classes and the domain column you provided.\n"))
+        
+      }
+    }
+  }
 
   measurementScale[col_classes == "numeric"] <- "ratio" # !
   measurementScale[col_classes == "character"] <- "nominal"
   measurementScale[col_classes == "ordered"] <- "ordinal"
   measurementScale[col_classes == "factor"] <- "nominal"
   measurementScale[col_classes %in% c("Date")] <- "dateTime"
+  
+  # compare measurementScale with measurementScale given in attributes if there is one
+  if("measurementScale" %in% names(attributes)){
+    if(!is.null(names(col_classes))){
+      if(any(measurementScale != attributes$measurementScale[attributes$attributeName == names(col_classes)])){
+        whichNot <- names(col_classes)[which(measurementScale != attributes$measurementScale[attributes$attributeName == names(col_classes)])]
+        stop(call. = FALSE,
+             paste0( "For the attribute ", whichNot," the measurementScale value inferred from col_classes does not agree with the measurementScale value existing in attributes. Check col_classes and the measurementScale column you provided.\n"))
+      }
+    }else{
+      if(any(measurementScale != attributes$measurementScale)){
+        whichNot <- attributes$attributeName[which(measurementScale != attributes$measurementScale)]
+        stop(call. = FALSE,
+             paste0( "For the attribute ", whichNot," the measurementScale value inferred from col_classes does not agree with the measurementScale value existing in attributes. Check col_classes and the measurementScale column you provided.\n"))
+        
+      }
+    }
+  }
+
 
   ## storage type is optional, maybe better not to set this?
   storageType[col_classes == "numeric"] <- "float"
   storageType[col_classes == "character"] <- "string"
   storageType[col_classes %in% c("factor", "ordered")] <- "string"
   storageType[col_classes %in% c("Date")] <- "date"
+  
+  # compare storageType with storageType given in attributes if there is one
+  if("storageType" %in% names(attributes)){
+    if(!is.null(names(col_classes))){
+      if(any(storageType != attributes$storageType[attributes$attributeName == names(col_classes)])){
+        whichNot <- names(col_classes)[which(storageType != attributes$storageType[attributes$attributeName == names(col_classes)])]
+        stop(call. = FALSE,
+             paste0( "For the attribute ", whichNot," the storageType value inferred from col_classes does not agree with the storageType value existing in attributes. Check col_classes and the storageType column you provided.\n"))
+      }
+    }else{
+      if(any(storageType != attributes$storageType)){
+        whichNot <- attributes$attributeName[which(storageType != attributes$storageType)]
+        stop(call. = FALSE,
+             paste0( "For the attribute ", whichNot," the storageType value inferred from col_classes does not agree with the storageType value existing in attributes. Check col_classes and the storageType column you provided.\n"))
+        
+      }
+    }
+  }
 
 
   data.frame(attributeName = attributeName, domain = domain, measurementScale = measurementScale, storageType = storageType, stringsAsFactors = FALSE)
