@@ -123,8 +123,10 @@ set_taxonomicCoverage <- function(sci_names = character()){
 
 
 ## cannot necessarily extract a species name from a taxonomicCoverage.
+
+
 get_taxonomicCoverage <- function(taxonomicCoverage){
-  lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)
+  lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)[[1]]
 
 }
 

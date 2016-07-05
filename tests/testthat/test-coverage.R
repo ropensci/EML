@@ -25,3 +25,20 @@ testthat::test_that("set_coverage creates a coverage object",{
   
   testthat::expect_is(coverage, "coverage")
   })
+
+
+testthat::test_that("get_taxonomicCoverage", {
+  f <- system.file("xsd/test/eml-i18n.xml", package="EML")
+  eml <- read_eml(f)
+  df <- EML:::get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
+  
+  
+  testthat::expect_is(df, "data.frame")
+  testthat::expect_length(df$rank, 8)
+  testthat::expect_length(df, 2)
+  
+  
+  # coverage <- eml_get(eml, "coverage")
+  
+  
+})
