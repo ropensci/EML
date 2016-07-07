@@ -110,7 +110,7 @@ set_temporalCoverage <- function(beginDate = character(), endDate  = character()
 #' @return a taxonomicCoverage object for EML
 #' @export
 #'
-#' @example 
+#' @examples 
 #' taxon_coverage <- 
 #'      set_taxonomicCoverage(list(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
 #'                                ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
