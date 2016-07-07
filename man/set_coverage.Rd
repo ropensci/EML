@@ -18,7 +18,7 @@ set_coverage(beginDate = character(), endDate = character(),
 
 \item{date}{give a single date, or vector of single dates covered (instead of beginDate and endDate)}
 
-\item{sci_names}{string of (space-separated) scientific names for species covered.  See details}
+\item{sci_names}{string (space seperated) or list or data frame of scientific names for species covered.  See details}
 
 \item{geographicDescription}{text string describing the geographic location}
 
@@ -56,6 +56,6 @@ coverage <-
               geographicDescription = "California coast, down through Baja, Mexico",
               west = -122.44, east = -117.15, 
               north = 37.38, south = 30.00)
-
+              
 }
 
