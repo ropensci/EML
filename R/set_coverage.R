@@ -29,23 +29,6 @@
 #'               west = -122.44, east = -117.15, 
 #'               north = 37.38, south = 30.00)
 #'               
-#' coverage <- 
-#'  set_coverage(begin = '2012-06-01', end = '2013-12-31',
-#'               sci_names = list(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
-#'                                ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
-#'                                genusSpecies="Macrocystis pyrifera",commonName="MAPY"),
-#'               geographicDescription = "California coast, down through Baja, Mexico",
-#'               west = -122.44, east = -117.15, 
-#'               north = 37.38, south = 30.00)
-#'             
-#'coverage <- 
-#'  set_coverage(begin = '2012-06-01', end = '2013-12-31',
-#'               sci_names = data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
-#'                                ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
-#'                                genusSpecies="Macrocystis pyrifera",commonName="MAPY"),
-#'               geographicDescription = "California coast, down through Baja, Mexico",
-#'               west = -122.44, east = -117.15, 
-#'               north = 37.38, south = 30.00)
 
 set_coverage <- function(beginDate = character(), endDate = character(),
                          date = character(), sci_names = character(),
