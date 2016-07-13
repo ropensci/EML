@@ -48,6 +48,127 @@ testthat::test_that("set_coverage creates a coverage object",{
   testthat::expect_is(coverage, "coverage")
   })
 
+testthat::test_that("set_taxonomicCoverage creates a taxonomicCoverage object",{
+  # input type: data frame
+  taxon = set_taxonomicCoverage(data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", 
+                                   CLASS="Phaeophyceae",ORDER="Laminariales",
+                                   FAMILY="Lessoniaceae",GENUS="Macrocystis",
+                                  genusSpecies="Macrocystis pyrifera",commonName="MAPY"))
+  testthat::expect_is(taxon, "taxonomicCoverage")
+  # input type: list
+  taxon = set_taxonomicCoverage(list(KINGDOM="Plantae", PHYLUM="Phaeophyta", 
+                                           CLASS="Phaeophyceae",ORDER="Laminariales",
+                                           FAMILY="Lessoniaceae",GENUS="Macrocystis",
+                                           genusSpecies="Macrocystis pyrifera",commonName="MAPY"))
+  testthat::expect_is(taxon, "taxonomicCoverage")
+})
+
+testthat::test_that("set_taxonomicCoverage create a object with correct depth", {
+  # regular case
+  dt = data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", 
+                  CLASS="Phaeophyceae",ORDER="Laminariales",
+                  FAMILY="Lessoniaceae",GENUS="Macrocystis",
+                  genusSpecies="Macrocystis pyrifera",commonName="MAPY")
+  taxon = set_taxonomicCoverage(dt)
+  depth = 0
+  while (length(taxon@taxonomicClassification) > 0){
+    depth = depth + 1
+    taxon = taxon@taxonomicClassification[[1]]
+  }
+  testthat::expect_equal(depth, 8)
+  
+  # unexpected input in data frame. 
+  dt = data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", 
+                  CLASS="Phaeophyceae",ORDER="Laminariales",
+                  FAMILY="Lessoniaceae",GENUS="Macrocystis",
+                  genusSpecies="Macrocystis pyrifera",commonName="MAPY", temp = "nothing")
+  taxon = set_taxonomicCoverage(dt)
+  depth = 0
+  while (length(taxon@taxonomicClassification) > 0){
+    depth = depth + 1
+    taxon = taxon@taxonomicClassification[[1]]
+  }
+  testthat::expect_equal(depth, 8)
+  
+  # input only some of the eight rank names
+  dt = data.frame(PHYLUM="Phaeophyta", 
+                  CLASS="Phaeophyceae",ORDER="Laminariales",
+                  FAMILY="Lessoniaceae",GENUS="Macrocystis",
+                  commonName="MAPY")
+  taxon = set_taxonomicCoverage(dt)
+  depth = 0
+  while (length(taxon@taxonomicClassification) > 0){
+    depth = depth + 1
+    taxon = taxon@taxonomicClassification[[1]]
+  }
+  testthat::expect_equal(depth, 6)
+})
+
+testthat::test_that("set_taxonomicCoverage create valid EML",{
+  download.file("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/doi%3A10.5063%2FF1BZ63Z8","test.xml")
+  eml <- read_eml("test.xml")
+  physical = eml_get(eml, "physical")
+  attributeList = eml_get(eml, "attributeList")
+  abstract = eml_get(eml, "abstract")
+  rights = eml_get(eml, "intellectualRights")
+  methods = eml_get(eml, "methods")
+  keys = eml_get(eml, "keywordSet")
+  
+  dataTable = new("dataTable",
+                  entityName = "data.csv",
+                  entityDescription = "test",
+                  physical = physical[[1]][[1]], 
+                  attributeList = attributeList[[1]][[1]]) 
+  title = "test"
+  pubDate = "2000"
+  creator=new("ListOfcreator")
+  creator[[1]]=as(as.person("John Smith [cre]"), "creator")
+  
+  address = new("address", 
+                  deliveryPoint="123 Main St.",
+                  city = "None",
+                  administrativeArea = "None",
+                  postalCode = "None",
+                  country = "USA")
+  publisher = new("publisher", organizationName = "None", address = address)
+  contact = new("contact", individualName = creator[[1]]@individualName,
+                  electronicMail = "None",
+                  address = address,
+                  organizationName = "None",
+                  phone = "None")
+  
+  df = data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", 
+                     CLASS="Phaeophyceae",ORDER="Laminariales",
+                     FAMILY="Lessoniaceae",GENUS="Macrocystis",
+                     genusSpecies="Macrocystis pyrifera",commonName="MAPY")
+  geographicDescription = "This is a test."
+    coverage = set_coverage(begin = "1900", end = "2000",
+                 sci_names = df, 
+                 geographicDescription = geographicDescription,
+                 west = 0, east = 0,
+                 north = 0, south = 0)
+  
+  dataset = new("dataset", 
+                title = title,
+                creator = creator,
+                contact = contact,
+                publisher = publisher,
+                pubDate = pubDate,
+                intellectualRights = rights[[1]], 
+                abstract = abstract[[1]], 
+                keywordSet = keys[[1]], 
+                coverage = coverage,
+                methods = methods,
+                dataTable = c(dataTable))
+  #create eml object
+  eml = new("eml",
+            packageId = uuid::UUIDgenerate(),
+            system = "uuid",
+            dataset = dataset)
+  
+  testthat::expect_true(eml_validate(eml))
+})
+
 testthat::test_that("get_taxonomicCoverage", {
   f <- system.file("xsd/test/eml-i18n.xml", package="EML")
   eml <- read_eml(f)

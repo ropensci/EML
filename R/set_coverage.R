@@ -17,8 +17,16 @@
 #' well suited, and users will need the more flexible but more verbose construction using
 #' "new()" methods; for instance, to specify temporal coverage in geological epoch instead
 #' of calendar dates, or to specify taxonomic coverage in terms of other ranks or identifiers.
-#' 
+#'
 #' @return a coverage object for EML
+#' 
+#' @note If "sci_names" is a data frame, a certain order of rank names is expected: 
+#' "Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common". The function
+#' will look for keywords from column names of the data frame. Rank names other than these 
+#' eight names will be ignored. The data frame do not necessarily to contain all the eight
+#' rank names. If "sci_names" is a list, users must make sure that the order of rank names
+#' they specify is from high to low.
+#' 
 #' @export
 #'
 #' @examples
@@ -108,6 +116,12 @@ set_temporalCoverage <- function(beginDate = character(), endDate  = character()
 #' or a list of user-defined taxonomicClassification
 #' 
 #' @return a taxonomicCoverage object for EML
+#' @note If "sci_names" is a data frame, a certain order of rank names is expected: 
+#' "Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common". The function
+#' will look for keywords from column names of the data frame. Rank names other than these 
+#' eight names will be ignored. The data frame do not necessarily to contain all the eight
+#' rank names. If "sci_names" is a list, users must make sure that the order of rank names
+#' they specify is from high to low.
 #' @export
 #'
 #' @examples 
@@ -182,6 +196,20 @@ formRecursiveTree = function(listOfelements){
 
 ## cannot necessarily extract a species name from a taxonomicCoverage.
 
+
+#' get_taxonomicCoverage
+#'
+#' @param taxonomicCoverage a taxonomicCoverage class object
+#' @details extract information from a taxonomicCoverage object and construct a data frame
+#' 
+#' @return a data frame with rank names as column names
+#' @export
+#'
+#' @examples 
+#' f <- system.file("xsd/test/eml-i18n.xml", package="EML")
+#' eml <- read_eml(f)
+#' df <- get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
+
 # return a data frame whose column names are rank names
 get_taxonomicCoverage <- function(taxonomicCoverage){
   df <- lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)[[1]]
@@ -203,5 +231,4 @@ taxa_to_df <- function(object){
                              value = object@taxonRankValue))
   df
 }
-
 
