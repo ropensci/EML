@@ -105,8 +105,10 @@ testthat::test_that("set_taxonomicCoverage create a object with correct depth", 
 })
 
 testthat::test_that("set_taxonomicCoverage create valid EML",{
-  download.file("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/doi%3A10.5063%2FF1BZ63Z8","test.xml")
-  eml <- read_eml("test.xml")
+  f = tempfile()
+  download.file("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/doi%3A10.5063%2FF1BZ63Z8", f)
+  eml <- read_eml(f)
+  
   physical = eml_get(eml, "physical")
   attributeList = eml_get(eml, "attributeList")
   abstract = eml_get(eml, "abstract")
