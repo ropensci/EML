@@ -18,7 +18,7 @@ set_coverage(beginDate = character(), endDate = character(),
 
 \item{date}{give a single date, or vector of single dates covered (instead of beginDate and endDate)}
 
-\item{sci_names}{string of (space-separated) scientific names for species covered.  See details}
+\item{sci_names}{string (space seperated) or list or data frame of scientific names for species covered.  See details}
 
 \item{geographicDescription}{text string describing the geographic location}
 
@@ -49,6 +49,14 @@ well suited, and users will need the more flexible but more verbose construction
 "new()" methods; for instance, to specify temporal coverage in geological epoch instead
 of calendar dates, or to specify taxonomic coverage in terms of other ranks or identifiers.
 }
+\note{
+If "sci_names" is a data frame, a certain order of rank names is expected: 
+"Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common". The function
+will look for keywords from column names of the data frame. Rank names other than these 
+eight names will be ignored. The data frame do not necessarily to contain all the eight
+rank names. If "sci_names" is a list, users must make sure that the order of rank names
+they specify is from high to low.
+}
 \examples{
 coverage <- 
  set_coverage(begin = '2012-06-01', end = '2013-12-31',
@@ -56,6 +64,6 @@ coverage <-
               geographicDescription = "California coast, down through Baja, Mexico",
               west = -122.44, east = -117.15, 
               north = 37.38, south = 30.00)
-
+              
 }
 
