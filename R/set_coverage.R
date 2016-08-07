@@ -152,16 +152,20 @@ set_taxonomicCoverage <- function(sci_names){
   } else if (class(sci_names)=="data.frame"){
     taxon_classification = list("Kingdom","Phylum","Class","Order","Family","Genus","Species","Common")
     ColNames = colnames(sci_names)
-    taxa = lapply(taxon_classification, function(name){
-      index = grep(name, ColNames, ignore.case = TRUE)
-      if (length(index)!=0){
-        index = index[1]
-        new("taxonomicClassification",
-            taxonRankName = ColNames[index],
-            taxonRankValue = as.character(sci_names[1,index]))
-      }
+    new = as.data.frame(t(sci_names))
+    colnames(new) = NULL
+    taxa = lapply(new, function(sci_name){
+        tc = lapply(taxon_classification, function(name){
+        index = grep(name, ColNames, ignore.case = TRUE)
+        if (length(index)!=0){
+          index = index[1]
+          new("taxonomicClassification",
+              taxonRankName = ColNames[index],
+              taxonRankValue = as.character(sci_name[index]))
+        }
+        })
+        tc = formRecursiveTree(tc)[[1]]
     })
-    taxa = formRecursiveTree(taxa)
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names)=="list"){
