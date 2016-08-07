@@ -150,7 +150,7 @@ set_taxonomicCoverage <- function(sci_names){
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names)=="data.frame"){
-    taxon_classification = list("Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common")
+    taxon_classification = list("Kingdom","Phylum","Class","Order","Family","Genus","Species","Common")
     ColNames = colnames(sci_names)
     taxa = lapply(taxon_classification, function(name){
       index = grep(name, ColNames, ignore.case = TRUE)
