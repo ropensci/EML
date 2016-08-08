@@ -179,7 +179,7 @@ set_taxonomicCoverage <- function(sci_names){
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else {
-    stop("Incorrect format: sci_names can only be data.frame or list")
+    stop("Incorrect format: sci_names can only be character string, data.frame or list")
   }
 } 
 
