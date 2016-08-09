@@ -76,32 +76,6 @@ testthat::test_that("set_taxonomicCoverage create a object with correct depth", 
     taxon = taxon@taxonomicClassification[[1]]
   }
   testthat::expect_equal(depth, 8)
-  
-  # unexpected input in data frame. 
-  dt = data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", 
-                  CLASS="Phaeophyceae",ORDER="Laminariales",
-                  FAMILY="Lessoniaceae",GENUS="Macrocystis",
-                  genusSpecies="Macrocystis pyrifera",commonName="MAPY", temp = "nothing")
-  taxon = set_taxonomicCoverage(dt)
-  depth = 0
-  while (length(taxon@taxonomicClassification) > 0){
-    depth = depth + 1
-    taxon = taxon@taxonomicClassification[[1]]
-  }
-  testthat::expect_equal(depth, 8)
-  
-  # input only some of the eight rank names
-  dt = data.frame(PHYLUM="Phaeophyta", 
-                  CLASS="Phaeophyceae",ORDER="Laminariales",
-                  FAMILY="Lessoniaceae",GENUS="Macrocystis",
-                  commonName="MAPY")
-  taxon = set_taxonomicCoverage(dt)
-  depth = 0
-  while (length(taxon@taxonomicClassification) > 0){
-    depth = depth + 1
-    taxon = taxon@taxonomicClassification[[1]]
-  }
-  testthat::expect_equal(depth, 6)
 })
 
 testthat::test_that("set_taxonomicCoverage create valid EML",{

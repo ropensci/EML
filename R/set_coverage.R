@@ -20,12 +20,10 @@
 #'
 #' @return a coverage object for EML
 #' 
-#' @note If "sci_names" is a data frame, a certain order of rank names is expected: 
-#' "Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common". The function
-#' will look for keywords from column names of the data frame. Rank names other than these 
-#' eight names will be ignored. The data frame do not necessarily to contain all the eight
-#' rank names. If "sci_names" is a list, users must make sure that the order of rank names
-#' they specify is from high to low.
+#' @note If "sci_names" is a data frame, column names of the data frame are rank names.
+#' For user-defined "sci_names", users must make sure that the order of rank names
+#' they specify is from high to low. 
+#' Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
 #' 
 #' @export
 #'
@@ -116,12 +114,11 @@ set_temporalCoverage <- function(beginDate = character(), endDate  = character()
 #' or a list of user-defined taxonomicClassification
 #' 
 #' @return a taxonomicCoverage object for EML
-#' @note If "sci_names" is a data frame, a certain order of rank names is expected: 
-#' "Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common". The function
-#' will look for keywords from column names of the data frame. Rank names other than these 
-#' eight names will be ignored. The data frame do not necessarily to contain all the eight
-#' rank names. If "sci_names" is a list, users must make sure that the order of rank names
-#' they specify is from high to low.
+#' @note If "sci_names" is a data frame, column names of the data frame are rank names.
+#' For user-defined "sci_names", users must make sure that the order of rank names
+#' they specify is from high to low. 
+#' Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
+#' 
 #' @export
 #'
 #' @examples 
@@ -150,18 +147,17 @@ set_taxonomicCoverage <- function(sci_names){
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names)=="data.frame"){
-    taxon_classification = list("Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common")
-    ColNames = colnames(sci_names)
-    taxa = lapply(taxon_classification, function(name){
-      index = grep(name, ColNames, ignore.case = TRUE)
-      if (length(index)!=0){
-        index = index[1]
-        new("taxonomicClassification",
-            taxonRankName = ColNames[index],
-            taxonRankValue = as.character(sci_names[1,index]))
-      }
+    taxon_classification = colnames(sci_names)
+    new = as.data.frame(t(sci_names))
+    colnames(new) = NULL
+    taxa = lapply(new, function(sci_name){
+        tc = lapply(taxon_classification, function(name){
+          new("taxonomicClassification",
+              taxonRankName = name,
+              taxonRankValue = as.character(sci_name[name]))
+        })
+        tc = formRecursiveTree(tc)[[1]]
     })
-    taxa = formRecursiveTree(taxa)
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names)=="list"){
@@ -175,7 +171,7 @@ set_taxonomicCoverage <- function(sci_names){
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else {
-    stop("Incorrect format: sci_names can only be data.frame or list")
+    stop("Incorrect format: sci_names can only be character string, data.frame or list")
   }
 } 
 
