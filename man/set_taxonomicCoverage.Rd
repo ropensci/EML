@@ -21,12 +21,10 @@ sci_names can be a space-separated character string or a data frame with column 
 or a list of user-defined taxonomicClassification
 }
 \note{
-If "sci_names" is a data frame, a certain order of rank names is expected: 
-"Kingdom","Phylum","Class","Order","Family","Genus","genusSpecies","Common". The function
-will look for keywords from column names of the data frame. Rank names other than these 
-eight names will be ignored. The data frame do not necessarily to contain all the eight
-rank names. If "sci_names" is a list, users must make sure that the order of rank names
-they specify is from high to low.
+If "sci_names" is a data frame, column names of the data frame are rank names.
+For user-defined "sci_names", users must make sure that the order of rank names
+they specify is from high to low. 
+Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
 }
 \examples{
 taxon_coverage <- 
