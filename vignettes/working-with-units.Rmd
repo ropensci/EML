@@ -156,7 +156,11 @@ As we have seen above, the custom unit declearations must be found in the `addit
 eml <- new("eml", additionalMetadata = as(unitList, "additionalMetadata"))
 ```
 
+<!--
+
 ------------
+
+
 
 In principle the EML declaration includes all information necessary to define functions for converting beween different units of a common `unitType`.  
 
@@ -166,4 +170,4 @@ In principle the EML declaration includes all information necessary to define fu
 library("udunits2")
 ```
 
-
+-->
