@@ -26,7 +26,7 @@ to a docbook. Otherwise, the input file should already be in docbook format (wit
 required for the rmarkdown package.
 }
 \examples{
-\dontrun{
+\donttest{
 ## using a simple character string
 a <- set_TextType(text = "This is the abstract")
 as(a, "abstract")

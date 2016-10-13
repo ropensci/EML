@@ -15,7 +15,7 @@
 #' required for the rmarkdown package.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## using a simple character string
 #' a <- set_TextType(text = "This is the abstract")
 #' as(a, "abstract")

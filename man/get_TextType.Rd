@@ -23,10 +23,11 @@ creates a file requested.
 Render a TextType node int HTML or some other format
 }
 \examples{
+\donttest{
 f <- system.file("examples/hf205-abstract.docx", package = "EML")
 a <- as(set_TextType(f), "abstract")
 get_TextType(a)
-
+}
 
 }
 

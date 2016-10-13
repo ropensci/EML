@@ -13,10 +13,11 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' f <- system.file("examples/hf205-abstract.docx", package = "EML")
 #' a <- as(set_TextType(f), "abstract")
 #' get_TextType(a)
-#'
+#' }
 #'
 get_TextType <- function(node, to = "html", output = tempfile(class(node), fileext = paste0(".", to)), view = TRUE){
 
