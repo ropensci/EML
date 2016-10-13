@@ -139,7 +139,7 @@ testthat::test_that("set_taxonomicCoverage create valid EML",{
                 dataTable = c(dataTable))
   #create eml object
   eml <- new("eml",
-            packageId = uuid::UUIDgenerate(),
+            packageId = "a6397e2b-8df2-4261-9cae-3b3419c40e06",
             system = "uuid",
             dataset = dataset)
 

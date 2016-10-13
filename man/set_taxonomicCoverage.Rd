@@ -23,18 +23,28 @@ or a list of user-defined taxonomicClassification
 \note{
 If "sci_names" is a data frame, column names of the data frame are rank names.
 For user-defined "sci_names", users must make sure that the order of rank names
-they specify is from high to low. 
+they specify is from high to low.
 Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
 }
 \examples{
-taxon_coverage <- 
-     set_taxonomicCoverage(list(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
-                               ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
-                               genusSpecies="Macrocystis pyrifera",commonName="MAPY"))
+taxon_coverage <-
+ set_taxonomicCoverage(list(KINGDOM="Plantae",
+                            PHYLUM="Phaeophyta",
+                            CLASS="Phaeophyceae",
+                            ORDER="Laminariales",
+                            FAMILY="Lessoniaceae",
+                            GENUS="Macrocystis",
+                            genusSpecies="Macrocystis pyrifera",
+                            commonName="MAPY"))
 
-df <- data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
-                               ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
-                               genusSpecies="Macrocystis pyrifera",commonName="MAPY")                               
+df <- data.frame(KINGDOM="Plantae",
+                 PHYLUM="Phaeophyta",
+                 CLASS="Phaeophyceae",
+                 ORDER="Laminariales",
+                 FAMILY="Lessoniaceae",
+                 GENUS="Macrocystis",
+                 genusSpecies="Macrocystis pyrifera",
+                 commonName="MAPY")
 taxon_coverage <- set_taxonomicCoverage(df)
 
 }

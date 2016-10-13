@@ -1,18 +1,18 @@
 
 #' set_TextType
-#' 
+#'
 #' For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
 #' @param text a plain text character string which will be used directly as the content of the node if no file is given
 #' @param file path to a file providing formatted input text, see details.
 #' @import XML
 #' @return a TextType object that can be coerced into any element inheriting from TextType, see examples
 #' @importFrom tools file_ext
-#' @details If the `rmarkdown` package is installed, then the input file can 
+#' @details If the `rmarkdown` package is installed, then the input file can
 #' be a Microsoft Word (.docx) file, a markdown file, or other file
 #' recognized by Pandoc (see http://pandoc.org), which will automate the conversion
-#' to a docbook. Otherwise, the input file should already be in docbook format (with 
-#' .xml or .dbk extension).  Note that pandoc comes pre-installed in RStudio and is 
-#' required for the rmarkdown package.  
+#' to a docbook. Otherwise, the input file should already be in docbook format (with
+#' .xml or .dbk extension).  Note that pandoc comes pre-installed in RStudio and is
+#' required for the rmarkdown package.
 #' @export
 #' @examples
 #' \dontrun{
@@ -24,17 +24,17 @@
 #' f <- system.file("examples/hf205-abstract.md", package = "EML")
 #' a <- set_TextType(f)
 #' as(a, "abstract")
-#' 
-#' ## Can also import from methods written in a .docx MS Word file. 
+#'
+#' ## Can also import from methods written in a .docx MS Word file.
 #' f <- system.file("examples/hf205-abstract.docx", package = "EML")
 #' a <- set_TextType(f)
 #' as(a, "abstract")
-#' 
-#' ## Documents with title headings use `section` instead of `para` notation 
+#'
+#' ## Documents with title headings use `section` instead of `para` notation
 #' f <- system.file("examples/hf205-methods.docx", package = "EML")
 #' d <- set_TextType(f)
 #' as(d, "description")
-#' 
+#'
 #' }
 #'
 #'
@@ -67,24 +67,24 @@ set_para <-  function(docbook){
 
 to_docbook <- function(file = NULL){
   if(!tools::file_ext(file) %in% c("xml", "dbk")){ ## Not xml yet, so use pandoc to generate docbook
-    
+
     if (!requireNamespace("rmarkdown", quietly = TRUE)){
       stop("rmarkdown package required to convert to Docbook format", call. = FALSE)
     }
     pandoc_convert <- getExportedValue("rmarkdown", "pandoc_convert")
-    
+
     wd <- getwd()
     dir <- tempdir()
     file.copy(file, file.path(dir, basename(file)), overwrite = TRUE)
     setwd(dir)
-    docbook_file = tempfile(tmpdir = dir, fileext = ".xml")
-    pandoc_convert(basename(file), to = "docbook", output = docbook_file, options = "-s")
+    docbook_file = tempfile(tmpdir = ".", fileext = ".xml")
+    pandoc_convert(basename(file), to = "docbook", output = normalizePath(docbook_file, mustWork = FALSE), options = "-s")
     docbook <- XML::xmlParse(docbook_file)
     setwd(wd)
-    
+
   } else { ## File is already xml/docbook, so no need for pandoc
     docbook  <- XML::xmlParse(file)
   }
   docbook
-  
+
 }

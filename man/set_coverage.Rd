@@ -52,16 +52,16 @@ of calendar dates, or to specify taxonomic coverage in terms of other ranks or i
 \note{
 If "sci_names" is a data frame, column names of the data frame are rank names.
 For user-defined "sci_names", users must make sure that the order of rank names
-they specify is from high to low. 
+they specify is from high to low.
 Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
 }
 \examples{
-coverage <- 
+coverage <-
  set_coverage(begin = '2012-06-01', end = '2013-12-31',
               sci_names = "Sarracenia purpurea",
               geographicDescription = "California coast, down through Baja, Mexico",
-              west = -122.44, east = -117.15, 
+              west = -122.44, east = -117.15,
               north = 37.38, south = 30.00)
-              
+
 }
 

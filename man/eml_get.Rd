@@ -45,7 +45,7 @@ eml <- read_eml(f)
 eml_get(eml, "physical")
 
 ## slower examples
-\donttest{ 
+\donttest{
 eml_get(eml, "attributeList")
 
 ## The first argument need not be an "eml" class, it could be a child element; e.g.
