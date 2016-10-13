@@ -10,3 +10,4 @@ inst/xsd/src
 vignettes/*.html
 ^CONDUCT\.md$
 ^appveyor\.yml$
+inst/create-package
