@@ -118,28 +118,3 @@ set_taxonomicCoverage <- function(sci_names = character()){
 }
 
 #######################
-
-# `get` methods are perhaps less necessary?  `set` methods can write a subset, `get` methods have to be more generic
-
-
-## cannot necessarily extract a species name from a taxonomicCoverage.
-
-
-get_taxonomicCoverage <- function(taxonomicCoverage){
-  lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)[[1]]
-
-}
-
-
-
-taxa_to_df <- function(object){
-  df <- data.frame(rank = character(), value = character())
-  while(length(object@taxonomicClassification) > 0){
-    df <- rbind(df, data.frame(rank = object@taxonRankName,
-                               value = object@taxonRankValue))
-    object <- object@taxonomicClassification[[1]]
-  }
-  df <- rbind(df, data.frame(rank = object@taxonRankName,
-                             value = object@taxonRankValue))
-  df
-}

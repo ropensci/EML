@@ -36,6 +36,7 @@ Collate:
     'eml_get.R'
     'eml_validate.R'
     'get_TextType.R'
+    'get_coverage.R'
     'is_standardUnit.R'
     'literature_coercions.R'
     'methods.R'
