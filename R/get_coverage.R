@@ -1,27 +1,26 @@
 
-# `get` methods are perhaps less necessary?  `set` methods can write a subset, `get` methods have to be more generic
-
-
-## cannot necessarily extract a species name from a taxonomicCoverage.
-
-
-#' get_taxanomicCoverage
+#' get_taxonomicCoverage
 #'
-#' @param taxonomicCoverage a taxonomicCoverage EML element
-#'
-#' @return a data frame with column for rank and column for value, see examples
+#' @param taxonomicCoverage a taxonomicCoverage class object
+#' @details extract information from a taxonomicCoverage object and construct a data frame
+#' 
+#' @return a data frame with rank names as column names
 #' @export
 #'
-#' @examples
+#' @examples 
 #' f <- system.file("xsd/test/eml-i18n.xml", package="EML")
 #' eml <- read_eml(f)
-#' df <- EML:::get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
+#' df <- get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
+
+# return a data frame whose column names are rank names
 get_taxonomicCoverage <- function(taxonomicCoverage){
-  lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)[[1]]
-  
+  df <- lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)[[1]]
+  df <- t(as.data.frame(df))
+  colnames(df) = df[1,]
+  df = t(as.data.frame(df[-1,]))
+  rownames(df) = NULL
+  as.data.frame(df)
 }
-
-
 
 taxa_to_df <- function(object){
   df <- data.frame(rank = character(), value = character())

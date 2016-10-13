@@ -3,7 +3,7 @@
 #' @param beginDate Starting date for temporal coverage range. 
 #' @param endDate End date for temporal coverage range
 #' @param date give a single date, or vector of single dates covered (instead of beginDate and endDate)
-#' @param sci_names string of (space-separated) scientific names for species covered.  See details
+#' @param sci_names string (space seperated) or list or data frame of scientific names for species covered.  See details
 #' @param geographicDescription text string describing the geographic location
 #' @param westBoundingCoordinate Decimal longitude for west edge bounding box
 #' @param eastBoundingCoordinate Decimal longitude for east edge bounding box
@@ -17,8 +17,14 @@
 #' well suited, and users will need the more flexible but more verbose construction using
 #' "new()" methods; for instance, to specify temporal coverage in geological epoch instead
 #' of calendar dates, or to specify taxonomic coverage in terms of other ranks or identifiers.
-#' 
+#'
 #' @return a coverage object for EML
+#' 
+#' @note If "sci_names" is a data frame, column names of the data frame are rank names.
+#' For user-defined "sci_names", users must make sure that the order of rank names
+#' they specify is from high to low. 
+#' Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
+#' 
 #' @export
 #'
 #' @examples
@@ -28,7 +34,8 @@
 #'               geographicDescription = "California coast, down through Baja, Mexico",
 #'               west = -122.44, east = -117.15, 
 #'               north = 37.38, south = 30.00)
-#' 
+#'               
+
 set_coverage <- function(beginDate = character(), endDate = character(),
                          date = character(), sci_names = character(),
                          geographicDescription = character(), westBoundingCoordinate = numeric(), 
@@ -99,22 +106,83 @@ set_temporalCoverage <- function(beginDate = character(), endDate  = character()
 }
 
 ######## Taxonomic Coverage ####################
+#' set_taxonomicCoverage
+#'
+#' @param sci_names string (space seperated) or list or data frame of scientific names for species covered.
+#' @details Turn a data.frame or a list of scientific names into a taxonomicCoverage block
+#' sci_names can be a space-separated character string or a data frame with column names as rank name
+#' or a list of user-defined taxonomicClassification
+#' 
+#' @return a taxonomicCoverage object for EML
+#' @note If "sci_names" is a data frame, column names of the data frame are rank names.
+#' For user-defined "sci_names", users must make sure that the order of rank names
+#' they specify is from high to low. 
+#' Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
+#' 
+#' @export
+#'
+#' @examples 
+#' taxon_coverage <- 
+#'      set_taxonomicCoverage(list(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
+#'                                ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
+#'                                genusSpecies="Macrocystis pyrifera",commonName="MAPY"))
+#' 
+#' df <- data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta", CLASS="Phaeophyceae",
+#'                                ORDER="Laminariales",FAMILY="Lessoniaceae",GENUS="Macrocystis",
+#'                                genusSpecies="Macrocystis pyrifera",commonName="MAPY")                               
+#' taxon_coverage <- set_taxonomicCoverage(df)
+#' 
 
-## Turn a string of scientific names into a taxonomicCoverage block
+set_taxonomicCoverage <- function(sci_names){
+  if (class(sci_names)=="character"){
+    taxa = lapply(sci_names, function(sci_name){
+      s <- strsplit(sci_name, " ")[[1]]
+      new("taxonomicClassification",
+          taxonRankName = "genus",
+          taxonRankValue = s[[1]],
+          taxonomicClassification = c(new("taxonomicClassification",
+                                          taxonRankName = "species",
+                                          taxonRankValue = s[[2]])))
+    })
+    new("taxonomicCoverage",
+        taxonomicClassification = do.call(c, taxa))
+  } else if (class(sci_names)=="data.frame"){
+    taxon_classification = colnames(sci_names)
+    new = as.data.frame(t(sci_names))
+    colnames(new) = NULL
+    taxa = lapply(new, function(sci_name){
+        tc = lapply(taxon_classification, function(name){
+          new("taxonomicClassification",
+              taxonRankName = name,
+              taxonRankValue = as.character(sci_name[name]))
+        })
+        tc = formRecursiveTree(tc)[[1]]
+    })
+    new("taxonomicCoverage",
+        taxonomicClassification = do.call(c, taxa))
+  } else if (class(sci_names)=="list"){
+    taxonRankNames = as.list(names(sci_names))
+    taxa = lapply(taxonRankNames, function(name){
+      new("taxonomicClassification", 
+          taxonRankName = as.character(name),
+          taxonRankValue = as.character(sci_names[[name]]))
+    })
+    taxa = formRecursiveTree(taxa)
+    new("taxonomicCoverage",
+        taxonomicClassification = do.call(c, taxa))
+  } else {
+    stop("Incorrect format: sci_names can only be character string, data.frame or list")
+  }
+} 
 
-## not the inverse of get_taxonomicCoverage!
-set_taxonomicCoverage <- function(sci_names = character()){
-  taxa = lapply(sci_names, function(sci_name){
-    s <- strsplit(sci_name, " ")[[1]]
-    new("taxonomicClassification",
-        taxonRankName = "genus",
-        taxonRankValue = s[[1]],
-        taxonomicClassification = c(new("taxonomicClassification",
-                                        taxonRankName = "species",
-                                        taxonRankValue = s[[2]])))
-  })
-  new("taxonomicCoverage",
-      taxonomicClassification = do.call(c, taxa))
+# helper function: form a nested tree recursively
+formRecursiveTree = function(listOfelements){
+  if (length(listOfelements)==1 || length(listOfelements)==2 && is.null(listOfelements[[2]])){
+    return(do.call(c, listOfelements[1]))
+  } else if (is.null(listOfelements[[1]])){
+    formRecursiveTree(listOfelements[2:length(listOfelements)])
+  } else {
+    listOfelements[[1]]@taxonomicClassification = formRecursiveTree(listOfelements[2:length(listOfelements)])
+    return(do.call(c, listOfelements[1]))
+  }
 }
-
-#######################

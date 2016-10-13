@@ -2,22 +2,25 @@
 % Please edit documentation in R/get_coverage.R
 \name{get_taxonomicCoverage}
 \alias{get_taxonomicCoverage}
-\title{get_taxanomicCoverage}
+\title{get_taxonomicCoverage}
 \usage{
 get_taxonomicCoverage(taxonomicCoverage)
 }
 \arguments{
-\item{taxonomicCoverage}{a taxonomicCoverage EML element}
+\item{taxonomicCoverage}{a taxonomicCoverage class object}
 }
 \value{
-a data frame with column for rank and column for value, see examples
+a data frame with rank names as column names
 }
 \description{
-get_taxanomicCoverage
+get_taxonomicCoverage
+}
+\details{
+extract information from a taxonomicCoverage object and construct a data frame
 }
 \examples{
 f <- system.file("xsd/test/eml-i18n.xml", package="EML")
 eml <- read_eml(f)
-df <- EML:::get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
+df <- get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
 }
 
