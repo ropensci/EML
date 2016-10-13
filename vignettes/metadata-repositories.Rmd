@@ -82,14 +82,30 @@ query(CNode("STAGING"), searchTerms = list(id = packageId))
 
 ---------------
 
-Gimme DOI! Note that the example would fail if run here since only the Production (`PROD`) environment can provide DOIs (the `STAGING` environment is only for tests and training examples), and only then on member nodes that offer DOIs, such as the KNB (`urn:node:KNB`).  
+### Gimme DOI! 
+
+Note that the example would fail if run here since only the Production (`PROD`) environment can provide DOIs (the `STAGING` environment is only for tests and training examples), and only then on member nodes that offer DOIs, such as the KNB (`urn:node:KNB`).  
 
 ```{r eval=FALSE}
 cn <- CNode("STAGING")
 mn <- getMNode(cn, "urn:node:mnStageUCSB2")
 newid <- generateIdentifier(mn, "DOI")
+```
 
-## now use the DOI in packaging the DataObject:
+
+We also want to update the EML file itself to use the new id as the `packageId`:
+
+
+```{r eval = FALSE}
+eml <- read_eml(sampleEML)
+eml@packageId <- newid
+write_eml(eml, sampleEML)
+```
+
+
+We can now use the DOI in packaging the DataObject
+
+```{r eval = FALSE}
 new("DataObject", id = newid, format = "eml://ecoinformatics.org/eml-2.1.1", file=sampleEML)
 ```
 
