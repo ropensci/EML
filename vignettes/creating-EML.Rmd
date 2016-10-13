@@ -105,6 +105,15 @@ data.frame(
   "variable",
   "value.i",
   "length"), 
+  attributeDefinition = c(
+    "which run number (=block). Range: 1 - 6. (integer)",
+    "year, 2012",
+    "Julian day. Range: 170 - 209.",
+    "hour and minute of observation. Range 1 - 2400 (integer)",
+    "is variable Real, Interpolated or Bad (character/factor)",
+    "what variable being measured in what treatment (character/factor).",
+    "value of measured variable for run.num on year/day/hour.min.",
+    "length of the species in meters (dummy example of numeric data)"),
   formatString = c(
     NA,        
     "YYYY",     
@@ -132,15 +141,6 @@ data.frame(
     NA,
     NA,
     "meter"),
-  attributeDefinition = c(
-    "which run number (=block). Range: 1 - 6. (integer)",
-    "year, 2012",
-    "Julian day. Range: 170 - 209.",
-    "hour and minute of observation. Range 1 - 2400 (integer)",
-    "is variable Real, Interpolated or Bad (character/factor)",
-    "what variable being measured in what treatment (character/factor).",
-    "value of measured variable for run.num on year/day/hour.min.",
-    "length of the species in meters (dummy example of numeric data)"),
   numberType = c(
     NA,
     NA,
@@ -155,7 +155,15 @@ data.frame(
 
 ```
 
-Factors (enumerated domains) need to specify definitions for each of the code terms appearing in the data columns.  This does not fit so nicely in the above table, where each attribute is a single row, so if data uses factors (instead of non-enumerated strings), these definitions must be provided in a separate table.  The format expected of this table has three columns: `attributeName` (as before), `code`, and `definition`.  Note that `attributeName` is simply repeated for all codes belonging to a common attribute.  
+Every column (attribute) in the dataset needs an `attributeName` (column name, as it appears in the CSV file) and `attributeDefinition`, a longer description of what the column contains. Additional information required depends on the data type:
+
+**Strings** (character vectors) data just needs a "definition" value, often the same as the `attributeDefinition` in this case.
+
+**Numeric** data needs a `numberType` (e.g. "real", "integer"), and a unit. 
+
+**Dates** need a date format.
+
+**Factors** (enumerated domains) need to specify definitions for each of the code terms appearing in the data columns.  This does not fit so nicely in the above table, where each attribute is a single row, so if data uses factors (instead of non-enumerated strings), these definitions must be provided in a separate table.  The format expected of this table has three columns: `attributeName` (as before), `code`, and `definition`.  Note that `attributeName` is simply repeated for all codes belonging to a common attribute.  
 
 In this case we have three attributes that are factors,  To make the code below more readable (aligning code and definitions side by side), we define these first as named character vectors, and convert that to a `data.frame`. (The `dplyr::frame_data` function also permits this more readable way to define data.frames inline).
 
