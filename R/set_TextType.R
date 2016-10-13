@@ -78,7 +78,7 @@ to_docbook <- function(file = NULL){
     file.copy(file, file.path(dir, basename(file)), overwrite = TRUE)
     setwd(dir)
     docbook_file = tempfile(tmpdir = ".", fileext = ".xml")
-    pandoc_convert(basename(file), to = "docbook", output = normalizePath(docbook_file, mustWork = FALSE), options = "-s")
+    pandoc_convert(basename(file), to = "docbook", output = normalizePath(docbook_file, winslash = "/", mustWork = FALSE), options = "-s")
     docbook <- XML::xmlParse(docbook_file)
     setwd(wd)
 

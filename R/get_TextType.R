@@ -34,7 +34,7 @@ get_TextType <- function(node, to = "html", output = tempfile(class(node), filee
     setwd(dir)
     docbook_file <- tempfile(tmpdir = ".", fileext = ".xml")
     XML::saveXML(x, docbook_file)
-    pandoc_convert(basename(docbook_file), to = to, output = normalizePath(output, mustWork = FALSE), options = "-s")
+    pandoc_convert(basename(docbook_file), to = to, output = normalizePath(output, winslash = "/", mustWork = FALSE), options = "-s")
 
     file.copy(output, file.path(wd, basename(output)), overwrite = TRUE)
 
