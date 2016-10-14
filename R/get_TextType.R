@@ -1,5 +1,6 @@
 
 
+
 #' get_TextType
 #'
 #' Render a TextType node int HTML or some other format
@@ -19,15 +20,20 @@
 #' get_TextType(a)
 #' }
 #'
-get_TextType <- function(node, to = "html", output = tempfile(class(node), fileext = paste0(".", to)), view = TRUE){
-
+get_TextType <-
+  function(node,
+           to = "html",
+           output = tempfile(class(node), fileext = paste0(".", to)),
+           view = TRUE) {
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
     x <- S4Toeml(node)
 
-    if (!requireNamespace("rmarkdown", quietly = TRUE)){
-      stop("rmarkdown package required to convert to Docbook format", call. = FALSE)
+    if (!requireNamespace("rmarkdown", quietly = TRUE)) {
+      stop("rmarkdown package required to convert to Docbook format",
+           call. = FALSE)
     }
-    pandoc_convert <- getExportedValue("rmarkdown", "pandoc_convert")
+    pandoc_convert <-
+      getExportedValue("rmarkdown", "pandoc_convert")
 
     wd <- getwd()
     dir <- tempdir()
@@ -35,16 +41,21 @@ get_TextType <- function(node, to = "html", output = tempfile(class(node), filee
     setwd(dir)
     docbook_file <- tempfile(tmpdir = ".", fileext = ".xml")
     XML::saveXML(x, docbook_file)
-    pandoc_convert(basename(docbook_file), to = to, output = normalizePath(output, winslash = "/", mustWork = FALSE), options = "-s")
+    pandoc_convert(
+      basename(docbook_file),
+      to = to,
+      output = normalizePath(output, winslash = "/", mustWork = FALSE),
+      options = "-s"
+    )
 
     file.copy(output, file.path(wd, basename(output)), overwrite = TRUE)
 
 
     setwd(wd)
 
-    if(view && to == "html")
+    if (view && to == "html")
       utils::browseURL(basename(output))
 
 
 
-    }
+  }

@@ -36,49 +36,69 @@
 #'               north = 37.38, south = 30.00)
 #'
 
-set_coverage <- function(beginDate = character(), endDate = character(),
-                         date = character(), sci_names = character(),
-                         geographicDescription = character(), westBoundingCoordinate = numeric(),
-                         eastBoundingCoordinate = numeric(), northBoundingCoordinate = numeric(),
-                         southBoundingCoordinate = numeric(), altitudeMinimum = numeric(),
-                         altitudeMaximum = numeric(), altitudeUnits = character()
-                         ){
-  new("coverage",
-      geographicCoverage = set_geographicCoverage(geographicDescription, westBoundingCoordinate,
-                                                  eastBoundingCoordinate, northBoundingCoordinate,
-                                                  southBoundingCoordinate, altitudeMinimum,
-                                                  altitudeMaximum, altitudeUnits),
+set_coverage <-
+  function(beginDate = character(),
+           endDate = character(),
+           date = character(),
+           sci_names = character(),
+           geographicDescription = character(),
+           westBoundingCoordinate = numeric(),
+           eastBoundingCoordinate = numeric(),
+           northBoundingCoordinate = numeric(),
+           southBoundingCoordinate = numeric(),
+           altitudeMinimum = numeric(),
+           altitudeMaximum = numeric(),
+           altitudeUnits = character()) {
+    new(
+      "coverage",
+      geographicCoverage = set_geographicCoverage(
+        geographicDescription,
+        westBoundingCoordinate,
+        eastBoundingCoordinate,
+        northBoundingCoordinate,
+        southBoundingCoordinate,
+        altitudeMinimum,
+        altitudeMaximum,
+        altitudeUnits
+      ),
       temporalCoverage = set_temporalCoverage(beginDate, endDate, date),
       taxonomicCoverage = set_taxonomicCoverage(sci_names)
-  )
-}
+    )
+  }
 
 
 
 
 ######## Geographic Coverage ####################
 ## Fixme just rewrite constructor?
-set_geographicCoverage <- function(geographicDescription = character(), westBoundingCoordinate = numeric(),
-                                   eastBoundingCoordinate = numeric(), northBoundingCoordinate = numeric(),
-                                   southBoundingCoordinate = numeric(), altitudeMinimum = numeric(),
-                                   altitudeMaximum = numeric(), altitudeUnits = character()){
-  ## Should permit G-Polygon definitions
-  new(
-    "geographicCoverage",
-    geographicDescription = geographicDescription,
-    boundingCoordinates = new(
-      "boundingCoordinates",
-      westBoundingCoordinate = as.character(westBoundingCoordinate),
-      eastBoundingCoordinate = as.character(eastBoundingCoordinate),
-      northBoundingCoordinate = as.character(northBoundingCoordinate),
-      southBoundingCoordinate = as.character(southBoundingCoordinate),
-      boundingAltitudes = new("boundingAltitudes",
-                              altitudeMinimum = as.character(altitudeMinimum),
-                              altitudeMaximum = as.character(altitudeMaximum),
-                              altitudeUnits = altitudeUnits)
+set_geographicCoverage <-
+  function(geographicDescription = character(),
+           westBoundingCoordinate = numeric(),
+           eastBoundingCoordinate = numeric(),
+           northBoundingCoordinate = numeric(),
+           southBoundingCoordinate = numeric(),
+           altitudeMinimum = numeric(),
+           altitudeMaximum = numeric(),
+           altitudeUnits = character()) {
+    ## Should permit G-Polygon definitions
+    new(
+      "geographicCoverage",
+      geographicDescription = geographicDescription,
+      boundingCoordinates = new(
+        "boundingCoordinates",
+        westBoundingCoordinate = as.character(westBoundingCoordinate),
+        eastBoundingCoordinate = as.character(eastBoundingCoordinate),
+        northBoundingCoordinate = as.character(northBoundingCoordinate),
+        southBoundingCoordinate = as.character(southBoundingCoordinate),
+        boundingAltitudes = new(
+          "boundingAltitudes",
+          altitudeMinimum = as.character(altitudeMinimum),
+          altitudeMaximum = as.character(altitudeMaximum),
+          altitudeUnits = altitudeUnits
+        )
+      )
     )
-  )
-}
+  }
 
 
 
@@ -86,24 +106,31 @@ set_geographicCoverage <- function(geographicDescription = character(), westBoun
 ############ Temporal Coverage #################
 
 ## FIXME if given dateTime objects, should coerce appropriately to include 'time' element
-set_temporalCoverage <- function(beginDate = character(), endDate  = character(), date  = character()){
-    if(length(beginDate) > 0){
+set_temporalCoverage <-
+  function(beginDate = character(),
+           endDate  = character(),
+           date  = character()) {
+    if (length(beginDate) > 0) {
+      node <- new(
+        "temporalCoverage",
+        rangeOfDates =
+          new(
+            "rangeOfDates",
+            beginDate =
+              new("beginDate",
+                  calendarDate = beginDate),
+            endDate =
+              new("endDate",
+                  calendarDate = endDate)
+          )
+      )
+    } else if (length(date) > 0) {
       node <- new("temporalCoverage",
-                  rangeOfDates =
-                    new("rangeOfDates",
-                        beginDate =
-                          new("beginDate",
-                              calendarDate = beginDate),
-                        endDate =
-                          new("endDate",
-                              calendarDate = endDate)))
-    } else if(length(date) > 0){
-      node <- new("temporalCoverage",
-          singleDateTime = lapply(date, function(x)
-            new("singleDateTime", calendarDate = x)))
+                  singleDateTime = lapply(date, function(x)
+                    new("singleDateTime", calendarDate = x)))
     }
     node
-}
+  }
 
 ######## Taxonomic Coverage ####################
 #' set_taxonomicCoverage
@@ -143,39 +170,49 @@ set_temporalCoverage <- function(beginDate = character(), endDate  = character()
 #' taxon_coverage <- set_taxonomicCoverage(df)
 #'
 
-set_taxonomicCoverage <- function(sci_names){
-  if (class(sci_names)=="character"){
-    taxa = lapply(sci_names, function(sci_name){
+set_taxonomicCoverage <- function(sci_names) {
+  if (class(sci_names) == "character") {
+    taxa = lapply(sci_names, function(sci_name) {
       s <- strsplit(sci_name, " ")[[1]]
-      new("taxonomicClassification",
-          taxonRankName = "genus",
-          taxonRankValue = s[[1]],
-          taxonomicClassification = c(new("taxonomicClassification",
-                                          taxonRankName = "species",
-                                          taxonRankValue = s[[2]])))
+      new(
+        "taxonomicClassification",
+        taxonRankName = "genus",
+        taxonRankValue = s[[1]],
+        taxonomicClassification = c(
+          new(
+            "taxonomicClassification",
+            taxonRankName = "species",
+            taxonRankValue = s[[2]]
+          )
+        )
+      )
     })
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
-  } else if (class(sci_names)=="data.frame"){
+  } else if (class(sci_names) == "data.frame") {
     taxon_classification = colnames(sci_names)
     new = as.data.frame(t(sci_names))
     colnames(new) = NULL
-    taxa = lapply(new, function(sci_name){
-        tc = lapply(taxon_classification, function(name){
-          new("taxonomicClassification",
-              taxonRankName = name,
-              taxonRankValue = as.character(sci_name[name]))
-        })
-        tc = formRecursiveTree(tc)[[1]]
+    taxa = lapply(new, function(sci_name) {
+      tc = lapply(taxon_classification, function(name) {
+        new(
+          "taxonomicClassification",
+          taxonRankName = name,
+          taxonRankValue = as.character(sci_name[name])
+        )
+      })
+      tc = formRecursiveTree(tc)[[1]]
     })
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
-  } else if (class(sci_names)=="list"){
+  } else if (class(sci_names) == "list") {
     taxonRankNames = as.list(names(sci_names))
-    taxa = lapply(taxonRankNames, function(name){
-      new("taxonomicClassification",
-          taxonRankName = as.character(name),
-          taxonRankValue = as.character(sci_names[[name]]))
+    taxa = lapply(taxonRankNames, function(name) {
+      new(
+        "taxonomicClassification",
+        taxonRankName = as.character(name),
+        taxonRankValue = as.character(sci_names[[name]])
+      )
     })
     taxa = formRecursiveTree(taxa)
     new("taxonomicCoverage",
@@ -186,10 +223,11 @@ set_taxonomicCoverage <- function(sci_names){
 }
 
 # helper function: form a nested tree recursively
-formRecursiveTree = function(listOfelements){
-  if (length(listOfelements)==1 || length(listOfelements)==2 && is.null(listOfelements[[2]])){
+formRecursiveTree = function(listOfelements) {
+  if (length(listOfelements) == 1 ||
+      length(listOfelements) == 2 && is.null(listOfelements[[2]])) {
     return(do.call(c, listOfelements[1]))
-  } else if (is.null(listOfelements[[1]])){
+  } else if (is.null(listOfelements[[1]])) {
     formRecursiveTree(listOfelements[2:length(listOfelements)])
   } else {
     listOfelements[[1]]@taxonomicClassification = formRecursiveTree(listOfelements[2:length(listOfelements)])
