@@ -5,10 +5,11 @@ library(XML)
 
 xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
 ## eml-unitDictionary is not EML but STMML; won't validate against EML schema.  (could add it into additionalMetadata though)
-xml_tests <- xml_tests[- which(xml_tests == "eml-unitDictionary.xml")]
+xml_tests <-
+  xml_tests[-which(xml_tests == "eml-unitDictionary.xml")]
 
 
-out <- lapply(xml_tests, function(xml){
+out <- lapply(xml_tests, function(xml) {
   testthat::test_that(xml, {
     f <- system.file(paste0("xsd/test/", xml), package = "EML")
     node <- xmlRoot(xmlParse(f))
@@ -24,7 +25,7 @@ out <- lapply(xml_tests, function(xml){
     xmlNamespaces(element) <- ns
     ids <- sapply(ns, `[[`, "id")
     tmp <- which(ids  == "eml")
-    if(length(tmp) > 0){
+    if (length(tmp) > 0) {
       ns_1 <- ids[[tmp]]
     } else {
       ns_1 <- ns[[1]]$id
@@ -40,7 +41,8 @@ out <- lapply(xml_tests, function(xml){
     ## identical modulo order
     testthat::expect_identical(sort(all_elements), sort(all_elements2))
     ## strictly identical:
-    if(!(xml == 'eml-physical.xml')) # Skip known error
+    if (!(xml == 'eml-physical.xml'))
+      # Skip known error
       testthat::expect_identical(all_elements, all_elements2)
 
     ## Validate

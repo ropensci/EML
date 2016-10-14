@@ -24,7 +24,8 @@ testthat::test_that("we can have numeric data with bounds where some bounds are 
                         maximum = NA,
                         stringsAsFactors = FALSE
                       )
-                      attributeList <- set_attributes(df, col_classes = "numeric")
+                      attributeList <-
+                        set_attributes(df, col_classes = "numeric")
 
                       dataTable <- new(
                         "dataTable",
@@ -34,7 +35,8 @@ testthat::test_that("we can have numeric data with bounds where some bounds are 
                         physical = set_physical("file.csv")
                       )
 
-                      me <- as.person("Carl Boettiger <cboettig@gmail.com> [ctb]")
+                      me <-
+                        as.person("Carl Boettiger <cboettig@gmail.com> [ctb]")
                       dataset <-
                         new(
                           "dataset",
@@ -504,4 +506,3 @@ testthat::test_that("The set_attributes function returns useful warnings", {
   testthat::expect_warning(set_attributes(attributes),
                            "The required formatString")
 })
-

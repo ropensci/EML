@@ -4,7 +4,6 @@ f <- system.file("examples", "coverage_test.xml", package = "EML")
 eml <- read_eml(f)
 
 testthat::test_that("we can find and get an element", {
-
   m <- eml_get(eml, "methods")
   testthat::expect_is(m, "methods")
   m <- eml_find(eml, "methods") # ok
@@ -14,7 +13,6 @@ testthat::test_that("we can find and get an element", {
 
 
 testthat::test_that("we can get child elements from arbitrary nodes", {
-
   geographicCoverage <- eml_get(eml, "geographicCoverage") #works
 
   # Note, this returns a list of all ListOfgeographicCoverage nodes...

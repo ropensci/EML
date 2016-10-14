@@ -17,4 +17,3 @@ testthat::test_that("We can parse the sample EML file correctly", {
   unlink("test.xml")
 
 })
-
