@@ -10,7 +10,7 @@ Authors@R: c(
     person("Maëlle", "Salmon", role = "ctb", email = "maelle.salmon@yahoo.se")
     )
 URL: https://github.com/ropensci/EML
-BugReorts: https://github.com/ropensci/EML/issues
+BugReports: https://github.com/ropensci/EML/issues
 Maintainer: Carl Boettiger <cboettig@gmail.com>
 Description: Parse and serialize Ecological Metadata Language ('EML') files into
     S4 objects.

@@ -60,7 +60,7 @@ method which displays in an XML-like layout for convenience:
 eml
 ```
 
-Validate EML against the official schema
+Validation helps ensure that an EML file can be accurately interpreted by any computer program designed to read EML.  We can validate any EML against the official schema:
 
 ```{r, message=TRUE}
 # An EML document with no validation errors
@@ -74,7 +74,6 @@ eml_validate(invalid_eml)
 
 
 Write out as EML:
-
 
 ```{r, eval=FALSE}
 write_eml(eml, "example.xml")

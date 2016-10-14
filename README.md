@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML)
 
 EML: The Ecological Metadata Language Standard
 ==============================================
@@ -98,13 +98,11 @@ eml
 #> </eml>
 ```
 
-Validate EML against the official schema
+Validation helps ensure that an EML file can be accurately interpreted by any computer program designed to read EML. We can validate any EML against the official schema:
 
 ``` r
 # An EML document with no validation errors
 eml_validate(eml)
-#> Warning in is.na(encoding): is.na() applied to non-(list or vector) of type
-#> 'NULL'
 #> [1] TRUE
 
 # An EML document with validation errors
