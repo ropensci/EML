@@ -51,9 +51,9 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...) {
 
 
     for (child in unique(subclasses)) {
-      y = lapply(metaclasses, function(x)
+      y <- lapply(metaclasses, function(x)
         match(child, names(x)))
-      s = names(y)[!is.na(y)]
+      s <- names(y)[!is.na(y)]
       cls <- metaclasses[[s]][[y[[s]]]]
       if (is.null(slot(s4, s)))
         slot(s4, s) <- new(s)
@@ -123,8 +123,8 @@ S4Toeml <- function(obj,
   if (is.null(node))
     node <- newXMLNode(node_name, namespaceDefinitions = ns)
 
-  base_attributes = c("lang")
-  schema_attributes = c("schemaLocation")
+  base_attributes <- c("lang")
+  schema_attributes <- c("schemaLocation")
 
 
 
@@ -156,13 +156,13 @@ S4Toeml <- function(obj,
         ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
         ## pass their children directly to their parent node.
       } else if (grepl("^[A-Z]", s)) {
-        X = slot(obj, s)
+        X <- slot(obj, s)
         if (!isEmpty(X)) {
           addChildren(node, S4Toeml(X, node = node))
         }
       } else {
         ## Complex child nodes
-        X = slot(obj, s)
+        X <- slot(obj, s)
         if (!isEmpty(X)) {
           if (is(X, "InlineType"))
             addChildren(node, newXMLNode(s, .children = X))

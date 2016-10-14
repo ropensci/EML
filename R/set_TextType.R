@@ -85,7 +85,7 @@ to_docbook <- function(file = NULL) {
     dir <- tempdir()
     file.copy(file, file.path(dir, basename(file)), overwrite = TRUE)
     setwd(dir)
-    docbook_file = tempfile(tmpdir = ".", fileext = ".xml")
+    docbook_file <- tempfile(tmpdir = ".", fileext = ".xml")
     pandoc_convert(
       basename(file),
       to = "docbook",

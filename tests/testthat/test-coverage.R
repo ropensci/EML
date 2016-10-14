@@ -50,13 +50,13 @@ testthat::test_that("set_coverage creates a coverage object",{
 
 testthat::test_that("set_taxonomicCoverage creates a taxonomicCoverage object",{
   # input type: data frame
-  taxon = set_taxonomicCoverage(data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta",
+  taxon <- set_taxonomicCoverage(data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta",
                                    CLASS="Phaeophyceae",ORDER="Laminariales",
                                    FAMILY="Lessoniaceae",GENUS="Macrocystis",
                                   genusSpecies="Macrocystis pyrifera",commonName="MAPY"))
   testthat::expect_is(taxon, "taxonomicCoverage")
   # input type: list
-  taxon = set_taxonomicCoverage(list(KINGDOM="Plantae", PHYLUM="Phaeophyta",
+  taxon <- set_taxonomicCoverage(list(KINGDOM="Plantae", PHYLUM="Phaeophyta",
                                            CLASS="Phaeophyceae",ORDER="Laminariales",
                                            FAMILY="Lessoniaceae",GENUS="Macrocystis",
                                            genusSpecies="Macrocystis pyrifera",commonName="MAPY"))
@@ -65,15 +65,15 @@ testthat::test_that("set_taxonomicCoverage creates a taxonomicCoverage object",{
 
 testthat::test_that("set_taxonomicCoverage create a object with correct depth", {
   # regular case
-  dt = data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta",
+  dt <- data.frame(KINGDOM="Plantae", PHYLUM="Phaeophyta",
                   CLASS="Phaeophyceae",ORDER="Laminariales",
                   FAMILY="Lessoniaceae",GENUS="Macrocystis",
                   genusSpecies="Macrocystis pyrifera",commonName="MAPY")
-  taxon = set_taxonomicCoverage(dt)
-  depth = 0
+  taxon <- set_taxonomicCoverage(dt)
+  depth <- 0
   while (length(taxon@taxonomicClassification) > 0){
-    depth = depth + 1
-    taxon = taxon@taxonomicClassification[[1]]
+    depth <- depth + 1
+    taxon <- taxon@taxonomicClassification[[1]]
   }
   testthat::expect_equal(depth, 8)
 })
@@ -118,8 +118,8 @@ testthat::test_that("set_taxonomicCoverage create valid EML",{
                      CLASS="Phaeophyceae",ORDER="Laminariales",
                      FAMILY="Lessoniaceae",GENUS="Macrocystis",
                      genusSpecies="Macrocystis pyrifera",commonName="MAPY")
-  geographicDescription = "This is a test."
-    coverage = set_coverage(begin = "1900", end = "2000",
+  geographicDescription <- "This is a test."
+    coverage <- set_coverage(begin = "1900", end = "2000",
                  sci_names = df,
                  geographicDescription = geographicDescription,
                  west = 0, east = 0,

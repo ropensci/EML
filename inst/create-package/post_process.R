@@ -1,62 +1,68 @@
-set_dummy_class <- function(class, file = "R/classes.R"){
+set_dummy_class <- function(class, file = "R/classes.R") {
   write(sprintf("setClass('%s')", class), file, append = TRUE)
 }
 
 
-replace_class <- function(class, new, file = "R/classes.R"){
+replace_class <- function(class, new, file = "R/classes.R") {
   R <- readLines(file)
   R <- gsub(sprintf("^setClass\\('%s'.*", class), new, R)
   write(R, file)
 }
 
 
-move_up_n <- function(class, file = "R/classes.R", n = 2){
+move_up_n <- function(class, file = "R/classes.R", n = 2) {
   R <- readLines(file)
   N <- length(R)
   i <- grep(sprintf("^setClass\\('%s'.*", class), R)[[1]]
-  write(c(R[1:(i-n)], R[i], R[(i-n+1):(i-1)], R[(i+1):N]), file)
+  write(c(R[1:(i - n)], R[i], R[(i - n + 1):(i - 1)], R[(i + 1):N]), file)
 }
 
 
-move_down_n <- function(class, file = "R/classes.R", n = 2){
+move_down_n <- function(class, file = "R/classes.R", n = 2) {
   R <- readLines(file)
   N <- length(R)
   i <- grep(sprintf("^setClass\\('%s'.*", class), R)[[1]]
-  write(c(R[1:(i-1)], R[(i+1):(i+n)], R[i], R[(i+n+1):N]), file)
+  write(c(R[1:(i - 1)], R[(i + 1):(i + n)], R[i], R[(i + n + 1):N]), file)
 }
 
 
-move_to_top <- function(class, file = "R/classes.R"){
+move_to_top <- function(class, file = "R/classes.R") {
   R <- readLines(file)
   i <- grep(sprintf("^setClass\\('%s'.*", class), R)
   write(c(R[i], R[-i]), file)
 }
 
 
-move_to_end <- function(class, file = "R/classes.R"){
+move_to_end <- function(class, file = "R/classes.R") {
   R <- readLines(file)
   i <- grep(sprintf("^setClass\\('%s'.*", class), R)
   write(c(R[-i], R[i]), file)
 }
 
 
-drop_method <- function(class, file){
+drop_method <- function(class, file) {
   M <- readLines(file)
-#  M <- gsub(sprintf("^setAs\\('%s',.*", class), "", M)
-#  M <- gsub(sprintf("setAs\\('XMLInternalNode', '%s',.*", class), "", M)
+  #  M <- gsub(sprintf("^setAs\\('%s',.*", class), "", M)
+  #  M <- gsub(sprintf("setAs\\('XMLInternalNode', '%s',.*", class), "", M)
   M <- gsub(sprintf("setMethod\\(initialize, '%s'.*", class), "", M)
   write(M, file)
 }
 
 # make sure that " = 'complex'" etc also gets fixed. not a problem if class isn't used as a type.
-fix_protected <- function(file){
+fix_protected <- function(file) {
   R <- readLines(file)
-  R <- gsub("^setClass\\('language'", "setClass('eml:language'", R)  ## not used? no "= 'language'"
-  R <- gsub("^setClass\\('name'", "setClass('eml:name'", R)   ## not used?
-  R <- gsub("^setClass\\('array'", "setClass('eml:array'", R) ## not used?
-  R <- gsub("^setClass\\('matrix'", "setClass('eml:matrix'", R) ## not used?
-  R <- gsub("^setClass\\('table'", "setClass('eml:table'", R) ## not used?
-  R <- gsub("^setClass\\('list'", "setClass('eml:list'", R) ## not used?
+  R <-
+    gsub("^setClass\\('language'", "setClass('eml:language'", R)  ## not used? no "= 'language'"
+  R <-
+    gsub("^setClass\\('name'", "setClass('eml:name'", R)   ## not used?
+  R <-
+    gsub("^setClass\\('array'", "setClass('eml:array'", R) ## not used?
+  R <-
+    gsub("^setClass\\('matrix'", "setClass('eml:matrix'", R) ## not used?
+  R <-
+    gsub("^setClass\\('table'", "setClass('eml:table'", R) ## not used?
+  R <-
+    gsub("^setClass\\('list'", "setClass('eml:list'", R) ## not used?
   R <- gsub("'complex'", "'eml:complex'", R)
   R <- gsub("c\\('class' = ", "c('eml:class' =", R)
   write(R, file, append = FALSE)
@@ -69,9 +75,9 @@ fix_protected <- function(file){
 
 ## Misc code to determine collate order
 ns <- xml_ns(read_xml("inst/xsd/eml.xsd"))
-schema <- list.files("inst/xsd/", pattern="*.xsd")
+schema <- list.files("inst/xsd/", pattern = "*.xsd")
 names(schema) = schema
-schema %>% map(function(x){
+schema %>% map(function(x) {
   xsd <- read_xml(paste0("inst/xsd/", x))
   xml_find_all(xsd, "//xs:import", ns = ns) %>% xml_attr("schemaLocation")
 }) -> deps

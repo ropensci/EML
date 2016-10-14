@@ -38,7 +38,7 @@ setOldClass("bibentry")
 # note    [o] (?)
 
 setAs("article", "bibentry", function(from) {
-  entry = list(
+  entry <- list(
     bibtype = class(from),
     #                       author = as(from@creator, "person"),
     #                       title = from@title,
@@ -57,14 +57,14 @@ setAs("article", "bibentry", function(from) {
 })
 
 setAs("bibentry", "article", function(from) {
-  eml_citation = new("article")
+  eml_citation <- new("article")
   #      eml_citation@creator = new("ListOfcreator", lapply(from$author, as, "creator"))
   #      eml_citation@title = from$title
-  eml_citation@journal = from$journal
+  eml_citation@journal <- from$journal
   #      eml_citation@pubDate = paste(from$year, from$month, sep = "-") # FIXME: Needs to be handled properly to put together year and month
-  eml_citation@volume = from$volume
-  eml_citation@issue = from$number
-  eml_citation@pageRange = from$pages
+  eml_citation@volume <- from$volume
+  eml_citation@issue <- from$number
+  eml_citation@pageRange <- from$pages
   eml_citation
 })
 
@@ -85,7 +85,7 @@ setAs("bibentry", "article", function(from) {
 # isbn             [o] (ISBN)
 
 setAs("book", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = class(from),
     # required
     #                       author = as(from@creator, "person"),
@@ -107,16 +107,16 @@ setAs("book", "bibentry", function(from) {
 })
 
 setAs("bibentry", "book", function(from) {
-  eml_citation                  = new("book")
-  #     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator")) # FIXME: The latex fields can be author or editor
-  #     eml_citation@title            = from$title
-  eml_citation@publisher        = as(person(from$publisher), "publisher")
-  #     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
-  eml_citation@volume           = from$volume
-  eml_citation@series           = from$series
-  eml_citation@publicationPlace = from$address
-  eml_citation@edition          = from$edition
-  eml_citation@ISBN             = from$isbn
+  eml_citation                  <- new("book")
+  #     eml_citation@creator          <- new("ListOfcreator", lapply(from$author, as, "creator")) # FIXME: The latex fields can be author or editor
+  #     eml_citation@title            <- from$title
+  eml_citation@publisher        <- as(person(from$publisher), "publisher")
+  #     eml_citation@pubDate          <- paste(from$year, from$month, sep = "-")
+  eml_citation@volume           <- from$volume
+  eml_citation@series           <- from$series
+  eml_citation@publicationPlace <- from$address
+  eml_citation@edition          <- from$edition
+  eml_citation@ISBN             <- from$isbn
   eml_citation
 })
 
@@ -157,13 +157,13 @@ setAs("editedBook", "bibentry", function(from) {
 })
 
 setAs("bibentry", "editedBook", function(from) {
-  eml_citation                  = new("editedBook")
-  eml_citation@publisher        = as(person(from$publisher), "publisher")
-  eml_citation@volume           = from$volume
-  eml_citation@series           = from$series
-  eml_citation@publicationPlace = from$address
-  eml_citation@edition          = from$edition
-  eml_citation@ISBN             = from$isbn
+  eml_citation                  <- new("editedBook")
+  eml_citation@publisher        <- as(person(from$publisher), "publisher")
+  eml_citation@volume           <- from$volume
+  eml_citation@series           <- from$series
+  eml_citation@publicationPlace <- from$address
+  eml_citation@edition          <- from$edition
+  eml_citation@ISBN             <- from$isbn
   eml_citation
 })
 
@@ -205,16 +205,16 @@ setAs("chapter", "bibentry", function(from) {
 })
 
 setAs("bibentry", "chapter", function(from) {
-  eml_citation                  = new("chapter")
-  eml_citation@editor           = new("ListOfeditor", lapply(from$editor, as, "editor"))
-  #     eml_citation@title            = from$title
-  eml_citation@publisher        = as(person(from$publisher), "publisher")
-  #     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
-  eml_citation@volume           = from$volume
-  eml_citation@series           = from$series
-  eml_citation@publicationPlace = from$address
-  eml_citation@edition          = from$edition
-  eml_citation@ISBN             = from$isbn
+  eml_citation                  <- new("chapter")
+  eml_citation@editor           <- new("ListOfeditor", lapply(from$editor, as, "editor"))
+  #     eml_citation@title            <- from$title
+  eml_citation@publisher        <- as(person(from$publisher), "publisher")
+  #     eml_citation@pubDate          <- paste(from$year, from$month, sep = "-")
+  eml_citation@volume           <- from$volume
+  eml_citation@series           <- from$series
+  eml_citation@publicationPlace <- from$address
+  eml_citation@edition          <- from$edition
+  eml_citation@ISBN             <- from$isbn
   eml_citation
 })
 
@@ -231,7 +231,7 @@ setAs("bibentry", "chapter", function(from) {
 # month  [o] (pubDate)
 
 setAs("manuscript", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = "unpublished",
     # required
     #                       author = as(from@creator, "person"),
@@ -250,12 +250,12 @@ setAs("manuscript", "bibentry", function(from) {
 })
 
 setAs("bibentry", "manuscript", function(from) {
-  eml_citation                  = new("manuscript")
-  #     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
-  #     eml_citation@title            = from$title
-  #eml_citation@additionalInfo   = from$note
-  #     eml_citation@pubDate          = paste(from$year, from$month, sep = "-")
-  eml_citation@institution      = new("ListOfinstitution")
+  eml_citation                  <- new("manuscript")
+  #     eml_citation@creator          <- new("ListOfcreator", lapply(from$author, as, "creator"))
+  #     eml_citation@title            <- from$title
+  #eml_citation@additionalInfo   <- from$note
+  #     eml_citation@pubDate          <- paste(from$year, from$month, sep = "-")
+  eml_citation@institution      <- new("ListOfinstitution")
   eml_citation
 })
 
@@ -275,7 +275,7 @@ setAs("bibentry", "manuscript", function(from) {
 # note    [o] (?)
 
 setAs("thesis", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = "phdthesis",
     # required
     #                       author = as(from@creator, "person"),
@@ -298,10 +298,10 @@ setAs("thesis", "bibentry", function(from) {
 })
 
 setAs("bibentry", "thesis", function(from) {
-  eml_citation                  = new("thesis")
+  eml_citation                  <- new("thesis")
   # required
-  eml_citation@degree           = from$type
-  eml_citation@institution      = new("ListOfinstitution", lapply(unlist(strsplit(from$school, ",")), function(organization)
+  eml_citation@degree           <- from$type
+  eml_citation@institution      <- new("ListOfinstitution", lapply(unlist(strsplit(from$school, ",")), function(organization)
     new("institution", organizationName = organization)))
   #     eml_citation@creator          = new("ListOfcreator", lapply(from$author, as, "creator"))
   # optional + more
@@ -327,7 +327,7 @@ setAs("bibentry", "thesis", function(from) {
 # note             [o] (?)
 
 setAs("conferenceProceedings", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = "proceedings",
     # required
     #                       title  = from@title,
@@ -345,11 +345,11 @@ setAs("conferenceProceedings", "bibentry", function(from) {
 })
 
 setAs("bibentry", "conferenceProceedings", function(from) {
-  eml_citation                      = new("conferenceProceedings")
-  #     eml_citation@title                = from$title
-  eml_citation@conferenceDate       = paste(from$year, from$month, sep = "-") # FIXME: handle date properly
-  # eml_citation@conferenceLocation = from$adddress # FIXME: extract address from string? no good way
-  eml_citation@conferenceName       = from$organization
+  eml_citation                      <- new("conferenceProceedings")
+  #     eml_citation@title                <- from$title
+  eml_citation@conferenceDate       <- paste(from$year, from$month, sep = "-") # FIXME: handle date properly
+  # eml_citation@conferenceLocation <- from$adddress # FIXME: extract address from string? no good way
+  eml_citation@conferenceName       <- from$organization
   eml_citation
 })
 
@@ -364,7 +364,7 @@ setAs("bibentry", "conferenceProceedings", function(from) {
 # note         [o] (additionalinfo)
 
 setAs("personalCommunication", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = "misc",
     textVersion = NULL,
     header = paste("Citation based on eml", class(from)),
@@ -375,7 +375,7 @@ setAs("personalCommunication", "bibentry", function(from) {
 })
 
 setAs("bibentry", "personalCommunication", function(from) {
-  eml_citation                      = new("personalCommunication")
+  eml_citation                      <- new("personalCommunication")
   # eml_citation@publisher
   # eml_citation@publicationPlace
   # eml_citation@recipient
@@ -393,7 +393,7 @@ setAs("bibentry", "personalCommunication", function(from) {
 # note         [o] (additionalInfo)
 
 setAs("map", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = "misc",
     textVersion = NULL,
     header = paste("Citation based on eml", class(from)),
@@ -404,7 +404,7 @@ setAs("map", "bibentry", function(from) {
 })
 
 setAs("bibentry", "map", function(from) {
-  eml_citation                      = new("map")
+  eml_citation                      <- new("map")
   # publisher              optional (from responsibleParty)
   # edition	        optional
   # geographicCoverage	optional unbounded (from geographicCoverage)
@@ -424,7 +424,7 @@ setAs("bibentry", "map", function(from) {
 # note         [o] (additionalinfo)
 
 setAs("audioVisual", "bibentry", function(from) {
-  entry =  list(
+  entry <-  list(
     bibtype = "misc",
     textVersion = NULL,
     header = paste("Citation based on eml", class(from)),
@@ -435,8 +435,8 @@ setAs("audioVisual", "bibentry", function(from) {
 })
 
 setAs("bibentry", "audioVisual", function(from) {
-  eml_citation                      = new("audioVisual")
-  eml_citation@publisher	       = new("publisher")
+  eml_citation                      <- new("audioVisual")
+  eml_citation@publisher	       <- new("publisher")
   # publicationPlace	optional unbounded
   # performer	        optional unbounded (from responsibleParty)
   # ISBN	                optional
@@ -466,9 +466,9 @@ setAs("generic", "bibentry", function(from) {
 })
 
 setAs("bibentry", "generic", function(from) {
-  eml_citation                      = new("generic")
-  eml_citation@publisher	       = new("publisher")
-  eml_citation@ISBN                 = ""
+  eml_citation                      <- new("generic")
+  eml_citation@publisher	       <- new("publisher")
+  eml_citation@ISBN                 <- ""
   eml_citation
 })
 
@@ -485,9 +485,9 @@ citationToBibentry <- function(from) {
                              ! isEmpty(slot(from, x)))]
   out <- as(slot(from, type[[1]]), "bibentry")
 
-  out$author = as(from@creator, "person")
-  out$title = from@title
-  out$year = from@pubDate
+  out$author <- as(from@creator, "person")
+  out$title <- from@title
+  out$year <- from@pubDate
   do.call(bibentry, out)
 
 }

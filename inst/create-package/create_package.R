@@ -19,24 +19,61 @@ file.remove(methods_file)
 
 
 ## Create some boilerplate classes:
-xs_base_classes <- function(file = "R/classes.R", methods_file = "R/methods.R"){
-
-  write("
-setClass('slot_order', contains = 'character')
-setClass('xml_attribute', contains = 'character')
-setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute', slot_order = 'character'))
-setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
-setClass('InlineType', contains=c('list'))",
-        file, append = TRUE)
-
-  ## Define classes for the these XSD schema types to correspond to the appropriate R object class
-  data.frame(class =    c("xs:float", "xs:string", "xs:anyURI", "xs:time", "xs:decimal", "xs:int", "xs:unsignedInt", "xs:unsignedLong", "xs:long", "xs:integer", "xs:boolean", "xs:date", "xs:positiveInteger"),
-             contains = c("numeric", "character", "character", "character", "numeric", "integer", "integer", "integer", "integer", "integer", "logical", "Date", "integer")) %>%
-    purrr::by_row(function(x)
-      write(sprintf("setClass('%s', contains = '%s')", x[["class"]], x[["contains"]]), file, append = TRUE)
+xs_base_classes <-
+  function(file = "R/classes.R",
+           methods_file = "R/methods.R") {
+    write(
+      "
+      setClass('slot_order', contains = 'character')
+      setClass('xml_attribute', contains = 'character')
+      setClass('eml-2.1.1', slots = c('schemaLocation' = 'xml_attribute', 'lang' = 'xml_attribute', slot_order = 'character'))
+      setClass('i18nNonEmptyStringType', slots = c('value' = 'ListOfvalue', 'lang' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))
+      setClass('InlineType', contains=c('list'))",
+      file,
+      append = TRUE
     )
 
-}
+    ## Define classes for the these XSD schema types to correspond to the appropriate R object class
+    data.frame(
+      class =    c(
+        "xs:float",
+        "xs:string",
+        "xs:anyURI",
+        "xs:time",
+        "xs:decimal",
+        "xs:int",
+        "xs:unsignedInt",
+        "xs:unsignedLong",
+        "xs:long",
+        "xs:integer",
+        "xs:boolean",
+        "xs:date",
+        "xs:positiveInteger"
+      ),
+      contains = c(
+        "numeric",
+        "character",
+        "character",
+        "character",
+        "numeric",
+        "integer",
+        "integer",
+        "integer",
+        "integer",
+        "integer",
+        "logical",
+        "Date",
+        "integer"
+      )
+    ) %>%
+      purrr::by_row(function(x)
+        write(
+          sprintf("setClass('%s', contains = '%s')", x[["class"]], x[["contains"]]),
+          file,
+          append = TRUE
+        ))
+
+  }
 
 xs_base_classes(classes_file)
 
@@ -83,18 +120,58 @@ fix_protected(classes_file)
 move_to_end("proceduralStep", classes_file)
 move_to_end("methodStep", classes_file)
 move_to_end("dataSource", classes_file)
-replace_class("keyword", "setClass('keyword', slots = c('keywordType' = 'xml_attribute'), contains = c('i18nNonEmptyStringType', 'eml-2.1.1'))", classes_file)
-replace_class("coverage", "setClass('coverage', contains=c('Coverage'))", classes_file)
-replace_class("temporalCoverage", "setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))", classes_file)
-replace_class("taxonomicCoverage", "setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))", classes_file)
-replace_class("geographicCoverage", "setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))", classes_file)
-replace_class('size', "setClass('size', slots = c('character' = 'character', 'unit' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))", classes_file)
-replace_class('metadata', "setClass('metadata', contains='InlineType')", classes_file)
-replace_class('inline', "setClass('inline', contains='InlineType')", classes_file)
-replace_class('InlineType', "setClass('InlineType', contains=c('list'))", classes_file)
-replace_class('parameter', "setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'), contains = 'eml-2.1.1')", classes_file)
-replace_class('PhysicalOnlineType', "setClass('PhysicalOnlineType',  slots = c('onlineDescription' = 'i18nNonEmptyStringType', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1', 'character'))", classes_file)
-replace_class('online', "setClass('online', contains = c('PhysicalOnlineType', 'OnlineType', 'eml-2.1.1'))", classes_file)
+replace_class(
+  "keyword",
+  "setClass('keyword', slots = c('keywordType' = 'xml_attribute'), contains = c('i18nNonEmptyStringType', 'eml-2.1.1'))",
+  classes_file
+)
+replace_class("coverage",
+              "setClass('coverage', contains=c('Coverage'))",
+              classes_file)
+replace_class(
+  "temporalCoverage",
+  "setClass('temporalCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TemporalCoverage'))",
+  classes_file
+)
+replace_class(
+  "taxonomicCoverage",
+  "setClass('taxonomicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('TaxonomicCoverage'))",
+  classes_file
+)
+replace_class(
+  "geographicCoverage",
+  "setClass('geographicCoverage', slots = c('system' = 'xml_attribute', 'scope' = 'xml_attribute'), contains = c('GeographicCoverage'))",
+  classes_file
+)
+replace_class(
+  'size',
+  "setClass('size', slots = c('character' = 'character', 'unit' = 'xml_attribute'), contains = c('eml-2.1.1', 'character'))",
+  classes_file
+)
+replace_class('metadata',
+              "setClass('metadata', contains='InlineType')",
+              classes_file)
+replace_class('inline',
+              "setClass('inline', contains='InlineType')",
+              classes_file)
+replace_class('InlineType',
+              "setClass('InlineType', contains=c('list'))",
+              classes_file)
+replace_class(
+  'parameter',
+  "setClass('parameter', slots = c(name = 'character', value = 'character', 'domainDescription' = 'character', 'required' = 'character', 'repeats' = 'character'), contains = 'eml-2.1.1')",
+  classes_file
+)
+replace_class(
+  'PhysicalOnlineType',
+  "setClass('PhysicalOnlineType',  slots = c('onlineDescription' = 'i18nNonEmptyStringType', 'url' = 'UrlType', 'connection' = 'ConnectionType', 'connectionDefinition' = 'ConnectionDefinitionType'), contains = c('eml-2.1.1', 'character'))",
+  classes_file
+)
+replace_class(
+  'online',
+  "setClass('online', contains = c('PhysicalOnlineType', 'OnlineType', 'eml-2.1.1'))",
+  classes_file
+)
 move_to_end("coverage", classes_file)
 move_to_end("temporalCoverage", classes_file)
 move_to_end("taxonomicCoverage", classes_file)
@@ -153,20 +230,45 @@ move_to_top("xml_attribute", classes_file)
 
 
 R <- readLines(classes_file)
-R <- gsub("'language' = 'i18nNonEmptyStringType'", "'language' = 'character'", R)
-R <- gsub("setClass\\('title', contains = c\\('eml-2.1.1', 'character'\\)\\).*", "", R)
+R <-
+  gsub("'language' = 'i18nNonEmptyStringType'",
+       "'language' = 'character'",
+       R)
+R <-
+  gsub("setClass\\('title', contains = c\\('eml-2.1.1', 'character'\\)\\).*",
+       "",
+       R)
 ## Consistent Ordering please
-R <- gsub("contains = c\\('character', 'eml-2.1.1'\\)", "contains = c('eml-2.1.1', 'character')", R)
+R <-
+  gsub(
+    "contains = c\\('character', 'eml-2.1.1'\\)",
+    "contains = c('eml-2.1.1', 'character')",
+    R
+  )
 
 ## avoid ReferencesGroup as separate class.
-R <- gsub("'ReferencesGroup' = 'ReferencesGroup'", "'references' = 'references'", R)
-resource_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'shortName' = 'character', 'title' = 'ListOftitle', 'creator' = 'ListOfcreator', 'metadataProvider' = 'ListOfmetadataProvider', 'associatedParty' = 'ListOfassociatedParty', 'pubDate' = 'yearDate', 'language' = 'character', 'series' = 'character', 'abstract' = 'TextType', 'keywordSet' = 'ListOfkeywordSet', 'additionalInfo' = 'ListOfadditionalInfo', 'intellectualRights' = 'TextType', 'distribution' = 'ListOfdistribution', 'coverage' = 'Coverage'"
-R <- gsub("'ResourceGroup' = 'ResourceGroup'", resource_group_slots, R)
-entity_group_slots <- "'alternateIdentifier' = 'ListOfalternateIdentifier', 'entityName' = 'character', 'entityDescription' = 'character', 'physical' = 'ListOfphysical', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'additionalInfo' = 'ListOfadditionalInfo'"
+R <-
+  gsub("'ReferencesGroup' = 'ReferencesGroup'",
+       "'references' = 'references'",
+       R)
+resource_group_slots <-
+  "'alternateIdentifier' = 'ListOfalternateIdentifier', 'shortName' = 'character', 'title' = 'ListOftitle', 'creator' = 'ListOfcreator', 'metadataProvider' = 'ListOfmetadataProvider', 'associatedParty' = 'ListOfassociatedParty', 'pubDate' = 'yearDate', 'language' = 'character', 'series' = 'character', 'abstract' = 'TextType', 'keywordSet' = 'ListOfkeywordSet', 'additionalInfo' = 'ListOfadditionalInfo', 'intellectualRights' = 'TextType', 'distribution' = 'ListOfdistribution', 'coverage' = 'Coverage'"
+R <-
+  gsub("'ResourceGroup' = 'ResourceGroup'", resource_group_slots, R)
+entity_group_slots <-
+  "'alternateIdentifier' = 'ListOfalternateIdentifier', 'entityName' = 'character', 'entityDescription' = 'character', 'physical' = 'ListOfphysical', 'coverage' = 'Coverage', 'methods' = 'MethodsType', 'additionalInfo' = 'ListOfadditionalInfo'"
 R <- gsub("'EntityGroup' = 'EntityGroup'", entity_group_slots, R)
 responsible_party_slots = "'individualName' = 'ListOfindividualName', 'organizationName' = 'ListOforganizationName', 'positionName' = 'ListOfpositionName', 'address' = 'ListOfaddress', 'phone' = 'ListOfphone', 'electronicMailAddress' = 'ListOfelectronicMailAddress', 'onlineUrl' = 'ListOfonlineUrl', 'userId' = 'ListOfuserId', 'references' = 'references', 'id' = 'xml_attribute', 'system' = 'xml_attribute', 'scope' = 'xml_attribute'"
-R <- gsub("'ResponsibleParty' = 'ResponsibleParty'", responsible_party_slots, R)
-R <- gsub("'ProcedureStepType' = 'ProcedureStepType'", "'description' = 'TextType', 'citation' = 'ListOfcitation', 'protocol' = 'ListOfprotocol', 'instrumentation' = 'ListOfinstrumentation', 'software' = 'ListOfsoftware', 'subStep' = 'ListOfsubStep'", R)
+R <-
+  gsub("'ResponsibleParty' = 'ResponsibleParty'",
+       responsible_party_slots,
+       R)
+R <-
+  gsub(
+    "'ProcedureStepType' = 'ProcedureStepType'",
+    "'description' = 'TextType', 'citation' = 'ListOfcitation', 'protocol' = 'ListOfprotocol', 'instrumentation' = 'ListOfinstrumentation', 'software' = 'ListOfsoftware', 'subStep' = 'ListOfsubStep'",
+    R
+  )
 
 R <- unique(R)
 write(R, classes_file)
@@ -178,12 +280,37 @@ M <- gsub("signature\\('language'", "signature('eml:language'", M)
 M <- gsub(".Object@complex", "slot(.Object, 'eml:complex')", M)
 write(M, methods_file)
 
-replace_class("ParagraphType", "setClass('ParagraphType', contains=c('InlineType'))", classes_file)
-replace_class("SectionType", "setClass('SectionType', contains=c('InlineType'))", classes_file)
-replace_class("eml:language", "setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1', 'character',  'i18nNonEmptyStringType'))", classes_file)
+replace_class(
+  "ParagraphType",
+  "setClass('ParagraphType', contains=c('InlineType'))",
+  classes_file
+)
+replace_class("SectionType",
+              "setClass('SectionType', contains=c('InlineType'))",
+              classes_file)
+replace_class(
+  "eml:language",
+  "setClass('eml:language', slots = c('LanguageValue' = 'character', 'LanguageCodeStandard' = 'character'), contains = c('eml-2.1.1', 'character',  'i18nNonEmptyStringType'))",
+  classes_file
+)
 
 drop_method('ParagraphType', methods_file)
 drop_method('SectionType', methods_file)
 drop_method('UrlType', methods_file)
-sapply(c("array", "table", "matrix", "list", "description", "keyword", "unit", "eml:complex", "language", "parameter", "parameterDefinition"), drop_method, methods_file)
-
+sapply(
+  c(
+    "array",
+    "table",
+    "matrix",
+    "list",
+    "description",
+    "keyword",
+    "unit",
+    "eml:complex",
+    "language",
+    "parameter",
+    "parameterDefinition"
+  ),
+  drop_method,
+  methods_file
+)

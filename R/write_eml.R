@@ -27,7 +27,7 @@ write_eml <-
     XML::saveXML(node, file = file, ...)
   }
 ## Default XML namespaces
-eml_namespaces = c(
+eml_namespaces <- c(
   eml = "eml://ecoinformatics.org/eml-2.1.1",
   xs = "http://www.w3.org/2001/XMLSchema",
   #                   xml = "http://www.w3.org/XML/1998/namespace",

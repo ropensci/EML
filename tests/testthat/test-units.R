@@ -1,25 +1,25 @@
 testthat::context("Creating custom units")
 
- 
-id = c("speed", "speed", "acceleration", "acceleration", "frequency")
-dimension = c("length", "time", "length", "time", "time")
-power = c(NA, "-1", NA, "-2", "-1")
+
+id <- c("speed", "speed", "acceleration", "acceleration", "frequency")
+dimension <- c("length", "time", "length", "time", "time")
+power <- c(NA, "-1", NA, "-2", "-1")
 unitTypes <- data.frame(id = id, dimension = dimension, power = power, stringsAsFactors = FALSE)
 
-id = c("minute", "centimeter")
-unitType = c("time", "length")
-parentSI = c("second", "meter")
-multiplierToSI = c("0.0166", "1")
-description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
-units = data.frame(id = id, unitType = unitType, parentSI = parentSI, multiplierToSI = multiplierToSI, 
+id <- c("minute", "centimeter")
+unitType <- c("time", "length")
+parentSI <- c("second", "meter")
+multiplierToSI <- c("0.0166", "1")
+description <- c("one minute is 60 seconds", "centimeter is a 100th of a meter")
+units <- data.frame(id = id, unitType = unitType, parentSI = parentSI, multiplierToSI = multiplierToSI,
                    description = description, stringsAsFactors = FALSE)
 
-x = set_unitList(units, unitTypes)
+x <- set_unitList(units, unitTypes)
 testthat::expect_is(x, "unitList")
 testthat::expect_equal(length(x@unit), 2)
 testthat::expect_equal(length(x@unitType), 3)
 
-x = set_unitList(units, unitTypes, as_metadata = TRUE)
+x <- set_unitList(units, unitTypes, as_metadata = TRUE)
 testthat::expect_is(x, "additionalMetadata")
 
 

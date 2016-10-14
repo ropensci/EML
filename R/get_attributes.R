@@ -71,8 +71,8 @@ column_attributes <- function(ListOfattribute) {
 ## Ratio/Interval maps
 numeric_attributes <- function(ListOfattribute, eml) {
   map_df(ListOfattribute, function(a) {
-    name = a@attributeName
-    scale = choice(a@measurementScale)
+    name <- a@attributeName
+    scale <- choice(a@measurementScale)
     if (scale %in% c("ratio", "interval")) {
       b <- slot(a@measurementScale, scale)
 
@@ -104,8 +104,8 @@ numeric_attributes <- function(ListOfattribute, eml) {
 ## characters
 char_attributes <- function(ListOfattribute, eml) {
   map_df(ListOfattribute, function(a) {
-    name = a@attributeName
-    scale = choice(a@measurementScale)
+    name <- a@attributeName
+    scale <- choice(a@measurementScale)
     if (scale %in% c("nominal", "ordinal")) {
       b <- slot(a@measurementScale, scale)
       if ("references" %in% choice(b@nonNumericDomain))
@@ -143,8 +143,8 @@ char_attributes <- function(ListOfattribute, eml) {
 ## datetimes df
 datetime_attributes <- function(ListOfattribute, eml) {
   map_df(ListOfattribute, function(a) {
-    name = a@attributeName
-    scale = choice(a@measurementScale)
+    name <- a@attributeName
+    scale <- choice(a@measurementScale)
     if (scale %in% c("dateTime")) {
       b <- slot(a@measurementScale, scale)
 
@@ -175,8 +175,8 @@ datetime_attributes <- function(ListOfattribute, eml) {
 
 factor_attributes <- function(ListOfattribute, eml) {
   map_df(ListOfattribute, function(a) {
-    name = eml_get(a, "attributeName")
-    scale = choice(a@measurementScale)
+    name <- eml_get(a, "attributeName")
+    scale <- choice(a@measurementScale)
     if (scale %in% c("nominal", "ordinal")) {
       b <- slot(a@measurementScale, scale)
 
@@ -265,7 +265,7 @@ or_na <- function(x) {
 ## Resolve reference nodes into copies of actual metadata nodes.  slow!
 get_reference <- function(n, eml) {
   id <- n@references[[1]]
-  doc = XML::xmlParse(write_eml(eml))
+  doc <- XML::xmlParse(write_eml(eml))
   node <- XML::xpathApply(doc, sprintf("//*[@id = '%s']", id))[[1]]
   emlToS4(node)
 }

@@ -172,7 +172,7 @@ set_temporalCoverage <-
 
 set_taxonomicCoverage <- function(sci_names) {
   if (class(sci_names) == "character") {
-    taxa = lapply(sci_names, function(sci_name) {
+    taxa <- lapply(sci_names, function(sci_name) {
       s <- strsplit(sci_name, " ")[[1]]
       new(
         "taxonomicClassification",
@@ -190,31 +190,31 @@ set_taxonomicCoverage <- function(sci_names) {
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names) == "data.frame") {
-    taxon_classification = colnames(sci_names)
-    new = as.data.frame(t(sci_names))
-    colnames(new) = NULL
-    taxa = lapply(new, function(sci_name) {
-      tc = lapply(taxon_classification, function(name) {
+    taxon_classification <- colnames(sci_names)
+    new <- as.data.frame(t(sci_names))
+    colnames(new) <- NULL
+    taxa <- lapply(new, function(sci_name) {
+      tc <- lapply(taxon_classification, function(name) {
         new(
           "taxonomicClassification",
           taxonRankName = name,
           taxonRankValue = as.character(sci_name[name])
         )
       })
-      tc = formRecursiveTree(tc)[[1]]
+      tc <- formRecursiveTree(tc)[[1]]
     })
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names) == "list") {
-    taxonRankNames = as.list(names(sci_names))
-    taxa = lapply(taxonRankNames, function(name) {
+    taxonRankNames <- as.list(names(sci_names))
+    taxa <- lapply(taxonRankNames, function(name) {
       new(
         "taxonomicClassification",
         taxonRankName = as.character(name),
         taxonRankValue = as.character(sci_names[[name]])
       )
     })
-    taxa = formRecursiveTree(taxa)
+    taxa <- formRecursiveTree(taxa)
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else {
@@ -223,14 +223,14 @@ set_taxonomicCoverage <- function(sci_names) {
 }
 
 # helper function: form a nested tree recursively
-formRecursiveTree = function(listOfelements) {
+formRecursiveTree <- function(listOfelements) {
   if (length(listOfelements) == 1 ||
       length(listOfelements) == 2 && is.null(listOfelements[[2]])) {
     return(do.call(c, listOfelements[1]))
   } else if (is.null(listOfelements[[1]])) {
     formRecursiveTree(listOfelements[2:length(listOfelements)])
   } else {
-    listOfelements[[1]]@taxonomicClassification = formRecursiveTree(listOfelements[2:length(listOfelements)])
+    listOfelements[[1]]@taxonomicClassification <- formRecursiveTree(listOfelements[2:length(listOfelements)])
     return(do.call(c, listOfelements[1]))
   }
 }

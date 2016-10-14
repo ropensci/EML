@@ -18,9 +18,9 @@ get_taxonomicCoverage <- function(taxonomicCoverage) {
   df <-
     lapply(taxonomicCoverage[[1]]@taxonomicClassification, taxa_to_df)[[1]]
   df <- t(as.data.frame(df))
-  colnames(df) = df[1, ]
-  df = t(as.data.frame(df[-1, ]))
-  rownames(df) = NULL
+  colnames(df) <- df[1, ]
+  df <- t(as.data.frame(df[-1, ]))
+  rownames(df) <- NULL
   as.data.frame(df)
 }
 

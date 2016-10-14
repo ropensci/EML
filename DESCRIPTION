@@ -2,14 +2,15 @@ Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
 Version: 1.0.0.0
-Date: 2016-02-04
 Authors@R: c(
-    person("Carl", "Boettiger", role = c("aut", "cre"), 
-           email = "cboettig@gmail.com"), 
-    person("Matt", "Jones", role="aut"), 
+    person("Carl", "Boettiger", role = c("aut", "cre"),
+           email = "cboettig@gmail.com"),
+    person("Matt", "Jones", role="aut"),
     person("Bryce", "Mecum", role = "ctb", email = "brycemecum@gmail.com"),
     person("Maëlle", "Salmon", role = "ctb", email = "maelle.salmon@yahoo.se")
     )
+URL: https://github.com/ropensci/EML
+BugReorts: https://github.com/ropensci/EML/issues
 Maintainer: Carl Boettiger <cboettig@gmail.com>
 Description: Parse and serialize Ecological Metadata Language ('EML') files into
     S4 objects.
