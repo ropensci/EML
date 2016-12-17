@@ -1,11 +1,11 @@
 Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
-Version: 1.0.0.0
+Version: 1.0.0.1
 Authors@R: c(
     person("Carl", "Boettiger", role = c("aut", "cre"),
            email = "cboettig@gmail.com"),
-    person("Matt", "Jones", role="aut"),
+    person("Matthew B.", "Jones", role="aut"),
     person("Bryce", "Mecum", role = "ctb", email = "brycemecum@gmail.com"),
     person("Maëlle", "Salmon", role = "ctb", email = "maelle.salmon@yahoo.se")
     )
@@ -20,6 +20,7 @@ RoxygenNote: 5.0.1
 Imports:
     XML,
     methods,
+    stringr,
     tools
 Suggests:
     testthat,
