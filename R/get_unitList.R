@@ -21,7 +21,7 @@
 #'
 #'
 get_unitList <-
-  function(x = read_eml(system.file("xsd/eml-unitDictionary.xml", package = "EML"))) {
+  function(x = read_eml(system.file("xsd/eml-2.1.1/eml-unitDictionary.xml", package = "EML"))) {
     unitList <- x
     if (is(unitList, "XMLInternalNode")) {
       unitList <- emlToS4(unitList)

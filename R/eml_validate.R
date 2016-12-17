@@ -1,7 +1,9 @@
 
-#' validate_eml
+#' eml_validate
 #'
-#' validate_eml
+#' eml_validate processes an EML document using the XSD schema for the
+#' appropriate version of EML and determines if the document is schema-valid
+#' as defined by the XSD specification
 #' @param eml an eml class object, file, or xml document
 #' @param encoding optional, if eml is a file path / an eml and has special characters, one can
 #' gives the encoding used by xmlParse.
@@ -29,8 +31,6 @@
 #' @export
 eml_validate <- function(eml, encoding = character(), ...){
 
-  schema <- system.file("xsd/eml.xsd", package = "EML") #"http://ropensci.github.io/EML/eml.xsd"
-
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
     eml <- write_eml(eml, encoding = encoding, ...)
@@ -39,6 +39,9 @@ eml_validate <- function(eml, encoding = character(), ...){
   # the encoding argument can only be passed to xmlParse directly
   eml <- xmlParse(eml, encoding = encoding)
 
+  # Use the EML namespace to find the EML version and the schema location
+  namespace <- xmlNamespace(xmlRoot(eml))
+  schema <- eml_locate_schema(eml)
   result <- xmlSchemaValidate(schema, eml)
 
   if (result$status != 0) {
@@ -49,6 +52,36 @@ eml_validate <- function(eml, encoding = character(), ...){
   }
 }
 
+#' eml_locate_schema
+#'
+#' eml_locate_schema returns the location of the XSD schema file for a given
+#' EML document, as shipped with the EML R package.
+#'
+#' @details Schema documents are copies of the schemas from the EML versioned
+#' releases. If an appropriate schema is not found, the function stops.
+#'
+#' @param eml an XML::XMLInternalDocument instance for an EML document
+#'
+#' @return fully qualified path to the XSD schema for the appropriate version of EML
+#'
+#' @examples \donttest{
+#' schema <- eml_locate_schema(eml)
+#' }
+#' @importFrom stringr str_match str_c
+#' @export
+eml_locate_schema <- function(eml) {
+    if(!is(eml,'XMLInternalDocument')) {
+        stop("Argument is not an instance of an XML document (XMLInternalDocument)")
+    }
+    namespace <- xmlNamespace(xmlRoot(eml))
+    stopifnot(is(namespace, 'XMLNamespace'))
+    eml_version <- str_match(namespace[[1]], "eml://ecoinformatics.org/(.*)")[,2]
+    schema <- system.file(str_c("xsd/", eml_version, "/eml.xsd"), package='EML')
+    if(schema == '') {
+        stop(str_c("No schema found for namespace: ", namespace[[1]]))
+    }
+    return(schema)
+}
 
 #' message_validation_error
 #'

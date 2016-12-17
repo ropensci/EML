@@ -4,8 +4,8 @@
 \alias{get_unitList}
 \title{get_unitList}
 \usage{
-get_unitList(x = read_eml(system.file("xsd/eml-unitDictionary.xml", package =
-  "EML")))
+get_unitList(x = read_eml(system.file("xsd/eml-2.1.1/eml-unitDictionary.xml",
+  package = "EML")))
 }
 \arguments{
 \item{x}{a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata, see details}

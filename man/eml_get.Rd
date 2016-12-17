@@ -12,7 +12,7 @@ eml_get(x, element = NULL, ...)
 \S4method{eml_get}{attributeList}(x, eml = x)
 
 
-  \S4method{eml_get}{unitList}(x = read_eml(system.file("xsd/eml-unitDictionary.xml",
+  \S4method{eml_get}{unitList}(x = read_eml(system.file("xsd/eml-2.1.1/eml-unitDictionary.xml",
   package = "EML")))
 }
 \arguments{
