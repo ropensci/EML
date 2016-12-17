@@ -40,9 +40,13 @@ eml_validate <- function(eml, encoding = character(), ...){
   eml <- xmlParse(eml, encoding = encoding)
 
   # Use the EML namespace to find the EML version and the schema location
-  namespace <- xmlNamespace(xmlRoot(eml))
-  schema <- eml_locate_schema(eml)
-  result <- xmlSchemaValidate(schema, eml)
+  try(schema <- eml_locate_schema(eml))
+  result <- tryCatch(xmlSchemaValidate(schema, eml),
+    error = function(e) {
+      warning("The document could not be validated.")
+      result <- list(status=1, errors=c(NULL), warnings=c(e))
+    }
+  )
 
   if (result$status != 0) {
     lapply(result$errors, message_validation_error)
@@ -57,14 +61,19 @@ eml_validate <- function(eml, encoding = character(), ...){
 #' eml_locate_schema returns the location of the XSD schema file for a given
 #' EML document, as shipped with the EML R package.
 #'
-#' @details Schema documents are copies of the schemas from the EML versioned
-#' releases. If an appropriate schema is not found, the function stops.
+#' @details The schema location is based on the last path component from the EML
+#' namespace (e.g., eml-2.1.1), which corresponds to the directory containing xsd
+#' files that ship with the EML package. Schema files are copies of the schemas
+#' from the EML versioned releases. If an appropriate schema is not found,
+#' the function returns FALSE.
 #'
 #' @param eml an XML::XMLInternalDocument instance for an EML document
 #'
 #' @return fully qualified path to the XSD schema for the appropriate version of EML
 #'
 #' @examples \donttest{
+#' f <- system.file("examples", "example-eml-2.1.1.xml", package = "EML")
+#' eml <- xmlParse(f)
 #' schema <- eml_locate_schema(eml)
 #' }
 #' @importFrom stringr str_match str_c
