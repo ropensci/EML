@@ -73,7 +73,7 @@ eml_validate <- function(eml, encoding = character(), ...){
 #'
 #' @examples \donttest{
 #' f <- system.file("examples", "example-eml-2.1.1.xml", package = "EML")
-#' eml <- xmlParse(f)
+#' eml <- XML::xmlParse(f)
 #' schema <- eml_locate_schema(eml)
 #' }
 #' @importFrom stringr str_match str_c

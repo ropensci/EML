@@ -17,11 +17,16 @@ eml_locate_schema returns the location of the XSD schema file for a given
 EML document, as shipped with the EML R package.
 }
 \details{
-Schema documents are copies of the schemas from the EML versioned
-releases. If an appropriate schema is not found, the function stops.
+The schema location is based on the last path component from the EML
+namespace (e.g., eml-2.1.1), which corresponds to the directory containing xsd
+files that ship with the EML package. Schema files are copies of the schemas
+from the EML versioned releases. If an appropriate schema is not found,
+the function returns FALSE.
 }
 \examples{
 \donttest{
+f <- system.file("examples", "example-eml-2.1.1.xml", package = "EML")
+eml <- XML::xmlParse(f)
 schema <- eml_locate_schema(eml)
 }
 }
