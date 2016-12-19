@@ -11,3 +11,4 @@ vignettes/*.html
 ^CONDUCT\.md$
 ^appveyor\.yml$
 inst/create-package
+^cran-comments\.md$
