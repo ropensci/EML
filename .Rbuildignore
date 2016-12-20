@@ -12,3 +12,4 @@ vignettes/*.html
 ^appveyor\.yml$
 inst/create-package
 ^cran-comments\.md$
+docs/

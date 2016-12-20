@@ -11,7 +11,7 @@ EML is a widely used metadata standard in the ecological and environmental scien
 Installation
 ------------
 
-`EML` has not yet been released. You can install the current development version from rOpenSci using:
+You can install the current development version from rOpenSci using:
 
 ``` r
 install.packages("EML", repos = c("http://packages.ropensci.org", "https://cran.rstudio.com"))

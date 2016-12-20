@@ -1,3 +1,7 @@
+## Corrections
+
+* The package description now includes a link to EML, as requested
+
 ## Test environments
 
 * local OS X install, R 3.3.2
