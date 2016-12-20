@@ -62,10 +62,10 @@ This schematic shows each of the metadata elements we will generate.  Most these
 
 In this example, we will use R to re-generate
 the EML metadata originally published by [Ellison _et al_
-(2012)](http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf205)
+(2012), HF205](http://harvardforest.fas.harvard.edu/data-archive)
 through the Harvard Forest Long Term Ecological Research
 Center, accompanying the PNAS paper [Sirota _et al_
-(2013)](http://dx.doi.org/10.1073/pnas.122103711). We have made only
+(2013)](http://dx.doi.org/10.1073/pnas.1221037110). We have made only
 a few modifications to simplify the presentation of this tutorial, 
 so our resulting EML will not be perfectly identical to the original.
 
