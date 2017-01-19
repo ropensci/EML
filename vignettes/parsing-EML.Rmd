@@ -17,7 +17,7 @@ The function `eml_view()` allows, when the `listviewer` package is installed, to
 ```{r, eval = FALSE}
 library("EML")
 f <- system.file("xsd/test/eml-i18n.xml", package = "EML")
-eml <- eml_view(f)
+eml_view(f)
 
 ```
 
