@@ -13,8 +13,8 @@ URL: https://github.com/ropensci/EML
 BugReports: https://github.com/ropensci/EML/issues
 Maintainer: Carl Boettiger <cboettig@gmail.com>
 Description: Parse and serialize Ecological Metadata Language ('EML', see
-  <https://en.wikipedia.org/wiki/Ecological_Metadata_Language> for
-  more information) files into S4 objects.
+    <https://en.wikipedia.org/wiki/Ecological_Metadata_Language> for
+    more information) files into S4 objects.
 License: FreeBSD
 LazyData: TRUE
 RoxygenNote: 5.0.1
@@ -26,7 +26,8 @@ Imports:
 Suggests:
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    listviewer
 VignetteBuilder: knitr
 Encoding: UTF-8
 Collate:
@@ -38,6 +39,7 @@ Collate:
     'get_attributes.R'
     'eml_get.R'
     'eml_validate.R'
+    'eml_view.R'
     'get_TextType.R'
     'get_coverage.R'
     'is_standardUnit.R'
