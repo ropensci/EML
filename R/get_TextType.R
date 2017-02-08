@@ -49,9 +49,6 @@ get_TextType <-
 #' @param output name of the desired output file
 #'
 #' @return creates a file requested.
-#' @export
-#'
-#' @examples
 node_to_file <-
   function(node, to = "html", output = tempfile(class(node), fileext = paste0(".", to))) {
     ## eml_get returns a list of nodes always.
