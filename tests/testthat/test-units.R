@@ -40,7 +40,7 @@ testthat::expect_is(x, "additionalMetadata")
 
 testthat::context("Reading default unit definitions")
 
-f <- system.file("xsd/eml-unitDictionary.xml", package = "EML")
+f <- system.file("xsd/eml-2.1.1/eml-unitDictionary.xml", package = "EML")
 eml <- read_eml(f)
 unitList <- get_unitList(eml)
 

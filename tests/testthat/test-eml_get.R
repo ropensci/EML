@@ -26,3 +26,9 @@ testthat::test_that("we can get child elements from arbitrary nodes", {
   eml_get(eml, "geographicDescription")  #return NULL
 
 })
+
+
+testthat::test_that("an empty list is returned when on elements are found", {
+  empty_eml <- new("eml")
+  testthat::expect_identical(eml_get(empty_eml, "creator"), list())
+})

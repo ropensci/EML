@@ -5,7 +5,7 @@ shrink <- function(l) {
 }
 #
 #
-all <- paste0("inst/xsd/", collate)
+all <- paste0("inst/xsd/eml-2.1.1/", collate)
 
 
 all %>% map(function(x) {

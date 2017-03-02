@@ -79,8 +79,8 @@ xs_base_classes(classes_file)
 
 
 ## This call to create_classes needs to pass a custom namespace
-#stmml_ns <- xml_ns_rename( xml_ns(read_xml("inst/xsd/stmml.xsd")), xsd = "xs")
-#create_classes("inst/xsd/stmml.xsd", classes_file, methods_file, ns = stmml_ns)
+#stmml_ns <- xml_ns_rename( xml_ns(read_xml("inst/xsd/eml-2.1.1/stmml.xsd")), xsd = "xs")
+#create_classes("inst/xsd/eml-2.1.1/stmml.xsd", classes_file, methods_file, ns = stmml_ns)
 
 ## Collate list -- avoid errors by manually setting the order of XSD file parsing
 collate <- c(
@@ -110,7 +110,7 @@ collate <- c(
   "eml.xsd"
 )
 ## Okay, here we go! Create all the classes...
-paste0("inst/xsd/", collate) %>% map(create_classes, cf = classes_file, mf = methods_file)
+paste0("inst/xsd/eml-2.1.1", collate) %>% map(create_classes, cf = classes_file, mf = methods_file)
 
 fix_protected(classes_file)
 

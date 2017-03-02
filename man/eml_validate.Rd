@@ -2,7 +2,7 @@
 % Please edit documentation in R/eml_validate.R
 \name{eml_validate}
 \alias{eml_validate}
-\title{validate_eml}
+\title{eml_validate}
 \usage{
 eml_validate(eml, encoding = character(), ...)
 }
@@ -18,7 +18,9 @@ gives the encoding used by xmlParse.}
 Whether the document is valid (logical)
 }
 \description{
-validate_eml
+eml_validate processes an EML document using the XSD schema for the
+appropriate version of EML and determines if the document is schema-valid
+as defined by the XSD specification
 }
 \examples{
 \donttest{

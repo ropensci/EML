@@ -30,7 +30,7 @@
 setGeneric("eml_get", function(x, element = NULL, ...) {
   if (is.null(element)) {
     out <- x
-    
+
   } else {
     all <- eml_find(x, element)
     if (length(all) > 1) {
@@ -40,6 +40,12 @@ setGeneric("eml_get", function(x, element = NULL, ...) {
     } else {
       out <- eml_get(all, ...)
     }
+
+    # Return early if no elements were found
+    if (length(out) == 0) {
+      return(out)
+    }
+
     if (isS4(out) &&
         length(out) < 1)
       # Already a simple S4 element, ready to return

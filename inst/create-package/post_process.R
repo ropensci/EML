@@ -74,11 +74,11 @@ fix_protected <- function(file) {
 
 
 ## Misc code to determine collate order
-ns <- xml_ns(read_xml("inst/xsd/eml.xsd"))
-schema <- list.files("inst/xsd/", pattern = "*.xsd")
+ns <- xml_ns(read_xml("inst/xsd/eml-2.1.1/eml.xsd"))
+schema <- list.files("inst/xsd/eml-2.1.1/", pattern = "*.xsd")
 names(schema) = schema
 schema %>% map(function(x) {
-  xsd <- read_xml(paste0("inst/xsd/", x))
+  xsd <- read_xml(paste0("inst/xsd/eml-2.1.1/", x))
   xml_find_all(xsd, "//xs:import", ns = ns) %>% xml_attr("schemaLocation")
 }) -> deps
 
@@ -86,14 +86,14 @@ schema %>% map(function(x) {
 # shrink <- function(l){ l[sapply(l, length) > 0] }
 #
 #
-# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:sequence[@maxOccurs]", ns) }) %>% shrink()
-# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType/*/xs:choice[@maxOccurs]", ns) }) %>% shrink()
+# paste0("inst/xsd/eml-2.1.1/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:sequence[@maxOccurs]", ns) }) %>% shrink()
+# paste0("inst/xsd/eml-2.1.1/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType/*/xs:choice[@maxOccurs]", ns) }) %>% shrink()
 
 
 
 
-# create_classes("inst/xsd/stmml.xsd", ns = stmml_ns, append = FALSE)
-#  paste0("inst/xsd/", collate) %>% map(create_classes, append = FALSE)
+# create_classes("inst/xsd/eml-2.1.1/stmml.xsd", ns = stmml_ns, append = FALSE)
+#  paste0("inst/xsd/eml-2.1.1/", collate) %>% map(create_classes, append = FALSE)
 # fix_protected("R/stmml-classes.R")
 # fix_protected("R/eml-resource-classes.R")
 #
@@ -114,5 +114,5 @@ schema %>% map(function(x) {
 # move_to_end("proceduralStep", "R/eml-methods-classes.R")
 # fix_protected("R/eml-storedProcedure-classes.R")
 
-# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType/xs:choice[@maxOccurs]", ns) }) %>% shrink()
-# paste0("inst/xsd/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType[child::xs:choice[@maxOccurs] | child::xs:sequence[@maxOccurs]]", ns) }) %>% shrink()
+# paste0("inst/xsd/eml-2.1.1/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType/xs:choice[@maxOccurs]", ns) }) %>% shrink()
+# paste0("inst/xsd/eml-2.1.1/", collate) %>% map(function(x){ xsd = read_xml(x); xml_find_all(xsd, "//xs:complexType[child::xs:choice[@maxOccurs] | child::xs:sequence[@maxOccurs]]", ns) }) %>% shrink()

@@ -17,6 +17,10 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
 [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/EML)](http://cran.r-project.org/package=EML)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/EML)](http://cran.r-project.org/web/packages/EML/index.html)
+[![Github Stars](https://img.shields.io/github/stars/ropensci/EML.svg?style=social&label=Github)](https://github.com/ropensci/EML)
+[![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
 
 
 # EML: The Ecological Metadata Language Standard
@@ -28,7 +32,7 @@ EML is a widely used metadata standard in the ecological and environmental scien
 
 ## Installation
 
-`EML` has not yet been released.  You can install the current development version from rOpenSci using:
+You can install the current development version from rOpenSci using:
 
 ```{r eval=FALSE}
 install.packages("EML", repos = c("http://packages.ropensci.org", "https://cran.rstudio.com"))

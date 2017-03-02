@@ -1,30 +1,33 @@
 Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
-Version: 1.0.0.0
+Version: 1.0.1.1
 Authors@R: c(
     person("Carl", "Boettiger", role = c("aut", "cre"),
            email = "cboettig@gmail.com"),
-    person("Matt", "Jones", role="aut"),
+    person("Matthew B.", "Jones", role="aut"),
     person("Bryce", "Mecum", role = "ctb", email = "brycemecum@gmail.com"),
     person("Maëlle", "Salmon", role = "ctb", email = "maelle.salmon@yahoo.se")
     )
 URL: https://github.com/ropensci/EML
 BugReports: https://github.com/ropensci/EML/issues
 Maintainer: Carl Boettiger <cboettig@gmail.com>
-Description: Parse and serialize Ecological Metadata Language ('EML') files into
-    S4 objects.
+Description: Parse and serialize Ecological Metadata Language ('EML', see
+    <https://en.wikipedia.org/wiki/Ecological_Metadata_Language> for
+    more information) files into S4 objects.
 License: FreeBSD
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
     XML,
     methods,
+    stringr,
     tools
 Suggests:
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    listviewer
 VignetteBuilder: knitr
 Encoding: UTF-8
 Collate:
@@ -36,6 +39,7 @@ Collate:
     'get_attributes.R'
     'eml_get.R'
     'eml_validate.R'
+    'eml_view.R'
     'get_TextType.R'
     'get_coverage.R'
     'is_standardUnit.R'

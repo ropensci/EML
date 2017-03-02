@@ -17,6 +17,14 @@ testthat::test_that("We return TRUE when validating valid documents", {
 
   testthat::expect_true(eml_validate(f2, encoding = "latin1"))
   testthat::expect_message(eml_validate(f2, encoding = "latin1"), NA)
+
+  # Check that we properly validate each supported version of EML
+  versions <- c("eml-2.1.1", "eml-2.1.0")
+  for(version in versions) {
+      eml <- system.file("examples", paste0("example-", version, ".xml"), package = "EML")
+      testthat::expect_true(eml_validate(eml))
+      testthat::expect_message(eml_validate(eml), NA)
+  }
 })
 
 testthat::test_that("We return TRUE when validating valid eml objects", {
