@@ -152,7 +152,7 @@ S4Toeml <- function(obj,
           names(attrs) <- s
           suppressWarnings(addAttributes(node, .attrs = attrs))
         }
-
+        ## metaTypes are used in slots rather than interitence to preserve element ordering!
         ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
         ## pass their children directly to their parent node.
       } else if (grepl("^[A-Z]", s)) {
