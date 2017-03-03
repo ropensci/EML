@@ -8,18 +8,24 @@ excluded_slots <- c("namespaces", "dirname", "slot_order", "xmlNodeName")
 
 #' @import xml2
 #' @import methods
-s4_to_xml <- function(obj, root){
-
+s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
 
     node_name <- class(obj)[[1]]
     fields <- setdiff(slotNames(obj), excluded_slots)
-    xml <- xml_add_child(root, node_name)
+
+    if(is.null(root)){
+      root <- do.call(xml_new_root, c(list(.value = node_name), ns))
+      xml <- root
+    } else {
+      xml <- xml_add_child(root, node_name)
+    }
 
     lapply(fields, function(child){
       node <- slot(obj, child)
       if(is.null(node) || emptynode(node)){
         xml
       } else if(is(node, "xml_attribute")){             # node is an attribute
+        if(child == "schemaLocation") child <- paste0("xsi:", child)  #Hack, should fix slot name to keep prefix
         xml_set_attr(xml, child, as.character(node))
       } else if(grepl("ListOf", class(node))){
         lapply(node, s4_to_xml, xml)
@@ -39,10 +45,10 @@ s4_to_xml <- function(obj, root){
 }
 
 
-root <- xml_new_root("eml", "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1")
-eml <- EML::read_eml("inst/examples/example-eml-2.1.1.xml")
-xml <- s4_to_xml(eml@dataset, root)
-write_xml(xml, "test.xml")
+#' root <- xml2::xml_new_root("eml", "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1")
+#' eml <- EML::read_eml("inst/examples/example-eml-2.1.1.xml")
+#' xml <- s4_to_xml(eml@dataset, root)
+#' xml2::write_xml(xml, "test.xml")
 
 
 xml_to_s4 <- function(){}

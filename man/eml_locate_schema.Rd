@@ -30,4 +30,3 @@ eml <- XML::xmlParse(f)
 schema <- eml_locate_schema(eml)
 }
 }
-

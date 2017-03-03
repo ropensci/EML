@@ -2,7 +2,7 @@
 #'
 #' write_eml
 #' @param eml an eml class object
-#' @param file file name to write XML. If NULL, will return XML as character string.
+#' @param file file name to write XML.
 #' @param namespaces named character vector of additional XML namespaces to use.
 #' @param ns root namespace abbreviation
 #' @param ... additional arguments to \code{\link{saveXML}}
@@ -12,11 +12,23 @@
 #' @import methods XML
 # @importFrom XML saveXML
 #' @examples
-#' f <- system.file("xsd/test", "eml.xml", package = "EML")
+#' f <- system.file("examples", "example-eml-valid.xml", package = "EML")
 #' eml <- read_eml(f)
-#' write_eml(eml)
-write_eml <-
-  function(eml,
+#' write_eml(eml, "test.xml")
+#' unlink("test.xml") # clean up
+write_eml <- function(eml,
+                      file,
+                      namespaces = NULL,
+                      ns = "eml",
+                      ...) {
+
+  tmp <- s4_to_xml(eml, ns = c(namespaces, eml_namespaces))
+  xml_set_namespace(tmp, "eml", "eml://ecoinformatics.org/eml-2.1.1")
+  xml2::write_xml(tmp, file, ...)
+
+}
+
+oldwrite <-  function(eml,
            file = NULL,
            namespaces = NULL,
            ns = "eml",
@@ -28,9 +40,8 @@ write_eml <-
   }
 ## Default XML namespaces
 eml_namespaces <- c(
-  eml = "eml://ecoinformatics.org/eml-2.1.1",
-  xs = "http://www.w3.org/2001/XMLSchema",
-  #                   xml = "http://www.w3.org/XML/1998/namespace",
-  xsi = "http://www.w3.org/2001/XMLSchema-instance",
-  stmml = "http://www.xml-cml.org/schema/stmml_1.1"
+  "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1",
+  "xmlns:xs" = "http://www.w3.org/2001/XMLSchema",
+  "xmlns:xsi" = "http://www.w3.org/2001/XMLSchema-instance",
+  "xmlns:stmml" = "http://www.xml-cml.org/schema/stmml_1.1"
 )

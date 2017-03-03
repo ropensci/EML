@@ -48,4 +48,3 @@ df <- data.frame(KINGDOM="Plantae",
 taxon_coverage <- set_taxonomicCoverage(df)
 
 }
-

@@ -89,7 +89,10 @@ emlToS4 <- function (node, obj = new(xmlName(node)), ...) {
 
 #' @import XML
 #' @import methods
-S4Toeml <- function(obj,
+S4Toeml <- s4_to_xml
+
+
+  oldfn <- function(obj,
                     node = NULL,
                     excluded_slots = c("namespaces", "dirname", "slot_order", "xmlNodeName"),
                     ns = character()) {

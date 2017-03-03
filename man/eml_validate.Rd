@@ -41,4 +41,3 @@ eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.
 }
 
 }
-

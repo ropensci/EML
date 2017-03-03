@@ -13,7 +13,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'value'))) {
       'not all elements are value objects'
-      
+
     } else {
       TRUE
     }
@@ -35,7 +35,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'temporalCoverage'))) {
       'not all elements are temporalCoverage objects'
-      
+
     } else {
       TRUE
     }
@@ -47,7 +47,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'geographicCoverage'))) {
       'not all elements are geographicCoverage objects'
-      
+
     } else {
       TRUE
     }
@@ -59,7 +59,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'taxonomicCoverage'))) {
       'not all elements are taxonomicCoverage objects'
-      
+
     } else {
       TRUE
     }
@@ -123,7 +123,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'section'))) {
       'not all elements are section objects'
-      
+
     } else {
       TRUE
     }
@@ -135,7 +135,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'para'))) {
       'not all elements are para objects'
-      
+
     } else {
       TRUE
     }
@@ -147,7 +147,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'itemizedlist'))) {
       'not all elements are itemizedlist objects'
-      
+
     } else {
       TRUE
     }
@@ -159,7 +159,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'orderedlist'))) {
       'not all elements are orderedlist objects'
-      
+
     } else {
       TRUE
     }
@@ -171,7 +171,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'emphasis'))) {
       'not all elements are emphasis objects'
-      
+
     } else {
       TRUE
     }
@@ -183,7 +183,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'subscript'))) {
       'not all elements are subscript objects'
-      
+
     } else {
       TRUE
     }
@@ -195,7 +195,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'superscript'))) {
       'not all elements are superscript objects'
-      
+
     } else {
       TRUE
     }
@@ -207,7 +207,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'literalLayout'))) {
       'not all elements are literalLayout objects'
-      
+
     } else {
       TRUE
     }
@@ -219,7 +219,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'citetitle'))) {
       'not all elements are citetitle objects'
-      
+
     } else {
       TRUE
     }
@@ -231,7 +231,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'ulink'))) {
       'not all elements are ulink objects'
-      
+
     } else {
       TRUE
     }
@@ -243,7 +243,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'listitem'))) {
       'not all elements are listitem objects'
-      
+
     } else {
       TRUE
     }
@@ -349,7 +349,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'individualName'))) {
       'not all elements are individualName objects'
-      
+
     } else {
       TRUE
     }
@@ -361,7 +361,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'organizationName'))) {
       'not all elements are organizationName objects'
-      
+
     } else {
       TRUE
     }
@@ -373,7 +373,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'positionName'))) {
       'not all elements are positionName objects'
-      
+
     } else {
       TRUE
     }
@@ -385,7 +385,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'address'))) {
       'not all elements are address objects'
-      
+
     } else {
       TRUE
     }
@@ -397,7 +397,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'phone'))) {
       'not all elements are phone objects'
-      
+
     } else {
       TRUE
     }
@@ -409,7 +409,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'electronicMailAddress'))) {
       'not all elements are electronicMailAddress objects'
-      
+
     } else {
       TRUE
     }
@@ -421,7 +421,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'onlineUrl'))) {
       'not all elements are onlineUrl objects'
-      
+
     } else {
       TRUE
     }
@@ -433,7 +433,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'userId'))) {
       'not all elements are userId objects'
-      
+
     } else {
       TRUE
     }
@@ -445,7 +445,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'salutation'))) {
       'not all elements are salutation objects'
-      
+
     } else {
       TRUE
     }
@@ -457,7 +457,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'givenName'))) {
       'not all elements are givenName objects'
-      
+
     } else {
       TRUE
     }
@@ -469,7 +469,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'deliveryPoint'))) {
       'not all elements are deliveryPoint objects'
-      
+
     } else {
       TRUE
     }
@@ -558,7 +558,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'alternateIdentifier'))) {
       'not all elements are alternateIdentifier objects'
-      
+
     } else {
       TRUE
     }
@@ -570,7 +570,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'title'))) {
       'not all elements are title objects'
-      
+
     } else {
       TRUE
     }
@@ -582,7 +582,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'creator'))) {
       'not all elements are creator objects'
-      
+
     } else {
       TRUE
     }
@@ -594,7 +594,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'metadataProvider'))) {
       'not all elements are metadataProvider objects'
-      
+
     } else {
       TRUE
     }
@@ -606,7 +606,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'associatedParty'))) {
       'not all elements are associatedParty objects'
-      
+
     } else {
       TRUE
     }
@@ -618,7 +618,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'keyword'))) {
       'not all elements are keyword objects'
-      
+
     } else {
       TRUE
     }
@@ -630,7 +630,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'keywordSet'))) {
       'not all elements are keywordSet objects'
-      
+
     } else {
       TRUE
     }
@@ -642,7 +642,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'additionalInfo'))) {
       'not all elements are additionalInfo objects'
-      
+
     } else {
       TRUE
     }
@@ -654,7 +654,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'distribution'))) {
       'not all elements are distribution objects'
-      
+
     } else {
       TRUE
     }
@@ -666,7 +666,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'parameterDefinition'))) {
       'not all elements are parameterDefinition objects'
-      
+
     } else {
       TRUE
     }
@@ -678,7 +678,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'mediumFormat'))) {
       'not all elements are mediumFormat objects'
-      
+
     } else {
       TRUE
     }
@@ -690,7 +690,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'parameter'))) {
       'not all elements are parameter objects'
-      
+
     } else {
       TRUE
     }
@@ -892,7 +892,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'altitudeResolution'))) {
       'not all elements are altitudeResolution objects'
-      
+
     } else {
       TRUE
     }
@@ -904,7 +904,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'depthResolution'))) {
       'not all elements are depthResolution objects'
-      
+
     } else {
       TRUE
     }
@@ -916,7 +916,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'horizCoordSysDef'))) {
       'not all elements are horizCoordSysDef objects'
-      
+
     } else {
       TRUE
     }
@@ -1046,7 +1046,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'allow'))) {
       'not all elements are allow objects'
-      
+
     } else {
       TRUE
     }
@@ -1058,7 +1058,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'deny'))) {
       'not all elements are deny objects'
-      
+
     } else {
       TRUE
     }
@@ -1070,7 +1070,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'principal'))) {
       'not all elements are principal objects'
-      
+
     } else {
       TRUE
     }
@@ -1082,7 +1082,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'permission'))) {
       'not all elements are permission objects'
-      
+
     } else {
       TRUE
     }
@@ -1119,7 +1119,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'attributeReference'))) {
       'not all elements are attributeReference objects'
-      
+
     } else {
       TRUE
     }
@@ -1217,7 +1217,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'contact'))) {
       'not all elements are contact objects'
-      
+
     } else {
       TRUE
     }
@@ -1229,7 +1229,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'editor'))) {
       'not all elements are editor objects'
-      
+
     } else {
       TRUE
     }
@@ -1241,7 +1241,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'institution'))) {
       'not all elements are institution objects'
-      
+
     } else {
       TRUE
     }
@@ -1253,7 +1253,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'recipient'))) {
       'not all elements are recipient objects'
-      
+
     } else {
       TRUE
     }
@@ -1265,7 +1265,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'publicationPlace'))) {
       'not all elements are publicationPlace objects'
-      
+
     } else {
       TRUE
     }
@@ -1277,7 +1277,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'performer'))) {
       'not all elements are performer objects'
-      
+
     } else {
       TRUE
     }
@@ -1506,7 +1506,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'singleDateTime'))) {
       'not all elements are singleDateTime objects'
-      
+
     } else {
       TRUE
     }
@@ -1518,7 +1518,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'timeScaleCitation'))) {
       'not all elements are timeScaleCitation objects'
-      
+
     } else {
       TRUE
     }
@@ -1530,7 +1530,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'gRingPoint'))) {
       'not all elements are gRingPoint objects'
-      
+
     } else {
       TRUE
     }
@@ -1542,7 +1542,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'datasetGPolygonExclusionGRing'))) {
       'not all elements are datasetGPolygonExclusionGRing objects'
-      
+
     } else {
       TRUE
     }
@@ -1554,7 +1554,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'datasetGPolygon'))) {
       'not all elements are datasetGPolygon objects'
-      
+
     } else {
       TRUE
     }
@@ -1566,7 +1566,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'classificationSystem'))) {
       'not all elements are classificationSystem objects'
-      
+
     } else {
       TRUE
     }
@@ -1578,7 +1578,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'identificationReference'))) {
       'not all elements are identificationReference objects'
-      
+
     } else {
       TRUE
     }
@@ -1590,7 +1590,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'identifierName'))) {
       'not all elements are identifierName objects'
-      
+
     } else {
       TRUE
     }
@@ -1602,7 +1602,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'originator'))) {
       'not all elements are originator objects'
-      
+
     } else {
       TRUE
     }
@@ -1614,7 +1614,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'vouchers'))) {
       'not all elements are vouchers objects'
-      
+
     } else {
       TRUE
     }
@@ -1626,7 +1626,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'taxonomicClassification'))) {
       'not all elements are taxonomicClassification objects'
-      
+
     } else {
       TRUE
     }
@@ -1638,7 +1638,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'commonName'))) {
       'not all elements are commonName objects'
-      
+
     } else {
       TRUE
     }
@@ -1840,7 +1840,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'authentication'))) {
       'not all elements are authentication objects'
-      
+
     } else {
       TRUE
     }
@@ -1852,7 +1852,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'compressionMethod'))) {
       'not all elements are compressionMethod objects'
-      
+
     } else {
       TRUE
     }
@@ -1864,7 +1864,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'encodingMethod'))) {
       'not all elements are encodingMethod objects'
-      
+
     } else {
       TRUE
     }
@@ -1876,7 +1876,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'recordDelimiter'))) {
       'not all elements are recordDelimiter objects'
-      
+
     } else {
       TRUE
     }
@@ -1888,7 +1888,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'physicalLineDelimiter'))) {
       'not all elements are physicalLineDelimiter objects'
-      
+
     } else {
       TRUE
     }
@@ -1900,7 +1900,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'fieldDelimiter'))) {
       'not all elements are fieldDelimiter objects'
-      
+
     } else {
       TRUE
     }
@@ -1912,7 +1912,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'quoteCharacter'))) {
       'not all elements are quoteCharacter objects'
-      
+
     } else {
       TRUE
     }
@@ -1924,7 +1924,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'literalCharacter'))) {
       'not all elements are literalCharacter objects'
-      
+
     } else {
       TRUE
     }
@@ -1936,7 +1936,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'textFixed'))) {
       'not all elements are textFixed objects'
-      
+
     } else {
       TRUE
     }
@@ -1948,7 +1948,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'textDelimited'))) {
       'not all elements are textDelimited objects'
-      
+
     } else {
       TRUE
     }
@@ -2134,7 +2134,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'role'))) {
       'not all elements are role objects'
-      
+
     } else {
       TRUE
     }
@@ -2146,7 +2146,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'personnel'))) {
       'not all elements are personnel objects'
-      
+
     } else {
       TRUE
     }
@@ -2158,7 +2158,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'descriptorValue'))) {
       'not all elements are descriptorValue objects'
-      
+
     } else {
       TRUE
     }
@@ -2170,7 +2170,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'citation'))) {
       'not all elements are citation objects'
-      
+
     } else {
       TRUE
     }
@@ -2182,7 +2182,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'descriptor'))) {
       'not all elements are descriptor objects'
-      
+
     } else {
       TRUE
     }
@@ -2194,7 +2194,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'coverage'))) {
       'not all elements are coverage objects'
-      
+
     } else {
       TRUE
     }
@@ -2206,7 +2206,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'description'))) {
       'not all elements are description objects'
-      
+
     } else {
       TRUE
     }
@@ -2218,7 +2218,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'relatedProject'))) {
       'not all elements are relatedProject objects'
-      
+
     } else {
       TRUE
     }
@@ -2302,7 +2302,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'language'))) {
       'not all elements are language objects'
-      
+
     } else {
       TRUE
     }
@@ -2314,7 +2314,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'operatingSystem'))) {
       'not all elements are operatingSystem objects'
-      
+
     } else {
       TRUE
     }
@@ -2326,7 +2326,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'machineProcessor'))) {
       'not all elements are machineProcessor objects'
-      
+
     } else {
       TRUE
     }
@@ -2338,7 +2338,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'programmingLanguage'))) {
       'not all elements are programmingLanguage objects'
-      
+
     } else {
       TRUE
     }
@@ -2350,7 +2350,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'implementation'))) {
       'not all elements are implementation objects'
-      
+
     } else {
       TRUE
     }
@@ -2362,7 +2362,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'licenseURL'))) {
       'not all elements are licenseURL objects'
-      
+
     } else {
       TRUE
     }
@@ -2374,7 +2374,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'license'))) {
       'not all elements are license objects'
-      
+
     } else {
       TRUE
     }
@@ -2462,7 +2462,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'proceduralStep'))) {
       'not all elements are proceduralStep objects'
-      
+
     } else {
       TRUE
     }
@@ -2502,7 +2502,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'dataSource'))) {
       'not all elements are dataSource objects'
-      
+
     } else {
       TRUE
     }
@@ -2514,7 +2514,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'methodStep'))) {
       'not all elements are methodStep objects'
-      
+
     } else {
       TRUE
     }
@@ -2526,7 +2526,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'referencedEntityId'))) {
       'not all elements are referencedEntityId objects'
-      
+
     } else {
       TRUE
     }
@@ -2538,7 +2538,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'sampling'))) {
       'not all elements are sampling objects'
-      
+
     } else {
       TRUE
     }
@@ -2550,7 +2550,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'qualityControl'))) {
       'not all elements are qualityControl objects'
-      
+
     } else {
       TRUE
     }
@@ -2562,7 +2562,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'protocol'))) {
       'not all elements are protocol objects'
-      
+
     } else {
       TRUE
     }
@@ -2574,7 +2574,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'instrumentation'))) {
       'not all elements are instrumentation objects'
-      
+
     } else {
       TRUE
     }
@@ -2586,7 +2586,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'software'))) {
       'not all elements are software objects'
-      
+
     } else {
       TRUE
     }
@@ -2598,7 +2598,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'subStep'))) {
       'not all elements are subStep objects'
-      
+
     } else {
       TRUE
     }
@@ -2659,7 +2659,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'attribute'))) {
       'not all elements are attribute objects'
-      
+
     } else {
       TRUE
     }
@@ -2671,7 +2671,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'attributeLabel'))) {
       'not all elements are attributeLabel objects'
-      
+
     } else {
       TRUE
     }
@@ -2683,7 +2683,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'storageType'))) {
       'not all elements are storageType objects'
-      
+
     } else {
       TRUE
     }
@@ -2695,7 +2695,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'missingValueCode'))) {
       'not all elements are missingValueCode objects'
-      
+
     } else {
       TRUE
     }
@@ -2707,7 +2707,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'quantitativeAttributeAccuracyAssessment'))) {
       'not all elements are quantitativeAttributeAccuracyAssessment objects'
-      
+
     } else {
       TRUE
     }
@@ -2719,7 +2719,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'codeDefinition'))) {
       'not all elements are codeDefinition objects'
-      
+
     } else {
       TRUE
     }
@@ -2731,7 +2731,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'codesetURL'))) {
       'not all elements are codesetURL objects'
-      
+
     } else {
       TRUE
     }
@@ -2743,7 +2743,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'enumeratedDomain'))) {
       'not all elements are enumeratedDomain objects'
-      
+
     } else {
       TRUE
     }
@@ -2755,7 +2755,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'pattern'))) {
       'not all elements are pattern objects'
-      
+
     } else {
       TRUE
     }
@@ -2767,7 +2767,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'textDomain'))) {
       'not all elements are textDomain objects'
-      
+
     } else {
       TRUE
     }
@@ -2779,7 +2779,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'bounds'))) {
       'not all elements are bounds objects'
-      
+
     } else {
       TRUE
     }
@@ -3038,7 +3038,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'constraint'))) {
       'not all elements are constraint objects'
-      
+
     } else {
       TRUE
     }
@@ -3050,7 +3050,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'physical'))) {
       'not all elements are physical objects'
-      
+
     } else {
       TRUE
     }
@@ -3185,7 +3185,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'geometry'))) {
       'not all elements are geometry objects'
-      
+
     } else {
       TRUE
     }
@@ -3197,7 +3197,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'quantitativeAccuracyReport'))) {
       'not all elements are quantitativeAccuracyReport objects'
-      
+
     } else {
       TRUE
     }
@@ -3264,7 +3264,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'cornerPoint'))) {
       'not all elements are cornerPoint objects'
-      
+
     } else {
       TRUE
     }
@@ -3276,7 +3276,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'controlPoint'))) {
       'not all elements are controlPoint objects'
-      
+
     } else {
       TRUE
     }
@@ -3288,7 +3288,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'bandDescription'))) {
       'not all elements are bandDescription objects'
-      
+
     } else {
       TRUE
     }
@@ -3459,7 +3459,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'dataTable'))) {
       'not all elements are dataTable objects'
-      
+
     } else {
       TRUE
     }
@@ -3471,7 +3471,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'spatialRaster'))) {
       'not all elements are spatialRaster objects'
-      
+
     } else {
       TRUE
     }
@@ -3483,7 +3483,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'spatialVector'))) {
       'not all elements are spatialVector objects'
-      
+
     } else {
       TRUE
     }
@@ -3495,7 +3495,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'storedProcedure'))) {
       'not all elements are storedProcedure objects'
-      
+
     } else {
       TRUE
     }
@@ -3507,7 +3507,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'view'))) {
       'not all elements are view objects'
-      
+
     } else {
       TRUE
     }
@@ -3519,7 +3519,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'otherEntity'))) {
       'not all elements are otherEntity objects'
-      
+
     } else {
       TRUE
     }
@@ -3531,7 +3531,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'changeHistory'))) {
       'not all elements are changeHistory objects'
-      
+
     } else {
       TRUE
     }
@@ -3611,7 +3611,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'describes'))) {
       'not all elements are describes objects'
-      
+
     } else {
       TRUE
     }
@@ -3623,7 +3623,7 @@ setClass(
   validity = function(object) {
     if (!all(sapply(object, is, 'additionalMetadata'))) {
       'not all elements are additionalMetadata objects'
-      
+
     } else {
       TRUE
     }
