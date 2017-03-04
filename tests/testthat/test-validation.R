@@ -1,7 +1,6 @@
 testthat::context("Validating EML documents")
 
 testthat::test_that("We return TRUE when validating valid documents", {
-  library("XML")
 
   f <-
     system.file("examples", "example-eml-valid.xml", package = "EML")
@@ -33,8 +32,8 @@ testthat::test_that("We return TRUE when validating valid eml objects", {
   f <-
     system.file("examples", "example-eml-valid.xml", package = "EML")
   eml <- read_eml(f)
-  testthat::expect_true(eml_validate(eml))
-  testthat::expect_message(eml_validate(eml), NA)
+  testthat::expect_true(eml_validate(f))
+  testthat::expect_message(eml_validate(f), NA)
 
 
   f2 <-
@@ -47,7 +46,6 @@ testthat::test_that("We return TRUE when validating valid eml objects", {
 })
 
 testthat::test_that("We return FALSE and messages when validating invalid documents", {
-  library("XML")
 
   f <-
     system.file("examples", "example-eml-invalid.xml", package = "EML")

@@ -20,6 +20,7 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
     XML,
+    xml2 (>= 1.1.1),
     methods,
     stringr,
     tools

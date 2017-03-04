@@ -34,26 +34,30 @@ eml_validate <- function(eml, encoding = "", ...){
 
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
-    eml <- write_eml(eml, encoding = encoding, ...)
+    f <- tempfile()
+    write_eml(eml, file = f, encoding = encoding, ...)
+    eml <- f
   }
-
-  eml <- xml2::read_xml(eml, encoding = encoding)
+  doc <- xml2::read_xml(eml, encoding = encoding)
+  # tidy up
+  if(exists(f)) unlink(f)
 
   # Use the EML namespace to find the EML version and the schema location
-  try(schema <- eml_locate_schema(eml))
-  result <- tryCatch(xml2::xml_validate(eml, schema),
+  try(schema <- eml_locate_schema(doc))
+  schema_doc <- xml2::read_xml(schema)
+  result <- tryCatch(xml2::xml_validate(doc, schema_doc),
     error = function(e) {
       warning("The document could not be validated.")
-      result <- list(status=1, errors=c(NULL), warnings=c(e))
+      list(status=1, errors=c(NULL), warnings=c(e))
     }
   )
 
-  if (result$status != 0) {
-    lapply(result$errors, message_validation_error)
-    return(FALSE)
-  } else {
-    return(TRUE)
-  }
+#  if (result$status != 0) {
+#    lapply(result$errors, message_validation_error)
+#    return(FALSE)
+#  } else {
+#    return(TRUE)
+#  }
 }
 
 #' eml_locate_schema
@@ -80,15 +84,17 @@ eml_validate <- function(eml, encoding = "", ...){
 #' @importFrom xml2 xml_ns
 #' @export
 eml_locate_schema <- function(eml) {
+
+
     if(!is(eml,'xml_document')) {
         stop("Argument is not an instance of an XML document (xml2::xml_document)")
     }
-    namespace <- xml_ns(eml)
+    namespace <- xml2::xml_ns(eml)
     stopifnot(is(namespace, 'xml_namespace'))
-    eml_version <- str_match(namespace[[1]], "eml://ecoinformatics.org/(.*)")[,2]
-    schema <- system.file(str_c("xsd/", eml_version, "/eml.xsd"), package='EML')
+    eml_version <- stringr::str_match(namespace[[1]], "eml://ecoinformatics.org/(.*)")[,2]
+    schema <- system.file(stringr::str_c("xsd/", eml_version, "/eml.xsd"), package='EML')
     if(schema == '') {
-        stop(str_c("No schema found for namespace: ", namespace[[1]]))
+        stop(stringr::str_c("No schema found for namespace: ", namespace[[1]]))
     }
     return(schema)
 }
