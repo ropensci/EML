@@ -14,7 +14,11 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
     fields <- setdiff(slotNames(obj), excluded_slots)
 
     if(is.null(root)){
-      root <- do.call(xml_new_root, c(list(.value = node_name), ns))
+      root <- xml_new_root(node_name,
+                           "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1",
+                           "xmlns:xs" = "http://www.w3.org/2001/XMLSchema",
+                           "xmlns:xsi" = "http://www.w3.org/2001/XMLSchema-instance",
+                           "xmlns:stmml" = "http://www.xml-cml.org/schema/stmml_1.1")
       xml <- root
     } else {
       xml <- xml_add_child(root, node_name)
@@ -43,13 +47,4 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
 
   root
 }
-
-
-#' root <- xml2::xml_new_root("eml", "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1")
-#' eml <- EML::read_eml("inst/examples/example-eml-2.1.1.xml")
-#' xml <- s4_to_xml(eml@dataset, root)
-#' xml2::write_xml(xml, "test.xml")
-
-
-xml_to_s4 <- function(){}
 

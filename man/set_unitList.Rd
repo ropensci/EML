@@ -79,3 +79,4 @@ The unitType table must have the following columns:
  additionalMetadata <- set_unitList(units, unitTypes, as_metadata = TRUE)
  new("eml", additionalMetadata = additionalMetadata)
 }
+

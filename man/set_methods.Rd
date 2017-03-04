@@ -40,3 +40,4 @@ f <- system.file("examples/hf205-methods.docx", package = "EML")
 set_methods(methods_file = f)
 }
 }
+

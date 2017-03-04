@@ -29,19 +29,19 @@
 #' }
 #'
 #' @export
-eml_validate <- function(eml, encoding = character(), ...){
+#' @importFrom xml2 read_xml xml_validate
+eml_validate <- function(eml, encoding = "", ...){
 
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
     eml <- write_eml(eml, encoding = encoding, ...)
   }
 
-  # the encoding argument can only be passed to xmlParse directly
-  eml <- xmlParse(eml, encoding = encoding)
+  eml <- xml2::read_xml(eml, encoding = encoding)
 
   # Use the EML namespace to find the EML version and the schema location
   try(schema <- eml_locate_schema(eml))
-  result <- tryCatch(xmlSchemaValidate(schema, eml),
+  result <- tryCatch(xml2::xml_validate(eml, schema),
     error = function(e) {
       warning("The document could not be validated.")
       result <- list(status=1, errors=c(NULL), warnings=c(e))
@@ -67,23 +67,24 @@ eml_validate <- function(eml, encoding = character(), ...){
 #' from the EML versioned releases. If an appropriate schema is not found,
 #' the function returns FALSE.
 #'
-#' @param eml an XML::XMLInternalDocument instance for an EML document
+#' @param eml an xml2::xml_document instance for an EML document
 #'
 #' @return fully qualified path to the XSD schema for the appropriate version of EML
 #'
 #' @examples \donttest{
 #' f <- system.file("examples", "example-eml-2.1.1.xml", package = "EML")
-#' eml <- XML::xmlParse(f)
+#' eml <- xml2::read_xml(f)
 #' schema <- eml_locate_schema(eml)
 #' }
 #' @importFrom stringr str_match str_c
+#' @importFrom xml2 xml_ns
 #' @export
 eml_locate_schema <- function(eml) {
-    if(!is(eml,'XMLInternalDocument')) {
-        stop("Argument is not an instance of an XML document (XMLInternalDocument)")
+    if(!is(eml,'xml_document')) {
+        stop("Argument is not an instance of an XML document (xml2::xml_document)")
     }
-    namespace <- xmlNamespace(xmlRoot(eml))
-    stopifnot(is(namespace, 'XMLNamespace'))
+    namespace <- xml_ns(eml)
+    stopifnot(is(namespace, 'xml_namespace'))
     eml_version <- str_match(namespace[[1]], "eml://ecoinformatics.org/(.*)")[,2]
     schema <- system.file(str_c("xsd/", eml_version, "/eml.xsd"), package='EML')
     if(schema == '') {

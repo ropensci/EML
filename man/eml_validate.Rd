@@ -4,7 +4,7 @@
 \alias{eml_validate}
 \title{eml_validate}
 \usage{
-eml_validate(eml, encoding = character(), ...)
+eml_validate(eml, encoding = "", ...)
 }
 \arguments{
 \item{eml}{an eml class object, file, or xml document}
@@ -41,3 +41,4 @@ eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.
 }
 
 }
+

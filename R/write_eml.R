@@ -9,8 +9,8 @@
 #' @return If file is not specified, the result is a character string containing
 #'    the resulting XML content. Otherwise return silently.
 #' @export
-#' @import methods XML
-# @importFrom XML saveXML
+#' @import methods xml2
+#' @importFrom xml2 write_xml xml_set_namespace
 #' @examples
 #' f <- system.file("examples", "example-eml-valid.xml", package = "EML")
 #' eml <- read_eml(f)
@@ -23,21 +23,12 @@ write_eml <- function(eml,
                       ...) {
 
   tmp <- s4_to_xml(eml, ns = c(namespaces, eml_namespaces))
-  xml_set_namespace(tmp, "eml", "eml://ecoinformatics.org/eml-2.1.1")
+  xml2::xml_set_namespace(tmp, "eml", "eml://ecoinformatics.org/eml-2.1.1")
   xml2::write_xml(tmp, file, ...)
 
 }
 
-oldwrite <-  function(eml,
-           file = NULL,
-           namespaces = NULL,
-           ns = "eml",
-           ...) {
-    node <- S4Toeml(eml)
-    xmlNamespaces(node) <- c(namespaces, eml_namespaces)
-    setXMLNamespace(node, ns)
-    XML::saveXML(node, file = file, ...)
-  }
+
 ## Default XML namespaces
 eml_namespaces <- c(
   "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1",

@@ -39,7 +39,6 @@ for example, compare \code{\link{get_attributes}} to the example shown here.
 
 \item \code{unitList}: get method for UnitList
 }}
-
 \examples{
 f <- system.file("xsd/test", "eml-datasetWithUnits.xml", package = "EML")
 eml <- read_eml(f)
@@ -53,3 +52,4 @@ eml_get(eml, "attributeList")
 eml_get(eml@dataset@dataTable, "physical")
 }
 }
+

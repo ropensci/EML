@@ -17,7 +17,7 @@ Description: Parse and serialize Ecological Metadata Language ('EML', see
     more information) files into S4 objects.
 License: FreeBSD
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 Imports:
     XML,
     methods,
@@ -30,7 +30,7 @@ Suggests:
     listviewer
 VignetteBuilder: knitr
 Encoding: UTF-8
-Collate: 
+Collate:
     'classes.R'
     'classes-stmml.R'
     'coercions.R'
@@ -55,4 +55,5 @@ Collate:
     'set_unitList.R'
     'write_eml.R'
     'xml-s4.R'
+    'xml_to_s4.R'
     'zzz.R'

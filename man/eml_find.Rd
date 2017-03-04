@@ -17,3 +17,4 @@ the requested element as an EML S4 object
 \description{
 find all occurrences of an EML element in at a given node at any depth
 }
+
