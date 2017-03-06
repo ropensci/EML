@@ -30,12 +30,12 @@
 #'
 #' @export
 #' @importFrom xml2 read_xml xml_validate
-eml_validate <- function(eml, encoding = "", ...){
+eml_validate <- function(eml, encoding = "UTF-8"){
 
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
     f <- tempfile()
-    write_eml(eml, file = f, encoding = encoding, ...)
+    write_eml(eml, file = f, encoding = encoding)
     eml <- f
   }
   doc <- xml2::read_xml(eml, encoding = encoding)

@@ -4,7 +4,7 @@
 \alias{eml_validate}
 \title{eml_validate}
 \usage{
-eml_validate(eml, encoding = "", ...)
+eml_validate(eml, encoding = "UTF-8")
 }
 \arguments{
 \item{eml}{an eml class object, file, or xml document}

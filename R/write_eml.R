@@ -23,7 +23,7 @@ write_eml <- function(eml,
                       ...) {
 
   tmp <- s4_to_xml(eml, ns = c(namespaces, eml_namespaces))
-  xml2::xml_set_namespace(tmp, "eml", "eml://ecoinformatics.org/eml-2.1.1")
+  xml2::xml_set_namespace(tmp, ns, paste0(ns, "://ecoinformatics.org/eml-2.1.1"))
   xml2::write_xml(tmp, file, ...)
 
 }

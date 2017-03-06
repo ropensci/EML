@@ -8,7 +8,7 @@
 xml_to_s4 <- function(node){
   node_name <- fix_protected_names( xml_name(node) )
   attrs <- xml_attrs(node)
-  children <- drop_comment_nodes( xml_children(node) )
+  children <-  xml_children(node)
   xml_names <- as.character(xml_name(children))
   xml_attr_names <- names(attrs)
 

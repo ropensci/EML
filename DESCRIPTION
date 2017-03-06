@@ -55,6 +55,5 @@ Collate:
     'set_physical.R'
     'set_unitList.R'
     'write_eml.R'
-    'xml-s4.R'
     'xml_to_s4.R'
     'zzz.R'
