@@ -5,6 +5,8 @@ emptynode <- function(node){
 
 is.basic <- function(x) !isS4(x) && length(x) > 0 && (is.character(x) || is.numeric(x))
 excluded_slots <- c("namespaces", "dirname", "slot_order", "xmlNodeName")
+base_attributes <- c("lang")
+schema_attributes <- c("schemaLocation")
 
 #' @import xml2
 #' @import methods
@@ -36,13 +38,11 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
     xml <- xml_add_child(root, node_name)
   }
 
-  base_attributes <- c("lang")
-  schema_attributes <- c("schemaLocation")
 
 
   ## Handle the special case of "InlineType" -- which contain raw xml (for docbook text)
   if (is(obj, "InlineType")) {  # should be inherits(obj, "InlineType") ?
-    xml_add_child(root, obj)  ## really? maybe need to subset the thing first?
+    xml_add_child(xml, obj)  ## really? maybe need to subset the thing first?
   } else {
 
     who <- who[!(who %in% excluded_slots)] # drop excluded slots
@@ -61,35 +61,35 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
           if (s %in% schema_attributes)
             s <- paste0("xsi:", s)
           names(attrs) <- s
-          xml_set_attrs(root, attrs)
+          xml_set_attrs(xml, attrs)
         }
         ## metaTypes are used in slots rather than interitence to preserve element ordering!
         ## Capitalized slots are meta-types, and should not create a new xmlNode but instead
         ## pass their children directly to their parent node.
       } else if (grepl("^[A-Z]", s)) {
         X <- slot(obj, s)
-        xml_add_child(root, S4Toeml(X, root = root))
+        xml_add_child(xml, s4_to_xml(X, xml))
       } else {
         ## Complex child nodes
         X <- slot(obj, s)
           if (is(X, "InlineType"))
-            xml_add_child(root, xml_add_child(root, s, X))
+            xml_add_child(xml, xml_add_child(xml, s, X))
           else if (is(X, "list") && length(X)>0) {
             if (is(X[[1]], "InlineType"))
-              lapply(X, function(x)  xml_add_child(root, s, x))
+              lapply(X, function(x)  xml_add_child(xml, s, x))
             else if (is.character(X[[1]]) && length(get_slots(class(X[[1]]))) <= 1)
-              lapply(X, function(x) xml_add_child(root, class(x), x))
+              lapply(X, function(x) xml_add_child(xml, class(x), x))
             else
-              lapply(X, S4Toeml, root)
+              lapply(X, s4_to_xml, xml)
           } else if (isS4(X)) {
-            xml_add_child(root, S4Toeml(slot(obj, s)))
+            xml_add_child(xml, s4_to_xml(slot(obj, s)))
             ## Simple Child nodes
           } else if (length(X) > 0) {
             if (s == class(obj)[1] || s == ".Data")
               # special case
-              xml_add_children(root, X)   #
+              xml_add_children(xml, X)   #
             else
-              xml_add_children(root, xml_add_child(root, s, X))
+              xml_add_children(xml, xml_add_child(xml, s, X))
             ## No child node
           }
 
@@ -101,11 +101,10 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
 
   root
 }
-S4Toeml <- s4_to_xml
 
 
 
-dummy <- function(){
+s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
   node_name <- class(obj)[[1]]
   fields <- setdiff(slotNames(obj), excluded_slots)
 
@@ -117,30 +116,41 @@ dummy <- function(){
                          "xmlns:stmml" = "http://www.xml-cml.org/schema/stmml_1.1")
     xml <- root
   } else {
-    xml <- xml_add_child(root, node_name)
+
+    if(inherits(obj,"InlineType") && length(obj@.Data) > 0 && is(obj@.Data[[1]], "xml_node")){
+      xml <- xml_add_child(root, obj@.Data[[1]])
+    } else {
+     xml <- xml_add_child(root, node_name)
+    }
   }
 
   lapply(fields, function(child){
     node <- slot(obj, child)
-    if(is.null(node) || emptynode(node)){
+    if(is.null(node) || emptynode(node)){             # slot is empty
       xml
     } else if(is(node, "xml_attribute")){             # node is an attribute
-      if(child == "schemaLocation") child <- paste0("xsi:", child)  #Hack, should fix slot name to keep prefix
+      if(child == "schemaLocation") child <- paste0("xsi:", child)  #Hack, should fix slot name to keep prefix. (schema_attributes)
+      #if(child %in% base_attributes)  child <- paste0("xml:", child)
       xml_set_attr(xml, child, as.character(node))
+    } else if(grepl("^[A-Z]", child)){                # node is a metanode (class whose children should all become slots)
+      xml_add_child(xml, s4_to_xml(node, xml))
+    } else if(is(node, "list") && length(node) > 0 && is(node@.Data[[1]], "xml_nodeset")){
+      lapply(node@.Data[[1]], function(n) xml_add_child(xml, n))
     } else if(grepl("ListOf", class(node))){
       lapply(node, s4_to_xml, xml)
-    } else if(is.basic(node)){
+    } else if(is.basic(node) && child == ".Data"){
       xml_set_text(xml, node)
     } else if(isS4(node)){                            # node is S4 class
       s4_to_xml(node, xml)
-    } else {                                          # node is a simple type
+    } else if(child != ".Data"){                                          # node is a simple type
       xml_add_child(xml, child, node)
     }
   })
 
-  empty <- "//*[not(*)][not(normalize-space())]"
+  empty <- "//*[not(*)][not(normalize-space())]"  ## FIXME do not remove attribute-only nodes
   xml_remove(xml_find_all(root, empty))
 
   root
 }
 
+S4Toeml <- s4_to_xml

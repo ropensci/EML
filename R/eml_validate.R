@@ -52,6 +52,8 @@ eml_validate <- function(eml, encoding = "UTF-8"){
     }
   )
 
+result
+
 #  if (result$status != 0) {
 #    lapply(result$errors, message_validation_error)
 #    return(FALSE)

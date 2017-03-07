@@ -29,25 +29,27 @@ xml_to_s4 <- function(node){
   metaclasses <- lapply(metanames, get_slots)
   names(metaclasses) <- metanames
 
-  ## "text" shouldn't count as a subclass (perhaps not needed, only occurs in older XML parser?)
-  text_classes <- "text" %in% subclasses
-  subclasses <- subclasses[subclasses != "text"]
-
   ## fill in attributes for which we have a slot
   for (child in not_subattrs) {
     slot(s4, child) <- new("xml_attribute", attrs[[child]])
   }
 
+
+
   ## InlineType nodes are left as xml
   if (inherits(s4, "InlineType")) {
+
     kids <- xml_children(node)
-    class(kids) <- c("list", "xml_nodeset")  # not necessary? why add class "list"?
-    s4@.Data  <- kids
+    if(length(kids) > 0){
+      s4@.Data <- list(kids)
+    } else {
+      s4@.Data <- list(node)
+    }
   } else {
 
-    ## special case of when we have a "text" node?  (perhaps not needed, only occurs in older XML parser?)
-    if (length(metaclasses) == 0 && text_classes) {
-      s4@.Data <- paste(sapply(children[names(children) == "text"], xml_text), collapse = "\n")
+    ## Simple data node
+    if (length(metaclasses) == 0 && length(not_sub) == 0 && ".Data" %in% slotNames(node_name)) {
+      s4@.Data <- xml_text(node)
     }
 
     ## handle the metaclasses
@@ -73,7 +75,7 @@ xml_to_s4 <- function(node){
 }
 
 parse_xml <- function(child, children, cls){
-  i <- match(child, xml_name(children))
+  i <- grep(child, xml_name(children))
   if (grepl("^ListOf", cls)) { ## Should be identical to if(length(i) > 1)
     listof(children, child, i)
   } else if (cls == "character") {
@@ -81,12 +83,34 @@ parse_xml <- function(child, children, cls){
   } else if (cls == "xml_attribute"){
       slot(slot(s4, s), child) <- new("xml_attribute" , attrs[[child]])
   } else {
-     emlToS4(children[[i]])
+     xml_to_s4(children[[i]])
   }
 }
 
 
-emlToS4 <- xml_to_s4
+##
+listof <-
+  function(children,
+           child,
+           i,
+           listclass = paste0("ListOf", child))
+    new(listclass, lapply(children[i], xml_to_s4))  ## subsets already
+
+
+fix_protected_names <- function(x) {
+  sapply(x, function(node_name) {
+    protected <- c("complex")
+    if (node_name %in% protected)
+      node_name <- paste0("eml:", node_name)
+    node_name
+  })
+}
+
+
+
+get_slots <- function(class_name) {
+  getClass(class_name)@slots
+}
 
 
 
@@ -121,26 +145,4 @@ isEmpty <- function(obj) {
 }
 
 
-get_slots <- function(class_name) {
-  getClass(class_name)@slots
-}
-
-
-##
-listof <-
-  function(kids,
-           element,
-           i,
-           listclass = paste0("ListOf", element))
-    new(listclass, lapply(kids[i], emlToS4))  ## subsets already
-
-
-fix_protected_names <- function(x) {
-  sapply(x, function(node_name) {
-    protected <- c("complex")
-    if (node_name %in% protected)
-      node_name <- paste0("eml:", node_name)
-    node_name
-  })
-}
-
+emlToS4 <- xml_to_s4
