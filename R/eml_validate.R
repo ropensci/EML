@@ -93,7 +93,7 @@ eml_locate_schema <- function(eml) {
     }
     namespace <- xml2::xml_ns(eml)
     stopifnot(is(namespace, 'xml_namespace'))
-    eml_version <- stringr::str_match(namespace[[1]], "eml://ecoinformatics.org/(.*)")[,2]
+    eml_version <- stringr::str_match(namespace[["eml"]], "eml://ecoinformatics.org/(.*)")[,2]
     schema <- system.file(stringr::str_c("xsd/", eml_version, "/eml.xsd"), package='EML')
     if(schema == '') {
         stop(stringr::str_c("No schema found for namespace: ", namespace[[1]]))
