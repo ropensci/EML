@@ -154,7 +154,7 @@ set_unitList <-
 
     if (as_metadata) {
       xml_meta <- S4Toeml(out)
-      setXMLNamespace(xml_meta,
+      set_xml_namespace(xml_meta,
                       c(stmml =  "http://www.xml-cml.org/schema/stmml_1.1"))
       new("additionalMetadata", metadata = new("metadata", list(xml_meta)))
     } else{
@@ -166,7 +166,7 @@ set_unitList <-
 
 setAs("unitList", "additionalMetadata", function(from) {
   xml_meta <- S4Toeml(from)
-  setXMLNamespace(xml_meta,
+  xml_set_namespace(xml_meta,
                   c(stmml =  "http://www.xml-cml.org/schema/stmml_1.1"))
   new("additionalMetadata", metadata = new("metadata", list(xml_meta)))
 })

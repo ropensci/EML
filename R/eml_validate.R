@@ -8,7 +8,7 @@
 #' @param encoding optional, if eml is a file path / an eml and has special characters, one can
 #' gives the encoding used by xmlParse.
 #' @param ... additional arguments to eml_write, such as namespaces
-#'
+#' @param schema path to schema
 #' @return Whether the document is valid (logical)
 #'
 #' @examples \donttest{
@@ -30,7 +30,7 @@
 #'
 #' @export
 #' @importFrom xml2 read_xml xml_validate
-eml_validate <- function(eml, encoding = "UTF-8"){
+eml_validate <- function(eml, encoding = "UTF-8", schema = NULL){
 
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
@@ -43,7 +43,9 @@ eml_validate <- function(eml, encoding = "UTF-8"){
   if(exists(f)) unlink(f)
 
   # Use the EML namespace to find the EML version and the schema location
-  try(schema <- eml_locate_schema(doc))
+  if(is.null(schema)){
+    try(schema <- eml_locate_schema(doc))
+  }
   schema_doc <- xml2::read_xml(schema)
   result <- tryCatch(xml2::xml_validate(doc, schema_doc),
     error = function(e) {
@@ -85,18 +87,19 @@ result
 #' @importFrom stringr str_match str_c
 #' @importFrom xml2 xml_ns
 #' @export
-eml_locate_schema <- function(eml) {
+eml_locate_schema <- function(eml, ns = 1) {
 
+    schema_file <- strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]][2]
 
     if(!is(eml,'xml_document')) {
         stop("Argument is not an instance of an XML document (xml2::xml_document)")
     }
     namespace <- xml2::xml_ns(eml)
     stopifnot(is(namespace, 'xml_namespace'))
-    eml_version <- stringr::str_match(namespace[["eml"]], "eml://ecoinformatics.org/(.*)")[,2]
-    schema <- system.file(stringr::str_c("xsd/", eml_version, "/eml.xsd"), package='EML')
+    eml_version <- strsplit(namespace[[ns]], "-")[[1]][2]
+    schema <- system.file(stringr::str_c("xsd/eml-", eml_version, "/", schema_file), package='EML')
     if(schema == '') {
-        stop(stringr::str_c("No schema found for namespace: ", namespace[[1]]))
+        stop(paste("No schema found for namespace: ", namespace[[ns]]))
     }
     return(schema)
 }

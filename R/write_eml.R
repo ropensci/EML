@@ -22,17 +22,25 @@ write_eml <- function(eml,
                       ns = "eml",
                       ...) {
 
-  tmp <- s4_to_xml(eml, ns = c(namespaces, eml_namespaces))
-  xml2::xml_set_namespace(tmp, ns, paste0(ns, "://ecoinformatics.org/eml-2.1.1"))
-  xml2::write_xml(tmp, file, ...)
+  ## use default namespaces if not provided
+  if(is.null(namespaces))
+    namespaces <- eml_namespaces
+
+  ## Convert to xml
+  node <- s4_to_xml(eml, ns = namespaces)
+
+  ## setting root element ns doesn't appear to do anything:
+  #xml2::xml_set_namespace(tmp, ns, paste0(ns, "://ecoinformatics.org/", ns, "-2.1.1"))
+
+  ## so we set it manually by renaming the node:
+  who <- xml_name(node)
+  xml_name(node) <- paste(ns, who, sep=":")
+
+  ## Now we write out to file
+  xml2::write_xml(node, file, ...)
 
 }
 
 
 ## Default XML namespaces
-eml_namespaces <- c(
-  "xmlns:eml" = "eml://ecoinformatics.org/eml-2.1.1",
-  "xmlns:xs" = "http://www.w3.org/2001/XMLSchema",
-  "xmlns:xsi" = "http://www.w3.org/2001/XMLSchema-instance",
-  "xmlns:stmml" = "http://www.xml-cml.org/schema/stmml_1.1"
-)
+eml_namespaces <- xml2::xml_ns(xml2::read_xml(system.file("examples", "example-eml-valid.xml", package = "EML")))
