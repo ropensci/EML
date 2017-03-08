@@ -25,7 +25,9 @@ all_test_examples<- function(xml) {
     ## Because root element in many test files is not "eml" but some sub-class like "dataset" or "access", we need to be explicit about namespace
     original <- xml2::read_xml(f)
     namespaces <- xml_ns(original)
-    ns <- names(namespaces[1])
+    i <- grep("eml", names(namespaces))
+    if(length(i) == 0) i <- 1
+    ns <- names(namespaces[i])
 
     ## Write and Validate EML (handling explicit namespacing)
     write_eml(eml, "unittest.xml", namespaces = namespaces, ns = ns)
@@ -51,11 +53,34 @@ all_test_examples<- function(xml) {
 }
 
 out <- lapply(xml_tests, all_test_examples)
+#out <- purrr::safely(purrr::map(xml_tests, all_test_examples))
 
 
+## scratch tests
 
-out <- purrr::safely(purrr::map(xml_tests, all_test_examples))
+testthat::test_that('check a single test file', {
+xml <-xml_tests[2]
+f <- system.file(paste0("xsd/test/", xml), package = "EML")
+eml <- read_eml(f)
+original <- xml2::read_xml(f)
+namespaces <- xml_ns(original)
+i <- grep("eml", names(namespaces))
+if(length(i) == 0) i <- 1
+ns <- names(namespaces[i])
 
+## Write and Validate EML (handling explicit namespacing)
+write_eml(eml, "unittest.xml", namespaces = namespaces, ns = ns)
+v <- eml_validate("unittest.xml")
+testthat::expect_true(v)
+original <- xml_name( xml_find_all(read_xml(f), "//*") )
+test <- xml_name(xml_find_all(xml2::read_xml("unittest.xml"), "//*") )
+
+testthat::expect_identical(length(original), length(test))
+testthat::expect_identical(sort(original), sort(test))
+testthat::expect_identical(original, test)
+})
+
+## Clean up
 ## purrr::compact(lapply(out, `[[`, "error"))
 
 # length differs for: 'eml-i18n.xml', 'eml-literatureInPress.xml',  'eml-literature.xml', 'eml-text.xml'

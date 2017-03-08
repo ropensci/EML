@@ -76,7 +76,7 @@ result
 #' the function returns FALSE.
 #'
 #' @param eml an xml2::xml_document instance for an EML document
-#'
+#' @param ns the namespace URI for the top (root) element
 #' @return fully qualified path to the XSD schema for the appropriate version of EML
 #'
 #' @examples \donttest{
@@ -87,7 +87,9 @@ result
 #' @importFrom stringr str_match str_c
 #' @importFrom xml2 xml_ns
 #' @export
-eml_locate_schema <- function(eml, ns = 1) {
+eml_locate_schema <- function(eml, ns = NA) {
+
+
 
     schema_file <- strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]][2]
 
@@ -96,10 +98,18 @@ eml_locate_schema <- function(eml, ns = 1) {
     }
     namespace <- xml2::xml_ns(eml)
     stopifnot(is(namespace, 'xml_namespace'))
-    eml_version <- strsplit(namespace[[ns]], "-")[[1]][2]
+
+    ##
+    if(is.na(ns)){
+      i <- grep("eml://ecoinformatics.org/eml", namespace)
+      if(length(i) == 0) i <- 1
+      ns <- namespace[i]
+    }
+
+    eml_version <- strsplit(ns, "-")[[1]][2]
     schema <- system.file(stringr::str_c("xsd/eml-", eml_version, "/", schema_file), package='EML')
     if(schema == '') {
-        stop(paste("No schema found for namespace: ", namespace[[ns]]))
+        stop(paste("No schema found for namespace: ", ns))
     }
     return(schema)
 }

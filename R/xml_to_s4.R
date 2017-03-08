@@ -23,9 +23,9 @@ xml_to_s4 <- function(node){
   not_subattrs <- xml_attr_names[xml_attr_names %in% s4_names]
   subclasses <- c(subclasses, subattrs)
 
-  ## metanames are s4 slots referring to a collection of xml elements, such as ResourceGroup.
-  ## These always start with a capital, and would be an inherited class but that doesn't preserve slot order, so we use them a slot
-  metanames <- s4_names[grepl("^[A-Z]", s4_names)]
+  ## metanames are s4 slots referring to a collection of xml elements, such as ResourceGroup, BoundsGroup, etc.
+  ## These always start with a capital (but are not in all caps, e.g. ISSN is not a metaclass), and would be an inherited class but that doesn't preserve slot order, so we use them a slot
+  metanames <- s4_names[grepl("^[A-Z][a-z]", s4_names)]
   metaclasses <- lapply(metanames, get_slots)
   names(metaclasses) <- metanames
 
@@ -60,7 +60,7 @@ xml_to_s4 <- function(node){
         cls <- metaclasses[[s]][[y[[s]]]]
         if (is.null(slot(s4, s)))
           slot(s4, s) <- new(s)
-        slot(slot(s4,s)) <- parse_xml(child, children, cls)
+        slot(slot(s4,s),child) <- parse_xml(child, children, cls)
       }
     }
 

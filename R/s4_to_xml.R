@@ -15,6 +15,11 @@ schema_attributes <- c("schemaLocation")
 
 s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
   node_name <- class(obj)[[1]]
+
+  ## clear prefixes from node-name, except stmml
+  if (!grepl("^stmml:", node_name))
+    node_name <- gsub("^[a-z]*:", "", node_name)
+
   fields <- setdiff(slotNames(obj), excluded_slots)
 
   if(is.null(root)){
@@ -39,7 +44,7 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
       if(child == "schemaLocation") child <- paste0("xsi:", child)  #Hack, should fix slot name to keep prefix. (schema_attributes)
       #if(child %in% base_attributes)  child <- paste0("xml:", child)
       xml_set_attr(xml, child, as.character(node))
-    } else if(grepl("^[A-Z]", child)){                # node is a metanode (class whose children should all become slots)
+    } else if(grepl("^[A-Z][a-z]", child)){                # node is a metanode (class whose children should all become slots)
       xml_add_child(xml, s4_to_xml(node, xml))
     } else if(is(node, "list") && length(node) > 0 && is(node@.Data[[1]], "xml_nodeset")){
       lapply(node@.Data[[1]], function(n) xml_add_child(xml, n))
