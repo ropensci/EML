@@ -58,8 +58,12 @@ out <- lapply(xml_tests, all_test_examples)
 
 ## scratch tests
 
+
 testthat::test_that('check a single test file', {
-xml <-xml_tests[2]
+#xml <-xml_tests[2]
+
+xml <- "eml-attribute.xml"
+library(xml2)
 f <- system.file(paste0("xsd/test/", xml), package = "EML")
 eml <- read_eml(f)
 original <- xml2::read_xml(f)
@@ -70,8 +74,8 @@ ns <- names(namespaces[i])
 
 ## Write and Validate EML (handling explicit namespacing)
 write_eml(eml, "unittest.xml", namespaces = namespaces, ns = ns)
-v <- eml_validate("unittest.xml")
-testthat::expect_true(v)
+#v <- eml_validate("unittest.xml")
+#testthat::expect_true(v)
 original <- xml_name( xml_find_all(read_xml(f), "//*") )
 test <- xml_name(xml_find_all(xml2::read_xml("unittest.xml"), "//*") )
 
@@ -79,6 +83,8 @@ testthat::expect_identical(length(original), length(test))
 testthat::expect_identical(sort(original), sort(test))
 testthat::expect_identical(original, test)
 })
+
+
 
 ## Clean up
 ## purrr::compact(lapply(out, `[[`, "error"))

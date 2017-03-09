@@ -28,17 +28,32 @@ write_eml <- function(eml,
 
   ## Convert to xml
   node <- s4_to_xml(eml, ns = namespaces)
+  root <- xml2::xml_root(node)
+
+  prune_empty(root)
 
   ## setting root element ns doesn't appear to do anything:
   #xml2::xml_set_namespace(tmp, ns, paste0(ns, "://ecoinformatics.org/", ns, "-2.1.1"))
-
   ## so we set it manually by renaming the node:
-  who <- xml_name(node)
-  xml_name(node) <- paste(ns, who, sep=":")
+  root_name <- xml_name(root)
+  xml_name(root) <- paste(ns, root_name, sep=":")
 
   ## Now we write out to file
-  xml2::write_xml(node, file, ...)
+  xml2::write_xml(root, file, ...)
 
+}
+
+
+prune_empty <- function(xml){
+  before <- 1
+  after <- 0
+  empty <- "//*[not(*)][not(normalize-space())]"  ## FIXME do not remove attribute-only nodes
+  while(after < before){
+    before <- length(xml_name(xml_find_all(xml, "//*") ))
+    xml_remove(xml_find_all(xml, empty))
+    after <- length(xml_name(xml_find_all(xml, "//*") ))
+  }
+  xml
 }
 
 

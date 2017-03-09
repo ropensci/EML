@@ -31,6 +31,8 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
 
     if(inherits(obj,"InlineType") && length(obj@.Data) > 0 && is(obj@.Data[[1]], "xml_node")){
       xml <- xml_add_child(root, obj@.Data[[1]])
+    } else if(grepl("^[A-Z][a-z]", node_name)){
+      xml <- root # metanode, do not create any xml
     } else {
      xml <- xml_add_child(root, node_name)
     }
@@ -45,7 +47,7 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
       #if(child %in% base_attributes)  child <- paste0("xml:", child)
       xml_set_attr(xml, child, as.character(node))
     } else if(grepl("^[A-Z][a-z]", child)){                # node is a metanode (class whose children should all become slots)
-      xml_add_child(xml, s4_to_xml(node, xml))
+      s4_to_xml(node, xml)
     } else if(is(node, "list") && length(node) > 0 && is(node@.Data[[1]], "xml_nodeset")){
       lapply(node@.Data[[1]], function(n) xml_add_child(xml, n))
     } else if(grepl("ListOf", class(node))){
@@ -59,12 +61,9 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
     }
   })
 
-
-  ## FIXME: We could use the option="no_empty_tags" from write_xml instead; internal C method, would be faster
-  empty <- "//*[not(*)][not(normalize-space())]"  ## FIXME do not remove attribute-only nodes
-  xml_remove(xml_find_all(root, empty))
-
-  root
+  xml
 }
+
+
 
 S4Toeml <- s4_to_xml
