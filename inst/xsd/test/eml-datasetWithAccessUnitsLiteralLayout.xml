@@ -219,7 +219,7 @@ rp86e08</shortName>
 <methodStep>
      <description>
          <section>
-                 <title>
+                 <title>Title should not be empty
 </title>
                  <para>
                          <literalLayout>
