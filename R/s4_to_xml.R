@@ -15,7 +15,7 @@ strip_prefix <- function(node_name){
   node_name
 }
 
-
+## FIXME confirm we obey slot_order?
 
 s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
   node_name <- class(obj)[[1]]

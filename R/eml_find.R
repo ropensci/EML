@@ -19,13 +19,11 @@ eml_find <- function(node, element) {
   } else {
     slots <- getSlots(class(node))
     children <- names(slots)
-    #children <- children[!(slots %in% c("character", "xml_attribute", "XMLInternalNode"))]
-    #simple <- children[(slots %in% c("character", "xml_attribute", "XMLInternalNode"))]
-    #if(element %in% simple)
-    
+
+
     if (element %in% children) {
       slot(node, element)
-      
+
     } else {
       nonempty_lapply(children, function(x)
         eml_find(slot(node, x), element))

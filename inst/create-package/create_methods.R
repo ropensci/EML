@@ -3,7 +3,7 @@ base_types <- c("xml_attribute")
 set_coerces <- function(class, class_file = "methods.R") {
   write(
     sprintf(
-      "setAs('%s', 'XMLInternalNode',   function(from) S4Toeml(from))",
+      "setAs('%s', 'xml_node',   function(from) S4Toeml(from))",
       class
     ),
     class_file,
@@ -11,7 +11,7 @@ set_coerces <- function(class, class_file = "methods.R") {
   )
   write(
     sprintf(
-      "setAs('XMLInternalNode', '%s',  function(from) emlToS4(from))",
+      "setAs('xml_node', '%s',  function(from) emlToS4(from))",
       class
     ),
     class_file,
