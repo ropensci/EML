@@ -14,7 +14,8 @@ xml_to_s4 <- function(node){
 
   s4 <- new(node_name)
   slot_classes <- get_slots(node_name)
-  s4_names <- names(slot_classes)
+  s4_names <- sapply(names(slot_classes), strip_prefix)
+  names(slot_classes) <- s4_names
 
   ## sub-classes/attrs are in the xml but do not have an s4 slot, such as: xmlns attributes (additional namespaces)
   subclasses <- xml_names[!xml_names %in% s4_names]
@@ -67,7 +68,8 @@ xml_to_s4 <- function(node){
     ## These are the normal s4@slot items
     for (child in unique(not_sub)) {
       cls <- as.character(slot_classes[[child]])
-      slot(s4, child) <- parse_xml(child, children, cls)
+      s <- fix_protected_names(child)
+      slot(s4, s) <- parse_xml(child, children, cls)
     }
   }
   s4

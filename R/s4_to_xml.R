@@ -9,7 +9,11 @@ base_attributes <- c("lang")
 schema_attributes <- c("schemaLocation")
 
 
-
+strip_prefix <- function(node_name){
+  if (!grepl("^stmml:", node_name))
+    node_name <- gsub("^[a-z]*:", "", node_name)
+  node_name
+}
 
 
 
@@ -17,8 +21,7 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
   node_name <- class(obj)[[1]]
 
   ## clear prefixes from node-name, except stmml
-  if (!grepl("^stmml:", node_name))
-    node_name <- gsub("^[a-z]*:", "", node_name)
+  node_name <- strip_prefix(node_name)
 
   fields <- setdiff(slotNames(obj), excluded_slots)
 
@@ -51,6 +54,7 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
     } else if (is(node, "InlineType")  && length(node) > 0 && is(node[[1]], "xml_nodeset")){
       xml <- xml_add_child(xml, child)
       lapply(node[[1]], function(n) xml_add_child(xml, n))
+    ## FIXME is this next case no longer needed? is the same as the case above?
     } else if(is(node, "list") && length(node) > 0 && is(node@.Data[[1]], "xml_nodeset")){
       lapply(node@.Data[[1]], function(n) xml_add_child(xml, n))
     } else if(grepl("ListOf", class(node))){
