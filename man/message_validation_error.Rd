@@ -15,4 +15,3 @@ Nothing.
 \description{
 Create a useful message() for an XML validation error.
 }
-

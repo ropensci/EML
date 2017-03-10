@@ -23,4 +23,3 @@ f <- system.file("xsd/test/eml-i18n.xml", package="EML")
 eml <- read_eml(f)
 df <- get_taxonomicCoverage(eml@dataset@coverage@taxonomicCoverage)
 }
-

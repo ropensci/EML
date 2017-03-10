@@ -1,4 +1,4 @@
-
+setOldClass("xml_node")
 
 
 #####  inst/xsd/eml-text.xsd  ####

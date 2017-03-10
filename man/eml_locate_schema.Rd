@@ -4,10 +4,12 @@
 \alias{eml_locate_schema}
 \title{eml_locate_schema}
 \usage{
-eml_locate_schema(eml)
+eml_locate_schema(eml, ns = NA)
 }
 \arguments{
 \item{eml}{an xml2::xml_document instance for an EML document}
+
+\item{ns}{the namespace URI for the top (root) element}
 }
 \value{
 fully qualified path to the XSD schema for the appropriate version of EML
@@ -30,4 +32,3 @@ eml <- xml2::read_xml(f)
 schema <- eml_locate_schema(eml)
 }
 }
-

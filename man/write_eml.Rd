@@ -30,4 +30,3 @@ eml <- read_eml(f)
 write_eml(eml, "test.xml")
 unlink("test.xml") # clean up
 }
-

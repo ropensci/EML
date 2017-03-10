@@ -17,12 +17,10 @@ Description: Parse and serialize Ecological Metadata Language ('EML', see
     more information) files into S4 objects.
 License: FreeBSD
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Imports:
-    XML,
     xml2 (>= 1.1.1),
     methods,
-    stringr,
     tools
 Suggests:
     testthat,

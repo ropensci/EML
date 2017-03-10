@@ -64,4 +64,3 @@ coverage <-
               north = 37.38, south = 30.00)
 
 }
-

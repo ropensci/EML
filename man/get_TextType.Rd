@@ -40,4 +40,3 @@ get_TextType(a)
 }
 
 }
-

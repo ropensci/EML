@@ -84,7 +84,6 @@ result
 #' eml <- xml2::read_xml(f)
 #' schema <- eml_locate_schema(eml)
 #' }
-#' @importFrom stringr str_match str_c
 #' @importFrom xml2 xml_ns
 #' @export
 eml_locate_schema <- function(eml, ns = NA) {
@@ -107,7 +106,7 @@ eml_locate_schema <- function(eml, ns = NA) {
     }
 
     eml_version <- strsplit(ns, "-")[[1]][2]
-    schema <- system.file(stringr::str_c("xsd/eml-", eml_version, "/", schema_file), package='EML')
+    schema <- system.file(paste0("xsd/eml-", eml_version, "/", schema_file), package='EML')
     if(schema == '') {
         stop(paste("No schema found for namespace: ", ns))
     }

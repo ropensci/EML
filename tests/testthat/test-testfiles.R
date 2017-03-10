@@ -2,7 +2,7 @@ testthat::context("We can parse & serialize test files")
 
 library(xml2)
 xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
-## eml-unitDictionary is not EML but STMML; won't validate against EML schema.  (could add it into additionalMetadata though)
+## eml-unitDictionary is not EML but STMML; won't validate against EML schema by itself.
 xml_tests <- xml_tests[!xml_tests %in% c("eml-unitDictionary.xml")]
 
 

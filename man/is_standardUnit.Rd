@@ -19,4 +19,3 @@ is_standardUnit
 is_standardUnit("amperePerMeter") # TRUE
 is_standardUnit("speciesPerSquareMeter") # FALSE
 }
-

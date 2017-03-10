@@ -21,4 +21,3 @@ read_eml
 f <- system.file("xsd/test", "eml.xml", package = "EML")
 eml <- read_eml(f)
 }
-

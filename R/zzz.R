@@ -3,5 +3,5 @@
 ## FIXME consider sysdata for this?
 
 
-#standardUnits <- get_unitList()
+standardUnits <- get_unitList()
 
