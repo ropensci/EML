@@ -75,7 +75,7 @@ xml_to_s4 <- function(node){
 }
 
 parse_xml <- function(child, children, cls){
-  i <- grep(child, xml_name(children))
+  i <- grep(paste0("^", child, "$"), xml_name(children))  ## position of whole word matches, code != codeExplanation
   if (grepl("^ListOf", cls)) { ## Should be identical to if(length(i) > 1)
     listof(children, child, i)
   } else if (cls == "character") {

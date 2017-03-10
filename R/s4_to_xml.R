@@ -48,6 +48,9 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
       xml_set_attr(xml, child, as.character(node))
     } else if(grepl("^[A-Z][a-z]", child)){                # node is a metanode (class whose children should all become slots)
       s4_to_xml(node, xml)
+    } else if (is(node, "InlineType")  && length(node) > 0 && is(node[[1]], "xml_nodeset")){
+      xml <- xml_add_child(xml, child)
+      lapply(node[[1]], function(n) xml_add_child(xml, n))
     } else if(is(node, "list") && length(node) > 0 && is(node@.Data[[1]], "xml_nodeset")){
       lapply(node@.Data[[1]], function(n) xml_add_child(xml, n))
     } else if(grepl("ListOf", class(node))){

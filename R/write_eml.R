@@ -47,7 +47,7 @@ write_eml <- function(eml,
 prune_empty <- function(xml){
   before <- 1
   after <- 0
-  empty <- "//*[not(*)][not(normalize-space())]"  ## FIXME do not remove attribute-only nodes
+  empty <- "//*[not(@*)][not(*)][not(normalize-space())]"  ##
   while(after < before){
     before <- length(xml_name(xml_find_all(xml, "//*") ))
     xml_remove(xml_find_all(xml, empty))
