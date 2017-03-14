@@ -89,8 +89,8 @@ result
 eml_locate_schema <- function(eml, ns = NA) {
 
 
-
-    schema_file <- basename(strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]][2])
+    schemaLocation <- strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]]
+    schema_file <- basename(schemaLocation[2])
 
     if(!is(eml,'xml_document')) {
         stop("Argument is not an instance of an XML document (xml2::xml_document)")
@@ -100,7 +100,7 @@ eml_locate_schema <- function(eml, ns = NA) {
 
     ##
     if(is.na(ns)){
-      i <- grep("eml://ecoinformatics.org/eml", namespace)
+      i <- grep(schemaLocation[1], namespace)
       if(length(i) == 0) i <- 1
       ns <- namespace[i]
     }

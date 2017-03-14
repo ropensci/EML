@@ -1,7 +1,7 @@
 testthat::context("We can parse & serialize test files")
 
 library(xml2)
-xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
+xml_tests <- list.files("inst/xsd/test/", "^eml-.*\\.xml")
 ## eml-unitDictionary is not EML but STMML; won't validate against EML schema by itself.
 xml_tests <- xml_tests[!xml_tests %in% c("eml-unitDictionary.xml")]
 
@@ -20,8 +20,8 @@ all_test_examples<- function(xml) {
     ## Because root element in many test files is not "eml" but some sub-class like "dataset" or "access", we need to be explicit about namespace
     original <- xml2::read_xml(f)
     namespaces <- xml_ns(original)
-    i <- grep("eml", names(namespaces))
-    if(length(i) == 0) i <- 1
+    schemaLocation <- strsplit(xml_attr(original, "schemaLocation"), "\\s+")[[1]]
+    i <- grep(schemaLocation[1], namespaces)
     ns <- names(namespaces[i])
 
     ## Write and Validate EML (handling explicit namespacing)
