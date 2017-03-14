@@ -28,7 +28,7 @@ Render a TextType node int HTML or some other format
 ## Convert an EML abstract to markdown
 f <- system.file("examples/hf205.xml", package = "EML")
 eml <- read_eml(f)
-abstract <- eml_get(eml, "abstract") 
+abstract <- eml_get(eml, "abstract")
 get_TextType(abstract[[1]], "markdown", "abstract.markdown")
 readLines("abstract.markdown")
 unlink("abstract.markdown") # tidy up

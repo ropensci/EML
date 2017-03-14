@@ -11,6 +11,7 @@
 #' @export
 #' @import methods xml2
 #' @importFrom xml2 write_xml xml_set_namespace
+#' @importFrom uuid UUIDgenerate()
 #' @examples
 #' f <- system.file("examples", "example-eml-valid.xml", package = "EML")
 #' eml <- read_eml(f)
@@ -26,14 +27,15 @@ write_eml <- function(eml,
   if(is(eml, "eml") && is_blank(eml@schemaLocation))
     eml@schemaLocation@.Data <- "eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
 
-  ## By default, system is the DOI of the R package release (required by schema)
+  ## By default, we use UUID system to generate packageId
   if("system" %in% slotNames(eml) && is_blank(eml@system))
-    slot(eml,"system") <- as("doi:10.5281/zenodo.213265", "xml_attribute")
+    slot(eml,"system") <- as("uuid", "xml_attribute")
 
   ## By default, a packageId will be generated if one is not available (required by schema)
   if(is(eml, "eml") && is_blank(eml@packageId))
-    slot(eml,"packageId") <- as(basename(tempfile("eml")), "xml_attribute")
+    slot(eml,"packageId") <- as(uuid::UUIDgenerate(), "xml_attribute")
 
+  # id <- basename(tempfile("eml"))
 
   ## use default namespaces if not provided
   if(is.null(namespaces))
