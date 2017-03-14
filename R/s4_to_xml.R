@@ -47,7 +47,7 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
       xml
     } else if(is(node, "xml_attribute")){             # node is an attribute
       if(child == "schemaLocation") child <- paste0("xsi:", child)  #Hack, should fix slot name to keep prefix. (schema_attributes)
-      #if(child %in% base_attributes)  child <- paste0("xml:", child)
+      if(child %in% base_attributes)  child <- paste0("xml:", child)
       xml_set_attr(xml, child, as.character(node))
     } else if(grepl("^[A-Z][a-z]", child)){                # node is a metanode (class whose children should all become slots)
       s4_to_xml(node, xml)

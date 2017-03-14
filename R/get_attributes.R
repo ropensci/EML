@@ -265,9 +265,9 @@ or_na <- function(x) {
 ## Resolve reference nodes into copies of actual metadata nodes.  slow!
 get_reference <- function(n, eml) {
   id <- n@references[[1]]
-  doc <- XML::xmlParse(write_eml(eml))
-  node <- XML::xpathApply(doc, sprintf("//*[@id = '%s']", id))[[1]]
-  emlToS4(node)
+  doc <- s4_to_xml(eml, root = xml_new_root("eml"))
+  node <- xml2::xml_find_all(doc, sprintf("//*[@id = '%s']", id))[[1]]
+  xml_to_s4(node)
 }
 
 

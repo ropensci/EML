@@ -22,6 +22,19 @@ write_eml <- function(eml,
                       ns = "eml",
                       ...) {
 
+  ## Make sure `eml` node has a schemaLocation
+  if(is(eml, "eml") && is_blank(eml@schemaLocation))
+    eml@schemaLocation@.Data <- "eml://ecoinformatics.org/eml-2.1.1 eml.xsd"
+
+  ## By default, system is the DOI of the R package release (required by schema)
+  if("system" %in% slotNames(eml) && is_blank(eml@system))
+    slot(eml,"system") <- as("doi:10.5281/zenodo.213265", "xml_attribute")
+
+  ## By default, a packageId will be generated if one is not available (required by schema)
+  if(is(eml, "eml") && is_blank(eml@packageId))
+    slot(eml,"packageId") <- as(basename(tempfile("eml")), "xml_attribute")
+
+
   ## use default namespaces if not provided
   if(is.null(namespaces))
     namespaces <- eml_namespaces
@@ -37,6 +50,7 @@ write_eml <- function(eml,
   ## so we set it manually by renaming the node:
   root_name <- xml_name(root)
   xml_name(root) <- paste(ns, root_name, sep=":")
+
 
   ## Now we write out to file
   xml2::write_xml(root, file, ...)
@@ -56,6 +70,8 @@ prune_empty <- function(xml){
   xml
 }
 
+# character(0) or "" data
+is_blank <- function(x) length(x) < 1 || x == ""
 
 ## Default XML namespaces
 eml_namespaces <- xml2::xml_ns(xml2::read_xml(system.file("examples", "example-eml-valid.xml", package = "EML")))

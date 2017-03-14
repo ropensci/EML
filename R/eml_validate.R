@@ -36,11 +36,11 @@ eml_validate <- function(eml, encoding = "UTF-8", schema = NULL){
   if(isS4(eml)){
     f <- tempfile()
     write_eml(eml, file = f, encoding = encoding)
-    eml <- f
+    doc <- xml2::read_xml(f, encoding = encoding)
+    unlink(f)
+  } else {
+    doc <- xml2::read_xml(eml, encoding = encoding)
   }
-  doc <- xml2::read_xml(eml, encoding = encoding)
-  # tidy up
-  if(exists(f)) unlink(f)
 
   # Use the EML namespace to find the EML version and the schema location
   if(is.null(schema)){
@@ -90,7 +90,7 @@ eml_locate_schema <- function(eml, ns = NA) {
 
 
 
-    schema_file <- strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]][2]
+    schema_file <- basename(strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]][2])
 
     if(!is(eml,'xml_document')) {
         stop("Argument is not an instance of an XML document (xml2::xml_document)")

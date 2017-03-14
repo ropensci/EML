@@ -15,15 +15,15 @@
 #'
 #' @examples
 #' \donttest{
-#' 
+#'
 #' ## Convert an EML abstract to markdown
 #' f <- system.file("examples/hf205.xml", package = "EML")
 #' eml <- read_eml(f)
-#' abstract <- eml_get(eml, "abstract") 
+#' abstract <- eml_get(eml, "abstract")
 #' get_TextType(abstract[[1]], "markdown", "abstract.markdown")
 #' readLines("abstract.markdown")
 #' unlink("abstract.markdown") # tidy up
-#' 
+#'
 #' ## Turn a docx file into EML abstract and preview at HTML
 #' f <- system.file("examples/hf205-abstract.docx", package = "EML")
 #' a <- as(set_TextType(f), "abstract")
@@ -35,13 +35,13 @@ get_TextType <-
            to = "html",
            output = tempfile(class(node), fileext = paste0(".", to)),
            view = TRUE) {
-    
+
     ## eml_get returns a list of nodes always.
-    if(!isS4(node) && length(node) == 1) 
+    if(!isS4(node) && length(node) == 1)
       node <- node[[1]]
-    
+
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
-    x <- XML::xmlChildren(S4Toeml(node))
+    x <- xml2::xml_children(s4_to_xml(node, root=xml_new_root("root")))
 
     if (!requireNamespace("rmarkdown", quietly = TRUE)) {
       stop("rmarkdown package required to convert to Docbook format",
@@ -55,12 +55,12 @@ get_TextType <-
     file.copy(output, file.path(dir, basename(output)), overwrite = TRUE)
     setwd(dir)
     docbook_file <- tempfile(pattern = "docbook", tmpdir = ".", fileext = ".db")
-    
+
     doctype <- XML::Doctype(name = "section",
                        public = c("-//OASIS//DTD DocBook XML V4.2//EN"),
                        system = "http://oasis-open.org/docbook/xml/4.5/docbookx.dtd")
     y <- XML::newXMLNode("article", x)
-    XML::saveXML(XML::xmlDoc(y), 
+    XML::saveXML(XML::xmlDoc(y),
                  docbook_file, doctype = doctype)
     pandoc_convert(
       basename(docbook_file),
