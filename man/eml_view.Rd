@@ -4,10 +4,12 @@
 \alias{eml_view}
 \title{View an EML}
 \usage{
-eml_view(eml_path)
+eml_view(eml_path, ...)
 }
 \arguments{
 \item{eml_path}{Path to the EML one wants to view}
+
+\item{...}{additional arguments to \code{\link{read_xml}}}
 }
 \value{
 Nothing, the EML is viewed in the Viewer.

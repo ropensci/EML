@@ -55,13 +55,6 @@ eml_validate <- function(eml, encoding = "UTF-8", schema = NULL){
   )
 
 result
-
-#  if (result$status != 0) {
-#    lapply(result$errors, message_validation_error)
-#    return(FALSE)
-#  } else {
-#    return(TRUE)
-#  }
 }
 
 #' eml_locate_schema
@@ -111,15 +104,4 @@ eml_locate_schema <- function(eml, ns = NA) {
         stop(paste("No schema found for namespace: ", ns))
     }
     return(schema)
-}
-
-#' message_validation_error
-#'
-#' Create a useful message() for an XML validation error.
-#'
-#' @param error The validation error (XML::XMLError)
-#'
-#' @return Nothing.
-message_validation_error <- function(error) {
-  message(paste0(error$line, ".", error$col, ": ", error$msg))
 }

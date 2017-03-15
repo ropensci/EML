@@ -82,8 +82,6 @@ parse_xml <- function(child, children, cls){
     listof(children, child, i)
   } else if (cls == "character") {
      xml_text(children[[i]])
-  } else if (cls == "xml_attribute"){
-      slot(slot(s4, s), child) <- new("xml_attribute" , attrs[[child]])
   } else {
      xml_to_s4(children[[i]])
   }

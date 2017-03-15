@@ -13,3 +13,4 @@ vignettes/*.html
 inst/create-package
 ^cran-comments\.md$
 docs/
+^CONTRIBUTING\.md$

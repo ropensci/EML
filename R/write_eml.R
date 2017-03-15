@@ -5,13 +5,13 @@
 #' @param file file name to write XML.
 #' @param namespaces named character vector of additional XML namespaces to use.
 #' @param ns root namespace abbreviation
-#' @param ... additional arguments to \code{\link{saveXML}}
+#' @param ... additional arguments to \code{\link{write_xml}}
 #' @return If file is not specified, the result is a character string containing
 #'    the resulting XML content. Otherwise return silently.
 #' @export
 #' @import methods xml2
 #' @importFrom xml2 write_xml xml_set_namespace
-#' @importFrom uuid UUIDgenerate()
+#' @importFrom uuid UUIDgenerate
 #' @examples
 #' f <- system.file("examples", "example-eml-valid.xml", package = "EML")
 #' eml <- read_eml(f)

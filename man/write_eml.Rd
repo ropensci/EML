@@ -15,7 +15,7 @@ write_eml(eml, file, namespaces = NULL, ns = "eml", ...)
 
 \item{ns}{root namespace abbreviation}
 
-\item{...}{additional arguments to \code{\link{saveXML}}}
+\item{...}{additional arguments to \code{\link{write_xml}}}
 }
 \value{
 If file is not specified, the result is a character string containing

@@ -10,6 +10,7 @@
 #' @param output name of the desired output file
 #' @param view if HTML, do we want to open result in browser?
 #' @importFrom utils browseURL
+#' @importFrom xml2 xml_dtd xml_add_child xml_new_root write_xml xml_children
 #' @return creates a file requested.
 #' @export
 #'
@@ -41,7 +42,7 @@ get_TextType <-
       node <- node[[1]]
 
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
-    x <- xml2::xml_children(s4_to_xml(node, root=xml_new_root("root")))
+    x <- xml2::xml_children(s4_to_xml(node, root = xml2::xml_new_root("root")))
 
     if (!requireNamespace("rmarkdown", quietly = TRUE)) {
       stop("rmarkdown package required to convert to Docbook format",
@@ -56,12 +57,12 @@ get_TextType <-
     setwd(dir)
     docbook_file <- tempfile(pattern = "docbook", tmpdir = ".", fileext = ".db")
 
-    doctype <- XML::Doctype(name = "section",
-                       public = c("-//OASIS//DTD DocBook XML V4.2//EN"),
-                       system = "http://oasis-open.org/docbook/xml/4.5/docbookx.dtd")
-    y <- XML::newXMLNode("article", x)
-    XML::saveXML(XML::xmlDoc(y),
-                 docbook_file, doctype = doctype)
+    doctype <-
+      xml2::xml_new_root(xml2::xml_dtd("section",
+                       "-//OASIS//DTD DocBook XML V4.2//EN",
+                       "http://oasis-open.org/docbook/xml/4.5/docbookx.dtd"))
+    xml2::xml_add_child(doctype, "article")
+    xml2::write_xml(doctype, docbook_file)
     pandoc_convert(
       basename(docbook_file),
       to = to,

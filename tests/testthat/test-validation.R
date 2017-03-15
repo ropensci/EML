@@ -64,8 +64,8 @@ testthat::test_that("We return FALSE and messages when validating invalid docume
 testthat::test_that("We can handle validation against sub-schema alone (e.g. against eml-access.xsd)",{
   f <- system.file("xsd/test/eml-access.xml", package = "EML")
   v <- eml_validate(f)
-  testthat::expect_false(v)
-  testthat::expect_length(attr(v, "errors"), 1)
+  testthat::expect_true(v)
+  testthat::expect_length(attr(v, "errors"), 0)
 
 })
 
