@@ -50,9 +50,10 @@ write_eml <- function(eml,
   ## setting root element ns doesn't appear to do anything:
   #xml2::xml_set_namespace(tmp, ns, paste0(ns, "://ecoinformatics.org/", ns, "-2.1.1"))
   ## so we set it manually by renaming the node:
-  root_name <- xml_name(root)
-  xml_name(root) <- paste(ns, root_name, sep=":")
-
+  if(!is_blank(ns)){
+    root_name <- xml_name(root)
+    xml_name(root) <- paste(ns, root_name, sep=":")
+  }
 
   ## Now we write out to file
   xml2::write_xml(root, file, ...)
