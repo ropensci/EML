@@ -26,8 +26,9 @@ s4_to_xml <- function(obj, root = NULL, ns = eml_namespaces){
   fields <- setdiff(slotNames(obj), excluded_slots)
 
   if(is.null(root)){
-
-    names(ns) <- paste("xmlns", names(ns), sep=":")
+    if(length(ns) > 0){
+      names(ns) <- paste("xmlns", names(ns), sep=":")
+    }
     root <- do.call(xml_new_root, c(.value = node_name, as.list(ns)))
     xml <- root
   } else {
