@@ -207,7 +207,7 @@ testthat::test_that("We return TRUE when validating a valid just created eml obj
   methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
   methods <- set_methods(methods_file)
 
-  R_person <- as.person("MaÃ«l Ellison <fakeaddress@email.com> [cre]")
+  R_person <- as.person("Maël Ellison <fakeaddress@email.com> [cre]")
   aaron <-as(R_person, "creator")
 
   others <- c(as.person("Benjamin Baiser [ctb]"), as.person("Jennifer Sirota [ctb]"))
