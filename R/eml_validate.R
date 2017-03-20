@@ -35,9 +35,11 @@ eml_validate <- function(eml, encoding = "UTF-8", schema = NULL){
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
     f <- tempfile()
+
+    ## FIXME On Windows, we need to actually ignore encoding when writing out file in order to get valid results. Crazy.
     if(Sys.info()['sysname'] == "Windows"){
       write_eml(eml, file = f)
-    }else{
+    } else {
       write_eml(eml, file = f, encoding = encoding)
     }
 
