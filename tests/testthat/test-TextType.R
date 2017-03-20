@@ -11,8 +11,8 @@ testthat::test_that("we can create TextType from a simple character string", {
 ## Using an external markdown file
 testthat::test_that("we can create TextType using an external markdown file", {
   skip_on_cran()
-  skip_on_appveyor()
-  skip_on_os("windows")
+#  skip_on_appveyor()
+#  skip_on_os("windows")
 
   f <- system.file("examples/hf205-abstract.md", package = "EML")
   a <- set_TextType(f)
