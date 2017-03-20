@@ -14,3 +14,4 @@ inst/create-package
 ^cran-comments\.md$
 docs/
 ^CONTRIBUTING\.md$
+^EML_.*\.tar.gz$
