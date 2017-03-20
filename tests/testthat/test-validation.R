@@ -74,6 +74,12 @@ testthat::test_that("We return TRUE when validating a valid just created eml obj
   ex <- system.file("examples", "create-full-eml.R", package = "EML")
   source(ex)
 
+
+  v <- eml_validate(eml, encoding = "latin1")
+  testthat::expect_true(v)
+  testthat::expect_message(v, NA)
+  testthat::expect_length(attr(v, "errors"), 0)
+
   v <- eml_validate(eml)
   testthat::expect_true(v)
   testthat::expect_message(v, NA)
