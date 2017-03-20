@@ -22,8 +22,8 @@ testthat::test_that("we can create TextType using an external markdown file", {
 
 testthat::test_that("we can create TextType in a .docx MS Word file.", {
   skip_on_cran()
-  skip_on_appveyor()
-  skip_on_os("windows")
+  #skip_on_appveyor()
+  #skip_on_os("windows")
 
   f <- system.file("examples/hf205-abstract.docx", package = "EML")
   a <- set_TextType(f)
@@ -35,8 +35,8 @@ testthat::test_that(
   "Documents can have richer formatting.  Documents with title headings use `section` instead of `para` notation",
   {
     skip_on_cran()
-    skip_on_appveyor()
-    skip_on_os("windows")
+   # skip_on_appveyor()
+   # skip_on_os("windows")
 
 
     f <- system.file("examples/hf205-methods.docx", package = "EML")
