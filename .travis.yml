@@ -10,6 +10,7 @@ sudo: required
 
 r_github_packages:
 - jimhester/covr
+- hadley/testthat
 
 after_success:
 - Rscript -e 'library(covr); codecov()'

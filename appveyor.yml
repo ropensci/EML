@@ -14,6 +14,7 @@ install:
 
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh install_github hadley/testthat
 
 test_script:
   - travis-tool.sh run_tests
@@ -40,3 +41,16 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+cache:
+  - C:\RLibrary
+  - C:\Program Files (x86)\Pandoc\
+
+# Adapt as necessary starting from here
+before_test:
+  - ps: >-
+      if (-Not (Test-Path "C:\Program Files (x86)\Pandoc\")) {
+        cinst pandoc
+      }
+  - ps: $env:Path += ";C:\Program Files (x86)\Pandoc\"
+  - pandoc -v

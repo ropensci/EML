@@ -37,6 +37,10 @@ set_attributes <-
   function(attributes,
            factors = NULL,
            col_classes = NULL) {
+    ## convert factors to data.frame because it could be a tibble
+    ## or tbl_df
+    factors <- as.data.frame(factors)
+
     ## all as characters please (no stringsAsFactors!)
     attributes[] <- lapply(attributes, as.character)
     factors[]  <- lapply(factors, as.character)
