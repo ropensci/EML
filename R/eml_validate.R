@@ -35,7 +35,7 @@ eml_validate <- function(eml, encoding = "UTF-8", schema = NULL){
   # validation is based on the xml format not the S4 objects
   if(isS4(eml)){
     f <- tempfile()
-    write_eml(eml, file = f)
+    write_eml(eml, file = f, encoding = encoding)
     doc <- xml2::read_xml(f, encoding = encoding)
     unlink(f)
   } else {
