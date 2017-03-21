@@ -67,7 +67,12 @@ prune_empty <- function(xml){
   empty <- "//*[not(@*)][not(*)][not(normalize-space())]"  ##
   while(after < before){
     before <- length(xml_name(xml_find_all(xml, "//*") ))
-    xml_remove(xml_find_all(xml, empty))
+
+    ## Avoid removing document root, which results in a segfault
+    total <- length(xml_find_all(xml, "//*"))
+    if(total > 1){
+      xml_remove(xml_find_all(xml, empty))
+    }
     after <- length(xml_name(xml_find_all(xml, "//*") ))
   }
   xml

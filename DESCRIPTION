@@ -31,7 +31,7 @@ Suggests:
     covr
 VignetteBuilder: knitr
 Encoding: UTF-8
-Collate:
+Collate: 
     'classes.R'
     'classes-stmml.R'
     'coercions.R'
@@ -54,6 +54,7 @@ Collate:
     'set_methods.R'
     'set_physical.R'
     'set_unitList.R'
+    'show_methods.R'
     'write_eml.R'
     'xml_to_s4.R'
     'zzz.R'
