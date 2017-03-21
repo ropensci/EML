@@ -1,7 +1,7 @@
 Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
-Version: 1.0.2.1
+Version: 1.0.1.2
 Authors@R: c(
     person("Carl", "Boettiger", role = c("aut", "cre"),
            email = "cboettig@gmail.com"),
@@ -27,7 +27,8 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    listviewer
+    listviewer,
+    covr
 VignetteBuilder: knitr
 Encoding: UTF-8
 Collate:
