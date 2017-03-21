@@ -70,7 +70,7 @@ testthat::test_that("We can handle validation against sub-schema alone (e.g. aga
 })
 
 
-testthat::test_that("We return TRUE when validating a valid just created eml object", {
+testthat::test_that("We return TRUE when validating a valid just created eml object with latin1 encoding", {
   ex <- system.file("examples", "create-full-eml.R", package = "EML")
   source(ex)
 
@@ -80,9 +80,18 @@ testthat::test_that("We return TRUE when validating a valid just created eml obj
   testthat::expect_message(v, NA)
   testthat::expect_length(attr(v, "errors"), 0)
 
+
+})
+
+
+testthat::test_that("We return TRUE when validating a valid just created eml object", {
+  ex <- system.file("examples", "create-full-eml.R", package = "EML")
+  source(ex)
+
   v <- eml_validate(eml)
   testthat::expect_true(v)
   testthat::expect_message(v, NA)
   testthat::expect_length(attr(v, "errors"), 0)
 
 })
+
