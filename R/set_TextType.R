@@ -68,7 +68,7 @@ set_para <-  function(docbook) {
 
 
 to_docbook <- function(file = NULL) {
-  if (!tools::file_ext(file) %in% c("xml", "dbk")) {
+  if (!tools::file_ext(file) %in% c("xml", "dbk", "db")) {
     ## Not xml yet, so use pandoc to generate docbook
 
     if (!requireNamespace("rmarkdown", quietly = TRUE)) {
