@@ -503,8 +503,8 @@ check_factors <- function(factors){
          call. = FALSE)
   }
 
-  lines_no <- unlist(lapply(unique(factors$attributeName), count_lines, factors = factors))
-  levels_no <- unlist(lapply(unique(factors$attributeName), count_levels, factors = factors))
+  lines_no <- vapply(unique(factors$attributeName), count_lines, factors = factors, 1)
+  levels_no <- vapply(unique(factors$attributeName), count_levels, factors = factors, 1)
 
   forcheck <- data.frame(lines_no = lines_no,
                          levels_no = levels_no,
