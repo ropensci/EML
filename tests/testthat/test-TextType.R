@@ -56,18 +56,18 @@ testthat::test_that(
   "We can parse a richer abstract into markdown",
   {
     skip_on_cran()
-    skip_on_appveyor()
-    skip_on_os("windows")
-    
-    
+    #skip_on_appveyor()
+    #skip_on_os("windows")
+
+
  f <- system.file("examples/hf205.xml", package = "EML")
  eml <- read_eml(f)
- abstract <- eml_get(eml, "abstract") 
+ abstract <- eml_get(eml, "abstract")
  get_TextType(abstract[[1]], "markdown", "abstract.markdown")
  a <- readLines("abstract.markdown")
- 
+
  testthat::expect_is(a, "character")
- 
+
  unlink("abstract.markdown") # tidy up
 
   })
