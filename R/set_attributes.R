@@ -50,7 +50,10 @@ set_attributes <-
     attributes <-
       check_and_complete_attributes(attributes, col_classes)
 
-
+   # check factors
+    if(nrow(factors) != 0){
+      check_factors(factors)
+    }
 
     ## Add NA columns if necessary FIXME some of these can be missing if their class isn't represented, but otherwise must be present
     for (x in c(
@@ -477,4 +480,39 @@ check_and_complete_attributes <- function(attributes, col_classes) {
   }
   return(attributes)
 
+}
+
+# number of codes by attributeName in factors
+count_levels <- function(attributeName, factors){
+  factors <- factors[factors$attributeName == attributeName,]
+  length(unique(factors$code))
+}
+
+# number of lines by attributeName in factors
+count_lines <- function(attributeName, factors){
+  factors <- factors[factors$attributeName == attributeName,]
+  nrow(factors)
+}
+
+# check the names of factors
+# check that for each attributeName codes are unique
+check_factors <- function(factors){
+
+  if(!all(c("attributeName", "code", "definition") %in% names(factors))){
+    stop("The factors data.frame should have variables called attributeName, code and definition.",
+         call. = FALSE)
+  }
+
+  lines_no <- vapply(unique(factors$attributeName), count_lines, factors = factors, 1)
+  levels_no <- vapply(unique(factors$attributeName), count_levels, factors = factors, 1)
+
+  forcheck <- data.frame(lines_no = lines_no,
+                         levels_no = levels_no,
+                         attributeName = unique(factors$attributeName))
+  notequal <- forcheck[forcheck$lines_no != forcheck$levels_no, ]
+  if(nrow(notequal) != 0){
+    stop(paste("There are attributeName(s) in factors with duplicate codes:",
+               notequal$attributeName),
+         call. = FALSE)
+  }
 }
