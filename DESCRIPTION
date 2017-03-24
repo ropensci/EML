@@ -1,7 +1,7 @@
 Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
-Version: 1.0.1.1
+Version: 1.0.1.2
 Authors@R: c(
     person("Carl", "Boettiger", role = c("aut", "cre"),
            email = "cboettig@gmail.com"),
@@ -17,20 +17,21 @@ Description: Parse and serialize Ecological Metadata Language ('EML', see
     more information) files into S4 objects.
 License: FreeBSD
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Imports:
-    XML,
+    xml2 (>= 1.1.1),
     methods,
-    stringr,
-    tools
+    tools,
+    uuid
 Suggests:
     testthat,
     knitr,
     rmarkdown,
-    listviewer
+    listviewer,
+    covr
 VignetteBuilder: knitr
 Encoding: UTF-8
-Collate:
+Collate: 
     'classes.R'
     'classes-stmml.R'
     'coercions.R'
@@ -46,12 +47,14 @@ Collate:
     'literature_coercions.R'
     'methods.R'
     'read_eml.R'
+    's4_to_xml.R'
     'set_TextType.R'
     'set_attributes.R'
     'set_coverage.R'
     'set_methods.R'
     'set_physical.R'
     'set_unitList.R'
+    'show_methods.R'
     'write_eml.R'
-    'xml-s4.R'
+    'xml_to_s4.R'
     'zzz.R'

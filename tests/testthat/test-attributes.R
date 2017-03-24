@@ -506,3 +506,111 @@ testthat::test_that("The set_attributes function returns useful warnings", {
   testthat::expect_warning(set_attributes(attributes),
                            "The required formatString")
 })
+
+
+testthat::test_that("The set_attributes function stops if missing required fields in factors",{
+  # attributesList
+  attributes <-
+    data.frame(
+      attributeName = c(
+        "animal",
+        "age",
+        "size"),
+      attributeDefinition = c(
+        "animal species",
+        "life stage",
+        "body length"),
+      formatString = c(
+        NA,
+        NA,
+        NA),
+      definition = c(
+        "animal species",
+        "life stage",
+        "body length"),
+      unit = c(
+        NA,
+        NA,
+        "meter"),
+      numberType = c(
+        NA,
+        NA,
+        "real"),
+      stringsAsFactors = FALSE
+    )
+
+  # two of the attributes are factors
+  animal.codes <- c(A = "monstercat",
+                    B = "monsterdog")
+  age.codes <- c(A = "juvenile",
+                 B = "adult")
+  factors <- rbind(
+    data.frame(
+      code = names(animal.codes),
+      definition = unname(animal.codes)
+    ),
+    data.frame(
+      code = names(age.codes),
+      definition = unname(age.codes)
+    ))
+
+  testthat::expect_error(set_attributes(attributes,
+                                        factors,
+                                        col_classes = c("factor", "factor", "numeric")),
+                         "The factors data.frame should have")
+
+    })
+
+testthat::test_that("The set_attributes function stops if duplicate codes in factors",{
+  # attributesList
+  attributes <-
+    data.frame(
+      attributeName = c(
+        "animal",
+        "age",
+        "size"),
+      attributeDefinition = c(
+        "animal species",
+        "life stage",
+        "body length"),
+      formatString = c(
+        NA,
+        NA,
+        NA),
+      definition = c(
+        "animal species",
+        "life stage",
+        "body length"),
+      unit = c(
+        NA,
+        NA,
+        "meter"),
+      numberType = c(
+        NA,
+        NA,
+        "real"),
+      stringsAsFactors = FALSE
+    )
+
+  # two of the attributes are factors
+  animal.codes <- c(A = "monstercat",
+                    B = "monsterdog")
+  age.codes <- c(A = "juvenile",
+                 B = "adult")
+  factors <- rbind(
+    data.frame(
+      attributeName = "animal",
+      code = names(animal.codes),
+      definition = unname(animal.codes)
+    ),
+    data.frame(
+      attributeName = "age",
+      code = c("A", "A"),
+      definition = unname(age.codes)
+    ))
+
+  testthat::expect_error(set_attributes(attributes,
+                                        factors,
+                                        col_classes = c("factor", "factor", "numeric")),
+                         regex = "There are attributeName")
+})

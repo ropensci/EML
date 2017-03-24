@@ -1,7 +1,6 @@
 testthat::context("xsd/test/eml.xml")
 
 testthat::test_that("We can parse the sample EML file correctly", {
-  library("XML")
 
   f <- system.file("xsd/test", "eml.xml", package = "EML")
   eml <- read_eml(f)

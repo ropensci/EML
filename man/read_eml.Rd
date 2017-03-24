@@ -9,7 +9,7 @@ read_eml(file, ...)
 \arguments{
 \item{file}{path to an EML file}
 
-\item{...}{additional arguments to \code{\link{xmlParse}}}
+\item{...}{additional arguments to \code{\link{read_xml}}}
 }
 \value{
 an eml object (S4 object)
@@ -21,4 +21,3 @@ read_eml
 f <- system.file("xsd/test", "eml.xml", package = "EML")
 eml <- read_eml(f)
 }
-

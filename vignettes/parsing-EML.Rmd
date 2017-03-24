@@ -47,7 +47,9 @@ eml_get(coverage, "temporalCoverage")
 Any EML element can be extracted in this way. Let's try an example metadata file for a `dataset` that documents 11 seperate `dataTables`: 
 
 ```{r}
-eml_HARV <- read_eml("http://harvardforest.fas.harvard.edu/data/eml/hf001.xml")
+hf001 <- system.file("examples/hf001.xml", package="EML") 
+
+eml_HARV <- read_eml(hf001)
 ```
 
 How many `dataTable` entities are there in this dataset?

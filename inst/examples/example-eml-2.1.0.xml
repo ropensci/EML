@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eml:eml packageId="knb-lter-arc.10531.6"
   system="https://pasta.lternet.edu"
+  xmlns:eml="eml://ecoinformatics.org/eml-2.1.0"
   xmlns:cit="eml://ecoinformatics.org/literature-2.1.0"
   xmlns:doc="eml://ecoinformatics.org/documentation-2.1.0"
   xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0"
-  xmlns:eml="eml://ecoinformatics.org/eml-2.1.0"
   xmlns:prot="eml://ecoinformatics.org/protocol-2.1.0"
   xmlns:res="eml://ecoinformatics.org/resource-2.1.0"
   xmlns:stmml="http://www.xml-cml.org/schema/stmml"
@@ -171,10 +171,10 @@
             <literalLayout>
 For water sampling protocols see the Arctic LTER Land-Water group protocol book accessible from the Land-Water mainpage on the Arctic LTER web page or at http://www-personal.umich.edu/~gwk and clicking on the protocol link at the bottom of the page.  Specific methodologies are described in the protocol book listed above and a general description is provided below.
 
-General analyses:  In general water samples from soils, streams, and lakes are filtered in the field and kept cold and dark or preserved until analysis.  Dissolved inorganic nutrients (NH4 and PO4) were analyzed by wet chemistry techniques at Toolik Field Station usually within 24 hours of sampling.  Dissolved gases CO2 and CH4 were determined using a syringe equilibration method and analyzed at Toolik Field Station on a gas chromatograph.  DOC, TDN, TDP, particulate C, N, and P, and dissolved ions were brought back to the University of Michigan for analysis.  DOC is analyzed on a Shimadzu TOC-5000 or a TOC-V.  Particulate Carbon and Nitrogen on a Perkin Elmer CHN 2400, TDN is analyzed on a Shimadzu TOC-5000 or TOC-V or using a persulfate digestion.  TDP and NO3 are analyzed on an OI Alpkem autoanalyzer, ions on a Dionex ion chromatograph, and cations on an inductively coupled plasma optical emission spectrometer (ICP-OES Perkin Elmer Optima 4300 or 8000).  Alkalinity samples were run on a Radiometer autotitrator.    
+General analyses:  In general water samples from soils, streams, and lakes are filtered in the field and kept cold and dark or preserved until analysis.  Dissolved inorganic nutrients (NH4 and PO4) were analyzed by wet chemistry techniques at Toolik Field Station usually within 24 hours of sampling.  Dissolved gases CO2 and CH4 were determined using a syringe equilibration method and analyzed at Toolik Field Station on a gas chromatograph.  DOC, TDN, TDP, particulate C, N, and P, and dissolved ions were brought back to the University of Michigan for analysis.  DOC is analyzed on a Shimadzu TOC-5000 or a TOC-V.  Particulate Carbon and Nitrogen on a Perkin Elmer CHN 2400, TDN is analyzed on a Shimadzu TOC-5000 or TOC-V or using a persulfate digestion.  TDP and NO3 are analyzed on an OI Alpkem autoanalyzer, ions on a Dionex ion chromatograph, and cations on an inductively coupled plasma optical emission spectrometer (ICP-OES Perkin Elmer Optima 4300 or 8000).  Alkalinity samples were run on a Radiometer autotitrator.
 
 For all analyses, sample values that were less than zero were assigned a value of zero.  See specific protocols for limits of detection.  Missing values (not sampled or analyzed) are represented by a period " . " in the dataset.
- 
+
 </literalLayout>
           </para>
         </description>

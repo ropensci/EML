@@ -153,10 +153,7 @@ set_unitList <-
     out@unit <- ListOfunit
 
     if (as_metadata) {
-      xml_meta <- S4Toeml(out)
-      setXMLNamespace(xml_meta,
-                      c(stmml =  "http://www.xml-cml.org/schema/stmml_1.1"))
-      new("additionalMetadata", metadata = new("metadata", list(xml_meta)))
+      as(out, "additionalMetadata")
     } else{
       out
     }
@@ -164,9 +161,19 @@ set_unitList <-
 
 
 
-setAs("unitList", "additionalMetadata", function(from) {
-  xml_meta <- S4Toeml(from)
-  setXMLNamespace(xml_meta,
-                  c(stmml =  "http://www.xml-cml.org/schema/stmml_1.1"))
-  new("additionalMetadata", metadata = new("metadata", list(xml_meta)))
+
+setOldClass("xml_nodeset")
+setOldClass("xml_document")
+## This is a terrible way to do coercion
+setAs("xml_document", "xml_nodeset", function(from){
+  xml_children(xml_root(xml_add_parent(from, "root")))
 })
+setAs("unitList", "additionalMetadata", function(from) {
+  xml_meta <- s4_to_xml(from)
+  xml_set_namespace(xml_meta,
+                  c(stmml =  "http://www.xml-cml.org/schema/stmml_1.1"))
+  new("additionalMetadata", metadata = new("metadata", list(as(xml_meta, "xml_nodeset"))))
+})
+
+
+

@@ -322,7 +322,7 @@ methods <- set_methods(methods_file)
 Individuals and organizations appear in many capacities in an EML document.  Meanwhile, R already has a native object class, `person` for describing individuals, which it uses in citations and package descriptions, among other things. We can use native R function `person()` to create an R `person` object.  Often it is more convenient to use R's coercion function, `as.person()`, to turn a string with standardized notation into a `person` class (Though this is not always reliable, for instance, in surnames containing whitespace).  However it is constructed, a `person` class can then be coerced into the appropriate EML object like so:
 
 ```{r}
-R_person <- as.person("Aaron Ellison <fakeaddress@email.com>")
+R_person <- as.person("Aaron Ellison <fakeaddress@email.com> [cre]")
 aaron <-as(R_person, "creator")
 ```
 
@@ -466,7 +466,11 @@ With our `eml` object fully constructed in R, we can now check that it is valid,
 
 
 ```{r}
-eml_validate(eml)
+write_eml(eml, "eml.xml")
+```
+
+```{r}
+eml_validate("eml.xml")
 ```
 
 

@@ -11,8 +11,8 @@ testthat::test_that("we can create TextType from a simple character string", {
 ## Using an external markdown file
 testthat::test_that("we can create TextType using an external markdown file", {
   skip_on_cran()
-  skip_on_appveyor()
-  skip_on_os("windows")
+#  skip_on_appveyor()
+#  skip_on_os("windows")
 
   f <- system.file("examples/hf205-abstract.md", package = "EML")
   a <- set_TextType(f)
@@ -22,8 +22,8 @@ testthat::test_that("we can create TextType using an external markdown file", {
 
 testthat::test_that("we can create TextType in a .docx MS Word file.", {
   skip_on_cran()
-  skip_on_appveyor()
-  skip_on_os("windows")
+  #skip_on_appveyor()
+  #skip_on_os("windows")
 
   f <- system.file("examples/hf205-abstract.docx", package = "EML")
   a <- set_TextType(f)
@@ -35,8 +35,8 @@ testthat::test_that(
   "Documents can have richer formatting.  Documents with title headings use `section` instead of `para` notation",
   {
     skip_on_cran()
-    skip_on_appveyor()
-    skip_on_os("windows")
+   # skip_on_appveyor()
+   # skip_on_os("windows")
 
 
     f <- system.file("examples/hf205-methods.docx", package = "EML")
@@ -56,18 +56,18 @@ testthat::test_that(
   "We can parse a richer abstract into markdown",
   {
     skip_on_cran()
-    skip_on_appveyor()
-    skip_on_os("windows")
-    
-    
+    #skip_on_appveyor()
+    #skip_on_os("windows")
+
+
  f <- system.file("examples/hf205.xml", package = "EML")
  eml <- read_eml(f)
- abstract <- eml_get(eml, "abstract") 
+ abstract <- eml_get(eml, "abstract")
  get_TextType(abstract[[1]], "markdown", "abstract.markdown")
  a <- readLines("abstract.markdown")
- 
+
  testthat::expect_is(a, "character")
- 
+
  unlink("abstract.markdown") # tidy up
 
   })

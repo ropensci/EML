@@ -3,7 +3,6 @@
 #' For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
 #' @param text a plain text character string which will be used directly as the content of the node if no file is given
 #' @param file path to a file providing formatted input text, see details.
-#' @import XML
 #' @return a TextType object that can be coerced into any element inheriting from TextType, see examples
 #' @importFrom tools file_ext
 #' @details If the `rmarkdown` package is installed, then the input file can
@@ -53,19 +52,17 @@ set_TextType <- function(file = NULL, text = NULL) {
 
 
 set_section <- function(docbook) {
-  sections <-
-    XML::xpathApply(docbook, "/article/sect1", XML::xmlChildren)
-  s <- lapply(sections, function(x)
-    new("section", as(x, "list")))
+  sections <- lapply(xml2::xml_find_all(docbook, "/article/sect1"), xml2::xml_children)
+  s <- lapply(sections, function(x) new("section", list(x)))
   as(s, "ListOfsection")
 }
 
 
 
 set_para <-  function(docbook) {
-  para <- XML::xpathApply(docbook, "/article/para", XML::xmlChildren)
+  para <- xml2::xml_find_all(docbook, "/article/para")
   s <- lapply(para, function(x)
-    new("para", as(x, "list")))
+    new("para", list(x)))
   as(s, "ListOfpara")
 }
 
@@ -92,12 +89,12 @@ to_docbook <- function(file = NULL) {
       output = normalizePath(docbook_file, winslash = "/", mustWork = FALSE),
       options = "-s"
     )
-    docbook <- XML::xmlParse(docbook_file)
+    docbook <- xml2::read_xml(docbook_file)
     setwd(wd)
 
   } else {
     ## File is already xml/docbook, so no need for pandoc
-    docbook  <- XML::xmlParse(file)
+    docbook  <- xml2::read_xml(file)
   }
   docbook
 

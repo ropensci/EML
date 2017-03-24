@@ -4,18 +4,18 @@
 \alias{write_eml}
 \title{write_eml}
 \usage{
-write_eml(eml, file = NULL, namespaces = NULL, ns = "eml", ...)
+write_eml(eml, file, namespaces = NULL, ns = "eml", ...)
 }
 \arguments{
 \item{eml}{an eml class object}
 
-\item{file}{file name to write XML. If NULL, will return XML as character string.}
+\item{file}{file name to write XML.}
 
 \item{namespaces}{named character vector of additional XML namespaces to use.}
 
 \item{ns}{root namespace abbreviation}
 
-\item{...}{additional arguments to \code{\link{saveXML}}}
+\item{...}{additional arguments to \code{\link{write_xml}}}
 }
 \value{
 If file is not specified, the result is a character string containing
@@ -25,8 +25,8 @@ If file is not specified, the result is a character string containing
 write_eml
 }
 \examples{
-f <- system.file("xsd/test", "eml.xml", package = "EML")
+f <- system.file("examples", "example-eml-valid.xml", package = "EML")
 eml <- read_eml(f)
-write_eml(eml)
+write_eml(eml, "test.xml")
+unlink("test.xml") # clean up
 }
-

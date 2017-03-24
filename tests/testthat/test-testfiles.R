@@ -1,69 +1,52 @@
 testthat::context("We can parse & serialize test files")
 
-library(XML)
+library(xml2)
+xml_tests <- list.files("inst/xsd/test/", "^eml-.*\\.xml")
+## eml-unitDictionary is not EML but STMML; won't validate against EML schema by itself.
+xml_tests <- xml_tests[!xml_tests %in% c("eml-unitDictionary.xml")]
 
 
-xml_tests <- list.files("inst/xsd/test/", "eml-.*\\.xml")
-## eml-unitDictionary is not EML but STMML; won't validate against EML schema.  (could add it into additionalMetadata though)
-xml_tests <-
-  xml_tests[-which(xml_tests == "eml-unitDictionary.xml")]
 
-
-out <- lapply(xml_tests, function(xml) {
+all_test_examples<- function(xml) {
   testthat::test_that(xml, {
-    f <- system.file(paste0("xsd/test/", xml), package = "EML")
-    node <- xmlRoot(xmlParse(f))
-    ## This can cause trouble if not namespaced, and is not required
-    XML::removeAttributes(node, .attrs = "xsi:schemaLocation")
-    ## Test: can we parse into S4?
-    s4 <- as(node, xmlName(node))
-    ## Test: can we transform back into XML?
-    element <- as(s4, "XMLInternalNode")
-    ## Test: is our XML still schema-valid?
-    ## preserve the namespace of the input
-    ns <- xmlNamespaces(node)
-    xmlNamespaces(element) <- ns
-    ids <- sapply(ns, `[[`, "id")
-    tmp <- which(ids  == "eml")
-    if (length(tmp) > 0) {
-      ns_1 <- ids[[tmp]]
-    } else {
-      ns_1 <- ns[[1]]$id
-    }
-    setXMLNamespace(element, ns_1)
-    saveXML(xmlDoc(element), "test.xml")
 
-    all_elements <- xpathSApply(xmlParse(f), "//*", xmlName)
-    all_elements2 <- xpathSApply(xmlDoc(element), "//*", xmlName)
+    message(paste("testing", xml))
+
+    ## Read EML
+    f <- system.file(paste0("xsd/test/", xml), package = "EML")
+    eml <- read_eml(f)
+    testthat::expect_true(isS4(eml))
+
+    ## Because root element in many test files is not "eml" but some sub-class like "dataset" or "access", we need to be explicit about namespace
+    original <- xml2::read_xml(f)
+    namespaces <- xml_ns(original)
+    schemaLocation <- strsplit(xml_attr(original, "schemaLocation"), "\\s+")[[1]]
+    i <- grep(schemaLocation[1], namespaces)
+    ns <- names(namespaces[i])
+
+    ## Write and Validate EML (handling explicit namespacing)
+    write_eml(eml, "unittest.xml", namespaces = namespaces, ns = ns)
+
+    v <- eml_validate("unittest.xml")
+    testthat::expect_true(v)
+
+    ## Check no elements were lost:
+    original <- xml_name( xml_find_all(read_xml(f), "//*") )
+    test <- xml_name(xml_find_all(xml2::read_xml("unittest.xml"), "//*") )
 
     ## identical number of elements
-    testthat::expect_identical(length(all_elements), length(all_elements2))
-    ## identical modulo order
-    testthat::expect_identical(sort(all_elements), sort(all_elements2))
+    testthat::expect_identical(length(original), length(test))
+    ## elements are identical, modulo ordering
+    testthat::expect_identical(sort(original), sort(test))
     ## strictly identical:
-    if (!(xml == 'eml-physical.xml'))
-      # Skip known error
-      testthat::expect_identical(all_elements, all_elements2)
-
-    ## Validate
-    v <- eml_validate("test.xml")
-    testthat::expect_equal(v$status, 0)
+    if (!(xml == 'eml-physical.xml'))      # Skip known issue, ordering need not be identical(?)
+      testthat::expect_identical(original, test)
 
     ## Clean up
-    unlink("test.xml")
+    unlink("unittest.xml")
+    })
+}
 
-  })
-})
+out <- lapply(xml_tests, all_test_examples)
 
 
-## purrr::compact(lapply(out, `[[`, "error"))
-
-# length differs for: 'eml-i18n.xml', 'eml-literatureInPress.xml',  'eml-literature.xml', 'eml-text.xml'
-# identical ordering differs for: 'eml-physical.xml'
-#
-#  - eml-i18n.xml has "<value> child elements in i18nNonEmptyStringType's. Same problem where mixed character type & child element results in tags being dropped.
-#  - literature: has <abstract> without TextType elements.  Would have been fine if used TextType elements, otherwise treated as character
-#  - eml-text: misses 2 <section> tags that are children of a <section> tag
-
-## Note: we cannot parse text nodes that mix text content and marked up content into slot values.
-## cannot interleave slot values. Thus we treat as literal XML
