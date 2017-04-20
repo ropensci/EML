@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/EML)](http://cran.r-project.org/package=EML) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/EML)](http://cran.r-project.org/web/packages/EML/index.html) [![Github Stars](https://img.shields.io/github/stars/ropensci/EML.svg?style=social&label=Github)](https://github.com/ropensci/EML) [![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
+[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/EML)](http://cran.r-project.org/package=EML) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/EML)](https://CRAN.R-project.org/package=EML) [![Github Stars](https://img.shields.io/github/stars/ropensci/EML.svg?style=social&label=Github)](https://github.com/ropensci/EML) [![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
 
 EML: The Ecological Metadata Language Standard
 ==============================================
@@ -104,13 +104,16 @@ Validation helps ensure that an EML file can be accurately interpreted by any co
 # An EML document with no validation errors
 eml_validate(eml)
 #> [1] TRUE
+#> attr(,"errors")
+#> character(0)
 
 # An EML document with validation errors
 invalid_eml <- system.file("xsd/test/example-eml-invalid.xml", package = "EML")
 
 eml_validate(invalid_eml)
-#> 10.0: Element 'creator': This element is not expected. Expected is one of ( references, alternateIdentifier, shortName, title ).
 #> [1] FALSE
+#> attr(,"errors")
+#> [1] "Element 'creator': This element is not expected. Expected is one of ( references, alternateIdentifier, shortName, title )."
 ```
 
 Write out as EML:
