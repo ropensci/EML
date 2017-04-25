@@ -1,12 +1,15 @@
 ## Corrections
 
-* The package description now includes a link to EML, as requested
+* Migrates from XML dependency to xml2 for improved efficiency (see NEWS)
+* Improves performance in serializing EML to XML
+* Fixes the Warning that emerged on R-devel (now on) R-3.4.0 release
 
 ## Test environments
 
-* local OS X install, R 3.3.2
-* ubuntu 12.04 (on travis-ci), R oldrel, release, devel
-* Windows tests via appveyor (devel and release) 
+* local OS X install, R 3.4.0
+* debian jessie, R 3.4.0, R-devel
+* ubuntu 12.04 R oldrel, release, devel
+* Windows tests via appveyor (devel and release), rhub
 
 ## R CMD check results
 
@@ -23,9 +26,7 @@ the tests could be re-written to download these files on the fly.  This would me
 and would break the ability for users to perform schema validation of their metadata files offline, which could be useful
 but non-essential.
 
-* This is a new release.
-
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+There are no reverse dependencies.
 
