@@ -12,13 +12,14 @@
 #' @examples
 #'
 #' # Read in additional units defined in a EML file
+#' \donttest{
 #' f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
 #' eml <- read_eml(f)
 #' unitList <- get_unitList(eml@@additionalMetadata[[1]]@@metadata)
 #'
 #' ## Read in the definitions of standard units:
 #' get_unitList()
-#'
+#' }
 #'
 get_unitList <-
   function(x = read_eml(system.file("xsd/eml-2.1.1/eml-unitDictionary.xml", package = "EML"))) {

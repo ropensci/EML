@@ -12,14 +12,10 @@
 #' as get_attributeList, which returns data.frames containing the desired metadata.  If such a function exists for the element
 #' requested, that function is called instead. Additional arguments given to `eml_get` will be passed to that function via ...,
 #' for example, compare \code{\link{get_attributes}} to the example shown here.
-#'
-#' @examples
+#' @examples \donttest{
 #' f <- system.file("xsd/test", "eml-datasetWithUnits.xml", package = "EML")
 #' eml <- read_eml(f)
 #' eml_get(eml, "physical")
-#'
-#' ## slower examples
-#' \donttest{
 #' eml_get(eml, "attributeList")
 #'
 #' ## The first argument need not be an "eml" class, it could be a child element; e.g.

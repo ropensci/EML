@@ -26,12 +26,13 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.
 \examples{
 
 # Read in additional units defined in a EML file
+\donttest{
 f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
 eml <- read_eml(f)
 unitList <- get_unitList(eml@additionalMetadata[[1]]@metadata)
 
 ## Read in the definitions of standard units:
 get_unitList()
-
+}
 
 }

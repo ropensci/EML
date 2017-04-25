@@ -36,10 +36,6 @@ as defined by the XSD specification
 eml <- read_eml(f)
 eml_validate(eml)
 
-## Can validate fragments as well, though may need the relevant namespace
-dataset <- new("dataset", title = "incomplete, invalid EML")
-eml_validate(dataset, namespaces = c(ds = "eml://ecoinformatics.org/dataset-2.1.1"), ns = "ds")
-
 }
 
 }
