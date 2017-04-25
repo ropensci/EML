@@ -5244,8 +5244,7 @@ setAs('language', 'xml_node',   function(from)
 setAs('xml_node', 'language',  function(from)
   emlToS4(from))
 
-setMethod(c, signature('eml:language'), function(x, ..., recursive = FALSE)
-  new('ListOflanguage', list(x, ...)))
+
 setAs('operatingSystem', 'xml_node',   function(from)
   S4Toeml(from))
 setAs('xml_node', 'operatingSystem',  function(from)

@@ -42,7 +42,6 @@
 \alias{c,distribution-method}
 \alias{c,editor-method}
 \alias{c,electronicMailAddress-method}
-\alias{c,eml:language-method}
 \alias{c,emphasis-method}
 \alias{c,encodingMethod-method}
 \alias{c,enumeratedDomain-method}
@@ -215,7 +214,6 @@
 \S4method{c}{coverage}(x, ..., recursive = FALSE)
 \S4method{c}{description}(x, ..., recursive = FALSE)
 \S4method{c}{relatedProject}(x, ..., recursive = FALSE)
-\S4method{c}{`eml:language`}(x, ..., recursive = FALSE)
 \S4method{c}{operatingSystem}(x, ..., recursive = FALSE)
 \S4method{c}{machineProcessor}(x, ..., recursive = FALSE)
 \S4method{c}{programmingLanguage}(x, ..., recursive = FALSE)
