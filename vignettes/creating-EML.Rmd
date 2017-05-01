@@ -9,6 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r include=FALSE}
+has_pandoc <- rmarkdown::pandoc_available()
+```
 
 
 ```{r}
@@ -311,9 +314,14 @@ coverage
 Careful documentation of the methods involved in the experimental design, measurement and collection of data are a key part
 of metadata.  Though frequently documented in scientific papers, such method sections may be too brief or incomplete, and may become more readily disconnected from the data file itself.  Such documentation is usually written using word-processing software such as MS Word, LaTeX or markdown.  Users with `pandoc` installed (which ships as part of RStudio) can install the `rmarkdown` package to take advantage of its automatic conversion into the DocBook XML format used by EML.  Here we open a MS Word file with the methods and read this into our methods element using the helper function `set_methods()`.  While not used in this example, note that the `set_methods()` function also includes many optional arguments for documenting additional information about sampling, or relevant citations.
 
-```{r}
+```{r eval=has_pandoc}
 methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
 methods <- set_methods(methods_file)
+```
+
+```{r include=FALSE, eval=!has_pandoc}
+## placeholder if pandoc is not installed
+methods <- new("methods")
 ```
 
 
@@ -427,7 +435,7 @@ see: http://www.lternet.edu/data/netpolicy.html."
 Many of these text fields can instead be read in from an external file that has richer formatting, such as we did with
 the `set_methods()` step.  Any text field containing a slot named `section` can import text data from a MS Word `.docx` file, markdown file, or other file format recognized by [Pandoc](http://pandoc.org) into that element.  For instance, here we import the same paragraph of text shown above for `abstract` from an external file (this time, a markdown-formatted file) instead:
 
-```{r}
+```{r eval=has_pandoc}
 abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")
 abstract <- as(set_TextType(abstract_file), "abstract")
 ```
