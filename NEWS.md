@@ -1,3 +1,7 @@
+# EML 1.0.3
+
+* Avoid vignette build errors on machines that lack pandoc (e.g. Solaris) using conditional checks
+
 # EML 1.0.2
 
 * Migrate dependency from XML to xml2

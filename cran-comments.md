@@ -1,8 +1,6 @@
 ## Corrections
 
-* Migrates from XML dependency to xml2 for improved efficiency (see NEWS)
-* Improves performance in serializing EML to XML
-* Fixes the Warning that emerged on R-devel (now on) R-3.4.0 release
+* Avoid vignette error when testing on platforms that lack access to pandoc
 
 ## Test environments
 

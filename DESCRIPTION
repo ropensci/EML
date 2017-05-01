@@ -1,7 +1,7 @@
 Package: EML
 Type: Package
 Title: Read and Write Ecological Metadata Language Files
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
     person("Carl", "Boettiger", role = c("aut", "cre"),
            email = "cboettig@gmail.com"),
