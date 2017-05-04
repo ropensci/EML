@@ -478,8 +478,28 @@ check_and_complete_attributes <- function(attributes, col_classes) {
       }
     }
   }
-  return(attributes)
 
+  # Check that measurementScale and domain values make valid combinations
+  if ("measurementScale" %in% names(attributes) &&
+      "domain" %in% names(attributes)) {
+    for (i in seq_len(nrow(attributes))) {
+      mscale <- attributes[i,"measurementScale"]
+      domain <- attributes[i,"domain"]
+
+      if (mscale %in% c("nominal", "ordinal") && !(domain %in% c("enumeratedDomain", "textDomain"))) {
+        stop(call. = FALSE,
+             paste0("The attribute in row ", i, " has an invalid combination of measurementScale (", mscale, ") and domain (", domain,"). For a measurementScale of '", mscale, "', domain must be either 'enumeratedDomain' or 'textDomain'."))
+      } else if (mscale %in% c("interval", "ratio") && domain != "numericDomain") {
+        stop(call. = FALSE,
+             paste0("The attribute in row ", i, " has an invalid combination of measurementScale (", mscale, ") and domain (", domain,"). For a measurementScale of '", mscale, "', domain must be 'numericDomain'."))
+      } else if (mscale == "dateTime" && !is.null(domain) && domain != "dateTimeDomain") {
+        stop(call. = FALSE,
+             paste0("The attribute in row ", i, " has an invalid combination of measurementScale (", mscale, ") and domain (", domain,"). For a measurementScale of '", mscale, "', domain must be 'dateTimeDomain'."))
+      }
+    }
+  }
+
+  return(attributes)
 }
 
 # number of codes by attributeName in factors
