@@ -169,7 +169,7 @@ set_temporalCoverage <-
 #' taxon_coverage <- set_taxonomicCoverage(df)
 #'
 #' # Query ITIS using taxize to fill in the full taxonomy given just species
-#' # names
+#  # names
 #' taxon_coverage <- set_taxonomicCoverage(
 #'   c("Macrocystis pyrifera", "Homo sapiens"),
 #'   expand = TRUE)

@@ -36,7 +36,7 @@ taxon_coverage <-
                             ORDER="Laminariales",
                             FAMILY="Lessoniaceae",
                             GENUS="Macrocystis",
-                            genusSpecies="Macrocystis pyrifera"))
+                            SPECIES="Macrocystis pyrifera"))
 
 df <- data.frame(KINGDOM="Plantae",
                  PHYLUM="Phaeophyta",
@@ -48,7 +48,6 @@ df <- data.frame(KINGDOM="Plantae",
 taxon_coverage <- set_taxonomicCoverage(df)
 
 # Query ITIS using taxize to fill in the full taxonomy given just species
-# names
 taxon_coverage <- set_taxonomicCoverage(
   c("Macrocystis pyrifera", "Homo sapiens"),
   expand = TRUE)
