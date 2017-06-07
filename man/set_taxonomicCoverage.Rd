@@ -4,7 +4,7 @@
 \alias{set_taxonomicCoverage}
 \title{set_taxonomicCoverage}
 \usage{
-set_taxonomicCoverage(sci_names)
+set_taxonomicCoverage(sci_names, expand = FALSE)
 }
 \arguments{
 \item{sci_names}{string (space seperated) or list or data frame of scientific names for species covered.}
@@ -46,5 +46,11 @@ df <- data.frame(KINGDOM="Plantae",
                  genusSpecies="Macrocystis pyrifera",
                  commonName="MAPY")
 taxon_coverage <- set_taxonomicCoverage(df)
+
+# Query ITIS using taxize to fill in the full taxonomy given just species
+# names
+taxon_coverage <- set_taxonomicCoverage(
+  c("Macrocystis pyrifera", "Homo sapiens"),
+  expand = TRUE)
 
 }

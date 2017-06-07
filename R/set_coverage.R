@@ -169,8 +169,30 @@ set_temporalCoverage <-
 #'                  commonName="MAPY")
 #' taxon_coverage <- set_taxonomicCoverage(df)
 #'
+#' # Query ITIS using taxize to fill in the full taxonomy given just species
+#' # names
+#' taxon_coverage <- set_taxonomicCoverage(
+#'   c("Macrocystis pyrifera", "Homo sapiens"),
+#'   expand = TRUE)
+#'
 
-set_taxonomicCoverage <- function(sci_names) {
+set_taxonomicCoverage <- function(sci_names, expand=FALSE) {
+  # Expand using taxize and ITIS if the user passes in just scientific names
+  if (is(sci_names, "character") && expand) {
+    if (!requireNamespace("taxize", quietly = TRUE)) {
+      stop(call. = FALSE,
+           "Expansion of scientific names requires the 'taxize' package to be installed. Install taxize or set expand to FALSE.")
+    }
+
+    classifications <- taxize::classification(sci_names, db = 'itis')
+
+    sci_names <- lapply(classifications, function(cls) {
+      x <- as.list(cls[["name"]])
+      names(x) <- cls[["rank"]]
+      x
+    })
+  }
+
   if (class(sci_names) == "character") {
     taxa <- lapply(sci_names, function(sci_name) {
       s <- strsplit(sci_name, " ")[[1]]
@@ -206,17 +228,28 @@ set_taxonomicCoverage <- function(sci_names) {
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
   } else if (class(sci_names) == "list") {
-    taxonRankNames <- as.list(names(sci_names))
-    taxa <- lapply(taxonRankNames, function(name) {
-      new(
-        "taxonomicClassification",
-        taxonRankName = as.character(name),
-        taxonRankValue = as.character(sci_names[[name]])
-      )
+    # Warn if not a list of lists
+    if (!all(vapply(sci_names, class, "") == "list")) {
+      message(call. = FALSE,
+              "sci_names should be a list of lists. Your input was automatically wrapped up in a list.")
+      sci_names <- list(sci_names)
+    }
+
+    taxa <- lapply(sci_names, function(sci_name) {
+      taxonRankNames <- as.list(names(sci_name))
+
+      taxa <- lapply(taxonRankNames, function(name) {
+        new(
+          "taxonomicClassification",
+          taxonRankName = as.character(name),
+          taxonRankValue = as.character(sci_name[[name]])
+        )
+      })
+      formRecursiveTree(taxa)
     })
-    taxa <- formRecursiveTree(taxa)
+
     new("taxonomicCoverage",
-        taxonomicClassification = do.call(c, taxa))
+        taxonomicClassification = new("ListOftaxonomicClassification", do.call(c, taxa)))
   } else {
     stop("Incorrect format: sci_names can only be character string, data.frame or list")
   }
