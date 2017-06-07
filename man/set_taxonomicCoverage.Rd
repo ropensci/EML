@@ -8,6 +8,8 @@ set_taxonomicCoverage(sci_names, expand = FALSE)
 }
 \arguments{
 \item{sci_names}{string (space seperated) or list or data frame of scientific names for species covered.}
+
+\item{expand}{Set to TRUE to use taxize to expand sci_names into full taxonomic classifications}
 }
 \value{
 a taxonomicCoverage object for EML

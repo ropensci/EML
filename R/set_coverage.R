@@ -136,6 +136,7 @@ set_temporalCoverage <-
 #' set_taxonomicCoverage
 #'
 #' @param sci_names string (space seperated) or list or data frame of scientific names for species covered.
+#' @param expand Set to TRUE to use taxize to expand sci_names into full taxonomic classifications
 #' @details Turn a data.frame or a list of scientific names into a taxonomicCoverage block
 #' sci_names can be a space-separated character string or a data frame with column names as rank name
 #' or a list of user-defined taxonomicClassification
