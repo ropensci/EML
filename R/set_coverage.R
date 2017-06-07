@@ -182,7 +182,7 @@ set_taxonomicCoverage <- function(sci_names) {
           new(
             "taxonomicClassification",
             taxonRankName = "species",
-            taxonRankValue = s[[2]]
+            taxonRankValue = sci_name
           )
         )
       )
