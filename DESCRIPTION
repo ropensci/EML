@@ -28,7 +28,8 @@ Suggests:
     knitr,
     rmarkdown,
     listviewer,
-    covr
+    covr,
+    taxize
 VignetteBuilder: knitr
 Encoding: UTF-8
 Collate: 

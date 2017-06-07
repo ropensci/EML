@@ -4,10 +4,12 @@
 \alias{set_taxonomicCoverage}
 \title{set_taxonomicCoverage}
 \usage{
-set_taxonomicCoverage(sci_names)
+set_taxonomicCoverage(sci_names, expand = FALSE)
 }
 \arguments{
 \item{sci_names}{string (space seperated) or list or data frame of scientific names for species covered.}
+
+\item{expand}{Set to TRUE to use taxize to expand sci_names into full taxonomic classifications}
 }
 \value{
 a taxonomicCoverage object for EML
@@ -34,8 +36,7 @@ taxon_coverage <-
                             ORDER="Laminariales",
                             FAMILY="Lessoniaceae",
                             GENUS="Macrocystis",
-                            genusSpecies="Macrocystis pyrifera",
-                            commonName="MAPY"))
+                            SPECIES="Macrocystis pyrifera"))
 
 df <- data.frame(KINGDOM="Plantae",
                  PHYLUM="Phaeophyta",
@@ -43,8 +44,12 @@ df <- data.frame(KINGDOM="Plantae",
                  ORDER="Laminariales",
                  FAMILY="Lessoniaceae",
                  GENUS="Macrocystis",
-                 genusSpecies="Macrocystis pyrifera",
-                 commonName="MAPY")
+                 SPECIES="Macrocystis pyrifera")
 taxon_coverage <- set_taxonomicCoverage(df)
+
+# Query ITIS using taxize to fill in the full taxonomy given just species
+taxon_coverage <- set_taxonomicCoverage(
+  c("Macrocystis pyrifera", "Homo sapiens"),
+  expand = TRUE)
 
 }
