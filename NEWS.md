@@ -1,3 +1,7 @@
+# EML 1.0.4
+
+* `set_taxonomicCoverage` now supports expanding the provided species names into full taxonomic classifications via the taxize package
+
 # EML 1.0.3
 
 * Avoid vignette build errors on machines that lack pandoc (e.g. Solaris) using conditional checks
