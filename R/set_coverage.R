@@ -244,8 +244,7 @@ set_taxonomicCoverage <- function(sci_names, expand=FALSE) {
   } else if (class(sci_names) == "list") {
     # Warn if not a list of lists
     if (!all(vapply(sci_names, class, "") == "list")) {
-      message(call. = FALSE,
-              "sci_names should be a list of lists. Your input was automatically wrapped up in a list.")
+      message("sci_names should be a list of lists. Your input was automatically wrapped up in a list.")
       sci_names <- list(sci_names)
     }
 
