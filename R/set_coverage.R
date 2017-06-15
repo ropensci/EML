@@ -137,6 +137,7 @@ set_temporalCoverage <-
 #'
 #' @param sci_names string (space seperated) or list or data frame of scientific names for species covered.
 #' @param expand Set to TRUE to use taxize to expand sci_names into full taxonomic classifications
+#' @param db The taxonomic database to query (when expand is set to \code{TRUE}). See \code{\link[taxize]{classification}} for valid options. Defaults to 'itis'.
 #' @details Turn a data.frame or a list of scientific names into a taxonomicCoverage block
 #' sci_names can be a space-separated character string or a data frame with column names as rank name
 #' or a list of user-defined taxonomicClassification
@@ -174,8 +175,13 @@ set_temporalCoverage <-
 #'   c("Macrocystis pyrifera", "Homo sapiens"),
 #'   expand = TRUE)
 #'
+#' # Query GBIF instead of ITIS
+#' taxon_coverage <- set_taxonomicCoverage(
+#'   c("Macrocystis pyrifera"),
+#'   expand = TRUE,
+#'   db = 'gbif')
 
-set_taxonomicCoverage <- function(sci_names, expand=FALSE) {
+set_taxonomicCoverage <- function(sci_names, expand=FALSE, db = 'itis') {
   # Expand using taxize and ITIS if the user passes in just scientific names
   if (is(sci_names, "character") && expand) {
     if (!requireNamespace("taxize", quietly = TRUE)) {
@@ -183,13 +189,28 @@ set_taxonomicCoverage <- function(sci_names, expand=FALSE) {
            "Expansion of scientific names requires the 'taxize' package to be installed. Install taxize or set expand to FALSE.")
     }
 
-    classifications <- taxize::classification(sci_names, db = 'itis')
+    classifications <- taxize::classification(sci_names, db = db)
 
-    sci_names <- lapply(classifications, function(cls) {
-      x <- as.list(cls[["name"]])
-      names(x) <- cls[["rank"]]
-      x
-    })
+    # Remove any NAs and warn for each
+    if (any(is.na(classifications))) {
+      warning(call. = FALSE,
+              paste0("Some scientific names were not found in the taxonomic database and were not expanded: ", paste0(sci_names[which(is.na(classifications))], collapse = ","), "."))
+    }
+
+    # Turn result into a list of named lists where names are the rank name and
+    # values are the rank value
+    sci_names <- mapply(function(cls, sci_name) {
+      # If the species name isn't found in the database, NA is returned
+      if (is.list(cls)) {
+        x <- as.list(cls[["name"]])
+        names(x) <- cls[["rank"]]
+        x
+      } else {
+        x <- list(list("species" = as.character(sci_name)))
+        names(x) <- sci_name
+        x
+      }
+    }, classifications, names(classifications), SIMPLIFY = FALSE)
   }
 
   if (class(sci_names) == "character") {
@@ -229,8 +250,7 @@ set_taxonomicCoverage <- function(sci_names, expand=FALSE) {
   } else if (class(sci_names) == "list") {
     # Warn if not a list of lists
     if (!all(vapply(sci_names, class, "") == "list")) {
-      message(call. = FALSE,
-              "sci_names should be a list of lists. Your input was automatically wrapped up in a list.")
+      message("sci_names should be a list of lists. Your input was automatically wrapped up in a list.")
       sci_names <- list(sci_names)
     }
 
