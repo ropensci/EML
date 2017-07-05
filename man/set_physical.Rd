@@ -54,7 +54,8 @@ set_physical(objectName, id = character(), numHeaderLines = character(),
 an EML physical object, such as used in a dataTable element to define the format of the data file.
 }
 \description{
-set_physical
+Will calculate the file size, checksum, and checksum algorithm automatically
+if the argument \code{objectName} is a file that exists.
 }
 \examples{
 set_physical("hf205-01-TPexp1.csv")
