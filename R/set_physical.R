@@ -1,5 +1,8 @@
 #' set_physical
 #'
+#' Will calculate the file size, checksum, and checksum algorithm automatically
+#' if the argument \code{objectName} is a file that exists.
+#'
 #' @param objectName name for the object, usually a filename like "hf205-1.csv"
 #' @param id optional, an id value for the <physical> element in EML, for use in referencing
 #' @param numHeaderLines Number of header lines preceding data. Lines are determined by the physicalLineDelimiter, or if it is absent, by the recordDelimiter. This value indicated the number of header lines that should be skipped before starting to parse the data.
@@ -60,6 +63,26 @@ set_physical <- function(objectName,
       )
     )
   )
+
+  # Automatically calculate file size and checksum if none is specified
+  # and objectName is a path to a file on disk and either of those two
+  # properties were not set when set_physical was called
+
+  if (file.exists(objectName)) {
+    if (length(size) == 0) {
+      warning(paste0("Automatically calculated file size using file.size(\"", objectName, "\")"))
+      size <- as.character(file.size(objectName))
+    }
+
+    if (length(authentication) == 0) {
+      warning(paste0("Automatically calculated authentication size using digest::digest(\"", objectName, "\", algo = \"md5\", file = TRUE)"))
+      authentication <- digest::digest(objectName, algo = "md5", file = TRUE)
+      authMethod <- "MD5"
+    }
+    # Fore the objectName to be set to the basename for the path just in case
+    # the user intended this
+    objectName <- basename(objectName)
+  }
 
   out <-
     new(
