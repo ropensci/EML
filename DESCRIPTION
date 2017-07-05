@@ -22,7 +22,8 @@ Imports:
     xml2 (>= 1.1.1),
     methods,
     tools,
-    uuid
+    uuid,
+    digest
 Suggests:
     testthat,
     knitr,
