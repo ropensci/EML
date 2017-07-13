@@ -32,5 +32,5 @@ eml_view <- function(eml_path, ...){
 
   ## shouldn't call function from a Suggested package, see get_TextType for how we use rmarkdown fns
   jsonedit <- getExportedValue("listviewer", "jsonedit")
-  # jsonedit(eml_list)
+  jsonedit(eml_list)
 }
