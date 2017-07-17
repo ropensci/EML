@@ -44,5 +44,12 @@ eml_view <- function(eml_path, ...){
 
 # code adapted from https://stackoverflow.com/questions/29818918/looping-nested-lists-in-r
 name_all <- function(l){
-  lapply(l, function(x) if(is.list(x) && any(names(x)=="")) names(x)[names(x) == ""] <- "noname" else if(is.list(x)) foo(x) else x)
+  lapply(l, function(x){
+    if(is.list(x) && any(names(x)=="")){
+      names(x)[names(x) == ""] <- "noname"
+      x
+    }  else{
+      if(is.list(x)) name_all(x) else x
+    }
+  } )
 }
