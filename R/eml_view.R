@@ -30,7 +30,19 @@ eml_view <- function(eml_path, ...){
   doc <- read_xml(eml_path, ...)
   eml_list <- xml2::as_list(doc)
 
+  # no unnamed elements please
+  if (any(names(eml_list)=="")){
+    names(eml_list)[names(eml_list) == ""] <- "noname"
+  }
+
+  eml_list <- name_all(eml_list)
+
   ## shouldn't call function from a Suggested package, see get_TextType for how we use rmarkdown fns
   jsonedit <- getExportedValue("listviewer", "jsonedit")
-  # jsonedit(eml_list)
+  jsonedit(eml_list)
+}
+
+# code adapted from https://stackoverflow.com/questions/29818918/looping-nested-lists-in-r
+name_all <- function(l){
+  lapply(l, function(x) if(is.list(x) && any(names(x)=="")) names(x)[names(x) == ""] <- "noname" else if(is.list(x)) foo(x) else x)
 }
