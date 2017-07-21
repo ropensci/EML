@@ -1,5 +1,5 @@
 {
-  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@context": ["https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld", "http://schema.org"],
   "@type": "SoftwareSourceCode",
   "identifier": "EML",
   "description": "Parse and serialize Ecological Metadata Language ('EML', see\n    <https://en.wikipedia.org/wiki/Ecological_Metadata_Language> for\n    more information) files into S4 objects.",
@@ -11,10 +11,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.0",
+    "version": "3.4.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.0 (2017-04-21)",
+  "runtimePlatform": "R version 3.4.1 (2017-06-30)",
   "author": [
     {
       "@type": "Person",
@@ -132,5 +132,128 @@
     }
   ],
   "contIntegration": "https://travis-ci.org/ropensci/EML",
-  "developmentStatus": []
+  "license": "https://spdx.org/licenses/BSD-2-Clause-FreeBSD",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Central R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "listviewer",
+      "name": "listviewer",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "taxize",
+      "name": "taxize",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "xml2",
+      "name": "xml2",
+      "version": "1.1.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tools",
+      "name": "tools"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "uuid",
+      "name": "uuid",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "releaseNotes": "https://github.com/ropensci/EML/blob/cboettig-patch-listview/NEWS.md",
+  "readme": "https://github.com/ropensci/EML/blob/cboettig-patch-listview/README.md",
+  "fileSize": "631.518KB"
 }

@@ -16,3 +16,4 @@ docs/
 ^CONTRIBUTING\.md$
 ^EML_.*\.tar.gz$
 ^codemeta.json$
+^codemeta\.json$
