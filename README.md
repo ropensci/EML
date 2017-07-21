@@ -1,6 +1,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/package=EML) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/EML)](https://CRAN.R-project.org/package=EML) [![Github Stars](https://img.shields.io/github/stars/ropensci/EML.svg?style=social&label=Github)](https://github.com/ropensci/EML) [![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
+[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML) [![](https://ropensci.org/badges/80_status.svg)](https://github.com/ropensci/onboarding/issues/80) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/package=EML) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/EML)](https://CRAN.R-project.org/package=EML) [![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
 
+<!--
+[![Github Stars](https://img.shields.io/github/stars/ropensci/EML.svg?style=social&label=Github)](https://github.com/ropensci/EML)
+-->
 EML: The Ecological Metadata Language Standard
 ==============================================
 
