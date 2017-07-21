@@ -1,20 +1,29 @@
 {
-  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@context": [
+    "https://doi.org/doi:10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "EML",
   "description": "Parse and serialize Ecological Metadata Language ('EML', see\n    <https://en.wikipedia.org/wiki/Ecological_Metadata_Language> for\n    more information) files into S4 objects.",
   "name": "EML: Read and Write Ecological Metadata Language Files",
   "codeRepository": "https://github.com/ropensci/EML",
   "issueTracker": "https://github.com/ropensci/EML/issues",
-  "licenseId": "FreeBSD",
+  "license": "https://spdx.org/licenses/BSD-2-Clause-FreeBSD",
   "version": "1.0.3",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.0",
+    "version": "3.4.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.0 (2017-04-21)",
+  "runtimePlatform": "R version 3.4.1 (2017-06-30)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Central R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -48,9 +57,10 @@
     "familyName": "Boettiger",
     "email": "cboettig@gmail.com"
   },
-  "suggests": [
+  "softwareSuggestions": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "testthat",
       "name": "testthat",
       "provider": {
         "@id": "https://cran.r-project.org",
@@ -61,6 +71,7 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "knitr",
       "name": "knitr",
       "provider": {
         "@id": "https://cran.r-project.org",
@@ -71,6 +82,7 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
       "name": "rmarkdown",
       "provider": {
         "@id": "https://cran.r-project.org",
@@ -81,6 +93,7 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "listviewer",
       "name": "listviewer",
       "provider": {
         "@id": "https://cran.r-project.org",
@@ -91,7 +104,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "covr",
       "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "taxize",
+      "name": "taxize",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -100,9 +125,10 @@
       }
     }
   ],
-  "depends": [
+  "softwareRequirements": [
     {
       "@type": "SoftwareApplication",
+      "identifier": "xml2",
       "name": "xml2",
       "version": "1.1.1",
       "provider": {
@@ -114,15 +140,29 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "methods",
       "name": "methods"
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "tools",
       "name": "tools"
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "uuid",
       "name": "uuid",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -132,5 +172,7 @@
     }
   ],
   "contIntegration": "https://travis-ci.org/ropensci/EML",
-  "developmentStatus": []
+  "releaseNotes": "https://github.com/ropensci/EML/blob/cboettig-patch-listview/NEWS.md",
+  "readme": "https://github.com/ropensci/EML/blob/cboettig-patch-listview/README.md",
+  "fileSize": "631.564KB"
 }
