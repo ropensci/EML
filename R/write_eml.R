@@ -9,8 +9,9 @@
 #' @return If file is not specified, the result is a character string containing
 #'    the resulting XML content. Otherwise return silently.
 #' @export
-#' @import methods xml2
-#' @importFrom xml2 write_xml xml_set_namespace
+#' @import methods
+#' @importFrom xml2 write_xml xml_set_namespace xml_name xml_ns
+#'  xml_find_all xml_remove xml_root
 #' @importFrom uuid UUIDgenerate
 #' @examples
 #' f <- system.file("examples", "example-eml-valid.xml", package = "EML")
@@ -48,11 +49,12 @@ write_eml <- function(eml,
   prune_empty(root)
 
   ## setting root element ns doesn't appear to do anything:
-  #xml2::xml_set_namespace(tmp, ns, paste0(ns, "://ecoinformatics.org/", ns, "-2.1.1"))
+  #xml2::xml_set_namespace(tmp, ns,
+  #paste0(ns, "://ecoinformatics.org/", ns, "-2.1.1"))
   ## so we set it manually by renaming the node:
   if(!is_blank(ns)){
-    root_name <- xml_name(root)
-    xml_name(root) <- paste(ns, root_name, sep=":")
+    root_name <- xml2::xml_name(root)
+    xml2::xml_name(root) <- paste(ns, root_name, sep=":")
   }
 
   ## Now we write out to file
@@ -66,14 +68,14 @@ prune_empty <- function(xml){
   after <- 0
   empty <- "//*[not(@*)][not(*)][not(normalize-space())]"  ##
   while(after < before){
-    before <- length(xml_name(xml_find_all(xml, "//*") ))
+    before <- length(xml2::xml_name(xml2::xml_find_all(xml, "//*") ))
 
     ## Avoid removing document root, which results in a segfault
     total <- length(xml_find_all(xml, "//*"))
     if(total > 1){
-      xml_remove(xml_find_all(xml, empty))
+      xml2::xml_remove(xml_find_all(xml, empty))
     }
-    after <- length(xml_name(xml_find_all(xml, "//*") ))
+    after <- length(xml2::xml_name(xml_find_all(xml, "//*") ))
   }
   xml
 }
@@ -82,4 +84,8 @@ prune_empty <- function(xml){
 is_blank <- function(x) length(x) < 1 || x == ""
 
 ## Default XML namespaces
-eml_namespaces <- xml2::xml_ns(xml2::read_xml(system.file("examples", "example-eml-valid.xml", package = "EML")))
+eml_namespaces <- xml2::xml_ns(
+  xml2::read_xml(
+    system.file("examples",
+                "example-eml-valid.xml",
+                package = "EML")))

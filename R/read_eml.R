@@ -7,7 +7,8 @@
 #' @param ... additional arguments to \code{\link{read_xml}}
 #' @return an eml object (S4 object)
 #' @export
-#' @import methods xml2
+#' @import methods
+#' @importFrom xml2 read_xml xml_name xml_attrs
 #' @examples
 #' f <- system.file("xsd/test", "eml.xml", package = "EML")
 #' eml <- read_eml(f)

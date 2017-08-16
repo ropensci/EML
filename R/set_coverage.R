@@ -213,7 +213,7 @@ set_taxonomicCoverage <- function(sci_names, expand=FALSE, db = 'itis') {
     }, classifications, names(classifications), SIMPLIFY = FALSE)
   }
 
-  if (class(sci_names) == "character") {
+  if (is(sci_names, "character")) {
     taxa <- lapply(sci_names, function(sci_name) {
       s <- strsplit(sci_name, " ")[[1]]
       new(
@@ -231,7 +231,7 @@ set_taxonomicCoverage <- function(sci_names, expand=FALSE, db = 'itis') {
     })
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
-  } else if (class(sci_names) == "data.frame") {
+  } else if (is(sci_names, "data.frame")) {
     taxon_classification <- colnames(sci_names)
     new <- as.data.frame(t(sci_names))
     colnames(new) <- NULL
@@ -247,7 +247,7 @@ set_taxonomicCoverage <- function(sci_names, expand=FALSE, db = 'itis') {
     })
     new("taxonomicCoverage",
         taxonomicClassification = do.call(c, taxa))
-  } else if (class(sci_names) == "list") {
+  } else if (is(sci_names, "list")) {
     # Warn if not a list of lists
     if (!all(vapply(sci_names, class, "") == "list")) {
       message("sci_names should be a list of lists. Your input was automatically wrapped up in a list.")

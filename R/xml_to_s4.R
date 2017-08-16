@@ -5,11 +5,13 @@
 ## but has type "ListOf<element>" which contains a list containing
 ## the repeated elements.
 
+#' @importFrom xml2 xml_attrs xml_name xml_children xml_text
+#' xml_set_text xml_set_attr xml_set_name xml_remove
 xml_to_s4 <- function(node){
-  node_name <- fix_protected_names( xml_name(node) )
-  attrs <- xml_attrs(node)
-  children <-  xml_children(node)
-  xml_names <- as.character(xml_name(children))
+  node_name <- fix_protected_names( xml2::xml_name(node) )
+  attrs <- xml2::xml_attrs(node)
+  children <-  xml2::xml_children(node)
+  xml_names <- as.character(xml2::xml_name(children))
   xml_attr_names <- names(attrs)
 
   s4 <- new(node_name)
@@ -50,7 +52,7 @@ xml_to_s4 <- function(node){
 
     ## Simple data node
     if (length(metaclasses) == 0 && length(not_sub) == 0 && ".Data" %in% slotNames(node_name)) {
-      s4@.Data <- xml_text(node)
+      s4@.Data <- xml2::xml_text(node)
     }
 
     ## handle the metaclasses
@@ -81,7 +83,7 @@ parse_xml <- function(child, children, cls){
   if (grepl("^ListOf", cls)) { ## Should be identical to if(length(i) > 1)
     listof(children, child, i)
   } else if (cls == "character") {
-     xml_text(children[[i]])
+     xml2::xml_text(children[[i]])
   } else {
      xml_to_s4(children[[i]])
   }
