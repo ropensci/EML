@@ -80,16 +80,20 @@ result
 #' eml <- xml2::read_xml(f)
 #' schema <- eml_locate_schema(eml)
 #' }
-#' @importFrom xml2 xml_ns
+#' @importFrom xml2 xml_ns xml_attr
 #' @export
 eml_locate_schema <- function(eml, ns = NA) {
 
 
-    schemaLocation <- strsplit(xml_attr(eml, "schemaLocation"), "\\s+")[[1]]
-    schema_file <- basename(schemaLocation[2])
+
+  schemaLocation <- strsplit(xml2::xml_attr(eml,
+                                            "schemaLocation"),
+                             "\\s+")[[1]]
+  schema_file <- basename(schemaLocation[2])
 
     if(!is(eml,'xml_document')) {
-        stop("Argument is not an instance of an XML document (xml2::xml_document)")
+        stop("Argument is not an instance of an
+             XML document (xml2::xml_document)")
     }
     namespace <- xml2::xml_ns(eml)
     stopifnot(is(namespace, 'xml_namespace'))

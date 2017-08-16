@@ -19,6 +19,7 @@
 #' part of a more general standard.) This means that once converted to a metadata element, the unit list is coerced
 #' into stmml XML and can no longer be subset or modified in the same way.
 #'
+#' @importFrom xml2 xml_root xml_add_parent xml_children
 #' @export
 #' @details
 #'
@@ -166,7 +167,7 @@ setOldClass("xml_nodeset")
 setOldClass("xml_document")
 ## This is a terrible way to do coercion
 setAs("xml_document", "xml_nodeset", function(from){
-  xml_children(xml_root(xml_add_parent(from, "root")))
+  xml_children(xml2::xml_root(xml2::xml_add_parent(from, "root")))
 })
 setAs("unitList", "additionalMetadata", function(from) {
   xml_meta <- s4_to_xml(from)
