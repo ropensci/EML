@@ -247,7 +247,7 @@ dataTable <- new("dataTable",
 
 All elements in EML have associated `new()` initialize methods.  We could have constructed the `attributeList` or `physical` in the same way, but their nested structure would mean a lot of `new()` calls inside other `new()` calls (just take a look at the `set_physical` function for an example).  
 
-The `new()` methods are standard part of S4 objects in R, (though the EML package defines custom `initialize()` methods that make the `new()` methods more powerful).  The `new()` method always takes as as the first argument the name of the object to be created, e.g. `new("dataTable")`.  If we include nothing else, we get an empty `dataTable` element.  We may also specify values for any of the "slots" in the `dataTable`.  You can see a list of all possible slots of a given class using the (standard R function) `getSlots()`, giving the name of the object class, e.g.:
+The `new()` methods are standard part of S4 objects in R, (though the EML package defines custom `initialize()` methods that make the `new()` methods more powerful).  The `new()` method always takes as the first argument the name of the object to be created, e.g. `new("dataTable")`.  If we include nothing else, we get an empty `dataTable` element.  We may also specify values for any of the "slots" in the `dataTable`.  You can see a list of all possible slots of a given class using the (standard R function) `getSlots()`, giving the name of the object class, e.g.:
 
 ```{r}
 getSlots("dataTable")
