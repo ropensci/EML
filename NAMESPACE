@@ -3,6 +3,7 @@
 export(eml_find)
 export(eml_get)
 export(eml_locate_schema)
+export(eml_to_jsonld)
 export(eml_validate)
 export(eml_view)
 export(get_TextType)

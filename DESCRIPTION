@@ -41,6 +41,7 @@ Collate:
     'get_unitList.R'
     'get_attributes.R'
     'eml_get.R'
+    'eml_to_jsonld.R'
     'eml_validate.R'
     'eml_view.R'
     'get_TextType.R'
