@@ -3,7 +3,7 @@
 
 #' get_TextType
 #'
-#' Render a TextType node int HTML or some other format
+#' Render a TextType node into HTML or some other format
 #'
 #' @param node any TextType node
 #' @param to desired format, default is html, but can be any type supported by pandoc (docx, md, etc)
@@ -42,12 +42,13 @@ get_TextType <-
       node <- node[[1]]
 
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
-    x <- xml2::xml_children(s4_to_xml(node, root = xml2::xml_new_root("root")))
+    x <- xml2::xml_contents(EML:::s4_to_xml(node, root = xml2::xml_new_root("root")))
 
     if (!requireNamespace("rmarkdown", quietly = TRUE)) {
       stop("rmarkdown package required to convert to Docbook format",
            call. = FALSE)
     }
+
     pandoc_convert <-
       getExportedValue("rmarkdown", "pandoc_convert")
 
@@ -61,8 +62,11 @@ get_TextType <-
       xml2::xml_new_root(xml2::xml_dtd("section",
                        "-//OASIS//DTD DocBook XML V4.2//EN",
                        "http://oasis-open.org/docbook/xml/4.5/docbookx.dtd"))
-    xml2::xml_add_child(doctype, "article")
+    article_el <- xml2::xml_add_child(doctype, "article")
+    lapply(x, function(node) { xml2::xml_add_child(article_el, node)})
+
     xml2::write_xml(doctype, docbook_file)
+
     pandoc_convert(
       basename(docbook_file),
       to = to,
@@ -71,14 +75,8 @@ get_TextType <-
       options = "-s"
     )
 
-    file.copy(output, file.path(wd, basename(output)), overwrite = TRUE)
-
-
-    setwd(wd)
-
     if (view && to == "html")
       utils::browseURL(basename(output))
 
-
-
+    output
   }

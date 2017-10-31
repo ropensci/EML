@@ -71,3 +71,20 @@ testthat::test_that(
  unlink("abstract.markdown") # tidy up
 
   })
+
+testthat::test_that(
+  "We can parse a simple abstract into markdown withour errors",
+  {
+    skip_on_cran()
+    #skip_on_appveyor()
+    #skip_on_os("windows")
+
+    abstract <- as("Test abstract", "abstract")
+    get_TextType(abstract, "markdown", "abstract.markdown")
+    a <- readLines("abstract.markdown")
+
+    testthat::expect_match(a, "Test abstract")
+
+    unlink("abstract.markdown") # tidy up
+
+  })
