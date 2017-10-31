@@ -1,6 +1,7 @@
 # EML 1.0.4
 
 * `set_taxonomicCoverage` now supports expanding the provided species names into full taxonomic classifications via the taxize package
+* Fixed two bugs in `get_TextType` which were preventing the method from working under multiple scenarios
 
 # EML 1.0.3
 
