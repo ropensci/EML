@@ -3,7 +3,7 @@
 
 #' get_TextType
 #'
-#' Render a TextType node int HTML or some other format
+#' Render a TextType node into HTML or some other format
 #'
 #' @param node any TextType node
 #' @param to desired format, default is html, but can be any type supported by pandoc (docx, md, etc)
