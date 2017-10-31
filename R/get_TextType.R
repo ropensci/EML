@@ -61,7 +61,8 @@ get_TextType <-
       xml2::xml_new_root(xml2::xml_dtd("section",
                        "-//OASIS//DTD DocBook XML V4.2//EN",
                        "http://oasis-open.org/docbook/xml/4.5/docbookx.dtd"))
-    xml2::xml_add_child(doctype, "article")
+    article_el <- xml2::xml_add_child(doctype, "article")
+    lapply(x, function(node) { xml2::xml_add_child(article_el, node)})
     xml2::write_xml(doctype, docbook_file)
     pandoc_convert(
       basename(docbook_file),
@@ -71,14 +72,8 @@ get_TextType <-
       options = "-s"
     )
 
-    file.copy(output, file.path(wd, basename(output)), overwrite = TRUE)
-
-
-    setwd(wd)
-
     if (view && to == "html")
       utils::browseURL(basename(output))
 
-
-
+    output
   }
