@@ -48,6 +48,7 @@ get_TextType <-
       stop("rmarkdown package required to convert to Docbook format",
            call. = FALSE)
     }
+
     pandoc_convert <-
       getExportedValue("rmarkdown", "pandoc_convert")
 
@@ -63,7 +64,9 @@ get_TextType <-
                        "http://oasis-open.org/docbook/xml/4.5/docbookx.dtd"))
     article_el <- xml2::xml_add_child(doctype, "article")
     lapply(x, function(node) { xml2::xml_add_child(article_el, node)})
+
     xml2::write_xml(doctype, docbook_file)
+
     pandoc_convert(
       basename(docbook_file),
       to = to,
