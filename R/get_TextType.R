@@ -42,7 +42,7 @@ get_TextType <-
       node <- node[[1]]
 
     # serialize sections in ListOfsection or paras from ListOfpara into XML document, save, rmarkdown into desired format
-    x <- xml2::xml_children(s4_to_xml(node, root = xml2::xml_new_root("root")))
+    x <- xml2::xml_contents(EML:::s4_to_xml(node, root = xml2::xml_new_root("root")))
 
     if (!requireNamespace("rmarkdown", quietly = TRUE)) {
       stop("rmarkdown package required to convert to Docbook format",
