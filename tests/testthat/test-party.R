@@ -46,3 +46,70 @@ testthat::test_that("every argument in set_party works as expected", {
   testthat::expect_equal(party@userId[[1]]@directory@.Data, "https://orcid.org")
   testthat::expect_equal(party@role@.Data, "contributor")
 })
+
+testthat::test_that("helper functions that just call set_party work without errors", {
+  creator <- set_creator("Bryce",
+                         "Mecum",
+                         "National Center for Ecological Analysis and Synthesis",
+                         "Scientific Software Engineer",
+                         set_address(c("735 State St.", "Suite 300"),
+                                     "Santa Barbara",
+                                     "California",
+                                     "93101-5504",
+                                     "USA"),
+                         set_phone("1-555-555-5555"),
+                         "mecum@nceas.ucsb.edu",
+                         "https://brycemecum.com",
+                         set_userId("https://orcid.org/0000-0002-0381-3766",
+                                    "https://orcid.org"))
+  expect_is(creator, "creator")
+
+  contact <- set_contact("Bryce",
+                         "Mecum",
+                         "National Center for Ecological Analysis and Synthesis",
+                         "Scientific Software Engineer",
+                         set_address(c("735 State St.", "Suite 300"),
+                                     "Santa Barbara",
+                                     "California",
+                                     "93101-5504",
+                                     "USA"),
+                         set_phone("1-555-555-5555"),
+                         "mecum@nceas.ucsb.edu",
+                         "https://brycemecum.com",
+                         set_userId("https://orcid.org/0000-0002-0381-3766",
+                                    "https://orcid.org"))
+  expect_is(contact, "contact")
+
+  metadataProvider <- set_metadataProvider("Bryce",
+                                           "Mecum",
+                                           "National Center for Ecological Analysis and Synthesis",
+                                           "Scientific Software Engineer",
+                                           set_address(c("735 State St.", "Suite 300"),
+                                                       "Santa Barbara",
+                                                       "California",
+                                                       "93101-5504",
+                                                       "USA"),
+                                           set_phone("1-555-555-5555"),
+                                           "mecum@nceas.ucsb.edu",
+                                           "https://brycemecum.com",
+                                           set_userId("https://orcid.org/0000-0002-0381-3766",
+                                                      "https://orcid.org"))
+  expect_is(metadataProvider, "metadataProvider")
+
+  associatedParty <- set_associatedParty("Bryce",
+                                         "Mecum",
+                                         "National Center for Ecological Analysis and Synthesis",
+                                         "Scientific Software Engineer",
+                                         set_address(c("735 State St.", "Suite 300"),
+                                                     "Santa Barbara",
+                                                     "California",
+                                                     "93101-5504",
+                                                     "USA"),
+                                         set_phone("1-555-555-5555"),
+                                         "mecum@nceas.ucsb.edu",
+                                         "https://brycemecum.com",
+                                         set_userId("https://orcid.org/0000-0002-0381-3766",
+                                                    "https://orcid.org"),
+                                         role = "contributor")
+  expect_is(associatedParty, "associatedParty")
+})
