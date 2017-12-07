@@ -1,25 +1,3 @@
-#' A few helper methods to speed up creating various types of EML party
-#' objects (creator, contact, etc.).
-#'
-#' High-level functions include:
-#'
-#' - set_creator
-#' - set_contact
-#' - set_associatedParty
-#' - set_metadataProvider
-#'
-#' Each of these functions calls eml_party with the provided arguments.
-#' In order to provide a good user experience, dots (...) with a link to the
-#' eml_party function were not used. Instead, the arguments and Roxygen markup
-#' have been copied across functions.
-#'
-#' Extra helper functions included are:
-#'
-#' set_phone
-#' set_address
-#' set_userId
-
-
 #' Create a phone object
 #'
 #' @param number (character) The phone number
@@ -283,7 +261,16 @@ set_creator <- function(givenNames,
 #'
 #' @examples
 #' set_contact("Mary", "Scientist")
-set_contact <- function(...) {
+set_contact <- function(givenNames,
+                        surName,
+                        organizationNames,
+                        positionNames,
+                        addresses,
+                        phones,
+                        electronicMailAddresses,
+                        onlineUrls,
+                        userIds,
+                        salutations) {
   set_party("contact",
             givenNames,
             surName,
@@ -315,7 +302,16 @@ set_contact <- function(...) {
 #'
 #' @examples
 #' set_metadataProvider("Mary", "Scientist")
-set_metadataProvider <- function(...) {
+set_metadataProvider <- function(givenNames,
+                                 surName,
+                                 organizationNames,
+                                 positionNames,
+                                 addresses,
+                                 phones,
+                                 electronicMailAddresses,
+                                 onlineUrls,
+                                 userIds,
+                                 salutations) {
   set_party("metadataProvider",
             givenNames,
             surName,
@@ -348,7 +344,17 @@ set_metadataProvider <- function(...) {
 #'
 #' @examples
 #' set_associatedParty("Mary", "Scientist")
-set_associatedParty <- function(...) {
+set_associatedParty <- function(givenNames,
+                                surName,
+                                organizationNames,
+                                positionNames,
+                                addresses,
+                                phones,
+                                electronicMailAddresses,
+                                onlineUrls,
+                                userIds,
+                                salutations,
+                                role) {
   set_party("associatedParty",
             givenNames,
             surName,

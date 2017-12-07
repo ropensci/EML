@@ -4,7 +4,9 @@
 \alias{set_associatedParty}
 \title{Create an associatedParty object}
 \usage{
-set_associatedParty(...)
+set_associatedParty(givenNames, surName, organizationNames, positionNames,
+  addresses, phones, electronicMailAddresses, onlineUrls, userIds, salutations,
+  role)
 }
 \arguments{
 \item{givenNames}{(character) One or more given names for the party's individualName}

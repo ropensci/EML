@@ -2,8 +2,7 @@
 % Please edit documentation in R/set_party.R
 \name{set_phone}
 \alias{set_phone}
-\title{A few helper methods to speed up creating various types of EML party
-objects (creator, contact, etc.).}
+\title{Create a phone object}
 \usage{
 set_phone(number, phonetype)
 }
@@ -16,21 +15,6 @@ set_phone(number, phonetype)
 (phone) A phone object
 }
 \description{
-High-level functions include:
-}
-\details{
-- set_creator
-- set_contact
-- set_associatedParty
-- set_metadataProvider
-
-Each of these functions calls eml_party with the provided arguments.
-
-Extra helper functions included are:
-
-set_phone
-set_address
-set_userId
 Create a phone object
 }
 \examples{

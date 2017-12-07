@@ -4,7 +4,8 @@
 \alias{set_metadataProvider}
 \title{Create a metadataProvider object}
 \usage{
-set_metadataProvider(...)
+set_metadataProvider(givenNames, surName, organizationNames, positionNames,
+  addresses, phones, electronicMailAddresses, onlineUrls, userIds, salutations)
 }
 \arguments{
 \item{givenNames}{(character) One or more given names for the party's individualName}

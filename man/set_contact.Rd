@@ -4,7 +4,8 @@
 \alias{set_contact}
 \title{Create a contact object}
 \usage{
-set_contact(...)
+set_contact(givenNames, surName, organizationNames, positionNames, addresses,
+  phones, electronicMailAddresses, onlineUrls, userIds, salutations)
 }
 \arguments{
 \item{givenNames}{(character) One or more given names for the party's individualName}
