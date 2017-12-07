@@ -46,24 +46,3 @@ of them can receive character vectors while they can also take vectors of
 the appropriate target type (though this is not explicitly laid out in the
 documentation).
 }
-\examples{
-# A simple example
-set_party("metadata_provider", "Bryce", "Mecum")
-# A more complete example
-set_party("creator",
-          "Bryce",
-          "Mecum",
-          "National Center for Ecological Analysis and Synthesis",
-          "Scientific Software Engineer",
-          set_address(c("735 State St.", "Suite 300"),
-                      "Santa Barbara",
-                      "California",
-                      "93101-5504",
-                      "USA"),
-          set_phone("1-555-555-5555"),
-          "mecum@nceas.ucsb.edu",
-          "https://brycemecum.com",
-          set_userId("https://orcid.org/0000-0002-0381-3766",
-                     "https://orcid.org"))
-Stop if no individualName, organizationName, or positionName are set
-}
