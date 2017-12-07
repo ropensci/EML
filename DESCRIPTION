@@ -54,6 +54,7 @@ Collate:
     'set_attributes.R'
     'set_coverage.R'
     'set_methods.R'
+    'set_party.R'
     'set_physical.R'
     'set_unitList.R'
     'show_methods.R'
