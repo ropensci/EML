@@ -105,6 +105,26 @@ set_userId <- function(userId, directory) {
 #' @param role (character) A role for the party
 #'
 #' @return An object of the class equal to \code{type}
+#'
+#' @examples
+#' # A simple example
+#' set_party("metadata_provider", "Bryce", "Mecum")
+#' # A more complete example
+#' set_party("creator",
+#'           "Bryce",
+#'           "Mecum",
+#'           "National Center for Ecological Analysis and Synthesis",
+#'           "Scientific Software Engineer",
+#'           set_address(c("735 State St.", "Suite 300"),
+#'                       "Santa Barbara",
+#'                       "California",
+#'                       "93101-5504",
+#'                       "USA"),
+#'           set_phone("1-555-555-5555"),
+#'           "mecum@nceas.ucsb.edu",
+#'           "https://brycemecum.com",
+#'           set_userId("https://orcid.org/0000-0002-0381-3766",
+#'                      "https://orcid.org"))
 set_party <- function(type="associatedParty",
                       givenNames,
                       surName,
@@ -196,7 +216,7 @@ set_party <- function(type="associatedParty",
   }
 
   if (!missing(role)) {
-    party@role <- as(role, "RoleType")
+    party@role <- as(role, "role")
   }
 
   party
@@ -219,7 +239,23 @@ set_party <- function(type="associatedParty",
 #' @export
 #'
 #' @examples
-#' set_creator("Mary", "Scientist")
+#' # A simple example
+#' set_creator("Bryce", "Mecum")
+#' # A more complete example
+#' set_creator("Bryce",
+#'             "Mecum",
+#'             "National Center for Ecological Analysis and Synthesis",
+#'             "Scientific Software Engineer",
+#'             set_address(c("735 State St.", "Suite 300"),
+#'                         "Santa Barbara",
+#'                         "California",
+#'                         "93101-5504",
+#'                         "USA"),
+#'             set_phone("1-555-555-5555"),
+#'             "mecum@nceas.ucsb.edu",
+#'             "https://brycemecum.com",
+#'             set_userId("https://orcid.org/0000-0002-0381-3766",
+#'                        "https://orcid.org"))
 set_creator <- function(givenNames,
                         surName,
                         organizationNames,
@@ -260,7 +296,23 @@ set_creator <- function(givenNames,
 #' @export
 #'
 #' @examples
-#' set_contact("Mary", "Scientist")
+#' # A simple example
+#' set_contact("Bryce", "Mecum")
+#' # A more complete example
+#' set_contact("Bryce",
+#'             "Mecum",
+#'             "National Center for Ecological Analysis and Synthesis",
+#'             "Scientific Software Engineer",
+#'             set_address(c("735 State St.", "Suite 300"),
+#'                         "Santa Barbara",
+#'                         "California",
+#'                         "93101-5504",
+#'                         "USA"),
+#'             set_phone("1-555-555-5555"),
+#'             "mecum@nceas.ucsb.edu",
+#'             "https://brycemecum.com",
+#'             set_userId("https://orcid.org/0000-0002-0381-3766",
+#'                        "https://orcid.org"))
 set_contact <- function(givenNames,
                         surName,
                         organizationNames,
@@ -301,7 +353,23 @@ set_contact <- function(givenNames,
 #' @export
 #'
 #' @examples
-#' set_metadataProvider("Mary", "Scientist")
+#' # A simple example
+#' set_metadataProvider("Bryce", "Mecum")
+#' # A more complete example
+#' set_metadataProvider("Bryce",
+#'                      "Mecum",
+#'                      "National Center for Ecological Analysis and Synthesis",
+#'                      "Scientific Software Engineer",
+#'                      set_address(c("735 State St.", "Suite 300"),
+#'                                  "Santa Barbara",
+#'                                  "California",
+#'                                  "93101-5504",
+#'                                  "USA"),
+#'                      set_phone("1-555-555-5555"),
+#'                      "mecum@nceas.ucsb.edu",
+#'                      "https://brycemecum.com",
+#'                      set_userId("https://orcid.org/0000-0002-0381-3766",
+#'                                 "https://orcid.org"))
 set_metadataProvider <- function(givenNames,
                                  surName,
                                  organizationNames,
@@ -343,7 +411,24 @@ set_metadataProvider <- function(givenNames,
 #' @export
 #'
 #' @examples
-#' set_associatedParty("Mary", "Scientist")
+#' # A simple example
+#' set_associatedParty("Bryce", "Mecum", role = "contributor")
+#' # A more complete example
+# set_associatedParty("Bryce",
+#                     "Mecum",
+#                     "National Center for Ecological Analysis and Synthesis",
+#                     "Scientific Software Engineer",
+#                     set_address(c("735 State St.", "Suite 300"),
+#                                 "Santa Barbara",
+#                                 "California",
+#                                 "93101-5504",
+#                                 "USA"),
+#                     set_phone("1-555-555-5555"),
+#                     "mecum@nceas.ucsb.edu",
+#                     "https://brycemecum.com",
+#                     set_userId("https://orcid.org/0000-0002-0381-3766",
+#                                "https://orcid.org"),
+#                     role = "contributor")
 set_associatedParty <- function(givenNames,
                                 surName,
                                 organizationNames,

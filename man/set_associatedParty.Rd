@@ -38,5 +38,7 @@ set_associatedParty(givenNames, surName, organizationNames, positionNames,
 Create an associatedParty object
 }
 \examples{
-set_associatedParty("Mary", "Scientist")
+# A simple example
+set_associatedParty("Bryce", "Mecum", role = "contributor")
+# A more complete example
 }
