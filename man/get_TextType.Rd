@@ -20,7 +20,7 @@ get_TextType(node, to = "html", output = tempfile(class(node), fileext =
 creates a file requested.
 }
 \description{
-Render a TextType node int HTML or some other format
+Render a TextType node into HTML or some other format
 }
 \examples{
 \donttest{
