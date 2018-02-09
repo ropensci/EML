@@ -5,7 +5,7 @@
 \title{set_physical}
 \usage{
 set_physical(objectName, id = character(), numHeaderLines = character(),
-  numFooterLines = character(), recordDelimiter = "\\\\n\\\\r",
+  numFooterLines = character(), recordDelimiter = "\\\\r\\\\n",
   fieldDelimiter = ",", collapseDelimiters = logical(),
   literalCharacter = character(), quoteCharacter = character(),
   attributeOrientation = "column", size = character(), sizeUnit = "bytes",
