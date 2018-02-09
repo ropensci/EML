@@ -4,6 +4,7 @@
 * Fixed two bugs in `get_TextType` which were preventing the method from working under multiple scenarios
 * Improved `eml_view` so it works when there are XML comments in the EML record being viewed
 * Added the ability to `set_physical` to calculate file size and checksums automatically
+* Fixed a bug in `set_physical` which was setting the `recordDelimiter` to `\n\r` instead of `\r\n`
 
 # EML 1.0.3
 
