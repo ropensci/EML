@@ -32,8 +32,8 @@ get_attributes <- function(x, eml = x) {
   datetimes <- datetime_attributes(A, eml)
   factors <- factor_attributes(A, eml)
 
-  attr_table <-
-    merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), column_meta, all = TRUE)
+  attr_list <- list(numerics, datetimes, chars, column_meta, factors)
+  attr_table <- merge_df(attr_list)
 
   # restore original order of attributes
   row.names(attr_table) <- attr_table$attributeName
@@ -277,4 +277,19 @@ choice <- function(s4) {
   drop <- sapply(who, function(x)
     isEmpty(slot(s4, x)))
   who[!drop]
+}
+
+## define merging two data frames as function for call in 'merge_df'
+merge_two_df <- function(x,y) {
+  merge(x, y, all = TRUE)
+}
+
+## merge a list of data frames
+merge_df <- function(list_of_df) {
+  x <- list_of_df
+
+  null_indices <- which(unlist(lapply(x, function(a) {is.null(a)})))
+  x <- x[-null_indices]
+
+  data.frame(tail(lapply(x, merge_two_df, x[[1]]), n=1))
 }
