@@ -614,3 +614,80 @@ testthat::test_that("The set_attributes function stops if duplicate codes in fac
                                         col_classes = c("factor", "factor", "numeric")),
                          regex = "There are attributeName")
 })
+
+testthat::test_that("merge_df is equivalent to multiple 'merge' calls", {
+  A <- eml@dataset@dataTable[[1]]@attributeList@attribute
+  A <- unname(A) # avoid row-names 'attribute','attribute1' etc
+
+  column_meta <- column_attributes(A)
+  numerics <- numeric_attributes(A, eml)
+  chars <- char_attributes(A, eml)
+  datetimes <- datetime_attributes(A, eml)
+
+  attr_table <- merge(merge(merge(numerics, datetimes, all = TRUE),
+                            chars, all = TRUE), column_meta, all = TRUE)
+
+  test_table <- merge_df(list(numerics, datetimes, chars, column_meta))
+
+  testthat::expect_equal(attr_table, test_table)
+})
+
+testthat::test_that("updated version of get_attributes outputs correct table", {
+  A <- eml@dataset@dataTable[[1]]@attributeList@attribute
+  A <- unname(A) # avoid row-names 'attribute','attribute1' etc
+
+  attr_order <- vapply(A, function(a)
+    a@attributeName, character(1))
+
+  column_meta <- column_attributes(A)
+  numerics <- numeric_attributes(A, eml)
+  chars <- char_attributes(A, eml)
+  datetimes <- datetime_attributes(A, eml)
+  factors <- factor_attributes(A, eml)
+
+  attr_table <-
+    merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), column_meta, all = TRUE)
+
+  # restore original order of attributes
+  row.names(attr_table) <- attr_table$attributeName
+  attr_table <- attr_table[attr_order, ]
+  row.names(attr_table) <- NULL
+
+  attribute_list <- list(attributes = attr_table, factors = factors)
+  test_attribute_list <- get_attributes(eml@dataset@dataTable[[1]]@attributeList)
+
+  testthat::expect_equal(attribute_list, test_attribute_list)
+})
+
+testthat::test_that("get_attributes doesn't error when NULL data frames are merged", {
+  eml2 <- eml
+  eml2@dataset@dataTable[[1]]@attributeList@attribute[c(1:4,11)] <- NULL # set dateTime attributes to NULL
+
+  A <- eml2@dataset@dataTable[[1]]@attributeList@attribute
+  A <- unname(A)
+
+  attr_order <- vapply(A, function(a)
+    a@attributeName, character(1))
+
+  column_meta <- column_attributes(A)
+  numerics <- numeric_attributes(A, eml2)
+  chars <- char_attributes(A, eml2)
+  datetimes <- datetime_attributes(A, eml2)
+  factors <- factor_attributes(A, eml2)
+
+  # datetimes is NULL so we remove it from the merge calls
+  attr_table <- merge(merge(numerics, chars, all = TRUE), column_meta, all = TRUE)
+  test_attr_table <- merge_df(list(numerics, datetimes, chars, column_meta))
+
+  testthat::expect_equal(attr_table, test_attr_table)
+
+  # restore original order of attributes
+  row.names(attr_table) <- attr_table$attributeName
+  attr_table <- attr_table[attr_order, ]
+  row.names(attr_table) <- NULL
+
+  attribute_list <- list(attributes = attr_table, factors = factors)
+  test_attribute_list <- get_attributes(eml2@dataset@dataTable[[1]]@attributeList)
+
+  testthat::expect_equal(attribute_list, test_attribute_list)
+})

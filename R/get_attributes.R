@@ -32,8 +32,8 @@ get_attributes <- function(x, eml = x) {
   datetimes <- datetime_attributes(A, eml)
   factors <- factor_attributes(A, eml)
 
-  attr_table <-
-    merge(merge(merge(numerics, datetimes, all = TRUE), chars, all = TRUE), column_meta, all = TRUE)
+  attr_list <- list(numerics, datetimes, chars, column_meta)
+  attr_table <- merge_df(attr_list)
 
   # restore original order of attributes
   row.names(attr_table) <- attr_table$attributeName
@@ -277,4 +277,30 @@ choice <- function(s4) {
   drop <- sapply(who, function(x)
     isEmpty(slot(s4, x)))
   who[!drop]
+}
+
+## merge a list of data frames
+merge_df <- function(list_of_df) {
+  x <- list_of_df
+  df <- NULL  # returns NULL if no attributes exist
+
+  null_indices <- which(unlist(lapply(x, function(a) {is.null(a)})))
+  if (length(null_indices) > 0) {
+    x <- x[-null_indices]
+  }
+
+  n_df <- length(x)
+  index = 1
+
+  while (index <= n_df) {
+    if (index == 1) {  # problem with else statement
+      df <- x[[1]]
+      index <- index + 1
+    } else {
+      df <- merge(df, x[[index]], all = TRUE)
+      index <- index + 1
+    }
+  }
+
+  return(df)
 }
