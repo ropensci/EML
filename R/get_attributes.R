@@ -282,19 +282,24 @@ choice <- function(s4) {
 ## merge a list of data frames
 merge_df <- function(list_of_df) {
   x <- list_of_df
+  df <- NULL  # returns NULL if no attributes exist
 
   null_indices <- which(unlist(lapply(x, function(a) {is.null(a)})))
   if (length(null_indices) > 0) {
-  x <- x[-null_indices]
+    x <- x[-null_indices]
   }
 
   n_df <- length(x)
-  df <- x[[1]]
+  index = 1
 
-  index = 2
   while (index <= n_df) {
-    df <- merge(df, x[[index]], all = TRUE)
-    index <- index + 1
+    if (index == 1) {  # problem with else statement
+      df <- x[[1]]
+      index <- index + 1
+    } else {
+      df <- merge(df, x[[index]], all = TRUE)
+      index <- index + 1
+    }
   }
 
   return(df)
