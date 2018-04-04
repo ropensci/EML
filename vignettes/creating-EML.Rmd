@@ -168,7 +168,7 @@ Every column (attribute) in the dataset needs an `attributeName` (column name, a
 
 **Factors** (enumerated domains) need to specify definitions for each of the code terms appearing in the data columns.  This does not fit so nicely in the above table, where each attribute is a single row, so if data uses factors (instead of non-enumerated strings), these definitions must be provided in a separate table.  The format expected of this table has three columns: `attributeName` (as before), `code`, and `definition`.  Note that `attributeName` is simply repeated for all codes belonging to a common attribute.  
 
-In this case we have three attributes that are factors,  To make the code below more readable (aligning code and definitions side by side), we define these first as named character vectors, and convert that to a `data.frame`. (The `dplyr::frame_data` function also permits this more readable way to define data.frames inline).
+In this case we have three attributes that are factors,  To make the code below more readable (aligning code and definitions side by side), we define these first as named character vectors, and convert that to a `data.frame`. (The `tibble::tribble()` function also permits this more readable way to define data.frames inline).
 
 ```{r}
 i.flag <- c(R = "real",
