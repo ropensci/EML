@@ -110,7 +110,7 @@ df <- data.frame(attributeName = "energy",
 ```
 
 
-Sometimes we will want to use a unit that is not avaialble in the `standardUnit` list, such as the example of species per square meter seen above.  To add this information to our EML file, we use `set_unitList`, using definitions that follow the same `data.frame` format we saw returned by the `get_unitList()` function.    Here we provide the definition for species per square meter, following the camelCase convention of EML
+Sometimes we will want to use a unit that is not available in the `standardUnit` list, such as the example of species per square meter seen above.  To add this information to our EML file, we use `set_unitList`, using definitions that follow the same `data.frame` format we saw returned by the `get_unitList()` function.    Here we provide the definition for species per square meter, following the camelCase convention of EML
 
 ```{r}
 custom_units <- data.frame(id = "speciesPerSquareMeter", unitType = "arealDensity", parentSI = "numberPerSquareMeter", multiplierToSI = 1, description = "number of species per square meter")
