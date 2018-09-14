@@ -61,15 +61,29 @@ get_attributes <- function(x, eml = NULL) {
     atts <- atts[!grepl("methods", names(atts))]
 
     ## Alter names to be consistent with other tools
-    names(atts) <- gsub("missingValueCode.code", "missingValueCode", names(atts), fixed = TRUE)
-    names(atts) <- gsub("standardUnit|customUnit", "unit", names(atts))
-    names(atts) <- gsub(".+\\.+", "", names(atts))
+    names(atts) <- gsub("missingValueCode.code",
+                        "missingValueCode",
+                        names(atts),
+                        fixed = TRUE)
+    names(atts) <- gsub("standardUnit|customUnit",
+                        "unit",
+                        names(atts))
+    names(atts) <- gsub(".+\\.+",
+                        "",
+                        names(atts))
     atts <- as.data.frame(t(atts), stringsAsFactors = FALSE)
   })
   attributes <- dplyr::bind_rows(attributes)
 
   ## remove non_fields in attributes
-  non_fields <- c("enforced", "exclusive", "id", "order", "references", "scope", "system", "typeSystem")
+  non_fields <- c("enforced",
+                  "exclusive",
+                  "id",
+                  "order",
+                  "references",
+                  "scope",
+                  "system",
+                  "typeSystem")
   attributes <- attributes[, !(names(attributes) %in% non_fields)]
 
   ## get factors

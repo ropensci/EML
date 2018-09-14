@@ -7,7 +7,7 @@
 #' cm <- jsonlite::read_json(system.file("extdata/codemeta.json", package = "EML"))
 #' software <- set_software(cm)
 #' my_eml <- eml$eml(packageId = "eml-1.2", system = "knb", software = software)
-#' 
+#'
 #' # write_eml(my_eml, "test.xml")
 set_software <- function(codemeta) {
   cm <- codemeta
@@ -25,7 +25,7 @@ set_software <- function(codemeta) {
         keyword = cm$keywords,
         keywordThesaurus = "codemeta"
       )
-    } ,
+    },
     licenseURL = cm$license,
     implementation =
       eml$implementation(
@@ -91,8 +91,6 @@ guess_url <- function(x) {
   } else if (is_url(x$provider$url)) {
     x$provider$url
   } else {
-    #    warning(paste("Download URL for",
-    #                  x$name,"not found,\n EML requires a distribution element"))
     as.character(NA)
   }
 }

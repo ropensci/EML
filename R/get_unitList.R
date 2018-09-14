@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' 
+#'
 #' # Read in additional units defined in a EML file
 #' \donttest{
 #' f <- system.file("tests", options("emld_db"),
@@ -19,11 +19,11 @@
 #' )
 #' eml <- read_eml(f)
 #' unitList <- get_unitList(eml)
-#' 
+#'
 #' ## Read in the definitions of standard units:
 #' get_unitList()
 #' }
-#' 
+#'
 get_unitList <-
   function(x = NULL) {
     if (is.null(x)) {
@@ -53,6 +53,12 @@ get_unitType <- function(unitType) {
   ## Nested data structure, rectangle via jq
   y <- toJSON(unitType)
 
-  tmp <- jqr::jq(as.character(y), ".[] | {\n            id,\n            name,\n            dimension: .dimension[].name?,\n            power: .dimension[].power?\n            }")
+  tmp <- jqr::jq(as.character(y),
+".[] | {
+             id,
+             name,
+             dimension: .dimension[].name?,
+             power: .dimension[].power?
+            }")
   fromJSON(jqr::combine(tmp))
 }

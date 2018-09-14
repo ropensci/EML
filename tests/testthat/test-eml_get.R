@@ -1,6 +1,10 @@
 context("eml_get")
 
-f <- system.file("tests", options("emld_db"), "eml-datasetWithUnits.xml", package = "emld")
+f <- system.file("tests",
+  options("emld_db"),
+  "eml-datasetWithUnits.xml",
+  package = "emld"
+)
 
 
 test_that("eml_get works on trivial calls", {
@@ -17,5 +21,8 @@ test_that("eml_get works on more calls", {
   y <- eml_get(my_eml, "attributeName")
   expect_s3_class(y, "emld")
 
-  y <- eml_get(my_eml$dataset$dataTable$attributeList$attribute[[1]], "attributeName")
+  y <- eml_get(
+    my_eml$dataset$dataTable$attributeList$attribute[[1]],
+    "attributeName"
+  )
 })

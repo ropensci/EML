@@ -93,7 +93,8 @@ attributes_server <- function(attributes, data) {
 
     #################### Units Table Inputs ####################
     ## Initiallize units reactive
-    react_units <- shiny::reactiveVal(build_units_table(attributes$unit, eml_units))
+    react_units <- shiny::reactiveVal(build_units_table(attributes$unit,
+                                                        eml_units))
 
     ## Get new units from att_table (update attributes and units tables)
     shiny::observeEvent(input$att_table$changes, {

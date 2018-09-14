@@ -1,10 +1,18 @@
 #' get_unit_id
 #'
-#' @description A function to assist with getting valid EML unit ids (see examples). Warning: ensure returned unit is equivalent to input unit (for example "pH" will return "picohenry" which may or may not be equivalent to the input unit "pH").
+#' @description A function to assist with getting valid EML unit ids
+#'  (see examples). Warning: ensure returned unit is equivalent to
+#'  input unit (for example "pH" will return "picohenry" which may
+#'  or may not be equivalent to the input unit "pH").
 #'
-#' @param input_units (character|vector) input units that needs valid EML unit ids
-#' @param eml_version (character) the eml schema version desired (there is a change in the way eml units are named from eml-2.1.1 to eml-2.2.0)
-#' @return (character) A valid EML unit id. If no valid EML unit id can be found, the function will output a warning, along with a preformatted custom unit id.
+#' @param input_units (character|vector) input units that needs
+#'  valid EML unit ids
+#' @param eml_version (character) the eml schema version desired
+#' (there is a change in the way eml units are named from eml-2.1.1
+#'  to eml-2.2.0)
+#' @return (character) A valid EML unit id. If no valid EML unit id
+#'  can be found, the function will output a warning, along with a
+#'  preformatted custom unit id.
 #' @examples
 #' \dontrun{
 #' # The following all return the same id
@@ -16,12 +24,13 @@
 #' get_unit_id("s-2 /     kilometers-1") # this works but is not advised
 #' }
 #' @export
-get_unit_id <- function(input_units, eml_version = getOption("emld_db", "eml-2.2.0")) {
+get_unit_id <- function(input_units,
+                        eml_version = getOption("emld_db", "eml-2.2.0")) {
   if (!requireNamespace("units", quietly = TRUE)) {
     stop(
       call. = FALSE,
       "return_eml_unit requires the
-         'units' package to be installed. Install units package for this functionality."
+       'units' package to be installed."
     )
   }
 
@@ -37,7 +46,8 @@ get_unit_id <- function(input_units, eml_version = getOption("emld_db", "eml-2.2
     udunits_units <- load_udunits()
     warning(
       call. = FALSE,
-      "installing the 'memoise' package will increase the processing speed of get_eml_unit_id"
+      "installing the 'memoise' package will increase
+       the processing speed of get_eml_unit_id"
     )
   } else {
     udunits_units <- mem_load_udunits()
@@ -65,7 +75,7 @@ get_unit_id <- function(input_units, eml_version = getOption("emld_db", "eml-2.2
     } else if (length(eml_abbr) == 1) {
       id <- eml_units$id[eml_abbr]
     } else {
-      split_unit <- get_split_unit(unit, exponents) # Split the unit into individual units
+      split_unit <- get_split_unit(unit, exponents)
       f_split_unit <- tryCatch({
         format_split_unit(split_unit, exponents, eml_version, udunits_units)
       },
@@ -79,7 +89,12 @@ get_unit_id <- function(input_units, eml_version = getOption("emld_db", "eml-2.2
       if (length(f_split_unit) > 0) {
         id <- paste(c(
           f_split_unit[1],
-          sapply(f_split_unit[-1], function(x) gsub("(^[[:alpha:]]?)", "\\U\\1", x, perl = TRUE))
+          sapply(f_split_unit[-1],
+                 function(x)
+                   gsub("(^[[:alpha:]]?)",
+                        "\\U\\1",
+                        x,
+                        perl = TRUE))
         ),
         collapse = ""
         )
@@ -110,17 +125,22 @@ format_split_unit <- function(split_unit,
                               udunits_units = mem_load_udunits()) {
 
   ## Check if eml_version is >= 2.2.0
-  greater_2.2.0 <- as.numeric(gsub("(^eml-)([[:digit:]]\\.[[:digit:]])(\\.)([[:digit:]])", "\\2\\4", eml_version)) >= 2.2
+  greater_2.2.0 <- as.numeric(
+    gsub(
+      "(^eml-)([[:digit:]]\\.[[:digit:]])(\\.)([[:digit:]])",
+      "\\2\\4", eml_version)) >= 2.2
 
   ## Format the split unit
   f_split_unit <- sapply(split_unit, function(x) {
 
     ## Check if the split unit is symbolic
-    singular_standard <- unique(udunits_units$singular_standard[which(x[1] == udunits_units$symbol)])
+    singular_standard <- unique(
+      udunits_units$singular_standard[which(x[1] == udunits_units$symbol)])
 
     if (length(singular_standard) != 1) {
       ## Check if the split unit is plural
-      singular_standard <- unique(udunits_units$singular_standard[which(x[1] == udunits_units$name_plural)])
+      singular_standard <- unique(
+        udunits_units$singular_standard[which(x[1] == udunits_units$name_plural)])
     }
 
     if (length(singular_standard) == 1) {
@@ -157,7 +177,9 @@ format_split_unit <- function(split_unit,
   # For eml schema before 2.2, first unit of multiple units is plural
   if (!greater_2.2.0 && length(split_unit) > 1) {
     length_su <- length(f_split_unit[[1]])
-    f_split_unit[[1]][length_su] <- udunits_units$plural_standard[which(f_split_unit[[1]][length_su] == udunits_units$name_singular)]
+    f_split_unit[[1]][length_su] <-
+      udunits_units$plural_standard[
+        which(f_split_unit[[1]][length_su] == udunits_units$name_singular)]
   }
 
   return(f_split_unit)
@@ -227,7 +249,8 @@ get_split_unit <- function(unit, exponents) {
 }
 
 get_valid_unit <- function(unit) {
-  stopifnot(length(unlist(gregexpr("\\(", unit))) == length(unlist(gregexpr("\\)", unit)))) # stop if not all parenthesis are closed
+  stopifnot(length(unlist(
+    gregexpr("\\(", unit))) == length(unlist(gregexpr("\\)", unit)))) # stop if not all parenthesis are closed
   stopifnot(!grepl("\\([^\\)]*\\(", unit)) # stop if nested parenthesis (unable to deparse)
   stopifnot(!grepl("\\([^\\)]*\\/[^\\)]*\\)", unit)) # stop if fractions in parenthesis (unable to deparse)
 
@@ -332,22 +355,29 @@ load_udunits <- function() {
   prefixes_name <- c(paste0(prefixes$name), "")
 
   ## Remove units without a name
-  udunits_unit_system <- udunits_unit_system[udunits_unit_system$name_singular != "", ]
+  udunits_unit_system <-
+    udunits_unit_system[udunits_unit_system$name_singular != "", ]
 
   ## Remove all already prefixed names, i.e. kilogram
-  is_prefixed <- grepl(paste0("^.*_?", prefixes$name, collapse = "|"), udunits_unit_system$name_singular)
+  is_prefixed <- grepl(paste0("^.*_?",
+                              prefixes$name,
+                              collapse = "|"),
+                       udunits_unit_system$name_singular)
   udunits_unit_system <- udunits_unit_system[!is_prefixed, ]
 
   ## Get all single and plural units and symbols
   udunits_units <- lapply(seq_len(nrow(udunits_unit_system)), function(i) {
 
     ## Get all singular names and aliases
-    name_singular <- paste0(udunits_unit_system[i, ]$name_singular, ", ", udunits_unit_system[i, ]$name_singular_aliases)
+    name_singular <- paste0(udunits_unit_system[i, ]$name_singular,
+                            ", ", udunits_unit_system[i, ]$name_singular_aliases)
     name_singular <- unlist(strsplit(name_singular, ", "))
-    singular_standard <- rep(udunits_unit_system[i, ]$name_singular, length(name_singular))
+    singular_standard <- rep(udunits_unit_system[i, ]$name_singular,
+                             length(name_singular))
 
     ## Get all plural names and aliases
-    name_plural <- paste0(udunits_unit_system[i, ]$name_plural, ", ", udunits_unit_system[i, ]$name_plural_aliases)
+    name_plural <- paste0(udunits_unit_system[i, ]$name_plural,
+                          ", ", udunits_unit_system[i, ]$name_plural_aliases)
     name_plural <- unlist(strsplit(name_plural, ", "))
     plural_standard <- rep(udunits_unit_system[i, ]$name_plural, length(name_plural))
 
@@ -372,13 +402,22 @@ load_udunits <- function() {
     }
 
     ## Get all prefixed names and plurals
-    name_singular <- unlist(lapply(name_singular, function(x) paste0(prefixes_name, x)))
-    singular_standard <- unlist(lapply(singular_standard, function(x) paste0(prefixes_name, x)))
-    name_plural <- unlist(lapply(name_plural, function(x) paste0(prefixes_name, x)))
-    plural_standard <- unlist(lapply(plural_standard, function(x) paste0(prefixes_name, x)))
+    name_singular <- unlist(lapply(name_singular,
+                                   function(x) paste0(prefixes_name, x)))
+    singular_standard <- unlist(lapply(singular_standard,
+                                       function(x) paste0(prefixes_name, x)))
+    name_plural <- unlist(lapply(name_plural,
+                                 function(x) paste0(prefixes_name, x)))
+    plural_standard <- unlist(lapply(plural_standard,
+                                     function(x) paste0(prefixes_name, x)))
 
     ## Create data frame
-    data.frame(name_singular, singular_standard, name_plural, plural_standard, symbol, stringsAsFactors = FALSE)
+    data.frame(name_singular,
+               singular_standard,
+               name_plural,
+               plural_standard,
+               symbol,
+               stringsAsFactors = FALSE)
   })
 
   udunits_units <- do.call(rbind, udunits_units)

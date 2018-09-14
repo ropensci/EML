@@ -408,13 +408,20 @@ htmlwidgets_attributes <- function(df, type = NULL) {
   hot
 }
 
-htmlwidgets_attributes_output <- function(outputId, width = "100%", height = "100%") {
-  htmlwidgets::shinyWidgetOutput(outputId, "htmlwidget_attributes_table", width, height, package = "EML")
-}
+htmlwidgets_attributes_output <-
+  function(outputId, width = "100%", height = "100%") {
+    htmlwidgets::shinyWidgetOutput(outputId,
+      "htmlwidget_attributes_table",
+      width,
+      height,
+      package = "EML"
+    )
+  }
 
-render_htmlwidgets_attributes <- function(expr, env = parent.frame(), quoted = FALSE) {
-  if (!quoted) {
-    expr <- substitute(expr)
-  } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, htmlwidgets_attributes_output, env, quoted = TRUE)
-}
+render_htmlwidgets_attributes <-
+  function(expr, env = parent.frame(), quoted = FALSE) {
+    if (!quoted) {
+      expr <- substitute(expr)
+    } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, htmlwidgets_attributes_output, env, quoted = TRUE)
+  }
