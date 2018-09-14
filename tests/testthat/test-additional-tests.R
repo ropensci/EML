@@ -13,6 +13,8 @@ test_that("we can validate an xml_document", {
 
 
 test_that("set_physical can compute file size automatically", {
+  #file.copy(system.file("examples","hf205-01-TPexp1.csv", package="EML"),
+  #          "hf205-01-TPexp1.csv")
   skip_if_not(file.exists("hf205-01-TPexp1.csv"))
   expect_message(
     physical <-
@@ -32,11 +34,12 @@ test_that("set_method with additional input files", {
       altitudeMin = 160, altitudeMaximum = 330,
       altitudeUnits = "meter"
     )
-
-  file <- system.file("examples", "hf205-methods.docx", package = "emld")
+  expect_is(coverage$geographicCoverage, "list")
+  file <- system.file("examples", "hf205-methods.docx", package = "EML")
   methods <- set_methods(file,
     qualityControl_file = file,
     sampling_file = file,
     sampling_coverage = coverage
   )
+  expect_is(methods$sampling, "list")
 })

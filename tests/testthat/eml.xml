@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="123" system="uuid" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1/ eml.xsd">
+  <dataset>
+    <title>Example EML</title>
+    <creator>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+    </creator>
+    <contact>
+      <individualName>
+        <givenName>Carl</givenName>
+        <surName>Boettiger</surName>
+      </individualName>
+    </contact>
+    <dataTable>
+      <entityName>file.csv</entityName>
+      <entityDescription>csv file containing the data</entityDescription>
+      <physical>
+        <objectName>file.csv</objectName>
+        <dataFormat>
+          <textFormat>
+            <recordDelimiter>\n\r</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+      </physical>
+      <attributeList>
+        <attribute>
+          <attributeName>svl</attributeName>
+          <attributeDefinition>Snout-vent length</attributeDefinition>
+          <storageType>float</storageType>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>meter</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+                <bounds>
+                  <minimum exclusive="false">0</minimum>
+                </bounds>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+    </dataTable>
+  </dataset>
+</eml:eml>

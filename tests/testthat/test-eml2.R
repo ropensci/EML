@@ -15,7 +15,7 @@ coverage <-
   )
 
 
-methods_file <- system.file("examples/hf205-methods.docx", package = "emld")
+methods_file <- system.file("examples", "hf205-methods.docx", package = "EML")
 methods <- set_methods(methods_file)
 
 
@@ -81,9 +81,10 @@ attributeList <-
   )
 
 ## ------------------------------------------------------------------------
-physical <- set_physical("hf205-01-TPexp1.csv")
-# testthat::expect_message(physical <- set_physical("hf205-01-TPexp1.csv"),
-#               "calculated file size")
+f <- system.file("examples", "hf205-01-TPexp1.csv", package="EML")
+#physical <- set_physical(f)
+ testthat::expect_message(physical <- set_physical(f),
+               "calculated file size")
 
 ## ------------------------------------------------------------------------
 dataTable <- list(
