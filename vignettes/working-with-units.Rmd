@@ -1,0 +1,82 @@
+---
+title: "Working with Units"
+author: "Carl Boettiger"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with units}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Overview
+
+
+One essential role of EML metadata is in precisely defining the units in which data is measured. To make sure these units can be understood by (and thus potentially converted to other units by) a computer, it's necessary to be rather precise about our choice of units.  EML knows about a lot of commonly used units, referred to as "standardUnits," already.  If a unit is in EML's `standardUnit` dictionary, we can refer to it without further explanation as long as we're careful to use the precise `id` for that unit, as we will see below.
+
+Sometimes data involves a unit that is not in `standardUnit` dictionary.  In this case, the metadata must provide additional information about the unit, including how to convert the unit into the SI system.  EML uses an existing standard, [stmml](http://www.ch.ic.ac.uk/rzepa/codata2/), to represent this information, which must be given in the `additionalMetadata` section of an EML file.  The `stmml` standard is also used to specify EML's own `standardUnit` definitions.
+
+
+## Add a custom unit to EML
+
+
+```{r}
+library("eml2")
+```
+
+
+
+
+```{r}
+custom_units <- 
+  data.frame(id = "speciesPerSquareMeter", 
+             unitType = "arealDensity", 
+             parentSI = "numberPerSquareMeter", 
+             multiplierToSI = 1, 
+             description = "number of species per square meter")
+
+
+unitList <- set_unitList(custom_units)
+```             
+
+
+Start with a minimal EML document
+```{r}
+me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
+my_eml <- list(dataset = list(
+              title = "A Mimimal Valid EML Dataset",
+              creator = me,
+              contact = me),
+              additionalMetadata = list(metadata = list(
+                unitList = unitList
+              ))
+            )
+
+```
+
+
+```{r}
+write_eml(my_eml, "eml-with-units.xml")
+eml_validate("eml-with-units.xml")
+```
+
+Note: Custom units are widely missunderstood and missused in EML.  See examples from [custom-units](https://gist.github.com/amoeba/67a23818dfca49904c7a54b0632d76bc#file-all-arcticdata-customUnits)
+
+
+
+
+
+## Reading EML: parsing unit information, including custom unit types
+
+
+Let us start by examining the numeric attributes in an example EML file.  First we read in the file:
+
+
+```{r}
+f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
+eml <- read_eml(f)
+```
+
+We extract the `attributeList`, and examine the numeric attributes (e.g. those which have units): 
+
+

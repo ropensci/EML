@@ -1,0 +1,427 @@
+---
+title: "Creating EML"
+author: "Carl Boettiger"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Creating EML}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r include=FALSE}
+has_pandoc <-  rmarkdown::pandoc_available()
+```
+
+
+```{r}
+library(eml2)
+library(emld)
+```
+
+Here we construct a common EML file, including: 
+
+- Constructing more complete lists of authors, publishers and contact.
+- Summarizing the geographic, temporal, and taxonomic coverage of the dataset
+- Reading in pages of methods descriptions from a Word document
+- Adding arbitrary additional metadata
+- Indicating the canonical citation to the paper that should be acknowledged when the data is re-used.  
+- Conversion between EML and other metadata formats, such as NCBII and ISO standards.
+
+In so doing we will take a modular approach that will allow us to build up our metadata from reusable components, while also providing a more fine-grained control over the resulting output fields and files.  
+
+### Overview of the EML hierarchy
+
+A basic knowledge of the components of an EML metadata file is essential to being able to take full advantage of the language. While more complete information can be found in the [official schema documentation](https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html), here we provide a general overview of commonly used metadata elements most relevant to describing data tables.  
+
+This schematic shows each of the metadata elements we will generate.  Most these elements have sub-components (e.g. a 'publisher' may have a name, address, and so forth) which are not shown for simplicity.  Other optional fields we will not be generating in this example are also not shown.   
+
+```yaml
+- eml
+  - dataset
+    - creator
+    - title
+    - publisher
+    - pubDate
+    - keywords
+    - abstract 
+    - intellectualRights
+    - contact
+    - methods
+    - coverage
+      - geographicCoverage
+      - temporalCoverage
+      - taxonomicCoverage
+    - dataTable
+      - entityName
+      - entityDescription
+      - physical
+      - attributeList
+
+```
+
+
+
+### Our example: (re)-creating hf205.xml
+
+In this example, we will use R to re-generate
+the EML metadata originally published by [Ellison _et al_
+(2012), HF205](http://harvardforest.fas.harvard.edu/data-archive)
+through the Harvard Forest Long Term Ecological Research
+Center, accompanying the PNAS paper [Sirota _et al_
+(2013)](http://dx.doi.org/10.1073/pnas.1221037110). We have made only
+a few modifications to simplify the presentation of this tutorial, 
+so our resulting EML will not be perfectly identical to the original.
+
+
+### Our strategy
+
+We will build this EML file from the bottom up, starting with the two main components
+of a `dataTable` indicated above: the `attributeList` and the `physical` file type.
+We will then slip these two pieces into place inside a `dataTable` element, and slip
+that into our `eml` element along with the rest of the generic metadata, much like
+building a puzzle or nesting a set of Russian dolls.  
+
+The original metadata file was created in association with the publication in PNAS
+based on a Microsoft Word document template that Harvard Forest provides
+to the academic researchers.  Metadata from this template is then read off
+by hand and an EML file is generated using a combination of a commercial
+XML editing platform (Oxygen) for commonly used higher-level elements,
+and the Java platform `Morpho` provided by the EML development team for
+lower level attribute metadata.
+
+
+## Attribute Metadata
+
+A fundamental part of EML metadata is a description of the attributes
+(usually columns) of a text file (usually a csv file) containing the
+data being described.  This is the heart of many EML files.
+
+```{r}
+attributes <-
+tibble::tribble(
+~attributeName, ~attributeDefinition,                                                 ~formatString, ~definition,        ~unit,   ~numberType,
+  "run.num",    "which run number (=block). Range: 1 - 6. (integer)",                 NA,            "which run number", NA,       NA,
+  "year",       "year, 2012",                                                         "YYYY",        NA,                 NA,       NA,
+  "day",        "Julian day. Range: 170 - 209.",                                      "DDD",         NA,                 NA,       NA,
+  "hour.min",   "hour and minute of observation. Range 1 - 2400 (integer)",           "hhmm",        NA,                 NA,       NA,
+  "i.flag",     "is variable Real, Interpolated or Bad (character/factor)",           NA,            NA,                 NA,       NA,
+  "variable",   "what variable being measured in what treatment (character/factor).", NA,            NA,                 NA,       NA,
+  "value.i",    "value of measured variable for run.num on year/day/hour.min.",       NA,            NA,                 NA,       NA,
+  "length",    "length of the species in meters (dummy example of numeric data)",     NA,            NA,                 "meter",  "real")
+
+```
+
+Every column (attribute) in the dataset needs an `attributeName` (column name, as it appears in the CSV file) and `attributeDefinition`, a longer description of what the column contains. Additional information required depends on the data type:
+
+**Strings** (character vectors) data just needs a "definition" value, often the same as the `attributeDefinition` in this case.
+
+**Numeric** data needs a `numberType` (e.g. "real", "integer"), and a unit. 
+
+**Dates** need a date format.
+
+**Factors** (enumerated domains) need to specify definitions for each of the code terms appearing in the data columns.  This does not fit so nicely in the above table, where each attribute is a single row, so if data uses factors (instead of non-enumerated strings), these definitions must be provided in a separate table.  The format expected of this table has three columns: `attributeName` (as before), `code`, and `definition`.  Note that `attributeName` is simply repeated for all codes belonging to a common attribute.  
+
+In this case we have three attributes that are factors,  To make the code below more readable (aligning code and definitions side by side), we define these first as named character vectors, and convert that to a `data.frame`. (The `dplyr::frame_data` function also permits this more readable way to define data.frames inline).
+
+```{r}
+i.flag <- c(R = "real",
+            I = "interpolated",
+            B = "bad")
+variable <- c(
+  control  = "no prey added",
+  low      = "0.125 mg prey added ml-1 d-1",
+  med.low  = "0,25 mg prey added ml-1 d-1",
+  med.high = "0.5 mg prey added ml-1 d-1",
+  high     = "1.0 mg prey added ml-1 d-1",
+  air.temp = "air temperature measured just above all plants (1 thermocouple)",
+  water.temp = "water temperature measured within each pitcher",
+  par       = "photosynthetic active radiation (PAR) measured just above all plants (1 sensor)"
+)
+
+value.i <- c(
+  control  = "% dissolved oxygen",
+  low      = "% dissolved oxygen",
+  med.low  = "% dissolved oxygen",
+  med.high = "% dissolved oxygen",
+  high     = "% dissolved oxygen",
+  air.temp = "degrees C",
+  water.temp = "degrees C",
+  par      = "micromoles m-1 s-1"
+)
+
+## Write these into the data.frame format
+factors <- rbind(
+data.frame(
+  attributeName = "i.flag",
+  code = names(i.flag),
+  definition = unname(i.flag)
+),
+data.frame(
+  attributeName = "variable",
+  code = names(variable),
+  definition = unname(variable)
+),
+data.frame(
+  attributeName = "value.i",
+  code = names(value.i),
+  definition = unname(value.i)
+)
+)
+```
+
+With these two data frames in place, we are ready to create our `attributeList` element:
+
+```{r}
+attributeList <- set_attributes(attributes, factors, col_classes = c("character", "Date", "Date", "Date", "factor", "factor", "factor", "numeric"))
+```
+
+
+## Data file format 
+
+The documentation of a `dataTable` also requires a description of the file format itself.  From where can the data file be downloaded?  Is it in CSV format, or TSV (tab-separated), or some other format? Are there header lines that should be skipped? This information documents the physical file itself, and is provided using the `physical` child element to the `dataTable`.  To assist in documenting common file types such as CSV files, the `EML` R package provides the function `set_physical`, which takes as arguments many of these common options.  By default these options are already set to document a standard `csv` formatted object, so we do not need to specify delimiters and so forth if our file conforms to that.  We simply provide the name of the file, which is used as the `objectName`.  (See examples for `set_physical()` for reading other common variations, analogous to the options covered in R's `read.table()` function.)
+
+```{r}
+physical <- set_physical("hf205-01-TPexp1.csv")
+```
+
+## Assembling the `dataTable`
+
+Once we have defined the `attributeList` and `physical` file, we can now assemble the `dataTable` element itself. Unlike the `EML` R package, in `eml2` there is no need to call `new()` to create elements.  Everything is just a list.  Template lists for a given class can be viewed with the `emld::template()` function. 
+
+```{r}
+dataTable <- list(
+                 entityName = "hf205-01-TPexp1.csv",
+                 entityDescription = "tipping point experiment 1",
+                 physical = physical,
+                 attributeList = attributeList)
+```
+
+
+## Coverage metadata
+
+One of the most common and useful types of metadata is coverage
+information, specifying the temporal, taxonomic, and geographic coverage
+of the data.  This kind of metadata is frequently indexed by data
+repositories, allowing users to search for all data about a specific
+region, time, or species.  In EML, these descriptions can take many forms,
+allowing for detailed descriptions as well as more general terms when such
+precision is not possible (such as geological epoch instead of date range,
+or higher taxonomic rank information in place of species definitions.)
+
+Most common specifications can
+be made using the more convenient but less flexible `set_coverage()`
+function in EML.  This function takes a date range or list of specific
+dates, a list of scientific names, a geographic description and bounding
+boxes, as shown here:
+
+
+```{r}
+geographicDescription <- "Harvard Forest Greenhouse, Tom Swamp Tract (Harvard Forest)"
+
+
+coverage <- 
+  set_coverage(begin = '2012-06-01', end = '2013-12-31',
+               sci_names = "Sarracenia purpurea",
+               geographicDescription = geographicDescription,
+               west = -122.44, east = -117.15, 
+               north = 37.38, south = 30.00,
+               altitudeMin = 160, altitudeMaximum = 330,
+               altitudeUnits = "meter")
+```
+
+
+
+## Creating methods
+
+Careful documentation of the methods involved in the experimental design, measurement and collection of data are a key part
+of metadata.  Though frequently documented in scientific papers, such method sections may be too brief or incomplete, and may become more readily disconnected from the data file itself.  Such documentation is usually written using word-processing software such as MS Word, LaTeX or markdown.  Users with `pandoc` installed (which ships as part of RStudio) can install the `rmarkdown` package to take advantage of its automatic conversion into the DocBook XML format used by EML.  Here we open a MS Word file with the methods and read this into our methods element using the helper function `set_methods()`.  While not used in this example, note that the `set_methods()` function also includes many optional arguments for documenting additional information about sampling, or relevant citations.
+
+```{r eval=has_pandoc}
+methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
+methods <- set_methods(methods_file)
+```
+
+```{r include=FALSE, eval=!has_pandoc}
+## placeholder if pandoc is not installed
+methods <- NULL
+```
+
+
+## Creating parties
+
+Individuals and organizations appear in many capacities in an EML document.  Meanwhile, R already has a native object class, `person` for describing individuals, which it uses in citations and package descriptions, among other things. We can use native R function `person()` to create an R `person` object.  Often it is more convenient to use R's coercion function, `as.person()`, to turn a string with standardized notation into a `person` class (Though this is not always reliable, for instance, in surnames containing whitespace).  However it is constructed, a `person` class can then be coerced into the appropriate EML object like so:
+
+```{r}
+R_person <- person("Aaron", "Ellison", ,"fakeaddress@email.com", "cre", 
+                  c(ORCID = "0000-0003-4151-6081"))
+aaron <- as_emld(R_person)
+```
+
+Likewise this method can be applied to a list of `person` objects:   
+
+```{r}
+others <- c(as.person("Benjamin Baiser"), as.person("Jennifer Sirota"))
+associatedParty <- as_emld(others)
+associatedParty[[1]]$role <- "Researcher"
+associatedParty[[2]]$role <- "Researcher"
+```
+
+Note that R only permits certain codes such as `ctb` be be given in square brackets or as the `role` slot in a `person` object.  
+
+We can instead always use the list approach to create any of these elements, instead of the 
+shorthand coercion methods shown above.  This permits a bit more flexibility, particularly for constructing elements
+where we want to include more metadata than R's `person` object knows about.  Here we define an `address` element
+first, since we can then re-use that element in defining both the contact person and publisher of the dataset:
+
+```{r}
+HF_address <- list(
+                  deliveryPoint = "324 North Main Street",
+                  city = "Petersham",
+                  administrativeArea = "MA",
+                  postalCode = "01366",
+                  country = "USA")
+```
+
+
+```{r}
+publisher <- list(
+                 organizationName = "Harvard Forest",
+                 address = HF_address)
+```
+
+
+```{r}              
+contact <- 
+  list(
+    individualName = aaron$individualName,
+    electronicMailAddress = aaron$electronicMailAddress,
+    address = HF_address,
+    organizationName = "Harvard Forest",
+    phone = "000-000-0000")
+
+```
+
+
+## Creating a `keywordSet`
+
+Constructing the `keywordSet` is just a list of lists.  Note that everything is a list.
+
+```{r}
+keywordSet <- list(
+    list(
+        keywordThesaurus = "LTER controlled vocabulary",
+        keyword = list("bacteria",
+                    "carnivorous plants",
+                    "genetics",
+                    "thresholds")
+        ),
+    list(
+        keywordThesaurus = "LTER core area",
+        keyword =  list("populations", "inorganic nutrients", "disturbance")
+        ),
+    list(
+        keywordThesaurus = "HFR default",
+        keyword = list("Harvard Forest", "HFR", "LTER", "USA")
+        ))
+```
+
+
+Lastly, some of the elements needed for `eml` object can simply be given as text strings.
+
+```{r}
+pubDate <- "2012" 
+
+title <- "Thresholds and Tipping Points in a Sarracenia 
+Microecosystem at Harvard Forest since 2012"
+
+abstract <- "The primary goal of this project is to determine
+  experimentally the amount of lead time required to prevent a state
+change. To achieve this goal, we will (1) experimentally induce state
+changes in a natural aquatic ecosystem - the Sarracenia microecosystem;
+(2) use proteomic analysis to identify potential indicators of states
+and state changes; and (3) test whether we can forestall state changes
+by experimentally intervening in the system. This work uses state-of-the
+art molecular tools to identify early warning indicators in the field
+of aerobic to anaerobic state changes driven by nutrient enrichment
+in an aquatic ecosystem. The study tests two general hypotheses: (1)
+proteomic biomarkers can function as reliable indicators of impending
+state changes and may give early warning before increasing variances
+and statistical flickering of monitored variables; and (2) well-timed
+intervention based on proteomic biomarkers can avert future state changes
+in ecological systems."  
+
+intellectualRights <- "This dataset is released to the public and may be freely
+  downloaded. Please keep the designated Contact person informed of any
+plans to use the dataset. Consultation or collaboration with the original
+investigators is strongly encouraged. Publications and data products
+that make use of the dataset must include proper acknowledgement. For
+more information on LTER Network data access and use policies, please
+see: http://www.lternet.edu/data/netpolicy.html."
+```
+
+
+Many of these text fields can instead be read in from an external file that has richer formatting, such as we did with
+the `set_methods()` step.  Any text field containing a slot named `section` can import text data from a MS Word `.docx` file, markdown file, or other file format recognized by [Pandoc](http://pandoc.org) into that element.  For instance, here we import the same paragraph of text shown above for `abstract` from an external file (this time, a markdown-formatted file) instead:
+
+```{r eval=has_pandoc}
+abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")
+abstract <- set_TextType(abstract_file)
+```
+
+
+We are now ready to add each of these elements we have created so far into our `dataset` element, like so:
+
+
+```{r}
+dataset <- list(
+               title = title,
+               creator = aaron,
+               pubDate = pubDate,
+               intellectualRights = intellectualRights,
+               abstract = abstract,
+               associatedParty = associatedParty,
+               keywordSet = keywordSet,
+               coverage = coverage,
+               contact = contact,
+               methods = methods,
+               dataTable = dataTable)
+```
+
+
+
+
+
+With the `dataset` in place, we are ready to declare our root `eml` element.  In addition to our `dataset` element we have already built, all we need is a packageId code and the system on which it is based.  Here we have generated a unique id using the standard `uuid` algorithm, which is available in the R package `uuid`.  
+
+```{r}
+eml <- list(
+           packageId = uuid::UUIDgenerate(),
+           system = "uuid", # type of identifier
+           dataset = dataset)
+
+```
+
+
+
+With our `eml` object fully constructed in R, we can now check that it is valid, conforming to all criteria set forth in the EML Schema.  This will ensure that other researchers and other software can readily parse and understand the contents of our metadata file:
+
+
+```{r}
+write_eml(eml, "eml.xml")
+```
+
+
+```{r}
+eml_validate("eml.xml")
+```
+
+
+The validator returns a status `0` to indicate success.  Otherwise, the first error message encountered will be displayed. The most common reason for an error is probably the omission of a required metadata field. 
+
+
+To take the greatest advantage of EML, we should consider depositing our file in a [Metacat](https://knb.ecoinformatics.org/knb/docs/intro.html)-enabled repository, which we discuss in the next vignette on using EML with data repositories.
+
+```{r include=FALSE}
+unlink("eml.xml")
+```

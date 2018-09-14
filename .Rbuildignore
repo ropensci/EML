@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+EML_R_functions
+EML_vignettes/*
+^README\.Rmd$
+^README-.*\.png$
+^LICENSE\.md$
+^data-raw$
+^\.travis\.yml$
+^codecov\.yml$
+^paper/
+^codemeta\.json$

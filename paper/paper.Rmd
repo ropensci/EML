@@ -1,0 +1,103 @@
+---
+title: Working with Ecological Metadata Language Files from R
+author:
+  - name: Carl Boettiger
+    email: cboettig@berkeley.edu
+    affiliation: ucb
+    footnote: Corresponding Author
+address:
+  - code: ucb
+    address: Department of Environmental Science, Policy, and Management, University of California, Berkeley, Berkeley, CA
+abstract: |
+  This is the abstract.
+
+  It consists of two paragraphs.
+
+journal: "Methods in Ecology and Evolution"
+date: "`r Sys.Date()`"
+bibliography: references.bib
+output: rticles::elsevier_article
+---
+
+---
+title: "Project Description"
+subtitle: "Realizing the Promise of Machine-Readable Metadata: Ecoinformatics for the Rest of Us"
+# author: "Carl Boettiger"
+bibliography: "references.bib"
+output: pdf_document
+header-includes:
+   - \usepackage{multicol}
+   - \usepackage{bold-extra}
+
+---
+
+
+
+Despite a sea change in the availability of public data collected in ecological research, broad synthesis of ecological data remains a rare and largely manual endeavor. Realizing the potential of these unprecedented new data sources requires thorough and accurate machine-readable data and metadata files, and the tools to make use of them.  Here, I describe user friendly R tools that will enable more ecologists to both take advantage of and contribute to growth of well-annotated public ecological data. 
+
+Many factors drive the rapid expansion of data availability in ecological research: from drones to satellite images, new technology for gene sequencing, large-scale simulations of climate and other processes [@Overpeck2011], to cultural changes such as the adoption of public data archiving [@Fairbairn2010; @Whitlock2010] and the significant investment in a national network of ecological [NEON, @Keller2008] and ocean [OOI, @Witze2013] observatories.  These factors also reflect the range and heterogeneity in ecological data, from the microscopic to the planetary.  How can researchers combine laboratory measurements of species environmental tolerances, aerial estimates of species occurrence, and simulated projections of changing climate?  How do we even find if the relevant data exist in these rapidly expanding archives? 
+
+Rich, machine-readable metadata greatly facilitates discovery, integration and synthesis of the kind of heterogeneous data inherent to ecological research. Metadata provides all of the context required to understand raw data files -- without it data may be little more than meaningless columns of numbers.  Metadata tells us what column labels mean, what units were used. Metadata tells us which species, geographic areas, and time periods are covered by the study, who performed the research, and how.  Data search and discovery requires good metadata: we are looking for measurements of body mass on species found in this region.  Data integration and synthesis require good metadata: we want to combine nine different data sets on different species found in the same region into a single data table, so we must know the species involved, the units of measurement, and so forth.  
+
+This metadata is most effective in a format that can be parsed and interpreted by a computer program.  While conventions have primarily relied on scientific papers or the occasional README file to provide this information, machine-readable metadata formats can help ensure these records are complete and accurate and can automate the often tedious process of recording metadata. A machine-readable format can be indexed by specialized search engines, allowing a user to identify all data sets that include measurements of a specific variable on a specific species or from a certain geographic region.  A machine-readable format can even help automate the process of data integration and synthesis, such as standardizing units when combining data columns from different studies.  Such automation is helpful even in small studies, it is crucial if ecological research is to keep up with our rapidly expanding data.
+
+### What is EML?
+
+The Ecological Metadata Language [EML, @Jones2006], originally designed around previous work from the Ecological Society of America [@Michener1997], seeks to tackle this challenge.  EML is an is an XML-based schema which provides a rich, extensible, machine-readable format to describe a wide range of data types, including tabular data, spatial raster and vector data, methods, protocols, software or citations.  EML files can be *validated* against the schema, ensuring this information conforms to the predictable structure and can thus be read by any computer software implementing the EML specification.  Recognizing the importance of thorough, machine-readable metadata, key providers of ecological data such as the NSF-supported Long Term Ecological Research (LTER) sites [@LTER_EML], and the NSF's recently launched National Ecological Observatory Network [NEON, @Keller2008; @NEON] now provide rich EML metadata accompanying their data products.   
+
+More than XX individual datasets have been descibed in EML over the past two decades.  EML metadata are required for all data produced by LTER projects (representing about about $12 million NSF support annually), by all NEON sites (about $469 million NSF support) and all projects supported by the NSF Arctic programs (about $40 million annually) (https://www.nsf.gov/pubs/2016/nsf16055/nsf16055.jsp).  
+
+Unfortunately, this XML-based format remains ignored or inaccessible to many ecologists, who lack tools and training to capitalize on these advances in computation and data management.  Few are familiar with the skills required to create EML descriptions of their own data, or to fully benefit from the rich information provided in EML [@Hernandez2012].  NEON relies on dedicated professionals to generate EML metadata, while ecologists working with LTER sites benefit from the support of informatics staff in creating EML files describing the data they contribute to LTER data repositories.  Consequently, LTER sites contribute the majority of EML files found in the DataONE Network (which indexes most major repositories of ecological and environmental data), Fig 1.  This highlights the need for tools for ecologists to create EML without assistance from experts or prior expertise in working with XML documents and schema. 
+
+
+![Number of EML metadata files by member nodes for the DataONE Network of the major ecological and environmental data repositories.  EML is used across a wide range of data repositories shown here, all though repositories in which ecoinformatics staff assist in preparation of metadata, such as LTER, provide significantly more metadata than those which primarly host direct community contributions, such as KNB.](img/repo_counts.pdf)
+
+
+### Relation to existing software tools 
+
+<!--
+3. How the proposed software compares to alternative or existing elements (including other commercial and research solutions) and what are the limitations of these existing elements.
+-->
+
+No extensible tool or utility for reading and writing EML files exists that integrates into the workflow of most ecologists.  Researchers can use the Java application `Morpho`, which provides a graphical user interface (GUI) for creating EML files describing their own data -- this provides an excellent introduction to creating EML, but can be tedious and the interface prohibits automation and templating possible with a programmatic tool. Moreover, `Morpho` can only write new EML files, but not help users parse and analyze existing ones.  The open-source software platform `MetaCat` is available for data repositories which wish to serve and index data files described in EML [@metacat].  This allows data hosts to present users with a nice web-based search interface for discovering data (`MetaCat-UI`) which is already in use by repositories such as KNB and DataONE (see Fig 2).  However, this web-based platform is ultimately software for data repositories to use and deploy, not software for end users.  The environment cannot be easily deployed or extended by research ecologists looking to to work with a generic collection of EML files, cannot perform arbitrary queries or assist in data integration and synthesis tasks.  @Weitz2016 identify these factors (a focus on servers, limited extensibility, and a software stack that is foreign to most researchers in the field of application) as the leading reasons why cyberinfrastructure ends up under-utilized by communities they seek to serve.  Most importantly, `Morpho` and `MetaCat` do little to empower the researcher to take advantage of machine-readable metadata in their own work: instead, these tools work in concert to allow other researchers to take advantage of the user's data -- a noble objective that is often seen as self-sacrificing and a disincentive to data sharing [@VanNoorden2013].  Researchers need an extensible tool that can easily be incorporated into their existing workflow and facilitate their own research.
+
+
+
+
+
+![A powerful EML metadata-driven search interface from DataONE, based on `MetaCat` platform.  The web interface identifies data files containing measurements of mass of *Cyprinidae* fishes in the geographical regions indicated by the grid. Such a search requires metadata that is thorough, granular, and machine readable. An R package for EML would both make it easier for more researchers to create this EML metadata, perform search queries like that shown here and extend both search and integration tasks through a programmable interface](img/dataone_search.png)
+
+
+
+
+## An R package for EML
+
+This proposal seeks to bridge this gap between the skills and workflows of most research ecologists and the powerful expressiveness of EML-annotated data being generated by NSF's major investments in informatics-supported data generation such as NEON and LTER through the development of an R package for reading, writing and manipulating EML files.  The R language is widely used throughout the ecological research community and has proven an effective platform to engage both users and developers [@Mair2015; @ropensci].  This proposal would support the development and maintenance of the EML R package.  A note on semantics: following the convention for naming R packages dedicated to parsing and serializing a given format, the proposed package name and the data format are both referred to by the acronym EML.  Throughout, I will refer to the data format as simply "EML", and the software package specifically as "the EML R package." 
+
+
+EML parsing in R would enable users to analyze metadata in the same programmatic environment many already use for data analysis.  This kind of programmable environment is essential for users to truly leverage the power of machine-readable metadata in large scale analyses. For instance, this would make it possible for a user to create scripts which can combine data frames coming from different studies which may use different column names or different units for the same variable.  Currently such data integration tasks require manual inspection of the metadata for each data file to verify things like column names and units, a process which does not easily scale to arbitrarily large numbers of separate data files. Or a user might search for a particular phrase being used in the protocol section of a corpus of EML files, or automatically extract citations from metadata files into format recognized by a reference manager.  Once metadata is available in a predictably structured R objects, users can take advantage of the familiar, programmable environment provided by R to automate these tasks.  
+
+The ability to create EML from within the R environment is equally powerful.  Again, this is a natural setting to generate metadata since many users are already working with their data in R.  Metadata creation and curation is infamously tedious, making a scripted approach that can automate repetitive tasks a natural choice. Reuse of common metadata elements can avoid tedious data entry (including individual and institutional information, citations, and common data formats), automatically detect metadata from existing data files (such as species coverage or geographic range).  Helper routines within the package can also improve the quality of metadata created. For instance, EML includes a description of the taxonomic coverage of the data being described.  This allows search engines such as MetaCat or the EML R package search functions to identify all data on a given species.  This metadata is most useful when it includes a complete taxonomic description, e.g. taxonomic ranks involved, such that a search for *Aves* returns all bird species.  The EML R package can leverage existing functions in the R package `taxize` to automatically generate the rank classification metadata [@Chamberlain2013].   Package users have the greatest incentive to generate careful and thorough metadata when they can benefit directly from these annotations.  By generating EML files for their own data, users can later leverage the EML parsing functions to help search and synthesize old data sets.  The EML package also integrates with `dataone` R package to automate uploading data and metadata files to a public or private repository archive in the DataONE network, such as the KNB.  This gives users a convenient way to back-up, archive, and share their data files using configurable permissions options and authentication provided by DataONE, and to release data publicly under a permanent DOI, facilitating discovery and citation by other researchers.  Once users can realize these benefits for themselves, opting in to public data sharing can be only a click away, with data already annotated. In this approach, the public benefits of data annotation and data sharing come as a by-product of a tool that puts the user's own needs first. 
+These use cases are summarized in Box 1.  This proposal outlines the project plan to implement this functionality into a robust, user-friendly, sustainable software tool.  
+
+
+# Software Architecture and Engineering Process #
+
+The software design follows the format of an R package, the definitive community standard for packaging software to R users. This provides a widely recognized layout for the project, cross platform support, and well defined norms for documentation, testing, distribution, release and evaluation described here.  
+
+**Documentation**: The project uses the widely adopted `roxygen2` framework for composing and maintaining all documentation in the software files, consistent with literate programming practice. Keeping code and documentation together helps ensure documentation is up-to-date and consistent with the software.  The automated testing suite also checks the documentation for consistency with the code.  R generates both HTML and PDF forms of documentation from these files.  A package README, Code of Conduct, and Contributing Guide provide further documentation relevant to other developers.  The project also uses the `pkgdown` package to generate a GitHub-hosted website from the package documentation.  
+
+**Testing and validation**: The package uses `testthat` [@testthat], a widely used unit-testing framework for R packages, and `covr` [@covr] to measure test coverage.  The test suite is fully automated both locally and through the Travis Continuous Integration (CI) service.
+
+
+**Security and Trustworthiness**: Open source development practices ensure users and developers can inspect all aspects of the code and tests.  EML files conform to open standards that permit validation and encryption of data. 
+
+**Provenance**: Semantic versioning, a NEWS log summarizing changes, and the automatic generation of archival DOIs for each version help researchers both access and cite specific version of the EML package that they use.  Additionally, the EML software itself helps researchers track and document provenance of their data and methods in the machine-readable EML format.  
+
+**Reproducibilty**: Our development process is committed to making sure analyses using the EML package remain as reproducible as possible in the future. All effort is made to maintain a backwards-compatible function interface by avoiding changes to the function signature that could break existing code whenever possible.  An increase of the major version number indicates when a new version may break backwards compatibility, and older versions of the software are archived by CRAN and in the Zenodo data repository at the DOI indicated for the version. 
+
+
+
+\pagebreak
+
+# References

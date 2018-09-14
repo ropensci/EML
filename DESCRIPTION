@@ -1,0 +1,47 @@
+Package: eml2
+Type: Package
+Title: Create and Manipulate Data using the Ecological Metadata Language
+Version: 0.1.0
+Authors@R: c(
+              person("Carl", "Boettiger", 
+                  email = "cboettig@gmail.com", 
+                  role = c("aut", "cre", "cph"),
+                  comment=c(ORCID = "http://orcid.org/0000-0002-1642-628X")),
+              person("Mitchell", "Maier", 
+                  comment= c(github = "https://github.com/maier-m",
+                             ORCID = "http://orcid.org/0000-0001-6955-0535"),
+                  role = c("ctb"))
+                  )
+Description: A successor to the 'EML' R package which provides the same high level
+             functions for creating and extracting data from 'EML' files, while
+             providing a simpler and more user friendly lower level interface.
+License: MIT + file LICENSE
+URL: https://github.com/cboettig/eml2
+BugReports: https://github.com/cboettig/eml2/issues
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 2.10)
+Suggests: knitr,
+    taxize,
+    tibble,
+    testthat,
+    covr,
+    EML, 
+    units, 
+    memoise,
+    htmlwidgets,
+    shiny,
+    shinyjs
+Imports: xml2, 
+    methods, 
+    digest, 
+    emld (>= 0.0.0.9900), 
+    jqr, 
+    jsonlite, 
+    uuid,
+    rmarkdown,
+    utils,
+    dplyr
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1.9000
+Remotes: cboettig/emld
