@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.0" xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd" system="hfr" scope="system" packageId="knb-lter-hfr.205.4">
+   <access authSystem="knb" order="allowFirst" scope="document">
+      <allow>
+         <principal>uid=HFR,o=lter,dc=ecoinformatics,dc=org</principal>
+         <permission>all</permission>
+      </allow>
+      <allow>
+         <principal>public</principal>
+         <permission>read</permission>
+      </allow>
+   </access>
+   <dataset id="HF205">
+      <alternateIdentifier>HF205</alternateIdentifier>
+      <title>Thresholds and Tipping Points in a Sarracenia Microecosystem at Harvard Forest since 2012</title>
+      <creator>
+         <individualName>
+            <givenName>Aaron</givenName>
+            <surName>Ellison</surName>
+         </individualName>
+      </creator>
+      <creator>
+         <individualName>
+            <givenName>Nicholas</givenName>
+            <surName>Gotelli</surName>
+         </individualName>
+      </creator>
+      <associatedParty>
+         <individualName>
+            <givenName>Benjamin</givenName>
+            <surName>Baiser</surName>
+         </individualName>
+         <role>Researcher</role>
+      </associatedParty>
+      <associatedParty>
+         <individualName>
+            <givenName>Jennifer</givenName>
+            <surName>Sirota</surName>
+         </individualName>
+         <role>Researcher</role>
+      </associatedParty>
+      <pubDate>2012</pubDate>
+      <abstract>
+         <section>
+            <para>The primary goal of this project is to determine experimentally the amount of lead time required to prevent a state change. To achieve this goal, we will (1) experimentally induce state changes in a natural aquatic ecosystem - the Sarracenia microecosystem; (2) use proteomic analysis to identify potential indicators of states and state changes; and (3) test whether we can forestall state changes by experimentally intervening in the system. This work uses state-of-the art molecular tools to identify early warning indicators in the field of aerobic to anaerobic state changes driven by nutrient enrichment in an aquatic ecosystem. The study tests two general hypotheses: (1) proteomic biomarkers can function as reliable indicators of impending state changes and may give early warning before increasing variances and statistical flickering of monitored variables; and (2) well-timed intervention based on proteomic biomarkers can avert future state changes in ecological systems.</para>
+         </section>
+      </abstract>
+      <keywordSet>
+         <keyword>bacteria</keyword>
+         <keyword>carnivorous plants</keyword>
+         <keyword>genetics</keyword>
+         <keyword>thresholds</keyword>
+         <keywordThesaurus>LTER controlled vocabulary</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+         <keyword>populations</keyword>
+         <keyword>inorganic nutrients</keyword>
+         <keyword>disturbance</keyword>
+         <keywordThesaurus>LTER core area</keywordThesaurus>
+      </keywordSet>
+      <keywordSet>
+         <keyword>Harvard Forest</keyword>
+         <keyword>HFR</keyword>
+         <keyword>LTER</keyword>
+         <keyword>USA</keyword>
+         <keywordThesaurus>HFR default</keywordThesaurus>
+      </keywordSet>
+      <intellectualRights>
+         <section>
+            <para>This dataset is released to the public and may be freely downloaded. Please keep the designated Contact person informed of any plans to use the dataset. Consultation or collaboration with the original investigators is strongly encouraged. Publications and data products that make use of the dataset must include proper acknowledgement. For more information on LTER Network data access and use policies, please see: http://www.lternet.edu/data/netpolicy.html.</para>
+         </section>
+      </intellectualRights>
+      <distribution>
+         <online>
+            <url function="information">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf205</url>
+         </online>
+      </distribution>
+      <coverage>
+         <geographicCoverage>
+            <geographicDescription>Harvard Forest Greenhouse, Tom Swamp Tract (Harvard Forest)</geographicDescription>
+            <boundingCoordinates>
+               <westBoundingCoordinate>-72.29</westBoundingCoordinate>
+               <eastBoundingCoordinate>-72.10</eastBoundingCoordinate>
+               <northBoundingCoordinate>+42.55</northBoundingCoordinate>
+               <southBoundingCoordinate>+42.42</southBoundingCoordinate>
+               <boundingAltitudes>
+                  <altitudeMinimum>160</altitudeMinimum>
+                  <altitudeMaximum>330</altitudeMaximum>
+                  <altitudeUnits>meter</altitudeUnits>
+               </boundingAltitudes>
+            </boundingCoordinates>
+         </geographicCoverage>
+         <temporalCoverage>
+            <rangeOfDates>
+               <beginDate>
+                  <calendarDate>2012-06-01</calendarDate>
+               </beginDate>
+               <endDate>
+                  <calendarDate>2013-12-31</calendarDate>
+               </endDate>
+            </rangeOfDates>
+         </temporalCoverage>
+         <taxonomicCoverage>
+            <taxonomicClassification>
+               <taxonRankName>genus</taxonRankName>
+               <taxonRankValue>Sarracenia</taxonRankValue>
+               <taxonomicClassification>
+                  <taxonRankName>species</taxonRankName>
+                  <taxonRankValue>purpurea</taxonRankValue>
+               </taxonomicClassification>
+            </taxonomicClassification>
+         </taxonomicCoverage>
+      </coverage>
+      <contact>
+         <individualName>
+            <givenName>Aaron</givenName>
+            <surName>Ellison</surName>
+         </individualName>
+         <organizationName>Harvard Forest</organizationName>
+         <address>
+            <deliveryPoint>324 North Main Street</deliveryPoint>
+            <city>Petersham</city>
+            <administrativeArea>MA</administrativeArea>
+            <postalCode>01366</postalCode>
+            <country>USA</country>
+         </address>
+         <phone phonetype="voice">(978) 724-3302</phone>
+         <electronicMailAddress>aellison@fas.harvard.edu</electronicMailAddress>
+      </contact>
+      <publisher>
+         <organizationName>Harvard Forest</organizationName>
+         <address>
+            <deliveryPoint>324 North Main Street</deliveryPoint>
+            <city>Petersham</city>
+            <administrativeArea>MA</administrativeArea>
+            <postalCode>01366</postalCode>
+            <country>USA</country>
+         </address>
+         <phone phonetype="voice">(978) 724-3302</phone>
+         <phone phonetype="fax">(978) 724-3595</phone>
+         <onlineUrl>http://harvardforest.fas.harvard.edu</onlineUrl>
+      </publisher>
+      <methods>
+         <methodStep>
+            <description>
+               <section>
+                  <title>General Protocols</title>
+                  <para>1. Field methods. All experiments will be carried out in the greenhouse at Harvard Forest. We have developed an instrumentation system that allows us to collect continuous dissolved [O2] measurements: dedicated micro-probes (DO-166MT; Lazar Research Laboratories: http://www.shelfscientific.com/) connected to multiplexers and data loggers (AM16/32B multiplexer, CR-1000 datalogger and control system [Campbell Scientific: http://www.cambellsci.com]). The initial ecosystem composition in all experimental plants will be standardized by seeding each pitcher with a 10-ml inoculum of liquid collected from pitchers growing at Tom Swamp.  In all experiments, prey will be supplied to pitchers as standardized aliquots of dried and finely ground bald-faced hornets (Dolichovespula maculata; Hymenoptera: Vespidae), which we collect in quantity throughout New England. Both hornets and ants (the latter are the dominant prey of S. purpurea) are hymenoptera, and have nearly identical C:N ratios (hornets: 3.97; common bog-dwelling ants [Tapinoma sessile and Myrmica lobifrons]: 3.37), but on average hornets have greater than 100 times the dry mass of these ants, and are easier to collect and process as a standardized food source. Additions of prey, either as large "pulses" or chronic "presses" are analogous to the enrichment and eutrophication that occur in aquatic "green" food webs in which phytoplankton abundance is boosted through addition of limiting nutrients. In "brown" food webs such as the Sarracenia microecosystem, detritus - not primary production - is at the base of the web, and our treatments boost this material as would happen through increases in arthropod prey capture78 or through nitrogen-enriched precipitation.</para>
+                  <para>2. Proteomic analysis. Proteomic profiles of microbial communities are determined after separating the microbial fraction from the pitcher fluid, prey, and other detritus. The microbial "pellet" is subjected to SDS-PAGE (sodium dodecyl sulfate polyacrylamide gel) electrophoresis; bands are cut out and digested in-gel with trypsin. Tryptic peptides are subjected to LC-MS/MS (liquid chromatography tandem mass spectrometry) for peptide and protein identification. Absolute abundance of peptides and proteins are quantified using AQUA (Absolute QUAntification) analysis109.</para>
+               </section>
+               <section>
+                  <title>Specific Experiments</title>
+                  <para>Experiment #1. Effects of nutrient enrichment on state changes and [O2] profiles. This experiment alters nutrient enrichment rates to characterize the [O2] profile and the transition to the anaerobic state. The experimental design is a one-way layout with 5 treatment groups: one control (no enrichment) and 4 enrichment levels (0.125, 0.25, 0.5, 1.0 mg prey added ml-1 d-1). One plant is assigned to each treatment group, and the entire set is replicated 6 times over successive weeks. [O2] is monitored continuously for 4 days to characterize state changes and tipping points under different enrichment rates. This experiment tracks a continuous [O2] profile but does not include proteomic analysis. The purpose of Experiment #1 is to identify an enrichment rate E that generates a long pre-tipping period before transition time T to the anaerobic state. This enrichment rate will be used in Experiments #2 - #4.</para>
+                  <para>Experiment #2. Identification of early intervention time and characterization of aerobic and anaerobic proteomes. This experiment will use the single enrichment rate E determined from Experiment #1 and impose different intervention times I at which nutrient enrichment will be terminated. Thus, this experiment will identify the latest time I* at which it is possible to intervene and stop the transition to the anaerobic state by halting enrichment. The [O2] profile will again be monitored continuously over 10 days to measure the state of the system. From Experiment #1, the transition time T to the anaerobic state with no intervention will be known. We will use one control group (no prey addition) and ten levels of intervention time (all with the same enrichment rate E) as a proportion of T (0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0). Six plants will be assigned randomly to each of the 11 treatments in a randomized one-way layout and [O2] profiles will be monitored continuously. In addition to the [O2] profiles, we will also characterize the protein profiles of aerobic and anaerobic pitchers in all 11 treatment groups at the end of the experiment.</para>
+                  <para>After the plants are harvested, we will create proteomic profiles of the predominantly bacterial portion (centrifuged pellet) of the pitcher fluid from each plant, as described in General Protocols. Thus, 66 separate pellet-fraction samples will be analyzed by SDS-PAGE. After examining the SDS-PAGE profiles, approximately ten proteins that show dynamic patterns consistent with state change and five that do not change will be cut from the gel, subjected to in-gel tryptic digestion and a portion of the tryptic peptides will be analyzed by LC-MS/MS. Using these data, we will choose three identified peptides from each protein for peptide synthesis such that each synthesized peptide contains stable isotope labels (AQUA peptides) to distinguish them by mass from the native peptides. We will then quantify all 45 of the native peptides from the original samples using a known amount of each AQUA peptide spiked into the tryptic digest. The AQUA analysis of proteins that do not show changes will be used for normalization between samples. These data will be used to independently identify the current state of the system and forecast the time-to-transition.</para>
+                  <para>We will use Sequest searches for initial identification of peptides; relevant scores including Xcorr and Delta Cn values will be given for each peptide. Other peptides will be identified by de novo sequencing using PepNovo; all PepNovo scores will likewise be given including any N- or C-terminal gaps. Mass error in ppm will be reported for each precursor ion. We will use standard multivariate analysis to search for distinctive proteomic profiles114 that characterize aerobic and anaerobic ecosystems, as well as ecosystems that developed with and without inputs of photosynthetic O2 and plant metabolites.</para>
+                  <para>Experiment #3. Identification of diagnostic proteins. Using Experiments #1 and 2, we will have identified an enrichment rate E with a long pre-tipping period and an intervention time I* before which mitigation and termination of enrichment will prevent eutrophication. Experiment #3 will characterize the mean and variance of the protein profile before and after I*. We are especially interested in identifying proteins that increase rapidly in abundance (or variance) well before the onset of flickering in [O2] and before the transition time T from the aerobic to the anaerobic state.</para>
+                  <para>A cohort of 100 plants all will be fed at rate E (determined from Experiment #1), with intervention time I* determined from Experiment #2, although no intervention will be used in this "press" experiment so that we can contrast proteins before and after the state change. At seven times before I* and three times after I*, we will harvest 10 randomly chosen plants. At each prescribed harvest time, we will measure [O2] and collect samples from each plant for proteomic screening using both SDS-PAGE and AQUA analysis. This experiment will identify proteins that rise quickly in abundance during the pre- I* period and can be used as early indicators of a future tipping point. Because different plants will be harvested at each time period, this is a one-way ANOVA design, with pre-and post- I* a priori contrasts. A randomization test will be used to determine whether variances in protein expression differ through time. During these analyses we will use the data from the AQUA peptides and from known amounts of protein standards, such as bovine serum albumin, to approximate the amount of protein in a given coomassie-stained SDS-PAGE gel band. The reason for doing this is to provide a fast "real-time" assay based just on expression in the SDS-PAGE. This rapid assay will be used in Experiment #4.</para>
+                  <para>Experiment # 4. Proof-of-application. This experiment will provide a benchmark test of our methods and their ability to correctly identify tipping points. A cohort of 100 plants will each be fitted with [O2] probes and started on the enrichment regime. Two times per day, we will collect 3 plants each, pool their contents, and conduct a rapid screen in the lab with SDS-PAGE for the diagnostic proteins that were identified in Experiment #3. We will use the protein expression in the gel to delineate an "early" and a "late" mitigation strategy. As soon as diagnostic proteins measured in the SDS-gels are at abundances that signal we are at 0.5×I* - approximately one-half of the way to the latest intervention time - we will randomly select one third of the remaining plants for mitigation and termination of enrichment (the "early" mitigation strategy). We will continue to harvest plants from the remainder of the cohort and monitor proteins. As soon as diagnostic proteins signal we are at 0.75 times I*, we will randomly select one half of the remaining plants for mitigation and termination of enrichment (the "late" mitigation strategy). The remaining plants (approximately one sixth to one third of the original cohort) will continue to be enriched. We will monitor [O2] in all 3 groups (no-mitigation control, early mitigation, late mitigation) until all plants reach a new [O2] equilibrium. If the protein markers are successful, the proportion of food webs that remain aerobic will be significantly higher in the two mitigation treatments than in the no-mitigation control.</para>
+               </section>
+            </description>
+         </methodStep>
+      </methods>
+      <dataTable id="hf205-01">
+         <entityName>hf205-01-TPexp1.csv</entityName>
+         <entityDescription>tipping point experiment 1</entityDescription>
+         <physical id="1354212701790">
+            <objectName>hf205-01-TPexp1.csv</objectName>
+            <dataFormat>
+               <textFormat>
+                  <numHeaderLines>1</numHeaderLines>
+                  <recordDelimiter>\r\n</recordDelimiter>
+                  <attributeOrientation>column</attributeOrientation>
+                  <simpleDelimited>
+                     <fieldDelimiter>,</fieldDelimiter>
+                  </simpleDelimited>
+               </textFormat>
+            </dataFormat>
+            <distribution>
+               <online>
+                  <url function="download">http://harvardforest.fas.harvard.edu/data/p20/hf205/hf205-01-TPexp1.csv</url>
+               </online>
+            </distribution>
+         </physical>
+         <attributeList>
+            <attribute id="1354213311470">
+               <attributeName>run.num</attributeName>
+               <attributeDefinition>which run number (=block). Range: 1 – 6. (integer)</attributeDefinition>
+               <measurementScale>
+                  <nominal>
+                     <nonNumericDomain>
+                        <textDomain>
+                           <definition>which run number</definition>
+                        </textDomain>
+                     </nonNumericDomain>
+                  </nominal>
+               </measurementScale>
+            </attribute>
+            <attribute id="1354213311471">
+               <attributeName>year</attributeName>
+               <attributeDefinition>year, 2012</attributeDefinition>
+               <measurementScale>
+                  <dateTime>
+                     <formatString>YYYY</formatString>
+                  </dateTime>
+               </measurementScale>
+            </attribute>
+            <attribute id="1354213311472">
+               <attributeName>day</attributeName>
+               <attributeDefinition>Julian day. Range: 170 – 209.</attributeDefinition>
+               <measurementScale>
+                  <dateTime>
+                     <formatString>DDD</formatString>
+                  </dateTime>
+               </measurementScale>
+            </attribute>
+            <attribute id="1354213311473">
+               <attributeName>hour.min</attributeName>
+               <attributeDefinition>hour and minute of observation. Range 1 – 2400 (integer)</attributeDefinition>
+               <measurementScale>
+                  <dateTime>
+                     <formatString>hhmm</formatString>
+                  </dateTime>
+               </measurementScale>
+            </attribute>
+            <attribute id="1354213311474">
+               <attributeName>i.flag</attributeName>
+               <attributeDefinition>is variable Real, Interpolated or Bad (character/factor)</attributeDefinition>
+               <measurementScale>
+                  <nominal>
+                     <nonNumericDomain>
+                        <enumeratedDomain>
+                           <codeDefinition>
+                              <code>R</code>
+                              <definition>real</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>I</code>
+                              <definition>interpolated</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>B</code>
+                              <definition>bad</definition>
+                           </codeDefinition>
+                        </enumeratedDomain>
+                     </nonNumericDomain>
+                  </nominal>
+               </measurementScale>
+            </attribute>
+            <attribute id="1354213311475">
+               <attributeName>variable</attributeName>
+               <attributeDefinition>what variable being measured in what treatment (character/factor).</attributeDefinition>
+               <measurementScale>
+                  <nominal>
+                     <nonNumericDomain>
+                        <enumeratedDomain>
+                           <codeDefinition>
+                              <code>control</code>
+                              <definition>no prey added</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>low</code>
+                              <definition>0.125 mg prey added ml-1 d-1</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>med.low</code>
+                              <definition>0,25 mg prey added ml-1 d-1</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>med.high</code>
+                              <definition>0.5 mg prey added ml-1 d-1</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>high</code>
+                              <definition>1.0 mg prey added ml-1 d-1</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>air.temp</code>
+                              <definition>air temperature measured just above all plants (1 thermocouple)</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>water.temp</code>
+                              <definition>water temperature measured within each pitcher</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>par</code>
+                              <definition>photosynthetic active radiation (PAR) measured just above all plants (1 sensor)</definition>
+                           </codeDefinition>
+                        </enumeratedDomain>
+                     </nonNumericDomain>
+                  </nominal>
+               </measurementScale>
+            </attribute>
+            <attribute id="1354213311476">
+               <attributeName>value.i</attributeName>
+               <attributeDefinition>value of measured variable for run.num on year/day/hour.min.</attributeDefinition>
+               <measurementScale>
+                  <nominal>
+                     <nonNumericDomain>
+                        <enumeratedDomain>
+                           <codeDefinition>
+                              <code>control</code>
+                              <definition>% dissolved oxygen</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>low</code>
+                              <definition>% dissolved oxygen</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>med.low</code>
+                              <definition>% dissolved oxygen</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>med.high</code>
+                              <definition>% dissolved oxygen</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>high</code>
+                              <definition>% dissolved oxygen</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>air.temp</code>
+                              <definition>degrees C</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>water.temp</code>
+                              <definition>degrees C</definition>
+                           </codeDefinition>
+                           <codeDefinition>
+                              <code>par</code>
+                              <definition>micromoles m-1 s-1</definition>
+                           </codeDefinition>
+                        </enumeratedDomain>
+                     </nonNumericDomain>
+                  </nominal>
+               </measurementScale>
+            </attribute>
+         </attributeList>
+         <numberOfRecords>9999</numberOfRecords>
+      </dataTable>
+      <otherEntity id="hf205-02">
+         <entityName>hf205-02-mathematica-oxygen.nb</entityName>
+         <entityDescription>Mathematica code for oxygen model (nb)</entityDescription>
+         <physical>
+            <objectName>hf205-02-mathematica-oxygen.nb</objectName>
+            <dataFormat>
+               <externallyDefinedFormat>
+                  <formatName>Mathematica notebook</formatName>
+               </externallyDefinedFormat>
+            </dataFormat>
+            <distribution>
+               <online>
+                  <url function="download">http://harvardforest.fas.harvard.edu/data/p20/hf205/hf205-02-mathematica-oxygen.nb</url>
+               </online>
+            </distribution>
+         </physical>
+         <entityType>Mathematica code</entityType>
+      </otherEntity>
+      <otherEntity id="hf205-03">
+         <entityName>hf205-03-mathematica-oxygen.pdf</entityName>
+         <entityDescription>Mathematica code for oxygen model (pdf)</entityDescription>
+         <physical>
+            <objectName>hf205-03-mathematica-oxygen.pdf</objectName>
+            <dataFormat>
+               <externallyDefinedFormat>
+                  <formatName>pdf</formatName>
+               </externallyDefinedFormat>
+            </dataFormat>
+            <distribution>
+               <online>
+                  <url function="download">http://harvardforest.fas.harvard.edu/data/p20/hf205/hf205-03-mathematica-oxygen.pdf</url>
+               </online>
+            </distribution>
+         </physical>
+         <entityType>Mathematica code</entityType>
+      </otherEntity>
+   </dataset>
+   <additionalMetadata>
+      <metadata>
+         <additionalClassifications>
+            <status>ongoing</status>
+            <researchTopic>community</researchTopic>
+            <studyType>short-term measurement</studyType>
+            <studyType>modeling</studyType>
+         </additionalClassifications>
+      </metadata>
+   </additionalMetadata>
+   <additionalMetadata>
+      <metadata>
+         <additionalLinks>
+            <url name="Ecophysiology of Carnivorous Plants Worldwide 1980-2011">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf168</url>
+            <url name="Effects of Prey Availability on Sarracenia Physiology at Harvard Forest 2005">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf109</url>
+            <url name="Food Web of Sarracenia Purpurea in United States and Canada since 1999">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf193</url>
+            <url name="Thresholds and Regime Shifts at Four LTER Sites (CCE, JRN, PAL, SBC) 1951-2009">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf170</url>
+            <url name="Nitrogen Cycling Dynamics in Sarracenia Purpurea at Harvard Forest 2004-2005">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf096</url>
+            <url name="Organic and Inorganic Nitrogen Uptake by Sarracenia Purpurea at Harvard Forest and Fort Albany ON 2007">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf146</url>
+            <url name="Prey Capture by Carnivorous Plants Worldwide 1923-2007">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf111</url>
+            <url name="Sarracenia Purpurea Prey Capture at Harvard Forest 2008">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf114</url>
+            <url name="Allochthonous Nutrients in the Sarracenia Microecosystem at Harvard Forest 2005-2007">http://harvardforest.fas.harvard.edu:8080/exist/xquery/data.xq?id=hf098</url>
+         </additionalLinks>
+      </metadata>
+   </additionalMetadata>
+</eml:eml>

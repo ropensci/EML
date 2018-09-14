@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml packageId="knb-lter-arc.10531.6"
+  system="https://pasta.lternet.edu"
+  xmlns:eml="eml://ecoinformatics.org/eml-2.1.0"
+  xmlns:cit="eml://ecoinformatics.org/literature-2.1.0"
+  xmlns:doc="eml://ecoinformatics.org/documentation-2.1.0"
+  xmlns:ds="eml://ecoinformatics.org/dataset-2.1.0"
+  xmlns:prot="eml://ecoinformatics.org/protocol-2.1.0"
+  xmlns:res="eml://ecoinformatics.org/resource-2.1.0"
+  xmlns:stmml="http://www.xml-cml.org/schema/stmml"
+  xmlns:sw="eml://ecoinformatics.org/software-2.1.0"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd">
+  <access authSystem="https://pasta.lternet.edu/authentication"
+    order="allowFirst" scope="document" system="https://pasta.lternet.edu">
+    <allow>
+      <principal>uid=ARC,o=lter,dc=ecoinformatics,dc=org</principal>
+      <permission>all</permission>
+    </allow>
+    <allow>
+      <principal>public</principal>
+      <permission>read</permission>
+    </allow>
+  </access>
+  <dataset>
+    <alternateIdentifier>2002-2013_Kling_AON_Imnavait_Chemistry.06</alternateIdentifier>
+    <title>Biogeochemistry data set for Imnavait Creek Weir on the North Slope of Alaska.</title>
+    <creator id="pers-1">
+      <organizationName>Arctic Observing Network (AON)</organizationName>
+      <individualName>
+        <givenName>George</givenName>
+        <surName>Kling</surName>
+      </individualName>
+      <address>
+        <deliveryPoint>University of Michigan</deliveryPoint>
+        <deliveryPoint>Department of Ecology and Evolutionary Biology</deliveryPoint>
+        <deliveryPoint>830 North University</deliveryPoint>
+        <city>Ann Arbor</city>
+        <administrativeArea>MI</administrativeArea>
+        <postalCode>48109-1048</postalCode>
+        <country>United States of America</country>
+      </address>
+    </creator>
+    <metadataProvider>
+      <organizationName>Arctic Observing Network (AON)</organizationName>
+      <address>
+        <deliveryPoint>The Ecosystems Center</deliveryPoint>
+        <deliveryPoint>Marine Biological Lab</deliveryPoint>
+        <deliveryPoint>7 MBL St</deliveryPoint>
+        <city>Woods Hole</city>
+        <administrativeArea>MA</administrativeArea>
+        <postalCode>02543</postalCode>
+        <country>USA</country>
+      </address>
+      <phone phonetype="voice">(508) 289 7496</phone>
+      <electronicMailAddress>arc_im@mbl.edu</electronicMailAddress>
+      <onlineUrl>http://arc-lter.ecosystems.mbl.edu/AON/</onlineUrl>
+    </metadataProvider>
+    <pubDate>2014</pubDate>
+    <abstract>
+      <para>Data file describing the biogeochemistry of samples collected at Imnavait Creek ,North Slope of Alaska. Sample site descriptors include a unique assigned number (sortchem), site, date, time, depth, distance (downstream), elevation, and category. Physical measures collected in the field include temperature, conductivity, pH. Chemical analysis for the sample include alkalinity; dissolved organic carbon (DOC); inorganic and total dissolved nutrients (NH4, PO4, NO3, TDN, TDP); particulate carbon, nitrogen, and phosphorus (PC, PN, and PP); cations (Ca, Mg, Na, K); anions (SO4 and Cl); silica and oxygen.</para>
+    </abstract>
+    <keywordSet>
+      <keyword>carbon</keyword>
+      <keyword>nitrogen</keyword>
+      <keyword>phosphorus</keyword>
+      <keyword>ammonium</keyword>
+      <keyword>total dissolved nitrogen</keyword>
+      <keyword>alkalinity</keyword>
+      <keyword>dissolved organic carbon</keyword>
+      <keyword>carbon dioxide</keyword>
+      <keyword>methane</keyword>
+      <keyword>pH</keyword>
+      <keyword>temperature</keyword>
+      <keyword>conductivity</keyword>
+      <keyword>particulates</keyword>
+      <keyword>particulate organic carbon</keyword>
+    </keywordSet>
+    <intellectualRights>
+      <para>This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.</para>
+      <para>The re-use of scientific data has the potential to greatly increase communication, collaboration and synthesis within and among disciplines, and thus is fostered, supported and encouraged. Permission to use this dataset is granted to the Data User free of charge subject to the following terms:</para>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>Citation. It is considered a matter of professional ethics to acknowledge the work of other scientists. Thus, the Data User should properly cite the Data Set in any publications or in the metadata of any derived data products that were produced using the Data Set.</para>
+          </listitem>
+          <listitem>
+            <para>Acknowledgement. The Data User should acknowledge any institutional support or specific funding awards referenced in the metadata accompanying this dataset in any publications where the Data Set contributed significantly to its content. Acknowledgements should identify the supporting party, the party that received the support, and any identifying information such as grant numbers. For example: Data sets were provided by the Arctic LTER. This material is based upon work supported by the National Science Foundation under Grants #ARC-1107593, 1107707, 0632139 and #DEB-1026843.</para>
+          </listitem>
+          <listitem>
+            <para>Notification. The Data User will notify the Data Set Contact when any derivative work or publication based on or derived from the Data Set is distributed. The Data User will provide the data contact with two reprints of any publications resulting from use of the Data Set and will provide copies, or online access to, any derived digital products. Notification will include an explanation of how the Data Set was used to produce the derived work.</para>
+          </listitem>
+          <listitem>
+            <para>Collaboration. The Data Set has been released in the spirit of open scientific collaboration. Data Users are thus strongly encouraged to consider consultation, collaboration and/or co-authorship with the Data Set Creator.</para>
+          </listitem>
+          <listitem>
+            <para>Disclaimer. While substantial efforts are made to ensure the accuracy of data and documentation contained in this Data Set, complete accuracy of data and metadata cannot be guaranteed. All data and metadata are made available "as is". The Data User holds all parties involved in the production or distribution of the Data Set harmless for damages resulting from its use or interpretation.</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </intellectualRights>
+    <distribution>
+      <online>
+        <url>http://arc-lter.ecosystems.mbl.edu/2002-2013KlingAONImnavaitChemistry</url>
+      </online>
+    </distribution>
+    <coverage>
+      <geographicCoverage id="GEO-1">
+        <geographicDescription>Arctic LTER Site number 1140</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>-149.317799</westBoundingCoordinate>
+          <eastBoundingCoordinate>-149.317799</eastBoundingCoordinate>
+          <northBoundingCoordinate>68.617081</northBoundingCoordinate>
+          <southBoundingCoordinate>68.617081</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+      <temporalCoverage>
+        <rangeOfDates>
+          <beginDate>
+            <calendarDate>2002-06-05</calendarDate>
+          </beginDate>
+          <endDate>
+            <calendarDate>2013-08-15</calendarDate>
+          </endDate>
+        </rangeOfDates>
+      </temporalCoverage>
+    </coverage>
+    <maintenance>
+      <description>
+        <para>21 October 2014: Generated this file (version .01) -jad/gwk</para>
+        <para>Version 2: Corrected publish date Jim l Oct2014</para>
+        <para>Version 4: Changed Distrubution URL since the LTER network DAS system is being discontinued. JimL 9Apr2015</para>
+        <para>Version 5: Updated data use policy. BK.</para>
+        <para>Version 6: Added grant numbers to eml. JL</para>
+      </description>
+    </maintenance>
+    <contact id="im" system="knb">
+      <positionName>Data Manager</positionName>
+      <address>
+        <deliveryPoint>The Ecosystems Center</deliveryPoint>
+        <deliveryPoint>Marine Biological Lab</deliveryPoint>
+        <deliveryPoint>7 MBL St</deliveryPoint>
+        <city>Woods Hole</city>
+        <administrativeArea>MA</administrativeArea>
+        <postalCode>02543</postalCode>
+        <country>USA</country>
+      </address>
+      <phone phonetype="voice">(508) 289 7496</phone>
+      <electronicMailAddress>arc_im@mbl.edu</electronicMailAddress>
+      <onlineUrl>http://arc-lter.ecosystems.mbl.edu/</onlineUrl>
+    </contact>
+    <publisher>
+      <organizationName>ARC LTER</organizationName>
+      <address>
+        <deliveryPoint>The Ecosystems Center</deliveryPoint>
+        <deliveryPoint>Marine Biological Lab</deliveryPoint>
+        <deliveryPoint>7 MBL St</deliveryPoint>
+        <city>Woods Hole</city>
+        <administrativeArea>MA</administrativeArea>
+        <postalCode>02543</postalCode>
+        <country>USA</country>
+      </address>
+      <phone phonetype="voice">(508) 289 7496</phone>
+      <electronicMailAddress>arc_im@mbl.edu</electronicMailAddress>
+      <onlineUrl>http://arc-lter.ecosystems.mbl.edu//</onlineUrl>
+    </publisher>
+    <methods>
+      <methodStep>
+        <description>
+          <para>
+            <literalLayout>
+For water sampling protocols see the Arctic LTER Land-Water group protocol book accessible from the Land-Water mainpage on the Arctic LTER web page or at http://www-personal.umich.edu/~gwk and clicking on the protocol link at the bottom of the page.  Specific methodologies are described in the protocol book listed above and a general description is provided below.
+
+General analyses:  In general water samples from soils, streams, and lakes are filtered in the field and kept cold and dark or preserved until analysis.  Dissolved inorganic nutrients (NH4 and PO4) were analyzed by wet chemistry techniques at Toolik Field Station usually within 24 hours of sampling.  Dissolved gases CO2 and CH4 were determined using a syringe equilibration method and analyzed at Toolik Field Station on a gas chromatograph.  DOC, TDN, TDP, particulate C, N, and P, and dissolved ions were brought back to the University of Michigan for analysis.  DOC is analyzed on a Shimadzu TOC-5000 or a TOC-V.  Particulate Carbon and Nitrogen on a Perkin Elmer CHN 2400, TDN is analyzed on a Shimadzu TOC-5000 or TOC-V or using a persulfate digestion.  TDP and NO3 are analyzed on an OI Alpkem autoanalyzer, ions on a Dionex ion chromatograph, and cations on an inductively coupled plasma optical emission spectrometer (ICP-OES Perkin Elmer Optima 4300 or 8000).  Alkalinity samples were run on a Radiometer autotitrator.
+
+For all analyses, sample values that were less than zero were assigned a value of zero.  See specific protocols for limits of detection.  Missing values (not sampled or analyzed) are represented by a period " . " in the dataset.
+
+</literalLayout>
+          </para>
+        </description>
+        <protocol>
+          <title>Field and Lab Methods &amp; Protocols</title>
+          <creator>
+            <references>pers-1</references>
+          </creator>
+          <distribution>
+            <online>
+              <url>http://arc-lter.ecosystems.mbl.edu/landwater/lw_protocols</url>
+            </online>
+          </distribution>
+          <proceduralStep>
+            <description>
+              <para>http://arc-lter.ecosystems.edu/landwater/lw_protocols</para>
+            </description>
+          </proceduralStep>
+        </protocol>
+      </methodStep>
+    </methods>
+    <project>
+      <title>Collaborative Research on Carbon, Water, and Energy Balance of the Arctic Landscape at Flagship Observatories in Alaska and Siberia.</title>
+      <personnel>
+        <individualName>
+          <givenName>George</givenName>
+          <surName>Kilng</surName>
+        </individualName>
+        <address>
+          <deliveryPoint>University of Michigan Ann Arbor</deliveryPoint>
+          <deliveryPoint>3003 South State St. Room 1062</deliveryPoint>
+          <city>Ann Arbor</city>
+          <administrativeArea>MI</administrativeArea>
+          <postalCode>48109</postalCode>
+          <country>USA</country>
+        </address>
+        <role>originator</role>
+      </personnel>
+      <abstract>
+        <para>The arctic landscape interacts with the global and regional climate by exchanging carbon dioxide, methane, water, and energy with the atmosphere. Understanding how these exchanges are regulated and how they change is a key goal of the US Study of Environmental Arctic Change and the NSF Arctic Observatory Network. The first goal of this work is year round monitoring of carbon, water, and energy balance at two arctic sites, Imnavait Creek in Alaska and Cherskii in Siberia. The work will be a collaboration among researchers from the Marine Biological Laboratory, the University of Alaska Fairbanks, Northeast Science Station, Russia, and the University of Michigan. The second goal is the development of these two sites as ?Flagship? observatories for research on arctic lands and freshwaters. The main task here is to integrate the new carbon, water, and energy balance data with the already large, diverse, and growing data bases from other research done at these sites. A third aim is to promote PanArctic comparisons and development of PanArctic data bases.</para>
+        <para>Broader impacts include contributions to education, including underrepresented groups, through participation in the Logan Science Journalism program, the Arctic Long-Term Ecological Research Schoolyard program, and outreach to Native Alaskan communities. Research and education infrastructure will be enhanced by making the data bases available online. Benefits to society include improved understanding of the impacts of climate change, especially in Alaska where the local residents are closely tied to the land through traditional, subsistence lifestyles.</para>
+      </abstract>
+      <funding>
+        <para>1107593</para>
+        <para>1107707</para>
+        <para>0632139</para>
+        <para>1026843</para>
+      </funding>
+      <studyAreaDescription>
+        <coverage>
+          <geographicCoverage>
+            <geographicDescription>The AON research site (68°N and 149°W) is in the foothills region of the North Slope of Alaska. This area is typical of the northern foothills of the Brooks Range, with continuous permafrost, no trees, a complete snow cover for 7 to 9 months, winter ice cover on lakes, streams, and ocean, and cessation of river flow during the winter. Tussock tundra vegetation of sedges and grasses mixed with dwarf birch and low willows form the dominant vegetation type with areas of drier heath tundra on ridge tops and other well-drained sites as well as areas of river-bottom willow communities.</geographicDescription>
+            <boundingCoordinates>
+              <westBoundingCoordinate>-149.75</westBoundingCoordinate>
+              <eastBoundingCoordinate>-149.0433</eastBoundingCoordinate>
+              <northBoundingCoordinate>68.8</northBoundingCoordinate>
+              <southBoundingCoordinate>68.5</southBoundingCoordinate>
+              <boundingAltitudes>
+                <altitudeMinimum>610</altitudeMinimum>
+                <altitudeMaximum>1360</altitudeMaximum>
+                <altitudeUnits>meter</altitudeUnits>
+              </boundingAltitudes>
+            </boundingCoordinates>
+          </geographicCoverage>
+        </coverage>
+      </studyAreaDescription>
+    </project>
+    <dataTable>
+      <entityName>2002-2013_Kling_AON_Imnavait_Chemistry.csv</entityName>
+      <entityDescription>Biogeochemistry data set for Imnavait Creek Weir on the North Slope of Alaska.</entityDescription>
+      <physical>
+        <objectName>2002-2013_Kling_AON_Imnavait_Chemistry.csv</objectName>
+        <dataFormat>
+          <textFormat>
+            <numHeaderLines>1</numHeaderLines>
+            <recordDelimiter>\r\n</recordDelimiter>
+            <attributeOrientation>column</attributeOrientation>
+            <simpleDelimited>
+              <fieldDelimiter>,</fieldDelimiter>
+              <quoteCharacter>"</quoteCharacter>
+            </simpleDelimited>
+          </textFormat>
+        </dataFormat>
+        <distribution>
+          <online>
+            <url>https://pasta.lternet.edu/package/data/eml/knb-lter-arc/10531/6/4a8d9b5e6280c09eb66c2a8d7c0d606e</url>
+          </online>
+        </distribution>
+      </physical>
+      <attributeList>
+        <attribute id=" att0.1">
+          <attributeName>SortChem</attributeName>
+          <attributeLabel>SortChem</attributeLabel>
+          <attributeDefinition>A unique number assigned to each sample collected at a specific site at a specific date and time. The year that the sample was collected is followed by a dash and then a sequential number. For example, if 600 samples were collected in 2002, then the first sample collected is 2002-0001 and the last sample is 2002-0600.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>A unique number assigned to each sample collected at a specific site at a specific date and time. The year that the sample was collected is followed by a dash and then a sequential number. For example, if 600 samples were collected in 2002, then the first sample collected is 2002-0001 and the last sample is 2002-0600.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.2">
+          <attributeName>Site</attributeName>
+          <attributeLabel>Site</attributeLabel>
+          <attributeDefinition>Site Name. If a soil site, the site is described in the name by general location then specific feature (e.g., watertrack) then specific sampling point (1,2,3,...). Lake and stream sites use common names (e.g., Toolik) or LTER number codes. Exceptions in naming procedure are provided in the Code Information and in the AK-LTER_Site_Info.xls file.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Site Name. If a soil site, the site is described in the name by general location then specific feature (e.g., watertrack) then specific sampling point (1,2,3,...). Lake and stream sites use common names (e.g., Toolik) or LTER number codes. Exceptions in naming procedure are provided in the Code Information and in the AK-LTER_Site_Info.xls file.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.3">
+          <attributeName>Date</attributeName>
+          <attributeLabel>Date</attributeLabel>
+          <attributeDefinition>Sampling Date</attributeDefinition>
+          <measurementScale>
+            <dateTime>
+              <formatString>dd-mon-yyyy</formatString>
+            </dateTime>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.4">
+          <attributeName>Time_hr_dst</attributeName>
+          <attributeLabel>Time_hr_dst</attributeLabel>
+          <attributeDefinition>Sampling Time in Alaska Daylight Savings Time (1 hour ahead of Alaska Standard Time: if 13:00 DST than 12:00 AST)</attributeDefinition>
+          <measurementScale>
+            <dateTime>
+              <formatString>hh24:mi</formatString>
+            </dateTime>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.5">
+          <attributeName>Depth_m</attributeName>
+          <attributeLabel>Depth_m</attributeLabel>
+          <attributeDefinition>Depth from surface of lake, stream, or soil, or a description of location such as "meta" for metalimnion.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Depth from surface of lake, stream, or soil, or a description of location such as "meta" for metalimnion.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.6">
+          <attributeName>Distance_km</attributeName>
+          <attributeLabel>Distance_km</attributeLabel>
+          <attributeDefinition>Distance along a stream where negative values are upstream of a designated starting point and positive values are downstream of the designated starting point. For soil sites, the distance is the perpendicular distance from the river or lake shore. Can include a text description.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Distance along a stream where negative values are upstream of a designated starting point and positive values are downstream of the designated starting point. For soil sites, the distance is the perpendicular distance from the river or lake shore. Can include a text description.</definition>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.7">
+          <attributeName>Elevation_m</attributeName>
+          <attributeLabel>Elevation_m</attributeLabel>
+          <attributeDefinition>Elevation above sea level</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>meter</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.8">
+          <attributeName>Temp_C</attributeName>
+          <attributeLabel>Temp_C</attributeLabel>
+          <attributeDefinition>Sample water temperature, deg C</attributeDefinition>
+          <measurementScale>
+            <interval>
+              <unit>
+                <standardUnit>celsius</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </interval>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.9">
+          <attributeName>Cond_uS</attributeName>
+          <attributeLabel>Cond_uS</attributeLabel>
+          <attributeDefinition>Electrical conductivity of the water sample</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>microsiemenPerCentimeter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.10">
+          <attributeName>pH</attributeName>
+          <attributeLabel>pH</attributeLabel>
+          <attributeDefinition>pH (opposite of the log of the molar hydrogen ion concentration)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>number</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.11">
+          <attributeName>Alk_ueqL</attributeName>
+          <attributeLabel>Alk_ueqL</attributeLabel>
+          <attributeDefinition>Total alkalinity (carbonate and non-carbonate alkalinity)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>microequivalentPerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.12">
+          <attributeName>PCO2_uatm</attributeName>
+          <attributeLabel>PCO2_uatm</attributeLabel>
+          <attributeDefinition>Partial pressure of carbon dioxide</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>microatmosphere</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.13">
+          <attributeName>PCH4_uatm</attributeName>
+          <attributeLabel>PCH4_uatm</attributeLabel>
+          <attributeDefinition>Partial pressure of methane gas</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>microatmosphere</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.14">
+          <attributeName>CO2_uM</attributeName>
+          <attributeLabel>CO2_uM</attributeLabel>
+          <attributeDefinition>Dissolved carbon dioxide gas concentration</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.15">
+          <attributeName>CH4_uM</attributeName>
+          <attributeLabel>CH4_uM</attributeLabel>
+          <attributeDefinition>Dissolved methane gas concentration</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.16">
+          <attributeName>DOC_uM</attributeName>
+          <attributeLabel>DOC_uM</attributeLabel>
+          <attributeDefinition>Dissolved organic carbon</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.17">
+          <attributeName>NH4_OPA_uM</attributeName>
+          <attributeLabel>NH4_OPA_uM</attributeLabel>
+          <attributeDefinition>Ammonium by the OPA method</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.18">
+          <attributeName>PO4_uM</attributeName>
+          <attributeLabel>PO4_uM</attributeLabel>
+          <attributeDefinition>Phosphate (Soluble Reactive Phosphorus)</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.19">
+          <attributeName>NO3_uM</attributeName>
+          <attributeLabel>NO3_uM</attributeLabel>
+          <attributeDefinition>Nitrate</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.20">
+          <attributeName>TDN_uM</attributeName>
+          <attributeLabel>TDN_uM</attributeLabel>
+          <attributeDefinition>Total dissolved nitrogen</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.21">
+          <attributeName>TDP_uM</attributeName>
+          <attributeLabel>TDP_uM</attributeLabel>
+          <attributeDefinition>Total dissolved phosphorus</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.22">
+          <attributeName>PC_ugL</attributeName>
+          <attributeLabel>PC_ugL</attributeLabel>
+          <attributeDefinition>Particulate carbon</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>microgramPerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.23">
+          <attributeName>PN_ugL</attributeName>
+          <attributeLabel>PN_ugL</attributeLabel>
+          <attributeDefinition>Particulate nitrogen</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>microgramPerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.24">
+          <attributeName>PP_uM</attributeName>
+          <attributeLabel>PP_uM</attributeLabel>
+          <attributeDefinition>Particulate phosphorus</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.25">
+          <attributeName>Ca_uM</attributeName>
+          <attributeLabel>Ca_uM</attributeLabel>
+          <attributeDefinition>Calcium</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.26">
+          <attributeName>Mg_uM</attributeName>
+          <attributeLabel>Mg_uM</attributeLabel>
+          <attributeDefinition>Magnesium</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.27">
+          <attributeName>Na_uM</attributeName>
+          <attributeLabel>Na_uM</attributeLabel>
+          <attributeDefinition>Sodium</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.28">
+          <attributeName>K_uM</attributeName>
+          <attributeLabel>K_uM</attributeLabel>
+          <attributeDefinition>Potassium</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.29">
+          <attributeName>Si_uM</attributeName>
+          <attributeLabel>Si_uM</attributeLabel>
+          <attributeDefinition>Silica</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.30">
+          <attributeName>SO4_uM</attributeName>
+          <attributeLabel>SO4_uM</attributeLabel>
+          <attributeDefinition>Sulfate</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id=" att0.31">
+          <attributeName>Cl_uM</attributeName>
+          <attributeLabel>Cl_uM</attributeLabel>
+          <attributeDefinition>Chloride</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <customUnit>micromolePerLiter</customUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>.</code>
+            <codeExplanation>Missing values</codeExplanation>
+          </missingValueCode>
+        </attribute>
+      </attributeList>
+      <numberOfRecords>793</numberOfRecords>
+    </dataTable>
+    <otherEntity>
+      <entityName>2002-2013_Kling_AON_Imnavait_Chemistry.xlsx</entityName>
+      <entityDescription>An excel file that has worksheets with the metadata and data.</entityDescription>
+      <physical scope="document">
+        <objectName>2002-2013_Kling_AON_Imnavait_Chemistry.xlsx</objectName>
+        <dataFormat>
+          <externallyDefinedFormat>
+            <formatName>Microsoft Excel</formatName>
+          </externallyDefinedFormat>
+        </dataFormat>
+        <distribution scope="document">
+          <online>
+            <url>https://pasta.lternet.edu/package/data/eml/knb-lter-arc/10531/6/38943544697d997b83e85a3ab894e776</url>
+          </online>
+        </distribution>
+      </physical>
+      <entityType>Microsoft Excel file</entityType>
+    </otherEntity>
+  </dataset>
+  <additionalMetadata>
+    <metadata>
+      <unitList>
+        <unit id="microsiemenPerCentimeter" multiplierToSI=""
+          name="microsiemenPerCentimeter" parentSI="" unitType="conductance">
+          <description>conductivity unit</description>
+        </unit>
+        <unit id="microequivalentPerLiter" multiplierToSI=""
+          name="microequivalentPerLiter" parentSI="molePerCubicMeter" unitType="amountOfSubstanceConcentration">
+          <description>concentration of charge (on dissolved ions). A single multiplier to SI is not possible</description>
+        </unit>
+        <unit id="microatmosphere" multiplierToSI="0.101325"
+          name="microatmosphere" parentSI="pascal" unitType="pressure">
+          <description>microatmosphere = .101325 pascals</description>
+        </unit>
+        <unit id="micromolePerLiter" multiplierToSI="0.000001"
+          name="micromolePerLiter" parentSI="molarity" unitType="amountOfSubstanceConcentration">
+          <description>µM = µmoles per liter of solution</description>
+        </unit>
+        <unit id="microgramPerLiter" multiplierToSI=""
+          name="microgramPerLiter" parentSI="" unitType=" volumetricMassDensityRate">
+          <description>micrograms per liter</description>
+        </unit>
+      </unitList>
+    </metadata>
+  </additionalMetadata>
+</eml:eml>

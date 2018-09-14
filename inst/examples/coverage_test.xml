@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml packageId="df35b.240.11" system="knb" xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd"> <access authSystem="knb" order="allowFirst"><allow><principal>uid=jones,o=NCEAS,dc=ecoinformatics,dc=org</principal>
+ <permission>read</permission>
+ <permission>write</permission>
+ <permission>changePermission</permission>
+ </allow>
+ <allow><principal>uid=cboettig,o=unaffiliated,dc=ecoinformatics,dc=org</principal>
+ <permission>read</permission>
+ </allow>
+ </access>
+ <dataset>  <title>The Global Population Dynamics Database</title>
+<creator id="1417562527964"><individualName><givenName>John</givenName>
+ <surName>Prendergast</surName>
+ </individualName>
+ <address><deliveryPoint>Centre for Population Biology Imperial College</deliveryPoint>
+ <deliveryPoint>Silwood Park</deliveryPoint>
+ <city>Ascot</city>
+ <administrativeArea>Berkshire</administrativeArea>
+ <postalCode>SL5 7PY</postalCode>
+ <country>United Kingdom</country>
+ </address>
+ <phone phonetype="voice">01344 294472</phone>
+ <phone phonetype="fax">01344 873173</phone>
+ <electronicMailAddress>johnp@everton42.freeserve.co.uk</electronicMailAddress>
+ </creator>
+ <creator id="1429903258711"><individualName><givenName>Ellen</givenName>
+ <surName>Bazeley-White</surName>
+ </individualName>
+ </creator>
+ <creator id="1429903279316"><individualName><givenName>Owen</givenName>
+ <surName>Smith</surName>
+ </individualName>
+ </creator>
+ <creator id="1429903289189"><individualName><givenName>John</givenName>
+ <surName>Lawton</surName>
+ </individualName>
+ </creator>
+ <creator id="1429903300084"><individualName><givenName>Pablo</givenName>
+ <surName>Inchausti</surName>
+ </individualName>
+ </creator>
+ <creator id="1429903319490"><individualName><givenName>David</givenName>
+ <surName>Kidd</surName>
+ </individualName>
+ </creator>
+ <creator id="1429903327762"><individualName><givenName>Sarah</givenName>
+ <surName>Knight</surName>
+ </individualName>
+ </creator>
+ <associatedParty id="1417562964649"><individualName><givenName>Rob</givenName>
+ <surName>Anderson</surName>
+ </individualName>
+ <role>Content Provider</role>
+ </associatedParty>
+ <associatedParty id="1417562982002"><individualName><givenName>Ellen</givenName>
+ <surName>Bazeley-White</surName>
+ </individualName>
+ <role>Content Provider</role>
+ </associatedParty>
+ <associatedParty id="1417563012740"><individualName><givenName>Andrea</givenName>
+ <surName>Chadden</surName>
+ </individualName>
+ <role>Metadata Provider</role>
+ </associatedParty>
+ <associatedParty id="1417563044253"><individualName><givenName>Jessica</givenName>
+ <surName>Couture</surName>
+ </individualName>
+ <organizationName>National Center for Ecological Analysis and Synthesis</organizationName>
+ <positionName>Research Assistant</positionName>
+ <address><deliveryPoint>735 State St., Suite 300</deliveryPoint>
+ <city>Santa Barbara</city>
+ <administrativeArea>CA</administrativeArea>
+ <postalCode>93101</postalCode>
+ <country>USA</country>
+ </address>
+ <electronicMailAddress>couture@nceas.ucsb.edu</electronicMailAddress>
+ <role>Metadata Provider</role>
+ </associatedParty>
+ <pubDate>2010</pubDate>
+<abstract><para>As a source of animal and plant population data, the Global Population Dynamics Database (GPDD) is unrivalled. Nearly five thousand separate time series are available here. In addition to all the population counts, there are taxonomic details of over 1400 species. The type of data contained in the GPDD varies enormously, from annual counts of mammals or birds at individual sampling sites, to weekly counts of zooplankton and other marine fauna. The project commenced in October 1994, following discussions on ways in which the collaborating partners could make a practical and enduring contribution to research into population dynamics. A small team was assembled and, with assistance and advice from numerous interested parties we decided to construct the database using the popular Microsoft Access platform. After an initial design phase, the major task has been that of locating, extracting, entering and validating the data in all the various tables. Now, nearly 5000 individual datasets have been entered onto the GPDD. The Global Population Dynamics Database comprises six Tables of data and information. The tables are linked to each other as shown in the diagram shown in figure 3 of the GPDD User Guide (GPDD-User-Guide.pdf). Referential integrity is maintained through record ID numbers which are held, along with other information in the Main Table. It's structure obeys all the rules of a standard relational database.</para>
+</abstract>
+  <keywordSet><keyword>Time series data</keyword>
+ <keyword>animal populations</keyword>
+ <keyword>plant populations</keyword>
+ <keyword>count data</keyword>
+ </keywordSet>
+ <intellectualRights><para>This compilaiton is a collection of datasets that have been previously compiled from public sources; all restricted datasets have been omitted. All datasets are fully referenced in the database, and, before embarking on any analysis, we encourage you to locate and refer to the original source material wherever possible. In most case we have been able to provide the complete citation to enable you to do this.
+
+Standard scientific norms for attribution and credit should be followed when using these data, including to the original sources.  This work is licensed under a Creative Commons Attribution 4.0 International License (CC-BY; http://creativecommons.org/licenses/by/4.0/).</para>
+ </intellectualRights>
+ <coverage><geographicCoverage><geographicDescription>Worldwide</geographicDescription>
+ <boundingCoordinates><westBoundingCoordinate>-180.0</westBoundingCoordinate>
+ <eastBoundingCoordinate>180.0</eastBoundingCoordinate>
+ <northBoundingCoordinate>90.0</northBoundingCoordinate>
+ <southBoundingCoordinate>-90.0</southBoundingCoordinate>
+ </boundingCoordinates>
+ </geographicCoverage>
+ <temporalCoverage><rangeOfDates><beginDate><calendarDate>1538</calendarDate>
+ </beginDate>
+ <endDate><calendarDate>2003</calendarDate>
+ </endDate>
+ </rangeOfDates>
+ </temporalCoverage>
+ </coverage>
+ <contact id="1417562693930"><individualName><givenName>Glen</givenName>
+ <surName>Dawkins</surName>
+ </individualName>
+ <organizationName>NERC Centre for Population Biology</organizationName>
+ <address><deliveryPoint>NERC Centre for Population Biology Imperial College London Silwood Park Campus</deliveryPoint>
+ <city>Ascot</city>
+ <administrativeArea>Berkshire</administrativeArea>
+ <postalCode>SL5 7PY</postalCode>
+ <country>United Kindom</country>
+ </address>
+ <phone phonetype="voice">44 (0)20 7594 2475</phone>
+ <phone phonetype="fax">44 (0)1344 873173</phone>
+ <electronicMailAddress>g.dawkins@ic.ac.uk</electronicMailAddress>
+ </contact>
+ <contact id="1417562850366"><individualName><salutation>Dr.</salutation>
+ <givenName>David</givenName>
+ <surName>Orme</surName>
+ </individualName>
+ <electronicMailAddress>d.orme@imperial.ac.uk</electronicMailAddress>
+ </contact>
+ <contact id="1417562913945"><individualName><salutation>Dr.</salutation>
+ <givenName>Pawar</givenName>
+ <surName>Samraat</surName>
+ </individualName>
+ <electronicMailAddress>s.pawar@imperial.ac.uk</electronicMailAddress>
+ </contact>
+ <methods><methodStep><description><section><title>Collection of time series data</title>
+ <para>The time series in the database come from both published and unpublished sources. They have been located in a variety of ways: (1) By systematically searching back issues of the predominant ecological and science journals; (2) By following citation trails: when a suitable time series is located in a publication, there are usually one or more references to similar or comparable studies in the citations list: every paper tends to lead to another paper. (3) By searching the world wide web, where an increasing number of ecological datasets are being made available. (4) By searching promising book titles. The vintage literature often contains a wealth of tabulated data of varying types, and we have drawn extensively upon the resources of the Imperial College library and the British Library to locate many long-out-of-print volumes. (5) By negotiating access to unpublished data. Through our network of professional contacts we have endeavoured to locate unpublished data which collectors are prepared to contribute to the project. Quite often, and quite understandably, collectors prefer to retain data for their own use, at least until they have published. We have, however been delighted at the selfless response of several collectors, who have donated unpublished data with no, or few, restrictions. All datasets are fully referenced in the database, and, before embarking on any analysis, we encourage you to locate and refer to the original source material wherever possible. In most case we have been able to provide the complete citation to enable you to do this.</para>
+ </section>
+ </description>
+ </methodStep>
+ </methods>
+ <dataTable id="1417565531760"><entityName>data.csv</entityName>
+ <entityDescription>The Data table stores the individual time series abundance records.</entityDescription>
+ <physical id="1417565059371"><objectName>data.csv</objectName>
+ <size unit="byte">8741081</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.233.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417565531761"><attributeName>DataID</attributeName>
+ <attributeDefinition>Automatic ID number</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>ID number</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531762"><attributeName>MainID</attributeName>
+ <attributeDefinition>Foreign key from 'main.csv' table</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><enumeratedDomain><entityCodeList><entityReference>1417566636779</entityReference>
+ <valueAttributeReference>1417566636780</valueAttributeReference>
+ <definitionAttributeReference>1417566636781</definitionAttributeReference>
+ </entityCodeList>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531763"><attributeName>Population</attributeName>
+ <attributeDefinition>Population data as published</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531764"><attributeName>PopulationUntransformed</attributeName>
+ <attributeDefinition>Retro-transformed population data</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531765"><attributeName>SampleYear</attributeName>
+ <attributeDefinition>year of sample</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY</formatString>
+ </dateTime>
+ </measurementScale>
+ <missingValueCode><code>9999</code>
+ <codeExplanation>not applicable</codeExplanation>
+ </missingValueCode>
+ </attribute>
+ <attribute id="1417565531766"><attributeName>TimePeriodID</attributeName>
+ <attributeDefinition>Foreign key from timeperiod.csv giving the time of year or sequence of sampling</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><entityCodeList><entityReference>1417627887318</entityReference>
+ <valueAttributeReference>1417627887319</valueAttributeReference>
+ <definitionAttributeReference>1417627887320</definitionAttributeReference>
+ </entityCodeList>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531767"><attributeName>Generation</attributeName>
+ <attributeDefinition>Generation number if more than 1 generation per year. Values: 1, 2, null</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>number</standardUnit>
+ </unit>
+ <numericDomain><numberType>natural</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531768"><attributeName>SeriesStep</attributeName>
+ <attributeDefinition>Time-scaled time-series step. Series begin at zero and then increments by the minimum time step required to define all periods between samples.</attributeDefinition>
+ <measurementScale><interval><unit><standardUnit>number</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </interval>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531769"><attributeName>DecimalYearBegin</attributeName>
+ <attributeDefinition>Decimal year of the beginning of the sampling period</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY.yyyy</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417565531770"><attributeName>DecimalYearEnd</attributeName>
+ <attributeDefinition>Decimal year of the end of the sampling period o</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY.yyyy</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>179859</numberOfRecords>
+ </dataTable>
+ <dataTable id="1417566636779"><entityName>main.csv</entityName>
+ <entityDescription>A MAIN record is a ‘time series’ which is unique Taxon/Location/LifeCycle combination. Sequential data for multiple life stages (e.g. eggs, larve and adults) are split into different Main records and must be amalgamated to create a single time series. Where more than one adult generation occurs per year generation is identified in the generation column of the data table.</entityDescription>
+ <physical id="1417565580318"><objectName>main.csv</objectName>
+ <size unit="byte">812691</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.234.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417566636780"><attributeName>MainID</attributeName>
+ <attributeDefinition>Automatic unique ID number</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>ID number</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636781"><attributeName>TaxonID</attributeName>
+ <attributeDefinition>ID Number in Taxon Table</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><entityCodeList><entityReference>1417629195042</entityReference>
+ <valueAttributeReference>1417629195043</valueAttributeReference>
+ <definitionAttributeReference>1417629195044</definitionAttributeReference>
+ </entityCodeList>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636782"><attributeName>DataSourceID</attributeName>
+ <attributeDefinition>ID Number in Datasource Table</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><entityCodeList><entityReference>1417630092917</entityReference>
+ <valueAttributeReference>1417630092918</valueAttributeReference>
+ <definitionAttributeReference>1417630092919</definitionAttributeReference>
+ </entityCodeList>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636783"><attributeName>BiotopeID</attributeName>
+ <attributeDefinition>ID Number in Biotope Table</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><entityCodeList><entityReference>1417631430058</entityReference>
+ <valueAttributeReference>1417631430059</valueAttributeReference>
+ <definitionAttributeReference>1417631430060</definitionAttributeReference>
+ </entityCodeList>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636784"><attributeName>LocationID</attributeName>
+ <attributeDefinition>ID Number in Location Table</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><entityCodeList><entityReference>1417632404559</entityReference>
+ <valueAttributeReference>1417632404560</valueAttributeReference>
+ <definitionAttributeReference>1417632404561</definitionAttributeReference>
+ </entityCodeList>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636785"><attributeName>SamplingUnits</attributeName>
+ <attributeDefinition>The entity observed. Entries include, ‘adults’, ‘cells’, ‘egg masses’, and ‘pelts’.</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>sampling units</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636786"><attributeName>SamplingProtocol</attributeName>
+ <attributeDefinition>How entities were sampled. Values are ‘Count’, ‘Count (millions)’, ‘Harvest’, ‘Index of abundance’, ‘Index of territories’, ‘Leaf area’, ‘Mean Count’, ‘Not Specified’, ‘Percent cover’ and ‘Sample’.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>SamplingProtocol</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636787"><attributeName>SourceDimension</attributeName>
+ <attributeDefinition>The dimension of source table or graph. Values are Area coverage, Biomass, Catch, Count, Count (estimated), Density, Density (estimated), Index, Index - CPUE, Mean Area Coverage, Mean Biomass, Mean concentration, Mean Count, Mean Density, Mean Harvest, Minimum Count, Not Specified, Percent Count, Relative Density, Transformed Biomass, Transformed Count, Transformed Density and Unknown.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>sourceDimension</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636788"><attributeName>SamplingEffort</attributeName>
+ <attributeDefinition>The sampling effort. Usually a measure of temporal effort but also census, density, harvest.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>sampling effort</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636789"><attributeName>SpatialDensity</attributeName>
+ <attributeDefinition>The spatial unit of a density</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>density unit</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636790"><attributeName>SourceTransform</attributeName>
+ <attributeDefinition>Any transformation of the data</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>transformation</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636791"><attributeName>SourceTransformReference</attributeName>
+ <attributeDefinition>Details of the reference value of any data transformation. Base Year, Log, None, Not Specified, Proportion, Unknown, x 1000 lbs.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>transformation Ref</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636792"><attributeName>AssociatedDataSets</attributeName>
+ <attributeDefinition>Comma separated list of MainID of other series from the same study or to which the series can be directly compared.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>associated dataset codes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636793"><attributeName>Reliability</attributeName>
+ <attributeDefinition>Subjective rank, 1-5, 1=least reliable, 5=most reliable. (see  'Quality Control' in GPDD-User-Guide.pdf)</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>data reliability</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636794"><attributeName>StartYear</attributeName>
+ <attributeDefinition>The year in which sampling commenced. 9999 - if series relates to generations and not calendar dates</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636795"><attributeName>EndYear</attributeName>
+ <attributeDefinition>The year in which sampling ended. 9999 - if series relateds to generations and not calendar dates</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636796"><attributeName>SamplingFrequency</attributeName>
+ <attributeDefinition>Approximate number of samples per year</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636797"><attributeName>DatasetLength</attributeName>
+ <attributeDefinition>Total number of samples</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636798"><attributeName>Notes</attributeName>
+ <attributeDefinition>Notes</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636799"><attributeName>SiblyFittedTheta</attributeName>
+ <attributeDefinition>Calculated as per Sibly, R.M., Baker, D., Denham, M.C., Hone, J. and Pagel, M. (2005) On the regulation of populations of mammals, birds, fish and insects. Science 309, 607-610.</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>natural</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636800"><attributeName>SiblyThetaCILower</attributeName>
+ <attributeDefinition>Calculated as per Sibly, R.M., Baker, D., Denham, M.C., Hone, J. and Pagel, M. (2005) On the regulation of populations of mammals, birds, fish and insects. Science 309, 607-610.</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>natural</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636801"><attributeName>SiblyThetaCIUpper</attributeName>
+ <attributeDefinition>Calculated as per Sibly, R.M., Baker, D., Denham, M.C., Hone, J. and Pagel, M. (2005) On the regulation of populations of mammals, birds, fish and insects. Science 309, 607-610.</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636802"><attributeName>SiblyExtremeNEffect</attributeName>
+ <attributeDefinition>Calculated as per Sibly, R.M., Baker, D., Denham, M.C., Hone, J. and Pagel, M. (2005) On the regulation of populations of mammals, birds, fish and insects. Science 309, 607-610.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><enumeratedDomain><codeDefinition><code>FALSE</code>
+ <definition>NO</definition>
+ </codeDefinition>
+ <codeDefinition><code>TRUE</code>
+ <definition>YES</definition>
+ </codeDefinition>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636803"><attributeName>SiblyReturnRate</attributeName>
+ <attributeDefinition>The return rate (per year) from Sibly, R.M., Baker, D., Denham, M.C., Hone, J. and Pagel, M. (2007) On the stability of populations of mammals, birds, fish and insects. Ecology Letters</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417566636804"><attributeName>SiblyCarryingCapacity</attributeName>
+ <attributeDefinition>The carrying capacity from Sibly, R.M., Baker, D., Denham, M.C., Hone, J. and Pagel, M. (2007) On the stability of populations of mammals, birds, fish and insects. Ecology Letters</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>dimensionless</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>5156</numberOfRecords>
+ </dataTable>
+ <dataTable id="1417627887318"><entityName>timeperiod.csv</entityName>
+ <entityDescription>TimePeriod is a look-up table that provides text descriptions of the temporal period the sample relates to such as ‘January’, ‘Spring’, ‘Week 1’ and ‘Day 1’.</entityDescription>
+ <physical id="1417627110403"><objectName>timeperiod.csv</objectName>
+ <size unit="byte">17515</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.235.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417627887319"><attributeName>TimePeriodID</attributeName>
+ <attributeDefinition>Automatic ID number (range 1-408, 407 rows)</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>TimePrdID</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417627887320"><attributeName>TimePeriod</attributeName>
+ <attributeDefinition>Time period definition</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>Time period</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417627887321"><attributeName>TimePeriodGroup</attributeName>
+ <attributeDefinition>Group time period belongs to, e.g. month, quarter, season, wet/dry etc.</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>time period group</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417627887322"><attributeName>TimePeriodOrder</attributeName>
+ <attributeDefinition>Order of timeperiod within time period group, e.g. January = 1, February = 2, etc. within the month group. Some groups do not have orders e.g wet/dry.</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>group order</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417627887323"><attributeName>Begin</attributeName>
+ <attributeDefinition>Decimal year of the beginning of the time period</attributeDefinition>
+ <measurementScale><dateTime><formatString>0.Y</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417627887324"><attributeName>End</attributeName>
+ <attributeDefinition>Decimal year of the end of the time period</attributeDefinition>
+ <measurementScale><dateTime><formatString>0.Y</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>408</numberOfRecords>
+ </dataTable>
+ <dataTable id="1417629195042"><entityName>taxon.csv</entityName>
+ <entityDescription>The taxon table stores the taxonomic names relating to Main records. It is links to the MAIN table with a unique TaxonID.  Most series are for species.  Some extra information regarding breeding habitats etc may be found in the notes column.</entityDescription>
+ <physical id="1417628645602"><objectName>taxon.csv</objectName>
+ <size unit="byte">276038</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.236.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417629195043"><attributeName>TaxonID</attributeName>
+ <attributeDefinition>Automatic ID number (Range 1-12151, 1896 rows)</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><textDomain><definition>TaxonID</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195044"><attributeName>TaxonName</attributeName>
+ <attributeDefinition>Name of taxon. May be binomial, higher taxon rank or user-defined</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>taxon name</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195045"><attributeName>WoldaCode</attributeName>
+ <attributeDefinition>Code used by H. Wolda to identify unnamed/identified species</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Wolda code</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195046"><attributeName>Authority</attributeName>
+ <attributeDefinition>Taxon definition authority</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>taxon authority</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195047"><attributeName>TaxonomicLevel</attributeName>
+ <attributeDefinition>Taxonomic level (ie.Species, Genus, Family etc. plus ‘Virus’)</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Taxonomic level</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195048"><attributeName>CommonName</attributeName>
+ <attributeDefinition>Single common name</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>common name</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195049"><attributeName>TaxonomicPhylum</attributeName>
+ <attributeDefinition>Taxonomic phylum</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>taxon phylum</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195050"><attributeName>TaxonomicClass</attributeName>
+ <attributeDefinition>Taxonomic class</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Taxonomic class</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195051"><attributeName>TaxonomicOrder</attributeName>
+ <attributeDefinition>Taxonomic Order</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Taxonomic order</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195052"><attributeName>TaxonomicFamily</attributeName>
+ <attributeDefinition>Taxonomic Family</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Taxonomic family</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195053"><attributeName>TaxonomicGenus</attributeName>
+ <attributeDefinition>Taxonomic genus</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>taxonomic genus</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417629195054"><attributeName>Notes</attributeName>
+ <attributeDefinition>notes</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>1898</numberOfRecords>
+ </dataTable>
+ <dataTable id="1417630092917"><entityName>datasource.csv</entityName>
+ <entityDescription>Information on where the data was obtained from, relating to the Main table through a unique DatasourceID.  Sources of data include published journals, books and unpublished datasets and the references details are held here.  The table also contains information regarding access restrictions, contact details and in what medium the data was obtained.</entityDescription>
+ <physical id="1417629825286"><objectName>datasource.csv</objectName>
+ <size unit="byte">89609</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.237.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417630092918"><attributeName>DatasourceID</attributeName>
+ <attributeDefinition>Automatic unique ID number</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>data source ID</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092919"><attributeName>Author</attributeName>
+ <attributeDefinition>Author(s)</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>Author</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092920"><attributeName>Year</attributeName>
+ <attributeDefinition>Year of publication</attributeDefinition>
+ <measurementScale><dateTime><formatString>YYYY</formatString>
+ </dateTime>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092921"><attributeName>Title</attributeName>
+ <attributeDefinition>Title</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>title</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092922"><attributeName>Reference</attributeName>
+ <attributeDefinition>Reference or citation</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>ref</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092923"><attributeName>Availability</attributeName>
+ <attributeDefinition>public access or restricted access (as of 2010)</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>availability</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092924"><attributeName>ContactAddress</attributeName>
+ <attributeDefinition>Contact details</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>contact</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092925"><attributeName>DataMedium</attributeName>
+ <attributeDefinition>Format of data aquired</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>data format</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417630092926"><attributeName>Notes</attributeName>
+ <attributeDefinition>Notes</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>363</numberOfRecords>
+ </dataTable>
+ <dataTable id="1417631430058"><entityName>biotope.csv</entityName>
+ <entityDescription>Biotope identifier definitions, uncited</entityDescription>
+ <physical id="1417631070724"><objectName>biotope.csv</objectName>
+ <size unit="byte">8302</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.238.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417631430059"><attributeName>BiotopeID</attributeName>
+ <attributeDefinition>Automatic ID number</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>biotope ID</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417631430060"><attributeName>HabitatName</attributeName>
+ <attributeDefinition>Habitat type name</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>habitat name</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417631430061"><attributeName>BiotopeType</attributeName>
+ <attributeDefinition>Biotope type</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>biotope type</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>194</numberOfRecords>
+ </dataTable>
+ <dataTable id="1417632404559"><entityName>location.csv</entityName>
+ <entityDescription>Location identifier definitions</entityDescription>
+ <physical id="1417631513539"><objectName>location.csv</objectName>
+ <size unit="byte">183498</size>
+ <dataFormat><textFormat><numHeaderLines>1</numHeaderLines>
+ <recordDelimiter>#x0A</recordDelimiter>
+ <attributeOrientation>column</attributeOrientation>
+ <simpleDelimited><fieldDelimiter>,</fieldDelimiter>
+ </simpleDelimited>
+ </textFormat>
+ </dataFormat>
+ <distribution><online><url>ecogrid://knb/df35b.239.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <attributeList><attribute id="1417632404560"><attributeName>LocationID</attributeName>
+ <attributeDefinition>Automatic unique ID number</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>location ID</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404561"><attributeName>ExactName</attributeName>
+ <attributeDefinition>Name of location</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>location name</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404562"><attributeName>TownName</attributeName>
+ <attributeDefinition>Town</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>town</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404563"><attributeName>CountyStateProvince</attributeName>
+ <attributeDefinition>country or state</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>country or state</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404564"><attributeName>Country</attributeName>
+ <attributeDefinition>country</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>country</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404565"><attributeName>Continent</attributeName>
+ <attributeDefinition>Continent</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>continent</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404566"><attributeName>Ocean</attributeName>
+ <attributeDefinition>Ocean</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>ocean</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404567"><attributeName>LongitudeDegrees</attributeName>
+ <attributeDefinition>Longitude degrees of location/centriod</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>integer</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404568"><attributeName>LongitudeMinutes</attributeName>
+ <attributeDefinition>Longitude minues of location/centroid</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>number</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404569"><attributeName>EorW</attributeName>
+ <attributeDefinition>East or west</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><enumeratedDomain><codeDefinition><code>E</code>
+ <definition>East</definition>
+ </codeDefinition>
+ <codeDefinition><code>W</code>
+ <definition>West</definition>
+ </codeDefinition>
+ <codeDefinition><code>Not applicable</code>
+ <definition>NA</definition>
+ </codeDefinition>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404570"><attributeName>LatitudeDegrees</attributeName>
+ <attributeDefinition>Latitude degrees of location/centroid</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>integer</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404571"><attributeName>LatitudeMinutes</attributeName>
+ <attributeDefinition>Latitude minutes of location/centroid</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>number</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404572"><attributeName>NorS</attributeName>
+ <attributeDefinition>North or south</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><enumeratedDomain><codeDefinition><code>N</code>
+ <definition>North</definition>
+ </codeDefinition>
+ <codeDefinition><code>S</code>
+ <definition>South</definition>
+ </codeDefinition>
+ <codeDefinition><code>Not applicable</code>
+ <definition>NA</definition>
+ </codeDefinition>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404573"><attributeName>LongDD</attributeName>
+ <attributeDefinition>Longitude in decimal degrees. Null value = 9999</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404574"><attributeName>LatDD</attributeName>
+ <attributeDefinition>Latitude in decimal degrees. Null value = 9999</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404575"><attributeName>North</attributeName>
+ <attributeDefinition>Bounding box northern extent</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404576"><attributeName>East</attributeName>
+ <attributeDefinition>Bounding box eastern extent</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404577"><attributeName>South</attributeName>
+ <attributeDefinition>Bounding box southern extent</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404578"><attributeName>West</attributeName>
+ <attributeDefinition>Bounding box western extent</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>degree</standardUnit>
+ </unit>
+ <numericDomain><numberType>real</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404579"><attributeName>Altitude</attributeName>
+ <attributeDefinition>Altitude in meters</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>meter</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404580"><attributeName>Area</attributeName>
+ <attributeDefinition>Area in ha</attributeDefinition>
+ <measurementScale><ratio><unit><standardUnit>hectare</standardUnit>
+ </unit>
+ <numericDomain><numberType>whole</numberType>
+ </numericDomain>
+ </ratio>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404581"><attributeName>Notes</attributeName>
+ <attributeDefinition>Notes</attributeDefinition>
+ <measurementScale><nominal><nonNumericDomain><textDomain><definition>notes</definition>
+ </textDomain>
+ </nonNumericDomain>
+ </nominal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404582"><attributeName>SpatialAccuracy</attributeName>
+ <attributeDefinition>Value between 0 - 6 indicating the accuracy of the location given.
+0 = Unknown
+1 = &gt;100 km radius
+2 = 10 - &lt;100km
+3 = 1 - &lt;9km, 4 = 0.1 - 1km
+5 = 10 - 100m
+6 = accurate survey (incl. GPS) &lt;= 10m</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><codeDefinition><code>0</code>
+ <definition>Unknown</definition>
+ </codeDefinition>
+ <codeDefinition><code>1</code>
+ <definition>&gt;100 km</definition>
+ </codeDefinition>
+ <codeDefinition><code>2</code>
+ <definition>10 - &lt;100km</definition>
+ </codeDefinition>
+ <codeDefinition><code>3</code>
+ <definition>1 - &lt;9km</definition>
+ </codeDefinition>
+ <codeDefinition><code>4</code>
+ <definition>0.1 - 1km</definition>
+ </codeDefinition>
+ <codeDefinition><code>5</code>
+ <definition>10 - 100m</definition>
+ </codeDefinition>
+ <codeDefinition><code>6</code>
+ <definition>&lt;= 10m</definition>
+ </codeDefinition>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ <attribute id="1417632404583"><attributeName>LocationExtent</attributeName>
+ <attributeDefinition>Value between 1 - 4 indicating the size of the study site
+Where available absolute size is recorded in the Area field. 1 = Region &gt;10 km radius
+2 = Local Area 1-10 km radius
+3 = Extended Site 0.1-1 km radius
+4 = Precise Site &lt;0.1 km radius</attributeDefinition>
+ <measurementScale><ordinal><nonNumericDomain><enumeratedDomain><codeDefinition><code>1</code>
+ <definition>Region &gt;10 km radius</definition>
+ </codeDefinition>
+ <codeDefinition><code>2</code>
+ <definition>Local Area 1-10 km radius</definition>
+ </codeDefinition>
+ <codeDefinition><code>3</code>
+ <definition>Extended Site 0.1-1 km radius</definition>
+ </codeDefinition>
+ <codeDefinition><code>4</code>
+ <definition>Precise Site &lt;0.1 km radius</definition>
+ </codeDefinition>
+ </enumeratedDomain>
+ </nonNumericDomain>
+ </ordinal>
+ </measurementScale>
+ </attribute>
+ </attributeList>
+ <numberOfRecords>1005</numberOfRecords>
+ </dataTable>
+ <otherEntity><entityName>GPDD-User-Guide.pdf</entityName>
+ <physical><objectName>GPDD-User-Guide.pdf</objectName>
+ <size unit="byte">2042491</size>
+ <dataFormat><externallyDefinedFormat><formatName>application/pdf</formatName>
+ </externallyDefinedFormat>
+ </dataFormat>
+ <distribution id="1427157631123"><online><url function="download">ecogrid://knb/df35b.241.1</url>
+ </online>
+ </distribution>
+ </physical>
+ <entityType>Other</entityType>
+ </otherEntity>
+ </dataset>
+ </eml:eml>
