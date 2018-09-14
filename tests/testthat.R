@@ -1,4 +1,4 @@
 library(testthat)
-library(eml2)
+library(EML)
 
-test_check("eml2")
+test_check("EML")

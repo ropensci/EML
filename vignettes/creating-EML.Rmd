@@ -15,7 +15,7 @@ has_pandoc <-  rmarkdown::pandoc_available()
 
 
 ```{r}
-library(eml2)
+library(EML)
 library(emld)
 ```
 

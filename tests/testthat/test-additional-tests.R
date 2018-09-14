@@ -1,11 +1,8 @@
-library(testthat)
-library(eml2)
-
 testthat::context("Additional tests")
 
 test_that("template constructor",{
 
-  creator <- eml2:::template_constructor("creator")
+  creator <- EML:::template_constructor("creator")
   expect_is(creator, "function")
 })
 
@@ -34,7 +31,7 @@ test_that("set_method with additional input files", {
                  altitudeMin = 160, altitudeMaximum = 330,
                  altitudeUnits = "meter")
 
-  file <- system.file("examples/hf205-methods.docx", package = "EML")
+  file <- system.file("examples", "hf205-methods.docx", package = "emld")
   methods <- set_methods(file,
                          qualityControl_file = file,
                          sampling_file = file,

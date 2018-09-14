@@ -12,7 +12,8 @@
 #' @export
 #' @importFrom dplyr bind_rows
 #' @examples
-#' eml <- read_eml(system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "EML"))
+#' f <- system.file("tests", options("emld_db"), "eml-datasetWithAttributelevelMethods.xml", package = "emld")
+#' eml <- read_eml(f)
 #' get_attributes(eml$dataset$dataTable$attributeList)
 get_attributes <- function(x, eml = NULL) {
   attributeList <- x

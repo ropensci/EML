@@ -1,7 +1,3 @@
-library(testthat)
-library(eml2)
-
-
 context("taxonomicCoverage")
 
 test_that("set_taxonomicCoverage works with data.frame", {

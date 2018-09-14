@@ -13,9 +13,9 @@ who <- names(db)
 writeLines(who, "inst/extdata/complexTypes.txt")
 
 
-#who <- readLines(system.file("extdata/complexTypes.txt", package="eml2"))
+#who <- readLines(system.file("extdata/complexTypes.txt", package="EML"))
 names(who) <- who
-eml <- lapply(who, eml2:::template_constructor)
+eml <- lapply(who, EML:::template_constructor)
 
 
 devtools::use_data(eml, overwrite=TRUE)

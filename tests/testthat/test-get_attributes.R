@@ -2,7 +2,8 @@ testthat::context("get_attributes")
 
 testthat::test_that("get_attributes returns attributes", {
 
-  file <- system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "EML")
+  file <- system.file("tests", options("emld_db"),
+                      "eml-datasetWithAttributelevelMethods.xml", package = "emld")
   eml <- read_eml(file)
   x <- eml$dataset$dataTable$attributeList
   df <- get_attributes(x, eml)
@@ -16,7 +17,10 @@ testthat::test_that("get_attributes returns attributes", {
 
 testthat::test_that("get_attributes returns attributes and factors", {
 
-  file <- system.file("xsd/test/eml-i18n.xml", package = "EML")
+  file <- system.file("tests",
+                      options("emld_db"),
+                      "eml-i18n.xml",
+                      package = "emld")
   eml <- read_eml(file)
   x <- eml$dataset$dataTable$attributeList
   df <- get_attributes(x, eml)
@@ -31,8 +35,11 @@ testthat::test_that("get_attributes returns attributes and factors", {
 
 testthat::test_that("get_attributes works with references", {
 
-  file <- system.file("xsd/test/eml-i18n.xml", package = "EML")
-  eml <- eml2::read_eml(file)
+  file <- system.file("tests",
+                      options("emld_db"),
+                      "eml-i18n.xml",
+                      package = "emld")
+  eml <- EML::read_eml(file)
   eml$dataset$dataTable$attributeList$id <- "att_id"
   dataTable_2 <- list(entityName = "entityName",
                       attributeList = list(references = "att_id"))

@@ -1,7 +1,7 @@
-Package: eml2
+Package: EML
 Type: Package
 Title: Create and Manipulate Data using the Ecological Metadata Language
-Version: 0.1.0
+Version: 1.99.0
 Authors@R: c(
               person("Carl", "Boettiger", 
                   email = "cboettig@gmail.com", 

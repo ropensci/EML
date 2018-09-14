@@ -1,4 +1,3 @@
-library(eml2)
 library(emld)
 
 ## ------------------------------------------------------------------------
@@ -14,7 +13,7 @@ coverage <-
                altitudeUnits = "meter")
 
 
-methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
+methods_file <- system.file("examples/hf205-methods.docx", package = "emld")
 methods <- set_methods(methods_file)
 
 
@@ -54,9 +53,9 @@ contact <-
 
 ## ------------------------------------------------------------------------
 attributes <- read.table(system.file("extdata/hf205_attributes.csv",
-                                     package = "eml2"))
+                                     package = "EML"))
 factors <- read.table(system.file("extdata/hf205_factors.csv",
-                                  package = "eml2"))
+                                  package = "EML"))
 attributeList <-
   set_attributes(attributes,
                  factors,

@@ -1,7 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 EML_R_functions
-EML_vignettes/*
+old-vignettes/*
 ^README\.Rmd$
 ^README-.*\.png$
 ^LICENSE\.md$

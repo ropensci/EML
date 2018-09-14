@@ -1,2 +1,2 @@
 
-## Package level documentation for eml2
+## Package level documentation for EML

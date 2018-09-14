@@ -25,7 +25,8 @@
 #' out <- shiny_attributes(data, NULL)
 #'
 #' # from exisiting attributes
-#' file <- system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "EML")
+#' file <- system.file("tests", options("emld_db"),
+#'   "eml-datasetWithAttributelevelMethods.xml", package = "emld")
 #' eml <- read_eml(file)
 #' x <- eml$dataset$dataTable$attributeList
 #' df <- get_attributes(x, eml)
@@ -397,12 +398,13 @@ htmlwidgets_attributes <- function(df, type = NULL) {
   )
 
   ## Create the widget
-  hot <- htmlwidgets::createWidget("htmlwidget_attributes_table", x, width = NULL, height = NULL, package = 'eml2')
+  hot <- htmlwidgets::createWidget("htmlwidget_attributes_table",
+                                   x, width = NULL, height = NULL, package = 'EML')
   hot
 }
 
 htmlwidgets_attributes_output <- function(outputId, width = "100%", height = "100%") {
-  htmlwidgets::shinyWidgetOutput(outputId, "htmlwidget_attributes_table", width, height, package = 'eml2')
+  htmlwidgets::shinyWidgetOutput(outputId, "htmlwidget_attributes_table", width, height, package = 'EML')
 }
 
 render_htmlwidgets_attributes <- function(expr, env = parent.frame(), quoted = FALSE) {

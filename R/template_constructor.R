@@ -11,7 +11,7 @@ template_constructor <- function(object){
 }
 
 
-#who <- readLines(system.file("extdata/complexTypes.txt", package="eml2"))
+#who <- readLines(system.file("extdata/complexTypes.txt", package="EML"))
 #names(who) <- who
 #construct <- lapply(who, template_constructor)
 

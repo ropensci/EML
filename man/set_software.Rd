@@ -16,7 +16,7 @@ an eml software element
 set_software
 }
 \examples{
-cm <- jsonlite::read_json(system.file("extdata/codemeta.json", package="eml2"))
+cm <- jsonlite::read_json(system.file("extdata/codemeta.json", package="EML"))
 software <- set_software(cm)
 my_eml <- eml$eml(packageId = "eml-1.2",system = "knb", software = software)
 

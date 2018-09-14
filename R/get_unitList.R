@@ -13,7 +13,8 @@
 #'
 #' # Read in additional units defined in a EML file
 #' \donttest{
-#' f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
+#' f <- system.file("tests", options("emld_db"),
+#' "eml-datasetWithUnits.xml", package = "emld")
 #' eml <- read_eml(f)
 #' unitList <- get_unitList(eml)
 #'
@@ -25,8 +26,10 @@ get_unitList <-
   function(x = NULL) {
 
     if(is.null(x)){
-     unitList <- read_eml(system.file("xsd/eml-2.1.1/eml-unitDictionary.xml",
-                         package = "EML"))
+     unitList <- read_eml(system.file("tests",
+                                      options("emld_db"),
+                                      "eml-unitDictionary.xml",
+                         package = "emld"))
     } else {
       unitList <- eml_get(x, "unitList")
     }
