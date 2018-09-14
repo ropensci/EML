@@ -54,7 +54,7 @@ get_unitType <- function(unitType) {
   y <- toJSON(unitType)
 
   tmp <- jqr::jq(as.character(y),
-".[] | {
+    ".[] | {
              id,
              name,
              dimension: .dimension[].name?,
