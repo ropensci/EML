@@ -1,44 +1,61 @@
 attributes_ui <- function() {
-  ui <- shiny::fluidPage(shinyjs::useShinyjs(),
-                         shiny::br(),
-                         shiny::tags$button(id = "quit",
-                                            type = "button",
-                                            class = "btn action-button btn-danger btn-lg",
-                                            onclick = "setTimeout(function(){window.close();},100);", "Quit App"),
-                         shiny::tags$button(id = "help",
-                                            type = "button",
-                                            class = "btn action-button btn-info btn-lg",
-                                            "Help"),
-                         shiny::br(),
-                         shiny::br(),
-                         shiny::mainPanel(width = 12,
-                                          shiny::tabsetPanel(id = "tabs",
-                                                             shiny::tabPanel("Attributes Table",
-                                                                             shiny::br(),
-                                                                             shiny::downloadButton("download_att", label = "Download Attributes",
-                                                                                                   class = "btn btn-primary"),
-                                                                             shiny::br(),
-                                                                             shiny::br(),
-                                                                             htmlwidgets_attributes_output("att_table")),
-                                                             shiny::tabPanel("Units Table",
-                                                                             shiny::br(),
-                                                                             shiny::downloadButton("download_units",
-                                                                                                   label = "Download Custom Units",
-                                                                                                   class = "btn btn-primary"),
-                                                                             shiny::br(),
-                                                                             shiny::br(),
-                                                                             htmlwidgets_attributes_output("units_table")),
-                                                             shiny::tabPanel("Factors Table",
-                                                                             shiny::br(),
-                                                                             shiny::downloadButton("download_factors",
-                                                                                                   label = "Download Factors",
-                                                                                                   class = "btn btn-primary"),
-                                                                             shiny::br(),
-                                                                             shiny::br(),
-                                                                             htmlwidgets_attributes_output("factors_table"))))
+  ui <- shiny::fluidPage(
+    shinyjs::useShinyjs(),
+    shiny::br(),
+    shiny::tags$button(
+      id = "quit",
+      type = "button",
+      class = "btn action-button btn-danger btn-lg",
+      onclick = "setTimeout(function(){window.close();},100);", "Quit App"
+    ),
+    shiny::tags$button(
+      id = "help",
+      type = "button",
+      class = "btn action-button btn-info btn-lg",
+      "Help"
+    ),
+    shiny::br(),
+    shiny::br(),
+    shiny::mainPanel(
+      width = 12,
+      shiny::tabsetPanel(
+        id = "tabs",
+        shiny::tabPanel(
+          "Attributes Table",
+          shiny::br(),
+          shiny::downloadButton("download_att",
+            label = "Download Attributes",
+            class = "btn btn-primary"
+          ),
+          shiny::br(),
+          shiny::br(),
+          htmlwidgets_attributes_output("att_table")
+        ),
+        shiny::tabPanel(
+          "Units Table",
+          shiny::br(),
+          shiny::downloadButton("download_units",
+            label = "Download Custom Units",
+            class = "btn btn-primary"
+          ),
+          shiny::br(),
+          shiny::br(),
+          htmlwidgets_attributes_output("units_table")
+        ),
+        shiny::tabPanel(
+          "Factors Table",
+          shiny::br(),
+          shiny::downloadButton("download_factors",
+            label = "Download Factors",
+            class = "btn btn-primary"
+          ),
+          shiny::br(),
+          shiny::br(),
+          htmlwidgets_attributes_output("factors_table")
+        )
+      )
+    )
   )
-
-
 }
 
 attributes_server <- function(attributes, data) {
@@ -48,10 +65,8 @@ attributes_server <- function(attributes, data) {
     eml_units <- get_unitList()$units
     eml_units$standard <- TRUE
     attributes$unit <- unlist(lapply(attributes$unit, function(x) {
-
       if (x != "") {
         out <- get_unit_id(x)
-
       } else {
         out <- ""
       }
@@ -68,13 +83,13 @@ attributes_server <- function(attributes, data) {
 
     ## Disable/Enable download button based on whether download will work
     shiny::observeEvent(input$attributes, {
-
       tryCatch({
         out_att()
         shinyjs::enable("download_att")
       }, error = function(err) {
         shinyjs::disable("download_att")
-      })})
+      })
+    })
 
     #################### Units Table Inputs ####################
     ## Initiallize units reactive
@@ -82,13 +97,11 @@ attributes_server <- function(attributes, data) {
 
     ## Get new units from att_table (update attributes and units tables)
     shiny::observeEvent(input$att_table$changes, {
-
       react_att(table_to_r(input$att_table))
 
       changes <- input$att_table$changes
 
-      for(i in seq(length(changes))) {
-
+      for (i in seq(length(changes))) {
         if (colnames(react_att())[changes[[i]][[2]] + 1] == "unit") {
 
           ## Get units
@@ -111,11 +124,10 @@ attributes_server <- function(attributes, data) {
         }
 
         # Clean up units when removed by deleting measurementScale
-        out <-react_units()
+        out <- react_units()
         out <- out[which(out$id %in% react_att()$unit), ]
         react_units(out)
       }
-
     })
 
     ## Save changes to units_table
@@ -126,14 +138,12 @@ attributes_server <- function(attributes, data) {
 
     ## Disable/Enable download button
     shiny::observeEvent(input$units_table, {
-
       tryCatch({
         out_units()
         shinyjs::enable("download_units")
       }, error = function(err) {
         shinyjs::disable("download_units")
       })
-
     })
 
     #################### Factors Inputs ####################
@@ -142,28 +152,22 @@ attributes_server <- function(attributes, data) {
 
     ## Get new factors from att_table
     shiny::observeEvent(input$att_table$changes, {
-
       changes <- input$att_table$changes
 
-      for(i in seq(length(changes))) {
-
+      for (i in seq(length(changes))) {
         if (colnames(react_att())[changes[[i]][[2]] + 1] == "domain") {
-
           if (!is.null(changes[[i]][[4]]) && changes[[i]][[4]] == "enumeratedDomain") {
             change <- react_att()[changes[[i]][[1]] + 1, ]
             new <- build_factors(change, data)
             out <- rbind(df_factors(), new)
             df_factors(out)
-
           } else if (!is.null(changes[[i]][[3]]) && changes[[i]][[3]] ==
-                     "enumeratedDomain" && changes[[i]][[4]] != "enumeratedDomain") {
+            "enumeratedDomain" && changes[[i]][[4]] != "enumeratedDomain") {
             out <- df_factors()[df_factors()$attributeName != react_att()$attributeName[changes[[i]][[1]] + 1], ]
             df_factors(out)
           }
-
         }
       }
-
     })
 
     ## Save changes to factors_table
@@ -173,14 +177,12 @@ attributes_server <- function(attributes, data) {
 
     ## Disable/Enable download button
     shiny::observeEvent(input$factors_table, {
-
       tryCatch({
         out_factors()
         shinyjs::enable("download_factors")
       }, error = function(err) {
         shinyjs::disable("download_factors")
       })
-
     })
 
 
@@ -237,8 +239,7 @@ attributes_server <- function(attributes, data) {
 
     #################### Quit ####################
     shiny::observeEvent(input$quit, {
-
-      attributes = out_att()
+      attributes <- out_att()
 
       units <- tryCatch({
         out_units()
@@ -258,7 +259,6 @@ attributes_server <- function(attributes, data) {
 
     #################### Help ####################
     shiny::observeEvent(input$help, {
-
       shiny::showModal(shiny::modalDialog(
         size = "l",
         title = "Help",
@@ -279,9 +279,7 @@ attributes_server <- function(attributes, data) {
 
                     After quitting the app, the tables will be returned as a list.<br>
                     Additionally, you can use the button above each table to export to a csv file.")
-        ))
+      ))
     })
-
-    }
-
+  }
 }

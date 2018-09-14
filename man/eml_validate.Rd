@@ -29,15 +29,14 @@ this function is simply an alias to `eml_validate` in `emld` package
 \examples{
 \donttest{
 
- f <- system.file("extdata", "example.xml", package = "emld")
+f <- system.file("extdata", "example.xml", package = "emld")
 
- ## validate file directly from disk:
- eml_validate(f)
+## validate file directly from disk:
+eml_validate(f)
 
- ## validate an eml object:
- eml <- read_eml(f)
- eml_validate(eml)
-
+## validate an eml object:
+eml <- read_eml(f)
+eml_validate(eml)
 }
 
 }

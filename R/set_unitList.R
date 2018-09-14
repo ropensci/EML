@@ -34,30 +34,32 @@
 #'  - power: the power to which the dimension is raised (NA implies power of 1)
 #'
 #' @examples
-#'  ## create the "unitType" table for custom unit
-#'  id = c("speed", "speed", "acceleration", "acceleration", "frequency")
-#'  dimension = c("length", "time", "length", "time", "time")
-#'  power = c(NA, "-1", NA, "-2", "-1")
-#'  unitTypes <- data.frame(id = id, dimension = dimension,
-#'                          power = power, stringsAsFactors = FALSE)
-#'
-#'  ## Create the units table
-#'  id = c("minute", "centimeter")
-#'  unitType = c("time", "length")
-#'  parentSI = c("second", "meter")
-#'  multiplierToSI = c("0.0166", "1")
-#'  description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
-#'  units = data.frame(id = id, unitType = unitType, parentSI = parentSI,
-#'                     multiplierToSI = multiplierToSI, description = description,
-#'                     stringsAsFactors = FALSE)
-#'
-#'  unitList <- set_unitList(units, unitTypes)
-#'
-
+#' ## create the "unitType" table for custom unit
+#' id <- c("speed", "speed", "acceleration", "acceleration", "frequency")
+#' dimension <- c("length", "time", "length", "time", "time")
+#' power <- c(NA, "-1", NA, "-2", "-1")
+#' unitTypes <- data.frame(
+#'   id = id, dimension = dimension,
+#'   power = power, stringsAsFactors = FALSE
+#' )
+#' 
+#' ## Create the units table
+#' id <- c("minute", "centimeter")
+#' unitType <- c("time", "length")
+#' parentSI <- c("second", "meter")
+#' multiplierToSI <- c("0.0166", "1")
+#' description <- c("one minute is 60 seconds", "centimeter is a 100th of a meter")
+#' units <- data.frame(
+#'   id = id, unitType = unitType, parentSI = parentSI,
+#'   multiplierToSI = multiplierToSI, description = description,
+#'   stringsAsFactors = FALSE
+#' )
+#' 
+#' unitList <- set_unitList(units, unitTypes)
 set_unitList <-
   function(units,
-           unitTypes = NULL,
-           as_metadata = FALSE) {
+             unitTypes = NULL,
+             as_metadata = FALSE) {
     ## no factors please
     units[] <- lapply(units, as.character)
     unitTypes[] <- lapply(unitTypes, as.character)
@@ -66,21 +68,24 @@ set_unitList <-
     if (is.null(unitTypes)) {
       ListOfunitType <- NULL
     } else {
-      if (is.null(unitTypes$name))
+      if (is.null(unitTypes$name)) {
         unitTypes$name <- unitTypes$id
-      if (is.null(unitTypes$id))
+      }
+      if (is.null(unitTypes$id)) {
         unitTypes$id <- unitTypes$name
+      }
 
 
       types <- unique(unitTypes$id)
       ListOfunitType <- lapply(types, function(type) {
-        dimensions <- unitTypes[(unitTypes$name == type),]
+        dimensions <- unitTypes[(unitTypes$name == type), ]
         ListOfdimension <-
           lapply(1:dim(dimensions)[1], function(i) {
             row <- dimensions[i, ]
             list(
-                name = row[["dimension"]],
-                power = na2empty(row[["power"]]))
+              name = row[["dimension"]],
+              power = na2empty(row[["power"]])
+            )
           })
         list(
           name = dimensions[["name"]][1],
@@ -88,24 +93,29 @@ set_unitList <-
           dimension = ListOfdimension
         )
       })
-
-
     }
 
-    if (is.null(units$name))
+    if (is.null(units$name)) {
       units$name <- units$id
-    if (is.null(units$id))
+    }
+    if (is.null(units$id)) {
       units$id <- units$name
-    if (is.null(units$abbreviation))
+    }
+    if (is.null(units$abbreviation)) {
       units$abbreviation <- rep(NA, length(units$name))
-    if (is.null(units$constantToSI))
+    }
+    if (is.null(units$constantToSI)) {
       units$constantToSI <- rep(NA, length(units$name))
-    if (is.null(units$description))
+    }
+    if (is.null(units$description)) {
       units$description <- rep(NA, length(units$name))
-    if (is.null(units$multiplierToSI))
+    }
+    if (is.null(units$multiplierToSI)) {
       units$multiplierToSI <- rep(NA, length(units$name))
-    if (is.null(units$parentSI))
+    }
+    if (is.null(units$parentSI)) {
       units$parentSI <- rep(NA, length(units$name))
+    }
 
     ## Coerce all columns to characters
 
@@ -131,10 +141,7 @@ set_unitList <-
 
     if (as_metadata) {
       list(metadata = list(unitList = out))
-    } else{
+    } else {
       out
     }
   }
-
-
-

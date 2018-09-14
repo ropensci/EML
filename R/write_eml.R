@@ -25,7 +25,7 @@ write_eml <- function(eml,
                       ns = "eml",
                       ...) {
   ## FIXME, insist on a packageId, or consider validation which can ignore id?
-  if(is.null(eml$packageId)){
+  if (is.null(eml$packageId)) {
     eml$packageId <- uuid::UUIDgenerate()
     eml$system <- "uuid"
   }

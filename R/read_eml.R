@@ -13,8 +13,6 @@
 #' @export
 #' @importFrom emld as_emld
 
-read_eml <- function(x, from = "xml"){
+read_eml <- function(x, from = "xml") {
   emld::as_emld(x, from = from)
 }
-
-

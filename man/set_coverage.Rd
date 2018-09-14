@@ -57,9 +57,11 @@ Ex. "Kingdom","Phylum","Class","Order","Family","Genus","Species","Common"
 }
 \examples{
 coverage <-
- set_coverage(begin = '2012-06-01', end = '2013-12-31',
-              sci_names = "Sarracenia purpurea",
-              geographicDescription = "California coast, down through Baja, Mexico",
-              west = -122.44, east = -117.15,
-              north = 37.38, south = 30.00)
+  set_coverage(
+    begin = "2012-06-01", end = "2013-12-31",
+    sci_names = "Sarracenia purpurea",
+    geographicDescription = "California coast, down through Baja, Mexico",
+    west = -122.44, east = -117.15,
+    north = 37.38, south = 30.00
+  )
 }

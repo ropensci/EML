@@ -20,18 +20,18 @@ get_attributes <- function(x, eml = NULL) {
 
   ## if the attributeList is referenced, get reference
   if (!is.null(attributeList$references)) {
-
     if (is.null(eml)) {
-      warning("The attributeList entered is referenced somewhere else in the eml.",
-              "No eml was entered to find the attributes.",
-              "Please enter the eml to get better results.")
-      eml = x
+      warning(
+        "The attributeList entered is referenced somewhere else in the eml.",
+        "No eml was entered to find the attributes.",
+        "Please enter the eml to get better results."
+      )
+      eml <- x
     }
 
     all_attributeLists <- eml_get(eml, "attributeList")
 
     for (attList in all_attributeLists) {
-
       if (attList$id == attributeList$references) {
         attributeList <- attList
         break
@@ -47,7 +47,7 @@ get_attributes <- function(x, eml = NULL) {
     measurementScale <- names(x$measurementScale)
     domain <- names(x$measurementScale[[measurementScale]])
 
-    if(length(domain) == 1) {
+    if (length(domain) == 1) {
       ## domain == "nonNumericDomain"
       domain <- names(x$measurementScale[[measurementScale]][[domain]])
     }
@@ -70,7 +70,7 @@ get_attributes <- function(x, eml = NULL) {
 
   ## remove non_fields in attributes
   non_fields <- c("enforced", "exclusive", "id", "order", "references", "scope", "system", "typeSystem")
-  attributes <- attributes[ ,!(names(attributes) %in% non_fields)]
+  attributes <- attributes[, !(names(attributes) %in% non_fields)]
 
   ## get factors
   factors <- lapply(attributeList$attribute, function(x) {
@@ -93,15 +93,16 @@ get_attributes <- function(x, eml = NULL) {
   factors <- dplyr::bind_rows(factors)
 
   if (nrow(factors) > 0) {
-  factors <- factors[!is.na(factors$code), ]
-
+    factors <- factors[!is.na(factors$code), ]
   } else {
     factors <- NULL
   }
 
   # FIXME: add support for methods
 
-  out <- list(attributes = attributes,
-              factors = factors)
+  out <- list(
+    attributes = attributes,
+    factors = factors
+  )
   return(out)
 }

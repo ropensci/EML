@@ -11,10 +11,11 @@
 #' @return A methods object
 #' @export
 #'
-#' @examples \donttest{
+#' @examples
+#' \donttest{
 #' f <- system.file("examples/hf205-methods.md", package = "EML")
 #' set_methods(methods_file = f)
-#'
+#' 
 #' ## Can also import from methods written in a .docx MS Word file.
 #' f <- system.file("examples/hf205-methods.docx", package = "EML")
 #' set_methods(methods_file = f)
@@ -32,14 +33,14 @@ set_methods <- function(methods_file,
       studyExtent = list(coverage = sampling_coverage),
       citation = sampling_citation
     )
-  } else{
+  } else {
     sampling <- NULL
   }
 
   if (!is.null(qualityControl_file)) {
     qualityControl <- list(
-                          description = set_TextType(qualityControl_file)
-                          )
+      description = set_TextType(qualityControl_file)
+    )
   } else {
     qualityControl <- NULL
   }
@@ -50,7 +51,7 @@ set_methods <- function(methods_file,
       instrumentation = instrumentation,
       software = software,
       description = set_TextType(methods_file)
-      )
+    )
   )
   methods
 }

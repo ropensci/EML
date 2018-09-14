@@ -27,7 +27,9 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.
 # Read in additional units defined in a EML file
 \donttest{
 f <- system.file("tests", options("emld_db"),
-"eml-datasetWithUnits.xml", package = "emld")
+  "eml-datasetWithUnits.xml",
+  package = "emld"
+)
 eml <- read_eml(f)
 unitList <- get_unitList(eml)
 

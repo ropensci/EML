@@ -8,12 +8,13 @@
 #' "xml", "json", "list", or "guess" with "list" as the default.
 #' @param ... additional arguments
 #'
-#' @examples \donttest{
+#' @examples
+#' \donttest{
 #' f <- system.file("tests", options("emld_db"), "eml-datasetWithUnits.xml", package = "emld")
 #' eml <- read_eml(f)
 #' eml_get(eml, "physical")
 #' eml_get(eml, "attributeList")
-#'
+#' 
 #' ## The first argument need not be an "eml" class, it could be a child element; e.g.
 #' eml_get(eml$dataset$dataTable, "physical")
 #' }
@@ -21,7 +22,7 @@
 #' @importFrom jqr jq combine
 #' @importFrom emld as_json as_emld
 #' @importFrom jsonlite fromJSON
-eml_get <- function(x, element, from = "list", ...){
+eml_get <- function(x, element, from = "list", ...) {
   doc <- as.character(emld::as_json(emld::as_emld(x, from = from)))
   out <- jqr::jq(doc, paste0("..|.", element, "? // empty"))
   json <- jqr::combine(out)

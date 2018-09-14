@@ -21,7 +21,7 @@ Sometimes data involves a unit that is not in `standardUnit` dictionary.  In thi
 
 
 ```{r}
-library("eml2")
+library("EML")
 ```
 
 

@@ -59,4 +59,6 @@ algorithm automatically if the argument \code{objectName} is a file that exists.
 }
 \examples{
 set_physical("hf205-01-TPexp1.csv")
+# FIXME set recordDelimiter based on user's system?
+# FIXME richer distribution options? use set_distribution at top level?
 }

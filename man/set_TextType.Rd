@@ -45,8 +45,6 @@ as(a, "abstract")
 f <- system.file("examples/hf205-methods.docx", package = "EML")
 d <- set_TextType(f)
 as(d, "description")
-
 }
-
 
 }

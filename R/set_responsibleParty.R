@@ -19,17 +19,17 @@
 #' carl <- set_responsibleParty(as.person("Carl Boettiger <cboettig@ropensci.org>"))
 #' matt <- set_responsibleParty("Matthew", "Jones", email = "mbjones@@nceas.ucsb.edu")
 set_responsibleParty <-
-  function (givenName = NULL,
-            surName = NULL,
-            organizationName = NULL,
-            positionName = NULL,
-            address = NULL,
-            phone = NULL,
-            electronicMailAddress = NULL,
-            onlineUrl = NULL,
-            userId = NULL,
-            id = NULL,
-            email = NULL) {
+  function(givenName = NULL,
+             surName = NULL,
+             organizationName = NULL,
+             positionName = NULL,
+             address = NULL,
+             phone = NULL,
+             electronicMailAddress = NULL,
+             onlineUrl = NULL,
+             userId = NULL,
+             id = NULL,
+             email = NULL) {
     UseMethod("set_responsibleParty", givenName)
   }
 
@@ -41,17 +41,17 @@ set_responsibleParty.person <- function(givenName, ...) {
 
 #' @export
 set_responsibleParty.character <-
-  function (givenName = NULL,
-            surName = NULL,
-            organizationName = NULL,
-            positionName = NULL,
-            address = NULL,
-            phone = NULL,
-            electronicMailAddress = NULL,
-            onlineUrl = NULL,
-            userId = NULL,
-            id = NULL,
-            email = NULL) {
+  function(givenName = NULL,
+             surName = NULL,
+             organizationName = NULL,
+             positionName = NULL,
+             address = NULL,
+             phone = NULL,
+             electronicMailAddress = NULL,
+             onlineUrl = NULL,
+             userId = NULL,
+             id = NULL,
+             email = NULL) {
     emld::as_emld(list(
       individualName = list(givenName = givenName, surName = surName),
       organizationName = organizationName,
@@ -59,14 +59,13 @@ set_responsibleParty.character <-
       address = address,
       phone = phone,
       electronicMailAddress =
-        if(is.null(electronicMailAddress)){
+        if (is.null(electronicMailAddress)) {
           email
         } else {
           electronicMailAddress
         },
       onlineUrl = onlineUrl,
       userId = userId,
-      "@id" = id)
-    )
-
+      "@id" = id
+    ))
   }

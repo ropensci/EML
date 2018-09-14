@@ -42,23 +42,26 @@ The unitType table must have the following columns:
  - power: the power to which the dimension is raised (NA implies power of 1)
 }
 \examples{
- ## create the "unitType" table for custom unit
- id = c("speed", "speed", "acceleration", "acceleration", "frequency")
- dimension = c("length", "time", "length", "time", "time")
- power = c(NA, "-1", NA, "-2", "-1")
- unitTypes <- data.frame(id = id, dimension = dimension,
-                         power = power, stringsAsFactors = FALSE)
+## create the "unitType" table for custom unit
+id <- c("speed", "speed", "acceleration", "acceleration", "frequency")
+dimension <- c("length", "time", "length", "time", "time")
+power <- c(NA, "-1", NA, "-2", "-1")
+unitTypes <- data.frame(
+  id = id, dimension = dimension,
+  power = power, stringsAsFactors = FALSE
+)
 
- ## Create the units table
- id = c("minute", "centimeter")
- unitType = c("time", "length")
- parentSI = c("second", "meter")
- multiplierToSI = c("0.0166", "1")
- description = c("one minute is 60 seconds", "centimeter is a 100th of a meter")
- units = data.frame(id = id, unitType = unitType, parentSI = parentSI,
-                    multiplierToSI = multiplierToSI, description = description,
-                    stringsAsFactors = FALSE)
+## Create the units table
+id <- c("minute", "centimeter")
+unitType <- c("time", "length")
+parentSI <- c("second", "meter")
+multiplierToSI <- c("0.0166", "1")
+description <- c("one minute is 60 seconds", "centimeter is a 100th of a meter")
+units <- data.frame(
+  id = id, unitType = unitType, parentSI = parentSI,
+  multiplierToSI = multiplierToSI, description = description,
+  stringsAsFactors = FALSE
+)
 
- unitList <- set_unitList(units, unitTypes)
-
+unitList <- set_unitList(units, unitTypes)
 }

@@ -187,7 +187,7 @@ physical <- set_physical("hf205-01-TPexp1.csv")
 
 ## Assembling the `dataTable`
 
-Once we have defined the `attributeList` and `physical` file, we can now assemble the `dataTable` element itself. Unlike the `EML` R package, in `eml2` there is no need to call `new()` to create elements.  Everything is just a list.  Template lists for a given class can be viewed with the `emld::template()` function. 
+Once we have defined the `attributeList` and `physical` file, we can now assemble the `dataTable` element itself. Unlike the old `EML` R package, in `EML` version 2.0 there is no need to call `new()` to create elements.  Everything is just a list.  Template lists for a given class can be viewed with the `emld::template()` function. 
 
 ```{r}
 dataTable <- list(

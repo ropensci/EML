@@ -26,8 +26,8 @@
 #'
 #' @examples
 #' set_physical("hf205-01-TPexp1.csv")
-# FIXME set recordDelimiter based on user's system?
-# FIXME richer distribution options? use set_distribution at top level?
+#' # FIXME set recordDelimiter based on user's system?
+#' # FIXME richer distribution options? use set_distribution at top level?
 set_physical <- function(objectName,
                          id = character(),
                          numHeaderLines = character(),
@@ -79,7 +79,8 @@ set_physical <- function(objectName,
     if (length(authentication) == 0) {
       message(paste0(
         "Automatically calculated authentication size using digest::digest(\"",
-        objectName, "\", algo = \"md5\", file = TRUE)"))
+        objectName, "\", algo = \"md5\", file = TRUE)"
+      ))
       authentication <- digest::digest(objectName, algo = "md5", file = TRUE)
       authMethod <- "MD5"
     }
@@ -106,17 +107,17 @@ set_physical <- function(objectName,
 
 
   out
-
 }
 
 
 
 set_distribution <- function(url = character()) {
-  if (length(url) > 0)
+  if (length(url) > 0) {
     list(online = list(url = list(
-                       url,
-                       "function" = "download")
-                     ))
-  else
+      url,
+      "function" = "download"
+    )))
+  } else {
     list()
+  }
 }
