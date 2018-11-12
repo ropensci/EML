@@ -92,19 +92,19 @@ unlink("example.xml")
 
 ## Reading EML files
 
-Please see the vignette, [Parsing EML](https://github.com/ropensci/EML/blob/master/vignettes/parsing-EML.Rmd) for a more thorough introduction to reading EML files and extracting relevant metadata.
+Please see the vignette, [Parsing EML](https://ropensci.github.io/EML/articles/parsing-EML.html) for a more thorough introduction to reading EML files and extracting relevant metadata.
 
 ## Creating EML files
 
-Please see the vignette, [Creating EML](https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd) for a proper introduction to creating your own EML files. 
+Please see the vignette, [Creating EML](https://ropensci.github.io/EML/articles/creating-EML.html) for a proper introduction to creating your own EML files. 
 
 ## Working with custom units
 
-Users may occassionally need to define custom unit types that EML does not know about.  Please see the vignette, [Working with units](https://github.com/ropensci/EML/blob/master/vignettes/working-with-units.Rmd) for an overview of how units work in EML, how to view the standard unit library, and how to access and define custom units and custom unit types. 
+Users may occassionally need to define custom unit types that EML does not know about.  Please see the vignette, [Working with units](https://ropensci.github.io/EML/articles/working-with-units.html) for an overview of how units work in EML, how to view the standard unit library, and how to access and define custom units and custom unit types. 
 
 ## Archiving, Sharing, and Publishing EML
 
-One of the chief advantages of using EML to manage your own data is the improved ability to search all of your data files, e.g. for the ones that have the particular measurements you need on the particular location or species of interest, and be able to share this data either publicly or securely with select collaborators.  To do so, you will need to upload your EML file and data to a scientific metadata repository that understands EML.  The vignette, [metadata repositories](https://github.com/ropensci/EML/blob/master/vignettes/metadata-repositories.Rmd) describes how to do this.  
+One of the chief advantages of using EML to manage your own data is the improved ability to search all of your data files, e.g. for the ones that have the particular measurements you need on the particular location or species of interest, and be able to share this data either publicly or securely with select collaborators.  To do so, you will need to upload your EML file and data to a scientific metadata repository that understands EML.  The vignette, [metadata repositories](https://ropensci.github.io/EML/articles/metadata-repositories.html) describes how to do this.  
 
 ## Developer notes
 
