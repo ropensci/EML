@@ -55,7 +55,7 @@ get_unit_id <- function(input_units,
 
   ## Initiallize exponents
   exponents <- list(
-    numeric = c("1", "2", "3"),
+    numeric = c("1", "2", "3", "4", "5", "6"),
     preceeding = c("", "square", "cubic"),
     following = c("", "squared", "cubed"),
     symbolic = c("", "\u00B2", "\u00B3")
@@ -250,19 +250,24 @@ get_split_unit <- function(unit, exponents) {
 
 get_valid_unit <- function(unit) {
   stopifnot(length(unlist(
-    gregexpr("\\(", unit))) == length(unlist(gregexpr("\\)", unit)))) # stop if not all parenthesis are closed
-  stopifnot(!grepl("\\([^\\)]*\\(", unit)) # stop if nested parenthesis (unable to deparse)
-  stopifnot(!grepl("\\([^\\)]*\\/[^\\)]*\\)", unit)) # stop if fractions in parenthesis (unable to deparse)
+    gregexpr("\\(", unit))) == length(unlist(gregexpr("\\)", unit)))) 
+  # stop if not all parenthesis are closed
+  stopifnot(!grepl("\\([^\\)]*\\(", unit)) 
+  # stop if nested parenthesis (unable to deparse)
+  stopifnot(!grepl("\\([^\\)]*\\/[^\\)]*\\)", unit))
+  # stop if fractions in parenthesis (unable to deparse)
 
   ## Preformat unit
   ## Use x2/y instead of x^2 per y
   unit <- gsub("(\\^)(-{0,1}[[:digit:]]+)", "\\2", unit) # remove ^ in front of digits
-  unit <- gsub("(^|[[:blank:]]+)[p|P]er[[:blank:]]+", " / ", unit) # replace "per" and "Per" with "/"
+  unit <- gsub("(^|[[:blank:]]+)[p|P]er[[:blank:]]+", " / ", unit) 
+  # replace "per" and "Per" with "/"
 
   ## Deal with parenthesis
   ## Use x/y/z instead of x/(y*z)
   rev_unit <- paste(rev(strsplit(unit, NULL)[[1]]), collapse = "")
-  rev_unit <- gsub("(\\*?[[:blank:]])(?=[^\\)]+\\({1}[[:blank:]]*\\/{1})", "/", rev_unit, perl = TRUE) # insert "/"
+  rev_unit <- gsub("(\\*?[[:blank:]])(?=[^\\)]+\\({1}[[:blank:]]*\\/{1})",
+                   "/", rev_unit, perl = TRUE) # insert "/"
   unit <- paste(rev(strsplit(rev_unit, NULL)[[1]]), collapse = "")
   unit <- gsub("\\(|\\)", " ", unit) # remove parenthesis
   unit <- gsub("\\*", " ", unit) # remove "*"

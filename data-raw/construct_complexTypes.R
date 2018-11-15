@@ -6,7 +6,8 @@
 options("emld_db" = "eml-2.1.1")
 ## Full database
 db <- purrr::compact(
-  jsonlite::read_json("https://raw.githubusercontent.com/cboettig/emld/master/data-raw/eml_db.json")
+  jsonlite::read_json(paste0("https://raw.githubusercontent.com/cboettig/emld/",
+                             "master/data-raw/", getOption("emld_db"), ".json"))
 )
 db["UrlType"] <- NULL # 'function' as argument, not needed
 db["url"] <- NULL
