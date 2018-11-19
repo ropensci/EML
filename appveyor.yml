@@ -1,19 +1,18 @@
 # DO NOT CHANGE the "init" and "install" sections below
+environment:
+  global:
+    USE_RTOOLS: true
 
 # Download script file from GitHub
 init:
   - ps: |
         $ErrorActionPreference = "Stop"
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
-        Import-Module '..\appveyor-tool.ps1'        
-        
+        Import-Module '..\appveyor-tool.ps1'
+
 
 install:
   - ps: Bootstrap
-  - ps: |
-        Progress ("Downloading Virtuoso") & "C:\Program Files\Git\mingw64\bin\curl.exe" -s -o Virtuoso_OpenSource_Server_7.20.x64.exe -L https://sourceforge.net/projects/virtuoso/files/virtuoso/7.2.5/Virtuoso_OpenSource_Server_7.20.x64.exe/download
-  - ps: Start-Process Virtuoso_OpenSource_Server_7.20.x64.exe  -ArgumentList "/VERYSILENT" -NoNewWindow -Wait
-
 
 cache:
   - C:\RLibrary
