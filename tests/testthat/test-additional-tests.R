@@ -24,6 +24,10 @@ test_that("set_physical can compute file size automatically", {
 })
 
 test_that("set_method with additional input files", {
+  
+  skip_if(compareVersion(as.character(rmarkdown::pandoc_version()), 
+                         "2.0.0") != 1)
+  
   coverage <-
     set_coverage(
       date = c("2012-06-01", "2013-12-31"),

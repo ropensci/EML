@@ -1,3 +1,5 @@
+## Developer note: Some functions not fully compatible with pandoc < 2.0 
+
 #' set_TextType
 #'
 #' For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
@@ -48,8 +50,6 @@ set_TextType <- function(file = NULL, text = NULL) {
   }
   TextType
 }
-
-
 
 #' @importFrom xml2 xml_find_all xml_children xml_contents read_xml
 #' @importFrom utils compareVersion
