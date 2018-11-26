@@ -10,3 +10,4 @@ old-vignettes/*
 ^codecov\.yml$
 ^paper/
 ^codemeta\.json$
+^appveyor\.yml$
