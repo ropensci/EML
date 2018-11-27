@@ -84,13 +84,18 @@
 
     
     
-
+<p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://travis-ci.org/ropensci/EML"><img src="https://travis-ci.org/ropensci/EML.svg?branch=master" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/cboettig/eml"><img src="https://ci.appveyor.com/api/projects/status/u2gw24yfkvxgny96?svg=true" alt="Windows build status"></a> <a href="https://codecov.io/gh/ropensci/EML"><img src="https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://cran.r-project.org/package=EML"><img src="https://www.r-pkg.org/badges/version/EML" alt="CRAN status"></a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/RNeXML" alt="downloads"><a href="https://zenodo.org/badge/latestdoi/10894022"><img src="https://zenodo.org/badge/10894022.svg" alt="DOI"></a></p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="eml" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#eml" class="anchor"></a>EML</h1></div>
-<p>The goal of <code>EML</code> is to provide both a drop-in replacement for the higher-level functions of the existing EML package while also providing additional functionality.</p>
-<p><code>EML</code> uses only simple and familiar list structures (S3 classes) instead of the more cumbersome use of S4 found in the original EML. While the higher-level functions are identical, this makes it easier to for most users and developers to work with <code>eml</code> objects and also to write their own functions for creating and manipulating EML objects. Under the hood, <code>EML</code> relies on the <a href="https://github.com/cboettig/emld">emld</a> package, which uses a Linked Data representation for EML. It is this approach which lets us combine the simplicity of lists with the specificy required by the XML schema.</p>
+<p>EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the <a href="https://knb.ecoinformatics.org/#external//emlparser/docs/index.html">EML Homepage</a> for an introduction and thorough documentation of the standard. Additionally, the scientific article <em><a href="http://doi.org/10.1146/annurev.ecolsys.37.091305.110031">The New Bioinformatics: Integrating Ecological Data from the Gene to the Biosphere (Jones et al 2006)</a></em> provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the <code>EML</code> R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.</p>
+<div id="notes-on-the-eml-v2-0-release" class="section level2">
+<h2 class="hasAnchor">
+<a href="#notes-on-the-eml-v2-0-release" class="anchor"></a>Notes on the EML v2.0 Release</h2>
+<p><code>EML</code> v2.0 is a complete re-write which aims to provide both a drop-in replacement for the higher-level functions of the existing EML package while also providing additional functionality. This new <code>EML</code> version uses only simple and familiar list structures (S3 classes) instead of the more cumbersome use of S4 found in the original <code>EML</code>. While the higher-level functions are identical, this makes it easier to for most users and developers to work with <code>eml</code> objects and also to write their own functions for creating and manipulating EML objects. Under the hood, <code>EML</code> relies on the <a href="https://github.com/cboettig/emld">emld</a> package, which uses a Linked Data representation for EML. It is this approach which lets us combine the simplicity of lists with the specificy required by the XML schema.</p>
+<p>This revision also supports the upcoming release of the EML 2.2 specification.</p>
+</div>
 </div>
 <div id="creating-eml" class="section level1">
 <h1 class="hasAnchor">
@@ -255,6 +260,14 @@
 <a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; character(0)</span></a>
 <a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw"><a href="reference/write_eml.html">write_eml</a></span>(my_eml, <span class="st">"eml.xml"</span>)</a></code></pre></div>
 </div>
+<div id="setting-the-version" class="section level2">
+<h2 class="hasAnchor">
+<a href="#setting-the-version" class="anchor"></a>Setting the version</h2>
+<p>EML will use the latest EML specification by default. To switch to a different version, set the option <code>emld_db</code>, like so:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">options</span>(<span class="st">"emld_db"</span> =<span class="st"> "eml-2.1.1"</span>)</a></code></pre></div>
+<p>Switch back to the 2.2.0 release:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">options</span>(<span class="st">"emld_db"</span> =<span class="st"> "eml-2.2.0"</span>)</a></code></pre></div>
+</div>
 </div>
   </div>
 
@@ -286,17 +299,7 @@
 </ul>
 </div>
 
-      <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
-<li><a href="https://travis-ci.org/ropensci/EML"><img src="https://travis-ci.org/ropensci/EML.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/cboettig/eml"><img src="https://ci.appveyor.com/api/projects/status/u2gw24yfkvxgny96?svg=true" alt="Windows build status"></a></li>
-<li><a href="https://codecov.io/gh/ropensci/EML"><img src="https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://cran.r-project.org/package=EML"><img src="https://www.r-pkg.org/badges/version/EML" alt="CRAN status"></a></li>
-</ul>
-</div>
-</div>
+      </div>
 
 </div>
 

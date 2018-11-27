@@ -29,9 +29,14 @@ has_pandoc <-  rmarkdown::pandoc_available()
 # EML
 
 
-The goal of `EML` is to provide both a drop-in replacement for the higher-level functions of the existing EML package while also providing additional functionality.  
+EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the [EML Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) for an introduction and thorough documentation of the standard. Additionally, the scientific article *[The New Bioinformatics: Integrating Ecological Data from the Gene to the Biosphere (Jones et al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)* provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the `EML` R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.
 
-`EML` uses only simple and familiar list structures (S3 classes) instead of the more cumbersome use of S4 found in the original EML.  While the higher-level functions are identical, this makes it easier to for most users and developers to work with `eml` objects and also to write their own functions for creating and manipulating EML objects.  Under the hood, `EML` relies on the [emld](https://github.com/cboettig/emld) package, which uses a Linked Data representation for EML.  It is this approach which lets us combine the simplicity of lists with the specificy required by the XML schema.    
+
+## Notes on the EML v2.0 Release
+
+`EML` v2.0 is a complete re-write which aims to provide both a drop-in replacement for the higher-level functions of the existing EML package while also providing additional functionality.  This new `EML` version uses only simple and familiar list structures (S3 classes) instead of the more cumbersome use of S4 found in the original `EML`.  While the higher-level functions are identical, this makes it easier to for most users and developers to work with `eml` objects and also to write their own functions for creating and manipulating EML objects.  Under the hood, `EML` relies on the [emld](https://github.com/cboettig/emld) package, which uses a Linked Data representation for EML.  It is this approach which lets us combine the simplicity of lists with the specificy required by the XML schema.    
+
+This revision also supports the upcoming release of the EML 2.2 specification.  
 
 # Creating EML
 
@@ -237,7 +242,19 @@ write_eml(my_eml, "eml.xml")
 
 
 
+## Setting the version
 
+EML will use the latest EML specification by default.  To switch to a different version, set the option `emld_db`, like so:
+
+```{r}
+options("emld_db" = "eml-2.1.1")
+```
+
+Switch back to the 2.2.0 release: 
+
+```{r}
+options("emld_db" = "eml-2.2.0")
+```
 
 
 ```{r include = FALSE}
