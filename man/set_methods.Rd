@@ -4,8 +4,8 @@
 \alias{set_methods}
 \title{set_methods}
 \usage{
-set_methods(methods_file, instrumentation = character(), software = NULL,
-  sampling_file = NULL, sampling_coverage = NULL,
+set_methods(methods_file, instrumentation = character(),
+  software = NULL, sampling_file = NULL, sampling_coverage = NULL,
   sampling_citation = NULL, qualityControl_file = NULL)
 }
 \arguments{

@@ -6,8 +6,10 @@
 \usage{
 set_coverage(beginDate = character(), endDate = character(),
   date = character(), sci_names = character(),
-  geographicDescription = character(), westBoundingCoordinate = numeric(),
-  eastBoundingCoordinate = numeric(), northBoundingCoordinate = numeric(),
+  geographicDescription = character(),
+  westBoundingCoordinate = numeric(),
+  eastBoundingCoordinate = numeric(),
+  northBoundingCoordinate = numeric(),
   southBoundingCoordinate = numeric(), altitudeMinimum = numeric(),
   altitudeMaximum = numeric(), altitudeUnits = character())
 }
