@@ -80,3 +80,9 @@ eml <- read_eml(f)
 We extract the `attributeList`, and examine the numeric attributes (e.g. those which have units): 
 
 
+
+```{r include = FALSE}
+# clean up
+unlink("eml-with-units.xml")
+```
+
