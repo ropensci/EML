@@ -25,8 +25,8 @@ test_that("set_physical can compute file size automatically", {
 
 test_that("set_method with additional input files", {
   
-  skip_if(compareVersion(as.character(rmarkdown::pandoc_version()), 
-                         "2.0.0") != 1)
+  skip_on_appveyor()
+  
   
   coverage <-
     set_coverage(

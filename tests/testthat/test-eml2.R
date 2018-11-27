@@ -2,9 +2,9 @@ library(emld)
 
 test_that("we can do a complete eml construction", {
 
-  
-  skip_if(compareVersion(as.character(rmarkdown::pandoc_version()), 
-                         "2.0.0") != 1)
+  ## Appveyor cannot even evaluate rmarkdown::pandoc_version() ?
+  skip_on_appveyor()
+
 ## ------------------------------------------------------------------------
 geographicDescription <-
   "Harvard Forest Greenhouse, Tom Swamp Tract (Harvard Forest)"
