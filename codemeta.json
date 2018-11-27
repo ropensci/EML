@@ -4,25 +4,61 @@
     "http://schema.org"
   ],
   "@type": "SoftwareSourceCode",
-  "identifier": "eml2",
-  "description": "A successor to the 'EML' R package which provides the same high level\n             functions for creating and extracting data from 'EML' files, while\n             providing a simpler and more user friendly lower level interface.",
-  "name": "eml2: Create and Manipulate Data using the Ecological Metadata Language",
+  "identifier": "EML",
+  "description": "Read and write Ecological Metadata Language files",
+  "name": "EML: Create and Manipulate Data using the Ecological Metadata Language",
+  "codeRepository": "https://github.com/ropensci/EML",
+  "issueTracker": "https://github.com/ropensci/EML/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.1.0",
+  "version": "1.99.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.5.0",
+    "version": "3.5.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.5.0 (2018-04-23)",
+  "runtimePlatform": "R version 3.5.1 (2018-07-02)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
       "givenName": "Carl",
       "familyName": "Boettiger",
       "email": "cboettig@gmail.com",
-      "@id": "http://orcid.org/0000-0002-1642-628X"
+      "@id": "https://orcid.org/0000-0002-1642-628X"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Matthew B.",
+      "familyName": "Jones",
+      "@id": "https://orcid.org/0000-0003-0077-4738"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Mitchell",
+      "familyName": "Maier",
+      "@id": "https://orcid.org/0000-0001-6955-0535"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Bryce",
+      "familyName": "Mecum",
+      "email": "brycemecum@gmail.com",
+      "@id": "https://orcid.org/0000-0002-0381-3766"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Maëlle",
+      "familyName": "Salmon",
+      "email": "maelle.salmon@yahoo.se",
+      "@id": "https://orcid.org/0000-0002-2815-0399"
     }
   ],
   "copyrightHolder": [
@@ -31,7 +67,7 @@
       "givenName": "Carl",
       "familyName": "Boettiger",
       "email": "cboettig@gmail.com",
-      "@id": "http://orcid.org/0000-0002-1642-628X"
+      "@id": "https://orcid.org/0000-0002-1642-628X"
     }
   ],
   "maintainer": [
@@ -40,7 +76,7 @@
       "givenName": "Carl",
       "familyName": "Boettiger",
       "email": "cboettig@gmail.com",
-      "@id": "http://orcid.org/0000-0002-1642-628X"
+      "@id": "https://orcid.org/0000-0002-1642-628X"
     }
   ],
   "softwareSuggestions": [
@@ -55,18 +91,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
     },
     {
       "@type": "SoftwareApplication",
@@ -127,6 +151,66 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=EML"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "units",
+      "name": "units",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=units"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "memoise",
+      "name": "memoise",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=memoise"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "htmlwidgets",
+      "name": "htmlwidgets",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=htmlwidgets"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "shiny",
+      "name": "shiny",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=shiny"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "shinyjs",
+      "name": "shinyjs",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=shinyjs"
     }
   ],
   "softwareRequirements": [
@@ -169,6 +253,7 @@
       "@type": "SoftwareApplication",
       "identifier": "emld",
       "name": "emld",
+      "version": ">= 0.0.0.9900",
       "sameAs": "https://github.com/cboettig/emld"
     },
     {
@@ -206,11 +291,52 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=uuid"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
     }
   ],
-  "contIntegration": [],
-  "readme": "https://github.com/cboettig/eml2/blob/master/README.md",
-  "fileSize": "466.612KB",
-  "codeRepository": "https://github.com/cboettig/eml2",
-  "issueTracker": "https://github.com/cboettig/eml2/issues"
+  "readme": "https://github.com/ropensci/EML/blob/master/README.md",
+  "fileSize": "438.457KB",
+  "contIntegration": [
+    "https://travis-ci.org/ropensci/EML",
+    "https://ci.appveyor.com/project/cboettig/eml",
+    "https://codecov.io/gh/ropensci/EML"
+  ],
+  "developmentStatus": "https://www.tidyverse.org/lifecycle/#maturing",
+  "keywords": [
+    "metadata-standard",
+    "eml",
+    "eml-metadata",
+    "r",
+    "rstats",
+    "r-package"
+  ],
+  "relatedLink": "https://CRAN.R-project.org/package=EML"
 }

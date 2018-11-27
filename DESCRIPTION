@@ -6,18 +6,25 @@ Authors@R: c(
               person("Carl", "Boettiger", 
                   email = "cboettig@gmail.com", 
                   role = c("aut", "cre", "cph"),
-                  comment=c(ORCID = "http://orcid.org/0000-0002-1642-628X")),
+                  comment=c(ORCID = "0000-0002-1642-628X",
+                            github = "https://github.com/cboettig")),
+              person("Matthew B.", "Jones", role="aut", 
+                     comment = c(ORCID="0000-0003-0077-4738")),      
               person("Mitchell", "Maier", 
-                  comment= c(github = "https://github.com/maier-m",
-                             ORCID = "http://orcid.org/0000-0001-6955-0535"),
-                  role = c("ctb"))
-                  )
-Description: A successor to the 'EML' R package which provides the same high level
-             functions for creating and extracting data from 'EML' files, while
-             providing a simpler and more user friendly lower level interface.
+                     role = c("ctb"),
+                     comment= c(github = "https://github.com/maier-m",
+                             ORCID = "0000-0001-6955-0535")),
+              person("Bryce", "Mecum", role = "ctb", 
+                     email = "brycemecum@gmail.com",
+                     comment = c(ORCID = "0000-0002-0381-3766")),
+              person("Maëlle", "Salmon", role = "ctb", 
+                     email = "maelle.salmon@yahoo.se", 
+                     comment = c(ORCID = "0000-0002-2815-0399"))
+            )
+Description: Read and write Ecological Metadata Language files
 License: MIT + file LICENSE
-URL: https://github.com/cboettig/eml2
-BugReports: https://github.com/cboettig/eml2/issues
+URL: https://github.com/ropensci/EML
+BugReports: https://github.com/ropensci/EML/issues
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)

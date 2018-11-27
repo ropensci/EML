@@ -1,38 +1,42 @@
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build
-Status](https://travis-ci.org/cboettig/eml2.svg?branch=master)](https://travis-ci.org/cboettig/eml2)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/cboettig/eml2/master.svg)](https://codecov.io/github/cboettig/eml2?branch=master)
-[![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/joethorley/stability-badges#experimental)
+Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
+[![Windows build
+status](https://ci.appveyor.com/api/projects/status/u2gw24yfkvxgny96?svg=true)](https://ci.appveyor.com/project/cboettig/eml)
+[![codecov](https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/EML)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/package=EML)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# eml2
+# EML
 
-The goal of `eml2` is to provide both a drop-in replacement for the
+The goal of `EML` is to provide both a drop-in replacement for the
 higher-level functions of the existing EML package while also providing
 additional functionality.
 
-`eml2` uses only simple and familiar list structures (S3 classes)
-instead of the more cumbersome use of S4 found in the original EML.
-While the higher-level functions are identical, this makes it easier to
-for most users and developers to work with `eml` objects and also to
-write their own functions for creating and manipulating EML objects.
-Under the hood, `eml2` relies on the
-[emld](https://github.com/cboettig/emld) package, which uses a Linked
-Data representation for EML. It is this approach which lets us combine
-the simplicity of lists with the specificy required by the XML
+`EML` uses only simple and familiar list structures (S3 classes) instead
+of the more cumbersome use of S4 found in the original EML. While the
+higher-level functions are identical, this makes it easier to for most
+users and developers to work with `eml` objects and also to write their
+own functions for creating and manipulating EML objects. Under the hood,
+`EML` relies on the [emld](https://github.com/cboettig/emld) package,
+which uses a Linked Data representation for EML. It is this approach
+which lets us combine the simplicity of lists with the specificy
+required by the XML
 schema.
 
 # Creating EML
 
 ``` r
-library(eml2)
+library(EML)
 ```
 
 ## A minimal valid EML document:
 
 ``` r
-me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
+me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"), id="cboettig")
 my_eml <- list(dataset = list(
               title = "A Mimimal Valid EML Dataset",
               creator = me,
@@ -50,14 +54,14 @@ eml_validate("ex.xml")
 ## A Richer Example
 
 Here we show a the creation of a relatively complete EML document using
-`eml2`. This closely parallels the function calls shown in the original
+`EML`. This closely parallels the function calls shown in the original
 EML [R-package
 vignette](https://ropensci.github.io/EML/articles/creating-EML.html).
 
 ## `set_*` methods
 
 The original EML R package defines a set of higher-level `set_*` methods
-to facilitate the creation of complex metadata structures. `eml2`
+to facilitate the creation of complex metadata structures. `EML`
 provides these same methods, taking the same arguments for
 `set_coverage`, `set_attributes`, `set_physical`, `set_methods` and
 `set_textType`, as illustrated
@@ -105,8 +109,8 @@ attribute metadata and factor definitions as given from `.csv`
 files.
 
 ``` r
-attributes <- read.table(system.file("extdata/hf205_attributes.csv", package = "eml2"))
-factors <- read.table(system.file("extdata/hf205_factors.csv", package = "eml2"))
+attributes <- read.table(system.file("extdata/hf205_attributes.csv", package = "EML"))
+factors <- read.table(system.file("extdata/hf205_factors.csv", package = "EML"))
 attributeList <- 
   set_attributes(attributes, 
                  factors, 
