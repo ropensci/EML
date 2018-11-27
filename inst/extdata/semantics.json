@@ -1,0 +1,29 @@
+{
+ "@context": {
+    "@vocab": "eml://ecoinformatics.org/eml-2.1.1/",
+    "eml": "eml://ecoinformatics.org/eml-2.1.1/",
+    "xsi": "http://www.w3.org/2001/XMLSchema-instance/",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "id": "@id"
+  },
+  "@type": "EML",
+  "title": "Sample Dataset Description",
+  "creator": {
+    "id": "23445",
+    "scope": "document",
+    "individualName": {
+      "surName": "Smith"
+    },
+    "birthDate": "1980-02-02"
+  },
+  "contact": [
+    {
+      "individualName": {
+        "surName": "Johnson"
+      }
+    },
+    {
+      "@id": "23445"
+    }
+  ]
+}

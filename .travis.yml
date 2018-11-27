@@ -1,16 +1,24 @@
-# Sample .travis.yml for R projects
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: R
+cache: packages
+latex: false
 
-language: r
-r:
-  - oldrel
-  - release
-#  - devel
-warnings_are_errors: true
-sudo: required
+matrix:
+  include:
+    - os: linux
+      r: devel
+    - os: linux
+      r: release
 
-#r_github_packages:
-#- jimhester/covr
-#- hadley/testthat
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:opencpu/jq'
+    packages:
+      - librdf0-dev
+      - libv8-dev
+      - libjq-dev
+      - libudunits2-dev
 
 after_success:
-- Rscript -e 'library(covr); codecov()'
+  - Rscript -e 'covr::codecov()'

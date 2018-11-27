@@ -4,11 +4,10 @@
 \alias{get_unitList}
 \title{get_unitList}
 \usage{
-get_unitList(x = read_eml(system.file("xsd/eml-2.1.1/eml-unitDictionary.xml",
-  package = "EML")))
+get_unitList(x = NULL)
 }
 \arguments{
-\item{x}{a unitList object.  Usually found in eml@additionalMetadata[[1]]@metadata, see details}
+\item{x}{an emld object}
 }
 \value{
 a list with two data.frames: "units", a table defining unit names, types, and conversions to SI,
@@ -27,9 +26,12 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.
 
 # Read in additional units defined in a EML file
 \donttest{
-f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
+f <- system.file("tests", options("emld_db"),
+  "eml-datasetWithUnits.xml",
+  package = "emld"
+)
 eml <- read_eml(f)
-unitList <- get_unitList(eml@additionalMetadata[[1]]@metadata)
+unitList <- get_unitList(eml)
 
 ## Read in the definitions of standard units:
 get_unitList()

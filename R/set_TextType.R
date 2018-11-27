@@ -1,3 +1,5 @@
+## Developer note: Some functions not fully compatible with pandoc < 2.0 
+
 #' set_TextType
 #'
 #' For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
@@ -5,6 +7,7 @@
 #' @param file path to a file providing formatted input text, see details.
 #' @return a TextType object that can be coerced into any element inheriting from TextType, see examples
 #' @importFrom tools file_ext
+#' @importFrom methods as
 #' @details If the `rmarkdown` package is installed, then the input file can
 #' be a Microsoft Word (.docx) file, a markdown file, or other file
 #' recognized by Pandoc (see http://pandoc.org), which will automate the conversion
@@ -17,63 +20,77 @@
 #' ## using a simple character string
 #' a <- set_TextType(text = "This is the abstract")
 #' as(a, "abstract")
-#'
+#' 
 #' ## Using an external markdown file
 #' f <- system.file("examples/hf205-abstract.md", package = "EML")
 #' a <- set_TextType(f)
 #' as(a, "abstract")
-#'
+#' 
 #' ## Can also import from methods written in a .docx MS Word file.
 #' f <- system.file("examples/hf205-abstract.docx", package = "EML")
 #' a <- set_TextType(f)
 #' as(a, "abstract")
-#'
+#' 
 #' ## Documents with title headings use `section` instead of `para` notation
 #' f <- system.file("examples/hf205-methods.docx", package = "EML")
 #' d <- set_TextType(f)
 #' as(d, "description")
-#'
 #' }
-#'
-#'
+#' 
 set_TextType <- function(file = NULL, text = NULL) {
   if (!is.null(text)) {
-    TextType <- new("TextType", .Data = text)
+    TextType <- text
   } else if (!is.null(file)) {
     docbook <- to_docbook(file)
     TextType <-
-      new("TextType",
-          section = set_section(docbook),
-          para = set_para(docbook))
+      list(
+        section = set_section(docbook),
+        para = set_para(docbook)
+      )
   }
   TextType
 }
 
-
-
+#' @importFrom xml2 xml_find_all xml_children xml_contents read_xml
+#' @importFrom utils compareVersion
+#' @importFrom rmarkdown pandoc_version
 set_section <- function(docbook) {
-  sections <- lapply(xml2::xml_find_all(docbook, "/article/sect1"), xml2::xml_children)
-  s <- lapply(sections, function(x) new("section", list(x)))
-  as(s, "ListOfsection")
+  ## Argh, section tag name changes in different versions of pandoc!!
+  if (utils::compareVersion(
+    as.character(rmarkdown::pandoc_version()),
+    "2.0"
+  ) == 1) {
+    xpath <- "/article/section"
+  } else {
+    xpath <- "/article/sect1"
+  }
+  lapply(
+    xml2::xml_find_all(docbook, xpath),
+    function(x)
+      paste(lapply(xml2::xml_children(x), as.character),
+        collapse = "\n"
+      )
+  )
 }
 
 
 
-set_para <-  function(docbook) {
-  para <- xml2::xml_find_all(docbook, "/article/para")
-  s <- lapply(para, function(x)
-    new("para", list(x)))
-  as(s, "ListOfpara")
+set_para <- function(docbook) {
+  lapply(
+    xml2::xml_find_all(docbook, "/article/para"),
+    function(x) as.character(xml2::xml_contents(x))
+  )
 }
 
-
+#' @importFrom xml2 xml_ns_strip
 to_docbook <- function(file = NULL) {
   if (!tools::file_ext(file) %in% c("xml", "dbk", "db")) {
     ## Not xml yet, so use pandoc to generate docbook
 
     if (!requireNamespace("rmarkdown", quietly = TRUE)) {
       stop("rmarkdown package required to convert to Docbook format",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     pandoc_convert <-
       getExportedValue("rmarkdown", "pandoc_convert")
@@ -90,12 +107,13 @@ to_docbook <- function(file = NULL) {
       options = "-s"
     )
     docbook <- xml2::read_xml(docbook_file)
-    setwd(wd)
-
+    on.exit(setwd(wd))
   } else {
     ## File is already xml/docbook, so no need for pandoc
-    docbook  <- xml2::read_xml(file)
+    docbook <- xml2::read_xml(file)
   }
-  docbook
 
+  ## Unlike EML, treat this as literal!
+  xml2::xml_ns_strip(docbook)
+  docbook
 }

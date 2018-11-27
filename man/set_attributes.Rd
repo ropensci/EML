@@ -7,8 +7,7 @@
 set_attributes(attributes, factors = NULL, col_classes = NULL)
 }
 \arguments{
-\item{attributes}{a joined table of all attribute metadata
-(such as returned by \code{\link{get_attributes}}, see details)}
+\item{attributes}{a joined table of all attribute metadata}
 
 \item{factors}{a table with factor code-definition pairs; see details}
 

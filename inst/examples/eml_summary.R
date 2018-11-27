@@ -2,7 +2,7 @@ setMethod("summary", signature = "dataTable", function(dt) {
   attr <- get_attributes(dt)$attributes
   ## Drop all-NA columns
   attr <- attr[sapply(attr, function(x)
-    ! all(is.na(x)))]
+    !all(is.na(x)))]
 
   cat(
     paste0(

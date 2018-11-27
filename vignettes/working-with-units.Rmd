@@ -11,13 +11,58 @@ vignette: >
 
 ## Overview
 
+
+One essential role of EML metadata is in precisely defining the units in which data is measured. To make sure these units can be understood by (and thus potentially converted to other units by) a computer, it's necessary to be rather precise about our choice of units.  EML knows about a lot of commonly used units, referred to as "standardUnits," already.  If a unit is in EML's `standardUnit` dictionary, we can refer to it without further explanation as long as we're careful to use the precise `id` for that unit, as we will see below.
+
+Sometimes data involves a unit that is not in `standardUnit` dictionary.  In this case, the metadata must provide additional information about the unit, including how to convert the unit into the SI system.  EML uses an existing standard, [stmml](http://www.ch.ic.ac.uk/rzepa/codata2/), to represent this information, which must be given in the `additionalMetadata` section of an EML file.  The `stmml` standard is also used to specify EML's own `standardUnit` definitions.
+
+
+## Add a custom unit to EML
+
+
 ```{r}
 library("EML")
 ```
 
-One essential role of EML metadata is in precisely defining the units in which data is measured. To make sure these units can be understood by (and thus potentially converted to other units by) a computer, it's necessary to be rather precise about our choice of units.  EML knows about a lot of commonly used units, referred to as "standardUnits," already.  If a unit is in EML's `standardUnit` dictionary, we can refer to it without further explanation as long as wer are careful to use the precise `id` for that unit, as we will see below.
 
-Sometimes data involves a unit that is not in `standardUnit` dictionary.  In this case, the metadata must provide additional information about the unit, including how to convert the unit into the SI system.  EML uses an existing standard, [stmml](http://www.ch.ic.ac.uk/rzepa/codata2/), to represent this information, which must be given in the `additionalMetadata` section of an EML file.  The `stmml` standard is also used to specify EML's own `standardUnit` definitions.
+
+
+```{r}
+custom_units <- 
+  data.frame(id = "speciesPerSquareMeter", 
+             unitType = "arealDensity", 
+             parentSI = "numberPerSquareMeter", 
+             multiplierToSI = 1, 
+             description = "number of species per square meter")
+
+
+unitList <- set_unitList(custom_units)
+```             
+
+
+Start with a minimal EML document
+```{r}
+me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
+my_eml <- list(dataset = list(
+              title = "A Mimimal Valid EML Dataset",
+              creator = me,
+              contact = me),
+              additionalMetadata = list(metadata = list(
+                unitList = unitList
+              ))
+            )
+
+```
+
+
+```{r}
+write_eml(my_eml, "eml-with-units.xml")
+eml_validate("eml-with-units.xml")
+```
+
+Note: Custom units are widely missunderstood and missused in EML.  See examples from [custom-units](https://gist.github.com/amoeba/67a23818dfca49904c7a54b0632d76bc#file-all-arcticdata-customUnits)
+
+
 
 
 
@@ -28,146 +73,10 @@ Let us start by examining the numeric attributes in an example EML file.  First 
 
 
 ```{r}
-f <- system.file("xsd/test/eml-datasetWithUnits.xml", package = "EML")
+f <- system.file("tests", options("emld_db"), "eml-datasetWithUnits.xml", package = "emld")
 eml <- read_eml(f)
 ```
 
 We extract the `attributeList`, and examine the numeric attributes (e.g. those which have units): 
 
-```{r}
-attribute_tables <- eml_get(eml, "attributeList")
 
-
-a <- attribute_tables$attributes
-numerics <- a[a$domain == "numericDomain",]
-numerics
-```
-
-We see this data contains eleven columns containing numeric data, with metadata for the unit, precision, range, and number type (integer, real complex) given in the resulting table.  
-
-EML knows about many standard units already, but a metadata file may occassionally need to define a unit that is not in the StandardUnit dictionary.  We can use the function `is_standardUnit()` to quickly check if the units shown here are in EML's dictionary:
-
-
-```{r}
-units <- numerics$unit
-units[ !is_standardUnit(units) ]
-```
-
-This shows us that the unit `speciesPerSquareMeter` is the only unit not in the Standard Unit Dictionary.  We can have a look at the definitions for all units that *are* in the Standard Unit dictionary using the function `get_unitList()` with no arguments:
-
-```{r}
-standardUnits <- get_unitList()
-standardUnits$units
-```
-
-Use `View(standardUnits$units)` for a prettier display locally.
-
-The `get_unitList()` function returns two tables, `units` and `unitType`.  We will see the importance of the latter in a moment.  This table can be useful in identifying the appropriate unit `id` to use when creating an EML file using `set_attributes()`.  
-
-For now, we would like to learn more about the custom unit that *isn't* in the standard dictionary.  A valid EML file must provide the definitions for any custom unit in the `addtionalMetadata` section.  We can use `get_unitList()` to extract this information from the EML document:
-
-
-```{r}
-customUnits <- get_unitList(eml@additionalMetadata[[1]]@metadata)
-customUnits
-```
-
-
-We see that this EML file defines two custom units (though as we've seen `gramsPerSquareMeter` is actually in the standard unit list now, so that one isn't needed.)  We also see that the `unitTypes` table is empty, since the custom unit `speciesPerSquareMeter` uses the standard `unitType` `arealDensity`, which we can look up in the standards table:
-
-```{r}
-
-which(standardUnits$unitTypes$id == "arealDensity")
-standardUnits$unitTypes[c(55,56),]
-```
-
-Which tells us that an `arealDensity` is a dimensionless unit times a length to `-2` power.  
-
-
-## Writing EML: Declaring unit types and custom units
-
-When writing our own EML files, we must thus take care to define our units.  
-
-For tabular data (e.g. csv files), this information is provided in the `attributeList` element, such as we created using the `set_attributes()` function in the vignette, "creating EML". When working with any numeric data, this function takes a `data.frame` with a column for `unit` that provides the name of the unit listed.  
-
-These units cannot be any free-form text, but should instead be one of the standard units recognized by EML. Since EML knows about lots of units already, this usually just means making sure we use the correct `id` for the desired unit in the attributes metadata.  As we have seen above, the `standardUnits` list can help us with this. We can just skim the table by eye, or, for instance, we can look up the unit `id` for a some units by abbreviation:
-
-```{r}
-i <- which(standardUnits$units$abbr == "btu")
-j <- which(standardUnits$units$abbr == "μm³/kg")
-standardUnits$units[c(i,j),]
-```
-
-note that EML names units in camelCase, with compound units spelled out.  We will need to give the full unit `id`, not the abbreviation, to the units column when defining attribute metadata, e.g.:
-
-```{r}
-df <- data.frame(attributeName = "energy", 
-                   attributeDefinition = "energy absorbed by the surface", 
-                   unit = "britishThermalUnit", 
-                   numberType = "real",
-                   stringsAsFactors = FALSE)
-  attributeList <- set_attributes(df, col_classes = "numeric")
-```
-
-
-Sometimes we will want to use a unit that is not available in the `standardUnit` list, such as the example of species per square meter seen above.  To add this information to our EML file, we use `set_unitList`, using definitions that follow the same `data.frame` format we saw returned by the `get_unitList()` function.    Here we provide the definition for species per square meter, following the camelCase convention of EML
-
-```{r}
-custom_units <- data.frame(id = "speciesPerSquareMeter", unitType = "arealDensity", parentSI = "numberPerSquareMeter", multiplierToSI = 1, description = "number of species per square meter")
-set_unitList(custom_units)
-```
-
-
-Note that this definition refers to the `unitType` `arealDensity`, which, as we have already seen, is defined in the standard unit types.  Users should consult the `standardUnits$unitType` table for the names and defintitions of standard types, e.g.
-
-```{r}
-unique(standardUnits$unitTypes$id)
-```
-
-Likewise, `parentSI` should refer to a unit already defined in the standard unit dictionary, or otherwise provided by similar custom definition. A
-`multiplierToSI` should be provided.  If necessary an additive `constantToSI` can also be provided.  An abbreviation and description of the unit is optional. 
-
-In even rarer cases, a `unitType` might not be available in the standard unit list. It is possible to convert between different `units` that share a common `unitType` such as `length`, but not units with different `unitTypes`.  This may be particularly applicable for compound units: for instance, there is no unit type with dimensions of length per time cubed, (equivalently, acceleration per time, also known as a "jerk").  We can define a custom unit type by providing the appropriate data frame, with one row for each base type.  Note we have to repeat the `id` for each row that is shared by the unit.  The unit definition follows from the product of the each of the base dimensions raised to the power given (a missing value for power is equivalent to a power of 1), e.g. for our jerk:
-
-```{r}
-unitType <- data.frame(id = c("jerk", "jerk"), dimension = c("length", "time"), power = c(1, -3) )
-```
-
-Of course we cannot use a `unitType` without a unit to measure it in, so we define the SI `unit` as well (note we do not need a `parentSI` or multiplier because this is already an SI unit): 
-
-```{r}
-unit <- data.frame(id = "meterPerSecondCubed", unitType = "jerk")
-```
-
-We can now generate the required `unitList`:
-
-```{r}
-unitList <- set_unitList(unit, unitType)
-```
-
-Note that there are often many equivalent ways to express a unit (our jerk could have been acceleration per time instead). Before defining a new unitType, some dilegence may help you recognize a unitType that has already been defined in a different way. 
-
-
-## Adding the unitList to the EML document
-
-As we have seen above, the custom unit declearations must be found in the `additionalMetadata` section of an EML file.  To do so, we can simply coerce the `unitList` into an additionalMetadata element when creating our `eml` object:
-
-```{r}
-eml <- new("eml", additionalMetadata = as(unitList, "additionalMetadata"))
-```
-
-<!--
-
-------------
-
-
-
-In principle the EML declaration includes all information necessary to define functions for converting beween different units of a common `unitType`.  
-
-`udunits2` package
-
-```{r eval=FALSE}
-library("udunits2")
-```
-
--->

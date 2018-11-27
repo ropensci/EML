@@ -7,7 +7,7 @@
 write_eml(eml, file, namespaces = NULL, ns = "eml", ...)
 }
 \arguments{
-\item{eml}{an eml class object}
+\item{eml}{an emld class object}
 
 \item{file}{file name to write XML.}
 
@@ -25,8 +25,9 @@ If file is not specified, the result is a character string containing
 write_eml
 }
 \examples{
-f <- system.file("examples", "example-eml-valid.xml", package = "EML")
+f <- system.file("extdata", "example.xml", package = "emld")
 eml <- read_eml(f)
 write_eml(eml, "test.xml")
+eml_validate("test.xml")
 unlink("test.xml") # clean up
 }

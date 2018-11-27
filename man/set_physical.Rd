@@ -5,11 +5,11 @@
 \title{set_physical}
 \usage{
 set_physical(objectName, id = character(), numHeaderLines = character(),
-  numFooterLines = character(), recordDelimiter = "\\\\r\\\\n",
+  numFooterLines = character(), recordDelimiter = "\\\\n\\\\r",
   fieldDelimiter = ",", collapseDelimiters = logical(),
   literalCharacter = character(), quoteCharacter = character(),
-  attributeOrientation = "column", size = character(), sizeUnit = "bytes",
-  authentication = character(), authMethod = character(),
+  attributeOrientation = "column", size = NULL, sizeUnit = "bytes",
+  authentication = NULL, authMethod = NULL,
   characterEncoding = character(), encodingMethod = character(),
   compressionMethod = character(), url = character())
 }
@@ -54,9 +54,11 @@ set_physical(objectName, id = character(), numHeaderLines = character(),
 an EML physical object, such as used in a dataTable element to define the format of the data file.
 }
 \description{
-Will calculate the file size, checksum, and checksum algorithm automatically
-if the argument \code{objectName} is a file that exists.
+Will calculate the file size, checksum, and checksum authentication method
+algorithm automatically if the argument \code{objectName} is a file that exists.
 }
 \examples{
 set_physical("hf205-01-TPexp1.csv")
+# FIXME set recordDelimiter based on user's system?
+# FIXME richer distribution options? use set_distribution at top level?
 }

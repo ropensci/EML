@@ -1,0 +1,9 @@
+"attributeName" "attributeDefinition" "formatString" "definition" "unit" "numberType"
+"1" "run.num" "which run number (=block). Range: 1 - 6. (integer)" NA "which run number" NA NA
+"2" "year" "year, 2012" "YYYY" NA NA NA
+"3" "day" "Julian day. Range: 170 - 209." "DDD" NA NA NA
+"4" "hour.min" "hour and minute of observation. Range 1 - 2400 (integer)" "hhmm" NA NA NA
+"5" "i.flag" "is variable Real, Interpolated or Bad (character/factor)" NA NA NA NA
+"6" "variable" "what variable being measured in what treatment (character/factor)." NA NA NA NA
+"7" "value.i" "value of measured variable for run.num on year/day/hour.min." NA NA NA NA
+"8" "length" "length of the species in meters (dummy example of numeric data)" NA NA "meter" "real"

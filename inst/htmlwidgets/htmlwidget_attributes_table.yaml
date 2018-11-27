@@ -1,0 +1,11 @@
+dependencies:
+ - name: handsontable
+   version: 3.0.0
+   src: "htmlwidgets/lib/handsontable"
+   script: handsontable.full.min.js
+   stylesheet: handsontable.full.min.css
+ - name: htmlwidget_attributes_table
+   version: 0.1
+   src: "htmlwidgets"
+   stylesheet: htmlwidget_attributes_table.css
+

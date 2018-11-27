@@ -1,34 +1,28 @@
-testthat::context("eml_find and eml_get")
+context("eml_get")
 
-f <- system.file("examples", "coverage_test.xml", package = "EML")
-eml <- read_eml(f)
+f <- system.file("tests",
+  options("emld_db"),
+  "eml-datasetWithUnits.xml",
+  package = "emld"
+)
 
-testthat::test_that("we can find and get an element", {
-  m <- eml_get(eml, "methods")
-  testthat::expect_is(m, "methods")
-  m <- eml_find(eml, "methods") # ok
-  testthat::expect_is(m, "methods")
 
+test_that("eml_get works on trivial calls", {
+  eml <- read_eml(f)
+  x <- eml_get(eml, "physical")
+  expect_s3_class(x, "emld")
+  y <- eml_get(eml, "attributeList")
+  expect_length(y, 3)
+  expect_s3_class(y, "emld")
 })
 
+test_that("eml_get works on more calls", {
+  my_eml <- read_eml(f)
+  y <- eml_get(my_eml, "attributeName")
+  expect_s3_class(y, "emld")
 
-testthat::test_that("we can get child elements from arbitrary nodes", {
-  geographicCoverage <- eml_get(eml, "geographicCoverage") #works
-
-  # Note, this returns a list of all ListOfgeographicCoverage nodes...
-  testthat::expect_is(geographicCoverage[[1]][[1]], "geographicCoverage")
-
-  ## How about an individual character-type element?
-  x <- eml_get(geographicCoverage, "geographicDescription")
-  testthat::expect_is(x, "character")
-
-  ## The fast way?
-  eml_get(eml, "geographicDescription")  #return NULL
-
-})
-
-
-testthat::test_that("an empty list is returned when on elements are found", {
-  empty_eml <- new("eml")
-  testthat::expect_identical(eml_get(empty_eml, "creator"), list())
+  y <- eml_get(
+    my_eml$dataset$dataTable$attributeList$attribute[[1]],
+    "attributeName"
+  )
 })

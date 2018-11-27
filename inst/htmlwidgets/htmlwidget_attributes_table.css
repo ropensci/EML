@@ -1,0 +1,19 @@
+.handsontable {
+  overflow: auto;
+}
+
+.handsontable .needData {
+    background: #ff6666;
+}
+
+.handsontable .htInvalid {
+    color: #000000 !important;
+}
+
+.handsontable .notNeeded {
+    background: #cccccc;
+}
+
+.handsontable .standardUnit {
+    background: #ccff99;
+}

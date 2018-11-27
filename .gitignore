@@ -1,5 +1,10 @@
 .Rproj.user
 .Rhistory
 .RData
+.Ruserdata
 inst/doc
-EML_1.*.tar.gz
+*.pdf
+*.spl
+*.tex
+*.DS_Store
+EML.Rproj

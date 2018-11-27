@@ -1,7 +1,7 @@
 #' set_physical
 #'
-#' Will calculate the file size, checksum, and checksum algorithm automatically
-#' if the argument \code{objectName} is a file that exists.
+#' Will calculate the file size, checksum, and checksum authentication method
+#' algorithm automatically if the argument \code{objectName} is a file that exists.
 #'
 #' @param objectName name for the object, usually a filename like "hf205-1.csv"
 #' @param id optional, an id value for the <physical> element in EML, for use in referencing
@@ -26,36 +26,33 @@
 #'
 #' @examples
 #' set_physical("hf205-01-TPexp1.csv")
-# FIXME set recordDelimiter based on user's system?
-# FIXME richer distribution options? use set_distribution at top level?
+#' # FIXME set recordDelimiter based on user's system?
+#' # FIXME richer distribution options? use set_distribution at top level?
 set_physical <- function(objectName,
                          id = character(),
                          numHeaderLines = character(),
                          numFooterLines = character(),
-                         recordDelimiter = "\\r\\n",
+                         recordDelimiter = "\\n\\r",
                          fieldDelimiter = ",",
                          collapseDelimiters = logical(),
                          literalCharacter = character(),
                          quoteCharacter = character(),
                          attributeOrientation = "column",
-                         size = character(),
+                         size = NULL,
                          sizeUnit = "bytes",
-                         authentication = character(),
-                         authMethod = character(),
+                         authentication = NULL,
+                         authMethod = NULL,
                          characterEncoding = character(),
                          encodingMethod = character(),
                          compressionMethod = character(),
                          url = character()) {
-  dataFormat <- new(
-    "dataFormat",
-    textFormat = new(
-      "textFormat",
+  dataFormat <- list(
+    textFormat = list(
       numHeaderLines = numHeaderLines,
       numFooterLines = numFooterLines,
       recordDelimiter = recordDelimiter,
       attributeOrientation = attributeOrientation,
-      simpleDelimited = new(
-        "simpleDelimited",
+      simpleDelimited = list(
         fieldDelimiter = fieldDelimiter,
         collapseDelimiters = as.character(collapseDelimiters),
         quoteCharacter = quoteCharacter,
@@ -70,26 +67,36 @@ set_physical <- function(objectName,
 
   if (file.exists(objectName)) {
     if (length(size) == 0) {
-      warning(paste0("Automatically calculated file size using file.size(\"", objectName, "\")"))
+      message(paste0(
+        "Automatically calculated file size using file.size(\"",
+        objectName,
+        "\")"
+      ))
       size <- as.character(file.size(objectName))
     }
 
+
     if (length(authentication) == 0) {
-      warning(paste0("Automatically calculated authentication size using digest::digest(\"", objectName, "\", algo = \"md5\", file = TRUE)"))
+      message(paste0(
+        "Automatically calculated authentication size using digest::digest(\"",
+        objectName, "\", algo = \"md5\", file = TRUE)"
+      ))
       authentication <- digest::digest(objectName, algo = "md5", file = TRUE)
       authMethod <- "MD5"
     }
-    # Fore the objectName to be set to the basename for the path just in case
+    # For the objectName to be set to the basename for the path just in case
     # the user intended this
     objectName <- basename(objectName)
   }
-
+  authentication <- list(authentication = authentication, method = authMethod)
+  if (!is.null(size)) {
+    size <- list(size = size, unit = sizeUnit)
+  }
   out <-
-    new(
-      "physical",
+    list(
       objectName = objectName,
-      size = new("size", size, unit = sizeUnit),
-      authentication = new("authentication", authentication, method = authMethod),
+      size = size,
+      authentication = authentication,
       compressionMethod = compressionMethod,
       encodingMethod = encodingMethod,
       characterEncoding = characterEncoding,
@@ -100,20 +107,17 @@ set_physical <- function(objectName,
 
 
   out
-
 }
 
 
 
 set_distribution <- function(url = character()) {
-  if (length(url) > 0)
-    new("distribution",
-        online = new("online",
-                     url = new(
-                       "url",
-                       url,
-                       "function" = new("xml_attribute", "download")
-                     )))
-  else
-    new("distribution")
+  if (length(url) > 0) {
+    list(online = list(url = list(
+      url,
+      "function" = "download"
+    )))
+  } else {
+    list()
+  }
 }

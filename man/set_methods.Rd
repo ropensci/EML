@@ -4,10 +4,9 @@
 \alias{set_methods}
 \title{set_methods}
 \usage{
-set_methods(methods_file, instrumentation = character(),
-  software = new("software"), sampling_file = NULL,
-  sampling_coverage = new("coverage"), sampling_citation = new("citation"),
-  qualityControl_file = NULL)
+set_methods(methods_file, instrumentation = character(), software = NULL,
+  sampling_file = NULL, sampling_coverage = NULL,
+  sampling_citation = NULL, qualityControl_file = NULL)
 }
 \arguments{
 \item{methods_file}{Path to a file (markdown or .docx) containing a description of the methods used}

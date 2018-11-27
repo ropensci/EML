@@ -7,10 +7,9 @@
 eml_validate(eml, encoding = "UTF-8", schema = NULL)
 }
 \arguments{
-\item{eml}{an eml class object, file, or xml document}
+\item{eml}{file path, xml_document,}
 
-\item{encoding}{optional, if eml is a file path / an eml and has special characters, one can
-gives the encoding used by xmlParse.}
+\item{encoding}{optional encoding for files, default UTF-8.}
 
 \item{schema}{path to schema}
 
@@ -24,18 +23,20 @@ eml_validate processes an EML document using the XSD schema for the
 appropriate version of EML and determines if the document is schema-valid
 as defined by the XSD specification
 }
+\note{
+this function is simply an alias to `eml_validate` in `emld` package
+}
 \examples{
 \donttest{
 
- f <- system.file("xsd/test", "eml.xml", package = "EML")
+f <- system.file("extdata", "example.xml", package = "emld")
 
- ## validate given a file name, without needing to parse first
- eml_validate(f)
+## validate file directly from disk:
+eml_validate(f)
 
-## Validate given an "eml" object
+## validate an eml object:
 eml <- read_eml(f)
 eml_validate(eml)
-
 }
 
 }

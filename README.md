@@ -1,155 +1,246 @@
+[![Build
+Status](https://travis-ci.org/cboettig/eml2.svg?branch=master)](https://travis-ci.org/cboettig/eml2)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/cboettig/eml2/master.svg)](https://codecov.io/github/cboettig/eml2?branch=master)
+[![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/joethorley/stability-badges#experimental)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML) [![codecov.io](https://codecov.io/github/ropensci/EML/coverage.svg?branch=master)](https://codecov.io/github/ropensci/EML?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/EML?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/EML) [![Onboarding](https://ropensci.org/badges/80_status.svg)](https://github.com/ropensci/onboarding/issues/80) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/package=EML) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/EML)](https://CRAN.R-project.org/package=EML) [![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
 
-<!-- [![Github Stars](https://img.shields.io/github/stars/ropensci/EML.svg?style=social&label=Github)](https://github.com/ropensci/EML)-->
-EML: The Ecological Metadata Language Standard
-==============================================
+# eml2
 
-EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the [EML Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html) for an introduction and thorough documentation of the standard. Additionally, the scientific article *[The New Bioinformatics: Integrating Ecological Data from the Gene to the Biosphere (Jones et al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)* provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the `EML` R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.
+The goal of `eml2` is to provide both a drop-in replacement for the
+higher-level functions of the existing EML package while also providing
+additional functionality.
 
-*Note*: The `EML` R package is work in progress. Please see the Issues tracker in this repository for details about current issues and development milestonds.
+`eml2` uses only simple and familiar list structures (S3 classes)
+instead of the more cumbersome use of S4 found in the original EML.
+While the higher-level functions are identical, this makes it easier to
+for most users and developers to work with `eml` objects and also to
+write their own functions for creating and manipulating EML objects.
+Under the hood, `eml2` relies on the
+[emld](https://github.com/cboettig/emld) package, which uses a Linked
+Data representation for EML. It is this approach which lets us combine
+the simplicity of lists with the specificy required by the XML
+schema.
 
-Installation
-------------
-
-You can install the current development version from rOpenSci using:
+# Creating EML
 
 ``` r
-install.packages("EML", repos = c("http://packages.ropensci.org", "https://cran.rstudio.com"))
+library(eml2)
 ```
 
-or install directly from GitHub (after installing the `devtools` package from CRAN):
+## A minimal valid EML document:
 
 ``` r
-devtools::install_github("ropensci/EML")
-```
+me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
+my_eml <- list(dataset = list(
+              title = "A Mimimal Valid EML Dataset",
+              creator = me,
+              contact = me)
+            )
 
-Quickstart
-----------
 
-Load the package and read in an EML file:
-
-``` r
-library("EML")
-f <- system.file("xsd/test/eml.xml", package = "EML")
-eml <- read_eml(f)
-```
-
-This creates a native R object called `eml`. Although this is an "S4 object" type, it uses a "show" method which displays in an XML-like layout for convenience:
-
-``` r
-eml
-#> <eml packageId="eml.1.1" system="knb" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd">
-#>   <dataset>
-#>     <title>Sample dataset Description</title>
-#>     <creator id="23445" scope="document">
-#>       <individualName>
-#>         <surName>Smith</surName>
-#>       </individualName>
-#>     </creator>
-#>     <creator id="23446" scope="document">
-#>       <individualName>
-#>         <surName>Smith</surName>
-#>       </individualName>
-#>     </creator>
-#>     <additionalInfo>
-#>       <para>My comments go here.</para>
-#>     </additionalInfo>
-#>     <intellectualRights>
-#>       <section>
-#>         <para>Anyone can use it.</para>
-#>       </section>
-#>     </intellectualRights>
-#>     <distribution>
-#>       <online>
-#>         <connectionDefinition scope="document">
-#>           <schemeName system="CAP">sde</schemeName>
-#>           <description>
-#>             <para>The SDE scheme used at CAP LTER</para>
-#>           </description>
-#>           <parameterDefinition>
-#>             <name>hostname</name>
-#>             <definition>The host</definition>
-#>             <defaultValue>mohave.asu.edu</defaultValue>
-#>           </parameterDefinition>
-#>           <parameterDefinition>
-#>             <name>databaseName</name>
-#>             <definition>The name of the database or catalog</definition>
-#>           </parameterDefinition>
-#>           <parameterDefinition>
-#>             <name>owner</name>
-#>             <definition>The owner catalog</definition>
-#>             <defaultValue>dbo</defaultValue>
-#>           </parameterDefinition>
-#>         </connectionDefinition>
-#>       </online>
-#>     </distribution>
-#>     <purpose>
-#>       <para>Provide data to the whole world.</para>
-#>     </purpose>
-#>     <contact>
-#>       <individualName>
-#>         <surName>Johnson</surName>
-#>       </individualName>
-#>     </contact>
-#>     <contact>
-#>       <references>23445</references>
-#>     </contact>
-#>   </dataset>
-#> </eml>
-```
-
-Validation helps ensure that an EML file can be accurately interpreted by any computer program designed to read EML. We can validate any EML against the official schema:
-
-``` r
-# An EML document with no validation errors
-eml_validate(eml)
+write_eml(my_eml, "ex.xml")
+eml_validate("ex.xml")
 #> [1] TRUE
 #> attr(,"errors")
 #> character(0)
-
-# An EML document with validation errors
-invalid_eml <- system.file("xsd/test/example-eml-invalid.xml", package = "EML")
-
-eml_validate(invalid_eml)
-#> [1] FALSE
-#> attr(,"errors")
-#> [1] "Element 'creator': This element is not expected. Expected is one of ( references, alternateIdentifier, shortName, title )."
 ```
 
-Write out as EML:
+## A Richer Example
+
+Here we show a the creation of a relatively complete EML document using
+`eml2`. This closely parallels the function calls shown in the original
+EML [R-package
+vignette](https://ropensci.github.io/EML/articles/creating-EML.html).
+
+## `set_*` methods
+
+The original EML R package defines a set of higher-level `set_*` methods
+to facilitate the creation of complex metadata structures. `eml2`
+provides these same methods, taking the same arguments for
+`set_coverage`, `set_attributes`, `set_physical`, `set_methods` and
+`set_textType`, as illustrated
+here:
+
+### Coverage metadata
 
 ``` r
-write_eml(eml, "example.xml")
+geographicDescription <- "Harvard Forest Greenhouse, Tom Swamp Tract (Harvard Forest)"
+coverage <- 
+  set_coverage(begin = '2012-06-01', end = '2013-12-31',
+               sci_names = "Sarracenia purpurea",
+               geographicDescription = geographicDescription,
+               west = -122.44, east = -117.15, 
+               north = 37.38, south = 30.00,
+               altitudeMin = 160, altitudeMaximum = 330,
+               altitudeUnits = "meter")
 ```
 
-Reading EML files
------------------
+### Reading in text from Word and Markdown
 
-Please see the vignette, [Parsing EML](https://github.com/ropensci/EML/blob/master/vignettes/parsing-EML.Rmd) for a more thorough introduction to reading EML files and extracting relevant metadata.
+We read in detailed methods written in a Word doc. This uses EML’s
+docbook-style markup to preserve formatting of paragraphs, lists,
+titles, and so forth. (This is a drop-in replacement for EML
+`set_method()`)
 
-Creating EML files
-------------------
+``` r
+methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
+methods <- set_methods(methods_file)
+```
 
-Please see the vignette, [Creating EML](https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd) for a proper introduction to creating your own EML files.
+We can also read in text that uses Markdown for markup
+elements:
 
-Working with custom units
--------------------------
+``` r
+abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")
+abstract <- set_TextType(abstract_file)
+```
 
-Users may occassionally need to define custom unit types that EML does not know about. Please see the vignette, [Working with units](https://github.com/ropensci/EML/blob/master/vignettes/working-with-units.Rmd) for an overview of how units work in EML, how to view the standard unit library, and how to access and define custom units and custom unit types.
+### Attribute Metadata from Tables
 
-Archiving, Sharing, and Publishing EML
---------------------------------------
+Attribute metadata can be verbose, and is often defined in separate
+tables (e.g. separate Excel sheets or `.csv` files). Here we use
+attribute metadata and factor definitions as given from `.csv`
+files.
 
-One of the chief advantages of using EML to manage your own data is the improved ability to search all of your data files, e.g. for the ones that have the particular measurements you need on the particular location or species of interest, and be able to share this data either publicly or securely with select collaborators. To do so, you will need to upload your EML file and data to a scientific metadata repository that understands EML. The vignette, [metadata repositories](https://github.com/ropensci/EML/blob/master/vignettes/metadata-repositories.Rmd) describes how to do this.
+``` r
+attributes <- read.table(system.file("extdata/hf205_attributes.csv", package = "eml2"))
+factors <- read.table(system.file("extdata/hf205_factors.csv", package = "eml2"))
+attributeList <- 
+  set_attributes(attributes, 
+                 factors, 
+                 col_classes = c("character", 
+                                 "Date",
+                                 "Date",
+                                 "Date",
+                                 "factor",
+                                 "factor",
+                                 "factor",
+                                 "numeric"))
+```
 
-Developer notes
----------------
+### Data file format
 
-### Creating EML class definitions
+Though the `physical` metadata specifying the file format is extremely
+flexible, the `set_physical` function provides defaults appropriate for
+`.csv` files. DEVELOPER NOTE: ideally the `set_physical` method should
+guess the appropriate metadata structure based on the file extension.
 
-Class definitions (`classes.R`) and methods (`methods.R`) are created programmatically. From the root of the package, run: `source("inst/create-package/create_package.R")`.
+``` r
+physical <- set_physical("hf205-01-TPexp1.csv")
+```
 
-### Meta
+## Generic construction
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+In the `EML` R package, objects for which there is no `set_` method are
+constructed using the `new()` S4 constructor. This provided an easy way
+to see the list of available slots. In `eml2`, all objects are just
+lists, and so there is no need for special methods. We can create any
+object directly by nesting lists with names corresponding to the EML
+elements. Here we create a `keywordSet` from scratch:
+
+``` r
+keywordSet <- list(
+    list(
+        keywordThesaurus = "LTER controlled vocabulary",
+        keyword = list("bacteria",
+                    "carnivorous plants",
+                    "genetics",
+                    "thresholds")
+        ),
+    list(
+        keywordThesaurus = "LTER core area",
+        keyword =  list("populations", "inorganic nutrients", "disturbance")
+        ),
+    list(
+        keywordThesaurus = "HFR default",
+        keyword = list("Harvard Forest", "HFR", "LTER", "USA")
+        ))
+```
+
+Of course, this assumes that we have some knowledge of what the possible
+terms permitted in an EML keywordSet are\! Not so useful for novices. We
+can get a preview of the elements that any object can take using the
+`emld::template()` option, but this involves a two-part workflow.
+Instead, `eml2` provides generic `construct` methods for all objects.
+
+## Constructor methods
+
+For instance, the function `eml$creator()` has function arguments
+corresponding to each possible slot for a creator. This means we can
+rely on *tab completion* (and/or autocomplete previews in RStudio) to
+see what the possible options are. `eml$` functions exist for all
+complex types. If `eml$` does not exist for an argument (e.g. there is
+no `eml$givenName`), then the field takes a simple string argument.
+
+### Creating parties (creator, contact, publisher)
+
+``` r
+aaron <- eml$creator(
+  individualName = eml$individualName(
+    givenName = "Aaron", 
+    surName = "Ellison"),
+  electronicMailAddress = "fakeaddress@email.com")
+```
+
+``` r
+HF_address <- eml$address(
+                  deliveryPoint = "324 North Main Street",
+                  city = "Petersham",
+                  administrativeArea = "MA",
+                  postalCode = "01366",
+                  country = "USA")
+```
+
+``` r
+publisher <- eml$publisher(
+                 organizationName = "Harvard Forest",
+                 address = HF_address)
+```
+
+``` r
+contact <- 
+  list(
+    individualName = aaron$individualName,
+    electronicMailAddress = aaron$electronicMailAddress,
+    address = HF_address,
+    organizationName = "Harvard Forest",
+    phone = "000-000-0000")
+```
+
+### Putting it all together
+
+``` r
+my_eml <- eml$eml(
+           packageId = uuid::UUIDgenerate(),  
+           system = "uuid",
+           dataset = eml$dataset(
+               title = "Thresholds and Tipping Points in a Sarracenia",
+               creator = aaron,
+               pubDate = "2012",
+               intellectualRights = "http://www.lternet.edu/data/netpolicy.html.",
+               abstract = abstract,
+               keywordSet = keywordSet,
+               coverage = coverage,
+               contact = contact,
+               methods = methods,
+               dataTable = eml$dataTable(
+                 entityName = "hf205-01-TPexp1.csv",
+                 entityDescription = "tipping point experiment 1",
+                 physical = physical,
+                 attributeList = attributeList)
+               ))
+```
+
+## Serialize and validate
+
+We can also validate first and then serialize:
+
+``` r
+eml_validate(my_eml)
+#> [1] TRUE
+#> attr(,"errors")
+#> character(0)
+write_eml(my_eml, "eml.xml")
+```

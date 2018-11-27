@@ -4,10 +4,10 @@
 \alias{get_attributes}
 \title{get_attributes}
 \usage{
-get_attributes(x, eml = x)
+get_attributes(x, eml = NULL)
 }
 \arguments{
-\item{x}{an "attributeList" element from EML}
+\item{x}{an "attributeList" element from an emld object}
 
 \item{eml}{The full eml document, needed only if <references> outside of attributes must be resolved.}
 }
@@ -25,10 +25,8 @@ declared elsewhere in the document.  This function will automatically resolve th
 and thus infer the correct metadata.
 }
 \examples{
-\donttest{ # runs > 5s
-
-eml <- read_eml(system.file("xsd/test/eml-datasetWithAttributelevelMethods.xml", package = "EML"))
-get_attributes( eml@dataset@dataTable[[1]]@attributeList )
-
-}
+f <- system.file("tests", options("emld_db"), 
+  "eml-datasetWithAttributelevelMethods.xml", package = "emld")
+eml <- read_eml(f)
+get_attributes(eml$dataset$dataTable$attributeList)
 }
