@@ -13,3 +13,5 @@ old-vignettes/*
 ^paper/
 ^codemeta\.json$
 ^appveyor\.yml$
+^pkgdown$
+
