@@ -32,7 +32,7 @@ set_physical <- function(objectName,
                          id = character(),
                          numHeaderLines = character(),
                          numFooterLines = character(),
-                         recordDelimiter = "\\n\\r",
+                         recordDelimiter = detect_delim(objectName),
                          fieldDelimiter = ",",
                          collapseDelimiters = logical(),
                          literalCharacter = character(),
@@ -109,6 +109,34 @@ set_physical <- function(objectName,
   out
 }
 
+
+#' Automatically detect line delimiters in a text file
+#'
+#' This helper function was written expressly for \code{\link{set_physical}} to
+#' be able to automate its \code{recordDelimiter} argument.
+#'
+#' @param path (character) File to search for a delimiter
+#' @param nchar (numeric) Maximum number of characters to read from disk when
+#' searching
+#'
+#' @return (character) If found, the delimiter, it not, \r\n
+detect_delim <- function(path, nchar = 1e3) {
+   # readChar() will error on non-character data so
+  chars <- tryCatch({
+    readChar(path, nchar)
+  },
+  error = function(e) {
+    NA
+  })
+
+  search <- regexpr("[\\r\\n]+", chars, perl = TRUE)
+
+  if (!is.na(search) && search >= 0) {
+    return(substr(chars, search, search + attr(search, "match.length") - 1))
+  }
+
+  "\r\n"
+}
 
 
 set_distribution <- function(url = character()) {
