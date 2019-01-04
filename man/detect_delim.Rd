@@ -13,7 +13,7 @@ detect_delim(path, nchar = 1000)
 searching}
 }
 \value{
-(character) If found, the delimiter, it not, \r\n
+(character) If found, the delimiter, it not, \\r\\n
 }
 \description{
 This helper function was written expressly for \code{\link{set_physical}} to

@@ -119,7 +119,7 @@ set_physical <- function(objectName,
 #' @param nchar (numeric) Maximum number of characters to read from disk when
 #' searching
 #'
-#' @return (character) If found, the delimiter, it not, \r\n
+#' @return (character) If found, the delimiter, it not, \\r\\n
 detect_delim <- function(path, nchar = 1e3) {
    # readChar() will error on non-character data so
   chars <- tryCatch({
