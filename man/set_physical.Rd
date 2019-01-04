@@ -6,7 +6,7 @@
 \usage{
 set_physical(objectName, id = character(),
   numHeaderLines = character(), numFooterLines = character(),
-  recordDelimiter = "\\\\n\\\\r", fieldDelimiter = ",",
+  recordDelimiter = detect_delim(objectName), fieldDelimiter = ",",
   collapseDelimiters = logical(), literalCharacter = character(),
   quoteCharacter = character(), attributeOrientation = "column",
   size = NULL, sizeUnit = "bytes", authentication = NULL,
