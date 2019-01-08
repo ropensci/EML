@@ -4,7 +4,7 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="457.29px" height="527.749px" viewBox="0 0 457.29 527.749" enable-background="new 0 0 457.29 527.749"
 	 xml:space="preserve">
-<g id="path4525" inkscape:connector-curvature="0">
+<g id="path4525">
 	<g>
 		<path fill="#338953" d="M118.974,451.631l-108.85-62.188l0.215-125.402l0.215-125.401l109.119-62.353l109.119-62.353l5.603,3.174
 			c3.08,1.746,52.213,29.816,109.186,62.38l103.586,59.205v125.341v125.34L338.529,451.59
@@ -12,13 +12,13 @@
 	</g>
 	<defs>
 		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="10.124" y="13.934" width="437.042" height="499.881">
-			
+
 				<feColorMatrix  type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0" color-interpolation-filters="sRGB" result="source"/>
 		</filter>
 	</defs>
 	<mask maskUnits="userSpaceOnUse" x="10.124" y="13.934" width="437.042" height="499.881" id="SVGID_1_">
 		<g filter="url(#Adobe_OpacityMaskFilter)">
-			
+
 				<image overflow="visible" width="1838" height="2100" xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEBLAEsAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
 EAMCAwYAAEg6AAB9cQAAl2D/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
 Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
@@ -708,11 +708,11 @@ bjeyFNG43shTRuN7IU0bjeyFNG43shTRuN7IdB9/rxXXHYpGbzzjxEX/AAf/ALMmf//Z" transform=
 			c-59.748,34.221-109.1,62.221-109.671,62.225C228.29,513.817,178.843,485.836,118.974,451.631L118.974,451.631z"/>
 	</g>
 </g>
-<path id="path4" inkscape:connector-curvature="0" fill="#48B069" d="M228.646,21.15l210.354,121.378v242.693L228.646,506.6
+<path id="path4" fill="#48B069" d="M228.646,21.15l210.354,121.378v242.693L228.646,506.6
 	L18.292,385.221V142.528L228.646,21.15z M228.646,0L0,131.937v263.876l228.646,131.936L457.29,395.813V131.937L228.646,0z"/>
 <g id="g2757" transform="matrix(0.23850315,0,0,0.32500408,588.63146,248.83888)">
 	<g>
-		<path id="path3_6_" inkscape:connector-curvature="0" fill="#FFFFFF" d="M-1910.97-413.598c0,0.403,0,0.805,0,1.208
+		<path id="path3_6_" fill="#FFFFFF" d="M-1910.97-413.598c0,0.403,0,0.805,0,1.208
 			c51.788,0.781,95.215,16.523,129.24,33.822c24.453,4.363,44.868,18.789,66.43,28.984c23.683,11.208,48.692,20.559,70.058,33.822
 			c5.667,3.516,11.309,9.36,16.911,13.287c25.452,17.842,51.297,37.406,72.474,60.393c-0.868-16.776-9.696-26.812-18.122-42.274
 			c-4.651-8.552-8.73-18.723-13.283-24.158c-15.6-18.648-45.409-30.171-67.642-44.69c-24.002-15.67-41.625-33.96-60.395-51.934
