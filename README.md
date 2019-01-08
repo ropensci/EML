@@ -1,4 +1,6 @@
 
+# EML <img src="man/figures/logo.svg" align="right" alt="" width="120" />
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build
 Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
@@ -11,8 +13,6 @@ status](https://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/pa
 [![DOI](https://zenodo.org/badge/10894022.svg)](https://zenodo.org/badge/latestdoi/10894022)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# EML
 
 EML is a widely used metadata standard in the ecological and
 environmental sciences. We strongly recommend that interested users

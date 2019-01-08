@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>get_unit_id — get_unit_id • EML</title>
+<title>Automatically detect line delimiters in a text file — detect_delim • EML</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,12 +37,10 @@
 
 
 
-<meta property="og:title" content="get_unit_id — get_unit_id" />
+<meta property="og:title" content="Automatically detect line delimiters in a text file — detect_delim" />
 
-<meta property="og:description" content="A function to assist with getting valid EML unit ids
- (see examples). Warning: ensure returned unit is equivalent to
- input unit (for example &quot;pH&quot; will return &quot;picohenry&quot; which may
- or may not be equivalent to the input unit &quot;pH&quot;)." />
+<meta property="og:description" content="This helper function was written expressly for set_physical to
+be able to automate its recordDelimiter argument." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -126,55 +124,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>get_unit_id</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/EML/blob/master/R/get_unit_id.R'><code>R/get_unit_id.R</code></a></small>
-    <div class="hidden name"><code>get_unit_id.Rd</code></div>
+    <h1>Automatically detect line delimiters in a text file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropensci/EML/blob/master/R/set_physical.R'><code>R/set_physical.R</code></a></small>
+    <div class="hidden name"><code>detect_delim.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function to assist with getting valid EML unit ids
- (see examples). Warning: ensure returned unit is equivalent to
- input unit (for example "pH" will return "picohenry" which may
- or may not be equivalent to the input unit "pH").</p>
+    <p>This helper function was written expressly for <code><a href='set_physical.html'>set_physical</a></code> to
+be able to automate its <code>recordDelimiter</code> argument.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_unit_id</span>(<span class='no'>input_units</span>, <span class='kw'>eml_version</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"emld_db"</span>, <span class='st'>"eml-2.2.0"</span>))</pre>
+    <pre class="usage"><span class='fu'>detect_delim</span>(<span class='no'>path</span>, <span class='kw'>nchar</span> <span class='kw'>=</span> <span class='fl'>1000</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input_units</th>
-      <td><p>(character|vector) input units that needs
-valid EML unit ids</p></td>
+      <th>path</th>
+      <td><p>(character) File to search for a delimiter</p></td>
     </tr>
     <tr>
-      <th>eml_version</th>
-      <td><p>(character) the eml schema version desired
-(there is a change in the way eml units are named from eml-2.1.1
- to eml-2.2.0)</p></td>
+      <th>nchar</th>
+      <td><p>(numeric) Maximum number of characters to read from disk when
+searching</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>(character) A valid EML unit id. If no valid EML unit id
- can be found, the function will output a warning, along with a
- preformatted custom unit id.</p>
+    <p>(character) If found, the delimiter, it not, \r\n</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># The following all return the same id</span>
-<span class='fu'>get_unit_id</span>(<span class='st'>"kilometersPerSquareSecond"</span>)
-<span class='fu'>get_unit_id</span>(<span class='st'>"kilometerPerSecondSquared"</span>)
-<span class='fu'>get_unit_id</span>(<span class='st'>"Kilometers per seconds squared"</span>)
-<span class='fu'>get_unit_id</span>(<span class='st'>"km/s^2"</span>)
-<span class='fu'>get_unit_id</span>(<span class='st'>"km s-2"</span>)
-<span class='fu'>get_unit_id</span>(<span class='st'>"s-2 /     kilometers-1"</span>) <span class='co'># this works but is not advised</span>
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -182,9 +164,7 @@ valid EML unit ids</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
