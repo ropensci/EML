@@ -121,7 +121,7 @@ set_physical <- function(objectName,
 #'
 #' @return (character) If found, the delimiter, it not, \\r\\n
 detect_delim <- function(path, nchar = 1e3) {
-  # only check if the file exists
+  # only look for delimiter if the file exists
   if(file.exists(path)){
     # readChar() will error on non-character data so
     chars <- tryCatch({
