@@ -51,7 +51,7 @@ library(EML)
 ## A minimal valid EML document:
 
 ```{r}
-me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"), id="cboettig")
+me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
 my_eml <- list(dataset = list(
               title = "A Mimimal Valid EML Dataset",
               creator = me,

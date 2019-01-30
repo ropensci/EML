@@ -323,7 +323,7 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "462.013KB",
+  "fileSize": "462.079KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/EML",
     "https://ci.appveyor.com/project/cboettig/eml",
