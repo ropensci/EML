@@ -90,7 +90,7 @@
       <h1>Creating EML</h1>
                         <h4 class="author">Carl Boettiger</h4>
             
-            <h4 class="date">2019-01-08</h4>
+            <h4 class="date">2019-01-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd"><code>vignettes/creating-EML.Rmd</code></a></small>
       <div class="hidden name"><code>creating-EML.Rmd</code></div>
@@ -159,7 +159,7 @@
 <a href="#attribute-metadata" class="anchor"></a>Attribute Metadata</h2>
 <p>A fundamental part of EML metadata is a description of the attributes (usually columns) of a text file (usually a csv file) containing the data being described. This is the heart of many EML files.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">attributes &lt;-</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">tibble<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/tibble/topics/tribble">tribble</a></span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span>(</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="op">~</span>attributeName, <span class="op">~</span>attributeDefinition,                                                 <span class="op">~</span>formatString, <span class="op">~</span>definition,        <span class="op">~</span>unit,   <span class="op">~</span>numberType,</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="st">"run.num"</span>,    <span class="st">"which run number (=block). Range: 1 - 6. (integer)"</span>,                 <span class="ot">NA</span>,            <span class="st">"which run number"</span>, <span class="ot">NA</span>,       <span class="ot">NA</span>,</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="st">"year"</span>,       <span class="st">"year, 2012"</span>,                                                         <span class="st">"YYYY"</span>,        <span class="ot">NA</span>,                 <span class="ot">NA</span>,       <span class="ot">NA</span>,</a>
