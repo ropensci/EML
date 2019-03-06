@@ -18,7 +18,7 @@
 #' get_attributes(eml$dataset$dataTable$attributeList)
 get_attributes <- function(x, eml = NULL) {
   attributeList <- x
-
+  
   ## if the attributeList is referenced, get reference
   if (!is.null(attributeList$references)) {
     if (is.null(eml)) {
@@ -29,9 +29,9 @@ get_attributes <- function(x, eml = NULL) {
       )
       eml <- x
     }
-
+    
     all_attributeLists <- eml_get(eml, "attributeList")
-
+    
     for (attList in all_attributeLists) {
       if (attList$id == attributeList$references) {
         attributeList <- attList
@@ -39,28 +39,33 @@ get_attributes <- function(x, eml = NULL) {
       }
     }
   }
-
+  
   ## get attributes
   attributes <- lapply(attributeList$attribute, function(x) {
-
+    
     ## get full attribute list
     atts <- unlist(x, recursive = TRUE, use.names = TRUE)
     measurementScale <- names(x$measurementScale)
     domain <- names(x$measurementScale[[measurementScale]])
-
+    
     if (length(domain) == 1) {
       ## domain == "nonNumericDomain"
       domain <- names(x$measurementScale[[measurementScale]][[domain]])
     }
     domain <- domain[grepl("Domain", domain)]
+    
+    if (measurementScale == "dateTime" & is.null(domain)){
+      domain <- "dateTimeDomain"
+    }
+    
     atts <- c(atts, measurementScale = measurementScale, domain = domain)
-
+    
     ## separate factors
     atts <- atts[!grepl("enumeratedDomain", names(atts))]
-
+    
     ## separate methods
     atts <- atts[!grepl("methods", names(atts))]
-
+    
     ## Alter names to be consistent with other tools
     names(atts) <- gsub("missingValueCode.code",
                         "missingValueCode",
@@ -75,7 +80,7 @@ get_attributes <- function(x, eml = NULL) {
     atts <- as.data.frame(t(atts), stringsAsFactors = FALSE)
   })
   attributes <- dplyr::bind_rows(attributes)
-
+  
   ## remove non_fields in attributes
   non_fields <- c("enforced",
                   "exclusive",
@@ -86,35 +91,36 @@ get_attributes <- function(x, eml = NULL) {
                   "system",
                   "typeSystem")
   attributes <- attributes[, !(names(attributes) %in% non_fields)]
-
+  
   ## get factors
   factors <- lapply(attributeList$attribute, function(x) {
-
+    
     ## get factors
     factors <- eml_get(x, "enumeratedDomain")
-
+    
     ## linearize factors
     factors <- lapply(factors$codeDefinition, function(x) {
       as.data.frame(x, stringsAsFactors = FALSE)
     })
     factors <- do.call(rbind, factors)
-
+    
     if (!is.null(factors)) {
       factors$attributeName <- x$attributeName
     }
-
+    
     return(factors)
   })
+  
   factors <- dplyr::bind_rows(factors)
-
+  
   if (nrow(factors) > 0) {
     factors <- factors[!is.na(factors$code), ]
   } else {
     factors <- NULL
   }
-
+  
   # FIXME: add support for methods
-
+  
   out <- list(
     attributes = attributes,
     factors = factors
