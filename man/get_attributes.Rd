@@ -25,6 +25,7 @@ declared elsewhere in the document.  This function will automatically resolve th
 and thus infer the correct metadata.
 }
 \examples{
+options("emld_db" = "eml-2.1.1")
 f <- system.file("tests", options("emld_db"), 
   "eml-datasetWithAttributelevelMethods.xml", package = "emld")
 eml <- read_eml(f)

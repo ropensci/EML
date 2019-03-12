@@ -12,6 +12,7 @@
 #' @export
 #' @importFrom dplyr bind_rows
 #' @examples
+#' options("emld_db" = "eml-2.1.1")
 #' f <- system.file("tests", options("emld_db"), 
 #'   "eml-datasetWithAttributelevelMethods.xml", package = "emld")
 #' eml <- read_eml(f)
