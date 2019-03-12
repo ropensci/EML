@@ -4,7 +4,7 @@
 \alias{get_unit_id}
 \title{get_unit_id}
 \usage{
-get_unit_id(input_units, eml_version = getOption("emld_db", "eml-2.2.0"))
+get_unit_id(input_units, eml_version = getOption("emld_db"))
 }
 \arguments{
 \item{input_units}{(character|vector) input units that needs
