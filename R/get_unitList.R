@@ -28,9 +28,9 @@ get_unitList <-
   function(x = NULL) {
     if (is.null(x)) {
       unitList <- read_eml(system.file("tests",
-        options("emld_db"),
-        "eml-unitDictionary.xml",
-        package = "emld"
+                                       emld::eml_version(),
+                                       "eml-unitDictionary.xml",
+                                       package = "emld"
       ))
     } else {
       unitList <- eml_get(x, "unitList")

@@ -25,7 +25,7 @@
 #' }
 #' @export
 get_unit_id <- function(input_units,
-                        eml_version = getOption("emld_db")) {
+                        eml_version = emld::eml_version()) {
   if (!requireNamespace("units", quietly = TRUE)) {
     stop(
       call. = FALSE,
