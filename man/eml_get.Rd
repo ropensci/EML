@@ -22,7 +22,7 @@ eml_get
 }
 \examples{
 \donttest{
-f <- system.file("tests", options("emld_db"), "eml-datasetWithUnits.xml", package = "emld")
+f <- system.file("tests", emld::eml_version(), "eml-datasetWithUnits.xml", package = "emld")
 eml <- read_eml(f)
 eml_get(eml, "physical")
 eml_get(eml, "attributeList")

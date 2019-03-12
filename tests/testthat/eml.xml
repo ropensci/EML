@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="123" system="uuid" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1/ eml.xsd">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" packageId="123" system="uuid" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.2.0/ eml.xsd">
   <dataset>
     <title>Example EML</title>
     <creator>
@@ -21,7 +21,8 @@
         <objectName>file.csv</objectName>
         <dataFormat>
           <textFormat>
-            <recordDelimiter>\n\r</recordDelimiter>
+            <recordDelimiter>&#13;
+</recordDelimiter>
             <attributeOrientation>column</attributeOrientation>
             <simpleDelimited>
               <fieldDelimiter>,</fieldDelimiter>

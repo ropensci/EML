@@ -1,7 +1,7 @@
 context("get_attributes")
 
 test_that("get_attributes returns attributes", {
-  file <- system.file("tests", options("emld_db"),
+  file <- system.file("tests", emld::eml_version(),
     "eml-datasetWithAttributelevelMethods.xml",
     package = "emld"
   )
@@ -18,7 +18,7 @@ test_that("get_attributes returns attributes", {
 
 test_that("get_attributes returns attributes and factors", {
   file <- system.file("tests",
-    options("emld_db"),
+    emld::eml_version(),
     "eml-i18n.xml",
     package = "emld"
   )
@@ -36,7 +36,7 @@ test_that("get_attributes returns attributes and factors", {
 
 test_that("get_attributes works with references", {
   file <- system.file("tests",
-    options("emld_db"),
+    emld::eml_version(),
     "eml-i18n.xml",
     package = "emld"
   )

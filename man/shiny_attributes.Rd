@@ -34,7 +34,7 @@ data <- iris
 out <- shiny_attributes(data, NULL)
 
 # from exisiting attributes
-file <- system.file("tests", options("emld_db"),
+file <- system.file("tests", emld::eml_version(),
   "eml-datasetWithAttributelevelMethods.xml",
   package = "emld"
 )

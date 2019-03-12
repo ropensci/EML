@@ -245,16 +245,16 @@ write_eml(my_eml, "eml.xml")
 
 ## Setting the version
 
-EML will use the latest EML specification by default.  To switch to a different version, set the option `emld_db`, like so:
+EML will use the latest EML specification by default.  To switch to a different version, use `emld::eml_version()` 
 
 ```{r}
-options("emld_db" = "eml-2.1.1")
+emld::eml_version("eml-2.1.1")
 ```
 
 Switch back to the 2.2.0 release: 
 
 ```{r}
-options("emld_db" = "eml-2.2.0")
+emld::eml_version("eml-2.2.0")
 ```
 
 
