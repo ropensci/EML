@@ -45,13 +45,13 @@ get_unitList <-
 
 get_unit <- function(unit) {
   ## Unnested structure, easy to rectangle
-  fromJSON(toJSON(unit))
+  fromJSON(toJSON(unit, auto_unbox = T))
 }
 
 #' @importFrom jsonlite toJSON fromJSON
 get_unitType <- function(unitType) {
   ## Nested data structure, rectangle via jq
-  y <- toJSON(unitType)
+  y <- toJSON(unitType, auto_unbox = T)
 
   tmp <- jqr::jq(as.character(y),
     ".[] | {
