@@ -36,7 +36,6 @@ Suggests: knitr,
     covr,
     EML, 
     units, 
-    memoise,
     htmlwidgets,
     shiny,
     shinyjs
