@@ -1,7 +1,7 @@
 context("eml_get")
 
 f <- system.file("tests",
-  options("emld_db"),
+  emld::eml_version(),
   "eml-datasetWithUnits.xml",
   package = "emld"
 )

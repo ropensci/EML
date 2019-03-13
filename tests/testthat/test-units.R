@@ -52,7 +52,7 @@ test_that("Reading default unit definitions", {
 
 
 test_that("Reading custom unit definitions from EML", {
-  f <- system.file("tests", options("emld_db"), "eml-datasetWithUnits.xml", package = "emld")
+  f <- system.file("tests", emld::eml_version(), "eml-datasetWithUnits.xml", package = "emld")
   eml <- read_eml(f)
   unitList <- get_unitList(eml)
   expect_is(unitList, "list")

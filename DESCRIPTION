@@ -17,7 +17,10 @@ Authors@R: c(
                      comment = c(ORCID = "0000-0002-0381-3766")),
               person("Maëlle", "Salmon", role = "ctb", 
                      email = "maelle.salmon@yahoo.se", 
-                     comment = c(ORCID = "0000-0002-2815-0399"))
+                     comment = c(ORCID = "0000-0002-2815-0399")),
+              person("Jeanette", "Clark", role = "ctb", 
+                     email = "jclark@nceas.ucsb.edu",
+                     comment = c(ORCID = "0000-0003-4703-1974"))
             )
 Description: Read and write Ecological Metadata Language files
 License: MIT + file LICENSE
@@ -33,7 +36,6 @@ Suggests: knitr,
     covr,
     EML, 
     units, 
-    memoise,
     htmlwidgets,
     shiny,
     shinyjs

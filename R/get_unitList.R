@@ -13,7 +13,7 @@
 #'
 #' # Read in additional units defined in a EML file
 #' \donttest{
-#' f <- system.file("tests", options("emld_db"),
+#' f <- system.file("tests", emld::eml_version(),
 #'   "eml-datasetWithUnits.xml",
 #'   package = "emld"
 #' )
@@ -28,9 +28,9 @@ get_unitList <-
   function(x = NULL) {
     if (is.null(x)) {
       unitList <- read_eml(system.file("tests",
-        options("emld_db"),
-        "eml-unitDictionary.xml",
-        package = "emld"
+                                       emld::eml_version(),
+                                       "eml-unitDictionary.xml",
+                                       package = "emld"
       ))
     } else {
       unitList <- eml_get(x, "unitList")
@@ -45,13 +45,13 @@ get_unitList <-
 
 get_unit <- function(unit) {
   ## Unnested structure, easy to rectangle
-  fromJSON(toJSON(unit))
+  fromJSON(toJSON(unit, auto_unbox = T))
 }
 
 #' @importFrom jsonlite toJSON fromJSON
 get_unitType <- function(unitType) {
   ## Nested data structure, rectangle via jq
-  y <- toJSON(unitType)
+  y <- toJSON(unitType, auto_unbox = T)
 
   tmp <- jqr::jq(as.character(y),
     ".[] | {

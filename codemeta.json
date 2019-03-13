@@ -59,6 +59,13 @@
       "familyName": "Salmon",
       "email": "maelle.salmon@yahoo.se",
       "@id": "https://orcid.org/0000-0002-2815-0399"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Jeanette",
+      "familyName": "Clark",
+      "email": "jclark@nceas.ucsb.edu",
+      "@id": "https://orcid.org/0000-0003-4703-1974"
     }
   ],
   "copyrightHolder": [
@@ -254,6 +261,12 @@
       "identifier": "emld",
       "name": "emld",
       "version": ">= 0.0.0.9900",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
       "sameAs": "https://github.com/cboettig/emld"
     },
     {
@@ -322,8 +335,8 @@
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     }
   ],
-  "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "462.071KB",
+  "readme": "https://github.com/jeanetteclark/EML/blob/master/README.md",
+  "fileSize": "462.082KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/EML",
     "https://ci.appveyor.com/project/cboettig/eml",
@@ -338,5 +351,6 @@
     "rstats",
     "r-package"
   ],
-  "relatedLink": "https://CRAN.R-project.org/package=EML"
+  "relatedLink": "https://CRAN.R-project.org/package=EML",
+  "funder": {}
 }

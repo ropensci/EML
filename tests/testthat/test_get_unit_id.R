@@ -74,7 +74,7 @@ test_that("allow for many unit input formats", {
   split_unit <- get_split_unit(complex, exponents)
   
   format_split_unit(split_unit, exponents, "eml-2.2.0", udunits_units)
-  get_unit_id(complex, "eml-2.2.0")
+  suppressWarnings(get_unit_id(complex, "eml-2.2.0"))
 })
 
 test_that("we can auto-simplify units", {

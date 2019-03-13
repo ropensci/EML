@@ -25,7 +25,7 @@
 #' }
 #' @export
 get_unit_id <- function(input_units,
-                        eml_version = getOption("emld_db", "eml-2.2.0")) {
+                        eml_version = emld::eml_version()) {
   if (!requireNamespace("units", quietly = TRUE)) {
     stop(
       call. = FALSE,
@@ -41,17 +41,6 @@ get_unit_id <- function(input_units,
     )
   }
 
-  ## Load udunits library
-  if (!requireNamespace("memoise", quietly = TRUE)) {
-    udunits_units <- load_udunits()
-    warning(
-      call. = FALSE,
-      "installing the 'memoise' package will increase
-       the processing speed of get_eml_unit_id"
-    )
-  } else {
-    udunits_units <- mem_load_udunits()
-  }
 
   ## Initiallize exponents
   exponents <- list(
@@ -122,7 +111,7 @@ get_unit_id <- function(input_units,
 format_split_unit <- function(split_unit,
                               exponents,
                               eml_version,
-                              udunits_units = mem_load_udunits()) {
+                              udunits_units) {
 
   ## Check if eml_version is >= 2.2.0
   greater_2.2.0 <- as.numeric(
@@ -349,6 +338,9 @@ get_plural_unit <- function(unit) {
   return(plural)
 }
 
+#' Get udunits from the `units` package. The return value of this function is  saved in the
+#' sysdata.rda file.
+
 load_udunits <- function() {
 
   ## Get unit system
@@ -427,5 +419,3 @@ load_udunits <- function() {
 
   udunits_units <- do.call(rbind, udunits_units)
 }
-
-mem_load_udunits <- memoise::memoise(load_udunits)
