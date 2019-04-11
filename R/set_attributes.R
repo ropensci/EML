@@ -152,7 +152,7 @@ set_attribute <- function(row, factors = NULL) {
   measurementScale <- setNames(list(list()), s)
   measurementScale[[s]] <- node
   missingValueCode <- NULL
-  if (!is.na(row[["missingValueCode"]])) {
+  if (!is.na(row[["missingValueCode"]]) && !is.na(row[["missingValueCodeExplanation"]])) {
     missingValueCode <-
       list(
         code = na2empty(row[["missingValueCode"]]),
