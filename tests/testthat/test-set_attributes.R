@@ -675,3 +675,111 @@ test_that(
     )
   }
 )
+
+test_that(
+  "The set_attributes function stops if missing required fields in missingValues", {
+    # attributesList
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal",
+          "age",
+          "size"
+        ),
+        attributeDefinition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        formatString = c(
+          NA,
+          NA,
+          NA
+        ),
+        definition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        unit = c(
+          NA,
+          NA,
+          "meter"
+        ),
+        numberType = c(
+          NA,
+          NA,
+          "real"
+        ),
+        stringsAsFactors = FALSE
+      )
+   # one attribute has missing values 
+   missing_values <- data.frame(
+     code = c("A", "B"),
+     definition = c("def1", "def2")
+   )
+    
+    expect_error(
+      set_attributes(
+        attributes,
+        col_classes = c("character", "character", "numeric"),
+        missingValues = missing_values
+      ),
+      "The missingValues data.frame should have"
+    )
+  }
+)
+test_that(
+  "The set_attributes function stops if duplicate codes in missingValues", {
+    # attributesList
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal",
+          "age",
+          "size"
+        ),
+        attributeDefinition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        formatString = c(
+          NA,
+          NA,
+          NA
+        ),
+        definition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        unit = c(
+          NA,
+          NA,
+          "meter"
+        ),
+        numberType = c(
+          NA,
+          NA,
+          "real"
+        ),
+        stringsAsFactors = FALSE
+      )
+    
+    # one attribute has missing values 
+    missing_values <- data.frame(
+      attributeName = c("size"),
+      code = c("A", "A"),
+      definition = c("def1", "def2")
+    )
+    
+    expect_error(set_attributes(
+      attributes,
+      col_classes = c("character", "character", "numeric"),
+      missingValues = missing_values
+    ),
+    regex = "There are attributeName"
+    )
+  }
+)
