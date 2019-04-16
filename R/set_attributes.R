@@ -96,13 +96,12 @@ set_attribute <- function(row, factors = NULL) {
     if (!is_standardUnit(row[["unit"]])) {
       type <- "customUnit"
       warning(
-        paste0(
-          "unit '",
+          "Unit '",
           row[["unit"]],
-          "' is not recognized, using custom unit.
-          Please define a custom unit or replace with a
-          recognized standard unit (see set_unitList() for details)"
-        )
+          "' is not a recognized standard unit; treating as custom unit. ",
+          "Please be sure you also define a custom unit in your EML record, ",
+          "or replace with a recognized standard unit. ",
+          "See set_unitList() for details."
       )
     } else {
       type <- "standardUnit"
