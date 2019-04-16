@@ -4,7 +4,8 @@
 \alias{set_attributes}
 \title{set_attributes}
 \usage{
-set_attributes(attributes, factors = NULL, col_classes = NULL)
+set_attributes(attributes, factors = NULL, col_classes = NULL,
+  missingValues = NULL)
 }
 \arguments{
 \item{attributes}{a joined table of all attribute metadata}
@@ -15,6 +16,8 @@ set_attributes(attributes, factors = NULL, col_classes = NULL)
 will let the function infer missing 'domain' and 'measurementScale' values for attributes column.
 Should be in same order as attributeNames in the attributes table, or be a named list with names corresponding to attributeNames
 in the attributes table.}
+
+\item{missingValues}{optional, a table with missing value code-deinition pairs; see details}
 }
 \value{
 an eml "attributeList" object
@@ -44,5 +47,18 @@ For character (textDomain) data:
 For dateTime data:
 - formatString (required)
 
-For factor data:
+The factors data frame, required for attributes in an enumerated domain, must use only the
+ following recognized column headers:
+
+- attributeName (required)
+- code (required)
+- definition (required)
+
+The missingValues data frame, optional, can be used in the case that multiple missing value codes
+need to be set for the same attribute. This table must contain the following recognized column
+headers.
+
+- attributeName (required)
+- code (required)
+- definition (required)
 }
