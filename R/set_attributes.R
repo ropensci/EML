@@ -7,6 +7,7 @@
 #' will let the function infer missing 'domain' and 'measurementScale' values for attributes column.
 #' Should be in same order as attributeNames in the attributes table, or be a named list with names corresponding to attributeNames
 #' in the attributes table.
+#' @param missingValues optional, a table with missing value code-deinition pairs; see details
 #' @details The attributes data frame must use only the recognized column
 #' headers shown here.  The attributes data frame must contain columns for required metadata.
 #' These are:
@@ -28,21 +29,37 @@
 #' For dateTime data:
 #' - formatString (required)
 #'
-#' For factor data:
+#' The factors data frame, required for attributes in an enumerated domain, must use only the
+#'  following recognized column headers:
+#' 
+#' - attributeName (required)
+#' - code (required)
+#' - definition (required)
+#'
+#' The missingValues data frame, optional, can be used in the case that multiple missing value codes
+#' need to be set for the same attribute. This table must contain the following recognized column
+#' headers.
+#' 
+#' - attributeName (required)
+#' - code (required)
+#' - definition (required)
 #'
 #' @return an eml "attributeList" object
 #' @export
 set_attributes <-
   function(attributes,
              factors = NULL,
-             col_classes = NULL) {
+             col_classes = NULL,
+             missingValues = NULL) {
     ## convert factors to data.frame because it could be a tibble
     ## or tbl_df
     factors <- as.data.frame(factors)
+    missingValues <- as.data.frame(missingValues)
 
     ## all as characters please (no stringsAsFactors!)
     attributes[] <- lapply(attributes, as.character)
     factors[] <- lapply(factors, as.character)
+    missingValues[] <- lapply(missingValues, as.character)
     ##  check attributes data.frame.
     ## must declare required columns: attributeName, attributeDescription
     ## infer "domain" & "measurementScale" given optional column classes
@@ -52,7 +69,12 @@ set_attributes <-
 
     # check factors
     if (nrow(factors) != 0) {
-      check_factors(factors)
+      check_codeDefinitions(factors, type = "factors")
+    }
+    
+    # check missingValues
+    if (nrow(missingValues) != 0) {
+      check_codeDefinitions(missingValues, type = "missingValues")
     }
 
     ## Add NA columns if necessary FIXME some of these can
@@ -79,7 +101,7 @@ set_attributes <-
     out <- list()
     out$attribute <-
       lapply(1:dim(attributes)[1], function(i)
-        set_attribute(attributes[i, ], factors = factors))
+        set_attribute(attributes[i, ], factors = factors, missingValues = missingValues))
 
     as_emld(out)
   }
@@ -88,7 +110,7 @@ set_attributes <-
 
 
 
-set_attribute <- function(row, factors = NULL) {
+set_attribute <- function(row, factors = NULL, missingValues = NULL) {
   s <- row[["measurementScale"]]
 
 
@@ -130,9 +152,11 @@ set_attribute <- function(row, factors = NULL) {
       node$nonNumericDomain$textDomain <- n
     } else if (row[["domain"]] == "enumeratedDomain") {
       node$nonNumericDomain$enumeratedDomain <-
-        set_enumeratedDomain(row, factors)
+        set_codeDefinitions(row, code_set = factors, type = "factors")
     }
   }
+  
+  
 
 
   if (s %in% c("dateTime")) {
@@ -152,13 +176,27 @@ set_attribute <- function(row, factors = NULL) {
   measurementScale <- setNames(list(list()), s)
   measurementScale[[s]] <- node
   missingValueCode <- NULL
-  if (!is.na(row[["missingValueCode"]])) {
+  if (!is.na(row[["missingValueCode"]]) & nrow(missingValues) == 0) {
     missingValueCode <-
       list(
         code = na2empty(row[["missingValueCode"]]),
         codeExplanation = na2empty(row[["missingValueCodeExplanation"]])
       )
   }
+  else if (is.na(row[["missingValueCode"]]) & !nrow(missingValues) == 0){
+    missingValueCode <- set_codeDefinitions(row, code_set = missingValues, type = "missingValues")
+  }
+  else if (!is.na(row[["missingValueCode"]]) & !nrow(missingValues) == 0){
+    warning(
+      paste0("attribute '",
+        row[["attributeName"]],
+        "' has missing value codes set in both the 'attributes' and 'missingValues' data.frames.
+        Using codes from 'missingValues' data.frame."
+      )
+    )
+    missingValueCode <- set_codeDefinitions(row, code_set = missingValues, type = "missingValues")
+  }
+  
   list(
     attributeName = row[["attributeName"]],
     attributeDefinition = row[["attributeDefinition"]],
@@ -169,17 +207,29 @@ set_attribute <- function(row, factors = NULL) {
   )
 }
 
-set_enumeratedDomain <- function(row, factors) {
+set_codeDefinitions <- function(row, code_set, type) {
   name <- row[["attributeName"]]
-  df <- factors[factors$attributeName == name, ]
+  df <- code_set[code_set$attributeName == name, ]
+  if (type == "factors"){
+    ListOfcodeDefinition <- lapply(1:dim(df)[1], function(i) {
+      list(
+        code = df[i, "code"],
+        definition = df[i, "definition"]
+      )
+    })
+    list(codeDefinition = ListOfcodeDefinition)
+  }
+  else if (type == "missingValues"){
+    {
+      ListOfcodeDefinition <- lapply(1:dim(df)[1], function(i) {
+        list(
+          code = df[i, "code"],
+          codeExplanation = df[i, "definition"]
+        )
+      })
+    }
+  }
 
-  ListOfcodeDefinition <- lapply(1:dim(df)[1], function(i) {
-    list(
-      code = df[i, "code"],
-      definition = df[i, "definition"]
-    )
-  })
-  list(codeDefinition = ListOfcodeDefinition)
 }
 
 set_BoundsGroup <- function(row) {
@@ -607,34 +657,35 @@ count_lines <- function(attributeName, factors) {
 
 # check the names of factors
 # check that for each attributeName codes are unique
-check_factors <- function(factors) {
-  if (!all(c("attributeName", "code", "definition") %in% names(factors))) {
+check_codeDefinitions <- function(code_set, type) {
+  if (!all(c("attributeName", "code", "definition") %in% names(code_set))) {
     stop(
-      "The factors data.frame should have
-      variables called attributeName, code and definition.",
+      paste0("The ", type, " data.frame should have
+      variables called attributeName, code and definition."
+      ),
       call. = FALSE
     )
   }
 
-  lines_no <- vapply(unique(factors$attributeName),
+  lines_no <- vapply(unique(code_set$attributeName),
     count_lines,
-    factors = factors, 1
+    factors = code_set, 1
   )
-  levels_no <- vapply(unique(factors$attributeName),
+  levels_no <- vapply(unique(code_set$attributeName),
     count_levels,
-    factors = factors, 1
+    factors = code_set, 1
   )
 
   forcheck <- data.frame(
     lines_no = lines_no,
     levels_no = levels_no,
-    attributeName = unique(factors$attributeName)
+    attributeName = unique(code_set$attributeName)
   )
   notequal <- forcheck[forcheck$lines_no != forcheck$levels_no, ]
   if (nrow(notequal) != 0) {
     stop(
-      paste(
-        "There are attributeName(s) in factors with duplicate codes:",
+      paste(paste0("There are attributeName(s) in ", type, " with duplicate codes:"
+      ),
         notequal$attributeName
       ),
       call. = FALSE
@@ -660,3 +711,4 @@ is_standardUnit <- function(x) {
   standard_unit_list <- standardUnits$units$id
   (x %in% standard_unit_list)
 }
+
