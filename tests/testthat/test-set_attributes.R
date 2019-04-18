@@ -934,3 +934,60 @@ test_that(
     
   })
 
+test_that(
+  "set_attributes returns an error when an unrecognized column is included in the attributes table", {
+    
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal",
+          "age",
+          "size"
+        ),
+        attributeDefinition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        formatString = c(
+          NA,
+          NA,
+          NA
+        ),
+        definition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        unit = c(
+          NA,
+          NA,
+          "meter"
+        ),
+        numberType = c(
+          NA,
+          NA,
+          "real"
+        ),
+        missingValueCode = c(
+          "A",
+          "B",
+          NA
+        ),
+        missingValueCodeDefinition = c(
+          "from attributes",
+          "from attributes",
+          NA
+        ),
+        stringsAsFactors = FALSE
+      )
+    
+  
+    expect_error(set_attributes(
+      attributes,
+      col_classes = c("character", "character", "numeric")
+    ),
+    regex = "The column names"
+    )
+  })
+
