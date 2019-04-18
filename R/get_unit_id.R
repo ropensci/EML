@@ -338,8 +338,8 @@ get_plural_unit <- function(unit) {
   return(plural)
 }
 
-#' Get udunits from the `units` package. The return value of this function is  saved in the
-#' sysdata.rda file.
+# Get udunits from the `units` package. The return value of this function is  saved in the
+# sysdata.rda file.
 
 load_udunits <- function() {
 
