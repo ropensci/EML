@@ -176,17 +176,18 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
   measurementScale <- setNames(list(list()), s)
   measurementScale[[s]] <- node
   missingValueCode <- NULL
-  if (!is.na(row[["missingValueCode"]]) & nrow(missingValues) == 0) {
+  if (!is.na(row[["missingValueCode"]]) & !(row[["attributeName"]] %in% unique(missingValues$attributeName))) {
     missingValueCode <-
       list(
         code = na2empty(row[["missingValueCode"]]),
         codeExplanation = na2empty(row[["missingValueCodeExplanation"]])
       )
   }
-  else if (is.na(row[["missingValueCode"]]) & !nrow(missingValues) == 0){
+  else if (is.na(row[["missingValueCode"]]) & row[["attributeName"]] %in% unique(missingValues$attributeName)){
     missingValueCode <- set_codeDefinitions(row, code_set = missingValues, type = "missingValues")
   }
-  else if (!is.na(row[["missingValueCode"]]) & !nrow(missingValues) == 0){
+  
+  else if (!is.na(row[["missingValueCode"]]) & row[["attributeName"]] %in% unique(missingValues$attributeName)){
     warning(
       paste0("attribute '",
         row[["attributeName"]],
@@ -220,16 +221,15 @@ set_codeDefinitions <- function(row, code_set, type) {
     list(codeDefinition = ListOfcodeDefinition)
   }
   else if (type == "missingValues"){
-    {
+    if (nrow(df) > 0){
       ListOfcodeDefinition <- lapply(1:dim(df)[1], function(i) {
         list(
           code = df[i, "code"],
           codeExplanation = df[i, "definition"]
         )
       })
-    }
-  }
-
+     }
+   }
 }
 
 set_BoundsGroup <- function(row) {
