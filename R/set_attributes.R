@@ -492,6 +492,21 @@ check_and_complete_attributes <- function(attributes, col_classes) {
       )
     }
   }
+  attribute_names <- c("attributeName", "measurementScale","domain","unit",
+                       "numberType","attributeLabel","attributeDefinition",
+                       "definition", "formatString", "missingValueCode",
+                       "missingValueCodeExplanation")
+  
+  if (any(!names(attributes) %in% attribute_names)) {
+    
+    stop(
+      call. = FALSE,
+      paste0("The column names '", 
+             paste(names(attributes)[which(!(names(attributes) %in% attribute_names))], collapse = ", "),
+             "' in the attributes table are not recognized.")
+    )
+    
+  }
 
   ## infer "domain" & "measurementScale" given optional column classes
   if (!is.null(col_classes)) {
