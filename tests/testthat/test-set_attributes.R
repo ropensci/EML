@@ -519,8 +519,7 @@ test_that(
         col_classes = list("Date", "Date", "Date")
       )
     )
-  }
-)
+  })
 
 test_that("The set_attributes function
           returns useful warnings", {
@@ -604,8 +603,8 @@ test_that(
       ),
       "The factors data.frame should have"
     )
-  }
-)
+  })
+
 test_that(
   "The set_attributes function stops if duplicate codes in factors", {
     # attributesList
@@ -673,8 +672,7 @@ test_that(
     ),
     regex = "There are attributeName"
     )
-  }
-)
+  })
 
 test_that(
   "The set_attributes function stops if missing required fields in missingValues", {
@@ -727,8 +725,8 @@ test_that(
       ),
       "The missingValues data.frame should have"
     )
-  }
-)
+  })
+
 test_that(
   "The set_attributes function stops if duplicate codes in missingValues", {
     # attributesList
@@ -781,5 +779,215 @@ test_that(
     ),
     regex = "There are attributeName"
     )
-  }
-)
+  })
+
+test_that(
+  "set_attributes can set multiple missing value codes", {
+    
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal"
+        ),
+        attributeDefinition = c(
+          "animal species"
+        ),
+        formatString = c(
+          NA
+        ),
+        definition = c(
+          "animal species"
+        ),
+        unit = c(
+          NA
+        ),
+        numberType = c(
+          NA
+        ),
+        stringsAsFactors = FALSE
+      )
+    
+    missing_values <- data.frame(
+      attributeName = c("animal"),
+      code = c("A", "B"),
+      definition = c("from table", "from table")
+    )
+    
+    att_list <- set_attributes(attributes, 
+                               col_classes = c("character"),
+                               missingValues = missing_values)
+    
+    expect_equal(2, length(att_list$attribute[[1]]$missingValueCode))
+    
+  })
+
+test_that(
+  "set_attributes warns if missing value codes are set in two places", {
+    
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal"
+        ),
+        attributeDefinition = c(
+          "animal species"
+        ),
+        formatString = c(
+          NA
+        ),
+        definition = c(
+          "animal species"
+        ),
+        unit = c(
+          NA
+        ),
+        numberType = c(
+          NA
+        ),
+        missingValueCode = c(
+          "A"
+        ),
+        missingValueCodeExplanation = c(
+          "from attributes"
+        ),
+        stringsAsFactors = FALSE
+      )
+    
+    missing_values <- data.frame(
+      attributeName = c("animal"),
+      code = c("A", "B"),
+      definition = c("from table", "from table")
+    )
+    
+    # warn if attributes are set in two places
+    expect_warning(
+      set_attributes(attributes, 
+                     col_classes = c("character"),
+                     missingValues = missing_values),
+      "The attribute")
+    
+  })
+
+test_that(
+  "set_attributes sets missing value codes as expected in all cases", {
+    
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal",
+          "age",
+          "size"
+        ),
+        attributeDefinition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        formatString = c(
+          NA,
+          NA,
+          NA
+        ),
+        definition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        unit = c(
+          NA,
+          NA,
+          "meter"
+        ),
+        numberType = c(
+          NA,
+          NA,
+          "real"
+        ),
+        missingValueCode = c(
+          "A",
+          "B",
+          NA
+        ),
+        missingValueCodeExplanation = c(
+          "from attributes",
+          "from attributes",
+          NA
+        ),
+        stringsAsFactors = FALSE
+      )
+    
+    missing_values <- data.frame(
+      attributeName = c("animal", "size"),
+      code = c("A", "C"),
+      definition = c("from table", "from table")
+    )
+    
+    att_list <- set_attributes(attributes, 
+                               col_classes = c("character", "character", "numeric"),
+                               missingValues = missing_values)
+    # set in both missing value and attributes table
+    expect_equal("from table", att_list$attribute[[1]]$missingValueCode[[1]]$codeExplanation)
+    # set only in attributes table
+    expect_equal("from attributes", att_list$attribute[[2]]$missingValueCode$codeExplanation)
+    # set only in missing values table
+    expect_equal("from table", att_list$attribute[[3]]$missingValueCode[[1]]$codeExplanation)
+    
+  })
+
+test_that(
+  "set_attributes returns an error when an unrecognized column is included in the attributes table", {
+    
+    attributes <-
+      data.frame(
+        attributeName = c(
+          "animal",
+          "age",
+          "size"
+        ),
+        attributeDefinition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        formatString = c(
+          NA,
+          NA,
+          NA
+        ),
+        definition = c(
+          "animal species",
+          "life stage",
+          "body length"
+        ),
+        unit = c(
+          NA,
+          NA,
+          "meter"
+        ),
+        numberType = c(
+          NA,
+          NA,
+          "real"
+        ),
+        missingValueCode = c(
+          "A",
+          "B",
+          NA
+        ),
+        missingValueCodeDefinition = c(
+          "from attributes",
+          "from attributes",
+          NA
+        ),
+        stringsAsFactors = FALSE
+      )
+    
+  
+    expect_error(set_attributes(
+      attributes,
+      col_classes = c("character", "character", "numeric")
+    ),
+    regex = "The column names"
+    )
+  })
+

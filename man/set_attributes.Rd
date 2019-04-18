@@ -32,9 +32,12 @@ These are:
 
 For all data:
 - attributeName (required, free text field)
+
 - attributeDefinition (required, free text field)
+
 - measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
  case sensitive) but it can be inferred from col_classes.
+ 
 - domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
  case sensitive) but it can be inferred from col_classes.
 
@@ -46,6 +49,10 @@ For character (textDomain) data:
 
 For dateTime data:
 - formatString (required)
+
+Other optional allowed columns in the attributes table are:
+source, pattern, precision, numberType, missingValueCode, missingValueCodeExplanation,
+attributeLabel, storageType, minimum, maximum
 
 The factors data frame, required for attributes in an enumerated domain, must use only the
  following recognized column headers:

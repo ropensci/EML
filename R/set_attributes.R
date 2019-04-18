@@ -14,9 +14,12 @@
 #'
 #' For all data:
 #' - attributeName (required, free text field)
+#' 
 #' - attributeDefinition (required, free text field)
+#' 
 #' - measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
 #'  case sensitive) but it can be inferred from col_classes.
+#'  
 #' - domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
 #'  case sensitive) but it can be inferred from col_classes.
 #'
@@ -28,6 +31,10 @@
 #'
 #' For dateTime data:
 #' - formatString (required)
+#' 
+#' Other optional allowed columns in the attributes table are:
+#' source, pattern, precision, numberType, missingValueCode, missingValueCodeExplanation,
+#' attributeLabel, storageType, minimum, maximum
 #'
 #' The factors data frame, required for attributes in an enumerated domain, must use only the
 #'  following recognized column headers:
@@ -176,19 +183,20 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
   measurementScale <- setNames(list(list()), s)
   measurementScale[[s]] <- node
   missingValueCode <- NULL
-  if (!is.na(row[["missingValueCode"]]) & nrow(missingValues) == 0) {
+  if (!is.na(row[["missingValueCode"]]) & !(row[["attributeName"]] %in% unique(missingValues$attributeName))) {
     missingValueCode <-
       list(
         code = na2empty(row[["missingValueCode"]]),
         codeExplanation = na2empty(row[["missingValueCodeExplanation"]])
       )
   }
-  else if (is.na(row[["missingValueCode"]]) & !nrow(missingValues) == 0){
+  else if (is.na(row[["missingValueCode"]]) & row[["attributeName"]] %in% unique(missingValues$attributeName)){
     missingValueCode <- set_codeDefinitions(row, code_set = missingValues, type = "missingValues")
   }
-  else if (!is.na(row[["missingValueCode"]]) & !nrow(missingValues) == 0){
+  
+  else if (!is.na(row[["missingValueCode"]]) & row[["attributeName"]] %in% unique(missingValues$attributeName)){
     warning(
-      paste0("attribute '",
+      paste0("The attribute '",
         row[["attributeName"]],
         "' has missing value codes set in both the 'attributes' and 'missingValues' data.frames.
         Using codes from 'missingValues' data.frame."
@@ -220,16 +228,15 @@ set_codeDefinitions <- function(row, code_set, type) {
     list(codeDefinition = ListOfcodeDefinition)
   }
   else if (type == "missingValues"){
-    {
+    if (nrow(df) > 0){
       ListOfcodeDefinition <- lapply(1:dim(df)[1], function(i) {
         list(
           code = df[i, "code"],
           codeExplanation = df[i, "definition"]
         )
       })
-    }
-  }
-
+     }
+   }
 }
 
 set_BoundsGroup <- function(row) {
@@ -491,6 +498,34 @@ check_and_complete_attributes <- function(attributes, col_classes) {
         "The attributeName column must be filled for each attribute."
       )
     }
+  }
+  attribute_names <- c("source",
+                       "pattern",
+                       "measurementScale",
+                       "unit",
+                       "precision",
+                       "numberType",
+                       "domain",
+                       "definition",
+                       "formatString",
+                       "missingValueCode",
+                       "missingValueCodeExplanation",
+                       "attributeName",
+                       "attributeDefinition",
+                       "attributeLabel",
+                       "storageType",
+                       "minimum",
+                       "maximum")
+  
+  if (any(!names(attributes) %in% attribute_names)) {
+    
+    stop(
+      call. = FALSE,
+      paste0("The column names '", 
+             paste(names(attributes)[which(!(names(attributes) %in% attribute_names))], collapse = ", "),
+             "' in the attributes table are not recognized.")
+    )
+    
   }
 
   ## infer "domain" & "measurementScale" given optional column classes
