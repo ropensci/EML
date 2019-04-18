@@ -14,13 +14,14 @@
 #'
 #' For all data:
 #' - attributeName (required, free text field)
+#' 
 #' - attributeDefinition (required, free text field)
+#' 
 #' - measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
 #'  case sensitive) but it can be inferred from col_classes.
+#'  
 #' - domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
 #'  case sensitive) but it can be inferred from col_classes.
-#' - missingValueCode, missingValueCodeExplanation (optional); can also be set using the
-#'  missingValues argument (see below).
 #'
 #' For numeric (ratio or interval) data:
 #' - unit (required)
@@ -30,6 +31,10 @@
 #'
 #' For dateTime data:
 #' - formatString (required)
+#' 
+#' Other optional allowed columns in the attributes table are:
+#' source, pattern, precision, numberType, missingValueCode, missingValueCodeDefinition,
+#' attributeLabel, storageType, minimum, maximum
 #'
 #' The factors data frame, required for attributes in an enumerated domain, must use only the
 #'  following recognized column headers:
@@ -502,10 +507,7 @@ check_and_complete_attributes <- function(attributes, col_classes) {
                        "numberType",
                        "domain",
                        "definition",
-                       "source",
-                       "pattern",
                        "formatString",
-                       "precision",
                        "missingValueCode",
                        "missingValueCodeExplanation",
                        "attributeName",
