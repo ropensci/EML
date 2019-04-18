@@ -51,7 +51,7 @@ For dateTime data:
 - formatString (required)
 
 Other optional allowed columns in the attributes table are:
-source, pattern, precision, numberType, missingValueCode, missingValueCodeDefinition,
+source, pattern, precision, numberType, missingValueCode, missingValueCodeExplanation,
 attributeLabel, storageType, minimum, maximum
 
 The factors data frame, required for attributes in an enumerated domain, must use only the
