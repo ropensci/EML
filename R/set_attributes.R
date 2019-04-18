@@ -19,6 +19,8 @@
 #'  case sensitive) but it can be inferred from col_classes.
 #' - domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
 #'  case sensitive) but it can be inferred from col_classes.
+#' - missingValueCode, missingValueCodeExplanation (optional); can also be set using the
+#'  missingValues argument (see below).
 #'
 #' For numeric (ratio or interval) data:
 #' - unit (required)
@@ -189,7 +191,7 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
   
   else if (!is.na(row[["missingValueCode"]]) & row[["attributeName"]] %in% unique(missingValues$attributeName)){
     warning(
-      paste0("attribute '",
+      paste0("The attribute '",
         row[["attributeName"]],
         "' has missing value codes set in both the 'attributes' and 'missingValues' data.frames.
         Using codes from 'missingValues' data.frame."
@@ -492,10 +494,26 @@ check_and_complete_attributes <- function(attributes, col_classes) {
       )
     }
   }
-  attribute_names <- c("attributeName", "measurementScale","domain","unit",
-                       "numberType","attributeLabel","attributeDefinition",
-                       "definition", "formatString", "missingValueCode",
-                       "missingValueCodeExplanation")
+  attribute_names <- c("source",
+                       "pattern",
+                       "measurementScale",
+                       "unit",
+                       "precision",
+                       "numberType",
+                       "domain",
+                       "definition",
+                       "source",
+                       "pattern",
+                       "formatString",
+                       "precision",
+                       "missingValueCode",
+                       "missingValueCodeExplanation",
+                       "attributeName",
+                       "attributeDefinition",
+                       "attributeLabel",
+                       "storageType",
+                       "minimum",
+                       "maximum")
   
   if (any(!names(attributes) %in% attribute_names)) {
     

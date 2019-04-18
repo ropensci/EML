@@ -37,6 +37,8 @@ For all data:
  case sensitive) but it can be inferred from col_classes.
 - domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
  case sensitive) but it can be inferred from col_classes.
+- missingValueCode, missingValueCodeExplanation (optional); can also be set using the
+ missingValues argument (see below).
 
 For numeric (ratio or interval) data:
 - unit (required)
