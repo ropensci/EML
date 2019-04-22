@@ -10,7 +10,7 @@ old-vignettes/*
 ^data-raw$
 ^\.travis\.yml$
 ^codecov\.yml$
-^paper/
+^paper$
 ^codemeta\.json$
 ^appveyor\.yml$
 ^pkgdown$

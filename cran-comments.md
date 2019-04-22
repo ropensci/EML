@@ -1,4 +1,5 @@
-
+This is a thorough re-write of the EML package based on S3 instead of S4
+object system.
 
 ## Test environments
 * local OS X install, R 3.5.3
