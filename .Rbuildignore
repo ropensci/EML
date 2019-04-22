@@ -14,4 +14,4 @@ old-vignettes/*
 ^codemeta\.json$
 ^appveyor\.yml$
 ^pkgdown$
-
+^cran-comments\.md$
