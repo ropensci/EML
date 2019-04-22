@@ -1,5 +1,5 @@
 This is a thorough re-write of the EML package based on S3 instead of S4
-object system.
+object system. 
 
 ## Test environments
 * local OS X install, R 3.5.3
@@ -8,5 +8,5 @@ object system.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 

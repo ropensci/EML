@@ -3,7 +3,7 @@
 #' @param beginDate Starting date for temporal coverage range.
 #' @param endDate End date for temporal coverage range
 #' @param date give a single date, or vector of single dates covered (instead of beginDate and endDate)
-#' @param sci_names string (space seperated) or list or data frame of scientific names for species covered.  See details
+#' @param sci_names string (space separated) or list or data frame of scientific names for species covered.  See details
 #' @param geographicDescription text string describing the geographic location
 #' @param westBoundingCoordinate Decimal longitude for west edge bounding box
 #' @param eastBoundingCoordinate Decimal longitude for east edge bounding box
@@ -123,7 +123,7 @@ set_temporalCoverage <-
 ######## Taxonomic Coverage ####################
 #' set_taxonomicCoverage
 #'
-#' @param sci_names string (space seperated) or list or data frame of scientific names for species covered.
+#' @param sci_names string (space separated) or list or data frame of scientific names for species covered.
 #' @param expand Set to TRUE to use taxize to expand sci_names into full taxonomic classifications
 #' @param db The taxonomic database to query (when expand is set to \code{TRUE}). See \code{\link[taxize]{classification}} for valid options. Defaults to 'itis'.
 #' @details Turn a data.frame or a list of scientific names into a taxonomicCoverage block
@@ -140,7 +140,7 @@ set_temporalCoverage <-
 #' @export
 #' @importFrom methods is
 #' @examples
-#' 
+#'
 #' sci_names <- data.frame(
 #'   Kingdom = "Plantae",
 #'   Phylum = "Phaeophyta",
@@ -151,21 +151,23 @@ set_temporalCoverage <-
 #'   Species = "pyrifera"
 #' )
 #' taxon_coverage <- set_taxonomicCoverage(sci_names)
-#' 
+#'
+#' \donttest{ # Examples that may take > 5s
+#'
 #' # Query ITIS using taxize to fill in the full taxonomy given just species
 #' #  # names
 #' taxon_coverage <- set_taxonomicCoverage(
 #'   c("Macrocystis pyrifera", "Homo sapiens"),
 #'   expand = TRUE
 #' )
-#' 
+#'
 #' # Query GBIF instead of ITIS
 #' taxon_coverage <- set_taxonomicCoverage(
 #'   c("Macrocystis pyrifera"),
 #'   expand = TRUE,
 #'   db = "gbif"
 #' )
-#' 
+#'
 #' ## use a list of lists for multiple species
 #' sci_names <- list(list(
 #'   Kindom = "Plantae",
@@ -177,6 +179,8 @@ set_temporalCoverage <-
 #'   Species = "pyrifera"
 #' ))
 #' set_taxonomicCoverage(sci_names)
+#'
+#' }
 set_taxonomicCoverage <- function(sci_names, expand = FALSE, db = "itis") {
   # Expand using taxize and ITIS if the user passes in just scientific names
   if (is.character(sci_names) && expand) {

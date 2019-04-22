@@ -9,7 +9,7 @@
 #' @param electronicMailAddress email address (alternatively, can use 'email' argument)
 #' @param onlineUrl a URL to the homepage of the individual or organization
 #' @param userId the user's ID, usually within a particular system (KNB, DataONE)
-#' @param id Identifier for this plock, ideally an ORCID id (optional)
+#' @param id Identifier for this block, ideally an ORCID id (optional)
 #' @param email alias for electronicMailAddress
 #'
 #' @return A emld object for any responsibleParty (e.g. creator, contact, etc)

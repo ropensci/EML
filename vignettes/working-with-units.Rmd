@@ -44,7 +44,7 @@ Start with a minimal EML document
 ```{r}
 me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
 my_eml <- list(dataset = list(
-              title = "A Mimimal Valid EML Dataset",
+              title = "A Minimal Valid EML Dataset",
               creator = me,
               contact = me),
               additionalMetadata = list(metadata = list(
@@ -60,7 +60,7 @@ write_eml(my_eml, "eml-with-units.xml")
 eml_validate("eml-with-units.xml")
 ```
 
-Note: Custom units are widely missunderstood and missused in EML.  See examples from [custom-units](https://gist.github.com/amoeba/67a23818dfca49904c7a54b0632d76bc#file-all-arcticdata-customUnits)
+Note: Custom units are widely misunderstood and misused in EML.  See examples from [custom-units](https://gist.github.com/amoeba/67a23818dfca49904c7a54b0632d76bc#file-all-arcticdata-customUnits)
 
 
 

@@ -5,8 +5,8 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "EML",
-  "description": "Read and write Ecological Metadata Language files",
-  "name": "EML: Create and Manipulate Data using the Ecological Metadata Language",
+  "description": "Work with Ecological Metadata Language ('EML') files. \n    'EML' is a widely used metadata standard in the ecological and\n    environmental sciences, described in Jones et al. (2006),\n    <doi:10.1146/annurev.ecolsys.37.091305.110031>.",
+  "name": "EML: Read and Write Ecological Metadata Language Files",
   "codeRepository": "https://github.com/ropensci/EML",
   "issueTracker": "https://github.com/ropensci/EML/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -206,6 +206,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=shinyjs"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "spelling",
+      "name": "spelling",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=spelling"
     }
   ],
   "softwareRequirements": [
@@ -255,7 +267,7 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://github.com/cboettig/emld"
+      "sameAs": "https://CRAN.R-project.org/package=emld"
     },
     {
       "@type": "SoftwareApplication",
@@ -324,7 +336,7 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "491.102KB",
+  "fileSize": "490.911KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/EML",
     "https://ci.appveyor.com/project/cboettig/eml",
@@ -340,5 +352,6 @@
     "r-package"
   ],
   "relatedLink": "https://CRAN.R-project.org/package=EML",
-  "funder": {}
+  "funder": {},
+  "releaseNotes": "https://github.com/ropensci/EML/blob/master/NEWS.md"
 }

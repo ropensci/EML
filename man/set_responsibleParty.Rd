@@ -28,7 +28,7 @@ set_responsibleParty(givenName = NULL, surName = NULL,
 
 \item{userId}{the user's ID, usually within a particular system (KNB, DataONE)}
 
-\item{id}{Identifier for this plock, ideally an ORCID id (optional)}
+\item{id}{Identifier for this block, ideally an ORCID id (optional)}
 
 \item{email}{alias for electronicMailAddress}
 }

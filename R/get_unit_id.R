@@ -239,9 +239,9 @@ get_split_unit <- function(unit, exponents) {
 
 get_valid_unit <- function(unit) {
   stopifnot(length(unlist(
-    gregexpr("\\(", unit))) == length(unlist(gregexpr("\\)", unit)))) 
+    gregexpr("\\(", unit))) == length(unlist(gregexpr("\\)", unit))))
   # stop if not all parenthesis are closed
-  stopifnot(!grepl("\\([^\\)]*\\(", unit)) 
+  stopifnot(!grepl("\\([^\\)]*\\(", unit))
   # stop if nested parenthesis (unable to deparse)
   stopifnot(!grepl("\\([^\\)]*\\/[^\\)]*\\)", unit))
   # stop if fractions in parenthesis (unable to deparse)
@@ -249,7 +249,7 @@ get_valid_unit <- function(unit) {
   ## Preformat unit
   ## Use x2/y instead of x^2 per y
   unit <- gsub("(\\^)(-{0,1}[[:digit:]]+)", "\\2", unit) # remove ^ in front of digits
-  unit <- gsub("(^|[[:blank:]]+)[p|P]er[[:blank:]]+", " / ", unit) 
+  unit <- gsub("(^|[[:blank:]]+)[p|P]er[[:blank:]]+", " / ", unit)
   # replace "per" and "Per" with "/"
 
   ## Deal with parenthesis

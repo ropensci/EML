@@ -7,7 +7,7 @@
 set_taxonomicCoverage(sci_names, expand = FALSE, db = "itis")
 }
 \arguments{
-\item{sci_names}{string (space seperated) or list or data frame of scientific names for species covered.}
+\item{sci_names}{string (space separated) or list or data frame of scientific names for species covered.}
 
 \item{expand}{Set to TRUE to use taxize to expand sci_names into full taxonomic classifications}
 
@@ -44,6 +44,8 @@ sci_names <- data.frame(
 )
 taxon_coverage <- set_taxonomicCoverage(sci_names)
 
+\donttest{ # Examples that may take > 5s
+
 # Query ITIS using taxize to fill in the full taxonomy given just species
 #  # names
 taxon_coverage <- set_taxonomicCoverage(
@@ -69,4 +71,6 @@ sci_names <- list(list(
   Species = "pyrifera"
 ))
 set_taxonomicCoverage(sci_names)
+
+}
 }

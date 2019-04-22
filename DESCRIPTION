@@ -1,6 +1,10 @@
 Package: EML
 Type: Package
-Title: Create and Manipulate Data using the Ecological Metadata Language
+Title: Read and Write Ecological Metadata Language Files
+Description: Work with Ecological Metadata Language ('EML') files. 
+    'EML' is a widely used metadata standard in the ecological and
+    environmental sciences, described in Jones et al. (2006),
+    <doi:10.1146/annurev.ecolsys.37.091305.110031>.
 Version: 2.0.0
 Authors@R: c(
               person("Carl", "Boettiger", 
@@ -22,23 +26,24 @@ Authors@R: c(
                      email = "jclark@nceas.ucsb.edu",
                      comment = c(ORCID = "0000-0003-4703-1974"))
             )
-Description: Read and write Ecological Metadata Language files
 License: MIT + file LICENSE
 URL: https://github.com/ropensci/EML
 BugReports: https://github.com/ropensci/EML/issues
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
-Suggests: knitr,
+Suggests: 
+    knitr,
     taxize,
     tibble,
     testthat,
     covr,
-    EML, 
-    units, 
+    EML,
+    units,
     htmlwidgets,
     shiny,
-    shinyjs
+    shinyjs,
+    spelling
 Imports: xml2, 
     methods, 
     digest, 
@@ -51,4 +56,4 @@ Imports: xml2,
     dplyr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
-Remotes: cboettig/emld
+Language: en-US

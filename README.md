@@ -24,7 +24,7 @@ Integrating Ecological Data from the Gene to the Biosphere (Jones et
 al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)*
 provides an excellent introduction into the role EML plays in building
 metadata-driven data repositories to address the needs of highly
-hetergenous data that cannot be easily reduced to a traditional
+heterogeneous data that cannot be easily reduced to a traditional
 vertically integrated database. At this time, the `EML` R package
 provides support for the serializing and parsing of all low-level EML
 concepts, but still assumes some familiarity with the EML standard,
@@ -44,7 +44,7 @@ users and developers to work with `eml` objects and also to write their
 own functions for creating and manipulating EML objects. Under the hood,
 `EML` relies on the [emld](https://github.com/cboettig/emld) package,
 which uses a Linked Data representation for EML. It is this approach
-which lets us combine the simplicity of lists with the specificy
+which lets us combine the simplicity of lists with the specificity
 required by the XML schema.
 
 This revision also supports the upcoming release of the EML 2.2
@@ -61,7 +61,7 @@ library(EML)
 ``` r
 me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
 my_eml <- list(dataset = list(
-              title = "A Mimimal Valid EML Dataset",
+              title = "A Minimal Valid EML Dataset",
               creator = me,
               contact = me)
             )
