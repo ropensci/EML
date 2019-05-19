@@ -21,7 +21,7 @@ Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html)
 for an introduction and thorough documentation of the standard.
 Additionally, the scientific article *[The New Bioinformatics:
 Integrating Ecological Data from the Gene to the Biosphere (Jones et
-al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)*
+al 2006)](https://doi.org/10.1146/annurev.ecolsys.37.091305.110031)*
 provides an excellent introduction into the role EML plays in building
 metadata-driven data repositories to address the needs of highly
 heterogeneous data that cannot be easily reduced to a traditional
