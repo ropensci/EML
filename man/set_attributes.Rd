@@ -42,7 +42,7 @@ For all data:
  case sensitive) but it can be inferred from col_classes.
 
 For numeric (ratio or interval) data:
-- unit (required)
+- unit (required). Unitless values should use "dimensionless" as the unit.
 
 For character (textDomain) data:
 - definition (required)
