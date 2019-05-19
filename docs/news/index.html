@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>eml — eml • EML</title>
+<title>Changelog • EML</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,7 @@
 
 
 
-<meta property="og:title" content="eml — eml" />
-
-<meta property="og:description" content="eml" />
+<meta property="og:title" content="Changelog" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -59,7 +57,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -126,32 +124,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>eml</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropensci/EML/blob/master/R/template_constructor.R'><code>R/template_constructor.R</code></a></small>
-    <div class="hidden name"><code>eml.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/ropensci/EML/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    
-    <p>eml</p>
-    
-    </div>
-
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A list with constructor functions</p>
-    
-
+    <div id="eml-2-0-0" class="section level1">
+<h1 class="page-header">
+<a href="#eml-2-0-0" class="anchor"></a>EML 2.0.0<small> 2019-04-23 </small>
+</h1>
+<ul>
+<li>
+<p>EML 2.0.0 is a ground-up rewrite of EML 1.x package. The primary difference is that EML 2.0.0 is built on S3 (list) objects instead of S4 object system. This makes the package interface easier to use and extend. Under the hood, this approach relies on the <code>emld</code> package, which uses a JSON-LD representation of EML which provides a natural translation into the list-based format.</p>
+<p>While most high level functions for creating EML have been preserved, the change to S3 means that this package will not be backwards-compatible with many scripts which relied on the S4 system.</p>
+</li>
+<li><p>Added a <code>NEWS.md</code> file to track changes to the package.</p></li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-          </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#eml-2-0-0">2.0.0</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>

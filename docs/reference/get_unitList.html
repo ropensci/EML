@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EML</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@
       <a href="../articles/working-with-units.html">Working with Units</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -161,7 +164,7 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 # Read in additional units defined in a EML file
-</div><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"tests"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>options</a></span>(<span class='st'>"emld_db"</span>),
+</div><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"tests"</span>, <span class='kw pkg'>emld</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/emld/topics/eml_version'>eml_version</a></span>(),
   <span class='st'>"eml-datasetWithUnits.xml"</span>,
   <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"emld"</span>
 )
@@ -394,52 +397,52 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 25                            mass
 #&gt; 26                            mass
 #&gt; 27                            mass
-#&gt; 28                            NULL
-#&gt; 29                            NULL
-#&gt; 30                            NULL
-#&gt; 31                            NULL
-#&gt; 32                            NULL
-#&gt; 33                            NULL
-#&gt; 34                            NULL
-#&gt; 35                            NULL
-#&gt; 36                            NULL
-#&gt; 37                            NULL
-#&gt; 38                            NULL
-#&gt; 39                            NULL
-#&gt; 40                            NULL
-#&gt; 41                            NULL
-#&gt; 42                            NULL
-#&gt; 43                            NULL
-#&gt; 44                            NULL
-#&gt; 45                            NULL
-#&gt; 46                            NULL
-#&gt; 47                            NULL
-#&gt; 48                            NULL
-#&gt; 49                            NULL
-#&gt; 50                            NULL
-#&gt; 51                            NULL
-#&gt; 52                            NULL
-#&gt; 53                            NULL
-#&gt; 54                            NULL
-#&gt; 55                            NULL
-#&gt; 56                            NULL
-#&gt; 57                            NULL
-#&gt; 58                            NULL
-#&gt; 59                            NULL
-#&gt; 60                            NULL
-#&gt; 61                            NULL
-#&gt; 62                            NULL
-#&gt; 63                            NULL
-#&gt; 64                            NULL
+#&gt; 28                            &lt;NA&gt;
+#&gt; 29                            &lt;NA&gt;
+#&gt; 30                            &lt;NA&gt;
+#&gt; 31                            &lt;NA&gt;
+#&gt; 32                            &lt;NA&gt;
+#&gt; 33                            &lt;NA&gt;
+#&gt; 34                            &lt;NA&gt;
+#&gt; 35                            &lt;NA&gt;
+#&gt; 36                            &lt;NA&gt;
+#&gt; 37                            &lt;NA&gt;
+#&gt; 38                            &lt;NA&gt;
+#&gt; 39                            &lt;NA&gt;
+#&gt; 40                            &lt;NA&gt;
+#&gt; 41                            &lt;NA&gt;
+#&gt; 42                            &lt;NA&gt;
+#&gt; 43                            &lt;NA&gt;
+#&gt; 44                            &lt;NA&gt;
+#&gt; 45                            &lt;NA&gt;
+#&gt; 46                            &lt;NA&gt;
+#&gt; 47                            &lt;NA&gt;
+#&gt; 48                            &lt;NA&gt;
+#&gt; 49                            &lt;NA&gt;
+#&gt; 50                            &lt;NA&gt;
+#&gt; 51                            &lt;NA&gt;
+#&gt; 52                            &lt;NA&gt;
+#&gt; 53                            &lt;NA&gt;
+#&gt; 54                            &lt;NA&gt;
+#&gt; 55                            &lt;NA&gt;
+#&gt; 56                            &lt;NA&gt;
+#&gt; 57                            &lt;NA&gt;
+#&gt; 58                            &lt;NA&gt;
+#&gt; 59                            &lt;NA&gt;
+#&gt; 60                            &lt;NA&gt;
+#&gt; 61                            &lt;NA&gt;
+#&gt; 62                            &lt;NA&gt;
+#&gt; 63                            &lt;NA&gt;
+#&gt; 64                            &lt;NA&gt;
 #&gt; 65                          volume
 #&gt; 66                          volume
 #&gt; 67                          volume
 #&gt; 68                          volume
-#&gt; 69                            NULL
-#&gt; 70                            NULL
+#&gt; 69                            &lt;NA&gt;
+#&gt; 70                            &lt;NA&gt;
 #&gt; 71                          volume
 #&gt; 72                          volume
-#&gt; 73                            NULL
+#&gt; 73                            &lt;NA&gt;
 #&gt; 74                           angle
 #&gt; 75                           angle
 #&gt; 76                           angle
@@ -759,23 +762,23 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 194                                                                    micrograms per gram
 #&gt; 195                                                 cubic centimeters per cubic centimeter
 #&gt;     abbreviation       multiplierToSI                          parentSI
-#&gt; 1           NULL                 NULL                              NULL
-#&gt; 2            sec                    1                              NULL
-#&gt; 3              m                    1                              NULL
-#&gt; 4             kg                    1                              NULL
-#&gt; 5              K                    1                              NULL
-#&gt; 6              C                    1                              NULL
-#&gt; 7              A                    1                              NULL
-#&gt; 8            mol                    1                              NULL
-#&gt; 9             cd                    1                              NULL
-#&gt; 10          NULL                 NULL                              NULL
-#&gt; 11            m³                    1                              NULL
-#&gt; 12          NULL                   60                            second
-#&gt; 13          NULL                 3600                            second
-#&gt; 14          NULL                86400                            second
-#&gt; 15          NULL               604800                            second
-#&gt; 16          NULL             31536000                            second
-#&gt; 17          NULL             31622400                            second
+#&gt; 1           &lt;NA&gt;                 &lt;NA&gt;                              &lt;NA&gt;
+#&gt; 2            sec                    1                              &lt;NA&gt;
+#&gt; 3              m                    1                              &lt;NA&gt;
+#&gt; 4             kg                    1                              &lt;NA&gt;
+#&gt; 5              K                    1                              &lt;NA&gt;
+#&gt; 6              C                    1                              &lt;NA&gt;
+#&gt; 7              A                    1                              &lt;NA&gt;
+#&gt; 8            mol                    1                              &lt;NA&gt;
+#&gt; 9             cd                    1                              &lt;NA&gt;
+#&gt; 10          &lt;NA&gt;                 &lt;NA&gt;                              &lt;NA&gt;
+#&gt; 11            m³                    1                              &lt;NA&gt;
+#&gt; 12          &lt;NA&gt;                   60                            second
+#&gt; 13          &lt;NA&gt;                 3600                            second
+#&gt; 14          &lt;NA&gt;                86400                            second
+#&gt; 15          &lt;NA&gt;               604800                            second
+#&gt; 16          &lt;NA&gt;             31536000                            second
+#&gt; 17          &lt;NA&gt;             31622400                            second
 #&gt; 18            ng       0.000000000001                          kilogram
 #&gt; 19            μg          0.000000001                          kilogram
 #&gt; 20            mg             0.000001                          kilogram
@@ -805,12 +808,12 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 44          usft               0.3048                             meter
 #&gt; 45            ft               0.3048                             meter
 #&gt; 46          gcft            0.3047997                             meter
-#&gt; 47          NULL               1.8288                             meter
-#&gt; 48          NULL                 1852                             meter
+#&gt; 47          &lt;NA&gt;               1.8288                             meter
+#&gt; 48          &lt;NA&gt;                 1852                             meter
 #&gt; 49          yard               0.9144                             meter
-#&gt; 50          NULL 0.914398530744440774                             meter
-#&gt; 51          NULL         0.2011661949                             meter
-#&gt; 52          NULL  0.91439841461602867                             meter
+#&gt; 50          &lt;NA&gt; 0.914398530744440774                             meter
+#&gt; 51          &lt;NA&gt;         0.2011661949                             meter
+#&gt; 52          &lt;NA&gt;  0.91439841461602867                             meter
 #&gt; 53          mile             1609.344                             meter
 #&gt; 54          nsec          0.000000001                            second
 #&gt; 55          μsec             0.000001                            second
@@ -832,52 +835,52 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 71             b             0.035239                             liter
 #&gt; 72           in³       0.000016387064                             liter
 #&gt; 73          pint             0.473176                             liter
-#&gt; 74           rad                    1                              NULL
+#&gt; 74           rad                    1                              &lt;NA&gt;
 #&gt; 75             º         0.0174532924                            radian
 #&gt; 76          grad             0.015707                            radian
 #&gt; 77           MHz              1000000                             hertz
 #&gt; 78           KHz                 1000                             hertz
-#&gt; 79            Hz                    1                              NULL
+#&gt; 79            Hz                    1                              &lt;NA&gt;
 #&gt; 80           mHz             0.000001                             hertz
-#&gt; 81             N                    1                              NULL
-#&gt; 82             J                    1                              NULL
+#&gt; 81             N                    1                              &lt;NA&gt;
+#&gt; 82             J                    1                              &lt;NA&gt;
 #&gt; 83           cal               4.1868                             joule
 #&gt; 84           btu            1055.0559                             joule
-#&gt; 85          NULL             1.355818                             joule
-#&gt; 86            lm                    1                              NULL
-#&gt; 87            lx                    1                              NULL
-#&gt; 88            Bq                    1                              NULL
-#&gt; 89            Gy                    1                              NULL
-#&gt; 90            Sv                    1                              NULL
-#&gt; 91           kat                    1                              NULL
-#&gt; 92             H                    1                              NULL
+#&gt; 85          &lt;NA&gt;             1.355818                             joule
+#&gt; 86            lm                    1                              &lt;NA&gt;
+#&gt; 87            lx                    1                              &lt;NA&gt;
+#&gt; 88            Bq                    1                              &lt;NA&gt;
+#&gt; 89            Gy                    1                              &lt;NA&gt;
+#&gt; 90            Sv                    1                              &lt;NA&gt;
+#&gt; 91           kat                    1                              &lt;NA&gt;
+#&gt; 92             H                    1                              &lt;NA&gt;
 #&gt; 93            MW              1000000                              watt
 #&gt; 94            kW                 1000                              watt
-#&gt; 95             W                    1                              NULL
+#&gt; 95             W                    1                              &lt;NA&gt;
 #&gt; 96            mW                0.001                              watt
 #&gt; 97            MV              1000000                              volt
 #&gt; 98            kV                 1000                              volt
-#&gt; 99             V                    1                              NULL
+#&gt; 99             V                    1                              &lt;NA&gt;
 #&gt; 100           mV                0.001                              volt
-#&gt; 101            F                    1                              NULL
-#&gt; 102            Ω                    1                              NULL
-#&gt; 103           Ωm                    1                              NULL
-#&gt; 104            S                    1                              NULL
-#&gt; 105           Wb                    1                              NULL
-#&gt; 106            T                    1                              NULL
-#&gt; 107           Pa                    1                              NULL
+#&gt; 101            F                    1                              &lt;NA&gt;
+#&gt; 102            Ω                    1                              &lt;NA&gt;
+#&gt; 103           Ωm                    1                              &lt;NA&gt;
+#&gt; 104            S                    1                              &lt;NA&gt;
+#&gt; 105           Wb                    1                              &lt;NA&gt;
+#&gt; 106            T                    1                              &lt;NA&gt;
+#&gt; 107           Pa                    1                              &lt;NA&gt;
 #&gt; 108          MPa              1000000                            pascal
 #&gt; 109          kPa                 1000                            pascal
 #&gt; 110          atm               101325                            pascal
 #&gt; 111          bar               100000                            pascal
 #&gt; 112         mbar                  100                            pascal
-#&gt; 113        kg/m²                    1                              NULL
+#&gt; 113        kg/m²                    1                              &lt;NA&gt;
 #&gt; 114         g/m²                0.001           kilogramsPerSquareMeter
 #&gt; 115        mg/m²             0.000001           kilogramsPerSquareMeter
-#&gt; 116         NULL               0.0001           kilogramsPerSquareMeter
-#&gt; 117         NULL                  0.1           kilogramsPerSquareMeter
+#&gt; 116         &lt;NA&gt;               0.0001           kilogramsPerSquareMeter
+#&gt; 117         &lt;NA&gt;                  0.1           kilogramsPerSquareMeter
 #&gt; 118      lbs/in²                17.85           kilogramsPerSquareMeter
-#&gt; 119         NULL                    1                              NULL
+#&gt; 119         &lt;NA&gt;                    1                              &lt;NA&gt;
 #&gt; 120        kg/m³                    1            kilogramsPerCubicMeter
 #&gt; 121          g/l                    1            kilogramsPerCubicMeter
 #&gt; 122        mg/m³             0.000001            kilogramsPerCubicMeter
@@ -885,26 +888,26 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 124         mg/l                0.001            kilogramsPerCubicMeter
 #&gt; 125        g/cm³                 1000            kilogramsPerCubicMeter
 #&gt; 126         g/ml                 1000            kilogramsPerCubicMeter
-#&gt; 127         NULL                    1                              NULL
-#&gt; 128          l/s                    1                              NULL
+#&gt; 127         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 128          l/s                    1                              &lt;NA&gt;
 #&gt; 129         m³/s                    1                   litersPerSecond
 #&gt; 130      ft³/sec            28.316874                   litersPerSecond
-#&gt; 131           m²                    1                              NULL
+#&gt; 131           m²                    1                              &lt;NA&gt;
 #&gt; 132            a                  100                       squareMeter
 #&gt; 133           ha                10000                       squareMeter
-#&gt; 134         NULL              1000000                       squareMeter
-#&gt; 135         NULL             0.000001                       squareMeter
-#&gt; 136         NULL               0.0001                       squareMeter
+#&gt; 134         &lt;NA&gt;              1000000                       squareMeter
+#&gt; 135         &lt;NA&gt;             0.000001                       squareMeter
+#&gt; 136         &lt;NA&gt;               0.0001                       squareMeter
 #&gt; 137            a            4046.8564                       squareMeter
 #&gt; 138          ft²             0.092903                       squareMeter
 #&gt; 139          yd²             0.836131                       squareMeter
 #&gt; 140        mile²        2589998.49806                       squareMeter
-#&gt; 141         l/m²                    1                              NULL
-#&gt; 142         NULL              0.00870              litersPerSquareMeter
-#&gt; 143         NULL               0.0001              litersPerSquareMeter
-#&gt; 144        m²/kg                    1                              NULL
+#&gt; 141         l/m²                    1                              &lt;NA&gt;
+#&gt; 142         &lt;NA&gt;              0.00870              litersPerSquareMeter
+#&gt; 143         &lt;NA&gt;               0.0001              litersPerSquareMeter
+#&gt; 144        m²/kg                    1                              &lt;NA&gt;
 #&gt; 145          m/s                    1                   metersPerSecond
-#&gt; 146        m/day          .0000115741                              NULL
+#&gt; 146        m/day          .0000115741                              &lt;NA&gt;
 #&gt; 147       ft/day        0.00000352778                   metersPerSecond
 #&gt; 148         ft/s               0.3048                   metersPerSecond
 #&gt; 149        ft/hr          0.000084667                   metersPerSecond
@@ -915,241 +918,241 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 154         cm/s                 0.01                   metersPerSecond
 #&gt; 155         mm/s                0.001                   metersPerSecond
 #&gt; 156      cm/year    0.000000000317098                   metersPerSecond
-#&gt; 157         NULL             0.514444                   metersPerSecond
+#&gt; 157         &lt;NA&gt;             0.514444                   metersPerSecond
 #&gt; 158        km/hr               0.2778                   metersPerSecond
-#&gt; 159         m/s²                    1                              NULL
-#&gt; 160         NULL                    1                              NULL
-#&gt; 161        m³/kg                    1                              NULL
+#&gt; 159         m/s²                    1                              &lt;NA&gt;
+#&gt; 160         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 161        m³/kg                    1                              &lt;NA&gt;
 #&gt; 162       μm³/kg    0.000000000000001             cubicMeterPerKilogram
-#&gt; 163         A/m²                    1                              NULL
-#&gt; 164          A/m                    1                              NULL
-#&gt; 165         NULL                    1                              NULL
+#&gt; 163         A/m²                    1                              &lt;NA&gt;
+#&gt; 164          A/m                    1                              &lt;NA&gt;
+#&gt; 165         &lt;NA&gt;                    1                              &lt;NA&gt;
 #&gt; 166            M                 1000                molesPerCubicMeter
-#&gt; 167            m                    1                              NULL
-#&gt; 168        cd/m²                    1                              NULL
-#&gt; 169         m²/s                    1                              NULL
+#&gt; 167            m                    1                              &lt;NA&gt;
+#&gt; 168        cd/m²                    1                              &lt;NA&gt;
+#&gt; 169         m²/s                    1                              &lt;NA&gt;
 #&gt; 170       m²/day                86400            metersSquaredPerSecond
 #&gt; 171      ft²/day          0.000124586            metersSquaredPerSecond
-#&gt; 172         NULL                    1                              NULL
-#&gt; 173         NULL                  0.1 kilogramsPerMeterSquaredPerSecond
-#&gt; 174         NULL   0.0000000000317098 kilogramsPerMeterSquaredPerSecond
-#&gt; 175         NULL   0.0000000000011574 kilogramsPerMeterSquaredPerSecond
-#&gt; 176         NULL             0.000317 kilogramsPerMeterSquaredPerSecond
-#&gt; 177         NULL           0000000317 kilogramsPerMeterSquaredPerSecond
-#&gt; 178         NULL                    1                              NULL
-#&gt; 179         NULL                 1000                  molesPerKilogram
-#&gt; 180         NULL                    1                  molesPerKilogram
-#&gt; 181         NULL                    1                              NULL
-#&gt; 182         NULL             0.000001         molesPerKilogramPerSecond
-#&gt; 183         kg/s                    1                              NULL
-#&gt; 184         NULL            0.0000317                kilogramsPerSecond
+#&gt; 172         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 173         &lt;NA&gt;                  0.1 kilogramsPerMeterSquaredPerSecond
+#&gt; 174         &lt;NA&gt;   0.0000000000317098 kilogramsPerMeterSquaredPerSecond
+#&gt; 175         &lt;NA&gt;   0.0000000000011574 kilogramsPerMeterSquaredPerSecond
+#&gt; 176         &lt;NA&gt;             0.000317 kilogramsPerMeterSquaredPerSecond
+#&gt; 177         &lt;NA&gt;           0000000317 kilogramsPerMeterSquaredPerSecond
+#&gt; 178         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 179         &lt;NA&gt;                 1000                  molesPerKilogram
+#&gt; 180         &lt;NA&gt;                    1                  molesPerKilogram
+#&gt; 181         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 182         &lt;NA&gt;             0.000001         molesPerKilogramPerSecond
+#&gt; 183         kg/s                    1                              &lt;NA&gt;
+#&gt; 184         &lt;NA&gt;            0.0000317                kilogramsPerSecond
 #&gt; 185         g/yr      0.0000000000317                kilogramsPerSecond
-#&gt; 186         NULL                    1                              NULL
-#&gt; 187         NULL             0.000001             numberPerMeterSquared
-#&gt; 188         NULL                    1                              NULL
-#&gt; 189         NULL                0.001               numberPerMeterCubed
-#&gt; 190         NULL             0.000001               numberPerMeterCubed
-#&gt; 191          m/g                    1                              NULL
-#&gt; 192         NULL                    1                              NULL
-#&gt; 193         NULL                    1                              NULL
-#&gt; 194         NULL             0.000001                      gramsPerGram
-#&gt; 195         NULL                    1                              NULL
+#&gt; 186         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 187         &lt;NA&gt;             0.000001             numberPerMeterSquared
+#&gt; 188         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 189         &lt;NA&gt;                0.001               numberPerMeterCubed
+#&gt; 190         &lt;NA&gt;             0.000001               numberPerMeterCubed
+#&gt; 191          m/g                    1                              &lt;NA&gt;
+#&gt; 192         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 193         &lt;NA&gt;                    1                              &lt;NA&gt;
+#&gt; 194         &lt;NA&gt;             0.000001                      gramsPerGram
+#&gt; 195         &lt;NA&gt;                    1                              &lt;NA&gt;
 #&gt;     constantToSI
-#&gt; 1           NULL
-#&gt; 2           NULL
-#&gt; 3           NULL
-#&gt; 4           NULL
-#&gt; 5           NULL
-#&gt; 6           NULL
-#&gt; 7           NULL
-#&gt; 8           NULL
-#&gt; 9           NULL
-#&gt; 10          NULL
-#&gt; 11          NULL
-#&gt; 12          NULL
-#&gt; 13          NULL
-#&gt; 14          NULL
-#&gt; 15          NULL
-#&gt; 16          NULL
-#&gt; 17          NULL
-#&gt; 18          NULL
-#&gt; 19          NULL
-#&gt; 20          NULL
-#&gt; 21          NULL
-#&gt; 22          NULL
-#&gt; 23          NULL
-#&gt; 24          NULL
-#&gt; 25          NULL
-#&gt; 26          NULL
-#&gt; 27          NULL
-#&gt; 28          NULL
-#&gt; 29          NULL
+#&gt; 1           &lt;NA&gt;
+#&gt; 2           &lt;NA&gt;
+#&gt; 3           &lt;NA&gt;
+#&gt; 4           &lt;NA&gt;
+#&gt; 5           &lt;NA&gt;
+#&gt; 6           &lt;NA&gt;
+#&gt; 7           &lt;NA&gt;
+#&gt; 8           &lt;NA&gt;
+#&gt; 9           &lt;NA&gt;
+#&gt; 10          &lt;NA&gt;
+#&gt; 11          &lt;NA&gt;
+#&gt; 12          &lt;NA&gt;
+#&gt; 13          &lt;NA&gt;
+#&gt; 14          &lt;NA&gt;
+#&gt; 15          &lt;NA&gt;
+#&gt; 16          &lt;NA&gt;
+#&gt; 17          &lt;NA&gt;
+#&gt; 18          &lt;NA&gt;
+#&gt; 19          &lt;NA&gt;
+#&gt; 20          &lt;NA&gt;
+#&gt; 21          &lt;NA&gt;
+#&gt; 22          &lt;NA&gt;
+#&gt; 23          &lt;NA&gt;
+#&gt; 24          &lt;NA&gt;
+#&gt; 25          &lt;NA&gt;
+#&gt; 26          &lt;NA&gt;
+#&gt; 27          &lt;NA&gt;
+#&gt; 28          &lt;NA&gt;
+#&gt; 29          &lt;NA&gt;
 #&gt; 30        273.18
 #&gt; 31       255.402
-#&gt; 32          NULL
-#&gt; 33          NULL
-#&gt; 34          NULL
-#&gt; 35          NULL
-#&gt; 36          NULL
-#&gt; 37          NULL
-#&gt; 38          NULL
-#&gt; 39          NULL
-#&gt; 40          NULL
-#&gt; 41          NULL
-#&gt; 42          NULL
-#&gt; 43          NULL
-#&gt; 44          NULL
-#&gt; 45          NULL
-#&gt; 46          NULL
-#&gt; 47          NULL
-#&gt; 48          NULL
-#&gt; 49          NULL
-#&gt; 50          NULL
-#&gt; 51          NULL
-#&gt; 52          NULL
-#&gt; 53          NULL
-#&gt; 54          NULL
-#&gt; 55          NULL
-#&gt; 56          NULL
-#&gt; 57          NULL
-#&gt; 58          NULL
-#&gt; 59          NULL
-#&gt; 60          NULL
-#&gt; 61          NULL
-#&gt; 62          NULL
-#&gt; 63          NULL
-#&gt; 64          NULL
-#&gt; 65          NULL
-#&gt; 66          NULL
-#&gt; 67          NULL
-#&gt; 68          NULL
-#&gt; 69          NULL
-#&gt; 70          NULL
-#&gt; 71          NULL
-#&gt; 72          NULL
-#&gt; 73          NULL
-#&gt; 74          NULL
-#&gt; 75          NULL
-#&gt; 76          NULL
-#&gt; 77          NULL
-#&gt; 78          NULL
-#&gt; 79          NULL
-#&gt; 80          NULL
-#&gt; 81          NULL
-#&gt; 82          NULL
-#&gt; 83          NULL
-#&gt; 84          NULL
-#&gt; 85          NULL
-#&gt; 86          NULL
-#&gt; 87          NULL
-#&gt; 88          NULL
-#&gt; 89          NULL
-#&gt; 90          NULL
-#&gt; 91          NULL
-#&gt; 92          NULL
-#&gt; 93          NULL
-#&gt; 94          NULL
-#&gt; 95          NULL
-#&gt; 96          NULL
-#&gt; 97          NULL
-#&gt; 98          NULL
-#&gt; 99          NULL
-#&gt; 100         NULL
-#&gt; 101         NULL
-#&gt; 102         NULL
-#&gt; 103         NULL
-#&gt; 104         NULL
-#&gt; 105         NULL
-#&gt; 106         NULL
-#&gt; 107         NULL
-#&gt; 108         NULL
-#&gt; 109         NULL
-#&gt; 110         NULL
-#&gt; 111         NULL
-#&gt; 112         NULL
-#&gt; 113         NULL
-#&gt; 114         NULL
-#&gt; 115         NULL
-#&gt; 116         NULL
-#&gt; 117         NULL
-#&gt; 118         NULL
-#&gt; 119         NULL
-#&gt; 120         NULL
-#&gt; 121         NULL
-#&gt; 122         NULL
-#&gt; 123         NULL
-#&gt; 124         NULL
-#&gt; 125         NULL
-#&gt; 126         NULL
-#&gt; 127         NULL
-#&gt; 128         NULL
-#&gt; 129         NULL
-#&gt; 130         NULL
-#&gt; 131         NULL
-#&gt; 132         NULL
-#&gt; 133         NULL
-#&gt; 134         NULL
-#&gt; 135         NULL
-#&gt; 136         NULL
-#&gt; 137         NULL
-#&gt; 138         NULL
-#&gt; 139         NULL
-#&gt; 140         NULL
-#&gt; 141         NULL
-#&gt; 142         NULL
-#&gt; 143         NULL
-#&gt; 144         NULL
-#&gt; 145         NULL
-#&gt; 146         NULL
-#&gt; 147         NULL
-#&gt; 148         NULL
-#&gt; 149         NULL
-#&gt; 150         NULL
-#&gt; 151         NULL
-#&gt; 152         NULL
-#&gt; 153         NULL
-#&gt; 154         NULL
-#&gt; 155         NULL
-#&gt; 156         NULL
-#&gt; 157         NULL
-#&gt; 158         NULL
-#&gt; 159         NULL
-#&gt; 160         NULL
-#&gt; 161         NULL
-#&gt; 162         NULL
-#&gt; 163         NULL
-#&gt; 164         NULL
-#&gt; 165         NULL
-#&gt; 166         NULL
-#&gt; 167         NULL
-#&gt; 168         NULL
-#&gt; 169         NULL
-#&gt; 170         NULL
-#&gt; 171         NULL
-#&gt; 172         NULL
-#&gt; 173         NULL
-#&gt; 174         NULL
-#&gt; 175         NULL
-#&gt; 176         NULL
-#&gt; 177         NULL
-#&gt; 178         NULL
-#&gt; 179         NULL
-#&gt; 180         NULL
-#&gt; 181         NULL
-#&gt; 182         NULL
-#&gt; 183         NULL
-#&gt; 184         NULL
-#&gt; 185         NULL
-#&gt; 186         NULL
-#&gt; 187         NULL
-#&gt; 188         NULL
-#&gt; 189         NULL
-#&gt; 190         NULL
-#&gt; 191         NULL
-#&gt; 192         NULL
-#&gt; 193         NULL
-#&gt; 194         NULL
-#&gt; 195         NULL
+#&gt; 32          &lt;NA&gt;
+#&gt; 33          &lt;NA&gt;
+#&gt; 34          &lt;NA&gt;
+#&gt; 35          &lt;NA&gt;
+#&gt; 36          &lt;NA&gt;
+#&gt; 37          &lt;NA&gt;
+#&gt; 38          &lt;NA&gt;
+#&gt; 39          &lt;NA&gt;
+#&gt; 40          &lt;NA&gt;
+#&gt; 41          &lt;NA&gt;
+#&gt; 42          &lt;NA&gt;
+#&gt; 43          &lt;NA&gt;
+#&gt; 44          &lt;NA&gt;
+#&gt; 45          &lt;NA&gt;
+#&gt; 46          &lt;NA&gt;
+#&gt; 47          &lt;NA&gt;
+#&gt; 48          &lt;NA&gt;
+#&gt; 49          &lt;NA&gt;
+#&gt; 50          &lt;NA&gt;
+#&gt; 51          &lt;NA&gt;
+#&gt; 52          &lt;NA&gt;
+#&gt; 53          &lt;NA&gt;
+#&gt; 54          &lt;NA&gt;
+#&gt; 55          &lt;NA&gt;
+#&gt; 56          &lt;NA&gt;
+#&gt; 57          &lt;NA&gt;
+#&gt; 58          &lt;NA&gt;
+#&gt; 59          &lt;NA&gt;
+#&gt; 60          &lt;NA&gt;
+#&gt; 61          &lt;NA&gt;
+#&gt; 62          &lt;NA&gt;
+#&gt; 63          &lt;NA&gt;
+#&gt; 64          &lt;NA&gt;
+#&gt; 65          &lt;NA&gt;
+#&gt; 66          &lt;NA&gt;
+#&gt; 67          &lt;NA&gt;
+#&gt; 68          &lt;NA&gt;
+#&gt; 69          &lt;NA&gt;
+#&gt; 70          &lt;NA&gt;
+#&gt; 71          &lt;NA&gt;
+#&gt; 72          &lt;NA&gt;
+#&gt; 73          &lt;NA&gt;
+#&gt; 74          &lt;NA&gt;
+#&gt; 75          &lt;NA&gt;
+#&gt; 76          &lt;NA&gt;
+#&gt; 77          &lt;NA&gt;
+#&gt; 78          &lt;NA&gt;
+#&gt; 79          &lt;NA&gt;
+#&gt; 80          &lt;NA&gt;
+#&gt; 81          &lt;NA&gt;
+#&gt; 82          &lt;NA&gt;
+#&gt; 83          &lt;NA&gt;
+#&gt; 84          &lt;NA&gt;
+#&gt; 85          &lt;NA&gt;
+#&gt; 86          &lt;NA&gt;
+#&gt; 87          &lt;NA&gt;
+#&gt; 88          &lt;NA&gt;
+#&gt; 89          &lt;NA&gt;
+#&gt; 90          &lt;NA&gt;
+#&gt; 91          &lt;NA&gt;
+#&gt; 92          &lt;NA&gt;
+#&gt; 93          &lt;NA&gt;
+#&gt; 94          &lt;NA&gt;
+#&gt; 95          &lt;NA&gt;
+#&gt; 96          &lt;NA&gt;
+#&gt; 97          &lt;NA&gt;
+#&gt; 98          &lt;NA&gt;
+#&gt; 99          &lt;NA&gt;
+#&gt; 100         &lt;NA&gt;
+#&gt; 101         &lt;NA&gt;
+#&gt; 102         &lt;NA&gt;
+#&gt; 103         &lt;NA&gt;
+#&gt; 104         &lt;NA&gt;
+#&gt; 105         &lt;NA&gt;
+#&gt; 106         &lt;NA&gt;
+#&gt; 107         &lt;NA&gt;
+#&gt; 108         &lt;NA&gt;
+#&gt; 109         &lt;NA&gt;
+#&gt; 110         &lt;NA&gt;
+#&gt; 111         &lt;NA&gt;
+#&gt; 112         &lt;NA&gt;
+#&gt; 113         &lt;NA&gt;
+#&gt; 114         &lt;NA&gt;
+#&gt; 115         &lt;NA&gt;
+#&gt; 116         &lt;NA&gt;
+#&gt; 117         &lt;NA&gt;
+#&gt; 118         &lt;NA&gt;
+#&gt; 119         &lt;NA&gt;
+#&gt; 120         &lt;NA&gt;
+#&gt; 121         &lt;NA&gt;
+#&gt; 122         &lt;NA&gt;
+#&gt; 123         &lt;NA&gt;
+#&gt; 124         &lt;NA&gt;
+#&gt; 125         &lt;NA&gt;
+#&gt; 126         &lt;NA&gt;
+#&gt; 127         &lt;NA&gt;
+#&gt; 128         &lt;NA&gt;
+#&gt; 129         &lt;NA&gt;
+#&gt; 130         &lt;NA&gt;
+#&gt; 131         &lt;NA&gt;
+#&gt; 132         &lt;NA&gt;
+#&gt; 133         &lt;NA&gt;
+#&gt; 134         &lt;NA&gt;
+#&gt; 135         &lt;NA&gt;
+#&gt; 136         &lt;NA&gt;
+#&gt; 137         &lt;NA&gt;
+#&gt; 138         &lt;NA&gt;
+#&gt; 139         &lt;NA&gt;
+#&gt; 140         &lt;NA&gt;
+#&gt; 141         &lt;NA&gt;
+#&gt; 142         &lt;NA&gt;
+#&gt; 143         &lt;NA&gt;
+#&gt; 144         &lt;NA&gt;
+#&gt; 145         &lt;NA&gt;
+#&gt; 146         &lt;NA&gt;
+#&gt; 147         &lt;NA&gt;
+#&gt; 148         &lt;NA&gt;
+#&gt; 149         &lt;NA&gt;
+#&gt; 150         &lt;NA&gt;
+#&gt; 151         &lt;NA&gt;
+#&gt; 152         &lt;NA&gt;
+#&gt; 153         &lt;NA&gt;
+#&gt; 154         &lt;NA&gt;
+#&gt; 155         &lt;NA&gt;
+#&gt; 156         &lt;NA&gt;
+#&gt; 157         &lt;NA&gt;
+#&gt; 158         &lt;NA&gt;
+#&gt; 159         &lt;NA&gt;
+#&gt; 160         &lt;NA&gt;
+#&gt; 161         &lt;NA&gt;
+#&gt; 162         &lt;NA&gt;
+#&gt; 163         &lt;NA&gt;
+#&gt; 164         &lt;NA&gt;
+#&gt; 165         &lt;NA&gt;
+#&gt; 166         &lt;NA&gt;
+#&gt; 167         &lt;NA&gt;
+#&gt; 168         &lt;NA&gt;
+#&gt; 169         &lt;NA&gt;
+#&gt; 170         &lt;NA&gt;
+#&gt; 171         &lt;NA&gt;
+#&gt; 172         &lt;NA&gt;
+#&gt; 173         &lt;NA&gt;
+#&gt; 174         &lt;NA&gt;
+#&gt; 175         &lt;NA&gt;
+#&gt; 176         &lt;NA&gt;
+#&gt; 177         &lt;NA&gt;
+#&gt; 178         &lt;NA&gt;
+#&gt; 179         &lt;NA&gt;
+#&gt; 180         &lt;NA&gt;
+#&gt; 181         &lt;NA&gt;
+#&gt; 182         &lt;NA&gt;
+#&gt; 183         &lt;NA&gt;
+#&gt; 184         &lt;NA&gt;
+#&gt; 185         &lt;NA&gt;
+#&gt; 186         &lt;NA&gt;
+#&gt; 187         &lt;NA&gt;
+#&gt; 188         &lt;NA&gt;
+#&gt; 189         &lt;NA&gt;
+#&gt; 190         &lt;NA&gt;
+#&gt; 191         &lt;NA&gt;
+#&gt; 192         &lt;NA&gt;
+#&gt; 193         &lt;NA&gt;
+#&gt; 194         &lt;NA&gt;
+#&gt; 195         &lt;NA&gt;
 #&gt; 
 #&gt; $unitTypes
 #&gt;                                 id                           name     dimension
@@ -1442,37 +1445,37 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 287              massSpecificCount              massSpecificCount          mass
 #&gt; 288              massSpecificCount              massSpecificCount          mass
 #&gt;     power
-#&gt; 1    NULL
+#&gt; 1    &lt;NA&gt;
 #&gt; 2      -2
-#&gt; 3    NULL
+#&gt; 3    &lt;NA&gt;
 #&gt; 4      -2
-#&gt; 5    NULL
+#&gt; 5    &lt;NA&gt;
 #&gt; 6       1
-#&gt; 7    NULL
+#&gt; 7    &lt;NA&gt;
 #&gt; 8       1
-#&gt; 9    NULL
+#&gt; 9    &lt;NA&gt;
 #&gt; 10     -1
-#&gt; 11   NULL
+#&gt; 11   &lt;NA&gt;
 #&gt; 12     -1
-#&gt; 13   NULL
+#&gt; 13   &lt;NA&gt;
 #&gt; 14     -2
-#&gt; 15   NULL
+#&gt; 15   &lt;NA&gt;
 #&gt; 16     -2
 #&gt; 17      3
 #&gt; 18     -2
 #&gt; 19      3
 #&gt; 20     -2
-#&gt; 21   NULL
+#&gt; 21   &lt;NA&gt;
 #&gt; 22     -1
-#&gt; 23   NULL
+#&gt; 23   &lt;NA&gt;
 #&gt; 24     -1
-#&gt; 25   NULL
+#&gt; 25   &lt;NA&gt;
 #&gt; 26     -3
-#&gt; 27   NULL
+#&gt; 27   &lt;NA&gt;
 #&gt; 28     -3
-#&gt; 29   NULL
+#&gt; 29   &lt;NA&gt;
 #&gt; 30     -1
-#&gt; 31   NULL
+#&gt; 31   &lt;NA&gt;
 #&gt; 32     -1
 #&gt; 33      3
 #&gt; 34     -3
@@ -1482,109 +1485,109 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 38     -1
 #&gt; 39      3
 #&gt; 40     -1
-#&gt; 41   NULL
+#&gt; 41   &lt;NA&gt;
 #&gt; 42     -3
 #&gt; 43     -1
-#&gt; 44   NULL
+#&gt; 44   &lt;NA&gt;
 #&gt; 45     -3
 #&gt; 46     -1
-#&gt; 47   NULL
+#&gt; 47   &lt;NA&gt;
 #&gt; 48     -3
 #&gt; 49     -1
-#&gt; 50   NULL
+#&gt; 50   &lt;NA&gt;
 #&gt; 51     -2
 #&gt; 52     -1
-#&gt; 53   NULL
+#&gt; 53   &lt;NA&gt;
 #&gt; 54     -2
 #&gt; 55     -1
-#&gt; 56   NULL
+#&gt; 56   &lt;NA&gt;
 #&gt; 57     -2
 #&gt; 58     -1
 #&gt; 59     -1
 #&gt; 60      3
 #&gt; 61     -1
 #&gt; 62      3
-#&gt; 63   NULL
+#&gt; 63   &lt;NA&gt;
 #&gt; 64     -3
-#&gt; 65   NULL
+#&gt; 65   &lt;NA&gt;
 #&gt; 66     -3
-#&gt; 67   NULL
+#&gt; 67   &lt;NA&gt;
 #&gt; 68     -1
-#&gt; 69   NULL
+#&gt; 69   &lt;NA&gt;
 #&gt; 70     -1
-#&gt; 71   NULL
+#&gt; 71   &lt;NA&gt;
 #&gt; 72     -1
 #&gt; 73     -1
-#&gt; 74   NULL
+#&gt; 74   &lt;NA&gt;
 #&gt; 75     -1
 #&gt; 76     -1
-#&gt; 77   NULL
+#&gt; 77   &lt;NA&gt;
 #&gt; 78     -1
 #&gt; 79     -1
-#&gt; 80   NULL
+#&gt; 80   &lt;NA&gt;
 #&gt; 81     -1
-#&gt; 82   NULL
+#&gt; 82   &lt;NA&gt;
 #&gt; 83     -1
-#&gt; 84   NULL
+#&gt; 84   &lt;NA&gt;
 #&gt; 85     -2
-#&gt; 86   NULL
+#&gt; 86   &lt;NA&gt;
 #&gt; 87     -2
-#&gt; 88   NULL
+#&gt; 88   &lt;NA&gt;
 #&gt; 89     -3
-#&gt; 90   NULL
+#&gt; 90   &lt;NA&gt;
 #&gt; 91     -3
-#&gt; 92   NULL
+#&gt; 92   &lt;NA&gt;
 #&gt; 93     -2
-#&gt; 94   NULL
+#&gt; 94   &lt;NA&gt;
 #&gt; 95     -2
-#&gt; 96   NULL
+#&gt; 96   &lt;NA&gt;
 #&gt; 97     -2
-#&gt; 98   NULL
+#&gt; 98   &lt;NA&gt;
 #&gt; 99     -2
 #&gt; 100    -1
 #&gt; 101     2
 #&gt; 102    -1
 #&gt; 103     2
-#&gt; 104  NULL
-#&gt; 105  NULL
+#&gt; 104  &lt;NA&gt;
+#&gt; 105  &lt;NA&gt;
 #&gt; 106    -2
-#&gt; 107  NULL
-#&gt; 108  NULL
+#&gt; 107  &lt;NA&gt;
+#&gt; 108  &lt;NA&gt;
 #&gt; 109    -2
-#&gt; 110  NULL
-#&gt; 111  NULL
+#&gt; 110  &lt;NA&gt;
+#&gt; 111  &lt;NA&gt;
 #&gt; 112    -2
-#&gt; 113  NULL
+#&gt; 113  &lt;NA&gt;
 #&gt; 114     2
 #&gt; 115    -2
-#&gt; 116  NULL
+#&gt; 116  &lt;NA&gt;
 #&gt; 117     2
 #&gt; 118    -2
-#&gt; 119  NULL
+#&gt; 119  &lt;NA&gt;
 #&gt; 120     2
 #&gt; 121    -2
-#&gt; 122  NULL
+#&gt; 122  &lt;NA&gt;
 #&gt; 123     2
 #&gt; 124    -3
-#&gt; 125  NULL
+#&gt; 125  &lt;NA&gt;
 #&gt; 126     2
 #&gt; 127    -3
-#&gt; 128  NULL
+#&gt; 128  &lt;NA&gt;
 #&gt; 129     2
 #&gt; 130    -3
-#&gt; 131  NULL
+#&gt; 131  &lt;NA&gt;
 #&gt; 132     2
 #&gt; 133    -3
 #&gt; 134    -1
-#&gt; 135  NULL
+#&gt; 135  &lt;NA&gt;
 #&gt; 136     2
 #&gt; 137    -3
 #&gt; 138    -1
-#&gt; 139  NULL
+#&gt; 139  &lt;NA&gt;
 #&gt; 140     2
 #&gt; 141    -3
 #&gt; 142    -1
-#&gt; 143  NULL
+#&gt; 143  &lt;NA&gt;
 #&gt; 144     2
 #&gt; 145    -3
 #&gt; 146    -1
@@ -1604,35 +1607,35 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 160    -2
 #&gt; 161     4
 #&gt; 162     2
-#&gt; 163  NULL
+#&gt; 163  &lt;NA&gt;
 #&gt; 164     2
 #&gt; 165    -3
 #&gt; 166    -2
-#&gt; 167  NULL
+#&gt; 167  &lt;NA&gt;
 #&gt; 168     2
 #&gt; 169    -3
 #&gt; 170    -2
-#&gt; 171  NULL
+#&gt; 171  &lt;NA&gt;
 #&gt; 172     2
 #&gt; 173    -3
 #&gt; 174    -2
-#&gt; 175  NULL
+#&gt; 175  &lt;NA&gt;
 #&gt; 176     2
 #&gt; 177    -3
 #&gt; 178    -2
-#&gt; 179  NULL
+#&gt; 179  &lt;NA&gt;
 #&gt; 180     3
 #&gt; 181    -3
 #&gt; 182    -2
-#&gt; 183  NULL
+#&gt; 183  &lt;NA&gt;
 #&gt; 184     3
 #&gt; 185    -3
 #&gt; 186    -2
-#&gt; 187  NULL
+#&gt; 187  &lt;NA&gt;
 #&gt; 188     3
 #&gt; 189    -3
 #&gt; 190    -2
-#&gt; 191  NULL
+#&gt; 191  &lt;NA&gt;
 #&gt; 192     3
 #&gt; 193    -3
 #&gt; 194    -2
@@ -1652,50 +1655,50 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 208    -2
 #&gt; 209     3
 #&gt; 210     2
-#&gt; 211  NULL
+#&gt; 211  &lt;NA&gt;
 #&gt; 212     2
 #&gt; 213    -2
 #&gt; 214    -1
-#&gt; 215  NULL
+#&gt; 215  &lt;NA&gt;
 #&gt; 216     2
 #&gt; 217    -2
 #&gt; 218    -1
-#&gt; 219  NULL
+#&gt; 219  &lt;NA&gt;
 #&gt; 220     2
 #&gt; 221    -2
 #&gt; 222    -1
-#&gt; 223  NULL
+#&gt; 223  &lt;NA&gt;
 #&gt; 224     2
 #&gt; 225    -2
 #&gt; 226    -1
-#&gt; 227  NULL
+#&gt; 227  &lt;NA&gt;
 #&gt; 228    -2
 #&gt; 229    -1
-#&gt; 230  NULL
+#&gt; 230  &lt;NA&gt;
 #&gt; 231    -2
 #&gt; 232    -1
-#&gt; 233  NULL
+#&gt; 233  &lt;NA&gt;
 #&gt; 234    -2
 #&gt; 235    -1
-#&gt; 236  NULL
+#&gt; 236  &lt;NA&gt;
 #&gt; 237     2
 #&gt; 238    -2
 #&gt; 239    -2
-#&gt; 240  NULL
+#&gt; 240  &lt;NA&gt;
 #&gt; 241     2
 #&gt; 242    -2
 #&gt; 243    -2
-#&gt; 244  NULL
+#&gt; 244  &lt;NA&gt;
 #&gt; 245     2
 #&gt; 246    -2
 #&gt; 247    -2
-#&gt; 248  NULL
+#&gt; 248  &lt;NA&gt;
 #&gt; 249     2
 #&gt; 250    -2
 #&gt; 251    -2
-#&gt; 252  NULL
+#&gt; 252  &lt;NA&gt;
 #&gt; 253    -2
-#&gt; 254  NULL
+#&gt; 254  &lt;NA&gt;
 #&gt; 255    -2
 #&gt; 256    -2
 #&gt; 257     2
@@ -1706,29 +1709,29 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 #&gt; 262    -2
 #&gt; 263     2
 #&gt; 264    -1
-#&gt; 265  NULL
+#&gt; 265  &lt;NA&gt;
 #&gt; 266    -1
-#&gt; 267  NULL
-#&gt; 268  NULL
+#&gt; 267  &lt;NA&gt;
+#&gt; 268  &lt;NA&gt;
 #&gt; 269    -2
 #&gt; 270     1
-#&gt; 271  NULL
+#&gt; 271  &lt;NA&gt;
 #&gt; 272    -2
 #&gt; 273     1
-#&gt; 274  NULL
+#&gt; 274  &lt;NA&gt;
 #&gt; 275    -2
 #&gt; 276     1
 #&gt; 277     2
 #&gt; 278    -1
 #&gt; 279     2
 #&gt; 280    -1
-#&gt; 281  NULL
+#&gt; 281  &lt;NA&gt;
 #&gt; 282    -1
-#&gt; 283  NULL
+#&gt; 283  &lt;NA&gt;
 #&gt; 284    -1
-#&gt; 285  NULL
+#&gt; 285  &lt;NA&gt;
 #&gt; 286    -1
-#&gt; 287  NULL
+#&gt; 287  &lt;NA&gt;
 #&gt; 288    -1
 #&gt; </div><div class='input'>
 </div></pre>
@@ -1754,7 +1757,7 @@ when defining metadata, e.g. in the table passed to `set_attributes()`.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

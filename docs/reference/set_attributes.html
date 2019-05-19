@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EML</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@
       <a href="../articles/working-with-units.html">Working with Units</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -134,7 +137,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>set_attributes</span>(<span class='no'>attributes</span>, <span class='kw'>factors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>set_attributes</span>(<span class='no'>attributes</span>, <span class='kw'>factors</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_classes</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>missingValues</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,6 +158,10 @@ will let the function infer missing 'domain' and 'measurementScale' values for a
 Should be in same order as attributeNames in the attributes table, or be a named list with names corresponding to attributeNames
 in the attributes table.</p></td>
     </tr>
+    <tr>
+      <th>missingValues</th>
+      <td><p>optional, a table with missing value code-deinition pairs; see details</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -165,20 +173,40 @@ in the attributes table.</p></td>
     <p>The attributes data frame must use only the recognized column
 headers shown here.  The attributes data frame must contain columns for required metadata.
 These are:</p>
-<p>For all data:
-- attributeName (required, free text field)
-- attributeDefinition (required, free text field)
-- measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
- case sensitive) but it can be inferred from col_classes.
-- domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
- case sensitive) but it can be inferred from col_classes.</p>
-<p>For numeric (ratio or interval) data:
-- unit (required)</p>
-<p>For character (textDomain) data:
-- definition (required)</p>
-<p>For dateTime data:
-- formatString (required)</p>
-<p>For factor data:</p>
+<p><strong>For all data:</strong></p>
+<ul>
+<li><p>attributeName (required, free text field)</p></li>
+<li><p>attributeDefinition (required, free text field)</p></li>
+<li><p>measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
+ case sensitive) but it can be inferred from col_classes.</p></li>
+<li><p>domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
+ case sensitive) but it can be inferred from col_classes.</p></li>
+</ul>
+    <p><strong>For numeric (ratio or interval) data:</strong></p><ul>
+<li><p>unit (required). Unitless values should use "dimensionless" as the unit.</p></li>
+</ul>
+    <p><strong>For character (textDomain) data:</strong></p><ul>
+<li><p>definition (required)</p></li>
+</ul>
+    <p><strong>For dateTime data:</strong></p><ul>
+<li><p>formatString (required)</p></li>
+</ul>
+    <p>Other optional allowed columns in the attributes table are:
+source, pattern, precision, numberType, missingValueCode, missingValueCodeExplanation,
+attributeLabel, storageType, minimum, maximum</p>
+<p>The <strong>factors</strong> data frame, required for attributes in an enumerated domain, must use only the
+ following recognized column headers:</p><ul>
+<li><p>attributeName (required)</p></li>
+<li><p>code (required)</p></li>
+<li><p>definition (required)</p></li>
+</ul>
+    <p>The <strong>missingValues</strong> data frame, optional, can be used in the case that multiple missing value codes
+need to be set for the same attribute. This table must contain the following recognized column
+headers.</p><ul>
+<li><p>attributeName (required)</p></li>
+<li><p>code (required)</p></li>
+<li><p>definition (required)</p></li>
+</ul>
     
 
   </div>
@@ -201,7 +229,7 @@ These are:</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>
