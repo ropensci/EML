@@ -991,3 +991,17 @@ test_that(
     )
   })
 
+test_that("set_attributes returns a warning when units unrecognised", {
+
+df <- data.frame(
+  attributeName = "freq_occ",
+  attributeDefinition = "Frequency of occurence",
+  unit = NA,
+  numberType = "real",
+  minimum = "0",
+  maximum = "1",
+  stringsAsFactors = FALSE)
+
+expect_warning(set_attributes(df, col_classes = "numeric"))
+
+})
