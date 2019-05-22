@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create and Manipulate Data using the Ecological Metadata Language • EML</title>
+<title>Read and Write Ecological Metadata Language Files • EML</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -15,8 +15,11 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Create and Manipulate Data using the Ecological Metadata Language">
-<meta property="og:description" content="Read and write Ecological Metadata Language files">
+<script src="pkgdown.js"></script><meta property="og:title" content="Read and Write Ecological Metadata Language Files">
+<meta property="og:description" content="Work with Ecological Metadata Language ('EML') files. 
+    'EML' is a widely used metadata standard in the ecological and
+    environmental sciences, described in Jones et al. (2006),
+    &lt;doi:10.1146/annurev.ecolsys.37.091305.110031&gt;.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -37,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EML</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -66,6 +69,9 @@
       <a href="articles/working-with-units.html">Working with Units</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -96,11 +102,11 @@
 </h1></div>
 <p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://travis-ci.org/ropensci/EML"><img src="https://travis-ci.org/ropensci/EML.svg?branch=master" alt="Build Status"></a> <a href="https://ci.appveyor.com/project/cboettig/eml"><img src="https://ci.appveyor.com/api/projects/status/u2gw24yfkvxgny96?svg=true" alt="Windows build status"></a> <a href="https://codecov.io/gh/ropensci/EML"><img src="https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://cran.r-project.org/package=EML"><img src="https://www.r-pkg.org/badges/version/EML" alt="CRAN status"></a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/RNeXML" alt="downloads"><a href="https://zenodo.org/badge/latestdoi/10894022"><img src="https://zenodo.org/badge/10894022.svg" alt="DOI"></a></p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<p>EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the <a href="https://knb.ecoinformatics.org/#external//emlparser/docs/index.html">EML Homepage</a> for an introduction and thorough documentation of the standard. Additionally, the scientific article <em><a href="http://doi.org/10.1146/annurev.ecolsys.37.091305.110031">The New Bioinformatics: Integrating Ecological Data from the Gene to the Biosphere (Jones et al 2006)</a></em> provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly hetergenous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the <code>EML</code> R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.</p>
+<p>EML is a widely used metadata standard in the ecological and environmental sciences. We strongly recommend that interested users visit the <a href="https://knb.ecoinformatics.org/#external//emlparser/docs/index.html">EML Homepage</a> for an introduction and thorough documentation of the standard. Additionally, the scientific article <em><a href="http://doi.org/10.1146/annurev.ecolsys.37.091305.110031">The New Bioinformatics: Integrating Ecological Data from the Gene to the Biosphere (Jones et al 2006)</a></em> provides an excellent introduction into the role EML plays in building metadata-driven data repositories to address the needs of highly heterogeneous data that cannot be easily reduced to a traditional vertically integrated database. At this time, the <code>EML</code> R package provides support for the serializing and parsing of all low-level EML concepts, but still assumes some familiarity with the EML standard, particularly for users seeking to create their own EML files. We hope to add more higher-level functions which will make such familiarity less essential in future development.</p>
 <div id="notes-on-the-eml-v2-0-release" class="section level2">
 <h2 class="hasAnchor">
 <a href="#notes-on-the-eml-v2-0-release" class="anchor"></a>Notes on the EML v2.0 Release</h2>
-<p><code>EML</code> v2.0 is a complete re-write which aims to provide both a drop-in replacement for the higher-level functions of the existing EML package while also providing additional functionality. This new <code>EML</code> version uses only simple and familiar list structures (S3 classes) instead of the more cumbersome use of S4 found in the original <code>EML</code>. While the higher-level functions are identical, this makes it easier to for most users and developers to work with <code>eml</code> objects and also to write their own functions for creating and manipulating EML objects. Under the hood, <code>EML</code> relies on the <a href="https://github.com/cboettig/emld">emld</a> package, which uses a Linked Data representation for EML. It is this approach which lets us combine the simplicity of lists with the specificy required by the XML schema.</p>
+<p><code>EML</code> v2.0 is a complete re-write which aims to provide both a drop-in replacement for the higher-level functions of the existing EML package while also providing additional functionality. This new <code>EML</code> version uses only simple and familiar list structures (S3 classes) instead of the more cumbersome use of S4 found in the original <code>EML</code>. While the higher-level functions are identical, this makes it easier to for most users and developers to work with <code>eml</code> objects and also to write their own functions for creating and manipulating EML objects. Under the hood, <code>EML</code> relies on the <a href="https://github.com/cboettig/emld">emld</a> package, which uses a Linked Data representation for EML. It is this approach which lets us combine the simplicity of lists with the specificity required by the XML schema.</p>
 <p>This revision also supports the upcoming release of the EML 2.2 specification.</p>
 </div>
 </div>
@@ -113,7 +119,7 @@
 <a href="#a-minimal-valid-eml-document" class="anchor"></a>A minimal valid EML document:</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">me &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">individualName =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">givenName =</span> <span class="st">"Carl"</span>, <span class="dt">surName =</span> <span class="st">"Boettiger"</span>))</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">my_eml &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">dataset =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">              <span class="dt">title =</span> <span class="st">"A Mimimal Valid EML Dataset"</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">              <span class="dt">title =</span> <span class="st">"A Minimal Valid EML Dataset"</span>,</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">              <span class="dt">creator =</span> me,</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">              <span class="dt">contact =</span> me)</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">            )</a>
@@ -270,10 +276,12 @@
 <div id="setting-the-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setting-the-version" class="anchor"></a>Setting the version</h2>
-<p>EML will use the latest EML specification by default. To switch to a different version, set the option <code>emld_db</code>, like so:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="st">"emld_db"</span> =<span class="st"> "eml-2.1.1"</span>)</a></code></pre></div>
+<p>EML will use the latest EML specification by default. To switch to a different version, use <code><a href="https://www.rdocumentation.org/packages/emld/topics/eml_version">emld::eml_version()</a></code></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">emld<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/emld/topics/eml_version">eml_version</a></span>(<span class="st">"eml-2.1.1"</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; [1] "eml-2.1.1"</span></a></code></pre></div>
 <p>Switch back to the 2.2.0 release:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="st">"emld_db"</span> =<span class="st"> "eml-2.2.0"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">emld<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/emld/topics/eml_version">eml_version</a></span>(<span class="st">"eml-2.2.0"</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt; [1] "eml-2.2.0"</span></a></code></pre></div>
 </div>
 </div>
   </div>
@@ -316,7 +324,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
 </div>

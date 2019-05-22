@@ -30,42 +30,53 @@ The attributes data frame must use only the recognized column
 headers shown here.  The attributes data frame must contain columns for required metadata.
 These are:
 
-For all data:
-- attributeName (required, free text field)
+\strong{For all data:}
 
-- attributeDefinition (required, free text field)
+\itemize{
+  \item attributeName (required, free text field)
 
-- measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
+  \item attributeDefinition (required, free text field)
+
+  \item measurementScale (required, "nominal", "ordinal", "ratio", "interval", or "dateTime",
  case sensitive) but it can be inferred from col_classes.
  
-- domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
+  \item domain (required, "numericDomain", "textDomain", "enumeratedDomain", or "dateTimeDomain",
  case sensitive) but it can be inferred from col_classes.
+}
 
-For numeric (ratio or interval) data:
-- unit (required)
+\strong{For numeric (ratio or interval) data:}
+\itemize{
+  \item unit (required). Unitless values should use "dimensionless" as the unit.
+}
 
-For character (textDomain) data:
-- definition (required)
+\strong{For character (textDomain) data:}
+\itemize{
+  \item definition (required)
+}
 
-For dateTime data:
-- formatString (required)
+\strong{For dateTime data:}
+\itemize{
+  \item formatString (required)
+}
 
 Other optional allowed columns in the attributes table are:
 source, pattern, precision, numberType, missingValueCode, missingValueCodeExplanation,
 attributeLabel, storageType, minimum, maximum
 
-The factors data frame, required for attributes in an enumerated domain, must use only the
+The \strong{factors} data frame, required for attributes in an enumerated domain, must use only the
  following recognized column headers:
+\itemize{
+  \item attributeName (required)
+  \item code (required)
+  \item definition (required)
+}
 
-- attributeName (required)
-- code (required)
-- definition (required)
-
-The missingValues data frame, optional, can be used in the case that multiple missing value codes
+The \strong{missingValues} data frame, optional, can be used in the case that multiple missing value codes
 need to be set for the same attribute. This table must contain the following recognized column
 headers.
-
-- attributeName (required)
-- code (required)
-- definition (required)
+\itemize{
+  \item attributeName (required)
+  \item code (required)
+  \item definition (required)
+}
 }

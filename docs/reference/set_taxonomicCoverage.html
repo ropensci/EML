@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EML</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@
       <a href="../articles/working-with-units.html">Working with Units</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -141,7 +144,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sci_names</th>
-      <td><p>string (space seperated) or list or data frame of scientific names for species covered.</p></td>
+      <td><p>string (space separated) or list or data frame of scientific names for species covered.</p></td>
     </tr>
     <tr>
       <th>expand</th>
@@ -183,27 +186,18 @@ EML permits any rank names provided they go in descending order.</p>
   <span class='kw'>Genus</span> <span class='kw'>=</span> <span class='st'>"Macrocystis"</span>,
   <span class='kw'>Species</span> <span class='kw'>=</span> <span class='st'>"pyrifera"</span>
 )
-<span class='no'>taxon_coverage</span> <span class='kw'>&lt;-</span> <span class='fu'>set_taxonomicCoverage</span>(<span class='no'>sci_names</span>)
+<span class='no'>taxon_coverage</span> <span class='kw'>&lt;-</span> <span class='fu'>set_taxonomicCoverage</span>(<span class='no'>sci_names</span>)</div><div class='input'> <span class='co'># Examples that may take &gt; 5s</span>
 
 <span class='co'># Query ITIS using taxize to fill in the full taxonomy given just species</span>
 <span class='co'>#  # names</span>
 <span class='no'>taxon_coverage</span> <span class='kw'>&lt;-</span> <span class='fu'>set_taxonomicCoverage</span>(
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Macrocystis pyrifera"</span>, <span class='st'>"Homo sapiens"</span>),
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='message'></span>
+)</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'crul':</span>
+#&gt; <span class='message'>  method                 from</span>
+#&gt; <span class='message'>  as.character.form_file httr</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Retrieving data for taxon 'Macrocystis pyrifera'</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Retrieving data for taxon 'Homo sapiens'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: &gt; 1 result; no direct match found</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span></div><div class='output co'>#&gt;      tsn                       target      commonNames nameUsage
-#&gt; 1 180092                 Homo sapiens man,Human,Humans     valid
-#&gt; 2 945628 Homo sapiens cro-magnonensis               NA   invalid
-#&gt; 3 945730  Homo sapiens cromagnonensis               NA   invalid
-#&gt; 4 945629   Homo sapiens grimaldiensis               NA   invalid</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>More than one TSN found for taxon 'Homo sapiens'!</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>            Enter rownumber of taxon (other inputs will return 'NA'):</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Returned 'NA'!</span>
-#&gt; <span class='message'></span></div><div class='output co'>#&gt; <span class='warning'>Warning: Some scientific names were not found in the</span>
-#&gt; <span class='warning'>taxonomic database and were not expanded: Homo sapiens.</span></div><div class='input'>
+#&gt; <span class='message'>Retrieving data for taxon 'Homo sapiens'</span></div><div class='input'>
 <span class='co'># Query GBIF instead of ITIS</span>
 <span class='no'>taxon_coverage</span> <span class='kw'>&lt;-</span> <span class='fu'>set_taxonomicCoverage</span>(
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Macrocystis pyrifera"</span>),
@@ -278,7 +272,8 @@ EML permits any rank names provided they go in descending order.</p>
 #&gt; 
 #&gt; 
 #&gt; 
-#&gt; </div></pre>
+#&gt; </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -303,7 +298,7 @@ EML permits any rank names provided they go in descending order.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>
