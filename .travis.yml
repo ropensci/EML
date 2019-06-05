@@ -13,7 +13,7 @@ matrix:
 addons:
   apt:
     sources:
-      - sourceline: 'ppa:opencpu/jq'
+      - sourceline: 'ppa:jeroen/jq'
     packages:
       - librdf0-dev
       - libv8-dev
