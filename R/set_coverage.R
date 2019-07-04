@@ -201,6 +201,7 @@ set_taxonomicCoverage <- function(sci_names, expand = FALSE, db = "itis") {
   } else if (is.data.frame(sci_names)) {
     set_taxonomicCoverage.data.frame(sci_names)
   } else if (is.list(sci_names)) {
+    names(sci_names) <- NULL
     set_taxonomicCoverage.list(sci_names)
   } else {
     stop("Incorrect format: sci_names
