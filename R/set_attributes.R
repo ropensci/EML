@@ -141,9 +141,9 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
           "' is not a recognized standard unit; treating as custom unit. ",
           "Please be sure you also define a custom unit in your EML record, ",
           "or replace with a recognized standard unit. ",
-          ifelse(is.na(row[["unit"]]), 
-                 'For unitless values, use "dimensionless" as the unit. ',
-                 NULL),
+          if(is.na(row[["unit"]])){
+            'For unitless values, use "dimensionless" as the unit. '
+          } ,
           "See set_unitList() for details."
       )
     } else {
