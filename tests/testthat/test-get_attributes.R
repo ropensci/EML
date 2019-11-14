@@ -64,3 +64,17 @@ test_that("get_attributes works with references", {
   expect_gt(nrow(factors), 0)
   expect_gt(ncol(factors), 0)
 })
+
+test_that("get_attributes errors when not used with an attributeList", {
+  file <- system.file("tests", emld::eml_version(),
+                      "eml-datasetWithAttributelevelMethods.xml",
+                      package = "emld"
+  )
+  eml <- read_eml(file)
+  
+  x <- eml$dataset$dataTable
+  y <- eml$dataset$dataTable$attributeList$attribute
+  
+  expect_error(get_attributes(x))
+  expect_error(get_attributes(y))
+})
