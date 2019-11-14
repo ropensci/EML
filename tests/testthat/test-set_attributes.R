@@ -922,9 +922,10 @@ test_that(
       definition = c("from table", "from table")
     )
     
-    att_list <- set_attributes(attributes, 
+    expect_warning(att_list <- set_attributes(attributes, 
                                col_classes = c("character", "character", "numeric"),
-                               missingValues = missing_values)
+                               missingValues = missing_values))
+    
     # set in both missing value and attributes table
     expect_equal("from table", att_list$attribute[[1]]$missingValueCode[[1]]$codeExplanation)
     # set only in attributes table
