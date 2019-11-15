@@ -19,12 +19,20 @@
 get_attributes <- function(x, eml = NULL) {
   attributeList <- x
   
+  ## check to make sure input appears to be an attributeList
+  if (!("attribute" %in% names(attributeList)) & is.null(attributeList$references)) {
+    stop(
+      call. = FALSE,
+      "Input does not appear to be an attributeList."
+    )
+  }  
+  
   ## if the attributeList is referenced, get reference
   if (!is.null(attributeList$references)) {
     if (is.null(eml)) {
       warning(
-        "The attributeList entered is referenced somewhere else in the eml.",
-        "No eml was entered to find the attributes.",
+        "The attributeList entered is referenced somewhere else in the eml. ",
+        "No eml was entered to find the attributes. ",
         "Please enter the eml to get better results."
       )
       eml <- x
