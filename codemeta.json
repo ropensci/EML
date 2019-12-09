@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/ropensci/EML",
   "issueTracker": "https://github.com/ropensci/EML/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -336,7 +336,7 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "491.462KB",
+  "fileSize": "491.59KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/EML",
     "https://ci.appveyor.com/project/cboettig/eml",
