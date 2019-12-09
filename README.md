@@ -16,11 +16,10 @@ status](https://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/pa
 
 EML is a widely used metadata standard in the ecological and
 environmental sciences. We strongly recommend that interested users
-visit the [EML
-Homepage](https://knb.ecoinformatics.org/#external//emlparser/docs/index.html)
-for an introduction and thorough documentation of the standard.
-Additionally, the scientific article *[The New Bioinformatics:
-Integrating Ecological Data from the Gene to the Biosphere (Jones et
+visit the [EML Homepage](https://eml.ecoinformatics.org/) for an
+introduction and thorough documentation of the standard. Additionally,
+the scientific article *[The New Bioinformatics: Integrating Ecological
+Data from the Gene to the Biosphere (Jones et
 al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)*
 provides an excellent introduction into the role EML plays in building
 metadata-driven data repositories to address the needs of highly
@@ -47,8 +46,8 @@ which uses a Linked Data representation for EML. It is this approach
 which lets us combine the simplicity of lists with the specificity
 required by the XML schema.
 
-This revision also supports the upcoming release of the EML 2.2
-specification.
+This revision also supports the **[recently released EML 2.2.0
+specification](https://eml.ecoinformatics.org/whats-new-in-eml-2-2-0.html)**.
 
 # Creating EML
 
@@ -76,7 +75,7 @@ eml_validate("ex.xml")
 
 ## A Richer Example
 
-Here we show a the creation of a relatively complete EML document using
+Here we show the creation of a relatively complete EML document using
 `EML`. This closely parallels the function calls shown in the original
 EML [R-package
 vignette](https://docs.ropensci.org/EML/articles/creating-EML.html).

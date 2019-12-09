@@ -1,3 +1,11 @@
+# EML 2.0.1
+
+* Improve error message for get_attributes (#286)
+* Avoid `ifelse()` for portability (#283)
+* Avoid edge case that can create invalid EML in `set_taxonomicNames()` (#280)
+* Add documentation regarding the use of dimensionless units (#276)
+* Avoid test errors on systems for which pandoc cannot be installed (#290)
+
 # EML 2.0.0
 
 * EML 2.0.0 is a ground-up rewrite of EML 1.x package.  The primary difference

@@ -1,10 +1,6 @@
-This is a thorough re-write of the EML package based on S3 instead of S4
-object system. 
+This release provides the requested changes to avoid errors in testing on systems 
+for which pandoc is not or cannot be installed.
 
-## Test environments
-* local OS X install, R 3.5.3
-* ubuntu 14.04 (on travis-ci), R 3.5.3
-* win-builder (devel and release)
 
 ## R CMD check results
 

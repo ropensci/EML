@@ -5,6 +5,8 @@ test_that("we can do a complete eml construction", {
   ## Appveyor cannot even evaluate rmarkdown::pandoc_version() ?
   skip_on_appveyor()
   skip_on_os("solaris")
+  skip_on_cran()
+
 
 ## ------------------------------------------------------------------------
 geographicDescription <-

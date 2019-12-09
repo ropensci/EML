@@ -24,10 +24,10 @@ test_that("set_physical can compute file size automatically", {
 })
 
 test_that("set_method with additional input files", {
-  
+
   skip_on_appveyor()
-  
-  
+  skip_on_cran()
+
   coverage <-
     set_coverage(
       date = c("2012-06-01", "2013-12-31"),

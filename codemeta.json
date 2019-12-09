@@ -14,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.5.3",
+    "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.5.3 (2019-03-11)",
+  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -336,7 +336,7 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "490.911KB",
+  "fileSize": "491.462KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/EML",
     "https://ci.appveyor.com/project/cboettig/eml",

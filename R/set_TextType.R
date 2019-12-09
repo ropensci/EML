@@ -1,9 +1,11 @@
-## Developer note: Some functions not fully compatible with pandoc < 2.0 
+## Developer note: Some functions not fully compatible with pandoc < 2.0
 
 #' set_TextType
 #'
-#' For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
-#' @param text a plain text character string which will be used directly as the content of the node if no file is given
+#' For any EML element of class TextType, this function can be used to generate
+#'  the appropriate EML from a markdown-formatted file.
+#' @param text a plain text character string which will be used directly as the content
+#'  of the node if no file is given
 #' @param file path to a file providing formatted input text, see details.
 #' @return a TextType object that can be coerced into any element inheriting from TextType, see examples
 #' @importFrom tools file_ext
@@ -20,23 +22,23 @@
 #' ## using a simple character string
 #' a <- set_TextType(text = "This is the abstract")
 #' as(a, "abstract")
-#' 
+#'
 #' ## Using an external markdown file
 #' f <- system.file("examples/hf205-abstract.md", package = "EML")
 #' a <- set_TextType(f)
 #' as(a, "abstract")
-#' 
+#'
 #' ## Can also import from methods written in a .docx MS Word file.
 #' f <- system.file("examples/hf205-abstract.docx", package = "EML")
 #' a <- set_TextType(f)
 #' as(a, "abstract")
-#' 
+#'
 #' ## Documents with title headings use `section` instead of `para` notation
 #' f <- system.file("examples/hf205-methods.docx", package = "EML")
 #' d <- set_TextType(f)
 #' as(d, "description")
 #' }
-#' 
+#'
 set_TextType <- function(file = NULL, text = NULL) {
   if (!is.null(text)) {
     TextType <- text
@@ -92,6 +94,13 @@ to_docbook <- function(file = NULL) {
         call. = FALSE
       )
     }
+    if (!rmarkdown::pandoc_available()) {
+      stop(paste("Pandoc is required to convert to Docbook format.",
+              "Please supply input text directly"),
+              call. = FALSE
+             )
+    }
+
     pandoc_convert <-
       getExportedValue("rmarkdown", "pandoc_convert")
 
