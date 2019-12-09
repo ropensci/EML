@@ -15,3 +15,4 @@ old-vignettes/*
 ^appveyor\.yml$
 ^pkgdown$
 ^cran-comments\.md$
+^CRAN-RELEASE$
