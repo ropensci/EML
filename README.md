@@ -79,7 +79,7 @@ eml_validate("ex.xml")
 Here we show a the creation of a relatively complete EML document using
 `EML`. This closely parallels the function calls shown in the original
 EML [R-package
-vignette](https://ropensci.github.io/EML/articles/creating-EML.html).
+vignette](https://docs.ropensci.org/EML/articles/creating-EML.html).
 
 ## `set_*` methods
 
