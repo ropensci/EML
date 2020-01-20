@@ -57,7 +57,7 @@ my_eml <- list(dataset = list(
               creator = me,
               contact = me)
             )
-
+my_eml <- set_packageId(my_eml)
 
 write_eml(my_eml, "ex.xml")
 eml_validate("ex.xml")

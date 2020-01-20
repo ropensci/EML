@@ -11,7 +11,6 @@
 #' @return If file is not specified, the result is a character string containing
 #'    the resulting XML content. Otherwise return silently.
 #' @export
-#' @importFrom uuid UUIDgenerate
 #' @importFrom xml2 write_xml xml_set_namespace
 #' @examples
 #' f <- system.file("extdata", "example.xml", package = "emld")
@@ -24,11 +23,5 @@ write_eml <- function(eml,
                       namespaces = NULL,
                       ns = "eml",
                       ...) {
-  ## FIXME, insist on a packageId, or consider validation which can ignore id?
-  if (is.null(eml$packageId)) {
-    eml$packageId <- uuid::UUIDgenerate()
-    eml$system <- "uuid"
-  }
-
   emld::as_xml(eml, file, ns = ns)
 }
