@@ -12,8 +12,6 @@ eml_validate(eml, encoding = "UTF-8", schema = NULL)
 \item{encoding}{optional encoding for files, default UTF-8.}
 
 \item{schema}{path to schema}
-
-\item{...}{additional arguments to eml_write, such as namespaces}
 }
 \value{
 Whether the document is valid (logical)

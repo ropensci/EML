@@ -4,10 +4,19 @@
 \alias{set_responsibleParty}
 \title{set_responsibleParty}
 \usage{
-set_responsibleParty(givenName = NULL, surName = NULL,
-  organizationName = NULL, positionName = NULL, address = NULL,
-  phone = NULL, electronicMailAddress = NULL, onlineUrl = NULL,
-  userId = NULL, id = NULL, email = NULL)
+set_responsibleParty(
+  givenName = NULL,
+  surName = NULL,
+  organizationName = NULL,
+  positionName = NULL,
+  address = NULL,
+  phone = NULL,
+  electronicMailAddress = NULL,
+  onlineUrl = NULL,
+  userId = NULL,
+  id = NULL,
+  email = NULL
+)
 }
 \arguments{
 \item{givenName}{individual's given names (list or vector for multiple names).  OR a person object.}

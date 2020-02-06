@@ -9,13 +9,15 @@ set_TextType(file = NULL, text = NULL)
 \arguments{
 \item{file}{path to a file providing formatted input text, see details.}
 
-\item{text}{a plain text character string which will be used directly as the content of the node if no file is given}
+\item{text}{a plain text character string which will be used directly as the content
+of the node if no file is given}
 }
 \value{
 a TextType object that can be coerced into any element inheriting from TextType, see examples
 }
 \description{
-For any EML element of class TextType, this function can be used to generate the appropriate EML from a markdown-formatted file.
+For any EML element of class TextType, this function can be used to generate
+ the appropriate EML from a markdown-formatted file.
 }
 \details{
 If the `rmarkdown` package is installed, then the input file can

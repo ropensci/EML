@@ -7,7 +7,6 @@
 #' as defined by the XSD specification
 #' @param eml file path, xml_document,
 #' @param encoding optional encoding for files, default UTF-8.
-#' @param ... additional arguments to eml_write, such as namespaces
 #' @param schema path to schema
 #' @return Whether the document is valid (logical)
 #' @note this function is simply an alias to `eml_validate` in `emld` package

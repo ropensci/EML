@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/EML",
   "issueTracker": "https://github.com/ropensci/EML/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
+    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -101,15 +101,8 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "taxize",
-      "name": "taxize",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=taxize"
+      "identifier": "taxadb",
+      "name": "taxadb"
     },
     {
       "@type": "SoftwareApplication",
@@ -260,7 +253,7 @@
       "@type": "SoftwareApplication",
       "identifier": "emld",
       "name": "emld",
-      "version": ">= 0.0.0.9900",
+      "version": ">= 0.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -336,7 +329,7 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "491.59KB",
+  "fileSize": "491.202KB",
   "contIntegration": [
     "https://travis-ci.org/ropensci/EML",
     "https://ci.appveyor.com/project/cboettig/eml",
@@ -351,7 +344,7 @@
     "rstats",
     "r-package"
   ],
-  "relatedLink": "https://CRAN.R-project.org/package=EML",
+  "relatedLink": ["https://CRAN.R-project.org/package=EML", "https://docs.ropensci.org/EML"],
   "funder": {},
   "releaseNotes": "https://github.com/ropensci/EML/blob/master/NEWS.md"
 }

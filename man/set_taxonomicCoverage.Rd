@@ -9,9 +9,9 @@ set_taxonomicCoverage(sci_names, expand = FALSE, db = "itis")
 \arguments{
 \item{sci_names}{string (space separated) or list or data frame of scientific names for species covered.}
 
-\item{expand}{Set to TRUE to use taxize to expand sci_names into full taxonomic classifications}
+\item{expand}{Set to TRUE to use `[taxadb]` to expand sci_names into full taxonomic classifications}
 
-\item{db}{The taxonomic database to query (when expand is set to \code{TRUE}). See \code{\link[taxize]{classification}} for valid options. Defaults to 'itis'.}
+\item{db}{The taxonomic database to query (when expand is set to \code{TRUE}). See `[taxadb::filter_name]` for valid options. Defaults to 'itis'.}
 }
 \value{
 a taxonomicCoverage object for EML
@@ -46,7 +46,7 @@ taxon_coverage <- set_taxonomicCoverage(sci_names)
 
 \donttest{ # Examples that may take > 5s
 
-# Query ITIS using taxize to fill in the full taxonomy given just species
+# Query ITIS using taxadb to fill in the full taxonomy given just species
 #  # names
 taxon_coverage <- set_taxonomicCoverage(
   c("Macrocystis pyrifera", "Homo sapiens"),

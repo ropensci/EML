@@ -4,15 +4,26 @@
 \alias{set_physical}
 \title{set_physical}
 \usage{
-set_physical(objectName, id = character(),
-  numHeaderLines = character(), numFooterLines = character(),
-  recordDelimiter = detect_delim(objectName), fieldDelimiter = ",",
-  collapseDelimiters = logical(), literalCharacter = character(),
-  quoteCharacter = character(), attributeOrientation = "column",
-  size = NULL, sizeUnit = "bytes", authentication = NULL,
-  authMethod = NULL, characterEncoding = character(),
-  encodingMethod = character(), compressionMethod = character(),
-  url = character())
+set_physical(
+  objectName,
+  id = character(),
+  numHeaderLines = character(),
+  numFooterLines = character(),
+  recordDelimiter = detect_delim(objectName),
+  fieldDelimiter = ",",
+  collapseDelimiters = logical(),
+  literalCharacter = character(),
+  quoteCharacter = character(),
+  attributeOrientation = "column",
+  size = NULL,
+  sizeUnit = "bytes",
+  authentication = NULL,
+  authMethod = NULL,
+  characterEncoding = character(),
+  encodingMethod = character(),
+  compressionMethod = character(),
+  url = character()
+)
 }
 \arguments{
 \item{objectName}{name for the object, usually a filename like "hf205-1.csv"}

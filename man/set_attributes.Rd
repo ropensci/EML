@@ -4,8 +4,12 @@
 \alias{set_attributes}
 \title{set_attributes}
 \usage{
-set_attributes(attributes, factors = NULL, col_classes = NULL,
-  missingValues = NULL)
+set_attributes(
+  attributes,
+  factors = NULL,
+  col_classes = NULL,
+  missingValues = NULL
+)
 }
 \arguments{
 \item{attributes}{a joined table of all attribute metadata}

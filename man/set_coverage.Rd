@@ -4,14 +4,20 @@
 \alias{set_coverage}
 \title{set_coverage}
 \usage{
-set_coverage(beginDate = character(), endDate = character(),
-  date = character(), sci_names = character(),
+set_coverage(
+  beginDate = character(),
+  endDate = character(),
+  date = character(),
+  sci_names = character(),
   geographicDescription = character(),
   westBoundingCoordinate = numeric(),
   eastBoundingCoordinate = numeric(),
   northBoundingCoordinate = numeric(),
-  southBoundingCoordinate = numeric(), altitudeMinimum = numeric(),
-  altitudeMaximum = numeric(), altitudeUnits = character())
+  southBoundingCoordinate = numeric(),
+  altitudeMinimum = numeric(),
+  altitudeMaximum = numeric(),
+  altitudeUnits = character()
+)
 }
 \arguments{
 \item{beginDate}{Starting date for temporal coverage range.}
