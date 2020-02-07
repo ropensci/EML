@@ -1,6 +1,9 @@
 context("taxonomicCoverage")
 
 test_that("set_taxonomicCoverage works with data.frame", {
+  
+  
+  
   sci_names <- data.frame(
     Kingdom = "Plantae",
     Phylum = "Phaeophyta",
@@ -34,6 +37,8 @@ test_that("set_taxonomicCoverage works with nested lists", {
 
 test_that("set_taxonomicCoverage works with
            ITIS using taxize", {
+             
+  skip_on_cran()           
   taxon_coverage <- set_taxonomicCoverage(
     c("Macrocystis pyrifera"),
     expand = TRUE
@@ -44,7 +49,7 @@ test_that("set_taxonomicCoverage works with
 
 
 test_that("set_taxonomicCoverage works with
-           ITIS using taxize", {
+           ITIS using taxadb", {
   skip("Interactive test")
 
   taxon_coverage <- set_taxonomicCoverage(
