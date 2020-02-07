@@ -124,8 +124,8 @@ set_temporalCoverage <-
 #' set_taxonomicCoverage
 #'
 #' @param sci_names string (space separated) or list or data frame of scientific names for species covered.
-#' @param expand Set to TRUE to use taxize to expand sci_names into full taxonomic classifications
-#' @param db The taxonomic database to query (when expand is set to \code{TRUE}). See \code{\link[taxize]{classification}} for valid options. Defaults to 'itis'.
+#' @param expand Set to TRUE to use `[taxadb]` to expand sci_names into full taxonomic classifications
+#' @param db The taxonomic database to query (when expand is set to \code{TRUE}). See `[taxadb::filter_name]` for valid options. Defaults to 'itis'.
 #' @details Turn a data.frame or a list of scientific names into a taxonomicCoverage block
 #' sci_names can be a space-separated character string or a data frame with column names as rank name
 #' or a list of user-defined taxonomicClassification
@@ -154,7 +154,7 @@ set_temporalCoverage <-
 #'
 #' \donttest{ # Examples that may take > 5s
 #'
-#' # Query ITIS using taxize to fill in the full taxonomy given just species
+#' # Query ITIS using taxadb to fill in the full taxonomy given just species
 #' #  # names
 #' taxon_coverage <- set_taxonomicCoverage(
 #'   c("Macrocystis pyrifera", "Homo sapiens"),
@@ -182,7 +182,7 @@ set_temporalCoverage <-
 #'
 #' }
 set_taxonomicCoverage <- function(sci_names, expand = FALSE, db = "itis") {
-  # Expand using taxize and ITIS if the user passes in just scientific names
+  # Expand using taxadb and ITIS if the user passes in just scientific names
   if (is.character(sci_names) && expand) {
     sci_names <- expand_scinames(sci_names, db)
   }
@@ -248,43 +248,11 @@ set_taxonomicCoverage.list <- function(sci_names) {
 
 
 
-
-expand_scinames <- function(sci_names, db) {
-  if (!requireNamespace("taxize", quietly = TRUE)) {
-    stop(
-      call. = FALSE,
-      "Expansion of scientific names requires the
-'taxize' package to be installed. Install taxize or set expand to FALSE."
-    )
-  }
-  classifications <- taxize::classification(sci_names, db = db)
-  # Remove any NAs and warn for each
-  if (any(is.na(classifications))) {
-    warning(
-      call. = FALSE,
-      paste0(
-        "Some scientific names were not found in the
-taxonomic database and were not expanded: ",
-        paste0(sci_names[which(is.na(classifications))],
-          collapse = ","
-        ), "."
-      )
-    )
-  }
-  # Turn result into a list of named lists where names are the rank name and
-  # values are the rank value
-  sci_names <- mapply(function(cls, sci_name) {
-    # If the species name isn't found in the database, NA is returned
-    if (is.list(cls)) {
-      x <- as.list(cls[["name"]])
-      names(x) <- cls[["rank"]]
-      x
-    } else {
-      x <- list(list("species" = as.character(sci_name)))
-      names(x) <- sci_name
-      x
-    }
-  }, classifications, names(classifications), SIMPLIFY = FALSE)
-
-  sci_names
+expand_scinames <- function(sci_names, db){
+  if (!requireNamespace("taxadb", quietly = TRUE)) {
+    stop(call. = FALSE,
+         "Expansion of scientific names requires the 'taxadb' package to be installed. Install taxadb or set expand to FALSE."
+        )}
+  df <- taxadb::filter_name(sci_names, provider = db)
+  as.list(df[c("kingdom", "phylum", "class", "order", "family", "genus", "specificEpithet")])
 }

@@ -1,3 +1,10 @@
+# EML 2.0.2
+
+* minor bugfix to documentation
+* Moves to taxadb in place of taxize for optional species classification
+* Note recent improvements to validation have been inherited through the release of `emld` 0.4.0,
+  package dependency now requires upgrading `emld` as well.
+
 # EML 2.0.1
 
 * Improve error message for get_attributes (#286)

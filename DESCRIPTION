@@ -5,7 +5,7 @@ Description: Work with Ecological Metadata Language ('EML') files.
     'EML' is a widely used metadata standard in the ecological and
     environmental sciences, described in Jones et al. (2006),
     <doi:10.1146/annurev.ecolsys.37.091305.110031>.
-Version: 2.0.1
+Version: 2.0.2
 Authors@R: c(
               person("Carl", "Boettiger", 
                   email = "cboettig@gmail.com", 
@@ -34,7 +34,7 @@ LazyData: true
 Depends: R (>= 2.10)
 Suggests: 
     knitr,
-    taxize,
+    taxadb,
     tibble,
     testthat,
     covr,
@@ -47,7 +47,7 @@ Suggests:
 Imports: xml2, 
     methods, 
     digest, 
-    emld (>= 0.0.0.9900), 
+    emld (>= 0.4.0), 
     jqr, 
     jsonlite, 
     uuid,
@@ -55,5 +55,6 @@ Imports: xml2,
     utils,
     dplyr
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Language: en-US
+Additional_repositories: https://cboettig.github.io/drat
