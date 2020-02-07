@@ -38,6 +38,7 @@ test_that("set_taxonomicCoverage works with nested lists", {
 test_that("set_taxonomicCoverage works with
            ITIS using taxize", {
              
+  skip_if_not_installed("taxadb")           
   skip_on_cran()           
   taxon_coverage <- set_taxonomicCoverage(
     c("Macrocystis pyrifera"),
