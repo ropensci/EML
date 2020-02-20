@@ -367,7 +367,7 @@ infer_domain_scale <-
     # But trust the user if they specify "interval"
     if ("measurementScale" %in% names(attributes)) {
       measurementScale[
-        col_classes == "numeric" &&
+        col_classes == "numeric" &
           attributes$measurementScale == "interval"] <- "interval"
     }
 
