@@ -1006,3 +1006,17 @@ df <- data.frame(
 expect_warning(set_attributes(df, col_classes = "numeric"))
 
 })
+
+test_that("set_attributes works with interval attributes and col_classes", {
+  df <- data.frame(
+    attributeName = "degrees",
+    attributeDefinition = "degrees C",
+    unit = "celsius",
+    numberType = "real",
+    measurementScale = "interval",
+    stringsAsFactors = FALSE)
+
+  attributes <- set_attributes(df, col_classes = "numeric")
+
+  expect_true("interval" %in% names(attributes$attribute[[1]]$measurementScale))
+})
