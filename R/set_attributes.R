@@ -361,7 +361,16 @@ infer_domain_scale <-
       }
     }
 
-    measurementScale[col_classes == "numeric"] <- "ratio" # !
+    # Map "numeric" cols to "ratio" by default
+    measurementScale[col_classes == "numeric"] <- "ratio"
+
+    # But trust the user if they specify "interval"
+    if ("measurementScale" %in% names(attributes)) {
+      measurementScale[
+        col_classes == "numeric" &
+          attributes$measurementScale == "interval"] <- "interval"
+    }
+
     measurementScale[col_classes == "character"] <- "nominal"
     measurementScale[col_classes == "ordered"] <- "ordinal"
     measurementScale[col_classes == "factor"] <- "nominal"
