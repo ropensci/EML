@@ -44,9 +44,9 @@ test_that("Creating custom units", {
 test_that("Reading default unit definitions", {
   unitList <- get_unitList()
 
-  testthat::expect_equal(dim(unitList$units), c(195, 8))
+  testthat::expect_equal(dim(unitList$units), c(335, 10))
   # testthat::expect_equal(dim(unitList$unitTypes), c(118, 4))
-  testthat::expect_equal(dim(unitList$unitTypes), c(288, 4))
+  testthat::expect_equal(dim(unitList$unitTypes), c(297, 4))
 })
 
 
