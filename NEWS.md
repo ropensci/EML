@@ -1,3 +1,11 @@
+# EML 2.0.3
+
+* Note recent improvements to validation have been inherited through the release of `emld` 0.5.0,
+  package dependency now requires upgrading `emld` as well.
+* Fixed a bug in `set_attributes` causing an error when specifying an interval `measurementScale`. (#293)
+* Updated test suite to account for the switch from taxize to taxadb
+* Updated test suite to match recent changes in `emld` 0.5.0 regarding unit definitions (See https://github.com/ropensci/emld/issues/56)
+
 # EML 2.0.2
 
 * minor bugfix to documentation
