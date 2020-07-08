@@ -47,7 +47,7 @@ Suggests:
 Imports: xml2, 
     methods, 
     digest, 
-    emld (>= 0.4.0), 
+    emld (>= 0.5.0), 
     jqr, 
     jsonlite, 
     uuid,
@@ -57,3 +57,4 @@ Imports: xml2,
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Language: en-US
+Remotes: ropensci/emld
