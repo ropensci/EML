@@ -57,4 +57,3 @@ Imports: xml2,
 VignetteBuilder: knitr
 RoxygenNote: 7.0.2
 Language: en-US
-Additional_repositories: https://cboettig.github.io/drat
