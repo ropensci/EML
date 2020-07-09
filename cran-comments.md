@@ -1,5 +1,7 @@
-This release provides the requested change in documentation of the ...
-argument.  
+This release fixes an issue created by the upcoming 0.5.0 release of `emld`.  Checks
+will pass once that version (emld 0.5.0) is accepted to CRAN (currently in pending
+with no errors, notes, or warnings, but does trigger the revdep check for this package
+to fail).  Thanks.
 
 
 ## R CMD check results
