@@ -3,8 +3,10 @@
 # names(who) <- who
 # construct <- lapply(who, template_constructor)
 
-options("emld_db" = "eml-2.2.0") ## hmm, not working?
-options("emld_db" = "eml-2.1.1")
+# Building the constructors for more than one version is not supported yet so
+# we just build them for EML 2.2.0. See
+# https://github.com/ropensci/EML/issues/287 for more info.
+options("emld_db" = "eml-2.2.0")
 
 ## Full database
 db <- purrr::compact(
@@ -22,4 +24,4 @@ names(who) <- who
 eml <- lapply(who, EML:::template_constructor)
 
 
-devtools::use_data(eml, overwrite = TRUE)
+usethis::use_data(eml, overwrite = TRUE)
