@@ -2,6 +2,7 @@
 # eml_creator <- template_constructor("creator")
 template_constructor <- function(object) {
   args <- emld::template(object)
+  names(args) <- gsub("^(\\w+:)*(\\w+)", "\\2", names(args))
   f <- paste0(
     "function(",
     paste(names(args), "=", args, collapse = ", "),
