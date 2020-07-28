@@ -68,3 +68,22 @@ test_that("Reading custom unit definitions from EML", {
   )
   eml <- list(additionalMetadata = additionalMetadata)
 })
+
+test_that("Ensuring standard units are not interpreted as custom units", {
+  
+  r <- EML::set_attributes(
+    data.frame(
+      attributeName = "soilmoisture", 
+      formatString = "",
+      unit = "percent",
+      numberType = "real",
+      attributeDefinition = "measurement of soil moisture",
+      stringsAsFactors = FALSE),
+    col_classes = "numeric")
+  
+  expect_true(
+    !is.null(r$attribute[[1]]$measurementScale$ratio$unit$standardUnit))
+  expect_true(
+    is.null(r$attribute[[1]]$measurementScale$ratio$unit$customUnit))
+  
+})
