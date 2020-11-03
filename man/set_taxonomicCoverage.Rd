@@ -46,20 +46,6 @@ taxon_coverage <- set_taxonomicCoverage(sci_names)
 
 \donttest{ # Examples that may take > 5s
 
-# Query ITIS using taxadb to fill in the full taxonomy given just species
-#  # names
-taxon_coverage <- set_taxonomicCoverage(
-  c("Macrocystis pyrifera", "Homo sapiens"),
-  expand = TRUE
-)
-
-# Query GBIF instead of ITIS
-taxon_coverage <- set_taxonomicCoverage(
-  c("Macrocystis pyrifera"),
-  expand = TRUE,
-  db = "gbif"
-)
-
 ## use a list of lists for multiple species
 sci_names <- list(list(
   Kindom = "Plantae",

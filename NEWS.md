@@ -1,3 +1,7 @@
+# EML 2.0.4
+
+* bugfix for CRAN testing
+
 # EML 2.0.3
 
 * Note recent improvements to validation have been inherited through the release of `emld` 0.5.0,
