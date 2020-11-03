@@ -22,7 +22,7 @@ For any EML element of class TextType, this function can be used to generate
 \details{
 If the `rmarkdown` package is installed, then the input file can
 be a Microsoft Word (.docx) file, a markdown file, or other file
-recognized by Pandoc (see http://pandoc.org), which will automate the conversion
+recognized by Pandoc (see https://pandoc.org), which will automate the conversion
 to a docbook. Otherwise, the input file should already be in docbook format (with
 .xml or .dbk extension).  Note that pandoc comes pre-installed in RStudio and is
 required for the rmarkdown package.
