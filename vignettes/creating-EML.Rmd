@@ -66,10 +66,10 @@ This schematic shows each of the metadata elements we will generate.  Most these
 
 In this example, we will use R to re-generate
 the EML metadata originally published by [Ellison _et al_
-(2012), HF205](http://harvardforest.fas.harvard.edu/data-archive)
+(2012), HF205](https://harvardforest.fas.harvard.edu/harvard-forest-data-archive)
 through the Harvard Forest Long Term Ecological Research
 Center, accompanying the PNAS paper [Sirota _et al_
-(2013)](http://dx.doi.org/10.1073/pnas.1221037110). We have made only
+(2013)](https://doi.org/10.1073/pnas.1221037110). We have made only
 a few modifications to simplify the presentation of this tutorial, 
 so our resulting EML will not be perfectly identical to the original.
 
@@ -362,7 +362,7 @@ see: http://www.lternet.edu/data/netpolicy.html."
 
 
 Many of these text fields can instead be read in from an external file that has richer formatting, such as we did with
-the `set_methods()` step.  Any text field containing a slot named `section` can import text data from a MS Word `.docx` file, markdown file, or other file format recognized by [Pandoc](http://pandoc.org) into that element.  For instance, here we import the same paragraph of text shown above for `abstract` from an external file (this time, a markdown-formatted file) instead:
+the `set_methods()` step.  Any text field containing a slot named `section` can import text data from a MS Word `.docx` file, markdown file, or other file format recognized by [Pandoc](https://pandoc.org) into that element.  For instance, here we import the same paragraph of text shown above for `abstract` from an external file (this time, a markdown-formatted file) instead:
 
 ```{r eval=has_pandoc}
 abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")

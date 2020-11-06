@@ -20,7 +20,7 @@ visit the [EML Homepage](https://eml.ecoinformatics.org/) for an
 introduction and thorough documentation of the standard. Additionally,
 the scientific article *[The New Bioinformatics: Integrating Ecological
 Data from the Gene to the Biosphere (Jones et
-al 2006)](http://doi.org/10.1146/annurev.ecolsys.37.091305.110031)*
+al 2006)](https://doi.org/10.1146/annurev.ecolsys.37.091305.110031)*
 provides an excellent introduction into the role EML plays in building
 metadata-driven data repositories to address the needs of highly
 heterogeneous data that cannot be easily reduced to a traditional
@@ -41,7 +41,7 @@ the more cumbersome use of S4 found in the original `EML`. While the
 higher-level functions are identical, this makes it easier to for most
 users and developers to work with `eml` objects and also to write their
 own functions for creating and manipulating EML objects. Under the hood,
-`EML` relies on the [emld](https://github.com/cboettig/emld) package,
+`EML` relies on the [emld](https://github.com/ropensci/emld/) package,
 which uses a Linked Data representation for EML. It is this approach
 which lets us combine the simplicity of lists with the specificity
 required by the XML schema.
@@ -67,6 +67,7 @@ my_eml <- list(dataset = list(
 
 
 write_eml(my_eml, "ex.xml")
+#> NULL
 eml_validate("ex.xml")
 #> [1] TRUE
 #> attr(,"errors")
@@ -86,8 +87,7 @@ The original EML R package defines a set of higher-level `set_*` methods
 to facilitate the creation of complex metadata structures. `EML`
 provides these same methods, taking the same arguments for
 `set_coverage`, `set_attributes`, `set_physical`, `set_methods` and
-`set_textType`, as illustrated
-here:
+`set_textType`, as illustrated here:
 
 ### Coverage metadata
 
@@ -115,8 +115,7 @@ methods_file <- system.file("examples/hf205-methods.docx", package = "EML")
 methods <- set_methods(methods_file)
 ```
 
-We can also read in text that uses Markdown for markup
-elements:
+We can also read in text that uses Markdown for markup elements:
 
 ``` r
 abstract_file <-  system.file("examples/hf205-abstract.md", package = "EML")
@@ -127,8 +126,7 @@ abstract <- set_TextType(abstract_file)
 
 Attribute metadata can be verbose, and is often defined in separate
 tables (e.g. separate Excel sheets or `.csv` files). Here we use
-attribute metadata and factor definitions as given from `.csv`
-files.
+attribute metadata and factor definitions as given from `.csv` files.
 
 ``` r
 attributes <- read.table(system.file("extdata/hf205_attributes.csv", package = "EML"))
@@ -269,6 +267,7 @@ eml_validate(my_eml)
 #> attr(,"errors")
 #> character(0)
 write_eml(my_eml, "eml.xml")
+#> NULL
 ```
 
 ## Setting the version
