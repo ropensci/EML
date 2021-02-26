@@ -335,9 +335,9 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "3594.676KB",
+  "fileSize": "2878.778KB",
   "contIntegration": ["https://travis-ci.org/ropensci/EML", "https://ci.appveyor.com/project/cboettig/eml", "https://codecov.io/gh/ropensci/EML"],
-  "developmentStatus": "https://www.tidyverse.org/lifecycle/#maturing",
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html",
   "keywords": [
     "metadata-standard",
     "eml",

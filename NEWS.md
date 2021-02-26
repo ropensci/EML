@@ -1,3 +1,7 @@
+# EML 2.0.5
+
+* migrate upstream namespace changes units::as.units -> units::as_units
+
 # EML 2.0.4
 
 * bugfix for CRAN testing
