@@ -199,6 +199,7 @@ function customText_att( instance, td, row, col, prop, value, cellProperties) {
     var colHeaders = instance.getColHeader(),
     n_domain = colHeaders.findIndex(n => n == "domain");
     n_mVC = colHeaders.findIndex(n => n == "missingValueCode");
+    n_pURI = colHeaders.findIndex(n => n == "propertyURI");
 
     if (value === null || value === "") {
 
@@ -251,6 +252,25 @@ function customText_att( instance, td, row, col, prop, value, cellProperties) {
             } else {
                 td.className = "notNeeded";
                 cellProperties.readOnly = true;
+            }
+        }
+
+        if (colHeaders[col] == "propertyLabel" | colHeaders[col] == "valueURI" | colHeaders[col] == "valueLabel") {
+
+            if (instance.getData()[row][n_pURI] !== null && instance.getData()[row][n_pURI] !== "") {
+                td.className = "needData";
+                cellProperties.readOnly = false;
+
+            } else {
+                td.className = "notNeeded";
+                cellProperties.readOnly = true;
+            }
+        }
+
+        if (colHeaders[col] == "id") {
+
+            if (instance.getData()[row][n_pURI] !== null && instance.getData()[row][n_pURI] !== "") {
+                td.className = "needData";
             }
         }
 

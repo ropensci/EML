@@ -111,7 +111,11 @@ set_attributes <-
       "attributeLabel",
       "storageType",
       "missingValueCode",
-      "missingValueCodeExplanation"
+      "missingValueCodeExplanation",
+      "valueURI",
+      "valueLabel",
+      "propertyURI",
+      "propertyLabel"
     )) {
       attributes <- add_na_column(x, attributes)
     }
@@ -219,13 +223,25 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
     missingValueCode <- set_codeDefinitions(row, code_set = missingValues, type = "missingValues")
   }
   
+
+  annotation <- NULL
+  if (!is.na(row[["valueURI"]]) & !is.na(row[["valueLabel"]]) & !is.na(row[["propertyURI"]]) & !is.na(row[["propertyLabel"]])) {
+    annotation <-
+      list(
+        propertyURI = list(label = row[["propertyLabel"]], propertyURI = row[["propertyURI"]]),
+        valueURI = list(label = row[["valueLabel"]], valueURI = row[["valueURI"]])
+      )
+  }
+
   list(
+    id = row[["id"]],
     attributeName = row[["attributeName"]],
     attributeDefinition = row[["attributeDefinition"]],
     attributeLabel = row[["attributeLabel"]],
     storageType = row[["storageType"]],
     missingValueCode = missingValueCode,
-    measurementScale = measurementScale
+    measurementScale = measurementScale,
+    annotation = annotation
   )
 }
 
@@ -538,7 +554,12 @@ check_and_complete_attributes <- function(attributes, col_classes) {
                        "attributeLabel",
                        "storageType",
                        "minimum",
-                       "maximum")
+                       "maximum",
+                       "id",
+                       "propertyLabel",
+                       "propertyURI",
+                       "valueLabel",
+                       "valueURI")
   
   if (any(!names(attributes) %in% attribute_names)) {
     
