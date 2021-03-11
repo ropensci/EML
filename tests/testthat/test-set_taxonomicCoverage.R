@@ -2,8 +2,6 @@ context("taxonomicCoverage")
 
 test_that("set_taxonomicCoverage works with data.frame", {
   
-  
-  
   sci_names <- data.frame(
     Kingdom = "Plantae",
     Phylum = "Phaeophyta",
@@ -49,8 +47,11 @@ test_that("set_taxonomicCoverage works with
 })
 
 
+
 test_that("set_taxonomicCoverage works with
            ITIS using taxadb", {
+             
+  skip_if_not_installed("taxadb")
   skip("Interactive test")
 
   taxon_coverage <- set_taxonomicCoverage(
@@ -64,7 +65,8 @@ test_that("set_taxonomicCoverage works with
 
 test_that("set_taxonomicCoverage works GBIF instead of ITIS", {
   skip("Interactive test")
-
+  skip_if_not_installed("taxadb")           
+  
   taxon_coverage <- set_taxonomicCoverage(
     c("Macrocystis pyrifera"),
     expand = TRUE,
