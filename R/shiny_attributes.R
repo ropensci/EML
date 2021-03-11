@@ -76,7 +76,12 @@ shiny_attributes <- function(data = NULL, attributes = NULL) {
     "definition",
     "formatString",
     "missingValueCode",
-    "missingValueCodeExplanation"
+    "missingValueCodeExplanation",
+    "id",
+    "propertyURI",
+    "propertyLabel",
+    "valueURI",
+    "valueLabel"
   )
 
   ## Prepare attributes from attribute_table
