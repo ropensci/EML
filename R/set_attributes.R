@@ -233,8 +233,14 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
       )
   }
 
+  # Having NA for id is invalid, instead explicitly set to NULL
+  id <- NULL
+  if(!is.null(row[["id"]]) && !is.na(row[["id"]])) {
+    id <- row[["id"]]
+  }
+
   list(
-    id = row[["id"]],
+    id = id,
     attributeName = row[["attributeName"]],
     attributeDefinition = row[["attributeDefinition"]],
     attributeLabel = row[["attributeLabel"]],
