@@ -451,7 +451,16 @@ infer_domain_scale <-
 
 
     ## storage type is optional, maybe better not to set this?
+    # Map "numeric" cols to "float" by default
     storageType[col_classes == "numeric"] <- "float"
+
+    # But trust the user if they specify "integer"
+    if ("storageType" %in% names(attributes)) {
+      storageType[
+        col_classes == "numeric" &
+          attributes$storageType == "integer"] <- "integer"
+    }
+
     storageType[col_classes == "character"] <- "string"
     storageType[col_classes %in% c("factor", "ordered")] <- "string"
     storageType[col_classes %in% c("Date")] <- "date"
