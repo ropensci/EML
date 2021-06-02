@@ -9,7 +9,7 @@ test_that("set_taxonomicCoverage works with data.frame", {
     Order = "Laminariales",
     Family = "Lessoniaceae",
     Genus = "Macrocystis",
-    Species = "pyrifera"
+    specificEpithet = "pyrifera"
   )
   taxon_coverage <- set_taxonomicCoverage(sci_names)
 
@@ -26,7 +26,7 @@ test_that("set_taxonomicCoverage works with nested lists", {
     Order = "Laminariales",
     Family = "Lessoniaceae",
     Genus = "Macrocystis",
-    Species = "pyrifera"
+    specificEpithet = "pyrifera"
   ))
   x <- set_taxonomicCoverage(sci_names)
 
