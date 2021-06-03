@@ -172,7 +172,7 @@ set_temporalCoverage <-
 set_taxonomicCoverage <- function(sci_names, expand = FALSE, db = "itis") {
   # Expand using taxadb and ITIS if the user passes in just scientific names
   if (is.character(sci_names) && expand) {
-    sci_names <- list(expand_scinames(sci_names, db))
+    sci_names <- expand_scinames(sci_names, db)
   }
   if (is.character(sci_names) && !expand) {
       taxa <- list(
@@ -236,5 +236,8 @@ expand_scinames <- function(sci_names, db){
          "Expansion of scientific names requires the 'taxadb' package to be installed. Install taxadb or set expand to FALSE."
         )}
   df <- taxadb::filter_name(sci_names, provider = db)
-  as.list(df[c("kingdom", "phylum", "class", "order", "family", "genus", "specificEpithet")])
+  
+  lapply(1:length(sci_names), function(i){
+    as.list(df[i,c("kingdom", "phylum", "class", "order", "family", "genus", "specificEpithet")])})
+  
 }
