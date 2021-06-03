@@ -20,7 +20,7 @@ test_that("set_taxonomicCoverage works with data.frame", {
 
 test_that("set_taxonomicCoverage works with nested lists", {
   sci_names <- list(list(
-    Kindom = "Plantae",
+    Kingdom = "Plantae",
     Phylum = "Phaeophyta",
     Class = "Phaeophyceae",
     Order = "Laminariales",
