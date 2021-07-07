@@ -6,6 +6,8 @@
 #' If multiple occurrences are found, will extract all
 #' @param from explicit type for the input format. Possible values:
 #' "xml", "json", "list", or "guess" with "list" as the default.
+#' @param simplify simplify return value into a list (`TRUE`)
+#' or return an S3 `emld` typed object (`FALSE`).
 #' @param ... additional arguments
 #'
 #' @examples
@@ -22,10 +24,17 @@
 #' @importFrom jqr jq combine
 #' @importFrom emld as_json as_emld
 #' @importFrom jsonlite fromJSON
-eml_get <- function(x, element, from = "list", ...) {
+eml_get <- function(x, element, from = "list", simplify = FALSE, ...) {
   doc <- as.character(emld::as_json(emld::as_emld(x, from = from)))
   out <- jqr::jq(doc, paste0("..|.", element, "? // empty"))
   json <- jqr::combine(out)
   robj <- jsonlite::fromJSON(json, simplifyVector = FALSE)
-  emld::as_emld(robj)
+  
+  if (simplify & !is.atomic(robj)){
+    robj$`@context` <- NULL
+  }
+  else if (!simplify){
+    robj <- emld::as_emld(robj)
+  }
+  return(robj)
 }

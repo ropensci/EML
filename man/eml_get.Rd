@@ -4,7 +4,7 @@
 \alias{eml_get}
 \title{eml_get}
 \usage{
-eml_get(x, element, from = "list", ...)
+eml_get(x, element, from = "list", simplify = FALSE, ...)
 }
 \arguments{
 \item{x}{an EML object or child/descendant object}
@@ -14,6 +14,9 @@ If multiple occurrences are found, will extract all}
 
 \item{from}{explicit type for the input format. Possible values:
 "xml", "json", "list", or "guess" with "list" as the default.}
+
+\item{simplify}{simplify return value into a list (`TRUE`)
+or return an S3 `emld` typed object (`FALSE`).}
 
 \item{...}{additional arguments}
 }
