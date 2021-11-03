@@ -111,7 +111,11 @@ set_attributes <-
       "attributeLabel",
       "storageType",
       "missingValueCode",
-      "missingValueCodeExplanation"
+      "missingValueCodeExplanation",
+      "valueURI",
+      "valueLabel",
+      "propertyURI",
+      "propertyLabel"
     )) {
       attributes <- add_na_column(x, attributes)
     }
@@ -219,13 +223,31 @@ set_attribute <- function(row, factors = NULL, missingValues = NULL) {
     missingValueCode <- set_codeDefinitions(row, code_set = missingValues, type = "missingValues")
   }
   
+
+  annotation <- NULL
+  if (!is.na(row[["valueURI"]]) & !is.na(row[["valueLabel"]]) & !is.na(row[["propertyURI"]]) & !is.na(row[["propertyLabel"]])) {
+    annotation <-
+      list(
+        propertyURI = list(label = row[["propertyLabel"]], propertyURI = row[["propertyURI"]]),
+        valueURI = list(label = row[["valueLabel"]], valueURI = row[["valueURI"]])
+      )
+  }
+
+  # Having NA for id is invalid, instead explicitly set to NULL
+  id <- NULL
+  if(!is.null(row[["id"]]) && !is.na(row[["id"]])) {
+    id <- row[["id"]]
+  }
+
   list(
+    id = id,
     attributeName = row[["attributeName"]],
     attributeDefinition = row[["attributeDefinition"]],
     attributeLabel = row[["attributeLabel"]],
     storageType = row[["storageType"]],
     missingValueCode = missingValueCode,
-    measurementScale = measurementScale
+    measurementScale = measurementScale,
+    annotation = annotation
   )
 }
 
@@ -429,7 +451,16 @@ infer_domain_scale <-
 
 
     ## storage type is optional, maybe better not to set this?
+    # Map "numeric" cols to "float" by default
     storageType[col_classes == "numeric"] <- "float"
+
+    # But trust the user if they specify "integer"
+    if ("storageType" %in% names(attributes)) {
+      storageType[
+        col_classes == "numeric" &
+          attributes$storageType == "integer"] <- "integer"
+    }
+
     storageType[col_classes == "character"] <- "string"
     storageType[col_classes %in% c("factor", "ordered")] <- "string"
     storageType[col_classes %in% c("Date")] <- "date"
@@ -538,7 +569,12 @@ check_and_complete_attributes <- function(attributes, col_classes) {
                        "attributeLabel",
                        "storageType",
                        "minimum",
-                       "maximum")
+                       "maximum",
+                       "id",
+                       "propertyLabel",
+                       "propertyURI",
+                       "valueLabel",
+                       "valueURI")
   
   if (any(!names(attributes) %in% attribute_names)) {
     

@@ -140,6 +140,8 @@ set_temporalCoverage <-
 #' @export
 #' @importFrom methods is
 #' @examples
+#' 
+#' taxon_coverage <- set_taxonomicCoverage("Macrocystis pyrifera")
 #'
 #' sci_names <- data.frame(
 #'   Kingdom = "Plantae",
@@ -148,35 +150,21 @@ set_temporalCoverage <-
 #'   Order = "Laminariales",
 #'   Family = "Lessoniaceae",
 #'   Genus = "Macrocystis",
-#'   Species = "pyrifera"
+#'   specificEpithet = "pyrifera"
 #' )
 #' taxon_coverage <- set_taxonomicCoverage(sci_names)
 #'
 #' \donttest{ # Examples that may take > 5s
 #'
-#' # Query ITIS using taxadb to fill in the full taxonomy given just species
-#' #  # names
-#' taxon_coverage <- set_taxonomicCoverage(
-#'   c("Macrocystis pyrifera", "Homo sapiens"),
-#'   expand = TRUE
-#' )
-#'
-#' # Query GBIF instead of ITIS
-#' taxon_coverage <- set_taxonomicCoverage(
-#'   c("Macrocystis pyrifera"),
-#'   expand = TRUE,
-#'   db = "gbif"
-#' )
-#'
 #' ## use a list of lists for multiple species
 #' sci_names <- list(list(
-#'   Kindom = "Plantae",
+#'   Kingdom = "Plantae",
 #'   Phylum = "Phaeophyta",
 #'   Class = "Phaeophyceae",
 #'   Order = "Laminariales",
 #'   Family = "Lessoniaceae",
 #'   Genus = "Macrocystis",
-#'   Species = "pyrifera"
+#'   specificEpithet = "pyrifera"
 #' ))
 #' set_taxonomicCoverage(sci_names)
 #'
@@ -187,16 +175,10 @@ set_taxonomicCoverage <- function(sci_names, expand = FALSE, db = "itis") {
     sci_names <- expand_scinames(sci_names, db)
   }
   if (is.character(sci_names) && !expand) {
-    taxa <- lapply(strsplit(sci_names, " "), function(s) {
-      list(
-        taxonRankName = "Genus",
-        taxonRankValue = s[[1]],
-        taxonomicClassification = list(
-          taxonRankName = "Species",
-          taxonRankValue = s[[2]]
-        )
+      taxa <- list(
+        taxonRankName = "Species",
+        taxonRankValue = sci_names
       )
-    })
     list(taxonomicClassification = taxa)
   } else if (is.data.frame(sci_names)) {
     set_taxonomicCoverage.data.frame(sci_names)
@@ -208,7 +190,7 @@ set_taxonomicCoverage <- function(sci_names, expand = FALSE, db = "itis") {
 can only be character string, data.frame or list")
   }
 }
-
+  
 
 
 ## Recursively turn named list into nested list
@@ -254,5 +236,8 @@ expand_scinames <- function(sci_names, db){
          "Expansion of scientific names requires the 'taxadb' package to be installed. Install taxadb or set expand to FALSE."
         )}
   df <- taxadb::filter_name(sci_names, provider = db)
-  as.list(df[c("kingdom", "phylum", "class", "order", "family", "genus", "specificEpithet")])
+  
+  lapply(1:length(sci_names), function(i){
+    as.list(df[i,c("kingdom", "phylum", "class", "order", "family", "genus", "specificEpithet")])})
+  
 }

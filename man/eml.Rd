@@ -4,7 +4,9 @@
 \name{eml}
 \alias{eml}
 \title{eml}
-\format{A list with constructor functions}
+\format{
+A list with constructor functions
+}
 \description{
 eml
 }

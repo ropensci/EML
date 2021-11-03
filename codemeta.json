@@ -7,17 +7,16 @@
   "identifier": "EML",
   "description": "Work with Ecological Metadata Language ('EML') files. \n    'EML' is a widely used metadata standard in the ecological and\n    environmental sciences, described in Jones et al. (2006),\n    <doi:10.1146/annurev.ecolsys.37.091305.110031>.",
   "name": "EML: Read and Write Ecological Metadata Language Files",
-  "codeRepository": "https://github.com/ropensci/EML",
+  "codeRepository": "https://github.com/ropensci/EML/",
   "issueTracker": "https://github.com/ropensci/EML/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
+  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -102,7 +101,14 @@
     {
       "@type": "SoftwareApplication",
       "identifier": "taxadb",
-      "name": "taxadb"
+      "name": "taxadb",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=taxadb"
     },
     {
       "@type": "SoftwareApplication",
@@ -253,7 +259,7 @@
       "@type": "SoftwareApplication",
       "identifier": "emld",
       "name": "emld",
-      "version": ">= 0.4.0",
+      "version": ">= 0.5.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -329,13 +335,9 @@
     }
   ],
   "readme": "https://github.com/ropensci/EML/blob/master/README.md",
-  "fileSize": "491.202KB",
-  "contIntegration": [
-    "https://travis-ci.org/ropensci/EML",
-    "https://ci.appveyor.com/project/cboettig/eml",
-    "https://codecov.io/gh/ropensci/EML"
-  ],
-  "developmentStatus": "https://www.tidyverse.org/lifecycle/#maturing",
+  "fileSize": "2878.778KB",
+  "contIntegration": ["https://travis-ci.org/ropensci/EML", "https://ci.appveyor.com/project/cboettig/eml", "https://codecov.io/gh/ropensci/EML"],
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html",
   "keywords": [
     "metadata-standard",
     "eml",
@@ -344,7 +346,11 @@
     "rstats",
     "r-package"
   ],
-  "relatedLink": ["https://CRAN.R-project.org/package=EML", "https://docs.ropensci.org/EML"],
+  "relatedLink": [
+    "https://CRAN.R-project.org/package=EML",
+    "https://docs.ropensci.org/EML",
+    "https://docs.ropensci.org/EML/"
+  ],
   "funder": {},
   "releaseNotes": "https://github.com/ropensci/EML/blob/master/NEWS.md"
 }

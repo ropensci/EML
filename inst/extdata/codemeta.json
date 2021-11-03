@@ -169,7 +169,7 @@
       "@type": "SoftwareApplication",
       "identifier": "emld",
       "name": "emld",
-      "sameAs": "https://github.com/cboettig/emld"
+      "sameAs": "https://github.com/ropensci/emld"
     },
     {
       "@type": "SoftwareApplication",

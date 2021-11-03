@@ -44,9 +44,9 @@ test_that("Creating custom units", {
 test_that("Reading default unit definitions", {
   unitList <- get_unitList()
 
-  testthat::expect_equal(dim(unitList$units), c(195, 8))
+  testthat::expect_equal(dim(unitList$units), c(335, 10))
   # testthat::expect_equal(dim(unitList$unitTypes), c(118, 4))
-  testthat::expect_equal(dim(unitList$unitTypes), c(288, 4))
+  testthat::expect_equal(dim(unitList$unitTypes), c(297, 4))
 })
 
 
@@ -67,4 +67,23 @@ test_that("Reading custom unit definitions from EML", {
     as_metadata = TRUE
   )
   eml <- list(additionalMetadata = additionalMetadata)
+})
+
+test_that("Ensuring standard units are not interpreted as custom units", {
+  
+  r <- EML::set_attributes(
+    data.frame(
+      attributeName = "soilmoisture", 
+      formatString = "",
+      unit = "percent",
+      numberType = "real",
+      attributeDefinition = "measurement of soil moisture",
+      stringsAsFactors = FALSE),
+    col_classes = "numeric")
+  
+  expect_true(
+    !is.null(r$attribute[[1]]$measurementScale$ratio$unit$standardUnit))
+  expect_true(
+    is.null(r$attribute[[1]]$measurementScale$ratio$unit$customUnit))
+  
 })

@@ -22,7 +22,7 @@ For any EML element of class TextType, this function can be used to generate
 \details{
 If the `rmarkdown` package is installed, then the input file can
 be a Microsoft Word (.docx) file, a markdown file, or other file
-recognized by Pandoc (see http://pandoc.org), which will automate the conversion
+recognized by Pandoc (see https://pandoc.org), which will automate the conversion
 to a docbook. Otherwise, the input file should already be in docbook format (with
 .xml or .dbk extension).  Note that pandoc comes pre-installed in RStudio and is
 required for the rmarkdown package.
@@ -31,22 +31,18 @@ required for the rmarkdown package.
 \donttest{
 ## using a simple character string
 a <- set_TextType(text = "This is the abstract")
-as(a, "abstract")
 
 ## Using an external markdown file
 f <- system.file("examples/hf205-abstract.md", package = "EML")
 a <- set_TextType(f)
-as(a, "abstract")
 
 ## Can also import from methods written in a .docx MS Word file.
 f <- system.file("examples/hf205-abstract.docx", package = "EML")
 a <- set_TextType(f)
-as(a, "abstract")
 
 ## Documents with title headings use `section` instead of `para` notation
 f <- system.file("examples/hf205-methods.docx", package = "EML")
 d <- set_TextType(f)
-as(d, "description")
 }
 
 }

@@ -278,14 +278,14 @@ get_valid_unit <- function(unit) {
   unit <- gsub("^[[:blank:]]|[[:blank:]]$", "", unit) # remove leading/trailing spaces
 
   ## Attempt to deparse unit
-  unit_out <- units::deparse_unit(units::as.units(unit))
+  unit_out <- units::deparse_unit(units::as_units(unit))
 
   ## If unit_out is NA, deparse numerator and denominator separately
   if (unit_out == "") {
     unit_numerator <- gsub("[[:alpha:]]+-[[:digit:]]", "", unit)
-    unit_numerator <- units::deparse_unit(units::as.units(unit_numerator))
+    unit_numerator <- units::deparse_unit(units::as_units(unit_numerator))
     unit_denominator <- gsub("[[:alpha:]]+[[:blank:]]", "", unit)
-    unit_denominator <- units::deparse_unit(units::as.units(unit_denominator))
+    unit_denominator <- units::deparse_unit(units::as_units(unit_denominator))
     unit_out <- paste(unit_numerator, unit_denominator)
   }
 

@@ -1,2 +1,3 @@
 standardUnits <- EML::get_unitList()
-devtools::use_data(standardUnits, internal = TRUE)
+udunits_units <- load_udunits()
+usethis::use_data(standardUnits, udunits_units, internal = TRUE, overwrite = TRUE)

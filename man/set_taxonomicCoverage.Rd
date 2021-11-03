@@ -33,6 +33,8 @@ EML permits any rank names provided they go in descending order.
 }
 \examples{
 
+taxon_coverage <- set_taxonomicCoverage("Macrocystis pyrifera")
+
 sci_names <- data.frame(
   Kingdom = "Plantae",
   Phylum = "Phaeophyta",
@@ -40,35 +42,21 @@ sci_names <- data.frame(
   Order = "Laminariales",
   Family = "Lessoniaceae",
   Genus = "Macrocystis",
-  Species = "pyrifera"
+  specificEpithet = "pyrifera"
 )
 taxon_coverage <- set_taxonomicCoverage(sci_names)
 
 \donttest{ # Examples that may take > 5s
 
-# Query ITIS using taxadb to fill in the full taxonomy given just species
-#  # names
-taxon_coverage <- set_taxonomicCoverage(
-  c("Macrocystis pyrifera", "Homo sapiens"),
-  expand = TRUE
-)
-
-# Query GBIF instead of ITIS
-taxon_coverage <- set_taxonomicCoverage(
-  c("Macrocystis pyrifera"),
-  expand = TRUE,
-  db = "gbif"
-)
-
 ## use a list of lists for multiple species
 sci_names <- list(list(
-  Kindom = "Plantae",
+  Kingdom = "Plantae",
   Phylum = "Phaeophyta",
   Class = "Phaeophyceae",
   Order = "Laminariales",
   Family = "Lessoniaceae",
   Genus = "Macrocystis",
-  Species = "pyrifera"
+  specificEpithet = "pyrifera"
 ))
 set_taxonomicCoverage(sci_names)
 

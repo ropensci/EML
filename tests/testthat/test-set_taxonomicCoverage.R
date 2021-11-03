@@ -2,8 +2,6 @@ context("taxonomicCoverage")
 
 test_that("set_taxonomicCoverage works with data.frame", {
   
-  
-  
   sci_names <- data.frame(
     Kingdom = "Plantae",
     Phylum = "Phaeophyta",
@@ -11,7 +9,7 @@ test_that("set_taxonomicCoverage works with data.frame", {
     Order = "Laminariales",
     Family = "Lessoniaceae",
     Genus = "Macrocystis",
-    Species = "pyrifera"
+    specificEpithet = "pyrifera"
   )
   taxon_coverage <- set_taxonomicCoverage(sci_names)
 
@@ -22,13 +20,13 @@ test_that("set_taxonomicCoverage works with data.frame", {
 
 test_that("set_taxonomicCoverage works with nested lists", {
   sci_names <- list(list(
-    Kindom = "Plantae",
+    Kingdom = "Plantae",
     Phylum = "Phaeophyta",
     Class = "Phaeophyceae",
     Order = "Laminariales",
     Family = "Lessoniaceae",
     Genus = "Macrocystis",
-    Species = "pyrifera"
+    specificEpithet = "pyrifera"
   ))
   x <- set_taxonomicCoverage(sci_names)
 
@@ -49,8 +47,11 @@ test_that("set_taxonomicCoverage works with
 })
 
 
+
 test_that("set_taxonomicCoverage works with
            ITIS using taxadb", {
+             
+  skip_if_not_installed("taxadb")
   skip("Interactive test")
 
   taxon_coverage <- set_taxonomicCoverage(
@@ -64,7 +65,8 @@ test_that("set_taxonomicCoverage works with
 
 test_that("set_taxonomicCoverage works GBIF instead of ITIS", {
   skip("Interactive test")
-
+  skip_if_not_installed("taxadb")           
+  
   taxon_coverage <- set_taxonomicCoverage(
     c("Macrocystis pyrifera"),
     expand = TRUE,

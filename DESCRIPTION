@@ -5,7 +5,7 @@ Description: Work with Ecological Metadata Language ('EML') files.
     'EML' is a widely used metadata standard in the ecological and
     environmental sciences, described in Jones et al. (2006),
     <doi:10.1146/annurev.ecolsys.37.091305.110031>.
-Version: 2.0.2
+Version: 2.0.5
 Authors@R: c(
               person("Carl", "Boettiger", 
                   email = "cboettig@gmail.com", 
@@ -27,7 +27,7 @@ Authors@R: c(
                      comment = c(ORCID = "0000-0003-4703-1974"))
             )
 License: MIT + file LICENSE
-URL: https://docs.ropensci.org/EML, https://github.com/ropensci/EML
+URL: https://docs.ropensci.org/EML/, https://github.com/ropensci/EML/
 BugReports: https://github.com/ropensci/EML/issues
 Encoding: UTF-8
 LazyData: true
@@ -47,7 +47,7 @@ Suggests:
 Imports: xml2, 
     methods, 
     digest, 
-    emld (>= 0.4.0), 
+    emld (>= 0.5.0), 
     jqr, 
     jsonlite, 
     uuid,
@@ -55,6 +55,5 @@ Imports: xml2,
     utils,
     dplyr
 VignetteBuilder: knitr
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Language: en-US
-Additional_repositories: https://cboettig.github.io/drat

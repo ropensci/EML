@@ -82,6 +82,15 @@ get_attributes <- function(x, eml = NULL) {
     names(atts) <- gsub("standardUnit|customUnit",
                         "unit",
                         names(atts))
+    ## Alter names of annotation label fields for accessibility
+    names(atts) <- gsub("annotation.valueURI.label",
+                        "valueLabel",
+                        names(atts),
+                        fixed = TRUE)
+    names(atts) <- gsub("annotation.propertyURI.label",
+                        "propertyLabel",
+                        names(atts),
+                        fixed = TRUE)
     names(atts) <- gsub(".+\\.+",
                         "",
                         names(atts))
@@ -92,7 +101,6 @@ get_attributes <- function(x, eml = NULL) {
   ## remove non_fields in attributes
   non_fields <- c("enforced",
                   "exclusive",
-                  "id",
                   "order",
                   "references",
                   "scope",
