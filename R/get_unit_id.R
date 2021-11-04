@@ -174,6 +174,20 @@ format_split_unit <- function(split_unit,
   return(f_split_unit)
 }
 
+# Cache calls to units::valid_udunits_prefixes()$symbol
+valid_udunits_prefixes_cache <- new.env(parent = emptyenv())
+
+get_udunits_prefix_symbols <- function() {
+  if (is.null(valid_udunits_prefixes_cache$symbol)) {
+    valid_udunits_prefixes_cache$symbol <-
+      suppressMessages({
+        units::valid_udunits_prefixes()$symbol
+      })
+  }
+
+  valid_udunits_prefixes_cache$symbol
+}
+
 get_split_unit <- function(unit, exponents) {
   if (is.na(unit)) {
     unit <- ""
@@ -187,7 +201,7 @@ get_split_unit <- function(unit, exponents) {
   unit <- gsub(
     paste0(
       "([^[:alpha:]]|^)(",
-      paste(suppressMessages(units::valid_udunits_prefixes()$symbol), collapse = "|"),
+      paste(get_udunits_prefix_symbols(), collapse = "|"),
       ")( )([[:upper:]])"
     ),
     "\\1\\2\\4",
