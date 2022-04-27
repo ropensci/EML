@@ -91,6 +91,14 @@ get_attributes <- function(x, eml = NULL) {
                         "propertyLabel",
                         names(atts),
                         fixed = TRUE)
+    names(atts) <- gsub("annotation.propertyURI.propertyURI",
+                        "propertyURI",
+                        names(atts),
+                        fixed = TRUE)
+    names(atts) <- gsub("annotation.valueURI.valueURI",
+                        "valueURI",
+                        names(atts),
+                        fixed = TRUE)
     names(atts) <- gsub(".+\\.+",
                         "",
                         names(atts))
