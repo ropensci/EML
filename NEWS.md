@@ -6,7 +6,7 @@
 * Fixed a minor typographical issue in the Working with Units vignette (See https://github.com/ropensci/EML/commit/eb1604817809d2cbea5405ed6909c0e046e31a3e)
 * Modified how `set_attributes` sets storageType on numeric columns so it will accept `integer` when provided by the user while still defaulting to `float` (See https://github.com/ropensci/EML/issues/324)
 * Extends `get_attributes`, `set_attributes`, and `shiny_attributes` to support attribute-level semantic annotations (See https://github.com/ropensci/EML/issues/318)
-* The test suite will now skip tests dependent on [taxadb](https://cran.r-project.org/web/packages/taxadb/index.html) when it's not installed (See https://github.com/ropensci/EML/issues/320)
+* The test suite will now skip tests dependent on [taxadb](https://cran.r-project.org/package=taxadb) when it's not installed (See https://github.com/ropensci/EML/issues/320)
 
 # EML 2.0.5
 

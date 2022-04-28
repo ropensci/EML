@@ -68,10 +68,10 @@ In this example, we will use R to re-generate
 the EML metadata originally published by [Ellison _et al_
 (2012), HF205](https://harvardforest.fas.harvard.edu/harvard-forest-data-archive)
 through the Harvard Forest Long Term Ecological Research
-Center, accompanying the PNAS paper [Sirota _et al_
-(2013)](https://doi.org/10.1073/pnas.1221037110). We have made only
-a few modifications to simplify the presentation of this tutorial, 
-so our resulting EML will not be perfectly identical to the original.
+Center, accompanying the PNAS paper (Sirota _et al_. 2013;
+doi:10.1073/pnas.1221037110). We have made only a few modifications to
+simplify the presentation of this tutorial, so our resulting EML will not
+be perfectly identical to the original.
 
 
 ### Our strategy

@@ -6,7 +6,7 @@
 Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
 [![Windows build
 status](https://ci.appveyor.com/api/projects/status/u2gw24yfkvxgny96?svg=true)](https://ci.appveyor.com/project/cboettig/eml)
-[![codecov](https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/EML)
+[![codecov](https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/EML)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/EML)](https://cran.r-project.org/package=EML)
 ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/RNeXML)
