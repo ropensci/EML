@@ -16,8 +16,16 @@
 #' @export
 #'
 #' @examples
+#' # Pass in either a person object or separate values to create an individual
 #' carl <- set_responsibleParty(as.person("Carl Boettiger <cboettig@ropensci.org>"))
 #' matt <- set_responsibleParty("Matthew", "Jones", email = "mbjones@@nceas.ucsb.edu")
+#'
+#' # To create an organization, used the named `organization` argument to
+#' specify the organization name
+#' my_org <- set_responsibleParty(
+#'   organization = "My Organization",
+#'   email = "contact@example.org"
+#' )
 set_responsibleParty <-
   function(givenName = NULL,
              surName = NULL,
@@ -30,8 +38,13 @@ set_responsibleParty <-
              userId = NULL,
              id = NULL,
              email = NULL) {
-    UseMethod("set_responsibleParty", givenName)
-  }
+
+    if (is(givenName, "person")) {
+      UseMethod("set_responsibleParty", givenName)
+    } else {
+      UseMethod("set_responsibleParty", c(surName, organizationName))
+    }
+}
 
 #' @export
 set_responsibleParty.person <- function(givenName, ...) {
