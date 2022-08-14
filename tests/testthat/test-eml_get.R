@@ -26,3 +26,15 @@ test_that("eml_get works on more calls", {
     "attributeName"
   )
 })
+
+test_that("eml_get can return a simple list output", {
+  my_eml <- read_eml(f)
+  y <- eml_get(my_eml, "attributeName", simplify = T)
+  expect_equal(class(y), "list")
+  
+  y <- eml_get(
+    my_eml$dataset$dataTable$attributeList$attribute[[1]],
+    "attributeName",
+    simplify = T
+  )
+})
