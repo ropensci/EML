@@ -1,3 +1,7 @@
+# EML 2.0.7
+
+* update roxygen / docs for CRAN
+
 # EML 2.0.6
 
 * Improved performance of `shiny_attribtues` by caching calls to `units::valid_udunits_prefixes` (See https://github.com/ropensci/EML/issues/332). This should dramatically improve performance of the Shiny application for certain use cases.

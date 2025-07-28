@@ -20,8 +20,8 @@
 #' carl <- set_responsibleParty(as.person("Carl Boettiger <cboettig@ropensci.org>"))
 #' matt <- set_responsibleParty("Matthew", "Jones", email = "mbjones@@nceas.ucsb.edu")
 #'
-#' # To create an organization, used the named `organization` argument to
-#' specify the organization name
+#' # To create an organization, use the named `organization` argument to
+#' # specify the organization name
 #' my_org <- set_responsibleParty(
 #'   organization = "My Organization",
 #'   email = "contact@example.org"

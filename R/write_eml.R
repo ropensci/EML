@@ -7,7 +7,7 @@
 #' @param file file name to write XML.
 #' @param namespaces named character vector of additional XML namespaces to use.
 #' @param ns root namespace abbreviation
-#' @param ... additional arguments to \code{\link{write_xml}}
+#' @param ... additional arguments to \code{\link[xml2]{write_xml}}
 #' @return If file is not specified, the result is a character string containing
 #'    the resulting XML content. Otherwise return silently.
 #' @export
