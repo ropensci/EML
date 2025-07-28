@@ -3,7 +3,7 @@
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Build
-Status](https://travis-ci.org/ropensci/EML.svg?branch=master)](https://travis-ci.org/ropensci/EML)
+Status](https://app.travis-ci.com/ropensci/EML.svg?branch=master)](https://app.travis-ci.com/ropensci/EML)
 [![Windows build
 status](https://ci.appveyor.com/api/projects/status/u2gw24yfkvxgny96?svg=true)](https://ci.appveyor.com/project/cboettig/eml)
 [![codecov](https://codecov.io/gh/ropensci/EML/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/EML)
