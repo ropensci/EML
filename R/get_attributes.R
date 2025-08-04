@@ -49,7 +49,7 @@ get_attributes <- function(x, eml = NULL) {
   }
   
   ## get attributes
-  attributes <- lapply(attributeList$attribute, function(x) {
+  getAttributes <- function(x) {
     
     ## get full attribute list
     atts <- unlist(x, recursive = TRUE, use.names = TRUE)
@@ -103,7 +103,16 @@ get_attributes <- function(x, eml = NULL) {
                         "",
                         names(atts))
     atts <- as.data.frame(t(atts), stringsAsFactors = FALSE)
-  })
+  }
+  
+  # use lapply for multiple attributes, otherwise pass in singular non-null attribute
+  attributes <- NULL
+  if (is.list(attributeList$attribute[[1]])) {
+    attributes <- lapply(attributeList$attribute, getAttributes)
+  } else if (!is.null(attributeList$attribute)) {
+    attributes <- getAttributes(attributeList$attribute)
+  }
+  
   attributes <- dplyr::bind_rows(attributes)
   
   ## remove non_fields in attributes
@@ -117,7 +126,7 @@ get_attributes <- function(x, eml = NULL) {
   attributes <- attributes[, !(names(attributes) %in% non_fields)]
   
   ## get factors
-  factors <- lapply(attributeList$attribute, function(x) {
+  getFactors <- function(x) {
     
     ## get factors
     factors <- eml_get(x, "enumeratedDomain")
@@ -133,7 +142,15 @@ get_attributes <- function(x, eml = NULL) {
     }
     
     return(factors)
-  })
+  }
+  
+  # use lapply for multiple attributes, otherwise pass in singular non-null attribute
+  factors <- NULL
+  if (is.list(attributeList$attribute[[1]])) {
+    factors <- lapply(attributeList$attribute, getFactors)
+  } else if (!is.null(attributeList$attribute)) {
+    factors <- getFactors(attributeList$attribute)
+  }
   
   factors <- dplyr::bind_rows(factors)
   
